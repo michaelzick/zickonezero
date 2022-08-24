@@ -2,8 +2,21 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { useEffect, useState } from 'react'
 
 const Home: NextPage = () => {
+  const [name, setName] = useState()
+
+  useEffect(() => {
+    const getUsername = async () => {
+      const getUser = await fetch('./api/hello')
+      const username = await getUser.json()
+      setName(username.name)
+      console.log(username)
+    }
+    getUsername()
+  }, [])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -15,6 +28,7 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
+          {name && <div>Name is {name}</div>}
         </h1>
 
         <p className={styles.description}>
