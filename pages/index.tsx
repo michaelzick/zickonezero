@@ -2,25 +2,36 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
-import { fetchWorkData } from './api/hello';
+import { LightBox } from 'react-lightbox-pack';
+import 'react-lightbox-pack/dist/index.css';
 
 import styles from '../styles/Home.module.css';
 import { Wrapper } from '../styles';
 
 const Home: NextPage = () => {
   const [name, setName] = useState();
-  const [workData, setWorkData] = useState();
+  const [works, setWorkData] = useState();
+  const [toggle, setToggle] = useState(false);
+  const [sIndex, setSIndex] = useState(0);
 
   useEffect(() => {
-    const getUsername = async () => {
-      const getUser = await fetch('./api/hello');
-      const username = await getUser.json();
-      setName(username.name);
-      console.log(username);
+    const processData = async () => {
+      const fetchData = await fetch('./api');
+      const dataJson = await fetchData.json();
+      const { name, workData } = dataJson;
+      setName(name);
+      setWorkData(workData);
+      console.log(name);
+      console.log(workData);
     };
 
-    getUsername();
+    processData();
   }, []);
+
+  const lightBoxHandler = (state: boolean, sIndex: number) => {
+    setToggle(state);
+    setSIndex(sIndex);
+  };
 
   return (
     <div className={styles.container}>
@@ -43,6 +54,32 @@ const Home: NextPage = () => {
           </p>
 
           <div className={styles.grid}>
+            {works && works.map((item, index) => (
+              <>
+                <img
+                  key={index}
+                  src={item.proj_link_0}
+                  alt={item.title}
+                  style={{ maxHeight: "80vh", maxWidth: "50vw" }}
+                  onClick={() => {
+                    lightBoxHandler(true, index);
+                  }}
+                />
+              </>
+            ))}
+
+            <LightBox
+              state={toggle}
+              event={lightBoxHandler}
+              data={works}
+              imageWidth="60vw"
+              imageHeight="70vh"
+              thumbnailHeight={50}
+              thumbnailWidth={50}
+              setImageIndex={setSIndex}
+              imageIndex={sIndex}
+            />
+
             <a href="https://nextjs.org/docs" className={styles.card}>
               <h2>Documentation &rarr;</h2>
               <p>Find in-depth information about Next.js features and API.</p>
