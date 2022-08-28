@@ -1,23 +1,26 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import { useEffect, useState } from 'react';
 
-import styles from '../styles/Home.module.css'
-import { Wrapper } from '../styles'
+import { fetchWorkData } from './api/hello';
+
+import styles from '../styles/Home.module.css';
+import { Wrapper } from '../styles';
 
 const Home: NextPage = () => {
-  const [name, setName] = useState()
+  const [name, setName] = useState();
+  const [workData, setWorkData] = useState();
 
   useEffect(() => {
     const getUsername = async () => {
-      const getUser = await fetch('./api/hello')
-      const username = await getUser.json()
-      setName(username.name)
-      console.log(username)
-    }
-    getUsername()
-  }, [])
+      const getUser = await fetch('./api/hello');
+      const username = await getUser.json();
+      setName(username.name);
+      console.log(username);
+    };
+
+    getUsername();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -73,7 +76,7 @@ const Home: NextPage = () => {
 
       <footer className={styles.footer}></footer>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
