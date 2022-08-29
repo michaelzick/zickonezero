@@ -25,6 +25,12 @@ const Home: NextPage = () => {
 
   // For lightbox
   const [toggler, setToggler] = useState(false);
+  const [productIndex, setProductIndex] = useState(0);
+  const onThumbClick = (index: number) => {
+    setToggler(!toggler);
+    setProductIndex(index);
+  };
+  const { imgs } = worksData[productIndex] || [];
 
   return (
     <div className={styles.container}>
@@ -41,24 +47,24 @@ const Home: NextPage = () => {
             {name && <div>Name is {name}</div>}
           </h1>
 
-          <div className={styles.grid}>
-            {worksData && worksData.map((item, index) => {
-              const { thumb, imgs, group } = item;
+          {worksData.length > 0 && <div className={styles.grid}>
+            {worksData.map((item, index) => {
+              const { thumb, group } = item;
 
               return (
                 <div key={index}>
-                  <div onClick={() => setToggler(!toggler)}>
+                  <div onClick={() => onThumbClick(index)}>
                     <Image src={thumb} width='200px' height='200px' alt={group} />
                   </div>
-
-                  <FsLightbox
-                    toggler={toggler}
-                    sources={imgs}
-                  />
                 </div>
               );
             })}
-          </div>
+
+            <FsLightbox
+              toggler={toggler}
+              sources={imgs}
+            />
+          </div>}
         </main>
       </Wrapper>
       <footer className={styles.footer}></footer>
