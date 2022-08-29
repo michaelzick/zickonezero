@@ -1,4 +1,4 @@
-export const workData = [
+[
   {
     "art_radio": false,
     "order_num": 29,
@@ -196,30 +196,5 @@ export const workData = [
     "proj_thumb": "/img/thumbs/parkme-thumb.jpg",
     "proj_title": "ParkMe Homepage",
     "work_radio": true
-  },
-  {
-    "art_radio": false,
-    "order_num": 0,
-    "pics_radio": false,
-    "proj_desc": "An app connecting lenders and borrowers to everyday stuff.",
-    "proj_header": "Stuf (Concept and Mockups)",
-    "proj_is_iframe": false,
-    "proj_is_url": false,
-    "proj_link_0": "/img/stuf/map_view.jpg",
-    "proj_link_1": "/img/stuf/item_view.jpg",
-    "proj_link_1_role": "View item details, including reviews and similar items.",
-    "proj_link_1_title": "Item Detail Page",
-    "proj_link_2": "/img/stuf/user_profile.jpg",
-    "proj_link_2_role": "View details about the lender and other items they're lending.",
-    "proj_link_2_title": "User Profile Page",
-    "proj_link_3": "/img/stuf/search_view.jpg",
-    "proj_link_3_role": "Search for items using different criteria, including proximity and length of borrow.",
-    "proj_link_3_title": "Detailed Search View",
-    "proj_new_line": false,
-    "proj_rel": "stuf",
-    "proj_role": "Find items on a map and see them on a list below. Click an item to see its detail page.",
-    "proj_thumb": "/img/thumbs/stuf.jpg",
-    "proj_title": "Map and List View",
-    "work_radio": true
   }
-];
+]

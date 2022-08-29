@@ -2,36 +2,28 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
-import { LightBox } from 'react-lightbox-pack';
-import 'react-lightbox-pack/dist/index.css';
+import workData from './api/workData.json';
+
+import { LightgalleryProvider, LightgalleryItem } from 'react-lightgallery';
+import 'lightgallery.js/dist/css/lightgallery.css';
 
 import styles from '../styles/Home.module.css';
 import { Wrapper } from '../styles';
 
 const Home: NextPage = () => {
-  const [name, setName] = useState();
-  const [works, setWorkData] = useState();
-  const [toggle, setToggle] = useState(false);
-  const [sIndex, setSIndex] = useState(0);
+  const [name, setName] = useState('');
 
   useEffect(() => {
     const processData = async () => {
       const fetchData = await fetch('./api');
       const dataJson = await fetchData.json();
-      const { name, workData } = dataJson;
+      const { name } = dataJson;
       setName(name);
-      setWorkData(workData);
       console.log(name);
-      console.log(workData);
     };
 
     processData();
   }, []);
-
-  const lightBoxHandler = (state: boolean, sIndex: number) => {
-    setToggle(state);
-    setSIndex(sIndex);
-  };
 
   return (
     <div className={styles.container}>
@@ -54,63 +46,19 @@ const Home: NextPage = () => {
           </p>
 
           <div className={styles.grid}>
-            {works && works.map((item, index) => (
-              <>
-                <img
-                  key={index}
-                  src={item.proj_link_0}
-                  alt={item.title}
-                  style={{ maxHeight: "80vh", maxWidth: "50vw" }}
-                  onClick={() => {
-                    lightBoxHandler(true, index);
-                  }}
-                />
-              </>
-            ))}
-
-            <LightBox
-              state={toggle}
-              event={lightBoxHandler}
-              data={works}
-              imageWidth="60vw"
-              imageHeight="70vh"
-              thumbnailHeight={50}
-              thumbnailWidth={50}
-              setImageIndex={setSIndex}
-              imageIndex={sIndex}
-            />
-
-            <a href="https://nextjs.org/docs" className={styles.card}>
-              <h2>Documentation &rarr;</h2>
-              <p>Find in-depth information about Next.js features and API.</p>
-            </a>
-
-            <a href="https://nextjs.org/learn" className={styles.card}>
-              <h2>Learn &rarr;</h2>
-              <p>Learn about Next.js in an interactive course with quizzes!</p>
-            </a>
-
-            <a
-              href="https://github.com/vercel/next.js/tree/canary/examples"
-              className={styles.card}
-            >
-              <h2>Examples &rarr;</h2>
-              <p>Discover and deploy boilerplate example Next.js projects.</p>
-            </a>
-
-            <a
-              href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              className={styles.card}
-            >
-              <h2>Deploy &rarr;</h2>
-              <p>
-                Instantly deploy your Next.js site to a public URL with Vercel.
-              </p>
-            </a>
+            <LightgalleryProvider>
+              {(workData || []).map((item, index) => {
+                const { proj_link_0 } = item || {};
+                return (
+                  <LightgalleryItem key={index} group="any" src={proj_link_0}>
+                    <img src={proj_link_0} style={{ maxWidth: '200px' }} />
+                  </LightgalleryItem>
+                );
+              })}
+            </LightgalleryProvider>
           </div>
         </main>
       </Wrapper>
-
       <footer className={styles.footer}></footer>
     </div>
   );
