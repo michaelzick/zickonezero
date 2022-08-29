@@ -1,96 +1,96 @@
 [
   {
     "thumb": "/img/thumbs/etc.jpg",
-    "imgs": {
-      "imgUrl0": "/img/checklist_web.jpg",
-      "imgUrl1": "/img/beachbiz_web.jpg",
-      "imgUrl2": "",
-      "imgUrl3": ""
-    },
+    "imgs": [
+      "/img/checklist_web.jpg",
+      "/img/beachbiz_web.jpg",
+      "",
+      ""
+    ],
     "desc": "Interactive landing pages. Performed under The Branding Farm, Venice, CA.",
     "header": "ETC Hotels",
     "group": "etc"
   },
   {
     "thumb": "/img/thumbs/wb.jpg",
-    "imgs": {
-      "imgUrl0": "/img/gipsy_1.jpg",
-      "imgUrl1": "/img/gipsy_2.jpg",
-      "imgUrl2": "/img/leatherback_1.jpg",
-      "imgUrl3": "/img/leatherback_2.jpg"
-    },
+    "imgs": [
+      "/img/gipsy_1.jpg",
+      "/img/gipsy_2.jpg",
+      "/img/leatherback_1.jpg",
+      "/img/leatherback_2.jpg"
+    ],
     "desc": "Interactive Infographics. Performed under Addison Interactive.",
     "header": "Warner Bros. Pictures",
     "group": "wb"
   },
   {
     "thumb": "/img/thumbs/paramount.jpg",
-    "imgs": {
-      "imgUrl0": "/img/jeff_web.jpg",
-      "imgUrl1": "/img/kp_facebook_web.jpg",
-      "imgUrl2": "/img/1kwords_web.jpg",
-      "imgUrl3": "/img/devil_inside_web.jpg"
-    },
+    "imgs": [
+      "/img/jeff_web.jpg",
+      "/img/kp_facebook_web.jpg",
+      "/img/1kwords_web.jpg",
+      "/img/devil_inside_web.jpg"
+    ],
     "desc": "Interactive emails and Facebook page. Performed under The Branding Farm, Venice, CA.",
     "header": "Paramount Pictures",
     "group": "paramount"
   },
   {
     "thumb": "/img/thumbs/sony.jpg",
-    "imgs": {
-      "imgUrl0": "/img/tite_1.jpg",
-      "imgUrl1": "/img/tite_2.jpg",
-      "imgUrl2": "/img/tite_3.jpg",
-      "imgUrl3": "/img/cloudy_3.jpg"
-    },
+    "imgs": [
+      "/img/tite_1.jpg",
+      "/img/tite_2.jpg",
+      "/img/tite_3.jpg",
+      "/img/cloudy_3.jpg"
+    ],
     "desc": "Multiple sites, landing pages and games. Performed under Addison Interactive.",
     "header": "Sony Pictures",
     "group": "sony"
   },
   {
     "thumb": "/img/thumbs/dreamworks.jpg",
-    "imgs": {
-      "imgUrl0": "/img/dragons_map.jpg",
-      "imgUrl1": "/img/dragons_forest.jpg",
-      "imgUrl2": "/img/dragons_video.jpg",
-      "imgUrl3": "/img/dragons_dl_2.jpg"
-    },
+    "imgs": [
+      "/img/dragons_map.jpg",
+      "/img/dragons_forest.jpg",
+      "/img/dragons_video.jpg",
+      "/img/dragons_dl_2.jpg"
+    ],
     "desc": "Interactive desktop and mobile sites. Performed under Addison Interactive.",
     "header": "DreamWorks Animation",
     "group": "dreamworks"
   },
   {
     "thumb": "/img/thumbs/fox.jpg",
-    "imgs": {
-      "imgUrl0": "/img/vikings_1.jpg",
-      "imgUrl1": "/img/vikings_2.jpg",
-      "imgUrl2": "/img/dragons_video.jpg",
-      "imgUrl3": "/img/vikings_4.jpg"
-    },
+    "imgs": [
+      "/img/vikings_1.jpg",
+      "/img/vikings_2.jpg",
+      "/img/vikings_3.jpg",
+      "/img/vikings_4.jpg"
+    ],
     "desc": "Interactive video voting bracket. Performed under Addison Interactive.",
     "header": "Fox Television",
     "group": "fox"
   },
   {
     "thumb": "/img/thumbs/riot.jpg",
-    "imgs": {
-      "imgUrl0": "/img/lol_home.jpg",
-      "imgUrl1": "/img/lol_user.jpg",
-      "imgUrl2": "/img/vikings_3.jpg",
-      "imgUrl3": "/img/lol_enlist.jpg"
-    },
+    "imgs": [
+      "/img/lol_home.jpg",
+      "/img/lol_user.jpg",
+      "/img/lol_tourney.jpg",
+      "/img/lol_enlist.jpg"
+    ],
     "desc": "Tournament creation app for the hit game League Of Legends, South America.",
     "header": "Riot Games",
     "group": "riot"
   },
   {
     "thumb": "/img/thumbs/parkme-thumb.jpg",
-    "imgs": {
-      "imgUrl0": "/img/parkme-home-2017.jpg",
-      "imgUrl1": "/img/parkme-city-2017.jpg",
-      "imgUrl2": "/img/lol_tourney.jpg",
-      "imgUrl3": "/img/parkme-lot-2017.jpg"
-    },
+    "imgs": [
+      "/img/parkme-home-2017.jpg",
+      "/img/parkme-city-2017.jpg",
+      "/img/parkme-map-2017.jpg",
+      "/img/parkme-lot-2017.jpg"
+    ],
     "desc": "Web and Mobile Parking and Reservation App.",
     "header": "ParkMe.com",
     "group": "parkme"

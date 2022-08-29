@@ -1,1 +1,1 @@
-declare module 'react-lightgallery';
+declare module 'fslightbox-react';

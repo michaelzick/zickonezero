@@ -1,10 +1,9 @@
 import type { NextPage } from 'next';
+import Image from 'next/image';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
-import { LightgalleryProvider, LightgalleryItem } from 'react-lightgallery';
-import 'lightgallery.js/dist/css/lightgallery.css';
-
+import FsLightbox from 'fslightbox-react';
 import styles from '../styles/Home.module.css';
 import { Wrapper } from '../styles';
 
@@ -24,6 +23,9 @@ const Home: NextPage = () => {
     setData();
   }, []);
 
+  // For lightbox
+  const [toggler, setToggler] = useState(false);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -39,38 +41,23 @@ const Home: NextPage = () => {
             {name && <div>Name is {name}</div>}
           </h1>
 
-          <p className={styles.description}>
-            Get started by editing{' '}
-            <code className={styles.code}>pages/index.tsx</code>
-          </p>
-
           <div className={styles.grid}>
-            <LightgalleryProvider>
-              {(worksData || []).map((item, index) => {
-                const { thumb, imgs, group } = item;
+            {worksData && worksData.map((item, index) => {
+              const { thumb, imgs, group } = item;
 
-                const Thumb = (
-                  <LightgalleryItem group="any" src={thumb} key={index}>
-                    <img src={thumb} style={{ maxWidth: '200px' }} />
-                  </LightgalleryItem>
-                );
+              return (
+                <div key={index}>
+                  <div onClick={() => setToggler(!toggler)}>
+                    <Image src={thumb} width='200px' height='200px' alt={group} />
+                  </div>
 
-                const MainImgs = Object.values(imgs).map((imgUrl, index) => {
-                  return (
-                    <LightgalleryItem group={group} src={imgUrl} key={index}>
-                      <img src={imgUrl} style={{ maxWidth: '500px' }} />
-                    </LightgalleryItem>
-                  );
-                });
-
-                return (
-                  <>
-                    {Thumb}
-                    {MainImgs}
-                  </>
-                );
-              })}
-            </LightgalleryProvider>
+                  <FsLightbox
+                    toggler={toggler}
+                    sources={imgs}
+                  />
+                </div>
+              );
+            })}
           </div>
         </main>
       </Wrapper>
