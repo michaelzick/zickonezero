@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
-import workData from './api/workData.json';
+import worksData from './api/worksData.json';
 
 import { LightgalleryProvider, LightgalleryItem } from 'react-lightgallery';
 import 'lightgallery.js/dist/css/lightgallery.css';
@@ -19,7 +19,6 @@ const Home: NextPage = () => {
       const dataJson = await fetchData.json();
       const { name } = dataJson;
       setName(name);
-      console.log(name);
     };
 
     processData();
@@ -47,12 +46,28 @@ const Home: NextPage = () => {
 
           <div className={styles.grid}>
             <LightgalleryProvider>
-              {(workData || []).map((item, index) => {
-                const { proj_link_0 } = item || {};
-                return (
-                  <LightgalleryItem key={index} group="any" src={proj_link_0}>
-                    <img src={proj_link_0} style={{ maxWidth: '200px' }} />
+              {(worksData || []).map((item, index) => {
+                const { thumb, imgs, group } = item;
+
+                const Thumb = (
+                  <LightgalleryItem group="any" src={thumb} key={index}>
+                    <img src={thumb} style={{ maxWidth: '200px' }} />
                   </LightgalleryItem>
+                );
+
+                const MainImgs = Object.values(imgs).map((imgUrl, index) => {
+                  return (
+                    <LightgalleryItem group={group} src={imgUrl} key={index}>
+                      <img src={imgUrl} style={{ maxWidth: '500px' }} />
+                    </LightgalleryItem>
+                  );
+                });
+
+                return (
+                  <>
+                    {Thumb}
+                    {MainImgs}
+                  </>
                 );
               })}
             </LightgalleryProvider>
@@ -60,7 +75,7 @@ const Home: NextPage = () => {
         </main>
       </Wrapper>
       <footer className={styles.footer}></footer>
-    </div>
+    </div >
   );
 };
 
