@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import FsLightbox from 'fslightbox-react';
 import styles from '../styles/Home.module.css';
-import { Wrapper } from '../styles';
+import { Wrapper, Title, SubTitle } from '../styles';
 
 const Home: NextPage = () => {
   const [name, setName] = useState('');
@@ -42,10 +42,12 @@ const Home: NextPage = () => {
 
       <Wrapper>
         <main className={styles.main}>
-          <h1 className={styles.title}>
-            Welcome to <a href="https://nextjs.org">Next.js!</a>
-            {name && <div>Name is {name}</div>}
-          </h1>
+          <Title>
+            Michael Zick
+          </Title>
+          <SubTitle italic>
+            React Engineer
+          </SubTitle>
 
           {worksData.length > 0 && <div className={styles.grid}>
             {worksData.map((item, index) => {
