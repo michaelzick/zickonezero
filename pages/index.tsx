@@ -2,8 +2,6 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
-import worksData from './api/worksData.json';
-
 import { LightgalleryProvider, LightgalleryItem } from 'react-lightgallery';
 import 'lightgallery.js/dist/css/lightgallery.css';
 
@@ -12,16 +10,18 @@ import { Wrapper } from '../styles';
 
 const Home: NextPage = () => {
   const [name, setName] = useState('');
+  const [worksData, setWorks] = useState([]);
 
   useEffect(() => {
-    const processData = async () => {
+    const setData = async () => {
       const fetchData = await fetch('./api');
       const dataJson = await fetchData.json();
-      const { name } = dataJson;
+      const { name, worksData } = dataJson;
       setName(name);
+      setWorks(worksData);
     };
 
-    processData();
+    setData();
   }, []);
 
   return (
