@@ -14,10 +14,18 @@
 
 .main .grid>div {
   margin: 3rem;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.main .grid>div:hover {
+  -webkit-filter: none;
+  filter: none;
+  cursor: pointer;
 }
 
 .footer {
-  display: flex;
+  display: none;
   flex: 1;
   padding: 2rem 0;
   border-top: 1px solid #eaeaea;
@@ -74,6 +82,7 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  max-width: 75rem;
 }
 
 .card {

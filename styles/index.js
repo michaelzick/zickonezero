@@ -14,7 +14,7 @@ export const Title = styled.h1`
 
 export const SubTitle = styled.h2`
   color: #4e4e57;
-  margin: 0 0 5rem 0;
+  margin: 0 0 3rem 0;
   line-height: 1.15;
   font-size: 3rem;
   ${(props) => props.italic && 'font-style: italic;'}

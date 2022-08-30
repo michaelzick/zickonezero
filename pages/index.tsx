@@ -45,21 +45,26 @@ const Home: NextPage = () => {
           <Title>
             Michael Zick
           </Title>
-          <SubTitle italic>
-            React Engineer
+          <SubTitle>
+            UI Engineer
           </SubTitle>
 
           <div className={styles.grid}>
             {worksData.map((item, index) => {
               const { thumb, group } = item;
 
-              return (
-                <div onClick={() => onThumbClick(index)} key={index}>
+              const Thumb: React.FunctionComponent = () => (
+                <div onClick={() => onThumbClick(index)} key={group}>
                   <Image src={thumb} width='200px' height='200px' alt={group} className='thumb' />
                 </div>
               );
+
+              return (
+                <Thumb key={index} />
+              );
             })}
           </div>
+
           <FsLightbox
             toggler={toggler}
             sources={imgs}
