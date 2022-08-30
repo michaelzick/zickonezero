@@ -17,7 +17,7 @@ const Home: NextPage = () => {
       const dataJson = await fetchData.json();
       const { name, worksData } = dataJson;
       setName(name);
-      setWorks(worksData);
+      setWorks(worksData.reverse());
     };
 
     setData();
@@ -41,7 +41,7 @@ const Home: NextPage = () => {
       </Head>
 
       <Wrapper>
-        <main className={styles.main}>
+        {worksData.length > 0 && <main className={styles.main}>
           <Title>
             Michael Zick
           </Title>
@@ -49,25 +49,22 @@ const Home: NextPage = () => {
             React Engineer
           </SubTitle>
 
-          {worksData.length > 0 && <div className={styles.grid}>
+          <div className={styles.grid}>
             {worksData.map((item, index) => {
               const { thumb, group } = item;
 
               return (
-                <div key={index}>
-                  <div onClick={() => onThumbClick(index)}>
-                    <Image src={thumb} width='200px' height='200px' alt={group} />
-                  </div>
+                <div onClick={() => onThumbClick(index)} key={index}>
+                  <Image src={thumb} width='200px' height='200px' alt={group} className='thumb' />
                 </div>
               );
             })}
-
-            <FsLightbox
-              toggler={toggler}
-              sources={imgs}
-            />
-          </div>}
-        </main>
+          </div>
+          <FsLightbox
+            toggler={toggler}
+            sources={imgs}
+          />
+        </main>}
       </Wrapper>
       <footer className={styles.footer}></footer>
     </div >

@@ -12,6 +12,10 @@
   align-items: center;
 }
 
+.main .grid>div {
+  margin: 3rem;
+}
+
 .footer {
   display: flex;
   flex: 1;
