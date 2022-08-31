@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import FsLightbox from 'fslightbox-react';
 import styles from '../styles/Home.module.scss';
-import { Wrapper, Title, SubTitle } from '../styles';
+import { Wrapper, Title, SubTitle, LinkBox, BioBox } from '../styles';
 
 const Home: NextPage = () => {
   const [name, setName] = useState('');
@@ -49,10 +49,10 @@ const Home: NextPage = () => {
             UI Engineer
           </SubTitle>
 
-          <div>
+          <LinkBox>
             <a href='https://github.com/michaelzick' target='_blank' rel='noreferrer'>GitHub</a>
             <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noreferrer'>LinkedIn</a>
-          </div>
+          </LinkBox>
 
           <div className={styles.grid}>
             {worksData.map((item, index) => {
@@ -74,6 +74,9 @@ const Home: NextPage = () => {
             toggler={toggler}
             sources={imgs}
           />
+          <BioBox>
+            yo
+          </BioBox>
         </main>}
       </Wrapper>
       <footer className={styles.footer}></footer>

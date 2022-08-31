@@ -15,7 +15,29 @@ export const Title = styled.h1`
 `;
 
 export const SubTitle = styled.h2`
-  margin: 0 0 3rem 0;
+  margin: 0 0 1.5rem 0;
   line-height: 1.15;
   font-size: 3rem;
 `;
+
+export const LinkBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 130px;
+  margin-bottom: 1rem;
+
+  a {
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+`;
+
+export const BioBox = styled.div`
+  padding: 5rem;
+  background: #8c8a8a;
+  width: 100%;
+  font-size: 25px;
+  margin-top: 2rem;
+`
