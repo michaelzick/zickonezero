@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
 import FsLightbox from 'fslightbox-react';
-import styles from '../styles/Home.module.css';
+import styles from '../styles/Home.module.scss';
 import { Wrapper, Title, SubTitle } from '../styles';
 
 const Home: NextPage = () => {
@@ -48,6 +48,11 @@ const Home: NextPage = () => {
           <SubTitle>
             UI Engineer
           </SubTitle>
+
+          <div>
+            <a href='https://github.com/michaelzick' target='_blank' rel='noreferrer'>GitHub</a>
+            <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noreferrer'>LinkedIn</a>
+          </div>
 
           <div className={styles.grid}>
             {worksData.map((item, index) => {

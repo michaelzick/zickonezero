@@ -10,18 +10,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
 
-.main .grid>div {
-  margin: 3rem;
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
-}
+  .grid>div {
+    margin: 3rem;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
 
-.main .grid>div:hover {
-  -webkit-filter: none;
-  filter: none;
-  cursor: pointer;
+    &:hover {
+      -webkit-filter: none;
+      filter: none;
+      cursor: pointer;
+    }
+  }
 }
 
 .footer {
@@ -95,13 +95,13 @@
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   max-width: 300px;
-}
 
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+  &:hover,
+  &:focus,
+  &:active {
+    color: #0070f3;
+    border-color: #0070f3;
+  }
 }
 
 .card h2 {
