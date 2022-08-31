@@ -7,6 +7,13 @@ export const Wrapper = styled.div`
   background-image: url('/img/mountains-bg.jpg');
   color: #fff;
   text-align: center;
+
+  a {
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
 `;
 
 export const Title = styled.h1`
@@ -25,19 +32,17 @@ export const LinkBox = styled.div`
   justify-content: space-between;
   width: 130px;
   margin-bottom: 1rem;
-
-  a {
-    text-decoration: underline;
-    &:hover {
-      text-decoration: none;
-    }
-  }
 `;
 
 export const BioBox = styled.div`
-  padding: 5rem;
-  background: #8c8a8a;
+  padding: 4rem;
+  background: rgba(40, 138, 138, 0.4);
   width: 100%;
   font-size: 25px;
   margin-top: 2rem;
-`
+  text-align: left;
+
+  h2 {
+    margin: 0;
+  }
+`;
