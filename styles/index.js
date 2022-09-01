@@ -3,8 +3,6 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  background-color: white;
-  background-image: url('/img/mountains-bg.jpg');
   color: #fff;
   text-align: center;
 
@@ -36,7 +34,7 @@ export const LinkBox = styled.div`
 
 export const BioBox = styled.div`
   padding: 4rem;
-  background: rgba(40, 138, 138, 0.6);
+  background: rgba(40, 138, 138, 0.3);
   width: 100%;
   font-size: 25px;
   margin-top: 2rem;
