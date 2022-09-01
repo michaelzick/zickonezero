@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  color: #fff;
   text-align: center;
 
   a {
@@ -33,6 +32,8 @@ export const LinkBox = styled.div`
 `;
 
 export const BioBox = styled.div`
+  display: flex;
+  justify-content: space-between;
   padding: 4rem;
   background: rgba(40, 138, 138, 0.3);
   width: 100%;
@@ -40,7 +41,27 @@ export const BioBox = styled.div`
   margin-top: 2rem;
   text-align: left;
 
+  .headshot {
+    width: 300px;
+
+    @media (max-width: 996px) {
+      margin-top: 3rem;
+    }
+  }
+
+  .text-wrapper {
+    max-width: 850px;
+
+    @media (max-width: 1314px) {
+      max-width: 600px;
+    }
+  }
+
   h2 {
     margin: 0;
+  }
+
+  @media (max-width: 996px) {
+    flex-direction: column;
   }
 `;
