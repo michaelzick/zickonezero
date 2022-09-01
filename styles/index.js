@@ -30,13 +30,13 @@ export const SubTitle = styled.h2`
 export const LinkBox = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 130px;
+  width: 200px;
   margin-bottom: 1rem;
 `;
 
 export const BioBox = styled.div`
   padding: 4rem;
-  background: rgba(40, 138, 138, 0.4);
+  background: rgba(40, 138, 138, 0.6);
   width: 100%;
   font-size: 25px;
   margin-top: 2rem;

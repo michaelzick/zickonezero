@@ -7,6 +7,8 @@ import FsLightbox from 'fslightbox-react';
 import styles from '../styles/Home.module.scss';
 import { Wrapper, Title, SubTitle, LinkBox, BioBox } from '../styles';
 
+import { scrollMethod } from '../src/helpers';
+
 const Home: NextPage = () => {
   const [name, setName] = useState('');
   const [worksData, setWorks] = useState([]);
@@ -52,6 +54,11 @@ const Home: NextPage = () => {
           <LinkBox>
             <a href='https://github.com/michaelzick' target='_blank' rel='noreferrer'>GitHub</a>
             <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noreferrer'>LinkedIn</a>
+            <a href='' onClick={(ev) => {
+              ev.preventDefault();
+              const element = document.getElementById('about');
+              scrollMethod(ev, element);
+            }}>About</a>
           </LinkBox>
 
           <div className={styles.grid}>
@@ -74,12 +81,12 @@ const Home: NextPage = () => {
             toggler={toggler}
             sources={imgs}
           />
-          <BioBox>
+          <BioBox id='about'>
             <h2>Hi, I{"'"}m Michael.</h2>
             <br />
             I{"'"}m a frontend engineer, coach, and cybersecurity enthusiast based in Los Angeles, CA. Most mornings you can find me at the beach or the gym earlier than probably anyone you know.
             <br /><br />
-            You can see some samples of the projects I build in the gallery above, code samples at <a href='https://github.com/michaelzick' target='_blank' rel='noreferrer'>GitHub</a>, and a full qualification on <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noreferrer'>LinkedIn</a>.
+            You can see some samples of the projects I{"'"}ve build in the gallery above, code samples at <a href='https://github.com/michaelzick' target='_blank' rel='noreferrer'>GitHub</a>, and a full qualification on <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noreferrer'>LinkedIn</a>.
           </BioBox>
         </main>}
       </Wrapper>
