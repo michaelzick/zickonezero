@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   text-align: center;
+  font-family: Garamond, serif;
 
   a {
     text-decoration: underline;
@@ -14,14 +15,14 @@ export const Wrapper = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 6rem;
-  margin: 0;
+  font-size: 4rem;
+  margin: 0 0 0.5rem;
 `;
 
 export const SubTitle = styled.h2`
   margin: 0 0 1.5rem 0;
   line-height: 1.15;
-  font-size: 3rem;
+  font-size: 2rem;
 `;
 
 export const LinkBox = styled.div`
@@ -53,9 +54,9 @@ export const BioBox = styled.div`
   }
 
   .text-wrapper {
-    max-width: 42rem;
+    max-width: 43rem;
 
-    @media (max-width: 1090px) {
+    @media (max-width: 1137px) {
       max-width: 35rem;
     }
     @media (max-width: 996px) {
