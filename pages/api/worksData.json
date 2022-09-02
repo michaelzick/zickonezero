@@ -84,12 +84,12 @@
     "group": "parkme"
   },
   {
-    "thumb": "/img/thumbs/sa-logo.png",
+    "thumb": "/img/thumbs/saatchi.jpg",
     "imgs": [
-      "/img/city.png",
-      "/img/etsy.png",
-      "/img/giftcard.png",
-      "/img/quiz.png"
+      "/img/citi.jpg",
+      "/img/etsy.jpg",
+      "/img/giftcard.jpg",
+      "/img/quiz.jpg"
     ],
     "desc": "World Renowned Fine Art Marketplace.",
     "header": "Saatchi Art.com",
