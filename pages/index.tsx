@@ -10,15 +10,13 @@ import { Wrapper, Title, SubTitle, LinkBox, BioBox } from '../styles';
 import { scrollMethod } from '../src/helpers';
 
 const Home: NextPage = () => {
-  const [name, setName] = useState('');
   const [worksData, setWorks] = useState([]);
 
   useEffect(() => {
     const setData = async () => {
       const fetchData = await fetch('./api');
       const dataJson = await fetchData.json();
-      const { name, worksData } = dataJson;
-      setName(name);
+      const { worksData } = dataJson;
       setWorks(worksData.reverse());
     };
 
@@ -26,13 +24,19 @@ const Home: NextPage = () => {
   }, []);
 
   // For lightbox
-  const [toggler, setToggler] = useState(false);
-  const [productIndex, setProductIndex] = useState(0);
+  const [lightboxController, setLightboxController] = useState({
+    toggler: false,
+    productIndex: 0
+  });
+
   const onThumbClick = (index: number) => {
-    setToggler(!toggler);
-    setProductIndex(index);
+    setLightboxController({
+      toggler: !lightboxController.toggler,
+      productIndex: index
+    });
   };
-  const { imgs } = worksData[productIndex] || [];
+
+  const { imgs } = worksData[lightboxController.productIndex] || [];
 
   return (
     <div className={styles.container}>
@@ -66,20 +70,21 @@ const Home: NextPage = () => {
               const { thumb, group } = item;
 
               const Thumb: React.FunctionComponent = () => (
-                <div onClick={() => onThumbClick(index)} key={group}>
+                <div onClick={() => onThumbClick(index)}>
                   <Image src={thumb} width='200px' height='200px' alt={group} className='thumb' />
                 </div>
               );
 
               return (
-                <Thumb key={index} />
+                <Thumb key={group} />
               );
             })}
           </div>
 
           <FsLightbox
-            toggler={toggler}
+            toggler={lightboxController.toggler}
             sources={imgs}
+            slide={1}
           />
           <BioBox id='about'>
             <div className='biobox-inner'>
