@@ -52,14 +52,6 @@ export const BioBox = styled.div`
     }
   }
 
-  .headshot {
-    width: 300px;
-
-    @media (max-width: 996px) {
-      margin-top: 3rem;
-    }
-  }
-
   .text-wrapper {
     max-width: 42rem;
 
@@ -68,6 +60,7 @@ export const BioBox = styled.div`
     }
     @media (max-width: 996px) {
       max-width: none;
+      margin-bottom: 3rem;
     }
   }
 
