@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import FsLightbox from 'fslightbox-react';
 import styles from '../styles/Home.module.scss';
 import BioBoxContent from '../src/BioBoxContent';
-import { Wrapper, Title, SubTitle, LinkBox, BioBox } from '../styles';
+import { Wrapper, Title, SubTitle, LinkBox } from '../styles';
 
 import { scrollMethod } from '../src/helpers';
 
@@ -87,9 +87,8 @@ const Home: NextPage = () => {
             sources={imgs}
             slide={1}
           />
-          <BioBox id='about'>
-            <BioBoxContent />
-          </BioBox>
+
+          <BioBoxContent />
         </main>}
       </Wrapper>
       <footer className={styles.footer}></footer>
