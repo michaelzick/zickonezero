@@ -60,7 +60,7 @@ export const BioBox = styled.div`
     }
     @media (max-width: 996px) {
       max-width: none;
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
     }
   }
 
