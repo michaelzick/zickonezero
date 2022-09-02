@@ -33,13 +33,24 @@ export const LinkBox = styled.div`
 
 export const BioBox = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 4rem;
   background: rgba(40, 138, 138, 0.3);
   width: 100%;
   font-size: 25px;
   margin-top: 2rem;
   text-align: left;
+
+  .biobox-inner {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 68rem;
+
+    @media (max-width: 996px) {
+      flex-direction: column;
+    }
+  }
 
   .headshot {
     width: 300px;
@@ -50,18 +61,17 @@ export const BioBox = styled.div`
   }
 
   .text-wrapper {
-    max-width: 850px;
+    max-width: 42rem;
 
-    @media (max-width: 1314px) {
-      max-width: 600px;
+    @media (max-width: 1090px) {
+      max-width: 35rem;
+    }
+    @media (max-width: 996px) {
+      max-width: none;
     }
   }
 
   h2 {
     margin: 0;
-  }
-
-  @media (max-width: 996px) {
-    flex-direction: column;
   }
 `;
