@@ -5,10 +5,8 @@ import { useEffect, useState } from 'react';
 
 import FsLightbox from 'fslightbox-react';
 import styles from '../styles/Home.module.scss';
-import BioBoxContent from '../src/BioBoxContent';
-import { Wrapper, Title, SubTitle, LinkBox } from '../styles';
-
-import { scrollMethod } from '../src/helpers';
+import { BioBoxContent, LinkBoxContent } from '../src';
+import { Wrapper, Title, SubTitle } from '../styles';
 
 const Home: NextPage = () => {
   const [worksData, setWorks] = useState([]);
@@ -56,15 +54,7 @@ const Home: NextPage = () => {
             UI Engineer
           </SubTitle>
 
-          <LinkBox>
-            <a href='https://github.com/michaelzick' target='_blank' rel='noreferrer'>GitHub</a>
-            <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noreferrer'>LinkedIn</a>
-            <a href='' onClick={(ev) => {
-              ev.preventDefault();
-              const element = document.getElementById('about');
-              scrollMethod(ev, element);
-            }}>About</a>
-          </LinkBox>
+          <LinkBoxContent />
 
           <div className={styles.grid}>
             {worksData.map((item, index) => {
