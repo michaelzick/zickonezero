@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import FsLightbox from 'fslightbox-react';
 import styles from '../styles/Home.module.scss';
 import { BioBoxContent, LinkBoxContent } from '../src';
-import { Wrapper, Title, SubTitle } from '../styles';
+import { Container, Main, Wrapper, Title, SubTitle } from '../styles';
 
 const Home: NextPage = () => {
   const [worksData, setWorks] = useState([]);
@@ -38,7 +38,7 @@ const Home: NextPage = () => {
   const { imgs } = worksData[lightboxController.productIndex] || [];
 
   return (
-    <div className={styles.container}>
+    <Container>
       <Head>
         <title>Michael Zick</title>
         <meta name="description" content="I'm a frontend engineer, coach, and cybersecurity enthusiast based in Los Angeles, CA." />
@@ -46,7 +46,7 @@ const Home: NextPage = () => {
       </Head>
 
       <Wrapper>
-        {worksData.length > 0 && <main className={styles.main}>
+        {worksData.length > 0 && <Main>
           <div className='titles'>
             <Title>
               ZICKONEZERO Engineering
@@ -58,7 +58,7 @@ const Home: NextPage = () => {
 
           <LinkBoxContent />
 
-          <div className={styles.grid}>
+          <div className='grid'>
             {worksData.map((item, index) => {
               const { thumb, group } = item;
 
@@ -81,9 +81,9 @@ const Home: NextPage = () => {
           />
 
           <BioBoxContent />
-        </main>}
+        </Main>}
       </Wrapper>
-    </div >
+    </Container >
   );
 };
 

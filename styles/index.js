@@ -1,5 +1,53 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  background-color: #000;
+  background-size: cover;
+  color: #fff;
+
+  @media (prefers-color-scheme: dark) {}
+`;
+
+export const Main = styled.main`
+  min-height: 100vh;
+  padding: 3rem 0 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 75rem;
+
+    @media (max-width: 600px) {
+      width: 100%;
+      flex-direction: column;
+    }
+  }
+
+  .grid>div {
+    margin: 3rem;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+
+    &:hover {
+      -webkit-filter: none;
+      filter: none;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      margin: 2rem;
+    }
+  }
+  }
+`;
+
 export const Wrapper = styled.div`
   text-align: center;
   font-family: Roboto, sans-serif;
@@ -29,7 +77,7 @@ export const SubTitle = styled.h2`
   line-height: 1.15;
   font-size: 1.4rem;
 
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     max-width: 250px;
   }
 `;
@@ -78,7 +126,7 @@ export const BioBox = styled.div`
     margin: 0;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     padding: 2rem;
   }
 `;
