@@ -4,6 +4,13 @@ export const Wrapper = styled.div`
   text-align: center;
   font-family: Roboto, sans-serif;
 
+  .titles {
+    width: 100%;
+    text-align: left;
+    padding-left: 3rem;
+    font-family: system-ui;
+  }
+
   a {
     text-decoration: underline;
     &:hover {
@@ -13,14 +20,14 @@ export const Wrapper = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 3rem;
+  font-size: 2.3rem;
   margin: 0 0 0.5rem;
 `;
 
 export const SubTitle = styled.h2`
   margin: 0 0 1.5rem 0;
   line-height: 1.15;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 `;
 
 export const LinkBox = styled.div`

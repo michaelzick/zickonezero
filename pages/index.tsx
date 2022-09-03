@@ -47,12 +47,14 @@ const Home: NextPage = () => {
 
       <Wrapper>
         {worksData.length > 0 && <main className={styles.main}>
-          <Title>
-            ZICKONEZERO Engineering
-          </Title>
-          <SubTitle>
-            React Development :: Cybersecurity
-          </SubTitle>
+          <div className='titles'>
+            <Title>
+              ZICKONEZERO Engineering
+            </Title>
+            <SubTitle>
+              React Development :: Cybersecurity
+            </SubTitle>
+          </div>
 
           <LinkBoxContent />
 
