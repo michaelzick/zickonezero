@@ -52,7 +52,7 @@ const Home: NextPage = () => {
               ZICKONEZERO Engineering
             </Title>
             <SubTitle>
-              React Development :: Cybersecurity
+              React Development & Cybersecurity
             </SubTitle>
           </div>
 
