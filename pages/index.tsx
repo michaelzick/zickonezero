@@ -83,7 +83,6 @@ const Home: NextPage = () => {
           <BioBoxContent />
         </main>}
       </Wrapper>
-      <footer className={styles.footer}></footer>
     </div >
   );
 };
