@@ -1,11 +1,11 @@
 .container {
-  background: url('/img/mountains-bg.jpg') no-repeat;
+  background-color: #000;
   background-size: cover;
 }
 
 .main {
   min-height: 100vh;
-  padding: 4rem 0 0;
+  padding: 3rem 0 0;
   flex: 1;
   display: flex;
   flex-direction: column;

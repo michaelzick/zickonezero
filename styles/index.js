@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
   text-align: center;
-  font-family: Garamond, serif;
+  font-family: Roboto, sans-serif;
 
   a {
     text-decoration: underline;
@@ -15,14 +13,14 @@ export const Wrapper = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 4rem;
+  font-size: 3rem;
   margin: 0 0 0.5rem;
 `;
 
 export const SubTitle = styled.h2`
   margin: 0 0 1.5rem 0;
   line-height: 1.15;
-  font-size: 2rem;
+  font-size: 1.5rem;
 `;
 
 export const LinkBox = styled.div`
@@ -36,11 +34,11 @@ export const BioBox = styled.div`
   display: flex;
   justify-content: center;
   padding: 4rem;
-  background: rgba(40, 138, 138, 0.3);
   width: 100%;
   font-size: 25px;
   margin-top: 2rem;
   text-align: left;
+  border-top: 1px solid #fff;
 
   .biobox-inner {
     display: flex;
@@ -67,5 +65,9 @@ export const BioBox = styled.div`
 
   h2 {
     margin: 0;
+  }
+
+  @media (max-width: 500px) {
+    padding: 2rem;
   }
 `;
