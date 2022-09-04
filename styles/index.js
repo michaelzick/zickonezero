@@ -32,12 +32,10 @@ export const Main = styled.main`
 
   .grid>div {
     margin: 3rem;
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
 
     &:hover {
-      -webkit-filter: none;
-      filter: none;
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
       cursor: pointer;
     }
 
