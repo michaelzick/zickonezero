@@ -79,7 +79,7 @@ const Home: NextPage<Props> = (props) => {
 };
 
 export async function getServerSideProps() {
-  const fetchData = await fetch('http://localhost:3000/api');
+  const fetchData = await fetch('https://zickonezero-syv79.ondigitalocean.app/api');
   const dataJson = await fetchData.json();
   const { worksData } = dataJson;
 
