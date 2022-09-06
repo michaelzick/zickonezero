@@ -10,7 +10,7 @@ import { Container, Main, Wrapper, Title, SubTitle } from '../styles';
 import type { Props } from '../src/types';
 
 const Home: NextPage<Props> = (props) => {
-  const { worksData } = props;
+  const { worksDataReversed } = props;
 
   // For lightbox
   const [lightboxController, setLightboxController] = useState({
@@ -25,8 +25,7 @@ const Home: NextPage<Props> = (props) => {
     });
   };
 
-  const reversedWorksData = worksData.reverse();
-  const { imgs } = reversedWorksData[lightboxController.productIndex] || [];
+  const { imgs } = worksDataReversed[lightboxController.productIndex] || [];
 
   return (
     <Container>
@@ -37,7 +36,7 @@ const Home: NextPage<Props> = (props) => {
       </Head>
 
       <Wrapper>
-        {reversedWorksData.length > 0 && <Main>
+        {worksDataReversed.length > 0 && <Main>
           <div className='titles'>
             <Title>
               ZICKONEZERO Engineering
@@ -50,7 +49,7 @@ const Home: NextPage<Props> = (props) => {
           <LinkBoxContent />
 
           <div className='grid'>
-            {reversedWorksData.map((item, index) => {
+            {worksDataReversed.map((item, index) => {
               const { thumb, group } = item;
 
               const Thumb: React.FunctionComponent = () => (
@@ -82,9 +81,10 @@ export async function getServerSideProps() {
   const fetchData = await fetch('https://zickonezero-syv79.ondigitalocean.app/api');
   const dataJson = await fetchData.json();
   const { worksData } = dataJson;
+  const worksDataReversed = worksData.reverse();
 
   return {
-    props: { worksData }, // will be passed to the page component as props
+    props: { worksDataReversed } // will be passed to the page component as props
   };
 }
 

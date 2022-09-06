@@ -7,5 +7,5 @@ export type WorksData = {
 };
 
 export type Props = {
-  worksData: Array<WorksData>;
+  worksDataReversed: Array<WorksData>;
 };
