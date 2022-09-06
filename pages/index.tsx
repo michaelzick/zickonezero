@@ -7,14 +7,16 @@ import FsLightbox from 'fslightbox-react';
 import { BioBoxContent, LinkBoxContent } from '../src';
 import { Container, Main, Wrapper, Title, SubTitle } from '../styles';
 
+type WorksData = {
+  thumb: string,
+  imgs: Array<string>,
+  desc: string,
+  header: string,
+  group: string;
+};
+
 type Props = {
-  worksData: {
-    thumb: string,
-    imgs: Array<string>,
-    desc: string,
-    header: string,
-    group: string;
-  };
+  worksData: Array<WorksData>;
 };
 
 const Home: NextPage<Props> = (props) => {
