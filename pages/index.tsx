@@ -1,26 +1,24 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import FsLightbox from 'fslightbox-react';
-import styles from '../styles/Home.module.scss';
 import { BioBoxContent, LinkBoxContent } from '../src';
 import { Container, Main, Wrapper, Title, SubTitle } from '../styles';
 
-const Home: NextPage = () => {
-  const [worksData, setWorks] = useState([]);
+type Props = {
+  worksData: {
+    thumb: string,
+    imgs: Array<string>,
+    desc: string,
+    header: string,
+    group: string;
+  };
+};
 
-  useEffect(() => {
-    const setData = async () => {
-      const fetchData = await fetch('./api');
-      const dataJson = await fetchData.json();
-      const { worksData } = dataJson;
-      setWorks(worksData.reverse());
-    };
-
-    setData();
-  }, []);
+const Home: NextPage<Props> = (props) => {
+  const { worksData } = props;
 
   // For lightbox
   const [lightboxController, setLightboxController] = useState({
@@ -35,7 +33,8 @@ const Home: NextPage = () => {
     });
   };
 
-  const { imgs } = worksData[lightboxController.productIndex] || [];
+  const reversedWorksData = worksData.reverse();
+  const { imgs } = reversedWorksData[lightboxController.productIndex] || [];
 
   return (
     <Container>
@@ -46,7 +45,7 @@ const Home: NextPage = () => {
       </Head>
 
       <Wrapper>
-        {worksData.length > 0 && <Main>
+        {reversedWorksData.length > 0 && <Main>
           <div className='titles'>
             <Title>
               ZICKONEZERO Engineering
@@ -59,7 +58,7 @@ const Home: NextPage = () => {
           <LinkBoxContent />
 
           <div className='grid'>
-            {worksData.map((item, index) => {
+            {reversedWorksData.map((item, index) => {
               const { thumb, group } = item;
 
               const Thumb: React.FunctionComponent = () => (
@@ -86,5 +85,15 @@ const Home: NextPage = () => {
     </Container >
   );
 };
+
+export async function getServerSideProps() {
+  const fetchData = await fetch('http://localhost:3000/api');
+  const dataJson = await fetchData.json();
+  const { worksData } = dataJson;
+
+  return {
+    props: { worksData }, // will be passed to the page component as props
+  };
+}
 
 export default Home;
