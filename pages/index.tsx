@@ -78,7 +78,11 @@ const Home: NextPage<Props> = (props) => {
 };
 
 export async function getServerSideProps() {
-  const fetchData = await fetch('https://zickonezero-syv79.ondigitalocean.app/api');
+  const fetchData = await fetch(
+    `${process.env.NODE_ENV === 'development' ?
+      'http://localhost:3000' :
+      'https://zickonezero-syv79.ondigitalocean.app'}/api`
+  );
   const dataJson = await fetchData.json();
   const { worksData } = dataJson;
   const worksDataReversed = worksData.reverse();
