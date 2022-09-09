@@ -106,6 +106,12 @@ export const BioBox = styled.div`
     width: 100%;
     max-width: 78rem;
 
+    .headshot {
+      position: relative;
+      width: 350px;
+      height: 392px;
+    }
+
     @media (max-width: 996px) {
       flex-direction: column;
     }

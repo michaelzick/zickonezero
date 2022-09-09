@@ -13,7 +13,9 @@ const BioBoxContent = () => (
         <br /><br />
         You can see some samples of the projects I{"'"}ve built in the gallery above, code samples at <a href='https://github.com/michaelzick' target='_blank' rel='noreferrer'>GitHub</a>, and a full qualification on <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noreferrer'>LinkedIn</a>.
       </div>
-      <Image width={300} height={336} layout='fixed' className='headshot' src='/img/headshot.jpeg' alt='headshot' style={{ borderRadius: 3 }} />
+      <div className='headshot'>
+        <Image layout='fill' src='/img/headshot.jpeg' alt='headshot' style={{ borderRadius: 3 }} />
+      </div>
     </div>
   </BioBox>
 );
