@@ -22,7 +22,7 @@ export const Main = styled.main`
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 75rem;
+    max-width: 85rem;
 
     @media (max-width: 600px) {
       width: 100%;
@@ -32,6 +32,9 @@ export const Main = styled.main`
 
   .grid>div {
     margin: 3rem;
+    width: 240px;
+    height: 240px;
+    position: relative;
 
     &:hover {
       -webkit-filter: grayscale(100%);
@@ -101,7 +104,7 @@ export const BioBox = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 68rem;
+    max-width: 78rem;
 
     @media (max-width: 996px) {
       flex-direction: column;

@@ -54,7 +54,7 @@ const Home: NextPage<Props> = (props) => {
 
               const Thumb: React.FunctionComponent = () => (
                 <div onClick={() => onThumbClick(index)}>
-                  <Image src={thumb} width='200px' height='200px' alt={group} className='thumb' style={{ borderRadius: 3 }} />
+                  <Image layout='fill' src={thumb} alt={group} className='thumb' style={{ borderRadius: 3 }} />
                 </div>
               );
 
