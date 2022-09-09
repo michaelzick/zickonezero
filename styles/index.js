@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { THEME } from './theme';
+
 export const Container = styled.div`
   background-color: #1e1e1e;
   background-size: cover;
@@ -24,7 +26,7 @@ export const Main = styled.main`
     flex-wrap: wrap;
     max-width: 85rem;
 
-    @media (max-width: 600px) {
+    @media (max-width: ${THEME.breakpoints.phone}) {
       width: 100%;
       flex-direction: column;
     }
@@ -42,7 +44,7 @@ export const Main = styled.main`
       cursor: pointer;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: ${THEME.breakpoints.phone}) {
       margin: 2rem;
     }
   }
@@ -78,7 +80,7 @@ export const SubTitle = styled.h2`
   line-height: 1.15;
   font-size: 1.4rem;
 
-  @media (max-width: 600px) {
+  @media (max-width: ${THEME.breakpoints.phone}) {
     max-width: 250px;
   }
 `;
@@ -112,7 +114,7 @@ export const BioBox = styled.div`
       height: 392px;
     }
 
-    @media (max-width: 996px) {
+    @media (max-width: ${THEME.breakpoints.tablet}) {
       flex-direction: column;
     }
   }
@@ -123,7 +125,7 @@ export const BioBox = styled.div`
     @media (max-width: 1137px) {
       max-width: 35rem;
     }
-    @media (max-width: 996px) {
+    @media (max-width: ${THEME.breakpoints.tablet}) {
       max-width: none;
       margin-bottom: 2.5rem;
     }
@@ -133,7 +135,7 @@ export const BioBox = styled.div`
     margin: 0;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: ${THEME.breakpoints.phone}) {
     padding: 2rem;
   }
 `;
