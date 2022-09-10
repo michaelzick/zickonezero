@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import Image from 'next/image';
 import Head from 'next/head';
 import { useState } from 'react';
 
@@ -54,7 +53,7 @@ const Home: NextPage<Props> = (props) => {
 
               const Thumb: React.FunctionComponent = () => (
                 <div onClick={() => onThumbClick(index)}>
-                  <Image layout='fill' src={thumb} alt={group} className='thumb' style={{ borderRadius: 3 }} />
+                  <img src={thumb} alt={group} className='thumb' />
                 </div>
               );
 

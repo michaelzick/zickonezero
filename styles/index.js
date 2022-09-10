@@ -33,10 +33,12 @@ export const Main = styled.main`
   }
 
   .grid>div {
-    margin: 3rem;
-    width: 240px;
-    height: 240px;
-    position: relative;
+    img {
+      margin: 3rem;
+      width: 240px;
+      height: 240px;
+      border-radius: 3px;
+    }
 
     &:hover {
       -webkit-filter: grayscale(100%);
@@ -109,9 +111,11 @@ export const BioBox = styled.div`
     max-width: 78rem;
 
     .headshot {
-      position: relative;
-      width: 350px;
-      height: 392px;
+      img {
+        height: 392px;
+        width: 350px;
+        border-radius: 3px;
+      }
     }
 
     @media (max-width: ${THEME.breakpoints.tablet}) {

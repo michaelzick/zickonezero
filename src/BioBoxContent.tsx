@@ -1,5 +1,4 @@
 import { BioBox } from '../styles';
-import Image from 'next/image';
 
 const BioBoxContent = () => (
   <BioBox id='about'>
@@ -14,7 +13,7 @@ const BioBoxContent = () => (
         You can see some samples of the projects I{"'"}ve built in the gallery above, code samples at <a href='https://github.com/michaelzick' target='_blank' rel='noreferrer'>GitHub</a>, and a full qualification on <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noreferrer'>LinkedIn</a>.
       </div>
       <div className='headshot'>
-        <Image layout='fill' src='/img/headshot.jpeg' alt='headshot' style={{ borderRadius: 3 }} />
+        <img src='/img/headshot.jpeg' alt='headshot' />
       </div>
     </div>
   </BioBox>
