@@ -26,8 +26,8 @@ const Home: NextPage<Props> = (props) => {
 
   const { imgs } = worksDataReversed[lightboxController.productIndex] || [];
 
-  if (!worksDataReversed) {
-    return <h2 style={{marginLeft: '50px'}}>Loading...</h2>
+  if (!imgs.length) {
+    return <h2 style={{ marginLeft: '50px' }}>Loading...</h2>;
   }
 
   return (
