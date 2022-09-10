@@ -32,16 +32,23 @@ export const Main = styled.main`
 
   .grid>div {
     img {
-      margin: 3rem;
+      margin: 3rem 3rem 1.5rem;
       width: 240px;
       height: 240px;
-      border-radius: 3px;
-      box-shadow: 3px 8px 12px #5c5c5c;
+      border-radius: 5px;
       cursor: pointer;
 
       @media (max-width: ${THEME.breakpoints.phone}) {
-        margin: 2rem;
+        margin: 2rem 0 1rem;
       }
+    }
+    h3 {
+      margin: 0;
+    }
+    p {
+      width: 240px;
+      text-align: center;
+      margin: 0 auto;
     }
   }
 `;
@@ -93,7 +100,7 @@ export const BioBox = styled.div`
   padding: 4rem;
   width: 100%;
   font-size: 25px;
-  margin-top: 2rem;
+  margin-top: 4rem;
   text-align: left;
   border-top: 1px solid #fff;
 
@@ -107,7 +114,7 @@ export const BioBox = styled.div`
       img {
         height: 392px;
         width: 350px;
-        border-radius: 3px;
+        border-radius: 5px;
       }
     }
 
@@ -134,5 +141,6 @@ export const BioBox = styled.div`
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     padding: 2rem;
+    margin-top: 2rem;
   }
 `;

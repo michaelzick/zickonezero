@@ -7,7 +7,7 @@
       "/img/leatherback_1.jpg",
       "/img/leatherback_2.jpg"
     ],
-    "desc": "Interactive Infographics. Performed under Addison Interactive.",
+    "desc": "Animated landing pages for Pacific Rim",
     "header": "Warner Bros. Pictures",
     "group": "wb"
   },
@@ -19,7 +19,7 @@
       "/img/1kwords_web.jpg",
       "/img/devil_inside_web.jpg"
     ],
-    "desc": "Interactive emails and Facebook page. Performed under The Branding Farm, Venice, CA.",
+    "desc": "Interactive emails and Facebook pages for various campaigns",
     "header": "Paramount Pictures",
     "group": "paramount"
   },
@@ -31,7 +31,7 @@
       "/img/tite_3.jpg",
       "/img/cloudy_3.jpg"
     ],
-    "desc": "Multiple sites, landing pages and games. Performed under Addison Interactive.",
+    "desc": "Multiple sites, landing pages, games, and Facebook pages",
     "header": "Sony Pictures",
     "group": "sony"
   },
@@ -43,7 +43,7 @@
       "/img/dragons_video.jpg",
       "/img/dragons_dl_2.jpg"
     ],
-    "desc": "Interactive desktop and mobile sites. Performed under Addison Interactive.",
+    "desc": "Interactive sites for How to Train Your Dragon",
     "header": "DreamWorks Animation",
     "group": "dreamworks"
   },
@@ -55,7 +55,7 @@
       "/img/vikings_3.jpg",
       "/img/vikings_4.jpg"
     ],
-    "desc": "Interactive video voting bracket. Performed under Addison Interactive.",
+    "desc": "Interactive video voting bracket for Vikings",
     "header": "Fox Television",
     "group": "fox"
   },
@@ -67,7 +67,7 @@
       "/img/lol_tourney.jpg",
       "/img/lol_enlist.jpg"
     ],
-    "desc": "Tournament creation app for the hit game League Of Legends, South America.",
+    "desc": "Tournament creation app for League of Legends",
     "header": "Riot Games",
     "group": "riot"
   },
@@ -79,7 +79,7 @@
       "/img/parkme-map-2017.jpg",
       "/img/parkme-lot-2017.jpg"
     ],
-    "desc": "Web and Mobile Parking and Reservation App.",
+    "desc": "Web and Mobile Parking and Reservation App",
     "header": "ParkMe.com",
     "group": "parkme"
   },
@@ -91,8 +91,8 @@
       "/img/giftcard.jpg",
       "/img/quiz.jpg"
     ],
-    "desc": "World Renowned Fine Art Marketplace.",
-    "header": "Saatchi Art.com",
+    "desc": "World Renowned Fine Art Marketplace",
+    "header": "SaatchiArt.com",
     "group": "saatchi"
   }
 ]

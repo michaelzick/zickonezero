@@ -49,11 +49,13 @@ const Home: NextPage<Props> = (props) => {
 
           <div className='grid'>
             {worksDataReversed.map((item, index) => {
-              const { thumb, group } = item;
+              const { thumb, group, desc, header } = item;
 
               const Thumb: React.FunctionComponent = () => (
                 <div onClick={() => onThumbClick(index)}>
                   <img src={thumb} alt={group} className='thumb' />
+                  <h3>{header}</h3>
+                  <p>{desc}</p>
                 </div>
               );
 
