@@ -37,6 +37,13 @@ export const Main = styled.main`
       height: 240px;
       border-radius: 5px;
       cursor: pointer;
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
+
+      &:hover {
+        -webkit-filter: none;
+        filter: none;
+      }
 
       @media (max-width: ${THEME.breakpoints.phone}) {
         margin: 2rem 0 1rem;
