@@ -26,6 +26,10 @@ const Home: NextPage<Props> = (props) => {
 
   const { imgs } = worksDataReversed[lightboxController.productIndex] || [];
 
+  if (!worksDataReversed) {
+    return <h2 style={{marginLeft: '50px'}}>Loading...</h2>
+  }
+
   return (
     <Container>
       <Head>
@@ -35,7 +39,7 @@ const Home: NextPage<Props> = (props) => {
       </Head>
 
       <Wrapper>
-        {worksDataReversed.length > 0 && <Main>
+        <Main>
           <div className='titles'>
             <Title>
               ZICKONEZERO Engineering
@@ -72,7 +76,7 @@ const Home: NextPage<Props> = (props) => {
           />
 
           <BioBoxContent />
-        </Main>}
+        </Main>
       </Wrapper>
     </Container >
   );
