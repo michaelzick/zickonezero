@@ -38,16 +38,16 @@ export const Main = styled.main`
       width: 240px;
       height: 240px;
       border-radius: 3px;
+
+      @media (max-width: ${THEME.breakpoints.phone}) {
+        margin: 2rem;
+      }
     }
 
     &:hover {
       -webkit-filter: grayscale(100%);
       filter: grayscale(100%);
       cursor: pointer;
-    }
-
-    @media (max-width: ${THEME.breakpoints.phone}) {
-      margin: 2rem;
     }
   }
   }
