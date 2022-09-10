@@ -3,11 +3,9 @@ import styled from 'styled-components';
 import { THEME } from './theme';
 
 export const Container = styled.div`
-  background-color: #1e1e1e;
   background-size: cover;
-  color: #fff;
-
-  @media (prefers-color-scheme: dark) {}
+  color: #272727;
+  background-color: #efefef;
 `;
 
 export const Main = styled.main`
@@ -38,18 +36,13 @@ export const Main = styled.main`
       width: 240px;
       height: 240px;
       border-radius: 3px;
+      box-shadow: 3px 8px 12px #5c5c5c;
+      cursor: pointer;
 
       @media (max-width: ${THEME.breakpoints.phone}) {
         margin: 2rem;
       }
     }
-
-    &:hover {
-      -webkit-filter: grayscale(100%);
-      filter: grayscale(100%);
-      cursor: pointer;
-    }
-  }
   }
 `;
 
