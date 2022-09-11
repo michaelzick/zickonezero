@@ -12,7 +12,7 @@ import {
 } from '../src/worksDataSlice';
 
 import FsLightbox from 'fslightbox-react';
-import { BioBoxContent, LinkBoxContent } from '../src';
+import { BioBoxContent, LinkBoxContent, HeadContents } from '../src';
 import { Container, Main, Wrapper, Title, SubTitle } from '../styles';
 
 import type { Props } from '../src/types';
@@ -43,9 +43,7 @@ const Home: NextPage<Props> = (props) => {
   return (
     <Container>
       <Head>
-        <title>Michael Zick</title>
-        <meta name="description" content="I'm a frontend engineer, coach, and cybersecurity enthusiast based in Los Angeles, CA." />
-        <link rel="icon" href="/favicon.ico" />
+        <HeadContents />
       </Head>
 
       <Wrapper>
