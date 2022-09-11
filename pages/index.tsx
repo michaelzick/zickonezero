@@ -2,6 +2,15 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
 
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../src/hooks';
+import {
+  selectData,
+  getData
+} from '../src/worksDataSlice';
+
 import FsLightbox from 'fslightbox-react';
 import { BioBoxContent, LinkBoxContent } from '../src';
 import { Container, Main, Wrapper, Title, SubTitle } from '../styles';
@@ -10,6 +19,11 @@ import type { Props } from '../src/types';
 
 const Home: NextPage<Props> = (props) => {
   const { worksDataReversed } = props;
+  // const dispatch = useAppDispatch();
+  // dispatch(getData(worksDataReversed));
+
+  const { worksData } = useAppSelector(selectData);
+  // console.log(worksData);
 
   // For lightbox
   const [lightboxController, setLightboxController] = useState({
