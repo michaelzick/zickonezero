@@ -79,7 +79,7 @@
       "/img/parkme-map-2017.jpg",
       "/img/parkme-lot-2017.jpg"
     ],
-    "desc": "Web and Mobile Parking and Reservation App",
+    "desc": "Web-based parking locator and reservation dashboard",
     "header": "ParkMe.com",
     "group": "parkme"
   },
@@ -91,7 +91,7 @@
       "/img/giftcard.jpg",
       "/img/quiz.jpg"
     ],
-    "desc": "World Renowned Fine Art Marketplace",
+    "desc": "World-renowned fine art marketplace",
     "header": "SaatchiArt.com",
     "group": "saatchi"
   }
