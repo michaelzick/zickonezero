@@ -75,6 +75,7 @@ export const Wrapper = styled.div`
     text-decoration: underline;
     &:hover {
       text-decoration: none;
+      color: #ff0000;
     }
   }
 `;

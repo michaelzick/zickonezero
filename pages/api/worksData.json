@@ -1,6 +1,6 @@
 [
   {
-    "thumb": "/img/thumbs/wb.jpg",
+    "thumb": "/img/squares/wb-large.jpg",
     "imgs": [
       "/img/gipsy_1.jpg",
       "/img/gipsy_2.jpg",
@@ -12,7 +12,7 @@
     "group": "wb"
   },
   {
-    "thumb": "/img/thumbs/paramount.jpg",
+    "thumb": "/img/squares/paramount-large.jpg",
     "imgs": [
       "/img/jeff_web.jpg",
       "/img/kp_facebook_web.jpg",
@@ -24,7 +24,7 @@
     "group": "paramount"
   },
   {
-    "thumb": "/img/thumbs/sony.jpg",
+    "thumb": "/img/squares/sony-large.jpg",
     "imgs": [
       "/img/tite_1.jpg",
       "/img/tite_2.jpg",
@@ -36,7 +36,7 @@
     "group": "sony"
   },
   {
-    "thumb": "/img/thumbs/dreamworks.jpg",
+    "thumb": "/img/squares/dreamworks-large.jpg",
     "imgs": [
       "/img/dragons_map.jpg",
       "/img/dragons_forest.jpg",
@@ -48,7 +48,7 @@
     "group": "dreamworks"
   },
   {
-    "thumb": "/img/thumbs/fox.jpg",
+    "thumb": "/img/squares/fox-large.jpg",
     "imgs": [
       "/img/vikings_1.jpg",
       "/img/vikings_2.jpg",
@@ -60,7 +60,7 @@
     "group": "fox"
   },
   {
-    "thumb": "/img/thumbs/riot.jpg",
+    "thumb": "/img/squares/riot-large.jpg",
     "imgs": [
       "/img/lol_home.jpg",
       "/img/lol_user.jpg",
@@ -72,7 +72,7 @@
     "group": "riot"
   },
   {
-    "thumb": "/img/thumbs/inrix-thumb.png",
+    "thumb": "/img/squares/inrix-large.jpg",
     "imgs": [
       "/img/parkme-home-2017.jpg",
       "/img/parkme-city-2017.jpg",
@@ -80,11 +80,11 @@
       "/img/parkme-lot-2017.jpg"
     ],
     "desc": "Web-based parking locator and reservation dashboard",
-    "header": "ParkMe.com",
+    "header": "INRIX",
     "group": "parkme"
   },
   {
-    "thumb": "/img/thumbs/saatchi.jpg",
+    "thumb": "/img/squares/saatchiart-large.jpg",
     "imgs": [
       "/img/citi.jpg",
       "/img/etsy.jpg",
@@ -92,7 +92,7 @@
       "/img/quiz.jpg"
     ],
     "desc": "World-renowned fine art marketplace",
-    "header": "SaatchiArt.com",
+    "header": "Saatchi Art",
     "group": "saatchi"
   }
 ]
