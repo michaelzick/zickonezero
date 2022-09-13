@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
   useAppDispatch,
@@ -18,6 +18,13 @@ import { Container, Main, Wrapper, Title, SubTitle, SectionHeader } from '../sty
 import type { Props } from '../src/types';
 
 const Home: NextPage<Props> = (props) => {
+  const [shouldRender, setShouldRender] = useState(false);
+  useEffect(() => {
+    window.setTimeout(() => {
+      setShouldRender(true);
+    }, 300)
+  }, []);
+
   const { worksDataReversed } = props;
   // const dispatch = useAppDispatch();
   // dispatch(getData(worksDataReversed));
@@ -61,7 +68,7 @@ const Home: NextPage<Props> = (props) => {
 
           <SectionHeader>Things I{"'"}ve Built</SectionHeader>
 
-          <div className='grid'>
+          {shouldRender ? <div className='grid'>
             {worksDataReversed.map((item, index) => {
               const { thumb, group, desc, header } = item;
 
@@ -77,7 +84,7 @@ const Home: NextPage<Props> = (props) => {
                 <Thumb key={group} />
               );
             })}
-          </div>
+          </div> : <h2>Loading...</h2>}
 
           {imgs && <FsLightbox
             toggler={lightboxController.toggler}
