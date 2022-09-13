@@ -22,7 +22,7 @@ const Home: NextPage<Props> = (props) => {
   useEffect(() => {
     window.setTimeout(() => {
       setShouldRender(true);
-    }, 300)
+    }, 100)
   }, []);
 
   const { worksDataReversed } = props;
