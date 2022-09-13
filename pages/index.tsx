@@ -59,7 +59,7 @@ const Home: NextPage<Props> = (props) => {
 
           <LinkBoxContent />
 
-          <SectionHeader>Things I've Built</SectionHeader>
+          <SectionHeader>Things I{"'"}ve Built</SectionHeader>
 
           <div className='grid'>
             {worksDataReversed.map((item, index) => {
@@ -67,7 +67,7 @@ const Home: NextPage<Props> = (props) => {
 
               const Thumb: React.FunctionComponent = () => (
                 <div onClick={() => onThumbClick(index)}>
-                  <img src={thumb} alt={group} className='thumb' />
+                  {imgs && <img src={thumb} alt={group} className='thumb' />}
                   <h3>{header}</h3>
                   <p>{desc}</p>
                 </div>
@@ -79,11 +79,11 @@ const Home: NextPage<Props> = (props) => {
             })}
           </div>
 
-          <FsLightbox
+          {imgs && <FsLightbox
             toggler={lightboxController.toggler}
             sources={imgs}
             slide={1}
-          />
+          />}
 
           <BioBoxContent />
         </Main>
@@ -92,15 +92,23 @@ const Home: NextPage<Props> = (props) => {
   );
 };
 
-export async function getServerSideProps() {
-  const fetchData = await fetch(
-    `${process.env.NODE_ENV === 'development' ?
-      'http://localhost:3000' :
-      'https://zickonezero-syv79.ondigitalocean.app'}/api`
-  );
-  const dataJson = await fetchData.json();
-  const { worksData } = dataJson;
-  const worksDataReversed = worksData.reverse();
+export async function getStaticProps() {
+  let worksDataReversed = {};
+
+  try {
+    const fetchData = await fetch(
+      `${process.env.NODE_ENV === 'development' ?
+        'http://localhost:3000' :
+        'https://zickonezero-syv79.ondigitalocean.app'}/api`
+    );
+    const dataJson = await fetchData.json();
+    const { worksData } = dataJson;
+    worksDataReversed = worksData.reverse();
+  } catch (e) {
+    return {
+      props: { worksDataReversed: [{ desc: 'There was a problem with the data.' }] }
+    };
+  }
 
   return {
     props: { worksDataReversed } // will be passed to the page component as props
