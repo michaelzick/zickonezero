@@ -152,3 +152,8 @@ export const BioBox = styled.div`
     margin-top: 2rem;
   }
 `;
+
+export const SectionHeader = styled.h2`
+  font-size: 32px;
+  margin-bottom: 0;
+`;

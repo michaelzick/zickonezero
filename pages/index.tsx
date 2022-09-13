@@ -13,7 +13,7 @@ import {
 
 import FsLightbox from 'fslightbox-react';
 import { BioBoxContent, LinkBoxContent, HeadContents } from '../src';
-import { Container, Main, Wrapper, Title, SubTitle } from '../styles';
+import { Container, Main, Wrapper, Title, SubTitle, SectionHeader } from '../styles';
 
 import type { Props } from '../src/types';
 
@@ -58,6 +58,8 @@ const Home: NextPage<Props> = (props) => {
           </div>
 
           <LinkBoxContent />
+
+          <SectionHeader>Things I've Built</SectionHeader>
 
           <div className='grid'>
             {worksDataReversed.map((item, index) => {
