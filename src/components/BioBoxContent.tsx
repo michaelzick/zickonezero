@@ -1,4 +1,4 @@
-import { BioBox } from '../styles';
+import { BioBox } from '../../styles';
 
 const BioBoxContent = () => (
   <BioBox id='about'>

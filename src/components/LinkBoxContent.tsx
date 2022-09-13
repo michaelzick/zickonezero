@@ -1,5 +1,5 @@
-import { LinkBox } from '../styles';
-import { scrollMethod } from '../src/helpers';
+import { LinkBox } from '../../styles';
+import { scrollMethod } from '../helpers';
 
 const LinkBoxContent = () => (
   <LinkBox>

@@ -12,7 +12,7 @@ import {
 } from '../src/worksDataSlice';
 
 import FsLightbox from 'fslightbox-react';
-import { BioBoxContent, LinkBoxContent, HeadContents } from '../src';
+import { BioBoxContent, LinkBoxContent, HeadContents } from '../src/components';
 import { Container, Main, Wrapper, Title, SubTitle, SectionHeader } from '../styles';
 
 import type { Props } from '../src/types';
