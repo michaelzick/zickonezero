@@ -15,10 +15,18 @@ a {
   box-sizing: border-box;
 }
 
+@media (max-width: 600px) {
+  // fs lightbox
+  .fslightbox-toolbar-button:nth-child(1) {
+    display: none;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
+
   body {
     color: white;
     background: black;
