@@ -29,7 +29,7 @@ const Home: NextPage<Props> = (props) => {
   // const dispatch = useAppDispatch();
   // dispatch(getData(worksDataReversed));
 
-  const { worksData } = useAppSelector(selectData);
+  // const { worksData } = useAppSelector(selectData);
   // console.log(worksData);
 
   // For lightbox
