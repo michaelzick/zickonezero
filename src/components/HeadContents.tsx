@@ -1,7 +1,5 @@
 const HeadContents = () => (
   <>
-    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-    <title>ZICKONEZERO Engineering</title>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon_io/favicon.ico" />
     <link rel="canonical" href="https://www.zickonezero.com" />
     <meta name="title" content="ZICKONEZERO Engineering" />
@@ -25,7 +23,6 @@ const HeadContents = () => (
     <meta name="twitter:url" content="https://www.zickonezero.com" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:description" content="I'm a frontend engineer, coach, and cybersecurity enthusiast based in Los Angeles, CA." />
-    <meta name="description" content="I'm a frontend engineer, coach, and cybersecurity enthusiast based in Los Angeles, CA." />
     <link rel="icon" href="/img/favicon_io/favicon.ico" />
   </>
 );

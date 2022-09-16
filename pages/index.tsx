@@ -22,7 +22,7 @@ const Home: NextPage<Props> = (props) => {
   useEffect(() => {
     window.setTimeout(() => {
       setShouldRender(true);
-    }, 100)
+    }, 100);
   }, []);
 
   const { worksDataReversed } = props;
@@ -50,6 +50,8 @@ const Home: NextPage<Props> = (props) => {
   return (
     <Container>
       <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <title>ZICKONEZERO Engineering</title>
         <HeadContents />
       </Head>
 
