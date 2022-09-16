@@ -4,6 +4,7 @@ const HeadContents = () => (
     <title>ZICKONEZERO Engineering</title>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon_io/favicon.ico" />
     <link rel="canonical" href="https://www.zickonezero.com" />
+    <meta name="title" content="ZICKONEZERO Engineering" />
     <meta name="description" content="I'm a frontend engineer, coach, and cybersecurity enthusiast based in Los Angeles, CA." />
     <meta property="og:site_name" content="ZICKONEZERO Engineering" />
     <meta property="og:title" content="ZICKONEZERO Engineering" />
