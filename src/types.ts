@@ -6,6 +6,6 @@ export type WorksData = {
   group: string;
 };
 
-export type Props = {
+export type WorksDataType = {
   worksDataReversed: Array<WorksData>;
 };

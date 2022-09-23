@@ -5,13 +5,10 @@ import {
 import type { RootState } from './store';
 import worksData from '../pages/api/worksData.json';
 
-// declaring the types for our state
-export type WorksDataState = {
-  worksData: Array<object>;
-};
+import type { WorksDataType } from '../src/types';
 
-const initialState: WorksDataState = {
-  worksData: [...worksData].reverse()
+const initialState: WorksDataType = {
+  worksDataReversed: [...worksData].reverse()
 };
 
 export const worksDataSlice = createSlice({
