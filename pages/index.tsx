@@ -8,6 +8,8 @@ import {
   getData
 } from '../src/worksDataSlice';
 
+import getWorksData from './api/getWorksData';
+
 import { MainContents } from '../src/components/MainContents';
 import { HeadContents } from '../src/components';
 import { Container } from '../styles';
@@ -35,23 +37,15 @@ export async function getStaticProps() {
   let worksDataReversed = {};
 
   try {
-    const fetchData = await fetch(
-      `${process.env.NODE_ENV === 'development' ?
-        'http://localhost:3000' :
-        'https://zickonezero-syv79.ondigitalocean.app'}/api`
-    );
-    const dataJson = await fetchData.json();
-    const { worksData } = dataJson;
-    worksDataReversed = worksData.reverse();
+    worksDataReversed = await getWorksData();
+    return {
+      props: { worksDataReversed } // will be passed to the page component as props
+    };
   } catch (e) {
     return {
       props: { worksDataReversed: [{ desc: 'There was a problem with the data.' }] }
     };
   }
-
-  return {
-    props: { worksDataReversed } // will be passed to the page component as props
-  };
 }
 
 export default Home;

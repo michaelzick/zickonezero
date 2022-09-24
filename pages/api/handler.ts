@@ -3,15 +3,14 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import worksData from './worksData.json';
 
 type Data = {
-  name: string;
   worksData: Array<object>;
 };
 
-const apiHander = async (
+const apiHandler = async (
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) => {
-  res.status(200).json({ name: 'John Doe', worksData });
+  res.status(200).json({ worksData });
 };
 
-export default apiHander;
+export default apiHandler;
