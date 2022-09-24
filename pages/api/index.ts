@@ -6,11 +6,11 @@ type Data = {
   worksData: Array<object>;
 };
 
-const apiHandler = async (
+const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) => {
   res.status(200).json({ worksData });
 };
 
-export default apiHandler;
+export default handler;

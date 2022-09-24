@@ -5,6 +5,7 @@ const getWorksData = async () => {
         'https://www.zickonezero.com' :
         'http://localhost:3000'}/api`
     );
+    console.log(process.env.NODE_ENV)
     const dataJson = await fetchData.json();
     const { worksData } = dataJson;
     return worksData.reverse();
