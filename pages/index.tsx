@@ -10,8 +10,7 @@ import {
 
 import getWorksData from './api/getWorksData';
 
-import { MainContents } from '../src/components/MainContents';
-import { HeadContents } from '../src/components';
+import { HeadContents, MainContents, FooterContents } from '../src/components';
 import { Container } from '../styles';
 
 import type { WorksDataType } from '../src/types';
@@ -29,6 +28,7 @@ const Home: NextPage<WorksDataType> = (props) => {
         <HeadContents />
       </Head>
       <MainContents />
+      <FooterContents />
     </Container >
   );
 };

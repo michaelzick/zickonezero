@@ -6,6 +6,14 @@ export const Container = styled.div`
   background-size: cover;
   color: #272727;
   background-color: #efefef;
+
+  a {
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+      color: #ff0000;
+    }
+  }
 `;
 
 export const Main = styled.main`
@@ -69,14 +77,6 @@ export const Wrapper = styled.div`
     text-align: left;
     padding-left: 3rem;
     font-family: system-ui;
-  }
-
-  a {
-    text-decoration: underline;
-    &:hover {
-      text-decoration: none;
-      color: #ff0000;
-    }
   }
 `;
 
@@ -156,4 +156,9 @@ export const BioBox = styled.div`
 export const SectionHeader = styled.h2`
   font-size: 32px;
   margin-bottom: 0;
+`;
+
+export const Footer = styled.div`
+  text-alin: left;
+  padding: 2rem;
 `;

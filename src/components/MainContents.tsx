@@ -11,7 +11,7 @@ import FsLightbox from 'fslightbox-react';
 import { BioBoxContent, LinkBoxContent } from '../components';
 import { Main, Wrapper, Title, SubTitle, SectionHeader } from '../../styles';
 
-export const MainContents = () => {
+const MainContents = () => {
   const [shouldRender, setShouldRender] = useState(false);
   useEffect(() => {
     window.setTimeout(() => {
@@ -81,3 +81,5 @@ export const MainContents = () => {
     </Wrapper>
   );
 };
+
+export default MainContents;
