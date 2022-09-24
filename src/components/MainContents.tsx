@@ -20,7 +20,6 @@ export const MainContents = () => {
   }, []);
 
   const { worksDataReversed } = useAppSelector(selectData);
-  console.log(worksDataReversed);
 
   // For lightbox
   const [lightboxController, setLightboxController] = useState({

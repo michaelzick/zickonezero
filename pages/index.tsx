@@ -5,7 +5,7 @@ import {
   useAppDispatch,
 } from '../src/hooks';
 import {
-  getData
+  setPageData
 } from '../src/worksDataSlice';
 
 import getWorksData from './api/getWorksData';
@@ -19,7 +19,7 @@ import type { WorksDataType } from '../src/types';
 const Home: NextPage<WorksDataType> = (props) => {
   const { worksDataReversed } = props;
   const dispatch = useAppDispatch();
-  dispatch(getData(worksDataReversed));
+  dispatch(setPageData(worksDataReversed));
 
   return (
     <Container>
@@ -34,18 +34,11 @@ const Home: NextPage<WorksDataType> = (props) => {
 };
 
 export async function getStaticProps() {
-  let worksDataReversed = {};
+  const worksDataReversed = await getWorksData();
 
-  try {
-    worksDataReversed = await getWorksData();
-    return {
-      props: { worksDataReversed } // will be passed to the page component as props
-    };
-  } catch (e) {
-    return {
-      props: { worksDataReversed: [{ desc: 'There was a problem with the data.' }] }
-    };
-  }
+  return {
+    props: { worksDataReversed } // will be passed to the page component as props
+  };
 }
 
 export default Home;
