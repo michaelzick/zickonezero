@@ -15,7 +15,15 @@ function MyApp({
 }: AppProps) {
   useEffect(() => {
     TagManager.initialize(tagManagerArgs);
+    TagManager.dataLayer({
+      dataLayer: {
+        event: 'pageview',
+        pagePath: '/',
+        pageTitle: 'Home',
+      },
+    });
   }, []);
+
   return (
     <Provider store={store}>
       <Component {...pageProps} />
