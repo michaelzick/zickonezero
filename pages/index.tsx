@@ -34,10 +34,10 @@ const Home: NextPage<WorksDataType> = (props) => {
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', 'G-D9EDCV92S2');
+          gtag('config', 'G-DY992J2EV8');
         `}}>
       </Script>
-      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-D9EDCV92S2"></Script>
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-DY992J2EV8"></Script>
       <MainContents />
       <FooterContents />
     </Container >
