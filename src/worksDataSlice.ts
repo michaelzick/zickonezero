@@ -1,9 +1,7 @@
 import {
   createSlice,
-  PayloadAction,
 } from '@reduxjs/toolkit';
 import type { RootState } from './store';
-import worksData from '../pages/api/worksData.json';
 
 import type { WorksDataType } from '../src/types';
 
