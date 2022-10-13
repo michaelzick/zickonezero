@@ -4,7 +4,7 @@ import {
 import {
   selectData,
 } from '../worksDataSlice';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import FsLightbox from 'fslightbox-react';
 
@@ -12,13 +12,6 @@ import { BioBoxContent, LinkBoxContent } from '../components';
 import { Main, Wrapper, Title, SubTitle, SectionHeader } from '../../styles';
 
 const MainContents = () => {
-  const [shouldRender, setShouldRender] = useState(false);
-  useEffect(() => {
-    window.setTimeout(() => {
-      setShouldRender(true);
-    }, 100);
-  }, []);
-
   const { worksDataReversed } = useAppSelector(selectData);
 
   // For lightbox
@@ -52,7 +45,7 @@ const MainContents = () => {
 
         <SectionHeader>Things I{"'"}ve Built</SectionHeader>
 
-        {shouldRender ? <div className='grid'>
+        <div className='grid'>
           {worksDataReversed.map((item, index) => {
             const { thumb, group, desc, header } = item;
 
@@ -68,7 +61,7 @@ const MainContents = () => {
               <Thumb key={group} />
             );
           })}
-        </div> : <h2>Loading...</h2>}
+        </div>
 
         {imgs && <FsLightbox
           toggler={lightboxController.toggler}
