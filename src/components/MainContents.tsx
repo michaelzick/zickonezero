@@ -17,7 +17,7 @@ const MainContents = () => {
   useEffect(() => {
     window.setTimeout(() => {
       setShouldRender(true);
-    }, 10);
+    }, 100);
   }, []);
 
   const { worksDataReversed } = useAppSelector(selectData);
