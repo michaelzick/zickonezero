@@ -5,7 +5,6 @@ import {
   selectData,
 } from '../worksDataSlice';
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 
 import FsLightbox from 'fslightbox-react';
 
@@ -59,7 +58,7 @@ const MainContents = () => {
 
             const Thumb: React.FunctionComponent = () => (
               <div onClick={() => onThumbClick(index)}>
-                {imgs && <Image width='240' height='240' src={thumb} alt={group} className='thumb' />}
+                {imgs && <img src={thumb} alt={group} className='thumb' />}
                 <h3>{header}</h3>
                 <p>{desc}</p>
               </div>
