@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { BioBox } from '../../styles';
 
 const BioBoxContent = () => (
@@ -14,7 +13,7 @@ const BioBoxContent = () => (
         You can see some samples of the projects I{"'"}ve built in the gallery above, code samples at <a href='https://github.com/michaelzick' target='_blank' rel='noreferrer'>GitHub</a>, and a full qualification on <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noreferrer'>LinkedIn</a>.
       </div>
       <div className='headshot'>
-        <Image height='392' width='350' src='/img/headshot.jpeg' alt='headshot' />
+        <img src='/img/headshot.jpeg' alt='headshot' />
       </div>
     </div>
   </BioBox>

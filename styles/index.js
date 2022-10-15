@@ -118,6 +118,8 @@ export const BioBox = styled.div`
 
     .headshot {
       img {
+        height: 392px;
+        width: 350px;
         border-radius: 5px;
       }
     }
