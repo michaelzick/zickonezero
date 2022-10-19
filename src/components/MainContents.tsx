@@ -4,7 +4,7 @@ import {
 import {
   selectData,
 } from '../worksDataSlice';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Image from 'next/image';
 
@@ -14,6 +14,13 @@ import { BioBoxContent, LinkBoxContent } from '../components';
 import { Main, Wrapper, Title, SubTitle, SectionHeader } from '../../styles';
 
 const MainContents = () => {
+  const [shouldRender, setShouldRender] = useState(false);
+  useEffect(() => {
+    window.setTimeout(() => {
+      setShouldRender(true);
+    }, 0);
+  }, []);
+
   const { worksDataReversed } = useAppSelector(selectData);
 
   // For lightbox
@@ -29,8 +36,10 @@ const MainContents = () => {
     });
   };
 
-  // Grab the images from the correct index supplied by Lightbox
   const { imgs } = worksDataReversed[lightboxController.productIndex] || [];
+  const baseUrl = `${process.env.NODE_ENV === 'production' ?
+    'https://www.zickonezero.com' :
+    'http://localhost:3000'}`;
 
   return (
     <Wrapper>
