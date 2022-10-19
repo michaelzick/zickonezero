@@ -6,6 +6,8 @@ import {
 } from '../worksDataSlice';
 import { useState, useEffect } from 'react';
 
+import Image from 'next/image';
+
 import FsLightbox from 'fslightbox-react';
 
 import { BioBoxContent, LinkBoxContent } from '../components';
@@ -16,7 +18,7 @@ const MainContents = () => {
   useEffect(() => {
     window.setTimeout(() => {
       setShouldRender(true);
-    }, 10);
+    }, 0);
   }, []);
 
   const { worksDataReversed } = useAppSelector(selectData);
@@ -35,6 +37,9 @@ const MainContents = () => {
   };
 
   const { imgs } = worksDataReversed[lightboxController.productIndex] || [];
+  const baseUrl = `${process.env.NODE_ENV === 'production' ?
+    'https://www.zickonezero.com' :
+    'http://localhost:3000'}`;
 
   return (
     <Wrapper>
@@ -52,14 +57,17 @@ const MainContents = () => {
 
         <SectionHeader>Things I{"'"}ve Built</SectionHeader>
 
-        {shouldRender ? <div className='grid'>
+        <div className='grid'>
           {worksDataReversed.map((item, index) => {
             const { thumb, group, desc, header } = item;
 
             const Thumb: React.FunctionComponent = () => (
               <div onClick={() => onThumbClick(index)}>
-                {imgs && <img src={thumb} alt={group} className='thumb' />}
+                {imgs && <Image src={thumb} width='240' height='240' alt={group}
+                  className='thumb' placeholder='blur' blurDataURL={thumb} />}
+
                 <h3>{header}</h3>
+
                 <p>{desc}</p>
               </div>
             );
@@ -68,7 +76,7 @@ const MainContents = () => {
               <Thumb key={group} />
             );
           })}
-        </div> : <h2>Loading...</h2>}
+        </div>
 
         {imgs && <FsLightbox
           toggler={lightboxController.toggler}
