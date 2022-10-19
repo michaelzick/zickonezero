@@ -39,8 +39,10 @@ export const Main = styled.main`
   }
 
   .grid>div {
-    margin: 3rem 3rem 1.5rem;
     img {
+      margin: 3rem 3rem 1.5rem;
+      width: 240px;
+      height: 240px;
       border-radius: 5px;
       cursor: pointer;
       -webkit-filter: grayscale(100%);
@@ -50,6 +52,10 @@ export const Main = styled.main`
         -webkit-filter: none;
         filter: none;
       }
+
+      @media (max-width: ${THEME.breakpoints.phone}) {
+        margin: 2rem 0 1rem;
+      }
     }
     h3 {
       margin: 0;
@@ -58,10 +64,6 @@ export const Main = styled.main`
       width: 240px;
       text-align: center;
       margin: 0 auto;
-    }
-
-    @media (max-width: ${THEME.breakpoints.phone}) {
-      margin: 2rem 0 1rem;
     }
   }
 `;
