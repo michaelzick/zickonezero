@@ -55,7 +55,7 @@ const MainContents = () => {
             const Thumb: React.FunctionComponent = () => (
               <div onClick={() => onThumbClick(index)}>
                 {imgs && <Image src={thumb} width='240' height='240' alt={group}
-                  className='thumb' placeholder='blur' blurDataURL={thumb} priority />}
+                  className='thumb' placeholder='blur' blurDataURL={thumb} />}
 
                 <h3>{header}</h3>
 
