@@ -54,8 +54,7 @@ const MainContents = () => {
 
             const Thumb: React.FunctionComponent = () => (
               <div onClick={() => onThumbClick(index)}>
-                {imgs && <Image src={thumb} width='240' height='240' alt={group}
-                  className='thumb' />}
+                {imgs && <Image src={thumb} width='240' height='240' alt={group} className='thumb' />}
 
                 <h3>{header}</h3>
 
