@@ -4,10 +4,12 @@ import {
   ThunkAction,
 } from '@reduxjs/toolkit';
 import worksReducer from './worksDataSlice';
+import showMobileMenuReducer from './showMobileMenuSlice';
 
 export const store = configureStore({
   reducer: {
-    data: worksReducer
+    data: worksReducer,
+    isMobileMenuShown: showMobileMenuReducer
   },
 });
 

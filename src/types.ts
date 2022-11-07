@@ -9,3 +9,7 @@ export type WorksData = {
 export type WorksDataType = {
   worksDataReversed: Array<WorksData>;
 };
+
+export type ShowMobileMenuType = {
+  isMobileMenuShown: Boolean;
+};

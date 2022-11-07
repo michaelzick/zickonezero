@@ -1,15 +1,12 @@
-import { LinkBox } from '../../styles';
-import { scrollMethod } from '../helpers';
+import Link from 'next/link'
+
+import { LinkBox, Button } from '../../styles';
 
 const LinkBoxContent = () => (
   <LinkBox>
+    <Link href='/about'>About</Link>
     <a href='https://github.com/michaelzick' target='_blank' rel='noreferrer'>GitHub</a>
-    <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noreferrer'>LinkedIn</a>
-    <a href='' onClick={(ev) => {
-      ev.preventDefault();
-      const element = document.getElementById('about');
-      scrollMethod(ev, element);
-    }}>About</a>
+    <Button href='https://linkedin.com/in/michaelzick' target='_blank' rel='noreferrer'>LinkedIn</Button>
   </LinkBox>
 );
 
