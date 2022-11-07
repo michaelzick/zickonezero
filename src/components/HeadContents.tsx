@@ -1,4 +1,4 @@
-const HeadContent = () => (
+const HeadContents = () => (
   <>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon_io/favicon.ico" />
     <link rel="canonical" href="https://www.zickonezero.com" />
@@ -27,4 +27,4 @@ const HeadContent = () => (
   </>
 );
 
-export default HeadContent;
+export default HeadContents;

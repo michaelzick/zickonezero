@@ -10,10 +10,10 @@ import Image from 'next/image';
 
 import FsLightbox from 'fslightbox-react';
 
-import { BioBoxContent, NavContent } from '.';
-import { Main, Wrapper, SectionHeader } from '../../styles';
+import { BioBoxContent, LinkBoxContent } from '../components';
+import { Main, Wrapper, Title, SubTitle, SectionHeader } from '../../styles';
 
-const MainContent = () => {
+const MainContents = () => {
   const { worksDataReversed } = useAppSelector(selectData);
 
   // For lightbox
@@ -35,7 +35,16 @@ const MainContent = () => {
   return (
     <Wrapper>
       <Main>
-        <NavContent />
+        <div className='titles'>
+          <Title>
+            ZICKONEZERO Engineering
+          </Title>
+          <SubTitle>
+            React Development & Cybersecurity
+          </SubTitle>
+        </div>
+
+        <LinkBoxContent />
 
         <SectionHeader>Things I{"'"}ve Built</SectionHeader>
 
@@ -71,4 +80,4 @@ const MainContent = () => {
   );
 };
 
-export default MainContent;
+export default MainContents;
