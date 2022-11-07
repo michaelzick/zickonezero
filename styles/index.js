@@ -18,13 +18,12 @@ export const Container = styled.div`
 
 export const Nav = styled.div`
   width: 100%;
-  padding: 1rem 3rem;
-  display: flex;
-  background: #fff;
+  padding: 0 3rem;
 `
 
 export const Main = styled.main`
   min-height: 100vh;
+  padding: 3rem 0 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -79,6 +78,7 @@ export const Wrapper = styled.div`
   .titles {
     width: 100%;
     text-align: left;
+    padding-left: 3rem;
     font-family: system-ui;
   }
 `;
