@@ -1,7 +1,8 @@
 import BioBoxContent from './BioBoxContent';
 import LinkBoxContent from './LinkBoxContent';
-import HeadContents from './HeadContents';
-import MainContents from './MainContents';
-import FooterContents from './FooterContents';
+import HeadContent from './HeadContent';
+import MainContent from './MainContent';
+import FooterContent from './FooterContent';
+import NavContent from './NavContent';
 
-export { BioBoxContent, LinkBoxContent, HeadContents, MainContents, FooterContents };
+export { BioBoxContent, LinkBoxContent, HeadContent, MainContent, FooterContent, NavContent };

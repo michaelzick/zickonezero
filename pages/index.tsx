@@ -11,7 +11,7 @@ import {
 
 import getWorksData from './api/getWorksData';
 
-import { HeadContents, MainContents, FooterContents } from '../src/components';
+import { HeadContent, MainContent, FooterContent } from '../src/components';
 import { Container } from '../styles';
 
 import type { WorksDataType } from '../src/types';
@@ -26,7 +26,7 @@ const Home: NextPage<WorksDataType> = (props) => {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         <title>ZICKONEZERO Engineering</title>
-        <HeadContents />
+        <HeadContent />
       </Head>
       <Script id='gtm' strategy="afterInteractive" dangerouslySetInnerHTML={{
         __html: `
@@ -38,8 +38,8 @@ const Home: NextPage<WorksDataType> = (props) => {
         `}}>
       </Script>
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-DY992J2EV8"></Script>
-      <MainContents />
-      <FooterContents />
+      <MainContent />
+      <FooterContent />
     </Container >
   );
 };

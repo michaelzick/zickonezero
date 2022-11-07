@@ -16,6 +16,11 @@ export const Container = styled.div`
   }
 `;
 
+export const Nav = styled.div`
+  width: 100%;
+  padding: 0 3rem;
+`
+
 export const Main = styled.main`
   min-height: 100vh;
   padding: 3rem 0 0;
