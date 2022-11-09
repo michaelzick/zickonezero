@@ -10,10 +10,10 @@ import Image from 'next/image';
 
 import FsLightbox from 'fslightbox-react';
 
-import { BioBoxContent, LinkBoxContent } from '../components';
-import { Main, Wrapper, Title, SubTitle, SectionHeader } from '../../styles';
+import { NavContent } from '.';
+import { SectionHeader, GridContainer } from '../../styles';
 
-const MainContents = () => {
+const MainContent = () => {
   const { worksDataReversed } = useAppSelector(selectData);
 
   // For lightbox
@@ -33,21 +33,12 @@ const MainContents = () => {
   const { imgs } = worksDataReversed[lightboxController.productIndex] || [];
 
   return (
-    <Wrapper>
-      <Main>
-        <div className='titles'>
-          <Title>
-            ZICKONEZERO Engineering
-          </Title>
-          <SubTitle>
-            React Development & Cybersecurity
-          </SubTitle>
-        </div>
+    <>
+      <NavContent />
 
-        <LinkBoxContent />
+      <SectionHeader>Things I{"'"}ve <span className='command-line'>$built</span></SectionHeader>
 
-        <SectionHeader>Things I{"'"}ve Built</SectionHeader>
-
+      <GridContainer>
         <div className='grid'>
           {worksDataReversed.map((item, index) => {
             const { thumb, group, desc, header } = item;
@@ -67,17 +58,15 @@ const MainContents = () => {
             );
           })}
         </div>
+      </GridContainer>
 
-        {imgs && <FsLightbox
-          toggler={lightboxController.toggler}
-          sources={imgs}
-          slide={1}
-        />}
-
-        <BioBoxContent />
-      </Main>
-    </Wrapper>
+      {imgs && <FsLightbox
+        toggler={lightboxController.toggler}
+        sources={imgs}
+        slide={1}
+      />}
+    </>
   );
 };
 
-export default MainContents;
+export default MainContent;

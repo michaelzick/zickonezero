@@ -1,6 +1,7 @@
 export const THEME = {
   breakpoints: {
-    'tablet': '1045px',
+    'largeTablet': '1045px',
+    'smallTablet': '899px',
     'phone': '600px'
   }
 };
