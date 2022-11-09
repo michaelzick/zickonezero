@@ -25,6 +25,13 @@ export const Container = styled.div`
     color: #fff;
     box-shadow: 0 10px 20px -8px rgb(0 0 0 / 53%);
   }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    // Hide the full screen icon in Lightbox
+    .fslightbox-toolbar-button:nth-child(1) {
+      display: none;
+    }
+  }
 `;
 
 export const Nav = styled.div`
