@@ -11,11 +11,6 @@ export const Container = styled.div`
   height: 100%;
   position: relative;
 
-  .wrapper {
-    padding-top: 1.7rem;
-    min-height: 84%;
-  }
-
   .underline {
     text-decoration: underline;
     &:hover {
@@ -37,6 +32,12 @@ export const Container = styled.div`
       display: none;
     }
   }
+`;
+
+export const Wrapper = styled.div`
+  padding-top: 1.7rem;
+  min-height: 84%;
+  ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
 `;
 
 export const Nav = styled.div`
@@ -101,7 +102,7 @@ export const Button = styled.a`
   grid-template-columns: auto;
   grid-template-rows: auto;
   border-radius: 4px;
-  background-color: ${props => props.bgColor || '#0071E3'};
+  background-color: ${props => props.bgColor || '#0071E3;'}
   /* box-shadow: 0 10px 20px -8px rgb(0 0 0 / 38%); */
   transition: transform 150ms,box-shadow 150ms,-webkit-transform 150ms;
   color: #fff;
@@ -168,6 +169,7 @@ export const Title = styled.h1`
   width: 100%;
   text-align: left;
   font-family: system-ui;
+  ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
 
   span {
     padding: 0.5rem;

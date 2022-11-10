@@ -1,24 +1,28 @@
 import {
-  useAppDispatch
+  useAppDispatch,
+  useAppSelector
 } from '../src/hooks';
 import {
   showMobileMenu,
+  getMobileMenuState
 } from '../src/showMobileMenuSlice';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { BioBox } from '../styles';
+import { BioBox, Wrapper } from '../styles';
 import { NavContent } from '../src/components';
 
 const About = () => {
+  const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
 
   return (
     <>
       <NavContent />
 
-      <div className='wrapper' onClick={() => dispatch(showMobileMenu(false))}>
+      <Wrapper isMobileMenuShown={isMobileMenuShown}
+        onClick={() => dispatch(showMobileMenu(false))}>
         <BioBox>
           <div className='biobox-inner'>
             <div className='text-wrapper'>
@@ -39,7 +43,7 @@ const About = () => {
             </div>
           </div>
         </BioBox>
-      </div>
+      </Wrapper>
     </>
   );
 };

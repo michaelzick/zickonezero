@@ -18,7 +18,8 @@ const NavContent = () => {
 
   return (
     <Nav>
-      <Title onClick={() => dispatch(showMobileMenu(false))}>
+      <Title isMobileMenuShown={isMobileMenuShown}
+        onClick={() => dispatch(showMobileMenu(false))}>
         <Link href='/'>
           <span>
             ZICKONEZERO

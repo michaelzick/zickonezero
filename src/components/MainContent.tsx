@@ -7,6 +7,7 @@ import {
 } from '../worksDataSlice';
 import {
   showMobileMenu,
+  getMobileMenuState
 } from '../showMobileMenuSlice';
 import { useState } from 'react';
 
@@ -15,10 +16,11 @@ import Image from 'next/image';
 import FsLightbox from 'fslightbox-react';
 
 import { NavContent } from '.';
-import { SectionHeader, GridContainer } from '../../styles';
+import { SectionHeader, GridContainer, Wrapper } from '../../styles';
 
 const MainContent = () => {
   const { worksDataReversed } = useAppSelector(selectData);
+  const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
 
   // For lightbox
@@ -41,7 +43,8 @@ const MainContent = () => {
     <>
       <NavContent />
 
-      <div className='wrapper' onClick={() => dispatch(showMobileMenu(false))}>
+      <Wrapper isMobileMenuShown={isMobileMenuShown}
+        onClick={() => dispatch(showMobileMenu(false))}>
         <SectionHeader>Things I{"'"}ve <span className='command-line'>$built</span></SectionHeader>
 
         <GridContainer>
@@ -71,7 +74,7 @@ const MainContent = () => {
           sources={imgs}
           slide={1}
         />}
-      </div>
+      </Wrapper>
     </>
   );
 };
