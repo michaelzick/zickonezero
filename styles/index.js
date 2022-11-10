@@ -26,7 +26,7 @@ export const Container = styled.div`
   .command-line {
     font-family: monospace;
     background: #2e2e2e;
-    padding: 0 0.2rem;
+    padding: 0.3rem;
     color: #fff;
     box-shadow: 0 10px 20px -8px rgb(0 0 0 / 53%);
   }
