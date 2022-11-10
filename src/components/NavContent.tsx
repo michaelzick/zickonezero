@@ -2,14 +2,12 @@ import Link from 'next/link';
 
 import {
   useAppSelector,
+  useAppDispatch
 } from '../hooks';
 import {
   showMobileMenu,
   getMobileMenuState
 } from '../showMobileMenuSlice';
-import {
-  useAppDispatch,
-} from '../hooks';
 
 import { Title, Nav, MenuIcon } from '../../styles';
 import { LinkBoxContent, LinkBoxMobileContent } from '.';
@@ -31,7 +29,8 @@ const NavContent = () => {
 
       <LinkBoxContent />
 
-      <MenuIcon onClick={() => dispatch(showMobileMenu(!isMobileMenuShown))} className={isMobileMenuShown && 'change'}>
+      <MenuIcon onClick={() => dispatch(showMobileMenu(!isMobileMenuShown))}
+        className={isMobileMenuShown && 'change'}>
         <div className="bar1"></div>
         <div className="bar2"></div>
         <div className="bar3"></div>

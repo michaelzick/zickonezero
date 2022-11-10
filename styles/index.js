@@ -11,6 +11,11 @@ export const Container = styled.div`
   height: 100%;
   position: relative;
 
+  .wrapper {
+    padding-top: 1.7rem;
+    min-height: 84%;
+  }
+
   .underline {
     text-decoration: underline;
     &:hover {
@@ -252,14 +257,13 @@ export const BioBox = styled.div`
     height: auto;
   }
   @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: 2rem;
-    margin-top: 2rem;
+    padding: 0 2rem;
   }
 `;
 
 export const SectionHeader = styled.h2`
-  font-size: 32px;
-  margin-bottom: 0;
+  font-size: 2rem;
+  margin: 0;
 `;
 
 export const Footer = styled.div`
