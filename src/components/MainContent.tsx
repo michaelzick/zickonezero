@@ -43,7 +43,7 @@ const MainContent = () => {
     <>
       <NavContent />
 
-      <Wrapper isMobileMenuShown={isMobileMenuShown}
+      <Wrapper isHomePage isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
         <SectionHeader>Things I{"'"}ve <span className='command-line'>$built</span></SectionHeader>
 

@@ -35,7 +35,7 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  padding-top: 1.7rem;
+  ${props => props.isHomePage && 'padding-top: 1.7rem;'}
   min-height: 84%;
   ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
 `;
@@ -267,8 +267,9 @@ export const BioBox = styled.div`
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     height: auto;
   }
+
   @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: 0 2rem;
+    padding: 2rem;
   }
 `;
 
