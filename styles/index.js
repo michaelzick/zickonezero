@@ -44,12 +44,13 @@ export const Nav = styled.div`
   padding: 1rem 3rem 1rem 2.5rem;
   display: flex;
   background: #fff;
-  border-bottom: 1px solid #efefef;
+  border-bottom: 1px solid ${THEME.colors.grey};
   justify-content: space-between;
 
   a {
     line-height: 2.5rem;
     width: 5rem;
+
     &:not(:last-child):hover {
       border-bottom: 0.2rem solid #000;
     }
@@ -195,18 +196,26 @@ export const LinkBox = styled.div`
 `;
 
 export const LinkBoxMobile = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   list-style: none;
   position: absolute;
   top: 3.4rem;
   right: 1rem;
   padding: 1rem;
-  background: #fff;
+  background: rgba(255,255,255,0.9);
   z-index: 99;
   border-radius: 4px;
   box-shadow: 20px 0 80px 20px rgb(138 138 149 / 40%);
 
   li:not(:first-child) {
     margin-top: 1rem;
+
+    a {
+      display: block;
+      border-bottom: 0.2rem solid #000;
+    }
   }
 `;
 

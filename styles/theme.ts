@@ -3,5 +3,8 @@ export const THEME = {
     'largeTablet': '1045px',
     'smallTablet': '899px',
     'phone': '600px'
+  },
+  colors: {
+    grey: '#c7c5c5'
   }
 };
