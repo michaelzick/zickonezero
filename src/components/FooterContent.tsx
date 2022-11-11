@@ -1,11 +1,9 @@
 import { Footer } from '../../styles';
 
 const FooterContent = () => (
-  <Footer>Made with <a href='https://nextjs.org/' target='_blank'
-    rel='noopener noreferrer' className='underline'>Next.js</a>{' '}
-    & <a href='https://redux-toolkit.js.org/' target='_blank'
-      rel='noopener noreferrer' className='underline'>Redux Toolkit</a>
-  </Footer>
+  <Footer>Site built with <a href='https://github.com/michaelzick/zickonezero' target='_blank'
+    rel='noopener noreferrer' className='underline'>Next.js & Redux Toolkit</a>, & designed by Michael Zick.
+  </Footer >
 );
 
 export default FooterContent;
