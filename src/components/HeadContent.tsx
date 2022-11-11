@@ -14,7 +14,7 @@ const HeadContent = () => (
     <meta property="og:image:height" content="996" />
     <meta itemProp="name" content="ZICKONEZERO Engineering" />
     <meta itemProp="url" content="https://www.zickonezero.com" />
-    <meta itemProp="description" content="I'm a Los Angeles-based certified life and relationship coach, helping individuals level up and relate powerfully. I run No More Mr. Nice Guy men's groups and transformation programs for men and women." />
+    <meta itemProp="description" content="I'm a frontend engineer, coach, and cybersecurity enthusiast based in Los Angeles, CA." />
     <meta itemProp="thumbnailUrl" content="/img/headshot.jpeg" />
     <link rel="image_src" href="/img/headshot.jpeg" />
     <meta itemProp="image" content="/img/headshot.jpeg" />
