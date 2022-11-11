@@ -53,7 +53,7 @@ export const Nav = styled.div`
     width: 5rem;
 
     &:not(:last-child):hover {
-      border-bottom: 0.2rem solid #000;
+      color: #0071E3;
     }
   }
 
