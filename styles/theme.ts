@@ -5,6 +5,7 @@ export const THEME = {
     'phone': '600px'
   },
   colors: {
-    grey: '#c7c5c5'
+    grey: '#c7c5c5',
+    blue: '#0071E3'
   }
 };

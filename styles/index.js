@@ -53,7 +53,7 @@ export const Nav = styled.div`
     width: 5rem;
 
     &:not(:last-child):hover {
-      color: #0071E3;
+      color: ${THEME.colors.blue};
     }
   }
 
@@ -102,7 +102,7 @@ export const Button = styled.a`
   grid-template-columns: auto;
   grid-template-rows: auto;
   border-radius: 4px;
-  background-color: ${props => props.bgColor || '#0071E3;'}
+  background-color: ${props => props.bgColor || THEME.colors.blue};
   /* box-shadow: 0 10px 20px -8px rgb(0 0 0 / 38%); */
   transition: transform 150ms,box-shadow 150ms,-webkit-transform 150ms;
   color: #fff;
@@ -122,6 +122,7 @@ export const GridContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   .grid {
     display: flex;
     align-items: center;
@@ -279,7 +280,28 @@ export const SectionHeader = styled.h2`
 `;
 
 export const Footer = styled.div`
+  display: flex;
+  justify-content: space-between;
   text-align: left;
   padding: 2rem;
   width: 100%;
+
+  .footer-links {
+    display: flex;
+    justify-content: space-between;
+    width: 16rem;
+
+    a:hover {
+      color: ${THEME.colors.blue};
+    }
+
+    @media (max-width: ${THEME.breakpoints.smallTablet}) {
+      margin-top: 1rem;
+    }
+  }
+
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+    width: 100%;
+    flex-direction: column;
+  }
 `;
