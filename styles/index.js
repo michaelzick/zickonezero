@@ -298,6 +298,10 @@ export const Footer = styled.div`
     @media (max-width: ${THEME.breakpoints.smallTablet}) {
       margin-top: 1rem;
     }
+
+    @media (max-width: ${THEME.breakpoints.phone}) {
+      width: 15rem;
+    }
   }
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
