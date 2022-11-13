@@ -15,10 +15,10 @@ const LinkBoxMobileContent = () => {
   return (
     <LinkBoxMobile>
       <li onClick={() => dispatch(showMobileMenu(false))}>
-        <Button href='https://linkedin.com/in/michaelzick' target='_blank' rel='noreferrer'>LinkedIn</Button>
+        <Button href='https://linkedin.com/in/michaelzick' target='_blank' rel='noopener noreferrer'>LinkedIn</Button>
       </li>
       <li onClick={() => dispatch(showMobileMenu(false))}>
-        <a href='https://github.com/michaelzick' target='_blank' rel='noreferrer'>GitHub</a>
+        <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'>GitHub</a>
       </li>
       <li onClick={() => dispatch(showMobileMenu(false))}>
         <Link href='/about'>About</Link>

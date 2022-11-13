@@ -37,8 +37,8 @@ const AboutContent = () => {
               personal and career success through coaching.
               <br /><br />
               You can see some samples of the projects I{"'"}ve built in the <span className='underline'><Link href='/'>main gallery</Link></span>,
-              code samples at <a href='https://github.com/michaelzick' target='_blank' rel='noreferrer' className='underline'>GitHub</a>,
-              and a full qualification on <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noreferrer'
+              code samples at <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer' className='underline'>GitHub</a>,
+              and a full qualification on <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noopener noreferrer'
                 className='underline'>LinkedIn</a>.
             </div>
             <div className='headshot'>
