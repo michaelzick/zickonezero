@@ -8,7 +8,7 @@ export const Container = styled.div`
   background-color: #fff;
   text-align: center;
   font-family: Roboto, sans-serif;
-  height: 100%;
+  height: auto;
   position: relative;
 
   .underline {
@@ -23,6 +23,7 @@ export const Container = styled.div`
     background: #2e2e2e;
     padding: 0.3rem;
     color: #fff;
+    border-radius: 4px;
     box-shadow: 0 10px 20px -8px rgb(0 0 0 / 53%);
   }
 
@@ -51,8 +52,9 @@ export const Nav = styled.div`
   a {
     line-height: 2.5rem;
     width: 5rem;
+    display: flex;
 
-    &:not(:last-child):hover {
+    &:hover {
       color: ${THEME.colors.blue};
     }
   }
@@ -60,6 +62,13 @@ export const Nav = styled.div`
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     padding: 1rem 1rem;
   }
+`;
+
+export const NewTabGlyph = styled.img`
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-top: 0.8rem;
+  margin-left: 0.2rem;
 `;
 
 export const MenuIcon = styled.div`
@@ -122,6 +131,7 @@ export const GridContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: 1rem;
 
   .grid {
     display: flex;
@@ -139,7 +149,7 @@ export const GridContainer = styled.div`
   .grid>div {
     margin: 3rem 3rem 1.5rem;
     img {
-      border-radius: 5px;
+      border-radius: 4px;
       cursor: pointer;
       -webkit-filter: grayscale(100%);
       filter: grayscale(100%);
@@ -165,7 +175,7 @@ export const GridContainer = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 1.9rem;
+  font-size: 1.8rem;
   margin: 0 0 0.5rem;
   width: 100%;
   text-align: left;
@@ -191,7 +201,7 @@ export const Title = styled.h1`
 export const LinkBox = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 30rem;
+  width: 25rem;
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     display: none;
@@ -212,12 +222,14 @@ export const LinkBoxMobile = styled.ul`
   border-radius: 4px;
   box-shadow: 20px 0 80px 20px rgb(138 138 149 / 40%);
 
-  li:not(:first-child) {
-    margin-top: 1rem;
+  li {
+    &:not(:first-child) {
+      margin-top: 1rem;
+    }
 
     a {
-      display: block;
       border-bottom: 0.2rem solid #000;
+      justify-content: center;
     }
   }
 `;
@@ -240,7 +252,14 @@ export const BioBox = styled.div`
 
     .headshot {
       img {
-        border-radius: 5px;
+        border-radius: 4px;
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+
+        &:hover {
+          -webkit-filter: none;
+          filter: none;
+        }
       }
     }
 
@@ -285,22 +304,36 @@ export const Footer = styled.div`
   text-align: left;
   padding: 2rem;
   width: 100%;
+  border-top: 1px solid ${THEME.colors.grey};
 
   .footer-links {
     display: flex;
     justify-content: space-between;
-    width: 16rem;
+    width: 18rem;
 
-    a:hover {
-      color: ${THEME.colors.blue};
+    a {
+      display: flex;
+
+      &:hover {
+        color: ${THEME.colors.blue};
+      }
+
+      ${NewTabGlyph} {
+        margin-top: 0.2rem;
+      }
     }
 
     @media (max-width: ${THEME.breakpoints.smallTablet}) {
       margin-top: 1rem;
     }
 
-    @media (max-width: ${THEME.breakpoints.phone}) {
-      width: 15rem;
+    @media (max-width: ${THEME.breakpoints.smallPhone}) {
+      width: 100%;
+      flex-direction: column;
+
+      a:not(:first-child) {
+        margin-top: 1rem;
+      }
     }
   }
 
