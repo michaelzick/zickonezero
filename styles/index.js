@@ -8,7 +8,7 @@ export const Container = styled.div`
   background-color: #fff;
   text-align: center;
   font-family: Roboto, sans-serif;
-  height: auto;
+  height: 100%;
   position: relative;
 
   .underline {
