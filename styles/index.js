@@ -23,7 +23,7 @@ export const Container = styled.div`
     background: #2e2e2e;
     padding: 0.3rem;
     color: #fff;
-    border-radius: 4px;
+    border-radius: 3px;
     box-shadow: 0 10px 20px -8px rgb(0 0 0 / 53%);
   }
 
@@ -274,6 +274,7 @@ export const BioBox = styled.div`
     @media (max-width: 1137px) {
       max-width: 35rem;
     }
+
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
       max-width: none;
       margin-bottom: 2.5rem;
@@ -288,7 +289,7 @@ export const BioBox = styled.div`
     height: auto;
   }
 
-  @media (max-width: ${THEME.breakpoints.phone}) {
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
     padding: 2rem;
   }
 `;
@@ -340,5 +341,6 @@ export const Footer = styled.div`
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     width: 100%;
     flex-direction: column;
+    padding: 1rem 2rem 2.1rem 2rem;
   }
 `;
