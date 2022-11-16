@@ -27,6 +27,13 @@ export const Container = styled.div`
     box-shadow: 0 10px 20px -8px rgb(0 0 0 / 53%);
   }
 
+  .new-tab-svg {
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.75rem;
+    margin-left: 0.2rem;
+  }
+
   @media (max-width: ${THEME.breakpoints.phone}) {
     // Hide the full screen icon in Lightbox
     .fslightbox-toolbar-button:nth-child(1) {
@@ -62,13 +69,6 @@ export const Nav = styled.div`
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     padding: 1rem 1rem;
   }
-`;
-
-export const NewTabGlyph = styled.img`
-  width: 0.9rem;
-  height: 0.9rem;
-  margin-top: 0.8rem;
-  margin-left: 0.2rem;
 `;
 
 export const MenuIcon = styled.div`
@@ -319,8 +319,8 @@ export const Footer = styled.div`
         color: ${THEME.colors.blue};
       }
 
-      ${NewTabGlyph} {
-        margin-top: 0.2rem;
+      svg {
+        margin-top: 0.1rem;
       }
     }
 

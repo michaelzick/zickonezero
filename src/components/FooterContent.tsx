@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
-import { Footer, NewTabGlyph } from '../../styles';
+import { NewTabSVG } from './svg/NewTab';
+import { Footer } from '../../styles';
 
 const FooterContent = () => (
   <Footer>
@@ -12,10 +13,10 @@ const FooterContent = () => (
       <Link href='/'>Home</Link>
       <Link href='/about'>About</Link>
       <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'>GitHub
-        <NewTabGlyph src='img/icons8-new-tab-50.png' alt='new tab icon' />
+        <NewTabSVG />
       </a>
       <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noopener noreferrer'>LinkedIn
-        <NewTabGlyph src='img/icons8-new-tab-50.png' alt='new tab icon' />
+        <NewTabSVG />
       </a>
     </div>
   </Footer >

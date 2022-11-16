@@ -7,7 +7,8 @@ import {
   useAppDispatch,
 } from '../hooks';
 
-import { LinkBoxMobile, NewTabGlyph } from '../../styles';
+import { NewTabSVG } from './svg/NewTab';
+import { LinkBoxMobile } from '../../styles';
 
 const LinkBoxMobileContent = () => {
   const dispatch = useAppDispatch();
@@ -19,12 +20,12 @@ const LinkBoxMobileContent = () => {
       </li>
       <li onClick={() => dispatch(showMobileMenu(false))}>
         <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'>GitHub
-          <NewTabGlyph src='img/icons8-new-tab-50.png' alt='new tab icon' />
+          <NewTabSVG />
         </a>
       </li>
       <li onClick={() => dispatch(showMobileMenu(false))}>
         <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noopener noreferrer'>LinkedIn
-          <NewTabGlyph src='img/icons8-new-tab-50.png' alt='new tab icon' />
+          <NewTabSVG />
         </a>
       </li>
     </LinkBoxMobile>
