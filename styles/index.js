@@ -32,6 +32,7 @@ export const Container = styled.div`
     height: 1rem;
     margin-top: 0.75rem;
     margin-left: 0.2rem;
+    flex-shrink: 0;
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
