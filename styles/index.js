@@ -176,10 +176,11 @@ export const GridContainer = styled.div`
 
 export const Title = styled.h1`
   font-size: 1.8rem;
-  margin: 0 0 0.5rem;
+  margin: 0;
   width: 100%;
   text-align: left;
   font-family: system-ui;
+  line-height: 2.5rem;
   ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
 
   span {
@@ -195,6 +196,7 @@ export const Title = styled.h1`
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     font-size: 1.5rem;
+    line-height: 1.7rem;
   }
 `;
 
