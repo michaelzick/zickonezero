@@ -21,7 +21,7 @@ export const Container = styled.div`
   .command-line {
     font-family: monospace;
     background: #2e2e2e;
-    padding: 0.1rem .3rem .3rem;
+    padding: 0.2rem .3rem .3rem;
     color: #fff;
     border-radius: 3px;
     box-shadow: 0 10px 20px -8px rgb(0 0 0 / 53%);
