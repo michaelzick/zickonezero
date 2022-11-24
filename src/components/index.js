@@ -5,6 +5,7 @@ import FooterContent from './FooterContent';
 import NavContent from './NavContent';
 import LinkBoxMobileContent from './LinkBoxMobileContent';
 import AboutContent from './AboutContent';
+import Thumbnail from './Thumbnail';
 
 export {
   LinkBoxContent,
@@ -13,5 +14,6 @@ export {
   FooterContent,
   NavContent,
   LinkBoxMobileContent,
-  AboutContent
+  AboutContent,
+  Thumbnail
 };

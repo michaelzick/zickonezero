@@ -27,14 +27,6 @@ export const Container = styled.div`
     box-shadow: 0 10px 20px -8px rgb(0 0 0 / 53%);
   }
 
-  .new-tab-svg {
-    width: 1rem;
-    height: 1rem;
-    margin-top: 0.75rem;
-    margin-left: 0.2rem;
-    flex-shrink: 0;
-  }
-
   @media (max-width: ${THEME.breakpoints.phone}) {
     // Hide the full screen icon in Lightbox
     .fslightbox-toolbar-button:nth-child(1) {
@@ -58,13 +50,23 @@ export const Nav = styled.div`
   justify-content: space-between;
 
   a {
-    line-height: 2.5rem;
+    line-height: 2.5rem;font-family: Roboto, sans-serif;
+    color: #272727;
     width: 5rem;
     display: flex;
+    text-decoration: none;
 
     &:hover {
       color: ${THEME.colors.blue};
     }
+  }
+
+  .new-tab-svg {
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.75rem;
+    margin-left: 0.2rem;
+    flex-shrink: 0;
   }
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
@@ -146,32 +148,35 @@ export const GridContainer = styled.div`
       flex-direction: column;
     }
   }
+`;
 
-  .grid>div {
-    margin: 3rem 3rem 1.5rem;
-    img {
-      border-radius: 4px;
-      cursor: pointer;
-      -webkit-filter: grayscale(100%);
-      filter: grayscale(100%);
+export const Thumb = styled.div`
+  text-align: center;
+  font-family: Roboto, sans-serif;
+  color: #272727;
+  margin: 3rem 3rem 1.5rem;
+  img {
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
 
-      &:hover {
-        -webkit-filter: none;
-        filter: none;
-      }
+    &:hover {
+      -webkit-filter: none;
+      filter: none;
     }
-    h3 {
-      margin: 0;
-    }
-    p {
-      width: 240px;
-      text-align: center;
-      margin: 0 auto;
-    }
+  }
+  h3 {
+    margin: 0;
+  }
+  p {
+    width: 240px;
+    text-align: center;
+    margin: 0 auto;
+  }
 
-    @media (max-width: ${THEME.breakpoints.phone}) {
-      margin: 2rem 0 1rem;
-    }
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    margin: 2rem 0 1rem;
   }
 `;
 
@@ -182,6 +187,7 @@ export const Title = styled.h1`
   text-align: left;
   font-family: system-ui;
   line-height: 2.5rem;
+  /* font-weight: normal; */
   ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
 
   span {

@@ -9,13 +9,11 @@ import {
   showMobileMenu,
   getMobileMenuState
 } from '../showMobileMenuSlice';
-import { useState } from 'react';
-
-import Image from 'next/image';
+import { useState, memo } from 'react';
 
 import FsLightbox from 'fslightbox-react';
 
-import { NavContent } from '.';
+import { NavContent, Thumbnail } from '.';
 import { SectionHeader, GridContainer, Wrapper } from '../../styles';
 
 const MainContent = () => {
@@ -50,20 +48,15 @@ const MainContent = () => {
         <GridContainer>
           <div className='grid'>
             {worksDataReversed.map((item, index) => {
-              const { thumb, group, desc, header } = item;
-
-              const Thumb: React.FunctionComponent = () => (
-                <div onClick={() => onThumbClick(index)}>
-                  {imgs && <Image src={thumb} width='240' height='240' alt={group} className='thumb' />}
-
-                  <h3>{header}</h3>
-
-                  <p>{desc}</p>
-                </div>
-              );
+              const { group } = item;
 
               return (
-                <Thumb key={group} />
+                <Thumbnail
+                  key={group}
+                  index={index}
+                  onThumbClick={onThumbClick}
+                  {...item}
+                />
               );
             })}
           </div>
@@ -79,4 +72,4 @@ const MainContent = () => {
   );
 };
 
-export default MainContent;
+export default memo(MainContent);
