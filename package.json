@@ -5,10 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build-storybook": "build-storybook",
+    "build-storybook": "build-storybook -s ./public",
     "start": "next start",
     "lint": "next lint",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 -s ./public",
     "chromatic": "npx chromatic --project-token=8d72ce9e2021"
   },
   "dependencies": {
