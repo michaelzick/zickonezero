@@ -327,8 +327,12 @@ export const Footer = styled.div`
         color: ${THEME.colors.blue};
       }
 
-      svg {
+      .new-tab-svg {
         margin-top: 0.1rem;
+        width: 1rem;
+        height: 1rem;
+        margin-left: 0.2rem;
+        flex-shrink: 0;
       }
     }
 
