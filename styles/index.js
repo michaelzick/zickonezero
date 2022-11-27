@@ -187,7 +187,6 @@ export const Title = styled.h1`
   text-align: left;
   font-family: system-ui;
   line-height: 2.5rem;
-  /* font-weight: normal; */
   ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
 
   span {
