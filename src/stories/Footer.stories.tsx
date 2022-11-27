@@ -1,22 +1,19 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Provider } from 'react-redux';
-import { store } from '../../src/store';
-
-import { NavContent } from '../components';
+import { FooterContent } from '../components';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Components',
-  component: NavContent,
+  component: FooterContent,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
-} as ComponentMeta<typeof NavContent>;
+} as ComponentMeta<typeof FooterContent>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof NavContent> = () => <Provider store={store}><NavContent /></Provider>;
+const Template: ComponentStory<typeof FooterContent> = () => <FooterContent />;
 
-export const Nav = Template.bind({});
+export const Footer = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Nav.args = {};
+Footer.args = {};

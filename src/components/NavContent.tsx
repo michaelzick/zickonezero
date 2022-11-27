@@ -11,8 +11,9 @@ import {
 
 import { Title, Nav, MenuIcon } from '../../styles';
 import { LinkBoxContent, LinkBoxMobileContent } from '.';
+import { ReactElement } from 'react';
 
-const NavContent = () => {
+const NavContent = (): ReactElement => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
 

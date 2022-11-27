@@ -2,13 +2,14 @@ import Image from 'next/image';
 
 import { WorksData } from '../types';
 import { Thumb } from '../../styles';
+import { ReactElement } from 'react';
 
 type AdditionalThumbProps = {
   index: number,
   onThumbClick: Function;
 };
 
-const Thumbnail = (props: WorksData & AdditionalThumbProps) => {
+const Thumbnail = (props: WorksData & AdditionalThumbProps): ReactElement => {
   const { imgs, group, thumb, header, desc, index, onThumbClick } = props;
 
   return (

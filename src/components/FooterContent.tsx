@@ -2,8 +2,9 @@ import Link from 'next/link';
 
 import { NewTabSVG } from './svg/NewTab';
 import { Footer } from '../../styles';
+import { ReactElement } from 'react';
 
-const FooterContent = () => (
+const FooterContent = (): ReactElement => (
   <Footer>
     <div>
       Site built with Next.js & Redux Toolkit. Designed by Michael Zick.
