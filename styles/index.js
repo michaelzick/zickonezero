@@ -4,7 +4,6 @@ import { THEME } from './theme';
 
 export const Container = styled.div`
   background-size: cover;
-  color: #272727;
   background-color: #fff;
   text-align: center;
   font-family: Roboto, sans-serif;
@@ -20,7 +19,7 @@ export const Container = styled.div`
 
   .command-line {
     font-family: monospace;
-    background: #2e2e2e;
+    background-color: #272727;
     padding: 0.2rem .3rem .3rem;
     color: #fff;
     border-radius: 3px;
@@ -51,7 +50,7 @@ export const Nav = styled.div`
 
   a {
     line-height: 2.5rem;font-family: Roboto, sans-serif;
-    color: inherit;
+    color: #272727;
     width: 5rem;
     display: flex;
     text-decoration: none;
@@ -81,7 +80,7 @@ export const MenuIcon = styled.div`
   .bar1, .bar2, .bar3 {
     width: 35px;
     height: 5px;
-    background-color: #333;
+    background-color: #272727;
     margin: 6px 0;
     transition: 0.4s;
   }
@@ -153,7 +152,7 @@ export const GridContainer = styled.div`
 export const Thumb = styled.div`
   text-align: center;
   font-family: Roboto, sans-serif;
-  color: inherit;
+  color: #272727;
   margin: 3rem 3rem 1.5rem;
   img {
     border-radius: 4px;
@@ -188,6 +187,7 @@ export const Title = styled.h1`
   font-family: system-ui;
   line-height: 2.5rem;
   ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
+  color: #272727;
 
   span {
     padding: 0.5rem;
@@ -257,6 +257,7 @@ export const BioBox = styled.div`
     justify-content: space-between;
     width: 100%;
     max-width: 78rem;
+    color: #272727;
 
     span {
       a {
@@ -265,7 +266,7 @@ export const BioBox = styled.div`
     }
 
     a {
-      color: inherit;
+      color: #272727;
     }
 
     .headshot {
@@ -315,6 +316,7 @@ export const BioBox = styled.div`
 export const SectionHeader = styled.h2`
   font-size: 2rem;
   margin: 0;
+  color: #272727;
 `;
 
 export const Footer = styled.div`
@@ -325,6 +327,7 @@ export const Footer = styled.div`
   width: 100%;
   border-top: 1px solid ${THEME.colors.grey};
   font-family: Roboto, sans-serif;
+  color: #272727;
 
   .footer-links {
     display: flex;
@@ -333,7 +336,7 @@ export const Footer = styled.div`
 
     a {
       display: flex;
-      color: inherit;
+      color: #272727;
       text-decoration: none;
 
       &:hover {
