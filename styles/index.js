@@ -51,7 +51,7 @@ export const Nav = styled.div`
 
   a {
     line-height: 2.5rem;font-family: Roboto, sans-serif;
-    color: #272727;
+    color: inherit;
     width: 5rem;
     display: flex;
     text-decoration: none;
@@ -153,7 +153,7 @@ export const GridContainer = styled.div`
 export const Thumb = styled.div`
   text-align: center;
   font-family: Roboto, sans-serif;
-  color: #272727;
+  color: inherit;
   margin: 3rem 3rem 1.5rem;
   img {
     border-radius: 4px;
@@ -258,6 +258,16 @@ export const BioBox = styled.div`
     width: 100%;
     max-width: 78rem;
 
+    span {
+      a {
+        text-decoration: none;
+      }
+    }
+
+    a {
+      color: inherit;
+    }
+
     .headshot {
       img {
         border-radius: 4px;
@@ -314,6 +324,7 @@ export const Footer = styled.div`
   padding: 2rem;
   width: 100%;
   border-top: 1px solid ${THEME.colors.grey};
+  font-family: Roboto, sans-serif;
 
   .footer-links {
     display: flex;
@@ -322,6 +333,8 @@ export const Footer = styled.div`
 
     a {
       display: flex;
+      color: inherit;
+      text-decoration: none;
 
       &:hover {
         color: ${THEME.colors.blue};
