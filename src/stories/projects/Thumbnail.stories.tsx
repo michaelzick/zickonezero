@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Thumbnail } from '../components';
+import { Thumbnail } from '../../components';
 import { string } from 'prop-types';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
