@@ -11,7 +11,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { BioBox, Wrapper } from '../../styles';
-import { NavContent } from '../components';
+import { TopNavContent } from '../components';
 
 const AboutContent = () => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
@@ -19,7 +19,7 @@ const AboutContent = () => {
 
   return (
     <>
-      <NavContent />
+      <TopNavContent />
 
       <Wrapper isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>

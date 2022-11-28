@@ -13,7 +13,7 @@ import { useState, memo } from 'react';
 
 import FsLightbox from 'fslightbox-react';
 
-import { NavContent, Thumbnail } from '.';
+import { TopNavContent, Thumbnail } from '.';
 import { SectionHeader, GridContainer, Wrapper } from '../../styles';
 
 const MainContent = () => {
@@ -39,7 +39,7 @@ const MainContent = () => {
 
   return (
     <>
-      <NavContent />
+      <TopNavContent />
 
       <Wrapper isHomePage isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>

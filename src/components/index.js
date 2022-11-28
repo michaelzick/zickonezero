@@ -2,7 +2,7 @@ import LinkBoxContent from './LinkBoxContent';
 import HeadContent from './HeadContent';
 import MainContent from './MainContent';
 import FooterContent from './FooterContent';
-import NavContent from './NavContent';
+import TopNavContent from './TopNavContent';
 import LinkBoxMobileContent from './LinkBoxMobileContent';
 import AboutContent from './AboutContent';
 import Thumbnail from './Thumbnail';
@@ -12,7 +12,7 @@ export {
   HeadContent,
   MainContent,
   FooterContent,
-  NavContent,
+  TopNavContent,
   LinkBoxMobileContent,
   AboutContent,
   Thumbnail
