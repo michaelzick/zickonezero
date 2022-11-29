@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { store } from '../src/store';
 
-import { HeadContent, FooterContent } from '../src/components';
+import { HeadContent } from '../src/components';
 import { Container } from '../styles';
 
 function MyApp({
@@ -31,7 +31,6 @@ function MyApp({
         <Script async src="https://www.googletagmanager.com/gtag/js?id=G-DY992J2EV8"></Script>
 
         <Component {...pageProps} />
-        <FooterContent />
       </Container>
     </Provider>
   );

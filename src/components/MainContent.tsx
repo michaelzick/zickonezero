@@ -13,8 +13,8 @@ import { useState, memo } from 'react';
 
 import FsLightbox from 'fslightbox-react';
 
-import { TopNavContent, Thumbnail } from '.';
-import { SectionHeader, GridContainer, Wrapper } from '../../styles';
+import { TopNavContent, GridContent, FooterContent } from '.';
+import { SectionHeader, Wrapper } from '../../styles';
 
 const MainContent = () => {
   const { worksDataReversed } = useAppSelector(selectData);
@@ -45,22 +45,10 @@ const MainContent = () => {
         onClick={() => dispatch(showMobileMenu(false))}>
         <SectionHeader>Things I{"'"}ve <span className='command-line'>$built</span></SectionHeader>
 
-        <GridContainer>
-          <div className='grid'>
-            {worksDataReversed.map((item, index) => {
-              const { group } = item;
-
-              return (
-                <Thumbnail
-                  key={group}
-                  index={index}
-                  onThumbClick={onThumbClick}
-                  {...item}
-                />
-              );
-            })}
-          </div>
-        </GridContainer>
+        <GridContent
+          worksDataReversed={worksDataReversed}
+          onThumbClick={onThumbClick}
+        />
 
         {imgs && <FsLightbox
           toggler={lightboxController.toggler}
@@ -68,6 +56,7 @@ const MainContent = () => {
           slide={1}
         />}
       </Wrapper>
+      <FooterContent />
     </>
   );
 };
