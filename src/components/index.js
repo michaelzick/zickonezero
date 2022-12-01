@@ -6,6 +6,7 @@ import TopNavContent from './TopNavContent';
 import LinkBoxMobileContent from './LinkBoxMobileContent';
 import AboutContent from './AboutContent';
 import Thumbnail from './Thumbnail';
+import GridContent from './GridContent';
 
 export {
   LinkBoxContent,
@@ -15,5 +16,6 @@ export {
   TopNavContent,
   LinkBoxMobileContent,
   AboutContent,
-  Thumbnail
+  Thumbnail,
+  GridContent
 };

@@ -9,8 +9,8 @@ const getWorksData = async () => {
     const dataJson = await fetchData.json();
     const { worksData } = dataJson;
     return worksData.reverse();
-  } catch (e) {
-    return [{ desc: 'There was a problem with the data.' }];
+  } catch (error) {
+    return [{ error }];
   }
 };
 

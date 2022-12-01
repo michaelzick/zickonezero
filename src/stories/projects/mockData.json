@@ -1,0 +1,98 @@
+[
+  {
+    "thumb": "/img/squares/wb-large.jpg",
+    "imgs": [
+      "/img/gipsy_1.jpg",
+      "/img/gipsy_2.jpg",
+      "/img/leatherback_1.jpg",
+      "/img/leatherback_2.jpg"
+    ],
+    "desc": "Animated landing pages for Pacific Rim",
+    "header": "Warner Bros. Pictures",
+    "group": "wb"
+  },
+  {
+    "thumb": "/img/squares/paramount-large.jpg",
+    "imgs": [
+      "/img/jeff_web.jpg",
+      "/img/kp_facebook_web.jpg",
+      "/img/1kwords_web.jpg",
+      "/img/devil_inside_web.jpg"
+    ],
+    "desc": "Interactive emails and Facebook pages for various campaigns",
+    "header": "Paramount Pictures",
+    "group": "paramount"
+  },
+  {
+    "thumb": "/img/squares/sony-large.jpg",
+    "imgs": [
+      "/img/tite_1.jpg",
+      "/img/tite_2.jpg",
+      "/img/tite_3.jpg",
+      "/img/cloudy_3.jpg"
+    ],
+    "desc": "Multiple sites, landing pages, games, and Facebook pages",
+    "header": "Sony Pictures",
+    "group": "sony"
+  },
+  {
+    "thumb": "/img/squares/dreamworks-large.jpg",
+    "imgs": [
+      "/img/dragons_map.jpg",
+      "/img/dragons_forest.jpg",
+      "/img/dragons_video.jpg",
+      "/img/dragons_dl_2.jpg"
+    ],
+    "desc": "Interactive sites for How to Train Your Dragon",
+    "header": "DreamWorks Animation",
+    "group": "dreamworks"
+  },
+  {
+    "thumb": "/img/squares/fox-large.jpg",
+    "imgs": [
+      "/img/vikings_1.jpg",
+      "/img/vikings_2.jpg",
+      "/img/vikings_3.jpg",
+      "/img/vikings_4.jpg"
+    ],
+    "desc": "Interactive video voting bracket for Vikings",
+    "header": "Fox Television",
+    "group": "fox"
+  },
+  {
+    "thumb": "/img/squares/riot-large.jpg",
+    "imgs": [
+      "/img/lol_home.jpg",
+      "/img/lol_user.jpg",
+      "/img/lol_tourney.jpg",
+      "/img/lol_enlist.jpg"
+    ],
+    "desc": "Tournament creation app for League of Legends",
+    "header": "Riot Games",
+    "group": "riot"
+  },
+  {
+    "thumb": "/img/squares/inrix-large.jpg",
+    "imgs": [
+      "/img/parkme-home-2017.jpg",
+      "/img/parkme-city-2017.jpg",
+      "/img/parkme-map-2017.jpg",
+      "/img/parkme-lot-2017.jpg"
+    ],
+    "desc": "Web-based parking locator and reservation dashboard",
+    "header": "ParkMe/INRIX",
+    "group": "parkme"
+  },
+  {
+    "thumb": "/img/squares/saatchi-large.jpg",
+    "imgs": [
+      "/img/citi.jpg",
+      "/img/etsy.jpg",
+      "/img/giftcard.jpg",
+      "/img/quiz.jpg"
+    ],
+    "desc": "World-renowned fine art marketplace",
+    "header": "Saatchi Art",
+    "group": "saatchi"
+  }
+]
