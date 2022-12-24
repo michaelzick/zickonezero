@@ -14,7 +14,7 @@ import { useState, memo } from 'react';
 import FsLightbox from 'fslightbox-react';
 
 import { TopNavContent, GridContent, FooterContent } from '.';
-import { SectionHeader, Wrapper } from '../../styles';
+import { SectionHeader, Wrapper, CommandLine } from '../../styles';
 
 const MainContent = () => {
   const { worksDataReversed } = useAppSelector(selectData);
@@ -43,7 +43,9 @@ const MainContent = () => {
 
       <Wrapper isHomePage isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
-        <SectionHeader>Things I{"'"}ve <span className='command-line'>$built</span></SectionHeader>
+        <SectionHeader>
+          Things I{"'"}ve <CommandLine>$built</CommandLine>
+        </SectionHeader>
 
         <GridContent
           worksDataReversed={worksDataReversed}

@@ -2,6 +2,14 @@ import styled from 'styled-components';
 
 import { THEME } from './theme';
 
+// Flat Styles
+export const NewTabSvgStyles = {
+  width: '1rem',
+  height: '1rem',
+  marginLeft: '0.2rem',
+  flexShrink: '0'
+};
+
 export const Container = styled.div`
   background-size: cover;
   background-color: #fff;
@@ -17,21 +25,21 @@ export const Container = styled.div`
     }
   }
 
-  .command-line {
-    font-family: monospace;
-    background-color: #272727;
-    padding: 0.2rem .3rem .3rem;
-    color: #fff;
-    border-radius: 3px;
-    box-shadow: 0 10px 20px -8px rgb(0 0 0 / 53%);
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
     // Hide the full screen icon in Lightbox
     .fslightbox-toolbar-button:nth-child(1) {
       display: none;
     }
   }
+`;
+
+export const CommandLine = styled.span`
+  font-family: monospace;
+  background-color: #272727;
+  padding: 0.2rem .3rem .3rem;
+  color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 10px 20px -8px rgb(0 0 0 / 53%);
 `;
 
 export const Wrapper = styled.div`
@@ -49,23 +57,16 @@ export const Nav = styled.div`
   justify-content: space-between;
 
   a {
-    line-height: 2.5rem;font-family: Roboto, sans-serif;
+    font-family: Roboto, sans-serif;
     color: #272727;
     width: 5rem;
     display: flex;
     text-decoration: none;
+    margin-top: 0.8rem;
 
     &:hover {
       color: ${THEME.colors.blue};
     }
-  }
-
-  .new-tab-svg {
-    width: 1rem;
-    height: 1rem;
-    margin-top: 0.75rem;
-    margin-left: 0.2rem;
-    flex-shrink: 0;
   }
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
@@ -317,6 +318,8 @@ export const SectionHeader = styled.h2`
   font-size: 2rem;
   margin: 0;
   color: #272727;
+  text-align: center;
+  font-family: Roboto, sans-serif;
 `;
 
 export const Footer = styled.div`
@@ -341,14 +344,6 @@ export const Footer = styled.div`
 
       &:hover {
         color: ${THEME.colors.blue};
-      }
-
-      .new-tab-svg {
-        margin-top: 0.1rem;
-        width: 1rem;
-        height: 1rem;
-        margin-left: 0.2rem;
-        flex-shrink: 0;
       }
     }
 
