@@ -94,5 +94,17 @@
     "desc": "World-renowned fine art marketplace",
     "header": "Saatchi Art",
     "group": "saatchi"
+  },
+  {
+    "thumb": "/img/squares/saatchi-large.jpg",
+    "imgs": [
+      "/img/citi.jpg",
+      "/img/etsy.jpg",
+      "/img/giftcard.jpg",
+      "/img/quiz.jpg"
+    ],
+    "desc": "World-renowned fine art marketplace",
+    "header": "Saatchi Art",
+    "group": "saatchi"
   }
 ]
