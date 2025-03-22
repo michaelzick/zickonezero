@@ -16,7 +16,7 @@ function MyApp({
       <Container>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-          <title>ZICKONEZERO Engineering</title>
+          <title>ZICKONEZERO Product & Engineering</title>
           <HeadContent />
         </Head>
         <Script id='gtm' strategy="afterInteractive" dangerouslySetInnerHTML={{
