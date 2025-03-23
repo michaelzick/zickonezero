@@ -23,8 +23,7 @@ const NavContent = (): ReactElement => {
         onClick={() => dispatch(showMobileMenu(false))}>
         <Link href='/'>
           <span>
-            ZICKONEZERO
-            Engineering
+            ZICKONEZERO Product | Engineering | UX
           </span>
         </Link>
       </Title>

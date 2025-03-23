@@ -27,12 +27,12 @@ const AboutContent = () => {
             <div className='text-wrapper'>
               <h2>Hi, I{"'"}m Michael.</h2>
               <br />
-              I{"'"}m a frontend engineer, coach, and cybersecurity enthusiast based in Los Angeles, CA.
+              I{"'"}m a Product & Engineering Manager, UX designer, frontend engineer, coach, and cybersecurity enthusiast.
               <br /><br />
-              I specialize in the React ecosystem (Next.js, Redux, TypeScript), JavaScript, and server configurations including Docker.
+              I specialize in the WordPress and React ecosystems (Next.js, Redux, TypeScript), JavaScript, and server configurations including Docker and Digital Ocean.
               I also have experience with Python, PHP, and UI/UX design.
               <br /><br />
-              I have the CompTIA Security+ certification and over 16 years in IT. Additionally, I{"'"}ve led groups and individuals to
+              I have the CompTIA Security+ certification and over 18 years in IT. Additionally, I{"'"}ve led groups and individuals to
               personal and career success through coaching.
               <br /><br />
               You can see some samples of the projects I{"'"}ve built in the <span className='underline'><Link href='/'>main gallery</Link></span>,

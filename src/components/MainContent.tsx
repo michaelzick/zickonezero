@@ -43,7 +43,7 @@ const MainContent = () => {
 
       <Wrapper isHomePage isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
-        <SectionHeader>
+        {/* <SectionHeader>
           Things I{"'"}ve <CommandLine>#managed</CommandLine>
         </SectionHeader>
 
@@ -51,7 +51,7 @@ const MainContent = () => {
           worksDataReversed={worksDataReversed}
           onThumbClick={onThumbClick}
           isManagedWork
-        />
+        /> */}
 
         <SectionHeader>
           Things I{"'"}ve <CommandLine>$built</CommandLine>
