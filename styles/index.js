@@ -210,7 +210,7 @@ export const Title = styled.h1`
 export const LinkBox = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 25rem;
+  width: 35em;
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     display: none;
