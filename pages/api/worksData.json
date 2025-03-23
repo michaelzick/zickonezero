@@ -96,15 +96,15 @@
     "group": "saatchi"
   },
   {
-    "thumb": "/img/squares/saatchi-large.jpg",
+    "thumb": "/img/squares/at_logo_purple.webp",
     "imgs": [
       "/img/citi.jpg",
       "/img/etsy.jpg",
       "/img/giftcard.jpg",
       "/img/quiz.jpg"
     ],
-    "desc": "World-renowned fine art marketplace",
-    "header": "Saatchi Art",
-    "group": "saatchi"
+    "desc": "Cybersecurity Training Marketplace and CMS",
+    "header": "Antisyphon Training",
+    "group": "antisyphon"
   }
 ]
