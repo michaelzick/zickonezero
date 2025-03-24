@@ -283,13 +283,20 @@ export const BioBox = styled.div`
       }
     }
 
+    .product-screenshot {
+      & > span {
+        box-shadow: 4px 5px 13px 2px rgb(42 40 40 / 64%);
+      }
+    }
+
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
       flex-direction: column;
     }
   }
 
   .text-wrapper {
-    max-width: 43rem;
+    max-width: 33rem;
+    margin-right: 2em;
 
     @media (max-width: 1137px) {
       max-width: 35rem;

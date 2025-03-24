@@ -40,8 +40,8 @@ const ProductContent = () => {
               and a full qualification on <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noopener noreferrer'
                 className='underline'>LinkedIn</a>.
             </div>
-            <div className='headshot'>
-              <Image src='/img/headshot.jpeg' alt='headshot' width='350' height='392' />
+            <div className='product-screenshot'>
+              <Image src='/img/antisyphon/home.webp' alt='headshot' width='1000' height='553' />
             </div>
           </div>
         </BioBox>
