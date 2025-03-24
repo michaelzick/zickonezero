@@ -21,7 +21,7 @@ const GridContent = (props: Props) => {
               <Thumbnail
                 key={group}
                 index={index}
-                returnVoid
+                squareLinkOut
                 onThumbClick={() => onThumbClick(null, true)}
                 {...item}
               />

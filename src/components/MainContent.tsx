@@ -27,8 +27,8 @@ const MainContent = () => {
     productIndex: 0
   });
 
-  const onThumbClick = (index: number, returnVoid?: boolean) => {
-    if (returnVoid) return;
+  const onThumbClick = (index: number, squareLinkOut?: boolean) => {
+    if (squareLinkOut) return;
 
     setLightboxController({
       toggler: !lightboxController.toggler,

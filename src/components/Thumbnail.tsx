@@ -6,16 +6,16 @@ import { ReactElement } from 'react';
 
 type AdditionalThumbProps = {
   index: number,
-  returnVoid?: boolean,
+  squareLinkOut?: boolean,
   onThumbClick: Function;
 };
 
 const Thumbnail = (props: WorksData & AdditionalThumbProps): ReactElement => {
-  const { imgs, group, thumb, header, desc, index, onThumbClick, returnVoid } = props;
+  const { imgs, group, thumb, header, desc, index, onThumbClick, squareLinkOut } = props;
 
   return (
-    <Thumb onClick={() => onThumbClick(index, returnVoid)}>
-      {imgs && returnVoid ?
+    <Thumb onClick={() => onThumbClick(index, squareLinkOut)}>
+      {imgs && squareLinkOut ?
         <a href='https://www.antisyphontraining.com' target='_blank' rel='noreferrer'>
           <Image src={thumb} width='240' height='240' alt={group} className='thumb' />
         </a> :
