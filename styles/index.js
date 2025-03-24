@@ -291,6 +291,12 @@ export const BioBox = styled.div`
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
       flex-direction: column;
+      .product-screenshot:nth-child(1) {
+          order: 2; /* Moves the first item down */
+      }
+      .product-screenshot:nth-child(2) {
+          order: 1; /* Moves the second item up */
+      }
     }
   }
 
