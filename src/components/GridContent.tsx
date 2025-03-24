@@ -21,7 +21,8 @@ const GridContent = (props: Props) => {
               <Thumbnail
                 key={group}
                 index={index}
-                onThumbClick={onThumbClick}
+                returnVoid
+                onThumbClick={() => onThumbClick(null, true)}
                 {...item}
               />
             );

@@ -18,9 +18,9 @@ const LinkBoxMobileContent = () => {
       <li onClick={() => dispatch(showMobileMenu(false))}>
         <Link href='/about'>About</Link>
       </li>
-      <li onClick={() => dispatch(showMobileMenu(false))}>
+      {/* <li onClick={() => dispatch(showMobileMenu(false))}>
         <Link href='/product-and-engineering'>Product & Engineering</Link>
-      </li>
+      </li> */}
       <li onClick={() => dispatch(showMobileMenu(false))}>
         <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'>GitHub
           <NewTabSVG />
