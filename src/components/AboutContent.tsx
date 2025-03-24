@@ -27,7 +27,7 @@ const AboutContent = () => {
             <div className='text-wrapper'>
               <h2>Hi, I{"'"}m Michael.</h2>
               <br />
-              I{"'"}m a Product & Engineering Manager, UX designer, frontend engineer, coach, and cybersecurity enthusiast.
+              I{"'"}m a Product & Engineering Manager, UX designer, frontend engineer, and coach.
               <br /><br />
               I specialize in the WordPress and React ecosystems (Next.js, Redux, TypeScript), JavaScript, and Git/DevOps.
               I also have experience with Python, PHP, and MySQL.
