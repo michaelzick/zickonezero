@@ -42,6 +42,11 @@ export const CommandLine = styled.span`
   box-shadow: 0 10px 20px -8px rgb(0 0 0 / 53%);
 `;
 
+export const WorkSectionHeader = styled.span`
+  font-family: monospace;
+  color: #626161;
+`;
+
 export const Wrapper = styled.div`
   ${props => props.isHomePage && 'padding-top: 1.7rem;'}
   min-height: 84%;

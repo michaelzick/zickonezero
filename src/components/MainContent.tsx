@@ -14,7 +14,7 @@ import { useState, memo } from 'react';
 import FsLightbox from 'fslightbox-react';
 
 import { TopNavContent, GridContent, FooterContent } from '.';
-import { SectionHeader, Wrapper, CommandLine } from '../../styles';
+import { SectionHeader, Wrapper, WorkSectionHeader } from '../../styles';
 
 const MainContent = () => {
   const { worksDataReversed } = useAppSelector(selectData);
@@ -47,7 +47,7 @@ const MainContent = () => {
         onClick={() => dispatch(showMobileMenu(false))}>
         <SectionHeader>
           {/* Projects I{"'"}ve <CommandLine>#managed</CommandLine> */}
-          <CommandLine>Product & Engineering</CommandLine>
+          <WorkSectionHeader>Product & Engineering Management | UX Design</WorkSectionHeader>
         </SectionHeader>
 
         <GridContent
@@ -58,7 +58,7 @@ const MainContent = () => {
 
         <SectionHeader>
           {/* Projects I{"'"}ve <CommandLine>$built</CommandLine> */}
-          <CommandLine>Frontend Development</CommandLine>
+          <WorkSectionHeader>Frontend Development</WorkSectionHeader>
         </SectionHeader>
 
         <GridContent
