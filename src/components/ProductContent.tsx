@@ -22,26 +22,32 @@ const ProductContent = () => {
       <TopNavContent />
       <Wrapper isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
-        <BioBox>
+        <BioBox direction='right'>
           <div className='biobox-inner'>
             <div className='text-wrapper'>
               <h2>Antisyphon Training</h2>
               <br />
-              I{"'"}m a Product & Engineering Manager, UX designer, frontend engineer, coach, and cybersecurity enthusiast.
+              Initially, I was hired at Antisyphon Training as a software engineer. However, that role quickly escalated to conceptualizing what would be our new website.
               <br /><br />
-              I specialize in the WordPress and React ecosystems (Next.js, Redux, TypeScript), JavaScript, and server configurations including Docker and Digital Ocean.
-              I also have experience with Python, PHP, and UI/UX design.
-              <br /><br />
-              I have the CompTIA Security+ certification and over 18 years in IT. Additionally, I{"'"}ve led groups and individuals to
-              personal and career success through coaching.
-              <br /><br />
-              You can see some samples of the projects I{"'"}ve built in the <span className='underline'><Link href='/'>main gallery</Link></span>,
-              code samples at <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer' className='underline'>GitHub</a>,
-              and a full qualification on <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noopener noreferrer'
-                className='underline'>LinkedIn</a>.
+              Not content with just making another static site that linked out to third-party platforms, I envisioned an intuitive marketplace for users to buy any type of course through a shopping cart experience.
             </div>
             <div className='product-screenshot'>
               <Image src='/img/antisyphon/home.webp' alt='headshot' width='1000' height='553' />
+            </div>
+          </div>
+        </BioBox>
+
+        <BioBox direction='left'>
+          <div className='biobox-inner'>
+            <div className='product-screenshot'>
+              <Image src='/img/antisyphon/home.webp' alt='headshot' width='1000' height='553' />
+            </div>
+            <div className='text-wrapper'>
+              <h2>UX Design</h2>
+              <br />
+              Initially, I was hired at Antisyphon Training as a software engineer. However, that role quickly escalated to conceptualizing what would be our new website.
+              <br /><br />
+              Not content with just making another static site that linked out to third-party platforms, I envisioned an intuitive marketplace for users to buy any type of course through a shopping cart experience.
             </div>
           </div>
         </BioBox>

@@ -296,7 +296,7 @@ export const BioBox = styled.div`
 
   .text-wrapper {
     max-width: 33rem;
-    margin-right: 2em;
+    ${props => props.direction && `margin-${props.direction}: 2em;`}
 
     @media (max-width: 1137px) {
       max-width: 35rem;
