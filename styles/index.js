@@ -56,7 +56,7 @@ export const Nav = styled.div`
   border-bottom: 1px solid ${THEME.colors.grey};
   justify-content: space-between;
 
-  a, a > * {
+  a {
     font-family: Roboto, sans-serif;
     color: #272727;
     width: 5rem;

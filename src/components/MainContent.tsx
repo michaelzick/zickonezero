@@ -46,7 +46,8 @@ const MainContent = () => {
       <Wrapper isHomePage isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
         <SectionHeader>
-          Projects I{"'"}ve <CommandLine>#managed</CommandLine>
+          {/* Projects I{"'"}ve <CommandLine>#managed</CommandLine> */}
+          <CommandLine>Product & Engineering</CommandLine>
         </SectionHeader>
 
         <GridContent
@@ -56,7 +57,8 @@ const MainContent = () => {
         />
 
         <SectionHeader>
-          Projects I{"'"}ve <CommandLine>$built</CommandLine>
+          {/* Projects I{"'"}ve <CommandLine>$built</CommandLine> */}
+          <CommandLine>Frontend Development</CommandLine>
         </SectionHeader>
 
         <GridContent
