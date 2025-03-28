@@ -27,9 +27,12 @@ const ProductContent = () => {
             <div className='text-wrapper'>
               <h2>Antisyphon Training</h2>
               <br />
-              Initially, I was hired at Antisyphon Training as a software engineer. However, that role quickly escalated to conceptualizing what would be our new website.
+              Initially, I was hired at Black Hills Information Security—Antisyphon Training as a software engineer.
+              However, that role quickly escalated to conceptualizing what would be our new website.
               <br /><br />
-              Not content with just making another static site that linked out to third-party platforms, I envisioned an intuitive marketplace for users to buy any type of course through a shopping cart experience. <a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>
+              Not content with just making another static site that linked out to third-party platforms,
+              I envisioned an intuitive marketplace for users to buy any type of course through a shopping cart experience.
+              {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>
             </div>
             <div className='product-screenshot'>
               <Image src='/img/antisyphon/cart.webp' alt='Antisyphon Cart' width='1200' height='664' />
@@ -48,9 +51,9 @@ const ProductContent = () => {
                 Starting with boilerplate WooCommerce and customizing the **** out of it, we crafted a logged-in experience for user account maintenance.
                 <br /><br />
                 This involved creating sections for Live and On-Demand courses complete with API queries to retrieve completion data, serving certificates
-                of completion,and allowing users to purchase, cancel, and renew subscriptions.
+                of completion, and allowing users to purchase, cancel, and renew Subscriptions.
                 <br /><br />
-                Of course, no user dashboard would be complete without a way to change their email, password, addresses, and see their purchase history.
+                Of course, no user dashboard would be complete without a way for users to change their email, password, addresses, and see their purchase history.
                 {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>
                 <br /><br />
                 <div className='product-screenshot'>
@@ -80,11 +83,14 @@ const ProductContent = () => {
               <br /><br />
               <h2>Admin Experiences</h2>
               <br />
-              In addition to consumer-facing aspects, Antisyphon Training was also a full-featured WordPress CMS, which required its
+              In addition to the consumer-facing site, Antisyphon Training is also a full-featured WordPress CMS, which required its
               own UX considerations. While design played less of a role, we needed to make content administration fast, intuitive, and reliable.
               <br /><br />
-              Using my years of experience as a frontend developer, I knew that simple is better, but simple isn{"'"}t always easy. Crafting a
-              site that{"'"}s easy to use would require research and intuition.
+              Using massive plugins like The Events Calendar, Events Tickets Plus, and Advanced Custom Fields, we customized and crafted an
+              administrative experience that increased course and content creation by around 85%, all while syncing with a PHP/MySQL backend services
+              layer to link everything correctly.
+              <br /><br />
+              Surfacing API errors, generating unique IDs, and allowing admins to edit orders were all part of the package.
               {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>
               <br /><br />
               <div className='product-screenshot'>
@@ -92,7 +98,7 @@ const ProductContent = () => {
               </div>
               <br />
               <div className='product-screenshot'>
-                <Image src='/img/antisyphon/admin-order-edit.webp' alt='Admin Course Edit' width='1200' height='664' />
+                <Image src='/img/antisyphon/admin-order-edit.webp' alt='Admin Order Edit' width='1200' height='664' />
               </div>
             </div>
           </div>
