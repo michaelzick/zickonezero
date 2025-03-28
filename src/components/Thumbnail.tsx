@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { WorksData } from '../types';
 import { Thumb } from '../../styles';
@@ -16,9 +17,9 @@ const Thumbnail = (props: WorksData & AdditionalThumbProps): ReactElement => {
   return (
     <Thumb onClick={() => onThumbClick(index, squareLinkOut)}>
       {imgs && squareLinkOut ?
-        <a href='https://www.antisyphontraining.com' target='_blank' rel='noreferrer'>
+        <Link href='/product-and-engineering'>
           <Image src={thumb} width='240' height='240' alt={group} className='thumb' />
-        </a> :
+        </Link> :
         <Image src={thumb} width='240' height='240' alt={group} className='thumb' />}
 
       <h3>{header}</h3>

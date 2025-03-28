@@ -64,7 +64,6 @@ export const Nav = styled.div`
   a {
     font-family: Roboto, sans-serif;
     color: #272727;
-    width: 5rem;
     display: flex;
     text-decoration: none;
     margin-top: 0.8rem;
@@ -215,7 +214,7 @@ export const Title = styled.h1`
 export const LinkBox = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 20em;
+  width: 35em;
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     display: none;
