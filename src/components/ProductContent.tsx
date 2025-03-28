@@ -32,7 +32,7 @@ const ProductContent = () => {
               Not content with just making another static site that linked out to third-party platforms, I envisioned an intuitive marketplace for users to buy any type of course through a shopping cart experience.
             </div>
             <div className='product-screenshot'>
-              <Image src='/img/antisyphon/cart.webp' alt='Antisyphon Cart' width='1000' height='553' />
+              <Image src='/img/antisyphon/cart.webp' alt='Antisyphon Cart' width='1200' height='664' />
             </div>
           </div>
         </BioBox>
@@ -40,16 +40,20 @@ const ProductContent = () => {
         <BioBox direction='left'>
           <div className='biobox-inner'>
             <div className='product-screenshot'>
-              <Image src='/img/antisyphon/wireframe-home.webp' alt='Wireframe Home' width='553' height='2200' />
+              <Image src='/img/antisyphon/wireframe-home.webp' alt='Wireframe Home' width='664' height='2641' />
               <br /><br /><br />
-              <h2>Intuitive Dashboards</h2>
-              <br />
-              In addition to consumer-facing aspects, Antisyphon Training was also a full-featured WordPress CMS, which required its own UX considerations. While design played less of a role, we needed to make content administration fast, intuitive, and reliable.
-              <br /><br />
-              Using my years of experience as a frontend developer, I knew that simple is better, but simple isn{"'"}t always easy. Crafting a site that{"'"}s easy to use would require research and intuition.
-              <br /><br />
-              <div className='product-screenshot'>
-                <Image src='/img/antisyphon/corporate-dashboard.webp' alt='Wireframe Dashboard' width='989' height='1435' />
+              <div>
+                <h2>Intuitive Dashboards</h2>
+                <br />
+                Starting with boilerplate WooCommerce and customizing the **** out of it, we crafted a logged-in experience for user account maintenance.
+                <br /><br />
+                This involved creating sections for Live and On-Demand courses complete with API queries to retrieve completion data, serving certificates of completion, and allowing users to purchase, cancel, and renew subscriptions.
+                <br /><br />
+                Of course, no user dashboard would be complete without a way to change their email, password, addresses, and see their purchase history.
+                <br /><br />
+                <div className='product-screenshot'>
+                  <Image src='/img/antisyphon/corporate-dashboard.webp' alt='Wireframe Dashboard' width='989' height='1435' />
+                </div>
               </div>
             </div>
             <div className='text-wrapper'>
@@ -65,7 +69,7 @@ const ProductContent = () => {
 
               <br /><br />
               <div className='product-screenshot'>
-                <Image src='/img/antisyphon/dashboard-live-courses.webp' alt='Admin Course Edit' width='1000' height='553' />
+                <Image src='/img/antisyphon/dashboard-saved-cc.webp' alt='Admin Course Edit' width='1200' height='664' />
               </div>
 
               <br /><br />
