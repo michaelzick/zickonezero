@@ -22,7 +22,7 @@ const ProductContent = () => {
       <TopNavContent />
       <Wrapper isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
-        <BioBox direction='right'>
+        <BioBox direction='right' noBottomPadding>
           <div className='biobox-inner'>
             <div className='text-wrapper'>
               <h2>Antisyphon Training</h2>
@@ -41,7 +41,7 @@ const ProductContent = () => {
           <div className='biobox-inner'>
             <div className='product-screenshot'>
               <Image src='/img/antisyphon/wireframe-home.webp' alt='Wireframe Home' width='553' height='2200' />
-              <br /><br />
+              <br /><br /><br />
               <h2>Intuitive Dashboards</h2>
               <br />
               In addition to consumer-facing aspects, Antisyphon Training was also a full-featured WordPress CMS, which required its own UX considerations. While design played less of a role, we needed to make content administration fast, intuitive, and reliable.
@@ -63,7 +63,12 @@ const ProductContent = () => {
                 <Image src='/img/antisyphon/wwhf-future-is.webp' alt='Wireframe THE FUTURE IS' width='553' height='2500' />
               </div>
 
-              <br />
+              <br /><br />
+              <div className='product-screenshot'>
+                <Image src='/img/antisyphon/dashboard-live-courses.webp' alt='Admin Course Edit' width='1000' height='553' />
+              </div>
+
+              <br /><br />
               <h2>Admin Experiences</h2>
               <br />
               In addition to consumer-facing aspects, Antisyphon Training was also a full-featured WordPress CMS, which required its own UX considerations. While design played less of a role, we needed to make content administration fast, intuitive, and reliable.
@@ -71,7 +76,7 @@ const ProductContent = () => {
               Using my years of experience as a frontend developer, I knew that simple is better, but simple isn{"'"}t always easy. Crafting a site that{"'"}s easy to use would require research and intuition.
               <br /><br />
               <div className='product-screenshot'>
-                <Image src='/img/antisyphon/corporate-dashboard.webp' alt='Wireframe' width='989' height='1435' />
+                <Image src='/img/antisyphon/admin-course-edit.webp' alt='Admin Course Edit' width='1000' height='553' />
               </div>
             </div>
           </div>

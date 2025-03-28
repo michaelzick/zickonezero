@@ -251,6 +251,7 @@ export const BioBox = styled.div`
   display: flex;
   justify-content: center;
   padding: 4rem;
+  ${props => props.noBottomPadding && 'padding-bottom: 0;'}
   width: 100%;
   font-size: 25px;
   text-align: left;
@@ -288,6 +289,8 @@ export const BioBox = styled.div`
     }
 
     .product-screenshot {
+      max-width: 23em;
+
       & > span {
         box-shadow: 4px 5px 13px 2px rgb(42 40 40 / 64%);
       }
