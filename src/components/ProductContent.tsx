@@ -57,6 +57,7 @@ const ProductContent = () => {
               </div>
             </div>
             <div className='text-wrapper'>
+              <br /><br />
               <h2>UX Design</h2>
               <br />
               Using Figma, I began designing wireframes that would go through several rounds of discussion, feedback, and countless iterations.
