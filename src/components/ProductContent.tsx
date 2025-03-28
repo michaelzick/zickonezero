@@ -69,7 +69,7 @@ const ProductContent = () => {
 
               <br /><br />
               <div className='product-screenshot'>
-                <Image src='/img/antisyphon/dashboard-saved-cc.webp' alt='Admin Course Edit' width='1200' height='664' />
+                <Image src='/img/antisyphon/dashboard-saved-cc.webp' alt='Dashboard Saved Credit Cards' width='1200' height='664' />
               </div>
 
               <br /><br />
@@ -81,6 +81,10 @@ const ProductContent = () => {
               <br /><br />
               <div className='product-screenshot'>
                 <Image src='/img/antisyphon/admin-course-edit.webp' alt='Admin Course Edit' width='1000' height='553' />
+              </div>
+              <br />
+              <div className='product-screenshot'>
+                <Image src='/img/antisyphon/admin-order-edit.webp' alt='Admin Course Edit' width='1200' height='664' />
               </div>
             </div>
           </div>
