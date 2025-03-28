@@ -32,7 +32,7 @@ const ProductContent = () => {
               <br /><br />
               Not content with just making another static site that linked out to third-party platforms,
               I envisioned an intuitive marketplace for users to buy any type of course through a shopping cart experience.
-              {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>
+              {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>.
             </div>
             <div className='product-screenshot'>
               <Image src='/img/antisyphon/cart.webp' alt='Antisyphon Cart' width='1200' height='664' />
@@ -54,7 +54,7 @@ const ProductContent = () => {
                 of completion, and allowing users to purchase, cancel, and renew Subscriptions.
                 <br /><br />
                 Of course, no user dashboard would be complete without a way for users to change their email, password, addresses, and see their purchase history.
-                {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>
+                {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>.
                 <br /><br />
                 <div className='product-screenshot'>
                   <Image src='/img/antisyphon/corporate-dashboard.webp' alt='Wireframe Dashboard' width='989' height='1435' />
@@ -67,9 +67,9 @@ const ProductContent = () => {
               <br />
               Using Figma, I began designing wireframes that would go through several rounds of discussion, feedback, and countless iterations.
               <br /><br />
-              Using my years of experience as a frontend developer, I knew that simple is better, but simple isn{"'"}t always easy.
-              Crafting a site that{"'"}s easy to use would require research and intuition.
-              {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>
+              When the wireframes were complete, we hired <a href="https://www.frieddesign.co/" target='_blank' rel='noopener noreferrer'>Fried Design</a>
+              {' '}to give our site a unique look complete with game-like course badges.
+              <br />{' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>.
               <br /><br />
               <div className='product-screenshot'>
                 <Image src='/img/antisyphon/wwhf-future-is.webp' alt='Wireframe THE FUTURE IS' width='553' height='2500' />
@@ -91,7 +91,7 @@ const ProductContent = () => {
               layer to link everything correctly.
               <br /><br />
               Surfacing API errors, generating unique IDs, and allowing admins to edit orders were all part of the package.
-              {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>
+              {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>.
               <br /><br />
               <div className='product-screenshot'>
                 <Image src='/img/antisyphon/admin-course-edit.webp' alt='Admin Course Edit' width='1000' height='553' />
