@@ -20,10 +20,16 @@ export const Container = styled.div`
 
   .underline {
     text-decoration: underline;
-    &:hover {
-      text-decoration: none;
-    }
   }
+
+  a {
+  transition: all 0.3s;
+  color: #272727;
+
+  &:hover {
+    color: ${THEME.colors.blue};
+  }
+}
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     // Hide the full screen icon in Lightbox
@@ -271,10 +277,6 @@ export const BioBox = styled.div`
       }
     }
 
-    a {
-      color: #272727;
-    }
-
     .headshot {
       img {
         border-radius: 4px;
@@ -355,10 +357,6 @@ export const Footer = styled.div`
       display: flex;
       color: #272727;
       text-decoration: none;
-
-      &:hover {
-        color: ${THEME.colors.blue};
-      }
     }
 
     @media (max-width: ${THEME.breakpoints.smallTablet}) {
