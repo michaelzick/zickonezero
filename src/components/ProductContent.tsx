@@ -41,9 +41,8 @@ const ProductContent = () => {
           <div className='biobox-inner'>
             <div className='product-screenshot'>
               <Image src='/img/antisyphon/wireframe-home.webp' alt='headshot' width='553' height='2200' />
-              <br />
-              <br />
-              <h2>Admin Experiences</h2>
+              <br /><br />
+              <h2>Intuitive Dashboards</h2>
               <br />
               In addition to consumer-facing aspects, Antisyphon Training was also a full-featured WordPress CMS, which required its own UX considerations. While design played less of a role, we needed to make content administration fast, intuitive, and reliable.
               <br /><br />
@@ -63,6 +62,9 @@ const ProductContent = () => {
               <div className='product-screenshot'>
                 <Image src='/img/antisyphon/wwhf-future-is.webp' alt='headshot' width='553' height='2500' />
               </div>
+
+              <br />
+              <h2>Admin Experiences</h2>
             </div>
           </div>
         </BioBox>
