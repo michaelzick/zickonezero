@@ -1,14 +1,14 @@
 import Link from 'next/link';
 
 import { NewTabSVG } from './svg/NewTab';
-import { Footer } from '../../styles';
+import { Footer, CommandLine } from '../../styles';
 import { ReactElement } from 'react';
 
 const FooterContent = (): ReactElement => (
   <Footer>
-    <div>
-      Site built with Next.js & Redux Toolkit. Designed by Michael Zick.
-    </div>
+    <CommandLine>
+      Site designed and built by Michael Zick using React, Next.js, and Redux Toolkit.
+    </CommandLine>
 
     <div className='footer-links'>
       <Link href='/'>Home</Link>
