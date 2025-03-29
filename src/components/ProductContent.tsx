@@ -97,9 +97,6 @@ const ProductContent = () => {
                 <Image src='/img/antisyphon/admin-course-edit.webp' alt='Admin Course Edit' width='1000' height='553' />
               </div>
               <br />
-              <div className='product-screenshot'>
-                <Image src='/img/antisyphon/admin-order-edit.webp' alt='Admin Order Edit' width='1200' height='664' />
-              </div>
             </div>
           </div>
         </BioBox>
