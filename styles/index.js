@@ -351,7 +351,8 @@ export const Footer = styled.div`
   .footer-links {
     display: flex;
     justify-content: space-between;
-    width: 18rem;
+    max-width: 34rem;
+    width: 100%;
 
     a {
       display: flex;
@@ -361,12 +362,7 @@ export const Footer = styled.div`
 
     @media (max-width: ${THEME.breakpoints.smallTablet}) {
       margin-top: 1rem;
-    }
-
-    @media (max-width: ${THEME.breakpoints.smallPhone}) {
-      width: 100%;
       flex-direction: column;
-
       a:not(:first-child) {
         margin-top: 1rem;
       }
