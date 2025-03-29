@@ -61,7 +61,7 @@ const ProductContent = () => {
                 </div>
               </div>
             </div>
-            <div className='text-wrapper'>
+            <div className='text-wrapper bottom'>
               <br /><br />
               <h2>UX Design</h2>
               <br />
@@ -70,12 +70,13 @@ const ProductContent = () => {
               When the wireframes were complete, we hired <a href="https://www.frieddesign.co/" target='_blank' rel='noopener noreferrer'>Fried Design</a>
               {' '}to give our site a unique look complete with game-like course badges.
               <br />{' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>.
+
               <br /><br />
               <div className='product-screenshot'>
                 <Image src='/img/antisyphon/wwhf-future-is.webp' alt='Wireframe THE FUTURE IS' width='553' height='2500' />
               </div>
 
-              <br /><br />
+              <br />
               <div className='product-screenshot'>
                 <Image src='/img/antisyphon/dashboard-saved-cc.webp' alt='Dashboard Saved Credit Cards' width='1200' height='664' />
               </div>

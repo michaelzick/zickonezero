@@ -313,7 +313,13 @@ export const BioBox = styled.div`
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
       max-width: none;
+      margin-left: 0;
+      margin-right: 0;
       margin-bottom: 2.5rem;
+
+      &.bottom {
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -327,6 +333,7 @@ export const BioBox = styled.div`
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     padding: 2rem;
+    ${props => props.noBottomPadding && 'padding-bottom: 0;'}
   }
 `;
 
@@ -356,7 +363,6 @@ export const Footer = styled.div`
 
     a {
       display: flex;
-      color: #272727;
       text-decoration: none;
     }
 
