@@ -65,7 +65,7 @@ const ProductContent = () => {
               <br /><br />
               <h2>UX Design</h2>
               <br />
-              Using Figma, I began designing wireframes that would go through several rounds of discussion, feedback, and countless iterations.
+              Using Figma, I designed over 50 wireframes that would go through several rounds of discussion, feedback, and countless iterations.
               <br /><br />
               When the wireframes were complete, we hired <a href="https://www.frieddesign.co/" target='_blank' rel='noopener noreferrer'>Fried Design</a>
               {' '}to give our site a unique look complete with game-like course badges.
@@ -73,7 +73,7 @@ const ProductContent = () => {
 
               <br /><br />
               <div className='product-screenshot'>
-                <Image src='/img/antisyphon/wwhf-future-is.webp' alt='Wireframe THE FUTURE IS' width='553' height='2500' />
+                <Image src='/img/antisyphon/course-catalog-full.webp' alt='Antisyphon Course Catalog' width='553' height='689' />
               </div>
 
               <br /><br />
