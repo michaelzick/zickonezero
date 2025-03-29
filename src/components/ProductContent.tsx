@@ -77,7 +77,7 @@ const ProductContent = () => {
                 </div>
                 <br />
                 <div className='product-screenshot'>
-                  <Image src='/img/antisyphon/dashboard-saved-cc.webp' alt='Dashboard Saved Credit Cards' width='1200' height='664' />
+                  <Image src='/img/antisyphon/dashboard-my-live-courses.webp' alt='Dashboard Live Courses' width='1200' height='664' />
                 </div>
               </div>
             </div>
