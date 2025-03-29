@@ -61,6 +61,23 @@ const ProductContent = () => {
               </div>
 
               <br /><br />
+              <div>
+                <h2>Intuitive Dashboards</h2>
+                <br />
+                Starting with boilerplate WooCommerce and customizing the **** out of it, we crafted a logged-in experience for user account maintenance.
+                <br /><br />
+                This involved creating sections for Live and On-Demand courses complete with API queries to retrieve completion data, serving certificates
+                of completion, and allowing users to purchase, cancel, and renew Subscriptions.
+                <br /><br />
+                Of course, no user dashboard would be complete without a way for users to change their email, password, addresses, and see their purchase history.
+                {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>.
+                <br /><br />
+                <div className='product-screenshot'>
+                  <Image src='/img/antisyphon/wireframe-live-courses.webp' alt='Wireframe Dashboard' width='989' height='1262' />
+                </div>
+              </div>
+
+              <br /><br />
               <h2>Admin Experiences</h2>
               <br />
               In addition to the consumer-facing site, Antisyphon Training is also a full-featured WordPress CMS, which required its
@@ -80,23 +97,6 @@ const ProductContent = () => {
               <br />
               <div className='product-screenshot'>
                 <Image src='/img/antisyphon/admin-course-edit.webp' alt='Admin Course Edit' width='1000' height='553' />
-              </div>
-
-              <br /><br />
-              <div>
-                <h2>Intuitive Dashboards</h2>
-                <br />
-                Starting with boilerplate WooCommerce and customizing the **** out of it, we crafted a logged-in experience for user account maintenance.
-                <br /><br />
-                This involved creating sections for Live and On-Demand courses complete with API queries to retrieve completion data, serving certificates
-                of completion, and allowing users to purchase, cancel, and renew Subscriptions.
-                <br /><br />
-                Of course, no user dashboard would be complete without a way for users to change their email, password, addresses, and see their purchase history.
-                {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>.
-                <br /><br />
-                <div className='product-screenshot'>
-                  <Image src='/img/antisyphon/wireframe-live-courses.webp' alt='Wireframe Dashboard' width='989' height='1262' />
-                </div>
               </div>
             </div>
           </div>
