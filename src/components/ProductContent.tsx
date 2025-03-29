@@ -76,11 +76,6 @@ const ProductContent = () => {
                 <Image src='/img/antisyphon/wwhf-future-is.webp' alt='Wireframe THE FUTURE IS' width='553' height='2500' />
               </div>
 
-              <br />
-              <div className='product-screenshot'>
-                <Image src='/img/antisyphon/dashboard-saved-cc.webp' alt='Dashboard Saved Credit Cards' width='1200' height='664' />
-              </div>
-
               <br /><br />
               <h2>Admin Experiences</h2>
               <br />
@@ -88,16 +83,20 @@ const ProductContent = () => {
               own UX considerations. While design played less of a role, we needed to make content administration fast, intuitive, and reliable.
               <br /><br />
               Using massive plugins like The Events Calendar, Events Tickets Plus, and Advanced Custom Fields, we customized and crafted an
-              administrative experience that increased course and content creation by around 85%, all while syncing with a PHP/MySQL backend services
+              administrative experience that improved course and content creation time by around 85%, all while syncing with a PHP/MySQL backend services
               layer to link everything correctly.
               <br /><br />
-              Surfacing API errors, generating unique IDs, and allowing admins to edit orders were all part of the package.
+              Surfacing API errors, generating unique IDs, and allowing admins to edit orders were just a small part of the package,
+              and much of it we built from scratch.
               {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>.
               <br /><br />
               <div className='product-screenshot'>
-                <Image src='/img/antisyphon/admin-course-edit.webp' alt='Admin Course Edit' width='1000' height='553' />
+                <Image src='/img/antisyphon/dashboard-saved-cc.webp' alt='Dashboard Saved Credit Cards' width='1200' height='664' />
               </div>
               <br />
+              <div className='product-screenshot'>
+                <Image src='/img/antisyphon/admin-course-edit.webp' alt='Admin Course Edit' width='1000' height='553' />
+              </div>
             </div>
           </div>
         </BioBox>
