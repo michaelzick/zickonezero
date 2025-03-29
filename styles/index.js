@@ -295,6 +295,7 @@ export const BioBox = styled.div`
 
       & > span {
         box-shadow: 4px 5px 13px 2px rgb(42 40 40 / 64%);
+        border-radius: 4px;
       }
     }
 
