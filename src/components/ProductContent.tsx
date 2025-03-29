@@ -40,7 +40,7 @@ const ProductContent = () => {
           </div>
         </BioBox>
 
-        <BioBox direction='left'>
+        <BioBox direction='left' noBottomPadding>
           <div className='biobox-inner'>
             <div className='product-screenshot'>
               <Image src='/img/antisyphon/wireframe-home.webp' alt='Wireframe Home' width='664' height='2641' />
@@ -75,9 +75,18 @@ const ProductContent = () => {
                 <div className='product-screenshot'>
                   <Image src='/img/antisyphon/wireframe-live-courses.webp' alt='Wireframe Dashboard' width='989' height='1262' />
                 </div>
+                <br />
+                <div className='product-screenshot'>
+                  <Image src='/img/antisyphon/dashboard-saved-cc.webp' alt='Dashboard Saved Credit Cards' width='1200' height='664' />
+                </div>
               </div>
+            </div>
+          </div>
+        </BioBox>
 
-              <br /><br />
+        <BioBox>
+          <div className='biobox-inner'>
+            <div className='text-wrapper'>
               <h2>Admin Experiences</h2>
               <br />
               In addition to the consumer-facing site, Antisyphon Training is also a full-featured WordPress CMS, which required its
@@ -90,14 +99,9 @@ const ProductContent = () => {
               Surfacing API errors, generating unique IDs, and allowing admins to edit orders were just a small part of the package,
               and much of it we built from scratch.
               {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>.
-              <br /><br />
-              <div className='product-screenshot'>
-                <Image src='/img/antisyphon/dashboard-saved-cc.webp' alt='Dashboard Saved Credit Cards' width='1200' height='664' />
-              </div>
-              <br />
-              <div className='product-screenshot'>
-                <Image src='/img/antisyphon/admin-course-edit.webp' alt='Admin Course Edit' width='1000' height='553' />
-              </div>
+            </div>
+            <div className='product-screenshot'>
+              <Image src='/img/antisyphon/admin-course-edit.webp' alt='Admin Course Edit' width='1200' height='664' />
             </div>
           </div>
         </BioBox>
