@@ -35,7 +35,7 @@ const ProductContent = () => {
               {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See&nbsp;the&nbsp;full&nbsp;site</a>.
             </div>
             <div className='product-screenshot'>
-              <Image src='/img/antisyphon/cart.webp' alt='Antisyphon Cart' width='1200' height='664' />
+              <Image src='/img/antisyphon/cart.webp' alt='Antisyphon Cart' width='1200' height='663' />
             </div>
           </div>
         </BioBox>
@@ -78,7 +78,7 @@ const ProductContent = () => {
                 </div>
                 <br />
                 <div className='product-screenshot'>
-                  <Image src='/img/antisyphon/dashboard-my-live-courses.webp' alt='Dashboard Live Courses' width='1200' height='664' />
+                  <Image src='/img/antisyphon/dashboard-my-live-courses.webp' alt='Dashboard Live Courses' width='1200' height='666' />
                 </div>
               </div>
             </div>
@@ -102,7 +102,7 @@ const ProductContent = () => {
               {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See&nbsp;the&nbsp;full&nbsp;site</a>.
             </div>
             <div className='product-screenshot'>
-              <Image src='/img/antisyphon/admin-course-edit.webp' alt='Admin Course Edit' width='1200' height='664' />
+              <Image src='/img/antisyphon/admin-course-edit.webp' alt='Admin Course Edit' width='1200' height='666' />
             </div>
           </div>
         </BioBox>
