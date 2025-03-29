@@ -57,7 +57,7 @@ const ProductContent = () => {
                 {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See the full site</a>.
                 <br /><br />
                 <div className='product-screenshot'>
-                  <Image src='/img/antisyphon/corporate-dashboard.webp' alt='Wireframe Dashboard' width='989' height='1435' />
+                  <Image src='/img/antisyphon/wireframe-live-courses.webp' alt='Wireframe Dashboard' width='989' height='1262' />
                 </div>
               </div>
             </div>
