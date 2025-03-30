@@ -46,6 +46,7 @@ export const CommandLine = styled.span`
   color: #fff;
   border-radius: 3px;
   box-shadow: 0 10px 20px -8px rgb(0 0 0 / 53%);
+  max-width: 49em;
 `;
 
 export const WorkSectionHeader = styled.span`
@@ -361,6 +362,7 @@ export const Footer = styled.div`
     justify-content: space-between;
     max-width: 34rem;
     width: 100%;
+    margin-left: 1em;
 
     a {
       display: flex;
@@ -370,6 +372,8 @@ export const Footer = styled.div`
     @media (max-width: ${THEME.breakpoints.smallTablet}) {
       margin-top: 1rem;
       flex-direction: column;
+      margin-left: 0;
+
       a:not(:first-child) {
         margin-top: 1rem;
       }
