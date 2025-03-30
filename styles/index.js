@@ -300,7 +300,11 @@ export const BioBox = styled.div`
       }
     }
 
-    @media (max-width: ${THEME.breakpoints.mediumTablet}) {
+    @media (max-width: ${THEME.breakpoints.largeTablet}) {
+      ${props => !props.about && 'flex-direction: column;'}
+    }
+
+    @media (max-width: ${THEME.breakpoints.smallTablet}) {
       flex-direction: column;
     }
   }
@@ -313,7 +317,7 @@ export const BioBox = styled.div`
       max-width: 35rem;
     }
 
-    @media (max-width: ${THEME.breakpoints.mediumTablet}) {
+    @media (max-width: ${THEME.breakpoints.largeTablet}) {
       margin-left: 0;
       margin-right: 0;
       margin-bottom: 2.5rem;
@@ -332,11 +336,11 @@ export const BioBox = styled.div`
     margin: 0;
   }
 
-  @media (max-width: ${THEME.breakpoints.mediumTablet}) {
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
     height: auto;
   }
 
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
     padding: 2rem;
     ${props => props.noBottomPadding && 'padding-bottom: 0;'}
   }
