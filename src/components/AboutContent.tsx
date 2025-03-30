@@ -22,7 +22,7 @@ const AboutContent = () => {
       <TopNavContent />
       <Wrapper isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
-        <BioBox>
+        <BioBox about>
           <div className='biobox-inner'>
             <div className='text-wrapper'>
               <h2>Hi, I{"'"}m Michael.</h2>

@@ -166,6 +166,7 @@ export const Thumb = styled.div`
   font-family: Roboto, sans-serif;
   color: #272727;
   margin: 3rem 3rem 1.5rem;
+
   img {
     border-radius: 4px;
     cursor: pointer;
@@ -177,9 +178,11 @@ export const Thumb = styled.div`
       filter: none;
     }
   }
+
   h3 {
     margin: 0;
   }
+
   p {
     width: 240px;
     text-align: center;
@@ -205,23 +208,20 @@ export const Title = styled.h1`
     padding: 0.5rem;
     cursor: pointer;
 
-    @media (max-width: ${THEME.breakpoints.phone}) {
+    @media (max-width: ${THEME.breakpoints.largeTablet}) {
       display: block;
       width: 11rem;
       padding: 0;
+      font-size: 1.5rem;
+      line-height: 1.7rem;
     }
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    font-size: 1.5rem;
-    line-height: 1.7rem;
   }
 `;
 
 export const LinkBox = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 35em;
+  min-width: 29em;
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     display: none;
@@ -300,21 +300,20 @@ export const BioBox = styled.div`
       }
     }
 
-    @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    @media (max-width: ${THEME.breakpoints.mediumTablet}) {
       flex-direction: column;
     }
   }
 
   .text-wrapper {
-    max-width: 33rem;
+    ${props => props.about ? 'max-width: 43rem;' : 'max-width: 33rem;'}
     ${props => props.direction && `margin-${props.direction}: 2em;`}
 
-    @media (max-width: 1137px) {
+    @media (max-width: ${THEME.breakpoints.largeTablet}) {
       max-width: 35rem;
     }
 
-    @media (max-width: ${THEME.breakpoints.largeTablet}) {
-      max-width: none;
+    @media (max-width: ${THEME.breakpoints.mediumTablet}) {
       margin-left: 0;
       margin-right: 0;
       margin-bottom: 2.5rem;
@@ -323,13 +322,17 @@ export const BioBox = styled.div`
         margin-bottom: 0;
       }
     }
+
+    @media (max-width: ${THEME.breakpoints.smallTablet}) {
+      max-width: none;
+    }
   }
 
   h2 {
     margin: 0;
   }
 
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+  @media (max-width: ${THEME.breakpoints.mediumTablet}) {
     height: auto;
   }
 
