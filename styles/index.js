@@ -180,7 +180,7 @@ export const Thumb = styled.div`
   }
 
   h3 {
-    margin: 0;
+    margin: 0.6em 0 0;
   }
 
   p {
