@@ -42,7 +42,7 @@ export const WorkSectionHeader = styled.span`
 `;
 
 export const Wrapper = styled.div`
-  ${props => props.isHomePage && 'padding-top: 1.7rem;'}
+  ${props => props.isHomePage ? 'padding-top: 7.7rem;' : 'padding-top: 5rem;'}
   min-height: 84%;
   ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
   background-color: ${THEME.colors.dark};
@@ -52,8 +52,11 @@ export const Nav = styled.div`
   width: 100%;
   padding: 1rem 3rem 1rem 2.5rem;
   display: flex;
-  border-bottom: 1px solid ${THEME.colors.grey};
+  border-bottom: 2px dotted ${THEME.colors.grey};
   justify-content: space-between;
+  position: fixed;
+  z-index: 90;
+  background-color: ${THEME.colors.darkest};
 
   svg {
     width: 1rem;
