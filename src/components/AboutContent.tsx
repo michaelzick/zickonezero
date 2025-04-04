@@ -25,20 +25,20 @@ const AboutContent = () => {
         <BioBox about>
           <div className='biobox-inner'>
             <div className='text-wrapper'>
-              <h2>Hi, I{"'"}m Michael.</h2>
-              <br />
-              I{"'"}m a Product & Engineering Manager, UX designer, frontend engineer, and coach.
+              Michael is a Product & Engineering Manager with a strong background in UX design, frontend development,
+              DevOps, SEO, and e-commerce platforms.
               <br /><br />
-              I specialize in the WordPress and React ecosystems (Next.js, Redux, TypeScript), JavaScript, and Git/DevOps.
-              I also have experience with Python, PHP, and MySQL.
+              He specializes in the WordPress and React ecosystems (including Next.js, Redux, and TypeScript).
+              He also has experience with Python, PHP, and MySQL.
               <br /><br />
-              I have the CompTIA Security+ certification and over 18 years in IT. Additionally, I{"'"}ve led groups and individuals to
-              personal and career success through coaching.
+              With a CompTIA Security+ certification and over 18 years in IT, Michael brings deep technical
+              expertise and leadership to every project. In addition to his technical background, he has guided
+              individuals and teams to personal and professional success through coaching.
               <br /><br />
-              You can see some samples of the projects I{"'"}ve worked on in the <span className='underline'><Link href='/'>main gallery</Link></span>,
-              code samples at <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer' className='underline'>GitHub</a>,
-              and a full qualification on <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noopener noreferrer'
-                className='underline'>LinkedIn</a>.
+              Samples of his work can be found in the <span className='underline'><Link href='/'>main gallery</Link></span>,
+              with code examples on <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'
+                className='underline'>GitHub</a>, and a full list of qualifications on <a href='https://linkedin.com/in/michaelzick'
+                  target='_blank' rel='noopener noreferrer' className='underline'>LinkedIn</a>.
             </div>
             <div className='headshot'>
               <Image src='/img/headshot.jpeg' alt='headshot' width='350' height='392' />
