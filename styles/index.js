@@ -7,7 +7,8 @@ export const NewTabSvgStyles = {
   width: '1rem',
   height: '1rem',
   marginLeft: '0.2rem',
-  flexShrink: '0'
+  flexShrink: '0',
+  fill: '#fff'
 };
 
 export const Container = styled.div`
@@ -163,14 +164,13 @@ export const Thumb = styled.div`
   margin: 3rem 3rem 1.5rem;
 
   img {
+    transition: all 0.3s;
     border-radius: 4px;
     cursor: pointer;
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
 
     &:hover {
-      -webkit-filter: none;
-      filter: none;
+      -webkit-filter: grayscale();
+      filter: grayscale();
     }
   }
 
@@ -274,13 +274,6 @@ export const BioBox = styled.div`
     .headshot {
       img {
         border-radius: 4px;
-        -webkit-filter: grayscale(100%);
-        filter: grayscale(100%);
-
-        &:hover {
-          -webkit-filter: none;
-          filter: none;
-        }
       }
     }
 
