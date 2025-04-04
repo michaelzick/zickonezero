@@ -2,15 +2,6 @@ import styled from 'styled-components';
 
 import { THEME } from './theme';
 
-// Flat Styles
-export const NewTabSvgStyles = {
-  width: '1rem',
-  height: '1rem',
-  marginLeft: '0.2rem',
-  flexShrink: '0',
-  fill: '#fff'
-};
-
 export const Container = styled.div`
   background-size: cover;
   text-align: center;
@@ -64,6 +55,14 @@ export const Nav = styled.div`
   border-bottom: 1px solid ${THEME.colors.grey};
   justify-content: space-between;
 
+  svg {
+    width: 1rem;
+    height: 1rem;
+    margin-left: 0.2rem;
+    flex-shrink: 0;
+    fill: ${THEME.colors.white};
+  }
+
   a {
     font-family: Roboto, sans-serif;
     color: ${THEME.colors.white};
@@ -88,7 +87,7 @@ export const MenuIcon = styled.div`
   .bar1, .bar2, .bar3 {
     width: 35px;
     height: 5px;
-    background-color: #272727;
+    background-color: ${THEME.colors.white};
     margin: 6px 0;
     transition: 0.4s;
   }
@@ -236,6 +235,10 @@ export const LinkBoxMobile = styled.ul`
   border-radius: 4px;
   box-shadow: 20px 0 80px 20px rgb(138 138 149 / 40%);
 
+  svg {
+    fill: ${THEME.colors.dark};
+  }
+
   li {
     &:not(:first-child) {
       margin-top: 1rem;
@@ -244,6 +247,7 @@ export const LinkBoxMobile = styled.ul`
     a {
       border-bottom: 0.2rem solid #000;
       justify-content: center;
+      color: ${THEME.colors.dark};
     }
   }
 `;
