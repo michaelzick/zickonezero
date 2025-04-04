@@ -25,7 +25,7 @@ export const Container = styled.div`
   svg {
     width: 1rem;
     height: 1rem;
-    margin: 0.1rem 0 0 0.2rem;
+    margin-left: 0.2rem;
     flex-shrink: 0;
   }
 
