@@ -205,7 +205,7 @@ export const Title = styled.h1`
   ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
 
   span {
-    transition: all 0.3;
+    transition: all 0.3s;
     padding: 0.5rem;
     cursor: pointer;
 
@@ -242,7 +242,7 @@ export const LinkBoxMobile = styled.ul`
   position: absolute;
   top: 3.4rem;
   right: 1rem;
-  padding: 1rem;
+  padding: 0 1rem 1rem;
   background: rgba(255,255,255,0.9);
   z-index: 99;
   border-radius: 4px;
