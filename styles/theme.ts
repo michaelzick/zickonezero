@@ -7,7 +7,9 @@ export const THEME = {
     'smallPhone': '300px'
   },
   colors: {
+    dark: '#212121',
     grey: '#c7c5c5',
-    blue: '#0071E3'
+    blue: '#0071E3',
+    white: '#fff'
   }
 };

@@ -12,7 +12,6 @@ export const NewTabSvgStyles = {
 
 export const Container = styled.div`
   background-size: cover;
-  background-color: #fff;
   text-align: center;
   font-family: Roboto, sans-serif;
   height: 100%;
@@ -24,7 +23,7 @@ export const Container = styled.div`
 
   a {
   transition: all 0.3s;
-  color: #272727;
+  color: ${THEME.colors.white};
 
   &:hover {
     color: ${THEME.colors.blue};
@@ -41,36 +40,32 @@ export const Container = styled.div`
 
 export const CommandLine = styled.span`
   font-family: monospace;
-  background-color: #272727;
-  padding: 0.2rem .3rem .3rem;
   color: #fff;
   border-radius: 3px;
-  box-shadow: 0 10px 20px -8px rgb(0 0 0 / 53%);
   max-width: 49em;
 `;
 
 export const WorkSectionHeader = styled.span`
   font-family: monospace;
-  color: #626161;
 `;
 
 export const Wrapper = styled.div`
   ${props => props.isHomePage && 'padding-top: 1.7rem;'}
   min-height: 84%;
   ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
+  background-color: ${THEME.colors.dark};
 `;
 
 export const Nav = styled.div`
   width: 100%;
   padding: 1rem 3rem 1rem 2.5rem;
   display: flex;
-  background: #fff;
   border-bottom: 1px solid ${THEME.colors.grey};
   justify-content: space-between;
 
   a {
     font-family: Roboto, sans-serif;
-    color: #272727;
+    color: ${THEME.colors.white};
     display: flex;
     text-decoration: none;
     margin-top: 0.8rem;
@@ -146,6 +141,7 @@ export const GridContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding-bottom: 1rem;
+  background-color: ${THEME.colors.dark};
 
   .grid {
     display: flex;
@@ -164,7 +160,6 @@ export const GridContainer = styled.div`
 export const Thumb = styled.div`
   text-align: center;
   font-family: Roboto, sans-serif;
-  color: #272727;
   margin: 3rem 3rem 1.5rem;
 
   img {
@@ -202,7 +197,6 @@ export const Title = styled.h1`
   font-family: system-ui;
   line-height: 2.5rem;
   ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
-  color: #272727;
 
   span {
     padding: 0.5rem;
@@ -270,7 +264,6 @@ export const BioBox = styled.div`
     justify-content: space-between;
     width: 100%;
     max-width: 78rem;
-    color: #272727;
 
     span {
       a {
@@ -295,7 +288,7 @@ export const BioBox = styled.div`
       max-width: 27em;
 
       & > span {
-        box-shadow: 4px 5px 13px 2px rgb(42 40 40 / 64%);
+        /* box-shadow: 4px 5px 13px 2px rgb(42 40 40 / 64%); */
         border-radius: 4px;
       }
     }
@@ -349,7 +342,6 @@ export const BioBox = styled.div`
 export const SectionHeader = styled.h2`
   font-size: 2rem;
   margin: 0;
-  color: #272727;
   text-align: center;
   font-family: Roboto, sans-serif;
 `;
@@ -362,7 +354,6 @@ export const Footer = styled.div`
   width: 100%;
   border-top: 1px solid ${THEME.colors.grey};
   font-family: Roboto, sans-serif;
-  color: #272727;
 
   .footer-links {
     display: flex;
