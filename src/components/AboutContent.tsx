@@ -26,7 +26,8 @@ const AboutContent = () => {
           <div className='biobox-inner'>
             <div className='text-wrapper'>
               Michael is a Product & Engineering Manager with a strong background in UX design, frontend development,
-              DevOps, SEO, and e-commerce platforms.
+              DevOps, SEO, and e-commerce platforms. He has hired and led engineering teams to build products from 0 to 1
+              under tight deadlines, aligning cross-functional stakeholders in highly ambiguous environments.
               <br /><br />
               He specializes in the WordPress and React ecosystems (including Next.js, Redux, and TypeScript).
               He also has experience with Python, PHP, and MySQL.
