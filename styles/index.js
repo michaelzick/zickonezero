@@ -18,7 +18,7 @@ export const Container = styled.div`
   color: ${THEME.colors.white};
 
   &:hover {
-    color: ${THEME.colors.blue};
+    color: ${THEME.colors.grey};
   }
 }
 
@@ -78,7 +78,7 @@ export const Nav = styled.div`
     margin-top: 0.8rem;
 
     &:hover {
-      color: ${THEME.colors.blue};
+      color: ${THEME.colors.grey};
     }
   }
 
@@ -127,7 +127,7 @@ export const Button = styled.a`
   grid-template-columns: auto;
   grid-template-rows: auto;
   border-radius: 4px;
-  background-color: ${props => props.bgColor || THEME.colors.blue};
+  background-color: ${props => props.bgColor || THEME.colors.grey};
   /* box-shadow: 0 10px 20px -8px rgb(0 0 0 / 38%); */
   transition: transform 150ms,box-shadow 150ms,-webkit-transform 150ms;
   color: #fff;
@@ -205,8 +205,13 @@ export const Title = styled.h1`
   ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
 
   span {
+    transition: all 0.3;
     padding: 0.5rem;
     cursor: pointer;
+
+    &:hover {
+      color: ${THEME.colors.grey};
+    }
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
       display: block;
@@ -216,6 +221,7 @@ export const Title = styled.h1`
       line-height: 1.7rem;
     }
   }
+
 `;
 
 export const LinkBox = styled.div`
