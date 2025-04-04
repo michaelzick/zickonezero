@@ -14,13 +14,20 @@ export const Container = styled.div`
   }
 
   a {
-  transition: all 0.3s;
-  color: ${THEME.colors.white};
+    transition: all 0.3s;
+    color: ${THEME.colors.white};
 
-  &:hover {
-    color: ${THEME.colors.grey};
+    &:hover {
+      color: ${THEME.colors.grey};
+    }
   }
-}
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+    margin: 0.1rem 0 0 0.2rem;
+    flex-shrink: 0;
+  }
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     // Hide the full screen icon in Lightbox
@@ -62,14 +69,6 @@ export const Nav = styled.div`
   z-index: 90;
   background-color: ${THEME.colors.darkest};
 
-  svg {
-    width: 1rem;
-    height: 1rem;
-    margin-left: 0.2rem;
-    flex-shrink: 0;
-    fill: ${THEME.colors.white};
-  }
-
   a {
     font-family: Roboto, sans-serif;
     color: ${THEME.colors.white};
@@ -80,6 +79,10 @@ export const Nav = styled.div`
     &:hover {
       color: ${THEME.colors.grey};
     }
+  }
+
+  svg {
+    fill: ${THEME.colors.white};
   }
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
@@ -375,6 +378,10 @@ export const Footer = styled.div`
     a {
       display: flex;
       text-decoration: none;
+    }
+
+    svg {
+      fill: ${THEME.colors.white};
     }
 
     @media (max-width: ${THEME.breakpoints.smallTablet}) {
