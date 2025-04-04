@@ -224,7 +224,6 @@ export const Title = styled.h1`
       line-height: 1.7rem;
     }
   }
-
 `;
 
 export const LinkBox = styled.div`
