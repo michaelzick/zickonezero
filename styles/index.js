@@ -46,6 +46,10 @@ export const Wrapper = styled.div`
   min-height: 84%;
   ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
   background-color: ${THEME.colors.dark};
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    ${props => props.isHomePage ? 'padding-top: 12rem;' : 'padding-top: 10rem;'}
+  }
 `;
 
 export const Nav = styled.div`
