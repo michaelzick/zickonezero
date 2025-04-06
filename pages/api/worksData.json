@@ -1,6 +1,6 @@
 [
   {
-    "thumb": "/img/squares/wb-large.jpg",
+    "thumb": "/img/squares/wb-large.webp",
     "imgs": [
       "/img/gipsy_1.jpg",
       "/img/gipsy_2.jpg",
@@ -12,7 +12,7 @@
     "group": "wb"
   },
   {
-    "thumb": "/img/squares/paramount-large.jpg",
+    "thumb": "/img/squares/paramount-large.webp",
     "imgs": [
       "/img/jeff_web.jpg",
       "/img/kp_facebook_web.jpg",
@@ -24,7 +24,7 @@
     "group": "paramount"
   },
   {
-    "thumb": "/img/squares/sony-large.jpg",
+    "thumb": "/img/squares/sony-large.webp",
     "imgs": [
       "/img/tite_1.jpg",
       "/img/tite_2.jpg",
@@ -36,7 +36,7 @@
     "group": "sony"
   },
   {
-    "thumb": "/img/squares/dreamworks-large.jpg",
+    "thumb": "/img/squares/dreamworks-large.webp",
     "imgs": [
       "/img/dragons_map.jpg",
       "/img/dragons_forest.jpg",
@@ -48,7 +48,7 @@
     "group": "dreamworks"
   },
   {
-    "thumb": "/img/squares/fox-large.jpg",
+    "thumb": "/img/squares/fox-large.webp",
     "imgs": [
       "/img/vikings_1.jpg",
       "/img/vikings_2.jpg",
@@ -60,7 +60,7 @@
     "group": "fox"
   },
   {
-    "thumb": "/img/squares/riot-large.jpg",
+    "thumb": "/img/squares/riot-large.webp",
     "imgs": [
       "/img/lol_home.jpg",
       "/img/lol_user.jpg",
@@ -72,7 +72,7 @@
     "group": "riot"
   },
   {
-    "thumb": "/img/squares/inrix-large.jpg",
+    "thumb": "/img/squares/inrix-large.webp",
     "imgs": [
       "/img/parkme-home-2017.jpg",
       "/img/parkme-city-2017.jpg",
@@ -84,7 +84,7 @@
     "group": "parkme"
   },
   {
-    "thumb": "/img/squares/saatchi-large.jpg",
+    "thumb": "/img/squares/saatchi-large.webp",
     "imgs": [
       "/img/citi.jpg",
       "/img/etsy.jpg",
