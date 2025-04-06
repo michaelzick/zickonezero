@@ -2,10 +2,10 @@
   {
     "thumb": "/img/squares/wb-large.webp",
     "imgs": [
-      "/img/gipsy_1.jpg",
-      "/img/gipsy_2.jpg",
-      "/img/leatherback_1.jpg",
-      "/img/leatherback_2.jpg"
+      "/img/gipsy_1.webp",
+      "/img/gipsy_2.webp",
+      "/img/leatherback_1.webp",
+      "/img/leatherback_2.webp"
     ],
     "desc": "Animated landing pages for Pacific Rim",
     "header": "Warner Bros. Pictures",
@@ -14,10 +14,10 @@
   {
     "thumb": "/img/squares/paramount-large.webp",
     "imgs": [
-      "/img/jeff_web.jpg",
-      "/img/kp_facebook_web.jpg",
-      "/img/1kwords_web.jpg",
-      "/img/devil_inside_web.jpg"
+      "/img/jeff_web.webp",
+      "/img/kp_facebook_web.webp",
+      "/img/1kwords_web.webp",
+      "/img/devil_inside_web.webp"
     ],
     "desc": "Interactive emails and Facebook pages for various campaigns",
     "header": "Paramount Pictures",
@@ -26,10 +26,10 @@
   {
     "thumb": "/img/squares/sony-large.webp",
     "imgs": [
-      "/img/tite_1.jpg",
-      "/img/tite_2.jpg",
-      "/img/tite_3.jpg",
-      "/img/cloudy_3.jpg"
+      "/img/tite_1.webp",
+      "/img/tite_2.webp",
+      "/img/tite_3.webp",
+      "/img/cloudy_3.webp"
     ],
     "desc": "Multiple sites, landing pages, games, and Facebook pages",
     "header": "Sony Pictures",
@@ -38,10 +38,10 @@
   {
     "thumb": "/img/squares/dreamworks-large.webp",
     "imgs": [
-      "/img/dragons_map.jpg",
-      "/img/dragons_forest.jpg",
-      "/img/dragons_video.jpg",
-      "/img/dragons_dl_2.jpg"
+      "/img/dragons_map.webp",
+      "/img/dragons_forest.webp",
+      "/img/dragons_video.webp",
+      "/img/dragons_dl_2.webp"
     ],
     "desc": "Interactive sites for How to Train Your Dragon",
     "header": "DreamWorks Animation",
@@ -50,10 +50,10 @@
   {
     "thumb": "/img/squares/fox-large.webp",
     "imgs": [
-      "/img/vikings_1.jpg",
-      "/img/vikings_2.jpg",
-      "/img/vikings_3.jpg",
-      "/img/vikings_4.jpg"
+      "/img/vikings_1.webp",
+      "/img/vikings_2.webp",
+      "/img/vikings_3.webp",
+      "/img/vikings_4.webp"
     ],
     "desc": "Interactive video voting bracket for Vikings",
     "header": "Fox Television",
@@ -62,10 +62,10 @@
   {
     "thumb": "/img/squares/riot-large.webp",
     "imgs": [
-      "/img/lol_home.jpg",
-      "/img/lol_user.jpg",
-      "/img/lol_tourney.jpg",
-      "/img/lol_enlist.jpg"
+      "/img/lol_home.webp",
+      "/img/lol_user.webp",
+      "/img/lol_tourney.webp",
+      "/img/lol_enlist.webp"
     ],
     "desc": "Tournament creation app for League of Legends",
     "header": "Riot Games",
@@ -74,10 +74,10 @@
   {
     "thumb": "/img/squares/inrix-large.webp",
     "imgs": [
-      "/img/parkme-home-2017.jpg",
-      "/img/parkme-city-2017.jpg",
-      "/img/parkme-map-2017.jpg",
-      "/img/parkme-lot-2017.jpg"
+      "/img/parkme-home-2017.webp",
+      "/img/parkme-city-2017.webp",
+      "/img/parkme-map-2017.webp",
+      "/img/parkme-lot-2017.webp"
     ],
     "desc": "Web-based parking locator and reservation dashboard",
     "header": "ParkMe/INRIX",
@@ -86,10 +86,10 @@
   {
     "thumb": "/img/squares/saatchi-large.webp",
     "imgs": [
-      "/img/citi.jpg",
-      "/img/etsy.jpg",
-      "/img/giftcard.jpg",
-      "/img/quiz.jpg"
+      "/img/citi.webp",
+      "/img/etsy.webp",
+      "/img/giftcard.webp",
+      "/img/quiz.webp"
     ],
     "desc": "World-renowned fine art marketplace",
     "header": "Saatchi Art",
@@ -98,10 +98,10 @@
   {
     "thumb": "/img/squares/at_logo_purple.webp",
     "imgs": [
-      "/img/citi.jpg",
-      "/img/etsy.jpg",
-      "/img/giftcard.jpg",
-      "/img/quiz.jpg"
+      "/img/citi.webp",
+      "/img/etsy.webp",
+      "/img/giftcard.webp",
+      "/img/quiz.webp"
     ],
     "desc": "Cybersecurity Training Marketplace and CMS",
     "header": "Antisyphon Training",
