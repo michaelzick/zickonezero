@@ -306,8 +306,9 @@ export const BioBox = styled.div`
     .product-screenshot {
       max-width: 27em;
 
-      & > span {
-        /* box-shadow: 4px 5px 13px 2px rgb(42 40 40 / 64%); */
+      img {
+        width: 100%;
+        height: auto;
         border-radius: 4px;
       }
     }
