@@ -8,7 +8,6 @@ import {
 } from '../showMobileMenuSlice';
 
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { BioBox, Wrapper } from '../../styles';
 import { TopNavContent, FooterContent } from '../components';
