@@ -220,10 +220,10 @@ export const Title = styled.h1`
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
       display: block;
-      width: 11em;
+      width: 7em;
       padding: 0;
-      font-size: 1.5em;
-      line-height: 1.7em;
+      font-size: 0.8em;
+      line-height: 1.3em;
     }
   }
 `;
