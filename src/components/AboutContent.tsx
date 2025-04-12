@@ -7,7 +7,6 @@ import {
   getMobileMenuState
 } from '../showMobileMenuSlice';
 
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { BioBox, Wrapper } from '../../styles';
@@ -42,7 +41,7 @@ const AboutContent = () => {
                   target='_blank' rel='noopener noreferrer' className='underline'>LinkedIn</a>.
             </div>
             <div className='headshot'>
-              <Image src='/img/headshot.webp' alt='headshot' width='350' height='392' />
+              <img src='/img/headshot.webp' alt='headshot' width='350' height='392' />
             </div>
           </div>
         </BioBox>

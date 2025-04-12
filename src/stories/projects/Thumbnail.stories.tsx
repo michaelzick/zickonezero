@@ -28,12 +28,12 @@ const Template: ComponentStory<typeof Thumbnail> = (args) => (
 export const Thumb = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Thumb.args = {
-  thumb: "/img/squares/saatchi-large.jpg",
+  thumb: "/img/squares/saatchi-large.webp",
   imgs: [
-    "/img/citi.jpg",
-    "/img/etsy.jpg",
-    "/img/giftcard.jpg",
-    "/img/quiz.jpg",
+    "/img/citi.webp",
+    "/img/etsy.webp",
+    "/img/giftcard.webp",
+    "/img/quiz.webp",
   ],
   desc: "World-renowned art marketplace",
   header: "Saatchi Art",
