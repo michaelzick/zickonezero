@@ -26,7 +26,7 @@ const ProductContent = () => {
             <div className='text-wrapper'>
               <h2>Antisyphon Training</h2>
               <br />
-              Initially, I was hired at Black Hills Information Security—Antisyphon Training as a software engineer.
+              Initially, I was hired at Black Hills Information Security / Antisyphon Training as a software engineer.
               However, that role quickly evolved into conceptualizing our new website.
               <br /><br />
               Rather than creating just another static site that linked to third-party platforms, I envisioned an
