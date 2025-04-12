@@ -130,7 +130,6 @@ export const Button = styled.a`
   grid-template-rows: auto;
   border-radius: 4px;
   background-color: ${props => props.bgColor || THEME.colors.grey};
-  /* box-shadow: 0 10px 20px -8px rgb(0 0 0 / 38%); */
   transition: transform 150ms,box-shadow 150ms,-webkit-transform 150ms;
   color: #fff;
   font-size: 16px;
@@ -289,7 +288,7 @@ export const BioBox = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 78em;
+    max-width: 50em;
 
     span {
       a {
@@ -323,8 +322,8 @@ export const BioBox = styled.div`
   }
 
   .text-wrapper {
-    ${props => props.about ? 'max-width: 43em;' : 'max-width: 33em;'}
-    ${props => props.direction && `margin-${props.direction}: 2em;`}
+    ${props => props.about ? 'max-width: 43em;' : 'max-width: 23em;'}
+    ${props => props.direction && `margin-${props.direction}: 1em;`}
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
       max-width: 35em;
