@@ -222,7 +222,7 @@ export const Title = styled.h1`
       width: 7em;
       padding: 0;
       font-size: 0.8em;
-      line-height: 1.3em;
+      line-height: 1.2em;
     }
   }
 `;
@@ -299,6 +299,9 @@ export const BioBox = styled.div`
     .headshot {
       img {
         border-radius: 4px;
+        width: 100%;
+        height: auto;
+        max-width: 18em;
       }
     }
 
@@ -322,11 +325,11 @@ export const BioBox = styled.div`
   }
 
   .text-wrapper {
-    ${props => props.about ? 'max-width: 43em;' : 'max-width: 23em;'}
-    ${props => props.direction && `margin-${props.direction}: 1em;`}
+    ${props => props.about ? 'max-width: 27em;' : 'max-width: 23em;'}
+    ${props => props.direction && `margin-${props.direction}: 2em;`}
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
-      max-width: 35em;
+      max-width: 22em;
     }
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
@@ -353,7 +356,7 @@ export const BioBox = styled.div`
   }
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    padding: 2em;
+    padding: 1em;
     ${props => props.noBottomPadding && 'padding-bottom: 0;'}
   }
 `;
