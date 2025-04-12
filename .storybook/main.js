@@ -23,6 +23,12 @@ module.exports = {
 
   webpackFinal: async (config) => {
     config.resolve.alias["next/image"] = path.resolve(__dirname, "nextImageMock.js");
+    config.module.rules.push({
+      test: /\.webp$/,
+      type: 'asset/resource',
+    });
     return config;
   },
+
+  staticDirs: ['../public'],
 }

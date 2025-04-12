@@ -1,5 +1,5 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { StoryFn, Meta } from "@storybook/react";
 
 import { Provider } from "react-redux";
 import { store } from "../../store";
@@ -12,10 +12,10 @@ export default {
   component: TopNavContent,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
-} as ComponentMeta<typeof TopNavContent>;
+} as Meta<typeof TopNavContent>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof TopNavContent> = () => (
+const Template: StoryFn<typeof TopNavContent> = () => (
   <Provider store={store}>
     <TopNavContent />
   </Provider>

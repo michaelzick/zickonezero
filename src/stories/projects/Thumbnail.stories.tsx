@@ -1,5 +1,5 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { StoryFn, Meta } from "@storybook/react";
 
 import { Thumbnail } from "../../components";
 import { string } from "prop-types";
@@ -18,10 +18,10 @@ export default {
     index: Number,
     onThumbClick: Function,
   },
-} as ComponentMeta<typeof Thumbnail>;
+} as Meta<typeof Thumbnail>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Thumbnail> = (args) => (
+const Template: StoryFn<typeof Thumbnail> = (args) => (
   <Thumbnail {...args} />
 );
 
