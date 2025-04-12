@@ -80,7 +80,7 @@ const ProductContent = () => {
 
         <BioBox direction='right'>
           <div className='biobox-inner'>
-            <div className='text-wrapper'>
+            <div className='text-wrapper bottom'>
               <h2>Admin Experiences</h2>
               <br />
               In addition to the consumer-facing site, Antisyphon Training also serves as a full-featured WordPress CMS, which required its own UX considerations.
@@ -94,9 +94,13 @@ const ProductContent = () => {
               from scratch.
               {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See&nbsp;the&nbsp;full&nbsp;site</a>.
             </div>
+            <br />
             <div className='product-screenshot'>
+              <img src='/img/antisyphon/dashboard-my-live-courses.webp' alt='Dashboard Live Courses' width='1200' height='666' />
+              <br /><br />
               <img src='/img/antisyphon/admin-course-edit.webp' alt='Admin Course Edit' width='1200' height='666' />
             </div>
+            <br />
           </div>
         </BioBox>
       </Wrapper>
