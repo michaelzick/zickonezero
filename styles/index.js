@@ -325,7 +325,7 @@ export const BioBox = styled.div`
   }
 
   .text-wrapper {
-    ${props => props.about ? 'max-width: 27em;' : 'max-width: 23em;'}
+    ${props => props.about ? 'max-width: 27em; margin-right: 1em;' : 'max-width: 23em;'}
     ${props => props.direction && `margin-${props.direction}: 2em;`}
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
@@ -334,7 +334,6 @@ export const BioBox = styled.div`
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
       margin-left: 0;
-      margin-right: 0;
       margin-bottom: 2.5em;
 
       &.bottom {

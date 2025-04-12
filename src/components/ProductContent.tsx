@@ -73,16 +73,12 @@ const ProductContent = () => {
                 <div className='product-screenshot'>
                   <img src='/img/antisyphon/wireframe-live-courses.webp' alt='Wireframe Dashboard' width='989' height='1262' />
                 </div>
-                <br />
-                <div className='product-screenshot'>
-                  <img src='/img/antisyphon/dashboard-my-live-courses.webp' alt='Dashboard Live Courses' width='1200' height='666' />
-                </div>
               </div>
             </div>
           </div>
         </BioBox>
 
-        <BioBox>
+        <BioBox direction='right'>
           <div className='biobox-inner'>
             <div className='text-wrapper'>
               <h2>Admin Experiences</h2>
