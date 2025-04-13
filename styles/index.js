@@ -39,7 +39,7 @@ export const Container = styled.div`
 
 export const CommandLine = styled.span`
   font-family: monospace;
-  color: #fff;
+  color: ${THEME.colors.white};
   border-radius: 3px;
   max-width: 49em;
 `;
@@ -169,26 +169,36 @@ export const Thumb = styled.div`
   text-align: center;
   font-family: Roboto, sans-serif;
   margin: 3em 3em 1.5em;
+  color: ${THEME.colors.white};
 
   img {
     transition: all 0.3s;
     border-radius: 4px;
     cursor: pointer;
-
-    &:hover {
-      -webkit-filter: grayscale();
-      filter: grayscale();
-    }
   }
 
   h3 {
+    transition: all 0.3s;
     margin: 0.6em 0 0;
   }
 
   p {
+    transition: all 0.3s;
     width: 240px;
     text-align: center;
     margin: 0 auto;
+  }
+
+  &:hover {
+    h3, p {
+      color: ${THEME.colors.grey};
+      cursor: pointer;
+    }
+
+    img {
+      -webkit-filter: grayscale();
+      filter: grayscale();
+    }
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
