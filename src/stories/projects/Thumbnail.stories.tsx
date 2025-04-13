@@ -4,6 +4,11 @@ import { StoryFn, Meta } from "@storybook/react";
 import { Thumbnail } from "../../components";
 import { string } from "prop-types";
 
+const onThumbClick = (e: React.MouseEvent, isManagedWork: boolean) => {
+  // Handle thumbnail click event
+  console.log("Thumbnail clicked!", e, isManagedWork);
+};
+
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: "Components/Projects",
@@ -22,7 +27,7 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Thumbnail> = (args) => (
-  <Thumbnail {...args} />
+  <Thumbnail {...args} onThumbClick={onThumbClick} />
 );
 
 export const Thumb = Template.bind({});
