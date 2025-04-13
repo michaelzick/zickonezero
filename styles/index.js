@@ -205,17 +205,11 @@ export const Title = styled.h1`
   line-height: 1.5em;
   ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
 
-  span {
+  a {
+    margin-top: 0;
     transition: all 0.3s;
     cursor: pointer;
-
-    &:hover {
-      color: ${THEME.colors.grey};
-    }
-
-    a {
-      margin-top: 0;
-    }
+    display: inline-block;
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
       display: block;
@@ -250,7 +244,7 @@ export const LinkBoxMobile = styled.ul`
   position: absolute;
   top: 3.4em;
   right: 1em;
-  padding: 0 1em 1em;
+  padding: 1em;
   background: rgba(255,255,255,0.9);
   z-index: 99;
   border-radius: 4px;
