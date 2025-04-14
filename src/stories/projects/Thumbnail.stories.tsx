@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
+import FsLightbox from "fslightbox-react";
 import { StoryFn, Meta } from "@storybook/react";
 
 import { Thumbnail } from "../../components";
 import { string } from "prop-types";
 
-const onThumbClick = (e: React.MouseEvent, isManagedWork: boolean) => {
-  // Handle thumbnail click event
-  console.log("Thumbnail clicked!", e, isManagedWork);
+const ThumbnailWrapper = (args: any) => {
+  const [lightboxController, setLightboxController] = useState({
+    toggler: false,
+    productIndex: 0,
+  });
+
+  const onThumbClick = (index: number, squareLinkOut?: boolean) => {
+    if (squareLinkOut) return;
+
+    setLightboxController({
+      toggler: !lightboxController.toggler,
+      productIndex: index,
+    });
+  };
+
+  return (
+    <>
+      <Thumbnail {...args} onThumbClick={onThumbClick} />
+      <FsLightbox
+        toggler={lightboxController.toggler}
+        sources={args.imgs}
+        slide={lightboxController.productIndex + 1}
+      />
+    </>
+  );
 };
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -27,7 +50,7 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Thumbnail> = (args) => (
-  <Thumbnail {...args} onThumbClick={onThumbClick} />
+  <ThumbnailWrapper {...args} />
 );
 
 export const Thumb = Template.bind({});
