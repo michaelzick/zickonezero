@@ -21,7 +21,7 @@ const AboutContent = () => {
       <TopNavContent />
       <Wrapper isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
-        <BioBox about>
+        <BioBox isAboutPage>
           <div className='biobox-inner'>
             <div className='text-wrapper'>
               Michael is a Product & Engineering Manager with a strong background in UX design, frontend development,

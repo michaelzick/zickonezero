@@ -308,7 +308,7 @@ export const BioBox = styled.div`
     }
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
-      ${props => !props.about && 'flex-direction: column;'}
+      ${props => !props.isAboutPage && 'flex-direction: column;'}
     }
 
     @media (max-width: ${THEME.breakpoints.smallTablet}) {
@@ -317,7 +317,7 @@ export const BioBox = styled.div`
   }
 
   .text-wrapper {
-    ${props => props.about ? 'max-width: 27em; margin-right: 1em;' : 'max-width: 23em;'}
+    ${props => props.isAboutPage ? 'max-width: 27em; margin-right: 1em;' : 'max-width: 23em;'}
     ${props => props.direction && `margin-${props.direction}: 2em;`}
 
     a {
