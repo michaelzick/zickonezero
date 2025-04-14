@@ -9,19 +9,6 @@ export const Container = styled.div`
   height: 100%;
   position: relative;
 
-  .underline {
-    text-decoration: underline;
-  }
-
-  a {
-    transition: all 0.3s;
-    color: ${THEME.colors.white};
-
-    &:hover {
-      color: ${THEME.colors.grey};
-    }
-  }
-
   svg {
     width: 1em;
     height: 1em;
@@ -70,6 +57,7 @@ export const Nav = styled.div`
   background-color: ${THEME.colors.darkest};
 
   a {
+    transition: all 0.3s;
     font-family: Roboto, sans-serif;
     color: ${THEME.colors.white};
     display: flex;
@@ -332,6 +320,19 @@ export const BioBox = styled.div`
     ${props => props.about ? 'max-width: 27em; margin-right: 1em;' : 'max-width: 23em;'}
     ${props => props.direction && `margin-${props.direction}: 2em;`}
 
+    a {
+      transition: all 0.3s;
+      color: ${THEME.colors.white};
+
+      &:hover {
+        color: ${THEME.colors.grey};
+      }
+    }
+
+    .underline {
+      text-decoration: underline;
+    }
+
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
       max-width: 22em;
     }
@@ -388,8 +389,14 @@ export const Footer = styled.div`
     margin-left: 1em;
 
     a {
+      transition: all 0.3s;
       display: flex;
       text-decoration: none;
+      color: ${THEME.colors.white};
+
+      &:hover {
+        color: ${THEME.colors.grey};
+      }
     }
 
     svg {
