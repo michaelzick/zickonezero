@@ -342,7 +342,7 @@ export const BioBox = styled.div`
       margin-bottom: 2.5em;
 
       &.bottom {
-        margin-bottom: 0;
+        margin-bottom: 1em;
       }
     }
 
