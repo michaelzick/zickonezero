@@ -1,4 +1,4 @@
-import Document, { DocumentContext, DocumentInitialProps } from 'next/document';
+import Document, { Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
@@ -28,5 +28,26 @@ export default class MyDocument extends Document {
     } finally {
       sheet.seal();
     }
+  }
+
+  render() {
+    return (
+      <Html lang="en">
+        <Head />
+        <body>
+          {/* Google Tag Manager (noscript) */}
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-5JHBZZX"
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+            ></iframe>
+          </noscript>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
   }
 }
