@@ -47,9 +47,7 @@ const MainContent = () => {
         onClick={() => dispatch(showMobileMenu(false))}>
         <SectionHeader>
           {/* Projects I{"'"}ve <CommandLine>#managed</CommandLine> */}
-          <WorkSectionHeader>Product & Engineering Management
-            <br />
-            + UX Design</WorkSectionHeader>
+          <WorkSectionHeader>Product Leadership</WorkSectionHeader>
         </SectionHeader>
 
         <GridContent

@@ -8,15 +8,16 @@ type AdditionalThumbProps = {
   index: number,
   squareLinkOut?: boolean,
   onThumbClick: Function;
+  link?: string;
 };
 
 const Thumbnail = (props: WorksData & AdditionalThumbProps): ReactElement => {
-  const { imgs, group, thumb, header, desc, index, onThumbClick, squareLinkOut } = props;
+  const { imgs, group, link, thumb, header, desc, index, onThumbClick, squareLinkOut } = props;
 
   return (
     <Thumb onClick={() => onThumbClick(index, squareLinkOut)}>
       {imgs && squareLinkOut ?
-        <Link href='/product-and-engineering'>
+        <Link href={link || ''}>
           <img src={thumb} width='240' height='240' alt={group} className='thumb' />
         </Link> :
         <img src={thumb} width='240' height='240' alt={group} className='thumb' />}

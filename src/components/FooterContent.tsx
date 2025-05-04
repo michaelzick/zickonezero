@@ -13,7 +13,8 @@ const FooterContent = (): ReactElement => (
     <div className='footer-links'>
       <Link href='/'>Home</Link>
       <Link href='/about'>About</Link>
-      <Link href='/product-and-engineering'>Product & Engineering</Link>
+      <Link href='/demostoke'>DemoStoke</Link>
+      <Link href='/antisyphon-training'>Antisyphon</Link>
       <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'>GitHub
         <NewTabSVG />
       </a>

@@ -24,7 +24,7 @@ const AboutContent = () => {
         <BioBox isAboutPage>
           <div className='biobox-inner'>
             <div className='text-wrapper'>
-              Michael is a Product & Engineering Manager with a strong background in UX design, frontend development,
+              Michael is a Product Leader and Founder with a strong background in UX design, frontend development,
               DevOps, SEO, and e-commerce platforms. He has hired and led engineering teams to build products from 0 to 1
               under tight deadlines, aligning cross-functional stakeholders in highly ambiguous environments.
               <br /><br />
