@@ -5,10 +5,11 @@ import FooterContent from './FooterContent';
 import TopNavContent from './TopNavContent';
 import LinkBoxMobileContent from './LinkBoxMobileContent';
 import AboutContent from './AboutContent';
-import ProductContent from './ProductContent';
+import ProductContent from './AntisyphonContent';
 import Thumbnail from './Thumbnail';
 import GridContent from './GridContent';
 import DemoStokeContent from './DemoStokeContent';
+import AntisyphonContent from './AntisyphonContent';
 
 export {
   LinkBoxContent,
@@ -21,5 +22,6 @@ export {
   ProductContent,
   Thumbnail,
   GridContent,
-  DemoStokeContent
+  DemoStokeContent,
+  AntisyphonContent
 };

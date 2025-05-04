@@ -8,9 +8,9 @@ import {
 } from '../showMobileMenuSlice';
 
 import { BioBox, Wrapper } from '../../styles';
-import { TopNavContent, FooterContent } from '../components';
+import { TopNavContent, FooterContent } from '.';
 
-const ProductContent = () => {
+const AntisyphonContent = () => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
 
@@ -109,4 +109,4 @@ const ProductContent = () => {
   );
 };
 
-export default ProductContent;
+export default AntisyphonContent;

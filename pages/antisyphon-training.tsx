@@ -1,5 +1,5 @@
-import { ProductContent } from '../src/components';
+import { AntisyphonContent } from '../src/components';
 
-const Product = () => <ProductContent />;
+const Antisyphon = () => <AntisyphonContent />;
 
-export default Product;
+export default Antisyphon;
