@@ -96,13 +96,15 @@
     "group": "saatchi"
   },
   {
+    "thumb": "/img/squares/demostoke-logo.webp",
+    "imgs": [],
+    "desc": "Action sports gear demo platform",
+    "header": "DemoStoke",
+    "group": "demostoke"
+  },
+  {
     "thumb": "/img/squares/at_logo_purple.webp",
-    "imgs": [
-      "/img/citi.webp",
-      "/img/etsy.webp",
-      "/img/giftcard.webp",
-      "/img/quiz.webp"
-    ],
+    "imgs": [],
     "desc": "Cybersecurity Training Marketplace and CMS",
     "header": "Antisyphon Training",
     "group": "antisyphon"
