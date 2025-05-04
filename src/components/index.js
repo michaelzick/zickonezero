@@ -8,6 +8,7 @@ import AboutContent from './AboutContent';
 import ProductContent from './ProductContent';
 import Thumbnail from './Thumbnail';
 import GridContent from './GridContent';
+import DemoStokeContent from './DemoStokeContent';
 
 export {
   LinkBoxContent,
@@ -19,5 +20,6 @@ export {
   AboutContent,
   ProductContent,
   Thumbnail,
-  GridContent
+  GridContent,
+  DemoStokeContent
 };
