@@ -11,6 +11,7 @@ export const THEME = {
     darkest: '#151515',
     grey: '#c7c5c5',
     blue: '#0071E3',
-    white: '#fff'
+    white: '#fff',
+    demostoke: '#00dff7'
   }
 };

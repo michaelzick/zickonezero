@@ -282,6 +282,10 @@ export const BioBox = styled.div`
     width: 100%;
     max-width: 50em;
 
+    &.demostoke-inner {
+      max-width: 45em;
+    }
+
     span {
       a {
         text-decoration: none;
@@ -419,4 +423,42 @@ export const Footer = styled.div`
     flex-direction: column;
     padding: 1em 2em 2.1em 2em;
   }
+`;
+
+export const DemoStokeTitle = styled.h2`
+  color: ${THEME.colors.demostoke};
+`;
+
+export const DemoStokeList = styled.ul`
+  background: ${THEME.colors.darkest};
+  padding: 0.8em 1.8em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-weight: lighter;
+  list-style: none;
+
+  li::before {
+    content: '⚡️'; /* Replace with your desired symbol */
+    display: inline-block;
+    width: 1em; /* Space between symbol and text */
+    margin-right: 0.5em;
+  }
+
+  a {
+    transition: all 0.3s;
+    color: ${THEME.colors.white};
+
+    &:hover {
+      color: ${THEME.colors.grey};
+    }
+  }
+`;
+
+export const DemoStokeTable = styled.table`
+  width: 100%;
+  background: ${THEME.colors.darkest};
+  padding: 0.8em 1.8em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-weight: lighter;
 `;
