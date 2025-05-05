@@ -53,60 +53,119 @@ const AntisyphonContent = () => {
                 <p>Conducted user interviews and surveys with riders across snow, surf, and skate.
                   <br /><strong>Key insight:</strong> People would pay to demo gear if trust and ease were guaranteed.</p>
                 <h3>Competitor Overview</h3>
+
                 <DemoStokeTable>
                   <thead>
                     <tr>
                       <th>Feature</th>
+                      <th>DemoStoke</th>
+                      <th>Gearo</th>
                       <th>FriendWithA</th>
                       <th>The Quiver</th>
-                      <th>DemoStoke</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Multi-sport</td>
+                      <td>Try-before-you-buy culture</td>
                       <td>✅</td>
-                      <td>✖️</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                    </tr>
+                    <tr>
+                      <td>Peer-to-Peer (P2P)</td>
+                      <td>✅</td>
+                      <td>❌</td>
+                      <td>✅</td>
                       <td>✅</td>
                     </tr>
                     <tr>
-                      <td>Targeted lifestyle branding</td>
-                      <td>✖️</td>
+                      <td>Business-to-Consumer (B2C)</td>
                       <td>✅</td>
                       <td>✅</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                    </tr>
+                    <tr>
+                      <td>Indie shapers/local makers</td>
+                      <td>✅</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                    </tr>
+                    <tr>
+                      <td>Lifestyle branding</td>
+                      <td>✅</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>✅</td>
+                    </tr>
+                    <tr>
+                      <td>Demo + rental hybrid</td>
+                      <td>✅</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                    </tr>
+                    <tr>
+                      <td>Community features</td>
+                      <td>✅</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                    </tr>
+                    <tr>
+                      <td>Data play for brands</td>
+                      <td>✅</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                    </tr>
+                    <tr>
+                      <td>Multi-sport identity</td>
+                      <td>✅</td>
+                      <td>✅</td>
+                      <td>✅</td>
+                      <td>❌</td>
+                    </tr>
+                    <tr>
+                      <td>Destination readiness</td>
+                      <td>✅</td>
+                      <td>✅</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                    </tr>
+                    <tr>
+                      <td>Membership model</td>
+                      <td>✅</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                    </tr>
+                    <tr>
+                      <td>UX for lifestyle discovery</td>
+                      <td>✅</td>
+                      <td>❌</td>
+                      <td>❌</td>
+                      <td>❌</td>
                     </tr>
                     <tr>
                       <td>Verified users</td>
                       <td>✅</td>
-                      <td>✖️</td>
                       <td>✅</td>
+                      <td>✅</td>
+                      <td>❌</td>
                     </tr>
                     <tr>
                       <td>Map-based discovery</td>
                       <td>✅</td>
                       <td>✅</td>
                       <td>✅</td>
-                    </tr>
-                    <tr>
-                      <td>Community building</td>
-                      <td>✖️</td>
-                      <td>✖️</td>
-                      <td>✅</td>
-                    </tr>
-                    <tr>
-                      <td>Monthly membership</td>
-                      <td>✖️</td>
-                      <td>✖️</td>
-                      <td>✅</td>
-                    </tr>
-                    <tr>
-                      <td>P2P and B2C demos</td>
-                      <td>✖️</td>
-                      <td>✖️</td>
                       <td>✅</td>
                     </tr>
                   </tbody>
                 </DemoStokeTable>
+
               </section>
               <section>
                 <h3>Personas</h3>
