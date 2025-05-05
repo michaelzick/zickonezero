@@ -24,6 +24,15 @@ export const Container = styled.div`
   }
 `;
 
+export const WhiteTransitionAnchor = styled.a`
+  transition: all 0.3s;
+  color: ${THEME.colors.white};
+
+  &:hover {
+    color: ${THEME.colors.grey};
+  }
+`;
+
 export const CommandLine = styled.span`
   font-family: monospace;
   color: ${THEME.colors.white};
@@ -437,20 +446,15 @@ export const DemoStokeList = styled.ul`
   font-weight: lighter;
   list-style: none;
 
+  li {
+    ${props => props.spaced && 'padding: 0.7em 0;'}
+  }
+
   li::before {
     content: '⚡️'; /* Replace with your desired symbol */
     display: inline-block;
     width: 1em; /* Space between symbol and text */
     margin-right: 0.5em;
-  }
-
-  a {
-    transition: all 0.3s;
-    color: ${THEME.colors.white};
-
-    &:hover {
-      color: ${THEME.colors.grey};
-    }
   }
 `;
 
