@@ -293,6 +293,10 @@ export const BioBox = styled.div`
 
     &.demostoke-inner {
       max-width: 45em;
+
+      .ds-logo {
+        width: 6em;
+      }
     }
 
     span {

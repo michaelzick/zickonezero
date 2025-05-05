@@ -22,9 +22,9 @@ const AntisyphonContent = () => {
         <BioBox direction='right' noBottomPadding>
           <div className='biobox-inner demostoke-inner'>
             <div>
-              <DemoStokeTitle>DemoStoke Case Study</DemoStokeTitle>
-              <p>Peer-to-Peer Demo Marketplace for Surf, Snow, SUP, Skate</p>
-              <WhiteTransitionAnchor href="https://demostoke.loveable.dev" target='_blank' rel='noopener noreferrer'>See the MVP</WhiteTransitionAnchor>
+              <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' /><DemoStokeTitle>DemoStoke Case Study</DemoStokeTitle>
+              <p>Peer-to-Peer Demo Marketplace for Snow, Surf, and Skate</p>
+              🤙🏻 <WhiteTransitionAnchor href="https://demostoke.loveable.dev" target='_blank' rel='noopener noreferrer'>See the MVP</WhiteTransitionAnchor>
               <section>
                 <h3>TL;DR (Executive Summary)</h3>
                 <DemoStokeList>
@@ -109,9 +109,9 @@ const AntisyphonContent = () => {
               </section>
               <section>
                 <h3>Build Process</h3>
-                <ul>
+                <DemoStokeList>
                   <li>Rapid interactive prototyping</li>
-                </ul>
+                </DemoStokeList>
               </section>
               <section>
                 <h3>Monetization</h3>
@@ -128,7 +128,7 @@ const AntisyphonContent = () => {
                 <DemoStokeList>
                   <li>User trust is central to any peer-based platform</li>
                   <li>UX must speak the cultural language of riders</li>
-                  <li>Foundational research makes everything smoother downstream</li>
+                  <li>Foundational research is everything; it’s all about solving pain points</li>
                 </DemoStokeList>
               </section>
               <section>
@@ -136,7 +136,8 @@ const AntisyphonContent = () => {
                 <DemoStokeList>
                   <li>Conduct field testing with riders in Tahoe and SoCal</li>
                   <li>Increase gear listings via referral/early access program</li>
-                  <li>Explore local shop pilot program</li>
+                  <li>Explore local shop and shaper pilot program</li>
+                  <li>Test membership program</li>
                 </DemoStokeList>
               </section>
               <section>
