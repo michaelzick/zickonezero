@@ -7,7 +7,7 @@ import {
   getMobileMenuState
 } from '../showMobileMenuSlice';
 
-import { BioBox, Wrapper, DemoStokeTitle, DemoStokeList, DemoStokeTable, WhiteTransitionAnchor } from '../../styles';
+import { BioBox, Wrapper, DemoStokeTitle, DemoStokeList, DemoStokeTable, WhiteTransitionAnchor, TableWrapper } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
 
 const AntisyphonContent = () => {
@@ -54,117 +54,119 @@ const AntisyphonContent = () => {
                   <br /><strong>Key insight:</strong> People would pay to demo gear if trust and ease were guaranteed.</p>
                 <h3>Competitor Overview</h3>
 
-                <DemoStokeTable>
-                  <thead>
-                    <tr>
-                      <th>Feature</th>
-                      <th>DemoStoke</th>
-                      <th>Gearo</th>
-                      <th>FriendWithA</th>
-                      <th>The Quiver</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Try-before-you-buy culture</td>
-                      <td>✅</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                    </tr>
-                    <tr>
-                      <td>Peer-to-Peer (P2P)</td>
-                      <td>✅</td>
-                      <td>❌</td>
-                      <td>✅</td>
-                      <td>✅</td>
-                    </tr>
-                    <tr>
-                      <td>Business-to-Consumer (B2C)</td>
-                      <td>✅</td>
-                      <td>✅</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                    </tr>
-                    <tr>
-                      <td>Indie shapers/local makers</td>
-                      <td>✅</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                    </tr>
-                    <tr>
-                      <td>Lifestyle branding</td>
-                      <td>✅</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>✅</td>
-                    </tr>
-                    <tr>
-                      <td>Demo + rental hybrid</td>
-                      <td>✅</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                    </tr>
-                    <tr>
-                      <td>Community features</td>
-                      <td>✅</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                    </tr>
-                    <tr>
-                      <td>Data play for brands</td>
-                      <td>✅</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                    </tr>
-                    <tr>
-                      <td>Multi-sport identity</td>
-                      <td>✅</td>
-                      <td>✅</td>
-                      <td>✅</td>
-                      <td>❌</td>
-                    </tr>
-                    <tr>
-                      <td>Destination readiness</td>
-                      <td>✅</td>
-                      <td>✅</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                    </tr>
-                    <tr>
-                      <td>Membership model</td>
-                      <td>✅</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                    </tr>
-                    <tr>
-                      <td>UX for lifestyle discovery</td>
-                      <td>✅</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                      <td>❌</td>
-                    </tr>
-                    <tr>
-                      <td>Verified users</td>
-                      <td>✅</td>
-                      <td>✅</td>
-                      <td>✅</td>
-                      <td>❌</td>
-                    </tr>
-                    <tr>
-                      <td>Map-based discovery</td>
-                      <td>✅</td>
-                      <td>✅</td>
-                      <td>✅</td>
-                      <td>✅</td>
-                    </tr>
-                  </tbody>
-                </DemoStokeTable>
+                <TableWrapper>
+                  <DemoStokeTable>
+                    <thead>
+                      <tr>
+                        <th>Feature</th>
+                        <th>DemoStoke</th>
+                        <th>Gearo</th>
+                        <th>FriendWithA</th>
+                        <th>The Quiver</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Try-before-you-buy culture</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                      </tr>
+                      <tr>
+                        <td>Peer-to-Peer (P2P)</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                      </tr>
+                      <tr>
+                        <td>Business-to-Consumer (B2C)</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                      </tr>
+                      <tr>
+                        <td>Indie shapers/local makers</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                      </tr>
+                      <tr>
+                        <td>Lifestyle branding</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                      </tr>
+                      <tr>
+                        <td>Demo + rental hybrid</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                      </tr>
+                      <tr>
+                        <td>Community features</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                      </tr>
+                      <tr>
+                        <td>Data play for brands</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                      </tr>
+                      <tr>
+                        <td>Multi-sport identity</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                      </tr>
+                      <tr>
+                        <td>Destination readiness</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                      </tr>
+                      <tr>
+                        <td>Membership model</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                      </tr>
+                      <tr>
+                        <td>UX for lifestyle discovery</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                      </tr>
+                      <tr>
+                        <td>Verified users</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                      </tr>
+                      <tr>
+                        <td>Map-based discovery</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                      </tr>
+                    </tbody>
+                  </DemoStokeTable>
+                </TableWrapper>
 
               </section>
               <section>

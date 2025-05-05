@@ -462,6 +462,26 @@ export const DemoStokeList = styled.ul`
   }
 `;
 
+export const TableWrapper = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  table {
+    min-width: 600px; /* Adjust based on your content */
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th,
+  td {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    text-align: left;
+    white-space: nowrap;
+  }
+`;
+
 export const DemoStokeTable = styled.table`
   width: 100%;
   background: ${THEME.colors.darkest};
