@@ -36,7 +36,7 @@ const AntisyphonContent = () => {
               </section>
               <section>
                 <h3>The Problem</h3>
-                <p>Demo opportunities for rideable gear are limited, inconvenient, or nonexistent. Many riders either blindly purchase expensive equipment or wait for infrequent shop demos. Meanwhile, gear sits unused in garages, with no platform to connect owners and seekers.</p>
+                <p>Demo opportunities for rideable gear are limited, inconvenient, or nonexistent. Many riders either blindly purchase expensive equipment or wait for infrequent on-site demos. Meanwhile, gear sits unused in garages, with no platform to connect owners and riders.</p>
                 <DemoStokeList>
                   <li>“I want to try before I buy but there’s nothing around me.”</li>
                   <li>“Shops only have limited brands.”</li>
@@ -87,12 +87,12 @@ const AntisyphonContent = () => {
               <section>
                 <h3>Personas</h3>
                 <DemoStokeList spaced>
-                  <li><strong>Weekend Warrior:</strong> Rachel (34, San Diego) is a marketing manager who rides 1–2x/month. She wants to try before buying expensive gear but is frustrated by limited demo options. She looks to Instagram and friends for recs, and wants RideLocal to offer trusted peer reviews, easy filters, and clear pickup info.</li>
-                  <li><strong>Die-Hard:</strong> Chris (29, Truckee) is a remote developer who rides almost daily. He seeks variety in gear but shops don’t offer enough options. He’s active in forums and trades gear with friends. He wants RideLocal to offer high-quality listings, flexible pickup, and rider reviews.</li>
-                  <li><strong>Nomadic Renter:</strong> Maya (31, Santa Cruz) is a van-lifer and remote UX designer who rides 1–3x/week. She doesn’t want to own DemoStokeListky gear and struggles to find quality rentals in new locations. She wants RideLocal to offer verified local lenders, easy gear specs, and fair prices.</li>
-                  <li><strong>Local Shop Owner:</strong> Tony (45, South Lake Tahoe) co-owns a board shop and wants to run demos without building his own tech. He’s frustrated that most platforms don’t support niche gear. He wants RideLocal to help list demo boards, drive traffic, and convert demos into sales.</li>
-                  <li><strong>Local Shaper:</strong> Dustin (38, Ventura) is a known surfboard shaper trying to grow his reputation. He wants to organize demos and track who rides his boards but lacks the tools. He wants RideLocal to offer a shaper-specific feature, demo tracking, and review visibility.</li>
-                  <li><strong>Quiver Lender:</strong> Jessie (27, Encinitas) is a yoga instructor with extra boards. She wants to earn passive income but doesn’t trust Craigslist. She wants RideLocal to provide a smooth listing flow, damage protection, reviews, and an earnings dashboard.</li>
+                  <li><strong>Weekend Warrior:</strong> Rachel (34, San Diego) is a marketing manager who rides 1–2x/month. She wants to try before buying expensive gear but is frustrated by limited demo options. She looks to Instagram and friends for recs, and wants DemoStoke to offer trusted peer reviews, easy filters, and clear pickup info.</li>
+                  <li><strong>Die-Hard:</strong> Chris (29, Truckee) is a remote developer who rides almost daily. He seeks variety in gear but shops don’t offer enough options. He’s active in forums and trades gear with friends. He wants DemoStoke to offer high-quality listings, flexible pickup, and rider reviews.</li>
+                  <li><strong>Nomadic Renter:</strong> Maya (31, Santa Cruz) is a van-lifer and remote UX designer who rides 1–3x/week. She doesn’t want to own a ton of gear and struggles to find quality rentals in new locations. She wants DemoStoke to offer verified local lenders, easy gear specs, and fair prices.</li>
+                  <li><strong>Local Shop Owner:</strong> Tony (45, South Lake Tahoe) co-owns a board shop and wants to run demos without building his own tech. He’s frustrated that most platforms don’t support niche gear. He wants DemoStoke to help list demo boards, drive traffic, and convert demos into sales.</li>
+                  <li><strong>Local Shaper:</strong> Dustin (38, Ventura) is a known surfboard shaper trying to grow his reputation. He wants to organize demos and track who rides his boards but lacks the tools. He wants DemoStoke to offer a shaper-specific feature, demo tracking, and review visibility.</li>
+                  <li><strong>Quiver Lender:</strong> Jessie (27, Encinitas) is a yoga instructor with extra boards. She wants to earn passive income but doesn’t trust Craigslist. She wants DemoStoke to provide a smooth listing flow, damage protection, reviews, and an earnings dashboard.</li>
                 </DemoStokeList>
 
               </section>
@@ -110,7 +110,7 @@ const AntisyphonContent = () => {
               <section>
                 <h3>Build Process</h3>
                 <DemoStokeList>
-                  <li>Rapid interactive prototyping</li>
+                  <li>Rapid interactive prototyping using Vite, React, and kickstarted by <WhiteTransitionAnchor href="https://demostoke.loveable.dev" target='_blank' rel='noopener noreferrer'>loveable.dev</WhiteTransitionAnchor></li>
                 </DemoStokeList>
               </section>
               <section>
