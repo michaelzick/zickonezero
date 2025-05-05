@@ -41,45 +41,69 @@ const AntisyphonContent = () => {
                   <li>“I want to try before I buy but there’s nothing around me.”</li>
                   <li>“Shops only have limited brands.”</li>
                   <li>“I don’t want to buy a $750 surfboard I’ve never ridden.”</li>
+                  <li>“Demo days at the beach and mountain are few and far inbetween.”</li>
+                  <li>“I need more people to try my boards but doing demo days takes me away from shaping.”</li>
+                  <li>“It would be cool to have all available demos, no matter who they’re from, in one place.”</li>
+                  <li>“Could I have the demo shipped to me so I don’t waste time picking it up?”</li>
+                  <li>“Demo boards at the resort are expensive and they have a limited selection.”</li>
                 </DemoStokeList>
               </section>
               <section>
                 <h3>Market Research & Competitive Analysis</h3>
-                <p>Conducted 10 interviews and 27 survey responses with riders. Key insight: People would pay to demo gear <em>if</em> trust and ease were guaranteed.</p>
+                <p>Conducted user interviews and surveys with riders across snow, surf, and skate.
+                  <br /><strong>Key insight:</strong> People would pay to demo gear if trust and ease were guaranteed.</p>
                 <h3>Competitor Overview</h3>
                 <DemoStokeTable>
                   <thead>
                     <tr>
-                      <th>DemoStoke</th>
+                      <th>Feature</th>
                       <th>FriendWithA</th>
                       <th>The Quiver</th>
+                      <th>DemoStoke</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td>Multi-sport</td>
+                      <td>✅</td>
                       <td>✖️</td>
-                      <td>✖️</td>
+                      <td>✅</td>
                     </tr>
                     <tr>
                       <td>Targeted lifestyle branding</td>
                       <td>✖️</td>
                       <td>✅</td>
+                      <td>✅</td>
                     </tr>
                     <tr>
-                      <td>Verified local riders</td>
+                      <td>Verified users</td>
+                      <td>✅</td>
                       <td>✖️</td>
-                      <td>✖️</td>
-                    </tr>
-                    <tr>
-                      <td>Community messaging</td>
-                      <td>✖️</td>
-                      <td>✖️</td>
+                      <td>✅</td>
                     </tr>
                     <tr>
                       <td>Map-based discovery</td>
                       <td>✅</td>
+                      <td>✅</td>
+                      <td>✅</td>
+                    </tr>
+                    <tr>
+                      <td>Community building</td>
                       <td>✖️</td>
+                      <td>✖️</td>
+                      <td>✅</td>
+                    </tr>
+                    <tr>
+                      <td>Monthly membership</td>
+                      <td>✖️</td>
+                      <td>✖️</td>
+                      <td>✅</td>
+                    </tr>
+                    <tr>
+                      <td>P2P and B2C demos</td>
+                      <td>✖️</td>
+                      <td>✖️</td>
+                      <td>✅</td>
                     </tr>
                   </tbody>
                 </DemoStokeTable>
@@ -99,12 +123,12 @@ const AntisyphonContent = () => {
               <section>
                 <h3>MVP & UX Strategy</h3>
                 <p>We focused on minimizing friction while maximizing trust. Key MVP features:</p>
-                <ul>
+                <DemoStokeList>
                   <li>Map-based gear discovery</li>
                   <li>Search filters by sport, location, and price</li>
                   <li>Gear profile pages with direct messaging</li>
                   <li>Mandatory verification with government ID</li>
-                </ul>
+                </DemoStokeList>
                 <p><em>Out of Scope: Payments, insurance, shop onboarding</em></p>
               </section>
               <section>
