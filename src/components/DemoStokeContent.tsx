@@ -40,26 +40,28 @@ const AntisyphonContent = () => {
                   Many riders either blindly purchase expensive equipment or wait for infrequent on-site demos.
                   Meanwhile, gear sits unused in garages, with no unifying platform to connect owners and riders.</p>
 
-                <h3>Complaints</h3>
+                <h3>Current Complaints</h3>
                 <DemoStokeList>
-                  <li>“I want to try before I buy but there’s nothing around me.”</li>
-                  <li>“Shops have limited brands and sizes.”</li>
-                  <li>“I don’t want to buy a $750 surfboard I’ve never ridden.”</li>
-                  <li>“Demo days at the beach or mountain are few and far inbetween.”</li>
-                  <li>“I need more people to try my boards but doing demo days takes me away from shaping.”</li>
-                  <li>“It would be cool to have all available demos, no matter who they’re from, in one place.”</li>
-                  <li>“Could I have the demo shipped to me so I don’t waste time picking it up?”</li>
-                  <li>“Demo boards at the resort are expensive and they have a limited selection.”</li>
-                  <li>“I want to try multiple pairs of skis before buying, but that gets very expensive.”</li>
-                  <li>“I’d like to get more people into my shop but I have a limited ad budget.”</li>
+                  <li className='complaint'>“I want to try before I buy but there’s nothing around me.”</li>
+                  <li className='complaint'>“Shops have limited brands and sizes.”</li>
+                  <li className='complaint'>“I don’t want to buy a $750 surfboard I’ve never ridden.”</li>
+                  <li className='complaint'>“Demo days at the beach or mountain are few and far inbetween.”</li>
+                  <li className='complaint'>“I need more people to try my boards but doing demo days takes me away from shaping.”</li>
+                  <li className='complaint'>“It would be cool to have all available demos, no matter who they’re from, in one place.”</li>
+                  <li className='complaint'>“Could I have the demo shipped to me so I don’t waste time picking it up?”</li>
+                  <li className='complaint'>“Demo boards at the resort are expensive and they have a limited selection.”</li>
+                  <li className='complaint'>“I want to try multiple pairs of skis before buying, but that gets very expensive.”</li>
+                  <li className='complaint'>“I’d like to get more people into my shop but I have a limited ad budget.”</li>
                 </DemoStokeList>
               </section>
               <section>
                 <h3>Market Research & Competitive Analysis</h3>
-                <p>📝 I conducted user interviews and surveys with riders across snow, surf, and skate.
-                  <br /><strong>💡 Key insight:</strong> People would pay to demo gear if trust and ease were guaranteed.</p>
-                <h3>Competitor Overview</h3>
+                <DemoStokeList>
+                  <li className='interview'>I conducted user interviews and surveys with riders across snow, surf, and skate.</li>
+                  <li className='learning'><strong>Key insight:</strong> People would pay to demo gear if trust and ease were guaranteed.</li>
+                </DemoStokeList>
 
+                <h3>Competitor Overview</h3>
                 <TableWrapper>
                   <DemoStokeTable>
                     <thead>
@@ -191,20 +193,27 @@ const AntisyphonContent = () => {
                         <td>❌</td>
                         <td>❌</td>
                       </tr>
+                      <tr>
+                        <td>AI-driven search customization</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                      </tr>
                     </tbody>
                   </DemoStokeTable>
                 </TableWrapper>
-
               </section>
+
               <section>
                 <h3>Personas</h3>
                 <DemoStokeList spaced>
-                  <li><strong>Weekend Warrior:</strong> Rachel (34, San Diego) is a marketing manager who rides 1-2x/month. She wants to try before buying expensive gear but is frustrated by limited demo options. She looks to Instagram and friends for recs, and wants DemoStoke to offer trusted peer reviews, easy filters, and clear pickup info.</li>
-                  <li><strong>Die-Hard:</strong> Chris (29, Truckee) is a remote project manager who snowboards 3-4x/week. He seeks variety in gear but shops don’t offer enough options. He’s active in forums and trades gear with friends. He wants DemoStoke to offer high-quality listings, flexible pickup, and rider reviews.</li>
-                  <li><strong>Nomadic Renter:</strong> Maya (31, Santa Cruz) is a van-lifer and remote UX designer who rides 1-3x/week. She doesn’t want to own a ton of gear and struggles to find quality rentals in new locations. She wants DemoStoke to offer verified local lenders, easy to find gear specs, and fair prices.</li>
-                  <li><strong>Local Shop Owner:</strong> Tony (45, South Lake Tahoe) co-owns a board shop and wants to run demos without building his own tech. He’s frustrated that most platforms don’t support niche gear. He wants DemoStoke to help list demo boards, drive traffic, and convert demos into sales.</li>
-                  <li><strong>Local Shaper:</strong> Dustin (38, Ventura) is a known surfboard shaper trying to grow his reputation. He wants to organize demos and track who rides his boards but lacks the tools. He wants DemoStoke to offer a shaper-specific feature, demo tracking, and review visibility.</li>
-                  <li><strong>Quiver Lender:</strong> Jessie (27, Encinitas) is a yoga instructor with extra boards. She wants to earn passive income but doesn’t trust Craigslist. She wants DemoStoke to provide a smooth listing flow, damage protection, reviews, verified users, and an earnings dashboard.</li>
+                  <li className='persona'><strong>Weekend Warrior:</strong> Rachel (34, San Diego) is a marketing manager who rides 1-2x/month. She wants to try before buying expensive gear but is frustrated by limited demo options. She looks to Instagram and friends for recs, and wants DemoStoke to offer trusted peer reviews, easy filters, and clear pickup info.</li>
+                  <li className='persona'><strong>Die-Hard:</strong> Chris (29, Truckee) is a remote project manager who snowboards 3-4x/week. He seeks variety in gear but shops don’t offer enough options. He’s active in forums and trades gear with friends. He wants DemoStoke to offer high-quality listings, flexible pickup, and rider reviews.</li>
+                  <li className='persona'><strong>Nomadic Renter:</strong> Maya (31, Santa Cruz) is a van-lifer and remote UX designer who rides 1-3x/week. She doesn’t want to own a ton of gear and struggles to find quality rentals in new locations. She wants DemoStoke to offer verified local lenders, easy to find gear specs, and fair prices.</li>
+                  <li className='persona'><strong>Local Shop Owner:</strong> Tony (45, South Lake Tahoe) co-owns a board shop and wants to run demos without building his own tech. He’s frustrated that most platforms don’t support niche gear. He wants DemoStoke to help list demo boards, drive traffic, and convert demos into sales.</li>
+                  <li className='persona'><strong>Local Shaper:</strong> Dustin (38, Ventura) is a known surfboard shaper trying to grow his reputation. He wants to organize demos and track who rides his boards but lacks the tools. He wants DemoStoke to offer a shaper-specific feature, demo tracking, and review visibility.</li>
+                  <li className='persona'><strong>Quiver Lender:</strong> Jessie (27, Encinitas) is a yoga instructor with extra boards. She wants to earn passive income but doesn’t trust Craigslist. She wants DemoStoke to provide a smooth listing flow, damage protection, reviews, verified users, and an earnings dashboard.</li>
                 </DemoStokeList>
 
               </section>
@@ -228,34 +237,35 @@ const AntisyphonContent = () => {
               <section>
                 <h3>Monetization</h3>
                 <DemoStokeList>
-                  <li>15% transaction fee on rentals</li>
-                  <li>$49-$99/month for shop demo listings</li>
-                  <li><strong>Future:</strong> Add-ons for insurance, affiliate referrals, sponsored listings, API access</li>
-                  <li><strong>Future:</strong> Monthly and yearly subscriptions with different price and demo tiers</li>
+                  <li className='monetization'>15% transaction fee on rentals</li>
+                  <li className='monetization'>$49-$99/month for shop demo listings</li>
+                  <li className='monetization'><strong>Future:</strong> Add-ons for insurance, affiliate referrals, sponsored listings, API access</li>
+                  <li className='monetization'><strong>Future:</strong> Monthly and yearly subscriptions with different price and demo tiers</li>
+                  <li className='monetization'><strong>Future:</strong> Gear selection quiz to customize search results using AI</li>
                 </DemoStokeList>
               </section>
               <section>
                 <h3>Learnings</h3>
                 <p>This case study was born from real interviews and market gaps. I learned:</p>
                 <DemoStokeList>
-                  <li>User trust is central to any peer-based platform</li>
-                  <li>UX must speak the cultural language of the target audience</li>
-                  <li>Foundational research is everything; it’s all about solving pain points</li>
+                  <li className='learning'>User trust is central to any peer-based platform</li>
+                  <li className='learning'>UX must speak the cultural language of the target audience</li>
+                  <li className='learning'>Foundational research is everything; it’s all about solving pain points</li>
                 </DemoStokeList>
               </section>
               <section>
                 <h3>Next Steps</h3>
                 <DemoStokeList>
-                  <li>Conduct field testing with riders in Tahoe and SoCal</li>
-                  <li>Increase gear listings via referral/early access program</li>
-                  <li>Explore local shop and shaper pilot program</li>
-                  <li>Test membership program</li>
+                  <li className='next-step'>Conduct field testing with riders in Tahoe and SoCal</li>
+                  <li className='next-step'>Increase gear listings via referral/early access program</li>
+                  <li className='next-step'>Explore local shop and shaper pilot program</li>
+                  <li className='next-step'>Test membership program</li>
                 </DemoStokeList>
               </section>
               <section>
                 <h3>Links</h3>
                 <DemoStokeList>
-                  <li>
+                  <li className='prototype'>
                     <WhiteTransitionAnchor href="https://demostoke.lovable.app/" target='_blank' rel='noopener noreferrer'>DemoStoke Interactive Prototype</WhiteTransitionAnchor>
                   </li>
                 </DemoStokeList>

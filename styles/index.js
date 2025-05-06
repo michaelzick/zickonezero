@@ -455,10 +455,38 @@ export const DemoStokeList = styled.ul`
   }
 
   li::before {
-    content: '⚡️'; /* Replace with your desired symbol */
+    content: '⚡️';
     display: inline-block;
     width: 1em; /* Space between symbol and text */
     margin-right: 0.5em;
+  }
+
+  li.monetization::before {
+    content: '💵';
+  }
+
+  li.complaint::before {
+    content: '👎🏻';
+  }
+
+  li.next-step::before {
+    content: '👉🏻';
+  }
+
+  li.persona::before {
+    content: '👤';
+  }
+
+  li.learning::before {
+    content: '💡';
+  }
+
+  li.interview::before {
+    content: '📝';
+  }
+
+  li.prototype::before {
+    content: '🤙🏻';
   }
 `;
 
