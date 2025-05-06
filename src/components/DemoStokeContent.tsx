@@ -23,12 +23,12 @@ const AntisyphonContent = () => {
           <div className='biobox-inner demostoke-inner'>
             <div>
               <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' /><DemoStokeTitle>DemoStoke Case Study</DemoStokeTitle>
-              <p>Peer-to-Peer Demo Marketplace for Snow, Surf, and Skate</p>
+              <p>P2P and B2C Demo Marketplace for Snow, Surf, and Skate</p>
               🤙🏻 <WhiteTransitionAnchor href="https://demostoke.lovable.app/" target='_blank' rel='noopener noreferrer'>See the interactive prototype!</WhiteTransitionAnchor>
               <section>
-                <h3>TL;DR (Executive Summary)</h3>
+                <h3>TL;DR</h3>
                 <DemoStokeList>
-                  <li><strong>What it is:</strong> A P2P and B2C platform to find and demo gear from multiple sources.</li>
+                  <li><strong>What it is:</strong> A P2P and B2C platform to find and demo action sports gear from multiple sources.</li>
                   <li><strong>Problem:</strong> Riders want to try before they buy, but demos are rare, costly, and inconvenient.</li>
                   <li><strong>Solution:</strong> A location-based marketplace to safely connect riders and lenders.</li>
                   <li><strong>My Role:</strong> Founder, Product Lead, UX strategist, MVP architect.</li>
