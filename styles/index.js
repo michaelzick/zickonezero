@@ -466,7 +466,7 @@ export const DemoStokeList = styled.ul`
   }
 
   li.complaint::before {
-    content: '👎🏻';
+    content: '⛔️';
   }
 
   li.next-step::before {
