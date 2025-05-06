@@ -476,7 +476,6 @@ export const TableWrapper = styled.div`
   th,
   td {
     padding: 0.75rem;
-    border: 1px solid #ccc;
     text-align: left;
     white-space: nowrap;
   }
