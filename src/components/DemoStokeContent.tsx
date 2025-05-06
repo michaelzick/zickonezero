@@ -24,7 +24,7 @@ const AntisyphonContent = () => {
             <div>
               <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' /><DemoStokeTitle>DemoStoke Case Study</DemoStokeTitle>
               <p>P2P and B2C Demo Marketplace for Snow, Surf, and Skate</p>
-              🤙🏻 <WhiteTransitionAnchor href="https://demostoke.lovable.app/" target='_blank' rel='noopener noreferrer'>See the interactive prototype!</WhiteTransitionAnchor>
+              🤙🏻 <WhiteTransitionAnchor href="https://demostoke.lovable.app/" target='_blank' rel='noopener noreferrer'>See the interactive prototype</WhiteTransitionAnchor>
               <section>
                 <h3>TL;DR</h3>
                 <DemoStokeList>
