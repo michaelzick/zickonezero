@@ -1,3 +1,4 @@
+import * as Tabs from '@radix-ui/react-tabs';
 import {
   useAppDispatch,
   useAppSelector
@@ -7,7 +8,19 @@ import {
   getMobileMenuState
 } from '../showMobileMenuSlice';
 
-import { BioBox, Wrapper, DemoStokeTitle, DemoStokeList, DemoStokeTable, WhiteTransitionAnchor, TableWrapper } from '../../styles';
+import {
+  BioBox,
+  Wrapper,
+  DemoStokeTitle,
+  DemoStokeList,
+  DemoStokeTable,
+  WhiteTransitionAnchor,
+  TableWrapper,
+  TabsContent,
+  TabsTrigger,
+  TabsList,
+  TabsRoot,
+} from '../../styles';
 import { TopNavContent, FooterContent } from '.';
 
 const AntisyphonContent = () => {
@@ -276,6 +289,26 @@ const AntisyphonContent = () => {
             </div>
           </div>
         </BioBox>
+
+        <Tabs.Root as={TabsRoot}>
+          <Tabs.List as={TabsList}>
+            <Tabs.Trigger as={TabsTrigger} value="tab1">
+              Overview
+            </Tabs.Trigger>
+            <Tabs.Trigger as={TabsTrigger} value="tab2">
+              Features
+            </Tabs.Trigger>
+            <Tabs.Trigger as={TabsTrigger} value="tab3">
+              Learnings
+            </Tabs.Trigger>
+          </Tabs.List>
+
+          <Tabs.Content as={TabsContent} value="tab1">
+            <h3>Overview</h3>
+            <p>DemoStoke is a platform for riders to demo gear from peers and shops.</p>
+          </Tabs.Content>
+        </Tabs.Root>
+
       </Wrapper>
       <FooterContent />
     </>

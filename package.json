@@ -15,7 +15,7 @@
     "chromatic": "npx chromatic --project-token=8d72ce9e2021"
   },
   "dependencies": {
-    "@radix-ui/react-tabs": "^1.1.9",
+    "@radix-ui/react-tabs": "^1.1.11",
     "@reduxjs/toolkit": "^1.8.5",
     "fslightbox-react": "^1.8.0",
     "next": "^15.3.0",
