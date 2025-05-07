@@ -517,34 +517,3 @@ export const DemoStokeTable = styled.table`
   font-size: 0.9em;
   font-weight: lighter;
 `;
-
-// Tabs
-export const TabsRoot = styled.div`
-  margin-top: 2rem;
-`;
-
-export const TabsList = styled.div`
-  display: flex;
-  border-bottom: 1px solid #ccc;
-`;
-
-export const TabsTrigger = styled.button`
-  all: unset;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  font-weight: bold;
-
-  &[data-state="active"] {
-    border-bottom-color: #0070f3;
-    color: #0070f3;
-  }
-
-  &:hover {
-    color: #005bb5;
-  }
-`;
-
-export const TabsContent = styled.div`
-  padding: 1rem 0;
-`;
