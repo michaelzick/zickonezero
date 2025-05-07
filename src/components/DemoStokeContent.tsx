@@ -239,9 +239,10 @@ const AntisyphonContent = () => {
                 <DemoStokeList>
                   <li className='monetization'>15% transaction fee on rentals</li>
                   <li className='monetization'>$49-$99/month for shop demo listings</li>
-                  <li className='monetization'><strong>Future:</strong> Add-ons for insurance, affiliate referrals, sponsored listings, API access</li>
-                  <li className='monetization'><strong>Future:</strong> Monthly and yearly subscriptions with different price and demo tiers</li>
-                  <li className='monetization'><strong>Future:</strong> Gear selection quiz to customize search results using AI</li>
+                  <li className='monetization'>Add-ons for insurance, affiliate referrals, and sponsored listings</li>
+                  <li className='monetization'>Monthly and yearly subscriptions with different price and demo tiers</li>
+                  <li className='monetization'>Premium and Pro analytics dashboard features</li>
+                  <li className='monetization'>Access to data API</li>
                 </DemoStokeList>
               </section>
               <section>
@@ -259,7 +260,9 @@ const AntisyphonContent = () => {
                   <li className='next-step'>Conduct field testing with riders in Tahoe and SoCal</li>
                   <li className='next-step'>Increase gear listings via referral/early access program</li>
                   <li className='next-step'>Explore local shop and shaper pilot program</li>
-                  <li className='next-step'>Test membership program</li>
+                  <li className='next-step'>Build and test AI-driven quiz and search results</li>
+                  <li className='next-step'>Build and test anayltics dashboard</li>
+                  <li className='next-step'>Build and test membership program</li>
                 </DemoStokeList>
               </section>
               <section>
