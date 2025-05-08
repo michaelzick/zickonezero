@@ -19,9 +19,9 @@ import {
   TabWrapper,
 } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
-import IndyShaper from './userstories/IndyShaper';
+import IndieShaper from './userstories/IndieShaper';
 
-const AntisyphonContent = () => {
+const DemoStokeContent = () => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
 
@@ -302,7 +302,7 @@ const AntisyphonContent = () => {
             </Tabs.Content>
 
             <Tabs.Content value="tab2">
-              <IndyShaper />
+              <IndieShaper />
             </Tabs.Content>
           </Tabs.Root>
         </TabWrapper>
@@ -312,4 +312,4 @@ const AntisyphonContent = () => {
   );
 };
 
-export default AntisyphonContent;
+export default DemoStokeContent;
