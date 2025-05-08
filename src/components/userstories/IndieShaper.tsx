@@ -72,7 +72,7 @@ const IndyShaper = () => {
             <section>
               <h3>Use Case Scenario</h3>
               <DemoStokeText>
-                Let’s say a surfer in San Clemente is curious about a 6’4 eco-friendly twin-fin but isn’t ready to commit $750 + a 4-month wait. They browse DemoStoke, see glowing reviews, reserve the demo
+                Let’s say a surfer in San Clemente is curious about a 6’4 eco-friendly twin-fin but isn’t ready to commit $750 + a 4-month wait. They browse {DSLink}, see glowing reviews, reserve the demo
                 for a Saturday morning pickup near Trestles, ride it, and love it.
                 <br /><br />
                 That evening, they tap Custom Order, upload photos of the waves they ride and their height/weight, and leave a deposit—all through the app.
