@@ -3,6 +3,7 @@ import {
   DemoStokeTitle,
   DemoStokeList,
   DemoStokeText,
+  WhiteTransitionAnchor,
 } from '../../../styles';
 
 const IndyShaper = () => {
@@ -14,7 +15,7 @@ const IndyShaper = () => {
             <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' />
             <DemoStokeTitle>User Story: The Independent Shaper</DemoStokeTitle>
             <p>
-              DemoStoke helps indie surfboard shapers reach more buyers with less effort by turning demo days into on-demand rentals.
+              <WhiteTransitionAnchor href="https://demostoke.lovable.app/" target='_blank' rel='noopener noreferrer'>DemoStoke</WhiteTransitionAnchor> helps indie surfboard shapers reach more buyers with less effort by turning demo days into on-demand rentals.
               Surfers try boards locally, then buy with confidence—no van hauls, no hard sells. It’s a smarter way to showcase
               eco-friendly gear, convert demos into deposits, and grow beyond word of mouth and social media.
             </p>
