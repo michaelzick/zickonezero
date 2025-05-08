@@ -254,7 +254,7 @@ const DemoStokeContent = () => {
                     <section>
                       <h3>Build Process</h3>
                       <DemoStokeList>
-                        <li>Rapid interactive prototyping using Vite, React, and kickstarted by <WhiteTransitionAnchor href="https://demostoke.lovable.app/" target='_blank' rel='noopener noreferrer'>lovable.dev</WhiteTransitionAnchor></li>
+                        <li>Rapid interactive prototyping using Vite, React, Tailwind, and kickstarted by <WhiteTransitionAnchor href="https://demostoke.lovable.app/" target='_blank' rel='noopener noreferrer'>lovable.dev</WhiteTransitionAnchor>.</li>
                       </DemoStokeList>
                     </section>
                     <section>
@@ -272,9 +272,9 @@ const DemoStokeContent = () => {
                       <h3>Learnings</h3>
                       <p>This case study was born from real interviews and market gaps. I learned:</p>
                       <DemoStokeList>
-                        <li className='learning'>User trust is central to any peer-based platform</li>
-                        <li className='learning'>UX must speak the cultural language of the target audience</li>
-                        <li className='learning'>Foundational research is everything; it’s all about solving pain points</li>
+                        <li className='learning'>User trust is central to any peer-based platform.</li>
+                        <li className='learning'>UX must speak the cultural language of the target audience.</li>
+                        <li className='learning'>Foundational research is everything; it’s all about solving pain points.</li>
                       </DemoStokeList>
                     </section>
                     <section>
