@@ -67,7 +67,7 @@ const DemoStokeContent = () => {
                       <DemoStokeList>
                         <li className='complaint'>“I want to try before I buy but there’s nothing around me.”</li>
                         <li className='complaint'>“Shops have limited brands and sizes.”</li>
-                        <li className='complaint'>“I don’t want to buy a $750 surfboard I’ve never ridden.”</li>
+                        <li className='complaint'>“I don’t want to buy a $900 surfboard I’ve never ridden.”</li>
                         <li className='complaint'>“Demo days at the beach or mountain are few and far inbetween.”</li>
                         <li className='complaint'>“I need more people to try my boards but doing demo days takes me away from shaping.”</li>
                         <li className='complaint'>“It would be cool to have all available demos, no matter who they’re from, in one place.”</li>
