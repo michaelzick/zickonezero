@@ -50,7 +50,7 @@ export const Wrapper = styled.div`
   background-color: ${THEME.colors.dark};
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    ${props => props.isHomePage ? 'padding-top: 12em;' : 'padding-top: 10em;'}
+    ${props => props.isHomePage ? 'padding-top: 12em;' : 'padding-top: 9em;'}
   }
 `;
 
@@ -549,6 +549,7 @@ input {
 	color: var(--mauve-11);
 	user-select: none;
   background-color: ${THEME.colors.darkest};
+  cursor: pointer;
 }
 .TabsTrigger:first-child {
 	border-top-left-radius: 6px;
@@ -560,12 +561,11 @@ input {
 	color: var(--violet-11);
 }
 .TabsTrigger[data-state="active"] {
-	color: var(--violet-11);
+	background-color: ${THEME.colors.white};
+  color: ${THEME.colors.dark};
 }
 .TabsTrigger:focus {
 	position: relative;
-  background-color: ${THEME.colors.white};
-  color: ${THEME.colors.dark};
 }
 
 .TabsContent {
