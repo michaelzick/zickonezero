@@ -2,9 +2,7 @@ import {
   BioBox,
   DemoStokeTitle,
   DemoStokeList,
-  WhiteTransitionAnchor,
 } from '../../../styles';
-import { TopNavContent, FooterContent } from '../';
 
 const IndyShaper = () => {
   return (
