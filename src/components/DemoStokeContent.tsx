@@ -44,7 +44,8 @@ const AntisyphonContent = () => {
               <BioBox direction='right' noBottomPadding>
                 <div className='biobox-inner demostoke-inner'>
                   <div>
-                    <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' /><DemoStokeTitle>DemoStoke Case Study</DemoStokeTitle>
+                    <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' />
+                    <DemoStokeTitle>DemoStoke Executive Summary</DemoStokeTitle>
                     <p>P2P and B2C Demo Marketplace for Snow, Surf, and Skate</p>
                     🤙🏻 <WhiteTransitionAnchor href="https://demostoke.lovable.app/" target='_blank' rel='noopener noreferrer'>See the interactive prototype</WhiteTransitionAnchor>
                     <section>

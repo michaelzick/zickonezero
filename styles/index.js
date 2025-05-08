@@ -517,6 +517,15 @@ export const DemoStokeTable = styled.table`
   font-weight: lighter;
 `;
 
+export const DemoStokeText = styled.div`
+  width: 100%;
+  background: ${THEME.colors.darkest};
+  padding: 0.8em 1.8em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-weight: lighter;
+`;
+
 // Tabs
 export const TabWrapper = styled.div`
 /* reset */
