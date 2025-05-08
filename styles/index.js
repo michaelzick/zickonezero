@@ -546,96 +546,22 @@ input {
 	justify-content: center;
 	font-size: 15px;
 	line-height: 1;
-	color: var(--mauve-11);
 	user-select: none;
   background-color: ${THEME.colors.darkest};
   cursor: pointer;
 }
-.TabsTrigger:first-child {
-	border-top-left-radius: 6px;
-}
-.TabsTrigger:last-child {
-	border-top-right-radius: 6px;
-}
+
 .TabsTrigger:hover {
 	color: var(--violet-11);
 }
+
 .TabsTrigger[data-state="active"] {
 	background-color: ${THEME.colors.white};
   color: ${THEME.colors.dark};
 }
-.TabsTrigger:focus {
-	position: relative;
-}
 
 .TabsContent {
 	flex-grow: 1;
-	border-bottom-left-radius: 6px;
-	border-bottom-right-radius: 6px;
 	outline: none;
-}
-.TabsContent:focus {
-	box-shadow: 0 0 0 2px black;
-}
-
-.Text {
-	margin-top: 0;
-	margin-bottom: 20px;
-	color: var(--mauve-11);
-	font-size: 15px;
-	line-height: 1.5;
-}
-
-.Fieldset {
-	margin-bottom: 15px;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-}
-
-.Label {
-	font-size: 13px;
-	line-height: 1;
-	margin-bottom: 10px;
-	color: var(--violet-12);
-	display: block;
-	user-select: none;
-}
-
-.Input {
-	flex: 1 0 auto;
-	border-radius: 4px;
-	padding: 0 10px;
-	font-size: 15px;
-	line-height: 1;
-	color: var(--violet-11);
-	box-shadow: 0 0 0 1px var(--violet-7);
-	height: 35px;
-}
-.Input:focus {
-	box-shadow: 0 0 0 2px var(--violet-8);
-}
-
-.Button {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 4px;
-	padding: 0 15px;
-	font-size: 15px;
-	line-height: 1;
-	font-weight: 500;
-	height: 35px;
-}
-.Button.green {
-	background-color: var(--green-4);
-	color: var(--green-11);
-}
-.Button.green:hover {
-	background-color: var(--green-5);
-}
-.Button.green:focus {
-	box-shadow: 0 0 0 2px var(--green-7);
 }
 `;
