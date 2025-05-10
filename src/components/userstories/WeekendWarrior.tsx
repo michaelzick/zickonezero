@@ -14,11 +14,11 @@ const WeekendWarrior = () => {
       <BioBox direction='right' noBottomPadding someTopPadding>
         <div className='biobox-inner demostoke-inner'>
           <div>
-            <DemoStokeTitle>User Story: The Weekend Warrior</DemoStokeTitle>
+            <DemoStokeTitle>The Weekend Warrior</DemoStokeTitle>
             <p>
-              Krista is a Tahoe-based snowboarder who values speed and precision, and won’t buy a new board
-              without riding it first. Her frustrations with traditional demo events opened the door for {DSLink} as a more
-              flexible, trustworthy, and convenient solution.
+              Krista is a snowboarder who values speed and precision, and won’t buy a new board without riding it first.
+              Her frustrations with traditional demo events opened the door for {DSLink} as a more flexible, trustworthy,
+              and convenient solution.
             </p>
 
             <section>
@@ -38,7 +38,7 @@ const WeekendWarrior = () => {
                   <strong>No platform to lend unused gear:</strong> She owns a board she never uses but never considered renting it out.
                 </li>
                 <li className='complaint'>
-                  <strong>Trust concerns:</strong> She’s hesitant to demo unfamiliar gear without waxing, safety checks, or protection against damage.
+                  <strong>Trust concerns:</strong> Krista is hesitant to demo unfamiliar gear without waxing, safety checks, or protection against damage.
                 </li>
               </DemoStokeList>
             </section>
@@ -52,14 +52,15 @@ const WeekendWarrior = () => {
                 </li>
                 <li>
                   <strong>Safe and trustworthy rentals:</strong> Insurance, waivers, and ID verification make her feel safer lending or demoing gear through {DSLink}.
-                  <p>She suggested a rental car-style damage waiver or refundable deposit model to protect both lenders and riders.</p>
+                  <p>She likes the insurance add-on or refundable deposit model to protect both lenders and riders.</p>
                 </li>
                 <li>
                   <strong>Peer-to-peer gear access:</strong> Krista would list her unused powder board for $20–40/day, adjusting based on demand.
-                  <p>She sees value in making use of idle gear and appreciated that good reviews could help others trust her listings.</p>
+                  <p>She sees value in making use of idle gear and appreciates that good reviews could help others trust her listings.</p>
                 </li>
                 <li>
-                  <strong>Flexible membership model:</strong> She’d pay $50–100/month to try up to 5 boards with insurance included, especially during seasons she’s hunting for a new setup.
+                  <strong>Flexible membership model:</strong> Krista would pay $50–100/month to try up to 5 boards with insurance included, especially during seasons
+                  she’s hunting for a new setup.
                 </li>
               </DemoStokeList>
             </section>
@@ -67,10 +68,12 @@ const WeekendWarrior = () => {
             <section>
               <h3>Use Case Scenario</h3>
               <DemoStokeText>
-                Krista is planning her next powder day at Palisades. She logs into {DSLink} and spots a board she’s been curious about. It’s available for pickup 5 minutes from the resort.
+                Krista is planning her next powder day at Palisades. She logs into {DSLink} and spots a board she’s been curious about. It’s available for pickup 5
+                minutes from the resort.
                 She grabs it, rides it all day, and decides it’s not quite the right fit, but she’s stoked she didn’t waste $600 guessing.
                 <br /><br />
-                The next weekend, she tries a different shape through the same app and this time it rips. She books it again and eventually buys it through the platform with confidence.
+                The next weekend, she tries a different shape through the same app and this time it rips. She books it again and eventually buys it through the
+                platform with confidence.
               </DemoStokeText>
             </section>
 

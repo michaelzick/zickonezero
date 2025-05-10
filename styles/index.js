@@ -23,6 +23,19 @@ export const Container = styled.div`
   }
 `;
 
+export const FlexBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    .tab-header {
+      font-size: 1em;
+      text-align: right
+    }
+  }
+`;
+
 export const WhiteTransitionAnchor = styled.a`
   transition: all 0.3s;
   color: ${THEME.colors.white};

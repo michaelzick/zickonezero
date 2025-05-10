@@ -17,6 +17,7 @@ import {
   WhiteTransitionAnchor,
   TableWrapper,
   TabWrapper,
+  FlexBox,
 } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
 import * as UserStories from './userstories';
@@ -44,9 +45,11 @@ const DemoStokeContent = () => {
               <BioBox direction='right' noBottomPadding>
                 <div className='biobox-inner demostoke-inner'>
                   <div>
-                    <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' />
-                    <DemoStokeTitle>DemoStoke Executive Summary</DemoStokeTitle>
-                    <p>P2P and B2C Demo Marketplace for Snow, Surf, and Skate</p>
+                    <FlexBox>
+                      <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' />
+                      <h2 className='tab-header'>Executive Summary</h2>
+                    </FlexBox>
+                    <p>DemoStoke is a P2P and B2C gear demo marketplace for the action sports industry.</p>
                     🤙🏻 <WhiteTransitionAnchor href="https://demostoke.lovable.app/" target='_blank' rel='noopener noreferrer'>See the interactive prototype</WhiteTransitionAnchor>
                     <section>
                       <h3>TL;DR</h3>

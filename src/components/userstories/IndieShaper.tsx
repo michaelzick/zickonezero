@@ -4,6 +4,7 @@ import {
   DemoStokeList,
   DemoStokeText,
   WhiteTransitionAnchor,
+  FlexBox,
 } from '../../../styles';
 
 const IndyShaper = () => {
@@ -14,8 +15,12 @@ const IndyShaper = () => {
       <BioBox direction='right' noBottomPadding>
         <div className='biobox-inner demostoke-inner'>
           <div>
-            <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' />
-            <DemoStokeTitle>User Story: The Independent Shaper</DemoStokeTitle>
+            <FlexBox>
+              <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' />
+              <h2 className='tab-header'>User Stories</h2>
+            </FlexBox>
+            <br />
+            <DemoStokeTitle>The Independent Shaper</DemoStokeTitle>
             <p>
               From the lens of Curtis, an independent Southern California surfboard shaper, {DSLink} has the potential
               to radically simplify and expand his business by addressing key pain points around demo logistics, discovery,
