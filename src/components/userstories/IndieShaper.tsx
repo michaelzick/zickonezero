@@ -17,7 +17,7 @@ const IndyShaper = () => {
             <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' />
             <DemoStokeTitle>User Story: The Independent Shaper</DemoStokeTitle>
             <p>
-              From the lens of an independent Southern California surfboard shaper, {DSLink} has the potential
+              From the lens of Curtis, an independent Southern California surfboard shaper, {DSLink} has the potential
               to radically simplify and expand his business by addressing key pain points around demo logistics, discovery,
               trust, and conversion.
             </p>
@@ -26,7 +26,7 @@ const IndyShaper = () => {
               <h3>Current Pain Points</h3>
               <DemoStokeList spaced>
                 <li className='complaint'>
-                  <strong>High-effort demo days:</strong> He manually hauls a van of boards to the beach, sets up, and hopes the right audience shows up. This is labor-intensive and hit-or-miss.
+                  <strong>High-effort demo days:</strong> Curtis manually hauls a van of boards to the beach, sets up, and hopes the right audience shows up. This is labor-intensive and hit-or-miss.
                 </li>
                 <li className='complaint'>
                   <strong>Limited reach:</strong> He relies on Instagram, local shops, and word-of-mouth. There’s no centralized platform that connects him with stoked, serious potential buyers.
@@ -47,7 +47,7 @@ const IndyShaper = () => {
               <h3>How DemoStoke Helps</h3>
               <DemoStokeList spaced>
                 <li>
-                  <strong>Low-effort, high-reach demo logistics:</strong> Instead of one demo day at one beach, he can list all his demo boards on {DSLink} and have potential buyers reserve and try them on their own schedule.
+                  <strong>Low-effort, high-reach demo logistics:</strong> Instead of one demo day at one beach, Curtis can list all his demo boards on {DSLink} and have potential buyers reserve and try them on their own schedule.
                   <p>Boards can be stored with verified surf lockers, partner shops, or even designated reps. The app handles location, reservations, and messaging.</p>
                 </li>
                 <li>
@@ -59,7 +59,7 @@ const IndyShaper = () => {
                   <p>You can even use feedback from demo users to match surfers to the right shape.</p>
                 </li>
                 <li>
-                  <strong>Bridges the trust gap for SUP buyers:</strong> SUPs are bulky and expensive. {DSLink} allows him to offer local tryouts at beaches or shops without needing to be there himself.
+                  <strong>Bridges the trust gap for SUP buyers:</strong> SUPs are bulky and expensive. {DSLink} allows Curtis to offer local tryouts at beaches or shops without needing to be there himself.
                   <p>Reviews, demo history, and performance ratings can give hesitant buyers confidence before putting down thousands.</p>
                 </li>
                 <li>
@@ -82,7 +82,7 @@ const IndyShaper = () => {
             </section>
 
             <section>
-              <h3>Why This Helps Him Scale</h3>
+              <h3>Why This Helps Curtis Scale</h3>
               <DemoStokeList spaced>
                 <li>
                   <strong>From 1-to-1 to many-to-1:</strong> He no longer needs to sell only through direct personal interactions.
@@ -91,7 +91,7 @@ const IndyShaper = () => {
                   <strong>More feedback, faster iteration:</strong> Demo feedback helps refine designs, understand trends, and guide inventory decisions.
                 </li>
                 <li>
-                  <strong>New revenue streams:</strong> He could even rent out boards on {DSLink} during the build waitlist to offset costs.
+                  <strong>New revenue streams:</strong> Curtis could even rent out boards on {DSLink} during the build waitlist to offset costs.
                 </li>
                 <li>
                   <strong>Geo-expansion:</strong> Surfboards can live and rotate in demo fleets in SD, LA, Ventura, and Santa Cruz without him ever leaving home.

@@ -278,6 +278,7 @@ export const BioBox = styled.div`
   justify-content: center;
   padding: 4em;
   ${props => props.noBottomPadding && 'padding-bottom: 0;'}
+  ${props => props.someTopPadding && 'padding-top: 1em;'}
   width: 100%;
   font-size: 25px;
   text-align: left;
@@ -378,6 +379,7 @@ export const BioBox = styled.div`
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     padding: 1em;
     ${props => props.noBottomPadding && 'padding-bottom: 0;'}
+    ${props => props.someTopPadding && 'padding-top: 1em;'}
   }
 `;
 

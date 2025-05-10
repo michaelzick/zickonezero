@@ -19,7 +19,7 @@ import {
   TabWrapper,
 } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
-import IndieShaper from './userstories/IndieShaper';
+import * as UserStories from './userstories';
 
 const DemoStokeContent = () => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
@@ -302,7 +302,8 @@ const DemoStokeContent = () => {
             </Tabs.Content>
 
             <Tabs.Content value="tab2">
-              <IndieShaper />
+              <UserStories.IndieShaper />
+              <UserStories.WeekendWarrior />
             </Tabs.Content>
           </Tabs.Root>
         </TabWrapper>
