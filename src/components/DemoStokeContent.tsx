@@ -57,7 +57,7 @@ const DemoStokeContent = () => {
                         <li><strong>What it is:</strong> A P2P and B2C platform to find and demo action sports gear from multiple sources.</li>
                         <li><strong>Problem:</strong> Riders want to try before they buy, but demos are rare, costly, and inconvenient.</li>
                         <li><strong>Solution:</strong> A location-based marketplace to safely connect riders and lenders.</li>
-                        <li><strong>My Role:</strong> Founder, Product Lead, UX strategist, MVP architect.</li>
+                        <li><strong>My Role:</strong> Founder, Head of Product, UX strategist, MVP architect.</li>
                       </DemoStokeList>
                     </section>
                     <section>
