@@ -28,10 +28,11 @@ const WeekendWarrior = () => {
                   <strong>Inconvenient demo process:</strong> Resort demo days involve waivers and time-consuming binding swaps that interrupt her riding flow.
                 </li>
                 <li className='complaint'>
-                  <strong>Lack of availability and timing:</strong> She often wants to try new boards with updated tech, but they aren’t available—or she misses the window because she just wants to ride.
+                  <strong>Lack of availability and timing:</strong> She often wants to try new boards with updated tech, but they aren’t available.
+                  Or, she misses the window because she just wants to ride.
                 </li>
                 <li className='complaint'>
-                  <strong>Gear guesswork:</strong> She’s bought boots, bindings, and boards based on timing or availability, not fit—risking costly mismatches.
+                  <strong>Gear guesswork:</strong> She’s bought boots, bindings, and boards based on timing or availability, not fit, risking costly mismatches.
                 </li>
                 <li className='complaint'>
                   <strong>No platform to lend unused gear:</strong> She owns a board she never uses but never considered renting it out.
@@ -66,9 +67,10 @@ const WeekendWarrior = () => {
             <section>
               <h3>Use Case Scenario</h3>
               <DemoStokeText>
-                Krista is planning her next powder day at Palisades. She logs into {DSLink} and spots a board she’s been curious about. It’s available for pickup 5 minutes from the resort. She grabs it, rides it all day, and decides it’s not quite the right fit—but she’s stoked she didn’t waste $600 guessing.
+                Krista is planning her next powder day at Palisades. She logs into {DSLink} and spots a board she’s been curious about. It’s available for pickup 5 minutes from the resort.
+                She grabs it, rides it all day, and decides it’s not quite the right fit, but she’s stoked she didn’t waste $600 guessing.
                 <br /><br />
-                The next weekend, she tries a different shape through the same app—this time it rips. She books it again and eventually buys it through the platform with confidence.
+                The next weekend, she tries a different shape through the same app and this time it rips. She books it again and eventually buys it through the platform with confidence.
               </DemoStokeText>
             </section>
 
@@ -85,7 +87,7 @@ const WeekendWarrior = () => {
                   <strong>Supports experimentation and tech curiosity:</strong> Krista wants to try new tech (rocker shapes, materials) without full commitment.
                 </li>
                 <li>
-                  <strong>Aligns with real riding flow:</strong> No more wasting powder days waiting at demo booths—{DSLink} fits into her actual ride plans.
+                  <strong>Aligns with real riding flow:</strong> No more wasting powder days waiting at demo booths. {DSLink} fits into her actual ride plans.
                 </li>
               </DemoStokeList>
             </section>
