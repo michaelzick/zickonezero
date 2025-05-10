@@ -17,9 +17,9 @@ const IndyShaper = () => {
             <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' />
             <DemoStokeTitle>User Story: The Independent Shaper</DemoStokeTitle>
             <p>
-              {DSLink} helps indie surfboard shapers reach more buyers with less effort by turning demo days into on-demand rentals.
-              Surfers try boards locally, then buy with confidence—no van hauls, no hard sells. It’s a smarter way to showcase
-              eco-friendly gear, convert demos into deposits, and grow beyond word of mouth and social media.
+              From the lens of an independent Southern California surfboard shaper, {DSLink} has the potential
+              to radically simplify and expand his business by addressing key pain points around demo logistics, discovery,
+              trust, and conversion.
             </p>
 
             <section>
