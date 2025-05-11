@@ -42,7 +42,7 @@ const DemoStokeContent = () => {
               </Tabs.Trigger>
             </Tabs.List>
             <Tabs.Content className='TabsContent' value="tab1">
-              <BioBox direction='right' noBottomPadding>
+              <BioBox direction='right' noBottomPadding top>
                 <div className='biobox-inner demostoke-inner'>
                   <div>
                     <FlexBox>

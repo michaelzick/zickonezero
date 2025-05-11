@@ -339,6 +339,7 @@ export const BioBox = styled.div`
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
       ${props => !props.isAboutPage && 'flex-direction: column;'}
+      ${props => props.top && 'padding-top: 3em;'}
     }
 
     @media (max-width: ${THEME.breakpoints.smallTablet}) {
@@ -543,49 +544,56 @@ export const DemoStokeText = styled.div`
 
 // Tabs
 export const TabWrapper = styled.div`
-/* reset */
-button,
-fieldset,
-input {
-	all: unset;
-}
+  /* reset */
+  button,
+  fieldset,
+  input {
+    all: unset;
+  }
 
-.TabsRoot {
-	display: flex;
-	flex-direction: column;
-}
+  .TabsRoot {
+    display: flex;
+    flex-direction: column;
+  }
 
-.TabsList {
-	flex-shrink: 0;
-	display: flex;
-}
+  .TabsList {
+    flex-shrink: 0;
+    display: flex;
+    position: fixed;
+    width: 100%;
+    top: 4.8em;
 
-.TabsTrigger {
-	font-family: inherit;
-	padding: 0 20px;
-	height: 45px;
-	flex: 1;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 15px;
-	line-height: 1;
-	user-select: none;
-  background-color: ${THEME.colors.darkest};
-  cursor: pointer;
-}
+    @media (max-width: ${THEME.breakpoints.largeTablet}) {
+      top: 8.8em;
+    }
+  }
 
-.TabsTrigger:hover {
-	color: var(--violet-11);
-}
+  .TabsTrigger {
+    font-family: inherit;
+    padding: 0 20px;
+    height: 45px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    line-height: 1;
+    user-select: none;
+    background-color: ${THEME.colors.darkest};
+    cursor: pointer;
+  }
 
-.TabsTrigger[data-state="active"] {
-	background-color: ${THEME.colors.white};
-  color: ${THEME.colors.dark};
-}
+  .TabsTrigger:hover {
+    color: var(--violet-11);
+  }
 
-.TabsContent {
-	flex-grow: 1;
-	outline: none;
-}
+  .TabsTrigger[data-state="active"] {
+    background-color: ${THEME.colors.white};
+    color: ${THEME.colors.dark};
+  }
+
+  .TabsContent {
+    flex-grow: 1;
+    outline: none;
+  }
 `;

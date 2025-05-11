@@ -12,7 +12,7 @@ const IndyShaper = () => {
 
   return (
     <>
-      <BioBox direction='right' noBottomPadding>
+      <BioBox direction='right' noBottomPadding top>
         <div className='biobox-inner demostoke-inner'>
           <div>
             <FlexBox>
