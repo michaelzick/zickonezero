@@ -7,11 +7,11 @@ import {
   showMobileMenu,
   getMobileMenuState
 } from '../showMobileMenuSlice';
+import { scrollToTop } from '../helpers';
 
 import {
   BioBox,
   Wrapper,
-  DemoStokeTitle,
   DemoStokeList,
   DemoStokeTable,
   WhiteTransitionAnchor,
@@ -34,10 +34,18 @@ const DemoStokeContent = () => {
         <TabWrapper>
           <Tabs.Root className='TabsRoot' defaultValue={'tab1'}>
             <Tabs.List className='TabsList'>
-              <Tabs.Trigger className='TabsTrigger' value="tab1">
+              <Tabs.Trigger
+                className='TabsTrigger'
+                value="tab1"
+                onClick={scrollToTop}
+              >
                 Executive Summary
               </Tabs.Trigger>
-              <Tabs.Trigger className='TabsTrigger' value="tab2">
+              <Tabs.Trigger
+                className='TabsTrigger'
+                value="tab2"
+                onClick={scrollToTop}
+              >
                 User Stories
               </Tabs.Trigger>
             </Tabs.List>
