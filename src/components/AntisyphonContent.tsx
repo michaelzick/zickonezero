@@ -19,16 +19,32 @@ const AntisyphonContent = () => {
       <TopNavContent />
       <Wrapper isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
+        <BioBox noBottomPadding direction='left'>
+          <div className='biobox-inner'>
+            <div className='product-screenshot'>
+              <img src="/img/antisyphon/home.webp" alt="Antisyphon Home" width='1200' height='663' />
+            </div>
+            <div className='text-wrapper'>
+              <h2 className='gets-mobile-margin'>Antisyphon Training</h2>
+              <br />
+              Initially, I was hired at Black Hills Information Security/Antisyphon Training as a software engineer.
+              However, that role quickly evolved into conceptualizing our new website.
+              <br /><br />
+              I partnered with creative directors and design teams, as well as key stakeholders to create an intuitive
+              experience for cybersecurity professionals.
+            </div>
+          </div>
+        </BioBox>
         <BioBox direction='right' noBottomPadding>
           <div className='biobox-inner'>
             <div className='text-wrapper'>
-              <h2>Antisyphon Training</h2>
+              <h2>E-Commerce Evolution</h2>
               <br />
-              Initially, I was hired at Black Hills Information Security / Antisyphon Training as a software engineer.
-              However, that role quickly evolved into conceptualizing our new website.
-              <br /><br />
               Rather than creating just another static site that linked to third-party platforms, I envisioned an
               intuitive marketplace where users could seamlessly purchase any type of course through a shopping cart experience.
+              <br /><br />
+              This would allow us to offer a wide range of courses, from live events to on-demand training, all in one place.
+              I also envisioned a system that would allow us to easily add new courses and manage existing ones.
             </div>
             <div className='product-screenshot'>
               <img src='/img/antisyphon/cart.webp' alt='Antisyphon Cart' width='1200' height='663' />
@@ -42,8 +58,7 @@ const AntisyphonContent = () => {
               <img src='/img/antisyphon/wireframe-home.webp' alt='Wireframe Home' width='664' height='2641' />
             </div>
             <div className='text-wrapper bottom'>
-              <br /><br />
-              <h2>UX Design</h2>
+              <h2 className='gets-mobile-margin'>UX Design</h2>
               <br />
               Using Figma, I designed over 50 wireframes, refining them through multiple rounds of discussion, feedback, and iterations.
               Since Black Hills Information Security was developing comics, I wanted the site to be both fun and user-friendly, with

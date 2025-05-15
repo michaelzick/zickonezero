@@ -366,6 +366,10 @@ export const BioBox = styled.div`
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
       max-width: 22em;
+
+      h2.gets-mobile-margin {
+        margin-top: 1em;
+      }
     }
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
