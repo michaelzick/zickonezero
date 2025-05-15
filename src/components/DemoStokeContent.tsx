@@ -58,7 +58,9 @@ const DemoStokeContent = () => {
                       <h2 className='tab-header'>Executive Summary</h2>
                     </FlexBox>
                     <p>DemoStoke is a P2P and B2C gear demo marketplace for the action sports industry.</p>
-                    🤙🏻 <WhiteTransitionAnchor href="https://demostoke.lovable.app/" target='_blank' rel='noopener noreferrer'>See the interactive prototype</WhiteTransitionAnchor>
+                    🤙🏻 <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
+                      See the interactive prototype
+                    </WhiteTransitionAnchor>.
                     <section>
                       <h3>TL;DR</h3>
                       <DemoStokeList>
@@ -265,18 +267,11 @@ const DemoStokeContent = () => {
                     <section>
                       <h3>Build Process</h3>
                       <DemoStokeList>
-                        <li>Rapid interactive prototyping using Vite, React, Tailwind, and kickstarted by <WhiteTransitionAnchor href="https://demostoke.lovable.app/" target='_blank' rel='noopener noreferrer'>lovable.dev</WhiteTransitionAnchor>.</li>
-                      </DemoStokeList>
-                    </section>
-                    <section>
-                      <h3>Monetization</h3>
-                      <DemoStokeList>
-                        <li className='monetization'>15% transaction fee on rentals</li>
-                        <li className='monetization'>$49-$99/month for shop demo listings</li>
-                        <li className='monetization'>Add-ons for insurance, affiliate referrals, and sponsored listings</li>
-                        <li className='monetization'>Monthly and yearly subscriptions with different price and demo tiers</li>
-                        <li className='monetization'>Premium and Pro analytics dashboard features</li>
-                        <li className='monetization'>Access to data API</li>
+                        <li>Rapid interactive prototyping using Vite, React, and Tailwind.{' '}
+                          <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
+                            See the prototype
+                          </WhiteTransitionAnchor>.
+                        </li>
                       </DemoStokeList>
                     </section>
                     <section>
@@ -303,7 +298,9 @@ const DemoStokeContent = () => {
                       <h3>Links</h3>
                       <DemoStokeList>
                         <li className='prototype'>
-                          <WhiteTransitionAnchor href="https://demostoke.lovable.app/" target='_blank' rel='noopener noreferrer'>DemoStoke Interactive Prototype</WhiteTransitionAnchor>
+                          <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
+                            DemoStoke Interactive Prototype
+                          </WhiteTransitionAnchor>
                         </li>
                       </DemoStokeList>
                     </section>

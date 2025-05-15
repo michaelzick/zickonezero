@@ -6,7 +6,7 @@ import {
   WhiteTransitionAnchor,
 } from '../../../styles';
 
-const DSLink = <WhiteTransitionAnchor href="https://demostoke.lovable.app/" target='_blank' rel='noopener noreferrer'>DemoStoke</WhiteTransitionAnchor>;
+const DSLink = <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>DemoStoke</WhiteTransitionAnchor>;
 
 const WeekendWarrior = () => {
   return (

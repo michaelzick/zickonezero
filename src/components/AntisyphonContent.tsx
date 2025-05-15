@@ -29,7 +29,6 @@ const AntisyphonContent = () => {
               <br /><br />
               Rather than creating just another static site that linked to third-party platforms, I envisioned an
               intuitive marketplace where users could seamlessly purchase any type of course through a shopping cart experience.
-              {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See&nbsp;the&nbsp;full&nbsp;site</a>.
             </div>
             <div className='product-screenshot'>
               <img src='/img/antisyphon/cart.webp' alt='Antisyphon Cart' width='1200' height='663' />
@@ -52,7 +51,6 @@ const AntisyphonContent = () => {
               <br /><br />
               Once the wireframes were finalized, we hired <a href="https://www.frieddesign.co/" target='_blank' rel='noopener noreferrer'>
                 Fried Design</a>{' '}to craft a unique visual identity for the site, including achievement-style course badges.
-              {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See&nbsp;the&nbsp;full&nbsp;site</a>.
 
               <br /><br />
               <div className='product-screenshot'>
@@ -68,7 +66,6 @@ const AntisyphonContent = () => {
                 This includes sections for Live and On-Demand courses, powered by API queries to track progress, generate certificates, and manage subscriptions.
                 Since our third-party LMS identifies users by email address, we customized account management features to allow updates while clearly warning users of
                 potential consequences.
-                {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See&nbsp;the&nbsp;full&nbsp;site</a>.
                 <br /><br />
                 <div className='product-screenshot'>
                   <img src='/img/antisyphon/wireframe-live-courses.webp' alt='Wireframe Dashboard' width='989' height='1262' />
@@ -92,7 +89,6 @@ const AntisyphonContent = () => {
               <br /><br />
               Surfacing API messages, generating unique IDs, and allowing admins to edit orders were just a few of the key features, much of which we built
               from scratch.
-              {' '}<a href="https://www.antisyphontraining.com" target='_blank' rel='noopener noreferrer'>See&nbsp;the&nbsp;full&nbsp;site</a>.
             </div>
             <br />
             <div className='product-screenshot'>
