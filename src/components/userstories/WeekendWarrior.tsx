@@ -59,7 +59,7 @@ const WeekendWarrior = () => {
                   <p>She sees value in making use of idle gear and appreciates that good reviews could help others trust her listings.</p>
                 </li>
                 <li>
-                  <strong>Flexible membership model:</strong> Krista would pay $50–100/month to try up to 5 boards with insurance included, especially during seasons
+                  <strong>Flexible subscription model:</strong> Krista would pay $50–100/month to try up to 5 boards with insurance included, especially during seasons
                   she’s hunting for a new setup.
                 </li>
               </DemoStokeList>

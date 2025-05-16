@@ -188,7 +188,7 @@ const DemoStokeContent = () => {
                               <td>❌</td>
                             </tr>
                             <tr>
-                              <td>Membership model</td>
+                              <td>Subscription model</td>
                               <td>✅</td>
                               <td>❌</td>
                               <td>❌</td>
@@ -262,7 +262,7 @@ const DemoStokeContent = () => {
                         <li>Search filters by sport, location, and price</li>
                         <li>Mandatory verification with government ID</li>
                       </DemoStokeList>
-                      <p>Out of Scope: payments, insurance, analytics dashboard, in-app messaging, paid membership</p>
+                      <p>Out of Scope: payments, insurance, analytics dashboard, in-app messaging, paid subscription</p>
                     </section>
                     <section>
                       <h3>Build Process</h3>
@@ -291,7 +291,7 @@ const DemoStokeContent = () => {
                         <li className='next-step'>Explore local shop and shaper pilot program</li>
                         <li className='next-step'>Build and test AI-driven quiz and search results</li>
                         <li className='next-step'>Build and test anayltics dashboard</li>
-                        <li className='next-step'>Build and test membership program</li>
+                        <li className='next-step'>Build and test subscription program</li>
                       </DemoStokeList>
                     </section>
                     <section>
