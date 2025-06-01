@@ -18,6 +18,7 @@ import {
   TableWrapper,
   TabWrapper,
   FlexBox,
+  Video,
 } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
 import * as UserStories from './userstories';
@@ -58,6 +59,17 @@ const DemoStokeContent = () => {
                       <h2 className='tab-header'>Executive Summary</h2>
                     </FlexBox>
                     <p>DemoStoke is a P2P and B2C gear demo marketplace for the action sports industry.</p>
+
+                    <Video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                    >
+                      <source src='https://www.dropbox.com/scl/fi/th70vsmd5w0zcrbd0d23u/screen_recording_2025-06-01.mp4?rlkey=961yu81egqp4q0m6apdhd045d&dl&raw=1' type='video/mp4' />
+                    </Video>
+                    <br />
+
                     🤙🏻 <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
                       See the interactive prototype
                     </WhiteTransitionAnchor>.

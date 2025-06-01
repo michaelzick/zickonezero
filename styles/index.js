@@ -601,3 +601,10 @@ export const TabWrapper = styled.div`
     outline: none;
   }
 `;
+
+export const Video = styled.video`
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+`;
