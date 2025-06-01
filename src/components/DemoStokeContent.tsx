@@ -65,6 +65,7 @@ const DemoStokeContent = () => {
                       loop
                       muted
                       playsInline
+                      poster='/img/snowboarders-flying-1125x633.webp'
                     >
                       <source src='https://www.dropbox.com/scl/fi/th70vsmd5w0zcrbd0d23u/screen_recording_2025-06-01.mp4?rlkey=961yu81egqp4q0m6apdhd045d&dl&raw=1' type='video/mp4' />
                     </Video>
