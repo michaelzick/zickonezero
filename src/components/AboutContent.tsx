@@ -23,7 +23,7 @@ const AboutContent = () => {
         onClick={() => dispatch(showMobileMenu(false))}>
         <BioBox isAboutPage>
           <div className='biobox-inner'>
-            <div className='text-wrapper'>
+            <div className='text-wrapper bottom'>
               Michael is a Product Leader and Founder with a strong background in UX design, frontend development,
               DevOps, SEO, and e-commerce platforms. He has hired and led engineering teams to build products from 0 to 1
               under tight deadlines, aligning cross-functional stakeholders in highly ambiguous environments.
@@ -41,7 +41,7 @@ const AboutContent = () => {
                   target='_blank' rel='noopener noreferrer' className='underline'>LinkedIn</a>.
             </div>
             <div className='headshot'>
-              <img src='/img/headshot.webp' alt='headshot' width='350' height='392' />
+              <img src='/img/mt-hood-selfie.webp' alt='Mt. Hood Selfie' width='350' height='392' />
             </div>
           </div>
         </BioBox>
