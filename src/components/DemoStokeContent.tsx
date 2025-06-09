@@ -326,6 +326,7 @@ const DemoStokeContent = () => {
             <Tabs.Content value="tab2">
               <UserStories.IndieShaper />
               <UserStories.WeekendWarrior />
+              <UserStories.SmallSkiBikeShop />
             </Tabs.Content>
           </Tabs.Root>
         </TabWrapper>
