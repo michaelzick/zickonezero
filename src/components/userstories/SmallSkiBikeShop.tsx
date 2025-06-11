@@ -14,7 +14,7 @@ const SmallSkiBikeShop = () => {
       <BioBox direction='right' noBottomPadding someTopPadding>
         <div className='biobox-inner demostoke-inner'>
           <div>
-            <DemoStokeTitle>Small Ski & Bike Shop</DemoStokeTitle>
+            <DemoStokeTitle>The Small Ski & Bike Shop</DemoStokeTitle>
             <p>
               For Jason, the owner of <strong>Town & Country Outfitters</strong>, a high-end ski and bike shop in a mountain town, {DSLink} offers a way to modernize without losing what makes his shop personal and trusted. DemoStoke solves his toughest problems around demo logistics, digital visibility, and customer trust.
             </p>
