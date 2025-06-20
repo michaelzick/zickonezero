@@ -75,7 +75,7 @@ export const Nav = styled.div`
   justify-content: space-between;
   position: fixed;
   z-index: 90;
-  background-color: ${THEME.colors.darkest};
+  background-color: ${THEME.colors.dark};
 
   a {
     transition: all 0.3s;

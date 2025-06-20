@@ -126,129 +126,129 @@ const DemoStokeContent = () => {
                           <tbody>
                             <tr>
                               <td>Try-before-you-buy culture</td>
-                              <td>✅</td>
-                              <td>❌</td>
-                              <td>❌</td>
-                              <td>❌</td>
+                              <td>✓</td>
+                              <td>X</td>
+                              <td>X</td>
+                              <td>X</td>
                             </tr>
                             <tr>
                               <td>Peer-to-Peer (P2P)</td>
-                              <td>✅</td>
-                              <td>❌</td>
-                              <td>✅</td>
-                              <td>✅</td>
+                              <td>✓</td>
+                              <td>X</td>
+                              <td>✓</td>
+                              <td>✓</td>
                             </tr>
                             <tr>
                               <td>Business-to-Consumer (B2C)</td>
-                              <td>✅</td>
-                              <td>✅</td>
-                              <td>❌</td>
-                              <td>❌</td>
+                              <td>✓</td>
+                              <td>✓</td>
+                              <td>X</td>
+                              <td>X</td>
                             </tr>
                             <tr>
                               <td>Indie shapers/local makers</td>
-                              <td>✅</td>
-                              <td>❌</td>
-                              <td>❌</td>
-                              <td>❌</td>
+                              <td>✓</td>
+                              <td>X</td>
+                              <td>X</td>
+                              <td>X</td>
                             </tr>
                             <tr>
                               <td>Lifestyle branding</td>
-                              <td>✅</td>
-                              <td>❌</td>
-                              <td>❌</td>
-                              <td>✅</td>
+                              <td>✓</td>
+                              <td>X</td>
+                              <td>X</td>
+                              <td>✓</td>
                             </tr>
                             <tr>
                               <td>Demo + rental hybrid</td>
-                              <td>✅</td>
-                              <td>❌</td>
-                              <td>❌</td>
-                              <td>❌</td>
+                              <td>✓</td>
+                              <td>X</td>
+                              <td>X</td>
+                              <td>X</td>
                             </tr>
                             <tr>
                               <td>Community features</td>
-                              <td>✅</td>
-                              <td>❌</td>
-                              <td>❌</td>
-                              <td>❌</td>
+                              <td>✓</td>
+                              <td>X</td>
+                              <td>X</td>
+                              <td>X</td>
                             </tr>
                             <tr>
                               <td>Data dashboard for users</td>
-                              <td>✅</td>
-                              <td>✅</td>
-                              <td>❌</td>
-                              <td>❌</td>
+                              <td>✓</td>
+                              <td>✓</td>
+                              <td>X</td>
+                              <td>X</td>
                             </tr>
                             <tr>
                               <td>Data API</td>
-                              <td>✅</td>
-                              <td>❌</td>
-                              <td>❌</td>
-                              <td>❌</td>
+                              <td>✓</td>
+                              <td>X</td>
+                              <td>X</td>
+                              <td>X</td>
                             </tr>
                             <tr>
                               <td>Multi-sport identity</td>
-                              <td>✅</td>
-                              <td>✅</td>
-                              <td>✅</td>
-                              <td>❌</td>
+                              <td>✓</td>
+                              <td>✓</td>
+                              <td>✓</td>
+                              <td>X</td>
                             </tr>
                             <tr>
                               <td>Destination readiness</td>
-                              <td>✅</td>
-                              <td>✅</td>
-                              <td>❌</td>
-                              <td>❌</td>
+                              <td>✓</td>
+                              <td>✓</td>
+                              <td>X</td>
+                              <td>X</td>
                             </tr>
                             <tr>
                               <td>Subscription model</td>
-                              <td>✅</td>
-                              <td>❌</td>
-                              <td>❌</td>
-                              <td>❌</td>
+                              <td>✓</td>
+                              <td>X</td>
+                              <td>X</td>
+                              <td>X</td>
                             </tr>
                             <tr>
                               <td>UX for lifestyle discovery</td>
-                              <td>✅</td>
-                              <td>✅</td>
-                              <td>❌</td>
-                              <td>✅</td>
+                              <td>✓</td>
+                              <td>✓</td>
+                              <td>X</td>
+                              <td>✓</td>
                             </tr>
                             <tr>
                               <td>Verified users</td>
-                              <td>✅</td>
-                              <td>✅</td>
-                              <td>✅</td>
-                              <td>❌</td>
+                              <td>✓</td>
+                              <td>✓</td>
+                              <td>✓</td>
+                              <td>X</td>
                             </tr>
                             <tr>
                               <td>Map-based discovery</td>
-                              <td>✅</td>
-                              <td>✅</td>
-                              <td>✅</td>
-                              <td>✅</td>
+                              <td>✓</td>
+                              <td>✓</td>
+                              <td>✓</td>
+                              <td>✓</td>
                             </tr>
                             <tr>
                               <td>Gear reservations</td>
-                              <td>✅</td>
-                              <td>✅</td>
-                              <td>✅</td>
-                              <td>✅</td>
+                              <td>✓</td>
+                              <td>✓</td>
+                              <td>✓</td>
+                              <td>✓</td>
                             </tr>
                             <tr>
                               <td>Promoted listings</td>
-                              <td>✅</td>
-                              <td>❌</td>
-                              <td>❌</td>
-                              <td>❌</td>
+                              <td>✓</td>
+                              <td>X</td>
+                              <td>X</td>
+                              <td>X</td>
                             </tr>
                             <tr>
                               <td>AI-driven search customization</td>
-                              <td>✅</td>
-                              <td>❌</td>
-                              <td>❌</td>
-                              <td>❌</td>
+                              <td>✓</td>
+                              <td>X</td>
+                              <td>X</td>
+                              <td>X</td>
                             </tr>
                           </tbody>
                         </DemoStokeTable>
