@@ -41,7 +41,7 @@ export const WhiteTransitionAnchor = styled.a`
   color: ${THEME.colors.white};
 
   &:hover {
-    color: ${THEME.colors.grey};
+    color: ${THEME.colors.hotRed};
   }
 `;
 
@@ -85,7 +85,7 @@ export const Nav = styled.div`
     text-decoration: none;
 
     &:hover {
-      color: ${THEME.colors.demostoke};
+      color: ${THEME.colors.hotRed};
     }
   }
 
@@ -200,13 +200,8 @@ export const Thumb = styled.div`
 
   &:hover {
     h3, p {
-      color: ${THEME.colors.grey};
+      color: ${THEME.colors.hotRed};
       cursor: pointer;
-    }
-
-    img {
-      -webkit-filter: grayscale();
-      filter: grayscale();
     }
   }
 
@@ -437,7 +432,7 @@ export const Footer = styled.div`
       color: ${THEME.colors.white};
 
       &:hover {
-        color: ${THEME.colors.grey};
+        color: ${THEME.colors.hotRed};
       }
     }
 
@@ -470,7 +465,6 @@ export const DemoStokeTitle = styled.h2`
 export const DemoStokeList = styled.ul`
   /* background: ${THEME.colors.darkest}; */
   padding: 0.8em 1.8em;
-  border-radius: 4px;
   font-size: 0.9em;
   font-weight: lighter;
   list-style: none;
@@ -549,7 +543,6 @@ export const DemoStokeText = styled.div`
   width: 100%;
   background: ${THEME.colors.darkest};
   padding: 0.8em 1.8em;
-  border-radius: 4px;
   font-size: 0.9em;
   font-weight: lighter;
   border: 1px solid ${THEME.colors.grey};
@@ -590,15 +583,15 @@ export const TabWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 15px;
-    line-height: 1;
+    font-size: 1.2em;
     user-select: none;
     background-color: ${THEME.colors.darkGreen};
     cursor: pointer;
-  }
+    display: block;
 
-  .TabsTrigger:hover {
-    color: var(--violet-11);
+    div {
+      line-height: 48px;
+    }
   }
 
   .TabsTrigger[data-state="active"] {
@@ -617,4 +610,8 @@ export const Video = styled.video`
   height: auto;
   border-radius: 4px;
   display: block;
+`;
+
+export const HotRedTitle = styled.h2`
+  color: ${THEME.colors.hotRed};
 `;

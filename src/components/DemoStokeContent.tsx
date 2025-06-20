@@ -40,14 +40,14 @@ const DemoStokeContent = () => {
                 value="tab1"
                 onClick={scrollToTop}
               >
-                Executive Summary
+                <div>Executive Summary</div>
               </Tabs.Trigger>
               <Tabs.Trigger
                 className='TabsTrigger'
                 value="tab2"
                 onClick={scrollToTop}
               >
-                User Stories
+                <div>User Stories</div>
               </Tabs.Trigger>
             </Tabs.List>
             <Tabs.Content className='TabsContent' value="tab1">
