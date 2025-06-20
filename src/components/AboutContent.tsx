@@ -41,7 +41,7 @@ const AboutContent = () => {
                   target='_blank' rel='noopener noreferrer' className='underline'>LinkedIn</a>.
             </div>
             <div className='headshot'>
-              <img src='/img/mt-hood-selfie.webp' alt='Mt. Hood Selfie' width='350' height='392' />
+              <img src='/img/mt-hood-selfie-resized.jpg' alt='Mt. Hood Selfie' width='350' height='392' />
             </div>
           </div>
         </BioBox>
