@@ -85,7 +85,7 @@ export const Nav = styled.div`
     text-decoration: none;
 
     &:hover {
-      color: ${THEME.colors.grey};
+      color: ${THEME.colors.demostoke};
     }
   }
 
@@ -310,6 +310,12 @@ export const BioBox = styled.div`
       .ds-logo {
         width: 6em;
       }
+
+      section {
+        h3 {
+          color: ${THEME.colors.hotRed};
+        }
+      }
     }
 
     span {
@@ -462,12 +468,14 @@ export const DemoStokeTitle = styled.h2`
 `;
 
 export const DemoStokeList = styled.ul`
-  background: ${THEME.colors.darkest};
+  /* background: ${THEME.colors.darkest}; */
   padding: 0.8em 1.8em;
   border-radius: 4px;
   font-size: 0.9em;
   font-weight: lighter;
   list-style: none;
+  border: 1px solid ${THEME.colors.grey};
+  border-radius: 20px;
 
   li {
     ${props => props.spaced && 'padding: 0.7em 0;'}
@@ -513,6 +521,8 @@ export const TableWrapper = styled.div`
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  border-radius: 20px;
+  border: 1px solid ${THEME.colors.grey};
 
   table {
     min-width: 600px; /* Adjust based on your content */
@@ -530,9 +540,7 @@ export const TableWrapper = styled.div`
 
 export const DemoStokeTable = styled.table`
   width: 100%;
-  background: ${THEME.colors.darkest};
   padding: 0.8em 1.8em;
-  border-radius: 4px;
   font-size: 0.9em;
   font-weight: lighter;
 `;
@@ -544,6 +552,8 @@ export const DemoStokeText = styled.div`
   border-radius: 4px;
   font-size: 0.9em;
   font-weight: lighter;
+  border: 1px solid ${THEME.colors.grey};
+  border-radius: 20px;
 `;
 
 // Tabs
@@ -583,7 +593,7 @@ export const TabWrapper = styled.div`
     font-size: 15px;
     line-height: 1;
     user-select: none;
-    background-color: ${THEME.colors.darkest};
+    background-color: ${THEME.colors.darkGreen};
     cursor: pointer;
   }
 
@@ -592,7 +602,7 @@ export const TabWrapper = styled.div`
   }
 
   .TabsTrigger[data-state="active"] {
-    background-color: ${THEME.colors.white};
+    background-color: ${THEME.colors.hotYellow};
     color: ${THEME.colors.dark};
   }
 

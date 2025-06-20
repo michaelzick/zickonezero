@@ -12,6 +12,9 @@ export const THEME = {
     grey: '#c7c5c5',
     blue: '#0071E3',
     white: '#fff',
-    demostoke: '#00dff7'
+    demostoke: '#00dff7',
+    hotYellow: '#d3ff00',
+    hotRed: '#fe0065',
+    darkGreen: '#01485d',
   }
 };
