@@ -357,7 +357,7 @@ export const BioBox = styled.div`
       color: ${THEME.colors.white};
 
       &:hover {
-        color: ${THEME.colors.grey};
+        color: ${THEME.colors.hotRed};
       }
     }
 
