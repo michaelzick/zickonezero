@@ -39,6 +39,7 @@ export const FlexBox = styled.div`
 export const WhiteTransitionAnchor = styled.a`
   transition: all 0.3s;
   color: ${THEME.colors.white};
+  ${props => props.large && 'font-size: 1.3em;'}
 
   &:hover {
     color: ${THEME.colors.hotRed};

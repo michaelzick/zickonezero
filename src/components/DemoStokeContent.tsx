@@ -58,7 +58,11 @@ const DemoStokeContent = () => {
                       <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' />
                       <h2 className='tab-header'>Executive Summary</h2>
                     </FlexBox>
-                    <p>DemoStoke is a P2P and B2C gear demo marketplace for the action sports industry.</p>
+                    <p>
+                      <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
+                        DemoStoke
+                      </WhiteTransitionAnchor> is the go-to platform to find, try, and buy the gear you’ll eventually fall in love with.
+                    </p>
 
                     <Video
                       autoPlay
@@ -72,9 +76,6 @@ const DemoStokeContent = () => {
                     </Video>
                     <br />
 
-                    🤙🏻 <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
-                      See the interactive prototype
-                    </WhiteTransitionAnchor>.
                     <section>
                       <h3>TL;DR</h3>
                       <DemoStokeList>
@@ -283,7 +284,7 @@ const DemoStokeContent = () => {
                       <DemoStokeList>
                         <li>Rapid interactive prototyping using Vite, React, and Tailwind.{' '}
                           <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
-                            See the prototype
+                            See the full site
                           </WhiteTransitionAnchor>.
                         </li>
                       </DemoStokeList>
@@ -313,7 +314,7 @@ const DemoStokeContent = () => {
                       <DemoStokeList>
                         <li className='prototype'>
                           <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
-                            DemoStoke Interactive Prototype
+                            See the full site
                           </WhiteTransitionAnchor>
                         </li>
                       </DemoStokeList>
