@@ -22,7 +22,7 @@ const AntisyphonContent = () => {
         <BioBox noBottomPadding direction='left'>
           <div className='biobox-inner'>
             <div className='product-screenshot'>
-              <img src="/img/antisyphon/home.webp" alt="Antisyphon Home" width='1200' height='663' />
+              <img src="/img/antisyphon/home.webp" alt="Antisyphon Home" width='1200' height='663' loading='lazy' />
             </div>
             <div className='text-wrapper'>
               <HotRedTitle className='gets-mobile-margin'>Antisyphon Training</HotRedTitle>
@@ -47,7 +47,7 @@ const AntisyphonContent = () => {
               I also envisioned a system that would allow us to easily add new courses and manage existing ones.
             </div>
             <div className='product-screenshot'>
-              <img src='/img/antisyphon/cart.webp' alt='Antisyphon Cart' width='1200' height='663' />
+              <img src='/img/antisyphon/cart.webp' alt='Antisyphon Cart' width='1200' height='663' loading="lazy" />
             </div>
           </div>
         </BioBox>
@@ -55,7 +55,7 @@ const AntisyphonContent = () => {
         <BioBox direction='left' noBottomPadding>
           <div className='biobox-inner'>
             <div className='product-screenshot'>
-              <img src='/img/antisyphon/wireframe-home.webp' alt='Wireframe Home' width='664' height='2641' />
+              <img src='/img/antisyphon/wireframe-home.webp' alt='Wireframe Home' width='664' height='2641' loading="lazy" />
             </div>
             <div className='text-wrapper bottom'>
               <HotRedTitle className='gets-mobile-margin'>UX Design</HotRedTitle>
@@ -69,7 +69,7 @@ const AntisyphonContent = () => {
 
               <br /><br />
               <div className='product-screenshot'>
-                <img src='/img/antisyphon/course-catalog-full.webp' alt='Antisyphon Course Catalog' width='553' height='689' />
+                <img src='/img/antisyphon/course-catalog-full.webp' alt='Antisyphon Course Catalog' width='553' height='689' loading="lazy" />
               </div>
 
               <br /><br />
@@ -83,7 +83,7 @@ const AntisyphonContent = () => {
                 potential consequences.
                 <br /><br />
                 <div className='product-screenshot'>
-                  <img src='/img/antisyphon/wireframe-live-courses.webp' alt='Wireframe Dashboard' width='989' height='1262' />
+                  <img src='/img/antisyphon/wireframe-live-courses.webp' alt='Wireframe Dashboard' width='989' height='1262' loading="lazy" />
                 </div>
               </div>
             </div>
@@ -107,9 +107,9 @@ const AntisyphonContent = () => {
             </div>
             <br />
             <div className='product-screenshot'>
-              <img src='/img/antisyphon/dashboard-my-live-courses-prod.webp' alt='Dashboard Live Courses' width='1200' height='666' />
+              <img src='/img/antisyphon/dashboard-my-live-courses-prod.webp' alt='Dashboard Live Courses' width='1200' height='666' loading="lazy" />
               <br /><br />
-              <img src='/img/antisyphon/admin-course-edit.webp' alt='Admin Course Edit' width='1200' height='666' />
+              <img src='/img/antisyphon/admin-course-edit.webp' alt='Admin Course Edit' width='1200' height='666' loading="lazy" />
             </div>
             <br />
           </div>

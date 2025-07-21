@@ -116,7 +116,7 @@ const DemoStokeContent = () => {
                         By leveraging location-based services, we can help riders find available gear to try before they buy,
                         while also providing a marketplace for gear owners to list their equipment for rent.</p>
 
-                      <Image src='/img/all-equipment-hybrid.webp' alt='DemoStoke Hybrid View' />
+                      <Image src='/img/all-equipment-hybrid.webp' alt='DemoStoke Hybrid View' loading="lazy" />
                       <br />
 
                       <h3>Key Features</h3>
@@ -132,10 +132,10 @@ const DemoStokeContent = () => {
                         <li>Demo events calendar with map and list views.</li>
                       </DemoStokeList>
 
-                      <Image src='/img/events-calendar.webp' alt='DemoStoke Events Calendar' />
+                      <Image src='/img/events-calendar.webp' alt='DemoStoke Events Calendar' loading="lazy" />
                       <br />
                       <br />
-                      <Image src='/img/blog-page.webp' alt='DemoStoke Blog Page' />
+                      <Image src='/img/blog-page.webp' alt='DemoStoke Blog Page' loading="lazy" />
                     </section>
 
                     <section>
@@ -145,7 +145,7 @@ const DemoStokeContent = () => {
                         and a Supabase/PostreSQL backend. Future iterations will include POS/API syncing
                         for real-time inventory management.</p>
 
-                      <Image src='/img/admin-img-download.webp' alt='DemoStoke Admin Image Download' />
+                      <Image src='/img/admin-img-download.webp' alt='DemoStoke Admin Image Download' loading="lazy" />
                     </section>
 
                     <section>
