@@ -55,6 +55,7 @@ export const CommandLine = styled.span`
 
 export const WorkSectionHeader = styled.span`
   font-family: monospace;
+  font-size: 1.4em;
 `;
 
 export const Wrapper = styled.div`

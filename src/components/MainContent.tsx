@@ -56,6 +56,7 @@ const MainContent = () => {
           isManagedWork
         />
 
+        <br />
         <SectionHeader>
           {/* Projects I{"'"}ve <CommandLine>$built</CommandLine> */}
           <WorkSectionHeader>Frontend Development</WorkSectionHeader>

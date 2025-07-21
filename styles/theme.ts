@@ -15,6 +15,6 @@ export const THEME = {
     demostoke: '#00dff7',
     hotYellow: '#d3ff00',
     hotRed: '#fe0065',
-    darkGreen: '#01485d',
+    darkGreen: '#0c4a6e',
   }
 };
