@@ -175,6 +175,12 @@ export const GridContainer = styled.div`
   }
 `;
 
+export const Image = styled.img`
+  width: 100%;
+  border-radius: 20px;
+  border: 1px solid ${THEME.colors.white};
+`;
+
 export const Thumb = styled.div`
   text-align: center;
   font-family: Roboto, sans-serif;
@@ -609,7 +615,8 @@ export const TabWrapper = styled.div`
 export const Video = styled.video`
   width: 100%;
   height: auto;
-  border-radius: 4px;
+  border-radius: 20px;
+  border: 1px solid ${THEME.colors.white};
   display: block;
 `;
 

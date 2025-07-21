@@ -19,6 +19,7 @@ import {
   TabWrapper,
   FlexBox,
   Video,
+  Image
 } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
 import * as UserStories from './userstories';
@@ -80,8 +81,11 @@ const DemoStokeContent = () => {
                       <h3>TL;DR</h3>
                       <DemoStokeList>
                         <li><strong>What it is:</strong> A P2P and B2C platform to find and demo action sports gear from multiple sources.</li>
+                        <br />
                         <li><strong>Problem:</strong> Riders want to try before they buy, but demos are rare, costly, and inconvenient.</li>
+                        <br />
                         <li><strong>Solution:</strong> A location-based marketplace to safely connect riders and lenders.</li>
+                        <br />
                         <li><strong>My Role:</strong> Founder, Head of Product, UX strategist, MVP architect.</li>
                       </DemoStokeList>
                     </section>
@@ -93,16 +97,35 @@ const DemoStokeContent = () => {
 
                       <h3>Current Complaints</h3>
                       <DemoStokeList>
-                        <li className='complaint'>“I want to try before I buy but there’s nothing around me.”</li>
-                        <li className='complaint'>“Shops have limited brands and sizes.”</li>
+                        <li className='complaint'>“I wait in long lines wasting valuable time just to rent.”</li>
+                        <br />
+                        <li className='complaint'>“I can’t find the right gear in my size.”</li>
+                        <br />
                         <li className='complaint'>“I don’t want to buy a $900 surfboard I’ve never ridden.”</li>
+                        <br />
                         <li className='complaint'>“Demo days at the beach or mountain are few and far inbetween.”</li>
-                        <li className='complaint'>“I need more people to try my boards but doing demo days takes me away from shaping.”</li>
-                        <li className='complaint'>“It would be cool to have all available demos, no matter who they’re from, in one place.”</li>
-                        <li className='complaint'>“Could I have the demo shipped to me so I don’t waste time picking it up?”</li>
+                        <br />
                         <li className='complaint'>“Demo boards at the resort are expensive and they have a limited selection.”</li>
-                        <li className='complaint'>“I want to try multiple pairs of skis before buying, but that gets very expensive.”</li>
-                        <li className='complaint'>“I’d like to get more people into my shop but I have a limited ad budget.”</li>
+                      </DemoStokeList>
+                    </section>
+                    <section>
+                      <h3>The Solution</h3>
+                      <p>A comprehensive gear discovery and rental platform that connects riders with demo opportunities in their area.
+                        By leveraging location-based services, we can help riders find available gear to try before they buy,
+                        while also providing a marketplace for gear owners to list their equipment for rent.</p>
+
+                      <Image src='/img/all-equipment-hybrid.webp' alt='DemoStoke Screenshot' />
+                      <br />
+                      <DemoStokeList>
+                        <li className='complaint'>“I wait in long lines wasting valuable time just to rent.”</li>
+                        <br />
+                        <li className='complaint'>“I can’t find the right gear in my size.”</li>
+                        <br />
+                        <li className='complaint'>“I don’t want to buy a $900 surfboard I’ve never ridden.”</li>
+                        <br />
+                        <li className='complaint'>“Demo days at the beach or mountain are few and far inbetween.”</li>
+                        <br />
+                        <li className='complaint'>“Demo boards at the resort are expensive and they have a limited selection.”</li>
                       </DemoStokeList>
                     </section>
                     <section>
