@@ -89,11 +89,12 @@ const DemoStokeContent = () => {
                         <li><strong>My Role:</strong> Founder, Head of Product, UX strategist, MVP architect.</li>
                       </DemoStokeList>
                     </section>
+
                     <section>
                       <h3>The Problem</h3>
                       <p>Demo opportunities for rideable gear are limited, inconvenient, or nonexistent.
-                        Many riders either blindly purchase expensive equipment or wait for infrequent on-site demos.
-                        Meanwhile, gear sits unused in garages, with no unifying platform to connect owners and riders.</p>
+                        Many riders either blindly purchase expensive equipment or wait for infrequent on-site demos,
+                        often leading to mismatched gear choices and wasted spending.</p>
 
                       <h3>Current Complaints</h3>
                       <DemoStokeList>
@@ -108,6 +109,7 @@ const DemoStokeContent = () => {
                         <li className='complaint'>“Demo boards at the resort are expensive and they have a limited selection.”</li>
                       </DemoStokeList>
                     </section>
+
                     <section>
                       <h3>The Solution</h3>
                       <p>A comprehensive gear discovery and rental platform that connects riders with demo opportunities in their area.
@@ -116,22 +118,31 @@ const DemoStokeContent = () => {
 
                       <Image src='/img/all-equipment-hybrid.webp' alt='DemoStoke Screenshot' />
                       <br />
+
+                      <h3>Key Features</h3>
                       <DemoStokeList>
-                        <li className='complaint'>“I wait in long lines wasting valuable time just to rent.”</li>
+                        <li>Map and list-based gear discovery</li>
                         <br />
-                        <li className='complaint'>“I can’t find the right gear in my size.”</li>
+                        <li>Gear and owner profile pages</li>
                         <br />
-                        <li className='complaint'>“I don’t want to buy a $900 surfboard I’ve never ridden.”</li>
+                        <li>Search filters by sport, location, and price</li>
                         <br />
-                        <li className='complaint'>“Demo days at the beach or mountain are few and far inbetween.”</li>
+                        <li>Reviews, guides, and lifestyle content</li>
                         <br />
-                        <li className='complaint'>“Demo boards at the resort are expensive and they have a limited selection.”</li>
+                        <li>Demo events calendar with map and list views</li>
                       </DemoStokeList>
+
+                      <Image src='/img/events-calendar.webp' alt='DemoStoke Screenshot' />
+                      <br />
+                      <br />
+                      <Image src='/img/blog-page.webp' alt='DemoStoke Screenshot' />
                     </section>
+
                     <section>
                       <h3>Market Research & Competitive Analysis</h3>
                       <DemoStokeList>
                         <li className='interview'>I conducted user interviews and surveys with riders across snow, surf, and skate.</li>
+                        <br />
                         <li className='learning'><strong>Key insight:</strong> People would pay to demo gear if trust and ease were guaranteed.</li>
                       </DemoStokeList>
 
@@ -289,19 +300,8 @@ const DemoStokeContent = () => {
                         <li className='persona'><strong>Local Shaper:</strong> Dustin (38, Ventura) is a known surfboard shaper trying to grow his reputation. He wants to organize demos and track who rides his boards but lacks the tools. He wants DemoStoke to offer a shaper-specific feature, demo tracking, and review visibility.</li>
                         <li className='persona'><strong>Quiver Lender:</strong> Jessie (27, Encinitas) is a yoga instructor with extra boards. She wants to earn passive income but doesn’t trust Craigslist. She wants DemoStoke to provide a smooth listing flow, damage protection, reviews, verified users, and an earnings dashboard.</li>
                       </DemoStokeList>
+                    </section>
 
-                    </section>
-                    <section>
-                      <h3>MVP & UX Strategy</h3>
-                      <p>I focused on minimizing friction while maximizing trust. Key MVP features:</p>
-                      <DemoStokeList>
-                        <li>Map and list-based gear discovery</li>
-                        <li>Gear profile pages</li>
-                        <li>Search filters by sport, location, and price</li>
-                        <li>Mandatory verification with government ID</li>
-                      </DemoStokeList>
-                      <p>Out of Scope: payments, insurance, analytics dashboard, in-app messaging, paid subscription</p>
-                    </section>
                     <section>
                       <h3>Build Process</h3>
                       <DemoStokeList>
@@ -312,26 +312,19 @@ const DemoStokeContent = () => {
                         </li>
                       </DemoStokeList>
                     </section>
+
                     <section>
                       <h3>Learnings</h3>
                       <p>This case study was born from real interviews and market gaps. I learned:</p>
                       <DemoStokeList>
                         <li className='learning'>User trust is central to any peer-based platform.</li>
+                        <br />
                         <li className='learning'>UX must speak the cultural language of the target audience.</li>
+                        <br />
                         <li className='learning'>Foundational research is everything; it’s all about solving pain points.</li>
                       </DemoStokeList>
                     </section>
-                    <section>
-                      <h3>Next Steps</h3>
-                      <DemoStokeList>
-                        <li className='next-step'>Conduct field testing with riders in Tahoe and SoCal</li>
-                        <li className='next-step'>Increase gear listings via referral/early access program</li>
-                        <li className='next-step'>Explore local shop and shaper pilot program</li>
-                        <li className='next-step'>Build and test AI-driven quiz and search results</li>
-                        <li className='next-step'>Build and test anayltics dashboard</li>
-                        <li className='next-step'>Build and test subscription program</li>
-                      </DemoStokeList>
-                    </section>
+
                     <section>
                       <h3>Links</h3>
                       <DemoStokeList>
