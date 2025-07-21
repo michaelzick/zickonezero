@@ -98,13 +98,13 @@ const DemoStokeContent = () => {
 
                       <h3>Current Complaints</h3>
                       <DemoStokeList>
-                        <li className='complaint'>“I wait in long lines wasting valuable time just to rent.”</li>
+                        <li className='complaint'>“I wait in long rental lines without knowing if they have what I want.”</li>
                         <br />
                         <li className='complaint'>“I can’t find the right gear in my size.”</li>
                         <br />
                         <li className='complaint'>“I don’t want to buy a $900 surfboard I’ve never ridden.”</li>
                         <br />
-                        <li className='complaint'>“Demo days at the beach or mountain are few and far inbetween.”</li>
+                        <li className='complaint'>“Demo days at the beach or mountain are few and far in between.”</li>
                         <br />
                         <li className='complaint'>“Demo boards at the resort are expensive and they have a limited selection.”</li>
                       </DemoStokeList>
@@ -116,26 +116,36 @@ const DemoStokeContent = () => {
                         By leveraging location-based services, we can help riders find available gear to try before they buy,
                         while also providing a marketplace for gear owners to list their equipment for rent.</p>
 
-                      <Image src='/img/all-equipment-hybrid.webp' alt='DemoStoke Screenshot' />
+                      <Image src='/img/all-equipment-hybrid.webp' alt='DemoStoke Hybrid View' />
                       <br />
 
                       <h3>Key Features</h3>
                       <DemoStokeList>
-                        <li>Map and list-based gear discovery</li>
+                        <li>Map and list-based gear discovery.</li>
                         <br />
-                        <li>Gear and owner profile pages</li>
+                        <li>Gear and owner profile pages.</li>
                         <br />
-                        <li>Search filters by sport, location, and price</li>
+                        <li>Filter gear by category, location, and price.</li>
                         <br />
-                        <li>Reviews, guides, and lifestyle content</li>
+                        <li>Reviews, guides, and lifestyle content.</li>
                         <br />
-                        <li>Demo events calendar with map and list views</li>
+                        <li>Demo events calendar with map and list views.</li>
                       </DemoStokeList>
 
-                      <Image src='/img/events-calendar.webp' alt='DemoStoke Screenshot' />
+                      <Image src='/img/events-calendar.webp' alt='DemoStoke Events Calendar' />
                       <br />
                       <br />
-                      <Image src='/img/blog-page.webp' alt='DemoStoke Screenshot' />
+                      <Image src='/img/blog-page.webp' alt='DemoStoke Blog Page' />
+                    </section>
+
+                    <section>
+                      <h3>Admin Dashboard</h3>
+                      <p>In addition to the client-facing site, DemoStoke is a full-featured admin dashboard
+                        for managing users, gear listings, and demo events, built with a React frontend
+                        and a Supabase/PostreSQL backend. Future iterations will include POS/API syncing
+                        for real-time inventory management.</p>
+
+                      <Image src='/img/admin-img-download.webp' alt='DemoStoke Admin Image Download' />
                     </section>
 
                     <section>
