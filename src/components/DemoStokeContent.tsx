@@ -70,9 +70,9 @@ const DemoStokeContent = () => {
                       loop
                       muted
                       playsInline
-                      poster='/img/homepage_2025-07-22.webp'
+                      poster='/img/homepage_light_2025-07-22.webp'
                     >
-                      <source src='/video/homepage_scroll_2025-07-22.mp4' type='video/mp4' />
+                      <source src='/video/homepage_scroll_light_2025-07-22.mp4' type='video/mp4' />
                       <source src='' type='video/mp4' />
                     </Video>
                     <br />
