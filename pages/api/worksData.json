@@ -108,5 +108,13 @@
     "desc": "Action sports gear demo service (founder-initiated case study)",
     "header": "DemoStoke",
     "group": "demostoke"
+  },
+  {
+    "thumb": "/img/squares/king-512.webp",
+    "imgs": [],
+    "desc": "Internal Family Systems journaling site",
+    "header": "Who’s In Charge?",
+    "group": "wic",
+    "link": "https://whosincharge.zickonezero.com/"
   }
 ]

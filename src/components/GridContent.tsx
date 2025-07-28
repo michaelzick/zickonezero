@@ -16,7 +16,7 @@ const GridContent = (props: Props) => {
         {worksDataReversed.map((item, index) => {
           const { group } = item;
 
-          if (index < 2) {
+          if (index < 3) {
             return (
               <Thumbnail
                 key={group}
@@ -37,7 +37,7 @@ const GridContent = (props: Props) => {
         {worksDataReversed.map((item, index) => {
           const { group } = item;
 
-          if (index > 1) {
+          if (index > 2) {
             return (
               <Thumbnail
                 key={group}
