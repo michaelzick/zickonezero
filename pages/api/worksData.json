@@ -100,14 +100,16 @@
     "imgs": [],
     "desc": "Cybersecurity training marketplace and CMS",
     "header": "Antisyphon Training",
-    "group": "antisyphon-training"
+    "group": "antisyphon-training",
+    "link": "/antisyphon-training"
   },
   {
     "thumb": "/img/squares/demostoke-logo-ds-transparent-cropped.webp",
     "imgs": [],
     "desc": "Action sports gear demo service (founder-initiated case study)",
     "header": "DemoStoke",
-    "group": "demostoke"
+    "group": "demostoke",
+    "link": "/demostoke"
   },
   {
     "thumb": "/img/squares/king-512.webp",
@@ -115,6 +117,7 @@
     "desc": "Internal Family Systems journaling site",
     "header": "Who’s In Charge?",
     "group": "wic",
-    "link": "https://whosincharge.zickonezero.com/"
+    "link": "https://whosincharge.zickonezero.com/",
+    "linkOut": true
   }
 ]
