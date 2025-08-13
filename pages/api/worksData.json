@@ -96,6 +96,24 @@
     "group": "saatchi"
   },
   {
+    "thumb": "/img/squares/king-512.webp",
+    "imgs": [],
+    "desc": "Internal Family Systems journaling app",
+    "header": "Who’s In Charge?",
+    "group": "wic",
+    "link": "https://whosincharge.zickonezero.com/",
+    "linkOut": true
+  },
+  {
+    "thumb": "/img/squares/mz-ppc-logo.webp",
+    "imgs": [],
+    "desc": "General information and booking site for Michael Zick Coaching",
+    "header": "Michael Zick Coaching",
+    "group": "michaelzickcoaching",
+    "link": "https://www.michaelzick.com/",
+    "linkOut": true
+  },
+  {
     "thumb": "/img/squares/at_logo_purple.webp",
     "imgs": [],
     "desc": "Cybersecurity training marketplace and CMS",
@@ -110,14 +128,5 @@
     "header": "DemoStoke",
     "group": "demostoke",
     "link": "/demostoke"
-  },
-  {
-    "thumb": "/img/squares/king-512.webp",
-    "imgs": [],
-    "desc": "Internal Family Systems journaling site",
-    "header": "Who’s In Charge?",
-    "group": "wic",
-    "link": "https://whosincharge.zickonezero.com/",
-    "linkOut": true
   }
 ]
