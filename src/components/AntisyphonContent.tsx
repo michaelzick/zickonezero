@@ -6,6 +6,9 @@ import {
   showMobileMenu,
   getMobileMenuState
 } from '../showMobileMenuSlice';
+import { useState } from 'react';
+
+import FsLightbox from 'fslightbox-react';
 
 import { BioBox, Wrapper, HotRedTitle } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
@@ -13,6 +16,30 @@ import { TopNavContent, FooterContent } from '.';
 const AntisyphonContent = () => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
+
+  // All images on the page for lightbox
+  const imagesSources = [
+    "/img/antisyphon/home.webp",
+    "/img/antisyphon/cart.webp",
+    "/img/antisyphon/wireframe-home.webp",
+    "/img/antisyphon/course-catalog-full.webp",
+    "/img/antisyphon/wireframe-live-courses.webp",
+    "/img/antisyphon/dashboard-my-live-courses-prod.webp",
+    "/img/antisyphon/admin-course-edit.webp"
+  ];
+
+  // For lightbox
+  const [lightboxController, setLightboxController] = useState({
+    toggler: false,
+    slide: 1
+  });
+
+  const openLightbox = (imageIndex: number) => {
+    setLightboxController({
+      toggler: !lightboxController.toggler,
+      slide: imageIndex + 1 // FsLightbox uses 1-based indexing
+    });
+  };
 
   return (
     <>
@@ -22,7 +49,15 @@ const AntisyphonContent = () => {
         <BioBox noBottomPadding direction='left'>
           <div className='biobox-inner'>
             <div className='product-screenshot'>
-              <img src="/img/antisyphon/home.webp" alt="Antisyphon Home" width='1200' height='663' loading='lazy' />
+              <img
+                src="/img/antisyphon/home.webp"
+                alt="Antisyphon Home"
+                width='1200'
+                height='663'
+                loading='lazy'
+                onClick={() => openLightbox(0)}
+                style={{ cursor: 'pointer' }}
+              />
             </div>
             <div className='text-wrapper'>
               <HotRedTitle className='gets-mobile-margin'>Antisyphon Training</HotRedTitle>
@@ -47,7 +82,15 @@ const AntisyphonContent = () => {
               I also envisioned a system that would allow us to easily add new courses and manage existing ones.
             </div>
             <div className='product-screenshot'>
-              <img src='/img/antisyphon/cart.webp' alt='Antisyphon Cart' width='1200' height='663' loading="lazy" />
+              <img
+                src='/img/antisyphon/cart.webp'
+                alt='Antisyphon Cart'
+                width='1200'
+                height='663'
+                loading="lazy"
+                onClick={() => openLightbox(1)}
+                style={{ cursor: 'pointer' }}
+              />
             </div>
           </div>
         </BioBox>
@@ -55,7 +98,15 @@ const AntisyphonContent = () => {
         <BioBox direction='left' noBottomPadding>
           <div className='biobox-inner'>
             <div className='product-screenshot'>
-              <img src='/img/antisyphon/wireframe-home.webp' alt='Wireframe Home' width='664' height='2641' loading="lazy" />
+              <img
+                src='/img/antisyphon/wireframe-home.webp'
+                alt='Wireframe Home'
+                width='664'
+                height='2641'
+                loading="lazy"
+                onClick={() => openLightbox(2)}
+                style={{ cursor: 'pointer' }}
+              />
             </div>
             <div className='text-wrapper bottom'>
               <HotRedTitle className='gets-mobile-margin'>UX Design</HotRedTitle>
@@ -69,7 +120,15 @@ const AntisyphonContent = () => {
 
               <br /><br />
               <div className='product-screenshot'>
-                <img src='/img/antisyphon/course-catalog-full.webp' alt='Antisyphon Course Catalog' width='553' height='689' loading="lazy" />
+                <img
+                  src='/img/antisyphon/course-catalog-full.webp'
+                  alt='Antisyphon Course Catalog'
+                  width='553'
+                  height='689'
+                  loading="lazy"
+                  onClick={() => openLightbox(3)}
+                  style={{ cursor: 'pointer' }}
+                />
               </div>
 
               <br /><br />
@@ -83,7 +142,15 @@ const AntisyphonContent = () => {
                 potential consequences.
                 <br /><br />
                 <div className='product-screenshot'>
-                  <img src='/img/antisyphon/wireframe-live-courses.webp' alt='Wireframe Dashboard' width='989' height='1262' loading="lazy" />
+                  <img
+                    src='/img/antisyphon/wireframe-live-courses.webp'
+                    alt='Wireframe Dashboard'
+                    width='989'
+                    height='1262'
+                    loading="lazy"
+                    onClick={() => openLightbox(4)}
+                    style={{ cursor: 'pointer' }}
+                  />
                 </div>
               </div>
             </div>
@@ -107,15 +174,37 @@ const AntisyphonContent = () => {
             </div>
             <br />
             <div className='product-screenshot'>
-              <img src='/img/antisyphon/dashboard-my-live-courses-prod.webp' alt='Dashboard Live Courses' width='1200' height='666' loading="lazy" />
+              <img
+                src='/img/antisyphon/dashboard-my-live-courses-prod.webp'
+                alt='Dashboard Live Courses'
+                width='1200'
+                height='666'
+                loading="lazy"
+                onClick={() => openLightbox(5)}
+                style={{ cursor: 'pointer' }}
+              />
               <br /><br />
-              <img src='/img/antisyphon/admin-course-edit.webp' alt='Admin Course Edit' width='1200' height='666' loading="lazy" />
+              <img
+                src='/img/antisyphon/admin-course-edit.webp'
+                alt='Admin Course Edit'
+                width='1200'
+                height='666'
+                loading="lazy"
+                onClick={() => openLightbox(6)}
+                style={{ cursor: 'pointer' }}
+              />
             </div>
             <br />
           </div>
         </BioBox>
       </Wrapper>
       <FooterContent />
+
+      <FsLightbox
+        toggler={lightboxController.toggler}
+        sources={imagesSources}
+        slide={lightboxController.slide}
+      />
     </>
   );
 };
