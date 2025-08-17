@@ -50,13 +50,13 @@ const AntisyphonContent = () => {
           <div className='biobox-inner'>
             <div className='product-screenshot'>
               <img
+                className="antisyphon-image"
                 src="/img/antisyphon/home.webp"
                 alt="Antisyphon Home"
                 width='1200'
                 height='663'
                 loading='lazy'
                 onClick={() => openLightbox(0)}
-                style={{ cursor: 'pointer' }}
               />
             </div>
             <div className='text-wrapper'>
@@ -83,13 +83,13 @@ const AntisyphonContent = () => {
             </div>
             <div className='product-screenshot'>
               <img
+                className="antisyphon-image"
                 src='/img/antisyphon/cart.webp'
                 alt='Antisyphon Cart'
                 width='1200'
                 height='663'
                 loading="lazy"
                 onClick={() => openLightbox(1)}
-                style={{ cursor: 'pointer' }}
               />
             </div>
           </div>
@@ -99,13 +99,13 @@ const AntisyphonContent = () => {
           <div className='biobox-inner'>
             <div className='product-screenshot'>
               <img
+                className="antisyphon-image"
                 src='/img/antisyphon/wireframe-home.webp'
                 alt='Wireframe Home'
                 width='664'
                 height='2641'
                 loading="lazy"
                 onClick={() => openLightbox(2)}
-                style={{ cursor: 'pointer' }}
               />
             </div>
             <div className='text-wrapper bottom'>
@@ -121,13 +121,13 @@ const AntisyphonContent = () => {
               <br /><br />
               <div className='product-screenshot'>
                 <img
+                  className="antisyphon-image"
                   src='/img/antisyphon/course-catalog-full.webp'
                   alt='Antisyphon Course Catalog'
                   width='553'
                   height='689'
                   loading="lazy"
                   onClick={() => openLightbox(3)}
-                  style={{ cursor: 'pointer' }}
                 />
               </div>
 
@@ -143,13 +143,13 @@ const AntisyphonContent = () => {
                 <br /><br />
                 <div className='product-screenshot'>
                   <img
+                    className="antisyphon-image"
                     src='/img/antisyphon/wireframe-live-courses.webp'
                     alt='Wireframe Dashboard'
                     width='989'
                     height='1262'
                     loading="lazy"
                     onClick={() => openLightbox(4)}
-                    style={{ cursor: 'pointer' }}
                   />
                 </div>
               </div>
@@ -175,23 +175,23 @@ const AntisyphonContent = () => {
             <br />
             <div className='product-screenshot'>
               <img
+                className="antisyphon-image"
                 src='/img/antisyphon/dashboard-my-live-courses-prod.webp'
                 alt='Dashboard Live Courses'
                 width='1200'
                 height='666'
                 loading="lazy"
                 onClick={() => openLightbox(5)}
-                style={{ cursor: 'pointer' }}
               />
               <br /><br />
               <img
+                className="antisyphon-image"
                 src='/img/antisyphon/admin-course-edit.webp'
                 alt='Admin Course Edit'
                 width='1200'
                 height='666'
                 loading="lazy"
                 onClick={() => openLightbox(6)}
-                style={{ cursor: 'pointer' }}
               />
             </div>
             <br />

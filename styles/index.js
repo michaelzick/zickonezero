@@ -343,6 +343,16 @@ export const BioBox = styled.div`
         width: 100%;
         height: auto;
         border-radius: 4px;
+
+        &.antisyphon-image {
+          cursor: pointer;
+          border: 4px solid transparent;
+          transition: border 0.3s ease;
+
+          &:hover {
+            border-color: ${THEME.colors.hotRed};
+          }
+        }
       }
     }
 
