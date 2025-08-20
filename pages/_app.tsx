@@ -31,7 +31,7 @@ function MyApp({
 
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-          <title>ZICKONEZERO Product & Engineering</title>
+          <title>ZICKONEZERO Creative</title>
           <HeadContent />
         </Head>
 
