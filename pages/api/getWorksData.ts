@@ -1,16 +1,12 @@
+import worksData from './worksData.json';
+
 const getWorksData = async () => {
   try {
-    const fetchData = await fetch(
-      `${process.env.NODE_ENV === 'production' ?
-        'https://www.zickonezero.com' :
-        'http://localhost:3000'}/api`
-    );
-    console.log(process.env.NODE_ENV)
-    const dataJson = await fetchData.json();
-    const { worksData } = dataJson;
-    return worksData.reverse();
+    // For static export, directly use the imported data instead of making HTTP requests
+    return [...worksData].reverse();
   } catch (error) {
-    return [{ error }];
+    console.error('Error processing works data:', error);
+    return [];
   }
 };
 
