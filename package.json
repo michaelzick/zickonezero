@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next build",
     "build-storybook": "storybook build",
     "start": "next start",
     "lint": "next lint",
