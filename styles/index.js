@@ -167,7 +167,7 @@ export const GridContainer = styled.div`
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 85em;
+    max-width: 100em;
 
     @media (max-width: ${THEME.breakpoints.phone}) {
       width: 100%;
@@ -185,7 +185,7 @@ export const Image = styled.img`
 export const Thumb = styled.div`
   text-align: center;
   font-family: Roboto, sans-serif;
-  margin: 3em 3em 1.5em;
+  margin: 3em 2em 1.5em;
   color: ${THEME.colors.white};
 
   img {
