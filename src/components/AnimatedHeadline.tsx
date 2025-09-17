@@ -8,10 +8,10 @@ import {
 } from '../../styles';
 
 const HEADLINE_PHRASES = [
-  'UX Designer',
-  'AI-Assisted Prototyper',
-  'React Developer',
-  'Product Leader'
+  'UX Design',
+  'AI-Assisted Prototyping',
+  'React Development',
+  'Product Leadership'
 ] as const;
 
 const LONGEST_PHRASE = HEADLINE_PHRASES.reduce((longest, phrase) =>
@@ -24,9 +24,9 @@ const AnimatedHeadline = () => {
   return (
     <AnimatedHeadlineWrapper
       role="text"
-      aria-label="I'm an accomplished UX Designer, AI-Assisted Prototyper, React Developer, Product Leader"
+      aria-label="Roles & Abilities: UX Design, AI-Assisted Prototyping, React Development, Product Leadership"
     >
-      <AnimatedHeadlineStatic>I’m an accomplished</AnimatedHeadlineStatic>
+      <AnimatedHeadlineStatic>Roles & Abilities:</AnimatedHeadlineStatic>
       <AnimatedHeadlineDynamic aria-hidden="true">
         <AnimatedHeadlineSizer aria-hidden="true">{LONGEST_PHRASE}</AnimatedHeadlineSizer>
         <AnimatedHeadlineTrack>
