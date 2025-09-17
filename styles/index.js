@@ -81,6 +81,12 @@ export const AnimatedHeadlineWrapper = styled.h1`
   line-height: 1.1;
   text-align: left;
 
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+    font-size: clamp(2.6rem, 6.2vw, 3.8rem);
+    margin: 0 auto 1.4em;
+    padding: 0 1.5em;
+  }
+
   @media (max-width: ${THEME.breakpoints.phone}) {
     font-size: clamp(2.1rem, 7vw, 3.1rem);
     gap: 0.25em;
@@ -100,7 +106,7 @@ export const AnimatedHeadlineDynamic = styled.span`
   display: inline-flex;
   align-items: baseline;
   overflow: hidden;
-  height: 1.25em;
+  min-height: 1.25em;
   line-height: 1.25;
   min-width: 0;
 `;
@@ -118,7 +124,7 @@ export const AnimatedHeadlinePhrase = styled.span`
   display: inline-flex;
   align-items: center;
   width: 100%;
-  height: 1.25em;
+  min-height: 1.25em;
   line-height: 1.25;
   color: ${THEME.colors.hotRed};
   transform: translateY(100%);
@@ -131,10 +137,10 @@ export const AnimatedHeadlinePhrase = styled.span`
 export const AnimatedHeadlineSizer = styled.span`
   visibility: hidden;
   pointer-events: none;
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  height: 1.25em;
+  display: block;
+  width: 100%;
+  min-height: 1.25em;
+  white-space: normal;
 `;
 
 export const Wrapper = styled.div`
