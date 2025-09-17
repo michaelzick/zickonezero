@@ -1,5 +1,12 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { THEME } from './theme';
+
+const phraseCycle = keyframes`
+  0%, 25% { transform: translateY(0); opacity: 1; }
+  30% { transform: translateY(-100%); opacity: 0; }
+  31%, 100% { transform: translateY(100%); opacity: 0; }
+`;
+
 
 export const Container = styled.div`
   background-size: cover;
@@ -58,6 +65,78 @@ export const WorkSectionHeader = styled.span`
   font-size: 1.4em;
 `;
 
+export const AnimatedHeadlineWrapper = styled.h1`
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.35em;
+  max-width: 100em;
+  width: 100%;
+  margin: 0 auto 1.75em;
+  padding: 0 1.75em;
+  color: ${THEME.colors.white};
+  font-family: Roboto, sans-serif;
+  font-size: clamp(2.4rem, 5.8vw, 4.4rem);
+  font-weight: 500;
+  line-height: 1.1;
+  text-align: left;
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    font-size: clamp(2.1rem, 7vw, 3.1rem);
+    gap: 0.25em;
+    margin: 0 auto 1.2em;
+    padding: 0 1.25em;
+  }
+`;
+
+export const AnimatedHeadlineStatic = styled.span`
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: baseline;
+`;
+
+export const AnimatedHeadlineDynamic = styled.span`
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  overflow: hidden;
+  height: 1.1em;
+  line-height: 1.1;
+  min-width: 0;
+`;
+
+export const AnimatedHeadlineTrack = styled.span`
+  position: absolute;
+  inset: 0;
+  display: block;
+`;
+
+export const AnimatedHeadlinePhrase = styled.span`
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  height: 1.1em;
+  line-height: 1.1;
+  color: ${THEME.colors.hotRed};
+  transform: translateY(100%);
+  opacity: 0;
+  animation: ${phraseCycle} 16s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+  animation-fill-mode: both;
+  will-change: transform, opacity;
+`;
+
+export const AnimatedHeadlineSizer = styled.span`
+  visibility: hidden;
+  pointer-events: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  height: 1.1em;
+`;
+
 export const Wrapper = styled.div`
   ${props => props.isHomePage ? 'padding-top: 7.7em;' : 'padding-top: 5em;'}
   min-height: 84%;
@@ -66,6 +145,10 @@ export const Wrapper = styled.div`
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     ${props => props.isHomePage ? 'padding-top: 12em;' : 'padding-top: 9em;'}
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    ${props => props.isHomePage ? 'padding-top: 4.6em;' : 'padding-top: 4em;'}
   }
 `;
 

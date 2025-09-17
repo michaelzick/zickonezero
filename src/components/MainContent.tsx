@@ -13,7 +13,7 @@ import { useState, memo } from 'react';
 
 import FsLightbox from 'fslightbox-react';
 
-import { TopNavContent, GridContent, FooterContent } from '.';
+import { TopNavContent, GridContent, FooterContent, AnimatedHeadline } from '.';
 import { SectionHeader, Wrapper, WorkSectionHeader } from '../../styles';
 
 const MainContent = () => {
@@ -45,6 +45,8 @@ const MainContent = () => {
 
       <Wrapper isHomePage isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
+        <AnimatedHeadline />
+
         <SectionHeader>
           {/* Projects I{"'"}ve <CommandLine>#managed</CommandLine> */}
           <WorkSectionHeader>Product Development + Design</WorkSectionHeader>
