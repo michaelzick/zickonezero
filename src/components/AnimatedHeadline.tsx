@@ -9,14 +9,14 @@ import {
 
 const HEADLINE_PHRASES = [
   'UX Design',
-  'AI-Assisted Prototyping',
-  'React Development',
-  'Product Leadership'
+  'Prototyping',
+  'Product Leadership',
+  'Web Development'
 ] as const;
 
 const LONGEST_PHRASE = HEADLINE_PHRASES.reduce((longest, phrase) =>
   phrase.length > longest.length ? phrase : longest
-, HEADLINE_PHRASES[0]);
+  , HEADLINE_PHRASES[0]);
 
 const PHRASE_DURATION_MS = 4000;
 
@@ -24,9 +24,9 @@ const AnimatedHeadline = () => {
   return (
     <AnimatedHeadlineWrapper
       role="text"
-      aria-label="Roles & Abilities: UX Design, AI-Assisted Prototyping, React Development, Product Leadership"
+      aria-label="Michael enjoys UX Design, Prototyping, Product Leadership, Web Development"
     >
-      <AnimatedHeadlineStatic>Roles & Abilities:</AnimatedHeadlineStatic>
+      {/* <AnimatedHeadlineStatic>Michael enjoys</AnimatedHeadlineStatic> */}
       <AnimatedHeadlineDynamic aria-hidden="true">
         <AnimatedHeadlineSizer aria-hidden="true">{LONGEST_PHRASE}</AnimatedHeadlineSizer>
         <AnimatedHeadlineTrack>

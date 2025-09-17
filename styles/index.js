@@ -124,7 +124,7 @@ export const AnimatedHeadlinePhrase = styled.span`
   transform: translateY(100%);
   opacity: 0;
   animation: ${phraseCycle} 16s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
-  animation-fill-mode: both;
+  animation-fill-mode: forwards;
   will-change: transform, opacity;
 `;
 
