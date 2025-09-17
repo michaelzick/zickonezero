@@ -100,8 +100,8 @@ export const AnimatedHeadlineDynamic = styled.span`
   display: inline-flex;
   align-items: baseline;
   overflow: hidden;
-  height: 1.1em;
-  line-height: 1.1;
+  height: 1.25em;
+  line-height: 1.25;
   min-width: 0;
 `;
 
@@ -118,8 +118,8 @@ export const AnimatedHeadlinePhrase = styled.span`
   display: inline-flex;
   align-items: center;
   width: 100%;
-  height: 1.1em;
-  line-height: 1.1;
+  height: 1.25em;
+  line-height: 1.25;
   color: ${THEME.colors.hotRed};
   transform: translateY(100%);
   opacity: 0;
@@ -134,7 +134,7 @@ export const AnimatedHeadlineSizer = styled.span`
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
-  height: 1.1em;
+  height: 1.25em;
 `;
 
 export const Wrapper = styled.div`
@@ -148,7 +148,7 @@ export const Wrapper = styled.div`
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    ${props => props.isHomePage ? 'padding-top: 4.6em;' : 'padding-top: 4em;'}
+    ${props => props.isHomePage ? 'padding-top: 6.8em;' : 'padding-top: 4.8em;'}
   }
 `;
 
