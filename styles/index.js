@@ -63,6 +63,7 @@ export const CommandLine = styled.span`
 export const WorkSectionHeader = styled.span`
   font-family: monospace;
   font-size: 1.4em;
+  padding: 0 0.5em;
 `;
 
 export const AnimatedHeadlineWrapper = styled.h1`
@@ -73,7 +74,7 @@ export const AnimatedHeadlineWrapper = styled.h1`
   max-width: 100em;
   width: 100%;
   margin: 0 auto 1.75em;
-  padding: 0 1.75em;
+  padding: 0 0.5em;
   color: ${THEME.colors.white};
   font-family: Roboto, sans-serif;
   font-size: clamp(2.4rem, 5.8vw, 4.4rem);
@@ -84,14 +85,14 @@ export const AnimatedHeadlineWrapper = styled.h1`
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     font-size: clamp(2.6rem, 6.2vw, 3.8rem);
     margin: 0 auto 1.4em;
-    padding: 0 1.5em;
+    padding: 0 0.5em;
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     font-size: clamp(2.1rem, 7vw, 3.1rem);
     gap: 0.25em;
     margin: 0 auto 1.2em;
-    padding: 0 1.25em;
+    padding: 0 0.5em;
   }
 `;
 
@@ -150,7 +151,7 @@ export const Wrapper = styled.div`
   background-color: ${THEME.colors.dark};
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    ${props => props.isHomePage ? 'padding-top: 12em;' : 'padding-top: 9em;'}
+    ${props => props.isHomePage ? 'padding-top: 6.8em;' : 'padding-top: 4.8em;'}
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
