@@ -747,14 +747,15 @@ export const ThemeSwitcherTrigger = styled(Select.Trigger)`
   justify-content: center;
   gap: 0;
   min-width: 0;
-  padding: 0.2em 0.65em;
+  padding: 0.32em 1em 0.18em;
   border-radius: 6px;
   border: 1px solid ${THEME.colors.grey};
   color: ${THEME.colors.white};
   background-color: transparent;
   cursor: pointer;
   font-family: 'Roboto', sans-serif;
-  font-size: 0.9rem;
+  font-size: 1.6rem;
+  line-height: 1;
   transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 
   &:hover,
@@ -771,7 +772,9 @@ export const ThemeSwitcherTrigger = styled(Select.Trigger)`
 
 export const ThemeSwitcherValue = styled(Select.Value)`
   flex: 0 1 auto;
-  text-transform: capitalize;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
 `;
 
 export const ThemeSwitcherContent = styled(Select.Content)`

@@ -16,12 +16,13 @@ import {
 type ThemeOptionMeta = {
   value: ThemeOption;
   label: string;
+  icon: string;
 };
 
 const OPTIONS: ThemeOptionMeta[] = [
-  { value: 'system', label: 'System' },
-  { value: 'light', label: 'Light' },
-  { value: 'dark', label: 'Dark' },
+  { value: 'system', label: 'System', icon: '💻' },
+  { value: 'light', label: 'Light', icon: '🌞' },
+  { value: 'dark', label: 'Dark', icon: '🌚' },
 ];
 
 const ThemeSwitcher = (): ReactElement => {
@@ -36,9 +37,11 @@ const ThemeSwitcher = (): ReactElement => {
         <Select.Portal>
           <ThemeSwitcherContent sideOffset={6} align="start">
             <ThemeSwitcherViewport>
-              {OPTIONS.map(({ value, label }) => (
-                <ThemeSwitcherItem key={value} value={value}>
-                  <Select.ItemText>{label}</Select.ItemText>
+              {OPTIONS.map(({ value, label, icon }) => (
+                <ThemeSwitcherItem key={value} value={value} aria-label={label}>
+                  <Select.ItemText>
+                    <span aria-hidden="true">{icon}</span>
+                  </Select.ItemText>
                   <ThemeSwitcherIndicator>
                     <CheckIcon />
                   </ThemeSwitcherIndicator>
