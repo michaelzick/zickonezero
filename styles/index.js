@@ -156,7 +156,7 @@ export const Wrapper = styled.div`
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    ${props => props.isHomePage ? 'padding-top: 6.8em;' : 'padding-top: 4.8em;'}
+    ${props => props.isHomePage ? 'padding-top: 8.4em;' : 'padding-top: 6.2em;'}
   }
 `;
 
@@ -193,6 +193,10 @@ export const Nav = styled.div`
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     padding: 1em 1em;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    align-items: flex-start;
   }
 `;
 
@@ -337,6 +341,32 @@ export const Title = styled.h1`
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
       font-size: 0.8em;
     }
+
+    @media (max-width: ${THEME.breakpoints.phone}) {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.05em;
+      white-space: normal;
+    }
+  }
+
+  .brand-line {
+    display: inline;
+    &.brand-first {
+      margin-right: 0.35em;
+    }
+
+    @media (max-width: ${THEME.breakpoints.phone}) {
+      display: block;
+      margin-right: 0;
+    }
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    font-size: 1.9em;
+    white-space: normal;
+    line-height: 1.1;
   }
 `;
 
@@ -741,6 +771,12 @@ export const ThemeSwitcherWrapper = styled.div`
   display: inline-flex;
   align-items: center;
   gap: 0.75em;
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4em;
+  }
 `;
 
 export const ThemeSwitcherTrigger = styled(Select.Trigger)`
