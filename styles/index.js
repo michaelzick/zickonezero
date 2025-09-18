@@ -152,11 +152,11 @@ export const Wrapper = styled.div`
   background-color: ${THEME.colors.dark};
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    ${props => props.isHomePage ? 'padding-top: 6.8em;' : 'padding-top: 4.8em;'}
+    ${props => props.isHomePage ? 'padding-top: 6.9em;' : 'padding-top: 5.2em;'}
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    ${props => props.isHomePage ? 'padding-top: 8.4em;' : 'padding-top: 6.2em;'}
+    ${props => props.isHomePage ? 'padding-top: 9.6em;' : 'padding-top: 9.2em;'}
   }
 `;
 
@@ -715,7 +715,11 @@ export const TabWrapper = styled.div`
     top: 4.8em;
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
-      top: 5.6em;
+      top: 4.95em;
+    }
+
+    @media (max-width: ${THEME.breakpoints.phone}) {
+      top: 8.9em;
     }
   }
 
