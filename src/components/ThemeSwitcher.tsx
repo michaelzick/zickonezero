@@ -17,26 +17,21 @@ const OPTIONS: ThemeOptionMeta[] = [
   { value: 'dark', label: 'Dark' },
 ];
 
-const SHORT_LABELS: Record<ThemeOption, string> = {
-  system: 'SYS',
-  light: 'LIT',
-  dark: 'DRK',
-};
-
 const Trigger = styled(Select.Trigger)`
   all: unset;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 4px;
+  gap: 0.35em;
+  min-width: 0;
+  padding: 0 0.75em;
+  border-radius: 6px;
   border: 1px solid ${THEME.colors.grey};
   color: ${THEME.colors.white};
   background-color: transparent;
   cursor: pointer;
   font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
   transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 
   &:hover,
@@ -52,24 +47,14 @@ const Trigger = styled(Select.Trigger)`
 `;
 
 const Value = styled(Select.Value)`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
+  flex: 0 1 auto;
+  text-transform: capitalize;
 `;
 
 const Icon = styled(Select.Icon)`
-  position: absolute;
-  right: 4px;
-  bottom: 4px;
   display: inline-flex;
   align-items: center;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
 `;
 
 const Content = styled(Select.Content)`
@@ -114,14 +99,6 @@ const SwitcherWrapper = styled.div`
   display: inline-flex;
 `;
 
-const CurrentLabel = styled.span`
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  font-family: 'Roboto', sans-serif;
-`;
-
 const ThemeSwitcher = (): ReactElement => {
   const { preference, setPreference } = useThemePreference();
 
@@ -130,7 +107,6 @@ const ThemeSwitcher = (): ReactElement => {
       <Select.Root value={preference} onValueChange={(value) => setPreference(value as ThemeOption)}>
         <Trigger aria-label="Theme">
           <Value />
-          <CurrentLabel>{SHORT_LABELS[preference]}</CurrentLabel>
           <Icon>
             <ChevronDownIcon />
           </Icon>
