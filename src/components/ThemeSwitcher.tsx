@@ -17,21 +17,26 @@ const OPTIONS: ThemeOptionMeta[] = [
   { value: 'dark', label: 'Dark' },
 ];
 
+const SHORT_LABELS: Record<ThemeOption, string> = {
+  system: 'SYS',
+  light: 'LIT',
+  dark: 'DRK',
+};
+
 const Trigger = styled(Select.Trigger)`
   all: unset;
   display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.5em;
-  min-width: 6.5em;
-  padding: 0.25em 0.75em;
-  font-size: 1em;
-  font-weight: 500;
-  border-radius: 999px;
+  justify-content: center;
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 4px;
   border: 1px solid ${THEME.colors.grey};
   color: ${THEME.colors.white};
   background-color: transparent;
   cursor: pointer;
+  font-family: 'Roboto', sans-serif;
   transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 
   &:hover,
@@ -47,13 +52,24 @@ const Trigger = styled(Select.Trigger)`
 `;
 
 const Value = styled(Select.Value)`
-  flex: 1;
-  text-transform: capitalize;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 `;
 
 const Icon = styled(Select.Icon)`
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
   display: inline-flex;
   align-items: center;
+  font-size: 0.75rem;
 `;
 
 const Content = styled(Select.Content)`
@@ -63,6 +79,7 @@ const Content = styled(Select.Content)`
   border-radius: 10px;
   border: 1px solid ${THEME.colors.grey};
   box-shadow: 0 18px 45px rgba(5, 5, 15, 0.35);
+  z-index: 400;
 `;
 
 const Viewport = styled(Select.Viewport)`
@@ -97,6 +114,14 @@ const SwitcherWrapper = styled.div`
   display: inline-flex;
 `;
 
+const CurrentLabel = styled.span`
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+`;
+
 const ThemeSwitcher = (): ReactElement => {
   const { preference, setPreference } = useThemePreference();
 
@@ -105,6 +130,7 @@ const ThemeSwitcher = (): ReactElement => {
       <Select.Root value={preference} onValueChange={(value) => setPreference(value as ThemeOption)}>
         <Trigger aria-label="Theme">
           <Value />
+          <CurrentLabel>{SHORT_LABELS[preference]}</CurrentLabel>
           <Icon>
             <ChevronDownIcon />
           </Icon>

@@ -47,10 +47,15 @@ interface ThemeProviderProps {
 }
 
 export const AppThemeProvider = ({ children }: ThemeProviderProps) => {
-  const [preference, setPreferenceState] = useState<ThemeOption>(() => getStoredPreference());
+  const [preference, setPreferenceState] = useState<ThemeOption>('system');
   const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(() => getSystemTheme());
 
   const resolved = preference === 'system' ? systemTheme : preference;
+
+  useEffect(() => {
+    const stored = getStoredPreference();
+    setPreferenceState((current) => (stored !== current ? stored : current));
+  }, []);
 
   useEffect(() => {
     if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {

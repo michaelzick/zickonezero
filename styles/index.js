@@ -165,6 +165,7 @@ export const Nav = styled.div`
   display: flex;
   border-bottom: 2px dotted ${THEME.colors.grey};
   justify-content: space-between;
+  align-items: center;
   position: fixed;
   z-index: 90;
   background-color: ${THEME.colors.dark};
@@ -309,16 +310,19 @@ export const Thumb = styled.div`
 `;
 
 export const Title = styled.h1`
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.75em;
-  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex: 1 1 auto;
+  gap: 0.65em;
+  flex-wrap: nowrap;
   font-size: 1.8em;
   margin: 0;
-  width: 100%;
   text-align: left;
   font-family: system-ui;
   line-height: 1.5em;
+  white-space: nowrap;
+  max-width: 100%;
   ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
 
   a {
@@ -326,11 +330,12 @@ export const Title = styled.h1`
     transition: all 0.3s;
     cursor: pointer;
     display: inline-flex;
-    align-items: center;
+    align-items: baseline;
+    flex: 0 0 auto;
+    white-space: nowrap;
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
       display: inline-flex;
-      width: auto;
       padding: 0;
       font-size: 0.8em;
       line-height: 1.2em;
@@ -338,8 +343,15 @@ export const Title = styled.h1`
   }
 
   .theme-switcher {
-    font-size: 0.55em;
+    margin-left: 0.4em;
+    font-size: 1em;
     flex-shrink: 0;
+  }
+
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+    flex-wrap: wrap;
+    white-space: normal;
+    gap: 0.5em;
   }
 `;
 
@@ -703,7 +715,8 @@ export const TabWrapper = styled.div`
     justify-content: center;
     font-size: 1.2em;
     user-select: none;
-    background-color: ${THEME.colors.darkGreen};
+    background-color: #0c4a6e;
+    color: #ffffff;
     cursor: pointer;
     display: block;
 
@@ -717,8 +730,8 @@ export const TabWrapper = styled.div`
   }
 
   .TabsTrigger[data-state="active"] {
-    background-color: ${THEME.colors.hotYellow};
-    color: ${THEME.colors.contrast};
+    background-color: #d3ff00;
+    color: #020817;
   }
 
   .TabsContent {
