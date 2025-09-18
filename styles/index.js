@@ -311,47 +311,28 @@ export const Thumb = styled.div`
 `;
 
 export const Title = styled.h1`
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex: 1 1 auto;
-  gap: 0.65em;
-  flex-wrap: nowrap;
-  font-size: 1.8em;
   margin: 0;
-  text-align: left;
+  font-size: 2.1em;
   font-family: system-ui;
-  line-height: 1.5em;
+  line-height: 1.3;
   white-space: nowrap;
-  max-width: 100%;
+  transition: all 0.3s;
   ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
 
   a {
-    margin-top: 0;
-    transition: all 0.3s;
-    cursor: pointer;
     display: inline-flex;
     align-items: baseline;
-    flex: 0 0 auto;
-    white-space: nowrap;
+    text-decoration: none;
+    color: ${THEME.colors.white};
+    transition: color 0.3s;
+
+    &:hover {
+      color: ${THEME.colors.hotRed};
+    }
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
-      display: inline-flex;
-      padding: 0;
       font-size: 0.8em;
-      line-height: 1.2em;
     }
-  }
-
-  .theme-switcher {
-    font-size: 1em;
-    flex-shrink: 0;
-  }
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    flex-wrap: wrap;
-    white-space: normal;
-    gap: 0.5em;
   }
 `;
 
@@ -755,6 +736,8 @@ export const HotRedTitle = styled.h2`
 // Theme Switcher styled components
 export const ThemeSwitcherWrapper = styled.div`
   display: inline-flex;
+  align-items: center;
+  gap: 0.75em;
 `;
 
 export const ThemeSwitcherTrigger = styled(Select.Trigger)`

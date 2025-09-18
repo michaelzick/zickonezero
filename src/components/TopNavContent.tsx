@@ -9,7 +9,7 @@ import {
   getMobileMenuState
 } from '../showMobileMenuSlice';
 
-import { Title, Nav, MenuIcon } from '../../styles';
+import { Title, Nav, MenuIcon, ThemeSwitcherWrapper } from '../../styles';
 import { LinkBoxContent, LinkBoxMobileContent, ThemeSwitcher } from '.';
 import { ReactElement } from 'react';
 
@@ -19,13 +19,15 @@ const NavContent = (): ReactElement => {
 
   return (
     <Nav>
-      <Title isMobileMenuShown={isMobileMenuShown}
-        onClick={() => dispatch(showMobileMenu(false))}>
-        <Link href='/'>
-          ZICKONEZERO Creative
-        </Link>
+      <ThemeSwitcherWrapper className="theme-switcher-container">
+        <Title isMobileMenuShown={isMobileMenuShown}
+          onClick={() => dispatch(showMobileMenu(false))}>
+          <Link href='/'>
+            ZICKONEZERO Creative
+          </Link>
+        </Title>
         <ThemeSwitcher />
-      </Title>
+      </ThemeSwitcherWrapper>
 
       <LinkBoxContent />
 
