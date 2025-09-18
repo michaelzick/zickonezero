@@ -44,6 +44,23 @@ export default class MyDocument extends Document {
               style={{ display: 'none', visibility: 'hidden' }}
             ></iframe>
           </noscript>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function() {
+                  try {
+                    var storageKey = 'zickonezero-theme';
+                    var preference = window.localStorage.getItem(storageKey) || 'system';
+                    var systemTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                    var resolved = preference === 'light' || preference === 'dark' ? preference : systemTheme;
+                    document.documentElement.setAttribute('data-theme', resolved);
+                  } catch (error) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                  }
+                })();
+              `,
+            }}
+          />
           <Main />
           <NextScript />
         </body>

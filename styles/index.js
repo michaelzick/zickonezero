@@ -309,6 +309,10 @@ export const Thumb = styled.div`
 `;
 
 export const Title = styled.h1`
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  flex-wrap: wrap;
   font-size: 1.8em;
   margin: 0;
   width: 100%;
@@ -321,15 +325,21 @@ export const Title = styled.h1`
     margin-top: 0;
     transition: all 0.3s;
     cursor: pointer;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
-      display: block;
-      width: 7em;
+      display: inline-flex;
+      width: auto;
       padding: 0;
       font-size: 0.8em;
       line-height: 1.2em;
     }
+  }
+
+  .theme-switcher {
+    font-size: 0.55em;
+    flex-shrink: 0;
   }
 `;
 
@@ -357,13 +367,13 @@ export const LinkBoxMobile = styled.ul`
   top: 3.4em;
   right: 1em;
   padding: 1em;
-  background: rgba(255,255,255,0.9);
+  background: ${THEME.colors.darkest};
   z-index: 99;
   border-radius: 4px;
   box-shadow: 20px 0 80px 20px rgb(138 138 149 / 40%);
 
   svg {
-    fill: ${THEME.colors.dark};
+    fill: ${THEME.colors.white};
   }
 
   li {
@@ -372,9 +382,9 @@ export const LinkBoxMobile = styled.ul`
     }
 
     a {
-      border-bottom: 0.2em solid #000;
+      border-bottom: 0.2em solid ${THEME.colors.white};
       justify-content: center;
-      color: ${THEME.colors.dark};
+      color: ${THEME.colors.white};
     }
   }
 `;
@@ -708,7 +718,7 @@ export const TabWrapper = styled.div`
 
   .TabsTrigger[data-state="active"] {
     background-color: ${THEME.colors.hotYellow};
-    color: ${THEME.colors.dark};
+    color: ${THEME.colors.contrast};
   }
 
   .TabsContent {

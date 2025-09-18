@@ -11,6 +11,7 @@ import Thumbnail from './Thumbnail';
 import GridContent from './GridContent';
 import DemoStokeContent from './DemoStokeContent';
 import AntisyphonContent from './AntisyphonContent';
+import ThemeSwitcher from './ThemeSwitcher';
 
 export {
   LinkBoxContent,
@@ -25,5 +26,6 @@ export {
   Thumbnail,
   GridContent,
   DemoStokeContent,
-  AntisyphonContent
+  AntisyphonContent,
+  ThemeSwitcher
 };

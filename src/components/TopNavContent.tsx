@@ -10,7 +10,7 @@ import {
 } from '../showMobileMenuSlice';
 
 import { Title, Nav, MenuIcon } from '../../styles';
-import { LinkBoxContent, LinkBoxMobileContent } from '.';
+import { LinkBoxContent, LinkBoxMobileContent, ThemeSwitcher } from '.';
 import { ReactElement } from 'react';
 
 const NavContent = (): ReactElement => {
@@ -24,6 +24,7 @@ const NavContent = (): ReactElement => {
         <Link href='/'>
           ZICKONEZERO Creative
         </Link>
+        <ThemeSwitcher />
       </Title>
 
       <LinkBoxContent />
