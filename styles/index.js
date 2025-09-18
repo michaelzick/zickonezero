@@ -712,14 +712,14 @@ export const TabWrapper = styled.div`
     display: flex;
     position: fixed;
     width: 100%;
-    top: 4.8em;
+    top: 5em;
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
-      top: 4.95em;
+      top: 4.9em;
     }
 
     @media (max-width: ${THEME.breakpoints.phone}) {
-      top: 8.9em;
+      top: 8.48em;
     }
   }
 
