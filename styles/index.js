@@ -679,7 +679,7 @@ export const TabWrapper = styled.div`
     top: 4.8em;
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
-      top: 8.8em;
+      top: 5.6em;
     }
   }
 
@@ -699,6 +699,10 @@ export const TabWrapper = styled.div`
 
     div {
       line-height: 48px;
+    }
+
+    @media (max-width: ${THEME.breakpoints.phone}) {
+      font-size: 1em;
     }
   }
 
