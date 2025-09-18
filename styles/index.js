@@ -187,6 +187,10 @@ export const Nav = styled.div`
     fill: ${THEME.colors.white};
   }
 
+  @media (max-width: 979px) {
+    padding: 1em 1em;
+  }
+
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     padding: 1em 1em;
   }
@@ -343,7 +347,6 @@ export const LinkBox = styled.div`
 
   a {
     margin-top: 0.8em;
-
   }
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
