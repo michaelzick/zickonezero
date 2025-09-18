@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import * as Select from '@radix-ui/react-select';
 import { THEME } from './theme';
 
 const phraseCycle = keyframes`
@@ -343,7 +344,6 @@ export const Title = styled.h1`
   }
 
   .theme-switcher {
-    margin-left: 0.4em;
     font-size: 1em;
     flex-shrink: 0;
   }
@@ -750,4 +750,81 @@ export const Video = styled.video`
 
 export const HotRedTitle = styled.h2`
   color: ${THEME.colors.hotRed};
+`;
+
+// Theme Switcher styled components
+export const ThemeSwitcherWrapper = styled.div`
+  display: inline-flex;
+`;
+
+export const ThemeSwitcherTrigger = styled(Select.Trigger)`
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-width: 0;
+  padding: 0.2em 0.65em;
+  border-radius: 6px;
+  border: 1px solid ${THEME.colors.grey};
+  color: ${THEME.colors.white};
+  background-color: transparent;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+
+  &:hover,
+  &[data-state='open'] {
+    border-color: ${THEME.colors.hotRed};
+    color: ${THEME.colors.hotRed};
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${THEME.colors.hotRed};
+    outline-offset: 2px;
+  }
+`;
+
+export const ThemeSwitcherValue = styled(Select.Value)`
+  flex: 0 1 auto;
+  text-transform: capitalize;
+`;
+
+export const ThemeSwitcherContent = styled(Select.Content)`
+  overflow: hidden;
+  background-color: ${THEME.colors.darkest};
+  color: ${THEME.colors.white};
+  border-radius: 10px;
+  border: 1px solid ${THEME.colors.grey};
+  box-shadow: 0 18px 45px rgba(5, 5, 15, 0.35);
+  z-index: 400;
+`;
+
+export const ThemeSwitcherViewport = styled(Select.Viewport)`
+  padding: 0.25em 0;
+`;
+
+export const ThemeSwitcherItem = styled(Select.Item)`
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  padding: 0.45em 1.1em;
+  font-size: 1em;
+  cursor: pointer;
+  user-select: none;
+  color: ${THEME.colors.white};
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &[data-highlighted] {
+    outline: none;
+    background-color: ${THEME.colors.hotRed};
+    color: ${THEME.colors.contrast};
+  }
+`;
+
+export const ThemeSwitcherIndicator = styled(Select.ItemIndicator)`
+  margin-left: auto;
+  display: inline-flex;
+  color: inherit;
 `;
