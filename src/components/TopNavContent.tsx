@@ -11,7 +11,7 @@ import {
 
 import { Title, Nav, MenuIcon, ThemeSwitcherWrapper } from '../../styles';
 import { LinkBoxContent, LinkBoxMobileContent, ThemeSwitcher } from '.';
-import { ReactElement } from 'react';
+import { MouseEvent, ReactElement } from 'react';
 
 const NavContent = (): ReactElement => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
@@ -39,11 +39,11 @@ const NavContent = (): ReactElement => {
 
       <LinkBoxContent />
 
-      <MenuIcon onClick={(event) => {
+      <MenuIcon onClick={(event: MouseEvent<HTMLDivElement>) => {
         event.stopPropagation();
         dispatch(showMobileMenu(!isMobileMenuShown));
       }}
-        className={isMobileMenuShown && 'change'}>
+        className={isMobileMenuShown ? 'change' : undefined}>
         <div className="bar1"></div>
         <div className="bar2"></div>
         <div className="bar3"></div>
