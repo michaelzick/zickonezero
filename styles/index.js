@@ -148,7 +148,7 @@ export const AnimatedHeadlineSizer = styled.span`
 export const Wrapper = styled.div`
   ${props => props.isHomePage ? 'padding-top: 7.7em;' : 'padding-top: 5em;'}
   min-height: 84%;
-  ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
+  ${props => props.isMobileMenuShown && 'filter: blur(2px); z-index: 300;'}
   background-color: ${THEME.colors.dark};
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
@@ -168,8 +168,9 @@ export const Nav = styled.div`
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  z-index: 90;
+  z-index: 100;
   background-color: ${THEME.colors.dark};
+  transition: filter 0.3s;
 
   a {
     transition: all 0.3s;
@@ -394,7 +395,7 @@ export const LinkBoxMobile = styled.ul`
   right: 1em;
   padding: 1em;
   background: ${THEME.colors.darkest};
-  z-index: 99;
+  z-index: 400;
   border-radius: 4px;
   box-shadow: 20px 0 80px 20px rgb(138 138 149 / 40%);
 
@@ -775,6 +776,9 @@ export const ThemeSwitcherWrapper = styled.div`
   display: inline-flex;
   align-items: center;
   gap: 0.75em;
+  transition: filter 0.3s;
+  pointer-events: ${props => props.isMobileMenuShown ? 'none' : 'auto'};
+  ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     flex-direction: column;
@@ -827,7 +831,7 @@ export const ThemeSwitcherContent = styled(Select.Content)`
   border-radius: 10px;
   border: 1px solid ${THEME.colors.grey};
   box-shadow: 0 18px 45px rgba(5, 5, 15, 0.35);
-  z-index: 400;
+  z-index: 200;
 `;
 
 export const ThemeSwitcherViewport = styled(Select.Viewport)`

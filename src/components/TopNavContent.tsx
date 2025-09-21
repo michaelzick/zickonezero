@@ -17,9 +17,16 @@ const NavContent = (): ReactElement => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
 
+  const handleNavClick = () => {
+    if (isMobileMenuShown) {
+      dispatch(showMobileMenu(false));
+    }
+  };
+
   return (
-    <Nav>
-      <ThemeSwitcherWrapper className="theme-switcher-container">
+    <Nav onClick={handleNavClick}>
+      <ThemeSwitcherWrapper className="theme-switcher-container"
+        isMobileMenuShown={isMobileMenuShown}>
         <Title isMobileMenuShown={isMobileMenuShown}
           onClick={() => dispatch(showMobileMenu(false))}>
           <Link href='/'>
@@ -32,7 +39,10 @@ const NavContent = (): ReactElement => {
 
       <LinkBoxContent />
 
-      <MenuIcon onClick={() => dispatch(showMobileMenu(!isMobileMenuShown))}
+      <MenuIcon onClick={(event) => {
+        event.stopPropagation();
+        dispatch(showMobileMenu(!isMobileMenuShown));
+      }}
         className={isMobileMenuShown && 'change'}>
         <div className="bar1"></div>
         <div className="bar2"></div>
