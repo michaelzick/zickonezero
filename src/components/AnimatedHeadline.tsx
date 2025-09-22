@@ -8,10 +8,10 @@ import {
 } from '../../styles';
 
 const HEADLINE_PHRASES = [
-  '🔮 UX Design',
-  '💻 Prototyping',
-  '🚀 Product Leadership',
-  '🕸️ Web Development'
+  'UX Design',
+  'Prototyping',
+  'Product Leadership',
+  'Web Development'
 ] as const;
 
 const LONGEST_PHRASE = HEADLINE_PHRASES.reduce((longest, phrase) =>
