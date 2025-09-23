@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { WorksData } from '../types';
 import { Thumb } from '../../styles';
+import { NewTabSVG } from './svg/NewTab';
 import { ReactElement } from 'react';
 
 type AdditionalThumbProps = {
@@ -25,7 +26,14 @@ const Thumbnail = (props: WorksData & AdditionalThumbProps): ReactElement => {
 
       <h3>{header}</h3>
 
-      <p>{desc}</p>
+      <p>
+        {desc}
+        {linkOut ? (
+          <span className='external-link-icon' aria-hidden='true'>
+            <NewTabSVG />
+          </span>
+        ) : null}
+      </p>
     </Thumb>
   );
 };

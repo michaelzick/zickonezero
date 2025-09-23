@@ -305,6 +305,20 @@ export const Thumb = styled.div`
     width: 240px;
     text-align: center;
     margin: 0 auto;
+    line-height: 1.4;
+
+    .external-link-icon {
+      display: inline-flex;
+      align-items: center;
+      vertical-align: middle;
+      position: relative;
+      top: -0.05em;
+
+      svg {
+        width: 0.95em;
+        height: 0.95em;
+      }
+    }
   }
 
   &:hover {
