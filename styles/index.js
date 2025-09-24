@@ -563,9 +563,6 @@ export const BioBox = styled.div`
 `;
 
 export const SectionHeader = styled.h2`
-  position: sticky;
-  top: 5.2em;
-  z-index: 60;
   padding: 1.2em 0 0.6em;
   margin: 0;
   text-align: center;
@@ -573,12 +570,10 @@ export const SectionHeader = styled.h2`
   font-size: 2em;
   background: ${THEME.colors.dark};
 
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    top: 5.4em;
-  }
-
   @media (max-width: ${THEME.breakpoints.phone}) {
-    top: 12.3em;
+    position: sticky;
+    top: 13em;
+    z-index: 60;
     padding: 1.1em 0 0.8em;
   }
 `;
