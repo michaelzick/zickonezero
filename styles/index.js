@@ -907,7 +907,7 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75em 1em;
+  padding: 0.75em 1em 0.65em;
   border-radius: 10px;
   font-family: Roboto, sans-serif;
   font-size: 1.05em;
@@ -918,7 +918,7 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
   background-color: ${props => props.$isActive ? THEME.colors.hotYellow : THEME.colors.darkGreen};
   color: ${props => props.$isActive ? THEME.colors.contrast : THEME.colors.white};
-  box-shadow: ${props => props.$isActive ? '0 12px 24px rgba(0, 0, 0, 0.25)' : '0 6px 18px rgba(0, 0, 0, 0.2)'};
+  box-shadow: ${props => props.$isActive ? '0 8px 20px rgba(0, 0, 0, 0.25)' : '0 8px 20px rgba(0, 0, 0, 0.15)'};
 
   &:focus-visible {
     outline: 2px solid ${THEME.colors.hotYellow};
