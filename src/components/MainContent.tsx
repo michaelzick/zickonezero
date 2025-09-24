@@ -9,17 +9,22 @@ import {
   showMobileMenu,
   getMobileMenuState
 } from '../showMobileMenuSlice';
-import { useState, memo } from 'react';
+import { useState, useRef, useEffect, memo, useCallback } from 'react';
 
 import FsLightbox from 'fslightbox-react';
 
 import { TopNavContent, GridContent, FooterContent, AnimatedHeadline } from '.';
-import { SectionHeader, Wrapper, WorkSectionHeader } from '../../styles';
+import { SectionHeader, Wrapper, WorkSectionHeader, HomeTabsBar, HomeTabButton, HomeTabsSpacer } from '../../styles';
+
+type SectionKey = 'ux' | 'ui';
 
 const MainContent = () => {
   const { worksDataReversed } = useAppSelector(selectData);
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
+  const uxSectionRef = useRef<HTMLHeadingElement | null>(null);
+  const uiSectionRef = useRef<HTMLHeadingElement | null>(null);
+  const [activeSection, setActiveSection] = useState<SectionKey>('ux');
 
   // For lightbox
   const [lightboxController, setLightboxController] = useState({
@@ -39,15 +44,99 @@ const MainContent = () => {
   // Grab the images from the correct index supplied by Lightbox
   const { imgs } = worksDataReversed[lightboxController.productIndex] || [];
 
+  const scrollToSection = useCallback((section: SectionKey) => {
+    const target = section === 'ux' ? uxSectionRef.current : uiSectionRef.current;
+
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, []);
+
+  useEffect(() => {
+    const sections = [
+      { key: 'ux' as SectionKey, ref: uxSectionRef },
+      { key: 'ui' as SectionKey, ref: uiSectionRef },
+    ];
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (visible) {
+        if (visible.target === uxSectionRef.current) {
+          setActiveSection('ux');
+        } else if (visible.target === uiSectionRef.current) {
+          setActiveSection('ui');
+        }
+      } else {
+        const topEntry = entries.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+
+        if (topEntry) {
+          if (topEntry.target === uiSectionRef.current && topEntry.boundingClientRect.top < 0) {
+            setActiveSection('ui');
+          } else {
+            setActiveSection('ux');
+          }
+        }
+      }
+    }, {
+      root: null,
+      rootMargin: '-160px 0px -55% 0px',
+      threshold: [0.15, 0.3, 0.6],
+    });
+
+    sections.forEach(({ ref }) => {
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+    });
+
+    return () => {
+      sections.forEach(({ ref }) => {
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      });
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <>
       <TopNavContent />
 
       <Wrapper isHomePage isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
+        <HomeTabsBar role='tablist' aria-label='Homepage sections'>
+          <HomeTabButton
+            type="button"
+            aria-selected={activeSection === 'ux'}
+            role='tab'
+            aria-controls='ux-design'
+            tabIndex={activeSection === 'ux' ? 0 : -1}
+            data-active={activeSection === 'ux' ? 'true' : 'false'}
+            onClick={() => scrollToSection('ux')}
+          >
+            UX Design
+          </HomeTabButton>
+          <HomeTabButton
+            type="button"
+            aria-selected={activeSection === 'ui'}
+            role='tab'
+            aria-controls='ui-engineering'
+            tabIndex={activeSection === 'ui' ? 0 : -1}
+            data-active={activeSection === 'ui' ? 'true' : 'false'}
+            onClick={() => scrollToSection('ui')}
+          >
+            UI Engineering
+          </HomeTabButton>
+        </HomeTabsBar>
+
+        <HomeTabsSpacer aria-hidden='true' />
         <AnimatedHeadline />
 
-        <SectionHeader>
+        <SectionHeader ref={uxSectionRef} id='ux-design'>
           {/* Projects I{"'"}ve <CommandLine>#managed</CommandLine> */}
           <WorkSectionHeader>UX Design</WorkSectionHeader>
         </SectionHeader>
@@ -59,7 +148,7 @@ const MainContent = () => {
         />
 
         <br />
-        <SectionHeader>
+        <SectionHeader ref={uiSectionRef} id='ui-engineering'>
           {/* Projects I{"'"}ve <CommandLine>$built</CommandLine> */}
           <WorkSectionHeader>UI Engineering</WorkSectionHeader>
         </SectionHeader>

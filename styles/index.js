@@ -62,6 +62,7 @@ export const CommandLine = styled.span`
 `;
 
 export const WorkSectionHeader = styled.span`
+  display: inline-block;
   font-family: monospace;
   font-size: 2em;
   padding: 0 0.5em;
@@ -562,10 +563,24 @@ export const BioBox = styled.div`
 `;
 
 export const SectionHeader = styled.h2`
-  font-size: 2em;
+  position: sticky;
+  top: 5.2em;
+  z-index: 60;
+  padding: 1.2em 0 0.6em;
   margin: 0;
   text-align: center;
   font-family: Roboto, sans-serif;
+  font-size: 2em;
+  background: ${THEME.colors.dark};
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    top: 5.4em;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    top: 12.3em;
+    padding: 1.1em 0 0.8em;
+  }
 `;
 
 export const Footer = styled.div`
@@ -874,4 +889,59 @@ export const ThemeSwitcherIndicator = styled(Select.ItemIndicator)`
   margin-left: auto;
   display: inline-flex;
   color: inherit;
+`;
+
+export const HomeTabsBar = styled.div`
+  display: none;
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    position: fixed;
+    top: 8.48em;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 0.6em;
+    padding: 0.4em 1em 0.45em;
+    z-index: 95;
+    background: ${THEME.colors.dark};
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  }
+`;
+
+export const HomeTabButton = styled.button`
+  all: unset;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75em 1em;
+  border-radius: 10px;
+  font-family: Roboto, sans-serif;
+  font-size: 1.05em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  background-color: ${props => props['data-active'] === 'true' ? THEME.colors.hotYellow : THEME.colors.darkGreen};
+  color: ${props => props['data-active'] === 'true' ? THEME.colors.contrast : THEME.colors.white};
+  box-shadow: ${props => props['data-active'] === 'true' ? '0 12px 24px rgba(0, 0, 0, 0.25)' : '0 6px 18px rgba(0, 0, 0, 0.2)'};
+
+  &:focus-visible {
+    outline: 2px solid ${THEME.colors.hotYellow};
+    outline-offset: 3px;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+`;
+
+export const HomeTabsSpacer = styled.div`
+  display: none;
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    display: block;
+    height: 4.2em;
+  }
 `;
