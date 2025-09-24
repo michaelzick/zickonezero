@@ -571,9 +571,6 @@ export const SectionHeader = styled.h2`
   background: ${THEME.colors.dark};
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    position: sticky;
-    top: 13em;
-    z-index: 60;
     padding: 1.1em 0 0.8em;
   }
 `;

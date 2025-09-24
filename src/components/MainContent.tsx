@@ -24,8 +24,6 @@ const MainContent = () => {
   const dispatch = useAppDispatch();
   const uxSectionRef = useRef<HTMLHeadingElement | null>(null);
   const uiSectionRef = useRef<HTMLHeadingElement | null>(null);
-  const uxAnchorRef = useRef<HTMLDivElement | null>(null);
-  const uiAnchorRef = useRef<HTMLDivElement | null>(null);
   const [activeSection, setActiveSection] = useState<SectionKey>('ux');
 
   // For lightbox
@@ -49,16 +47,17 @@ const MainContent = () => {
   const scrollToSection = useCallback((section: SectionKey) => {
     setActiveSection(section);
 
-    const target = section === 'ux' ? uxAnchorRef.current : uiAnchorRef.current;
+    const target = section === 'ux' ? uxSectionRef.current : uiSectionRef.current;
 
     if (target) {
       const prefersMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 600px)').matches;
 
       if (prefersMobile) {
-        // On mobile, scroll to anchor point with minimal offset for mobile tabs
-        const navOffset = 70; // Small offset to account for mobile tabs
+        // On mobile, position the header right below the tabs
+        // Tabs end at approximately 13.3em, so we want the header positioned there
+        const tabsHeight = 13.3 * 16; // Convert em to px (assuming 16px base font)
         const targetPosition = target.getBoundingClientRect().top + window.scrollY;
-        const offsetPosition = targetPosition - navOffset;
+        const offsetPosition = targetPosition - tabsHeight;
 
         window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
       } else {
@@ -79,31 +78,24 @@ const MainContent = () => {
     ];
 
     const observer = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      const prefersMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 600px)').matches;
 
-      if (visible) {
-        if (visible.target === uxSectionRef.current) {
-          setActiveSection('ux');
-        } else if (visible.target === uiSectionRef.current) {
-          setActiveSection('ui');
-        }
-      } else {
-        const topEntry = entries.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-
-        if (topEntry) {
-          if (topEntry.target === uiSectionRef.current && topEntry.boundingClientRect.top < 0) {
-            setActiveSection('ui');
-          } else {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (entry.target === uxSectionRef.current) {
             setActiveSection('ux');
+          } else if (entry.target === uiSectionRef.current) {
+            setActiveSection('ui');
           }
         }
-      }
+      });
     }, {
       root: null,
-      rootMargin: '-160px 0px -55% 0px',
-      threshold: [0.15, 0.3, 0.6],
+      // On mobile, account for tabs position; on desktop, use smaller margin
+      rootMargin: typeof window !== 'undefined' && window.matchMedia('(max-width: 600px)').matches
+        ? '-213px 0px -50% 0px'  // Mobile: tabs are ~213px from top
+        : '-120px 0px -50% 0px',  // Desktop: smaller nav
+      threshold: [0.1, 0.5],
     });
 
     sections.forEach(({ ref }) => {
@@ -156,7 +148,6 @@ const MainContent = () => {
         <HomeTabsSpacer aria-hidden='true' />
         <AnimatedHeadline />
 
-        <div ref={uxAnchorRef} id='ux-anchor' />
         <SectionHeader ref={uxSectionRef} id='ux-design'>
           {/* Projects I{"'"}ve <CommandLine>#managed</CommandLine> */}
           <WorkSectionHeader>UX Design</WorkSectionHeader>
@@ -169,7 +160,6 @@ const MainContent = () => {
         />
 
         <br />
-        <div ref={uiAnchorRef} id='ui-anchor' />
         <SectionHeader ref={uiSectionRef} id='ui-engineering'>
           {/* Projects I{"'"}ve <CommandLine>$built</CommandLine> */}
           <WorkSectionHeader>UI Engineering</WorkSectionHeader>
