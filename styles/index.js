@@ -63,7 +63,7 @@ export const CommandLine = styled.span`
 
 export const WorkSectionHeader = styled.span`
   font-family: monospace;
-  font-size: 1.4em;
+  font-size: 2em;
   padding: 0 0.5em;
 `;
 
