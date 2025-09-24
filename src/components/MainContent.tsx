@@ -45,12 +45,19 @@ const MainContent = () => {
   const { imgs } = worksDataReversed[lightboxController.productIndex] || [];
 
   const scrollToSection = useCallback((section: SectionKey) => {
+    setActiveSection(section);
+
     const target = section === 'ux' ? uxSectionRef.current : uiSectionRef.current;
 
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const prefersMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 600px)').matches;
+      const navOffset = prefersMobile ? 180 : 120;
+      const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = targetPosition - navOffset;
+
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
-  }, []);
+  }, [setActiveSection]);
 
   useEffect(() => {
     const sections = [
@@ -115,7 +122,7 @@ const MainContent = () => {
             role='tab'
             aria-controls='ux-design'
             tabIndex={activeSection === 'ux' ? 0 : -1}
-            data-active={activeSection === 'ux' ? 'true' : 'false'}
+            $isActive={activeSection === 'ux'}
             onClick={() => scrollToSection('ux')}
           >
             UX Design
@@ -126,7 +133,7 @@ const MainContent = () => {
             role='tab'
             aria-controls='ui-engineering'
             tabIndex={activeSection === 'ui' ? 0 : -1}
-            data-active={activeSection === 'ui' ? 'true' : 'false'}
+            $isActive={activeSection === 'ui'}
             onClick={() => scrollToSection('ui')}
           >
             UI Engineering

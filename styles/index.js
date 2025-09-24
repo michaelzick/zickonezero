@@ -908,7 +908,9 @@ export const HomeTabsBar = styled.div`
   }
 `;
 
-export const HomeTabButton = styled.button`
+export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
+  'data-active': $isActive ? 'true' : 'false',
+}))`
   all: unset;
   width: 100%;
   display: inline-flex;
@@ -923,9 +925,9 @@ export const HomeTabButton = styled.button`
   text-align: center;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-  background-color: ${props => props['data-active'] === 'true' ? THEME.colors.hotYellow : THEME.colors.darkGreen};
-  color: ${props => props['data-active'] === 'true' ? THEME.colors.contrast : THEME.colors.white};
-  box-shadow: ${props => props['data-active'] === 'true' ? '0 12px 24px rgba(0, 0, 0, 0.25)' : '0 6px 18px rgba(0, 0, 0, 0.2)'};
+  background-color: ${props => props.$isActive ? THEME.colors.hotYellow : THEME.colors.darkGreen};
+  color: ${props => props.$isActive ? THEME.colors.contrast : THEME.colors.white};
+  box-shadow: ${props => props.$isActive ? '0 12px 24px rgba(0, 0, 0, 0.25)' : '0 6px 18px rgba(0, 0, 0, 0.2)'};
 
   &:focus-visible {
     outline: 2px solid ${THEME.colors.hotYellow};
