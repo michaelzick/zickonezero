@@ -938,3 +938,53 @@ export const HomeTabsSpacer = styled.div`
     height: 4.2em;
   }
 `;
+export const DemoStokeTabsBar = styled.div`
+  position: fixed;
+  top: 5em;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 0.6em;
+  padding: 0.4em 1em 0.45em;
+  z-index: 95;
+  background: transparent;
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    top: 4.9em;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    top: 8.48em;
+  }
+`;
+
+export const DemoStokeTabButton = styled.button.attrs(({ $isActive }) => ({
+  'data-active': $isActive ? 'true' : 'false',
+}))`
+  all: unset;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75em 1em 0.65em;
+  border-radius: 10px;
+  font-family: Roboto, sans-serif;
+  font-size: 1.05em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  background-color: ${props => props.$isActive ? THEME.colors.hotYellow : THEME.colors.darkGreen};
+  color: ${props => props.$isActive ? THEME.colors.contrast : THEME.colors.white};
+  box-shadow: ${props => props.$isActive ? '0 8px 20px rgba(0, 0, 0, 0.25)' : '0 8px 20px rgba(0, 0, 0, 0.15)'};
+
+  &:focus-visible {
+    outline: 2px solid ${THEME.colors.hotYellow};
+    outline-offset: 3px;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+`;
