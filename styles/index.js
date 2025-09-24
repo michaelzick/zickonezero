@@ -917,7 +917,7 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
   background-color: ${props => props.$isActive ? THEME.colors.hotYellow : THEME.colors.darkGreen};
-  color: ${props => props.$isActive ? THEME.colors.contrast : THEME.colors.white};
+  color: ${props => props.$isActive ? '#020817' : '#fff'}; /* hard coding to override theme switching */
   box-shadow: ${props => props.$isActive ? '0 8px 20px rgba(0, 0, 0, 0.25)' : '0 8px 20px rgba(0, 0, 0, 0.15)'};
 
   &:focus-visible {
