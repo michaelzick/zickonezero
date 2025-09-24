@@ -24,6 +24,8 @@ const MainContent = () => {
   const dispatch = useAppDispatch();
   const uxSectionRef = useRef<HTMLHeadingElement | null>(null);
   const uiSectionRef = useRef<HTMLHeadingElement | null>(null);
+  const uxAnchorRef = useRef<HTMLDivElement | null>(null);
+  const uiAnchorRef = useRef<HTMLDivElement | null>(null);
   const [activeSection, setActiveSection] = useState<SectionKey>('ux');
 
   // For lightbox
@@ -47,15 +49,26 @@ const MainContent = () => {
   const scrollToSection = useCallback((section: SectionKey) => {
     setActiveSection(section);
 
-    const target = section === 'ux' ? uxSectionRef.current : uiSectionRef.current;
+    const target = section === 'ux' ? uxAnchorRef.current : uiAnchorRef.current;
 
     if (target) {
       const prefersMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 600px)').matches;
-      const navOffset = prefersMobile ? 180 : 120;
-      const targetPosition = target.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = targetPosition - navOffset;
 
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      if (prefersMobile) {
+        // On mobile, scroll to anchor point with minimal offset for mobile tabs
+        const navOffset = 70; // Small offset to account for mobile tabs
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = targetPosition - navOffset;
+
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      } else {
+        // Desktop scrolling
+        const navOffset = 120;
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = targetPosition - navOffset;
+
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
     }
   }, [setActiveSection]);
 
@@ -143,6 +156,7 @@ const MainContent = () => {
         <HomeTabsSpacer aria-hidden='true' />
         <AnimatedHeadline />
 
+        <div ref={uxAnchorRef} id='ux-anchor' />
         <SectionHeader ref={uxSectionRef} id='ux-design'>
           {/* Projects I{"'"}ve <CommandLine>#managed</CommandLine> */}
           <WorkSectionHeader>UX Design</WorkSectionHeader>
@@ -155,6 +169,7 @@ const MainContent = () => {
         />
 
         <br />
+        <div ref={uiAnchorRef} id='ui-anchor' />
         <SectionHeader ref={uiSectionRef} id='ui-engineering'>
           {/* Projects I{"'"}ve <CommandLine>$built</CommandLine> */}
           <WorkSectionHeader>UI Engineering</WorkSectionHeader>
