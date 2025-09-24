@@ -895,8 +895,7 @@ export const HomeTabsBar = styled.div`
     gap: 0.6em;
     padding: 0.4em 1em 0.45em;
     z-index: 95;
-    background: ${THEME.colors.dark};
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+    background: transparent;
   }
 `;
 
