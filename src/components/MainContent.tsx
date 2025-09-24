@@ -49,7 +49,7 @@ const MainContent = () => {
 
         <SectionHeader>
           {/* Projects I{"'"}ve <CommandLine>#managed</CommandLine> */}
-          <WorkSectionHeader>Product Development + Design</WorkSectionHeader>
+          <WorkSectionHeader>UX Design</WorkSectionHeader>
         </SectionHeader>
 
         <GridContent
@@ -61,7 +61,7 @@ const MainContent = () => {
         <br />
         <SectionHeader>
           {/* Projects I{"'"}ve <CommandLine>$built</CommandLine> */}
-          <WorkSectionHeader>Frontend Development</WorkSectionHeader>
+          <WorkSectionHeader>UI Engineering</WorkSectionHeader>
         </SectionHeader>
 
         <GridContent
