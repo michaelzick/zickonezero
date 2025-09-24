@@ -75,7 +75,7 @@ export const AnimatedHeadlineWrapper = styled.h1`
   gap: 0.35em;
   max-width: 100em;
   width: 100%;
-  margin: 0 auto 1.75em;
+  margin: 0 auto;
   padding: 0 0.5em;
   color: ${THEME.colors.white};
   font-family: Roboto, sans-serif;
@@ -86,14 +86,14 @@ export const AnimatedHeadlineWrapper = styled.h1`
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     font-size: clamp(2.6rem, 6.2vw, 3.8rem);
-    margin: 0 auto 1.4em;
+    margin: 0 auto;
     padding: 0 0.5em;
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     font-size: clamp(2.1rem, 7vw, 3.1rem);
     gap: 0.25em;
-    margin: 0 auto 1.2em;
+    margin: 0 auto;
     padding: 0 0.5em;
   }
 `;
