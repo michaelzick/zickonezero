@@ -24,6 +24,8 @@ const MainContent = () => {
   const dispatch = useAppDispatch();
   const uxSectionRef = useRef<HTMLHeadingElement | null>(null);
   const uiSectionRef = useRef<HTMLHeadingElement | null>(null);
+  const uxContentRef = useRef<HTMLDivElement | null>(null);
+  const uiContentRef = useRef<HTMLDivElement | null>(null);
   const [activeSection, setActiveSection] = useState<SectionKey>('ux');
 
   // For lightbox
@@ -72,40 +74,51 @@ const MainContent = () => {
   }, [setActiveSection]);
 
   useEffect(() => {
-    const sections = [
-      { key: 'ux' as SectionKey, ref: uxSectionRef },
-      { key: 'ui' as SectionKey, ref: uiSectionRef },
+    const contentSections = [
+      { key: 'ux' as SectionKey, ref: uxContentRef },
+      { key: 'ui' as SectionKey, ref: uiContentRef },
     ];
 
+    const prefersMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 600px)').matches;
+
     const observer = new IntersectionObserver((entries) => {
-      const prefersMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 600px)').matches;
+      // Find the section with the highest intersection ratio (most visible)
+      let mostVisibleSection: SectionKey | null = null;
+      let highestRatio = 0;
 
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (entry.target === uxSectionRef.current) {
-            setActiveSection('ux');
-          } else if (entry.target === uiSectionRef.current) {
-            setActiveSection('ui');
+        if (entry.isIntersecting && entry.intersectionRatio > highestRatio) {
+          if (entry.target === uxContentRef.current) {
+            mostVisibleSection = 'ux';
+            highestRatio = entry.intersectionRatio;
+          } else if (entry.target === uiContentRef.current) {
+            mostVisibleSection = 'ui';
+            highestRatio = entry.intersectionRatio;
           }
         }
       });
+
+      // Only update if we found a visible section
+      if (mostVisibleSection) {
+        setActiveSection(mostVisibleSection);
+      }
     }, {
       root: null,
       // On mobile, account for tabs position; on desktop, use smaller margin
-      rootMargin: typeof window !== 'undefined' && window.matchMedia('(max-width: 600px)').matches
-        ? '-213px 0px -50% 0px'  // Mobile: tabs are ~213px from top
-        : '-120px 0px -50% 0px',  // Desktop: smaller nav
-      threshold: [0.1, 0.5],
+      rootMargin: prefersMobile
+        ? '-213px 0px -20% 0px'  // Mobile: tabs are ~213px from top, smaller bottom margin
+        : '-120px 0px -20% 0px',  // Desktop: smaller nav, smaller bottom margin
+      threshold: [0.1, 0.3, 0.5, 0.7],
     });
 
-    sections.forEach(({ ref }) => {
+    contentSections.forEach(({ ref }) => {
       if (ref.current) {
         observer.observe(ref.current);
       }
     });
 
     return () => {
-      sections.forEach(({ ref }) => {
+      contentSections.forEach(({ ref }) => {
         if (ref.current) {
           observer.unobserve(ref.current);
         }
@@ -148,27 +161,31 @@ const MainContent = () => {
         <HomeTabsSpacer aria-hidden='true' />
         <AnimatedHeadline />
 
-        <SectionHeader ref={uxSectionRef} id='ux-design'>
-          {/* Projects I{"'"}ve <CommandLine>#managed</CommandLine> */}
-          <WorkSectionHeader>UX Design</WorkSectionHeader>
-        </SectionHeader>
+        <div ref={uxContentRef}>
+          <SectionHeader ref={uxSectionRef} id='ux-design'>
+            {/* Projects I{"'"}ve <CommandLine>#managed</CommandLine> */}
+            <WorkSectionHeader>UX Design</WorkSectionHeader>
+          </SectionHeader>
 
-        <GridContent
-          worksDataReversed={worksDataReversed}
-          onThumbClick={onThumbClick}
-          isManagedWork
-        />
+          <GridContent
+            worksDataReversed={worksDataReversed}
+            onThumbClick={onThumbClick}
+            isManagedWork
+          />
+        </div>
 
         <br />
-        <SectionHeader ref={uiSectionRef} id='ui-engineering'>
-          {/* Projects I{"'"}ve <CommandLine>$built</CommandLine> */}
-          <WorkSectionHeader>UI Engineering</WorkSectionHeader>
-        </SectionHeader>
+        <div ref={uiContentRef}>
+          <SectionHeader ref={uiSectionRef} id='ui-engineering'>
+            {/* Projects I{"'"}ve <CommandLine>$built</CommandLine> */}
+            <WorkSectionHeader>UI Engineering</WorkSectionHeader>
+          </SectionHeader>
 
-        <GridContent
-          worksDataReversed={worksDataReversed}
-          onThumbClick={onThumbClick}
-        />
+          <GridContent
+            worksDataReversed={worksDataReversed}
+            onThumbClick={onThumbClick}
+          />
+        </div>
 
         {imgs && <FsLightbox
           toggler={lightboxController.toggler}
