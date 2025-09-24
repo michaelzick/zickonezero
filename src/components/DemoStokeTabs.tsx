@@ -37,9 +37,7 @@ const StyledTabsBar = styled.div`
   }
 `;
 
-const StyledTabButton = styled.button.attrs<StyledTabButtonProps>(({ $isActive }: StyledTabButtonProps) => ({
-  'data-active': $isActive ? 'true' : 'false',
-})) <StyledTabButtonProps>`
+const StyledTabButton = styled.button<StyledTabButtonProps>`
   all: unset;
   width: 100%;
   display: inline-flex;
@@ -79,6 +77,7 @@ const DemoStokeTabs = ({ tabs, activeTab, onTabClick }: DemoStokeTabsProps) => {
           role='tab'
           aria-controls={`${tab.key}-content`}
           tabIndex={activeTab === tab.key ? 0 : -1}
+          data-active={activeTab === tab.key ? 'true' : 'false'}
           $isActive={activeTab === tab.key}
           onClick={() => onTabClick(tab.key)}
         >
