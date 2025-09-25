@@ -917,9 +917,9 @@ export const ThemeSwitcherIndicator = styled(Select.ItemIndicator)`
 export const HomeTabsBar = styled.div`
   display: none;
 
-  @media (max-width: ${THEME.breakpoints.phone}) {
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
     position: fixed;
-    top: 8.48em;
+    top: 4.9em;
     left: 0;
     right: 0;
     display: flex;
@@ -927,6 +927,10 @@ export const HomeTabsBar = styled.div`
     padding: 0.4em 1em 0.45em;
     z-index: 95;
     background: transparent;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    top: 8.48em;
   }
 `;
 
@@ -967,7 +971,7 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
 export const HomeTabsSpacer = styled.div`
   display: none;
 
-  @media (max-width: ${THEME.breakpoints.phone}) {
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
     display: block;
     height: 4.2em;
   }
