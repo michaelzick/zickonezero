@@ -27,6 +27,7 @@ const MainContent = () => {
   const uxContentRef = useRef<HTMLDivElement | null>(null);
   const uiContentRef = useRef<HTMLDivElement | null>(null);
   const [activeSection, setActiveSection] = useState<SectionKey>('ux');
+  const isManualScrolling = useRef(false);
 
   // For lightbox
   const [lightboxController, setLightboxController] = useState({
@@ -47,6 +48,8 @@ const MainContent = () => {
   const { imgs } = worksDataReversed[lightboxController.productIndex] || [];
 
   const scrollToSection = useCallback((section: SectionKey) => {
+    // Set flag to prevent intersection observer from interfering
+    isManualScrolling.current = true;
     setActiveSection(section);
 
     const target = section === 'ux' ? uxSectionRef.current : uiSectionRef.current;
@@ -71,6 +74,11 @@ const MainContent = () => {
         window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
       }
     }
+
+    // Clear the flag after a delay to allow manual scroll to complete
+    setTimeout(() => {
+      isManualScrolling.current = false;
+    }, 1000);
   }, [setActiveSection]);
 
   useEffect(() => {
@@ -79,35 +87,41 @@ const MainContent = () => {
       { key: 'ui' as SectionKey, ref: uiContentRef },
     ];
 
-    const prefersMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 600px)').matches;
-
     const observer = new IntersectionObserver((entries) => {
-      // Find the section with the highest intersection ratio (most visible)
-      let mostVisibleSection: SectionKey | null = null;
-      let highestRatio = 0;
+      // Don't update if user just clicked a tab
+      if (isManualScrolling.current) {
+        return;
+      }
+
+      let uxRatio = 0;
+      let uiRatio = 0;
 
       entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio > highestRatio) {
+        if (entry.isIntersecting) {
           if (entry.target === uxContentRef.current) {
-            mostVisibleSection = 'ux';
-            highestRatio = entry.intersectionRatio;
+            uxRatio = entry.intersectionRatio;
           } else if (entry.target === uiContentRef.current) {
-            mostVisibleSection = 'ui';
-            highestRatio = entry.intersectionRatio;
+            uiRatio = entry.intersectionRatio;
           }
         }
       });
 
-      // Only update if we found a visible section
-      if (mostVisibleSection) {
-        setActiveSection(mostVisibleSection);
+      console.log('Observer fired:', { uxRatio, uiRatio, currentActive: activeSection });
+
+      // Asymmetric switching logic:
+      // - Switch to UI Engineering only when it has more visibility AND meets minimum threshold
+      // - Switch back to UX Design when it has any more visibility than UI Engineering
+      if (uiRatio > 0.05 && uiRatio > uxRatio) {
+        console.log('Switching to UI');
+        setActiveSection('ui');
+      } else if (uxRatio > uiRatio) {
+        console.log('Switching to UX');
+        setActiveSection('ux');
       }
     }, {
       root: null,
-      // On mobile, account for tabs position; on desktop, use smaller margin
-      rootMargin: prefersMobile
-        ? '-213px 0px -20% 0px'  // Mobile: tabs are ~213px from top, smaller bottom margin
-        : '-120px 0px -20% 0px',  // Desktop: smaller nav, smaller bottom margin
+      // Use a simpler rootMargin that works on all screen sizes
+      rootMargin: '-150px 0px -20% 0px',
       threshold: [0.1, 0.3, 0.5, 0.7],
     });
 
@@ -125,7 +139,7 @@ const MainContent = () => {
       });
       observer.disconnect();
     };
-  }, []);
+  }, [activeSection]);
 
   return (
     <>

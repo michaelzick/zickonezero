@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { THEME } from '../../styles/theme';
+import { HomeTabButton } from '../../styles';
 
 type TabConfig = {
   key: string;
@@ -10,10 +11,6 @@ type DemoStokeTabsProps = {
   tabs: TabConfig[];
   activeTab: string;
   onTabClick: (tabKey: string) => void;
-};
-
-type StyledTabButtonProps = {
-  $isActive: boolean;
 };
 
 // Create styled components directly in this file to ensure they work
@@ -37,40 +34,11 @@ const StyledTabsBar = styled.div`
   }
 `;
 
-const StyledTabButton = styled.button<StyledTabButtonProps>`
-  all: unset;
-  width: 100%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75em 1em 0.65em;
-  border-radius: 10px;
-  font-family: Roboto, sans-serif;
-  font-size: 1.05em;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-  background-color: ${(props: StyledTabButtonProps) => props.$isActive ? THEME.colors.hotYellow : THEME.colors.darkGreen};
-  color: ${(props: StyledTabButtonProps) => props.$isActive ? '#020817' : '#fff'}; /* hard coding to override theme switching */
-  box-shadow: ${(props: StyledTabButtonProps) => props.$isActive ? 'none' : '0 8px 20px rgba(0, 0, 0, 0.25)'};
-
-  &:focus-visible {
-    outline: 2px solid ${THEME.colors.hotYellow};
-    outline-offset: 3px;
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
-`;
-
 const DemoStokeTabs = ({ tabs, activeTab, onTabClick }: DemoStokeTabsProps) => {
   return (
     <StyledTabsBar role='tablist' aria-label='Page sections'>
       {tabs.map((tab) => (
-        <StyledTabButton
+        <HomeTabButton
           key={tab.key}
           type="button"
           aria-selected={activeTab === tab.key}
@@ -82,7 +50,7 @@ const DemoStokeTabs = ({ tabs, activeTab, onTabClick }: DemoStokeTabsProps) => {
           onClick={() => onTabClick(tab.key)}
         >
           {tab.label}
-        </StyledTabButton>
+        </HomeTabButton>
       ))}
     </StyledTabsBar>
   );
