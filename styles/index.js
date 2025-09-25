@@ -408,7 +408,8 @@ export const LinkBoxMobile = styled.ul`
   position: absolute;
   top: 3.4em;
   right: 1em;
-  padding: 1em;
+  padding: 1.5em 2em;
+  min-width: 180px;
   background: ${THEME.colors.darkest};
   z-index: 400;
   border-radius: 4px;
@@ -421,7 +422,7 @@ export const LinkBoxMobile = styled.ul`
 
   li {
     &:not(:first-child) {
-      margin-top: 1em;
+      margin-top: 1.5em;
     }
 
     a {
