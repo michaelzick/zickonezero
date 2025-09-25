@@ -66,6 +66,10 @@ export const WorkSectionHeader = styled.span`
   font-family: monospace;
   font-size: 2em;
   padding: 0 0.5em;
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    font-size: 1.3em;
+  }
 `;
 
 export const AnimatedHeadlineWrapper = styled.h1`
