@@ -968,6 +968,7 @@ export const HomeTabsSpacer = styled.div`
     height: 4.2em;
   }
 `;
+
 export const DemoStokeTabsBar = styled.div`
   position: fixed;
   top: 5em;
