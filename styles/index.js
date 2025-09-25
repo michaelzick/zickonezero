@@ -412,7 +412,8 @@ export const LinkBoxMobile = styled.ul`
   background: ${THEME.colors.darkest};
   z-index: 400;
   border-radius: 4px;
-  box-shadow: 20px 0 80px 20px rgb(138 138 149 / 40%);
+  border: 2px solid ${THEME.colors.white};
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 
   svg {
     fill: ${THEME.colors.white};
