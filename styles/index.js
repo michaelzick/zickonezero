@@ -951,7 +951,6 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   text-align: center;
   white-space: normal;
   word-wrap: break-word;
-  hyphens: auto;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
   background-color: ${props => props.$isActive ? THEME.colors.hotYellow : THEME.colors.darkGreen};
