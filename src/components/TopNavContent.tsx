@@ -10,7 +10,7 @@ import {
 } from '../showMobileMenuSlice';
 
 import { Title, Nav, MenuIcon, ThemeSwitcherWrapper } from '../../styles';
-import { LinkBoxContent, LinkBoxMobileContent, ThemeSwitcher } from '.';
+import { LinkBoxContent, AnimatedMobileMenu, ThemeSwitcher } from '.';
 import { MouseEvent, ReactElement } from 'react';
 
 const NavContent = (): ReactElement => {
@@ -49,7 +49,7 @@ const NavContent = (): ReactElement => {
         <div className="bar3"></div>
       </MenuIcon>
 
-      {isMobileMenuShown ? <LinkBoxMobileContent /> : null}
+      <AnimatedMobileMenu isVisible={isMobileMenuShown} />
     </Nav>
   );
 };

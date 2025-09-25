@@ -10,11 +10,15 @@ import {
 import { NewTabSVG } from './svg/NewTab';
 import { LinkBoxMobile } from '../../styles';
 
-const LinkBoxMobileContent = () => {
+type LinkBoxMobileContentProps = {
+  isAnimating?: boolean;
+};
+
+const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps) => {
   const dispatch = useAppDispatch();
 
   return (
-    <LinkBoxMobile>
+    <LinkBoxMobile $isAnimating={isAnimating}>
       <li onClick={() => dispatch(showMobileMenu(false))}>
         <Link href='/about'>About</Link>
       </li>

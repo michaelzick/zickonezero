@@ -415,6 +415,31 @@ export const LinkBoxMobile = styled.ul`
   border-radius: 4px;
   border: 2px solid ${THEME.colors.white};
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  animation: ${props => props.$isAnimating
+    ? 'slideInFromRight 0.3s ease-out forwards'
+    : 'slideOutToRight 0.3s ease-in forwards'};
+
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(calc(100% + 1em));
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideOutToRight {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(calc(100% + 1em));
+      opacity: 0;
+    }
+  }
 
   svg {
     fill: ${THEME.colors.white};

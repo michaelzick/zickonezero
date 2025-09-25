@@ -12,6 +12,7 @@ import GridContent from './GridContent';
 import DemoStokeContent from './DemoStokeContent';
 import AntisyphonContent from './AntisyphonContent';
 import ThemeSwitcher from './ThemeSwitcher';
+import AnimatedMobileMenu from './AnimatedMobileMenu';
 
 export {
   LinkBoxContent,
@@ -27,5 +28,6 @@ export {
   GridContent,
   DemoStokeContent,
   AntisyphonContent,
-  ThemeSwitcher
+  ThemeSwitcher,
+  AnimatedMobileMenu
 };
