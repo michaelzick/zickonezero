@@ -11,5 +11,5 @@ export type WorksDataType = {
 };
 
 export type ShowMobileMenuType = {
-  isMobileMenuShown: Boolean;
+  isMobileMenuShown: boolean;
 };
