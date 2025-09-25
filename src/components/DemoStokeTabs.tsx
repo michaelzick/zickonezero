@@ -54,7 +54,7 @@ const StyledTabButton = styled.button<StyledTabButtonProps>`
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
   background-color: ${(props: StyledTabButtonProps) => props.$isActive ? THEME.colors.hotYellow : THEME.colors.darkGreen};
   color: ${(props: StyledTabButtonProps) => props.$isActive ? '#020817' : '#fff'}; /* hard coding to override theme switching */
-  box-shadow: ${(props: StyledTabButtonProps) => props.$isActive ? '0 8px 20px rgba(0, 0, 0, 0.25)' : '0 8px 20px rgba(0, 0, 0, 0.15)'};
+  box-shadow: ${(props: StyledTabButtonProps) => props.$isActive ? 'none' : '0 8px 20px rgba(0, 0, 0, 0.25)'};
 
   &:focus-visible {
     outline: 2px solid ${THEME.colors.hotYellow};
