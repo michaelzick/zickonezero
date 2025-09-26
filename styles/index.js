@@ -846,7 +846,7 @@ export const ThemeSwitcherTrigger = styled(Select.Trigger)`
   justify-content: center;
   gap: 0;
   min-width: 0;
-  padding: 0.32em 1em 0.18em;
+  padding: 0.25em 1em 0.22em;
   border-radius: 6px;
   border: 1px solid ${THEME.colors.grey};
   color: ${THEME.colors.white};
