@@ -151,7 +151,7 @@ const DemoStokeContent = () => {
                   <section>
                     <h3>Market Research & Competitive Analysis</h3>
                     <DemoStokeList>
-                      <li className='interview'>I conducted user interviews and surveys with riders across snow, surf, and skate.</li>
+                      <li className='interview'>I conducted user interviews and surveys with riders across snow, surf, and MTB.</li>
                       <br />
                       <li className='learning'><strong>Key insight:</strong> People would pay to demo gear if trust and ease were guaranteed.</li>
                     </DemoStokeList>
