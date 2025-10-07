@@ -29,6 +29,11 @@ const MainContent = () => {
   const [activeSection, setActiveSection] = useState<SectionKey>('ux');
   const isManualScrolling = useRef(false);
 
+  // Parallax refs and state
+  const introTextRef = useRef<HTMLDivElement | null>(null);
+  const introImageRef = useRef<HTMLDivElement | null>(null);
+  const [parallaxOffset, setParallaxOffset] = useState({ text: 0, image: 0 });
+
   // For lightbox
   const [lightboxController, setLightboxController] = useState({
     toggler: false,
@@ -141,6 +146,39 @@ const MainContent = () => {
     };
   }, [activeSection]);
 
+  // Parallax scroll effect
+  useEffect(() => {
+    // Only enable parallax on desktop devices
+    const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+
+    if (!isDesktop) return;
+
+    const handleScroll = () => {
+      if (!introTextRef.current || !introImageRef.current) return;
+
+      const scrollY = window.scrollY;
+      const introSection = introTextRef.current.closest('.intro-section');
+
+      if (introSection) {
+        const rect = introSection.getBoundingClientRect();
+        const sectionTop = rect.top + scrollY;
+        const sectionHeight = rect.height;
+
+        // Only apply parallax when the intro section is in view
+        if (scrollY + window.innerHeight > sectionTop && scrollY < sectionTop + sectionHeight) {
+          // Calculate parallax offsets - text moves slower, image moves faster
+          const textOffset = (scrollY - sectionTop) * 0.3; // Text moves 30% of scroll speed
+          const imageOffset = (scrollY - sectionTop) * -0.2; // Image moves 20% opposite direction
+
+          setParallaxOffset({ text: textOffset, image: imageOffset });
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <>
       <TopNavContent />
@@ -175,8 +213,12 @@ const MainContent = () => {
         <HomeTabsSpacer aria-hidden='true' />
         <AnimatedHeadline />
 
-        <IntroSection>
-          <div className="intro-text">
+        <IntroSection className="intro-section">
+          <div
+            className="intro-text"
+            ref={introTextRef}
+            style={{ transform: `translateY(${parallaxOffset.text}px)` }}
+          >
             <h2>Michael Zick is ZICKONEZERO Creative.</h2>
             <p>
               Starting out as a frontend developer for digital agencies, Michael began crafting user experiences across a wide range of industries. After spending many years as a React and then full-stack Node developer, Michael realized he had a passion for UX design, where he's currently focusing his attention.
@@ -185,7 +227,11 @@ const MainContent = () => {
               From UX designs to rapid prototypes, to production-ready apps, Michael's range of experience and AI fluency can bring any project to life in record time.
             </p>
           </div>
-          <div className="intro-image">
+          <div
+            className="intro-image"
+            ref={introImageRef}
+            style={{ transform: `translateY(${parallaxOffset.image}px)` }}
+          >
             <img
               src="/img/florescent-lifeguard-tower.webp"
               alt="Florescent lifeguard tower"

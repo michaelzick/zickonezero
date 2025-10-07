@@ -1001,11 +1001,14 @@ export const IntroSection = styled.div`
   max-width: 100em;
   margin: 0 auto;
   gap: 4em;
+  overflow: hidden; /* Prevent parallax elements from creating horizontal scroll */
 
   .intro-text {
     flex: 1;
     max-width: 35em;
     text-align: left;
+    will-change: transform; /* Optimize for transforms */
+    transition: transform 0.1s ease-out; /* Smooth parallax movement */
 
     h2 {
       color: ${THEME.colors.white};
@@ -1034,6 +1037,8 @@ export const IntroSection = styled.div`
   .intro-image {
     flex: 1;
     max-width: 35em;
+    will-change: transform; /* Optimize for transforms */
+    transition: transform 0.1s ease-out; /* Smooth parallax movement */
 
     img {
       width: 100%;
@@ -1051,6 +1056,7 @@ export const IntroSection = styled.div`
     .intro-text {
       max-width: none;
       text-align: left;
+      transform: none !important; /* Disable parallax on tablets and mobile */
 
       h2 {
         font-size: 2.8em;
@@ -1070,6 +1076,7 @@ export const IntroSection = styled.div`
 
     .intro-image {
       max-width: 30em;
+      transform: none !important; /* Disable parallax on tablets and mobile */
     }
   }
 
