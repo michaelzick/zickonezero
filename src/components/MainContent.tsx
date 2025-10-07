@@ -213,10 +213,13 @@ const MainContent = () => {
           >
             <h2>Michael Zick is ZICKONEZERO Creative.</h2>
             <p>
-              Starting out as a frontend developer for digital agencies, Michael began crafting user experiences across a wide range of industries. After spending many years as a React and then full-stack Node developer, Michael realized he has a passion for UX design, where he's currently focusing his attention.
+              Starting out as a frontend developer for digital agencies, Michael began crafting user experiences across a wide range of industries.
+              After spending many years as a React and then full-stack Node developer, Michael realized he has a passion for UX design, where he&apos;s
+              currently focusing his attention.
             </p>
             <p>
-              From UX designs to rapid prototypes, to production-ready apps, Michael's range of experience and AI fluency can bring any project to life in record time.
+              From UX designs to rapid prototypes, to production-ready apps, Michael&apos;s range of experience and AI fluency can bring any project to
+              life in record time.
             </p>
           </div>
           <div
