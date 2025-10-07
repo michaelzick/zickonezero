@@ -161,8 +161,8 @@ const MainContent = () => {
       // Simple parallax calculation based on scroll position
       // Text starts at -60px and moves slower (positive direction, slower than scroll)
       const textOffset = -60 + (scrollY * 0.2); // Start higher, then move 20% of scroll speed
-      // Image moves in opposite direction
-      const imageOffset = scrollY * -0.1; // Image moves 10% opposite direction
+      // Image moves in opposite direction (slower)
+      const imageOffset = scrollY * -0.05; // Image moves 5% opposite direction
 
       setParallaxOffset({ text: textOffset, image: imageOffset });
     };
