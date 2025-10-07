@@ -1005,22 +1005,25 @@ export const IntroSection = styled.div`
   .intro-text {
     flex: 1;
     max-width: 35em;
+    text-align: left;
 
     h2 {
       color: ${THEME.colors.white};
       font-family: Roboto, sans-serif;
-      font-size: 1.8em;
+      font-size: 3.2em;
       font-weight: 600;
       margin: 0 0 1em 0;
-      line-height: 1.3;
+      line-height: 1.2;
+      text-align: left;
     }
 
     p {
       color: ${THEME.colors.white};
       font-family: Roboto, sans-serif;
-      font-size: 1.1em;
-      line-height: 1.6;
+      font-size: 1.6em;
+      line-height: 1.5;
       margin: 0;
+      text-align: left;
     }
   }
 
@@ -1042,14 +1045,16 @@ export const IntroSection = styled.div`
 
     .intro-text {
       max-width: none;
-      text-align: center;
+      text-align: left;
 
       h2 {
-        font-size: 1.6em;
+        font-size: 2.8em;
+        text-align: left;
       }
 
       p {
-        font-size: 1em;
+        font-size: 1.4em;
+        text-align: left;
       }
     }
 
@@ -1064,11 +1069,11 @@ export const IntroSection = styled.div`
 
     .intro-text {
       h2 {
-        font-size: 1.4em;
+        font-size: 2.2em;
       }
 
       p {
-        font-size: 0.95em;
+        font-size: 1.2em;
       }
     }
   }
