@@ -1022,8 +1022,12 @@ export const IntroSection = styled.div`
       font-family: Roboto, sans-serif;
       font-size: 1.6em;
       line-height: 1.5;
-      margin: 0;
+      margin: 0 0 1em 0;
       text-align: left;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -1034,7 +1038,8 @@ export const IntroSection = styled.div`
     img {
       width: 100%;
       height: auto;
-      border-radius: 10px;
+      border-radius: 4px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
     }
   }
 
@@ -1055,6 +1060,11 @@ export const IntroSection = styled.div`
       p {
         font-size: 1.4em;
         text-align: left;
+        margin: 0 0 1em 0;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
 
@@ -1074,6 +1084,11 @@ export const IntroSection = styled.div`
 
       p {
         font-size: 1.2em;
+        margin: 0 0 1em 0;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
   }
