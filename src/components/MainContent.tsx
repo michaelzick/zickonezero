@@ -14,7 +14,7 @@ import { useState, useRef, useEffect, memo, useCallback } from 'react';
 import FsLightbox from 'fslightbox-react';
 
 import { TopNavContent, GridContent, FooterContent, AnimatedHeadline } from '.';
-import { SectionHeader, Wrapper, WorkSectionHeader, HomeTabsBar, HomeTabButton, HomeTabsSpacer } from '../../styles';
+import { SectionHeader, Wrapper, WorkSectionHeader, HomeTabsBar, HomeTabButton, HomeTabsSpacer, IntroSection } from '../../styles';
 
 type SectionKey = 'ux' | 'ui';
 
@@ -174,6 +174,22 @@ const MainContent = () => {
 
         <HomeTabsSpacer aria-hidden='true' />
         <AnimatedHeadline />
+
+        <IntroSection>
+          <div className="intro-text">
+            <h2>Michael Zick is ZICKONEZERO Creative.</h2>
+            <p>
+              Starting out as a frontend developer for digital agencies, Michael began crafting user experiences across a wide range of industries. After spending many years as a React and then full-stack Node developer, Michael realized he had a passion for UX design, where he's currently focusing his attention.
+            </p>
+          </div>
+          <div className="intro-image">
+            <img
+              src="/img/florescent-lifeguard-tower.webp"
+              alt="Florescent lifeguard tower"
+              loading="lazy"
+            />
+          </div>
+        </IntroSection>
 
         <div ref={uxContentRef}>
           <SectionHeader ref={uxSectionRef} id='ux-design'>

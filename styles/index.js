@@ -993,3 +993,83 @@ export const DemoStokeTabsBar = styled.div`
     top: 8.48em;
   }
 `;
+export const IntroSection = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3em 2em;
+  max-width: 100em;
+  margin: 0 auto;
+  gap: 4em;
+
+  .intro-text {
+    flex: 1;
+    max-width: 35em;
+
+    h2 {
+      color: ${THEME.colors.white};
+      font-family: Roboto, sans-serif;
+      font-size: 1.8em;
+      font-weight: 600;
+      margin: 0 0 1em 0;
+      line-height: 1.3;
+    }
+
+    p {
+      color: ${THEME.colors.white};
+      font-family: Roboto, sans-serif;
+      font-size: 1.1em;
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+
+  .intro-image {
+    flex: 1;
+    max-width: 35em;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+  }
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    flex-direction: column;
+    gap: 2.5em;
+    padding: 2em 1.5em;
+
+    .intro-text {
+      max-width: none;
+      text-align: center;
+
+      h2 {
+        font-size: 1.6em;
+      }
+
+      p {
+        font-size: 1em;
+      }
+    }
+
+    .intro-image {
+      max-width: 30em;
+    }
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    padding: 1.5em 1em;
+    gap: 2em;
+
+    .intro-text {
+      h2 {
+        font-size: 1.4em;
+      }
+
+      p {
+        font-size: 0.95em;
+      }
+    }
+  }
+`;
