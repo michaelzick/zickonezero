@@ -32,7 +32,7 @@ const MainContent = () => {
   // Parallax refs and state
   const introTextRef = useRef<HTMLDivElement | null>(null);
   const introImageRef = useRef<HTMLDivElement | null>(null);
-  const [parallaxOffset, setParallaxOffset] = useState({ text: 0, image: 0 });
+  const [parallaxOffset, setParallaxOffset] = useState({ text: -60, image: 0 });
 
   // For lightbox
   const [lightboxController, setLightboxController] = useState({
@@ -157,22 +157,14 @@ const MainContent = () => {
       if (!introTextRef.current || !introImageRef.current) return;
 
       const scrollY = window.scrollY;
-      const introSection = introTextRef.current.closest('.intro-section');
 
-      if (introSection) {
-        const rect = introSection.getBoundingClientRect();
-        const sectionTop = rect.top + scrollY;
-        const sectionHeight = rect.height;
+      // Simple parallax calculation based on scroll position
+      // Text starts at -60px and moves slower (positive direction, slower than scroll)
+      const textOffset = -60 + (scrollY * 0.2); // Start higher, then move 20% of scroll speed
+      // Image moves in opposite direction
+      const imageOffset = scrollY * -0.1; // Image moves 10% opposite direction
 
-        // Only apply parallax when the intro section is in view
-        if (scrollY + window.innerHeight > sectionTop && scrollY < sectionTop + sectionHeight) {
-          // Calculate parallax offsets - text moves slower, image moves faster
-          const textOffset = (scrollY - sectionTop) * 0.3; // Text moves 30% of scroll speed
-          const imageOffset = (scrollY - sectionTop) * -0.2; // Image moves 20% opposite direction
-
-          setParallaxOffset({ text: textOffset, image: imageOffset });
-        }
-      }
+      setParallaxOffset({ text: textOffset, image: imageOffset });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -221,7 +213,7 @@ const MainContent = () => {
           >
             <h2>Michael Zick is ZICKONEZERO Creative.</h2>
             <p>
-              Starting out as a frontend developer for digital agencies, Michael began crafting user experiences across a wide range of industries. After spending many years as a React and then full-stack Node developer, Michael realized he had a passion for UX design, where he's currently focusing his attention.
+              Starting out as a frontend developer for digital agencies, Michael began crafting user experiences across a wide range of industries. After spending many years as a React and then full-stack Node developer, Michael realized he has a passion for UX design, where he's currently focusing his attention.
             </p>
             <p>
               From UX designs to rapid prototypes, to production-ready apps, Michael's range of experience and AI fluency can bring any project to life in record time.
