@@ -42,9 +42,6 @@ const IndyShaper = () => {
                 <li className='complaint'>
                   <strong>Eco-niche is under-leveraged:</strong> He builds eco-conscious boards, but there’s no scalable way to differentiate or educate the broader surf audience about that value.
                 </li>
-                <li className='complaint'>
-                  <strong>SUPs are lucrative but hard to move:</strong> The price point is high, so buyers are even more hesitant to buy without trying.
-                </li>
               </DemoStokeList>
             </section>
 
@@ -62,10 +59,6 @@ const IndyShaper = () => {
                 <li>
                   <strong>Converts demos into deposits:</strong> The “Try Before You Buy” model builds trust. A surfer can try a board, love it, and put a deposit down through the app—no awkward sales push required.
                   <p>You can even use feedback from demo users to match surfers to the right shape.</p>
-                </li>
-                <li>
-                  <strong>Bridges the trust gap for SUP buyers:</strong> SUPs are bulky and expensive. {DSLink} allows Curtis to offer local tryouts at beaches or shops without needing to be there himself.
-                  <p>Reviews, demo history, and performance ratings can give hesitant buyers confidence before putting down thousands.</p>
                 </li>
                 <li>
                   <strong>Turns environmental values into a competitive edge:</strong> Boards can be tagged with attributes like “eco-epoxy,” “sustainable blanks,” or “bio-resin.” Surfers increasingly care about
