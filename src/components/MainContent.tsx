@@ -32,7 +32,7 @@ const MainContent = () => {
   // Parallax refs and state
   const introTextRef = useRef<HTMLDivElement | null>(null);
   const introImageRef = useRef<HTMLDivElement | null>(null);
-  const [parallaxOffset, setParallaxOffset] = useState({ text: -60, image: 0 });
+  const [parallaxOffset, setParallaxOffset] = useState({ text: -60, image: -40 });
 
   // For lightbox
   const [lightboxController, setLightboxController] = useState({
@@ -162,7 +162,7 @@ const MainContent = () => {
       // Text starts at -60px and moves slower (positive direction, slower than scroll)
       const textOffset = -60 + (scrollY * 0.2); // Start higher, then move 20% of scroll speed
       // Image moves in opposite direction (slower)
-      const imageOffset = scrollY * -0.05; // Image moves 5% opposite direction
+      const imageOffset = -40 + (scrollY * -0.05); // Image starts higher, then glides slightly upward
 
       setParallaxOffset({ text: textOffset, image: imageOffset });
     };
