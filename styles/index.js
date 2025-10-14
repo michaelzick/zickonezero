@@ -668,6 +668,10 @@ export const DemoStokeList = styled.ul`
 
   li {
     ${props => props.spaced && 'padding: 0.7em 0;'}
+
+    p {
+      margin-bottom: 0;
+    }
   }
 
   li::before {
