@@ -228,7 +228,7 @@ const MainContent = () => {
             style={{ transform: `translateY(${parallaxOffset.image}px)` }}
           >
             <img
-              src="/img/florescent-lifeguard-tower.webp"
+              src="/img/lifeguard-tower-transparent.webp"
               alt="Florescent lifeguard tower"
               loading="lazy"
             />
