@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   useAppDispatch,
   useAppSelector
@@ -33,8 +33,17 @@ const DemoStokeContent = () => {
 
   const handleTabClick = (tabKey: string) => {
     setActiveTab(tabKey as SectionKey);
-    scrollToTop();
   };
+
+  // Scroll to top after tab content changes
+  useEffect(() => {
+    // Use requestAnimationFrame to ensure scroll happens after browser layout calculations
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        scrollToTop();
+      });
+    });
+  }, [activeTab]);
 
   return (
     <>
