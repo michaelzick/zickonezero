@@ -54,6 +54,19 @@ export const WhiteTransitionAnchor = styled.a`
   }
 `;
 
+export const PitchDeckLink = styled(WhiteTransitionAnchor)`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  margin-top: 0.4em;
+  font-size: 0.95em;
+
+  svg {
+    width: 1.1em;
+    height: 1.1em;
+  }
+`;
+
 export const CommandLine = styled.span`
   font-family: monospace;
   color: ${THEME.colors.white};

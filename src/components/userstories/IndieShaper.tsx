@@ -1,3 +1,4 @@
+import { FileTextIcon } from '@radix-ui/react-icons';
 import {
   BioBox,
   DemoStokeTitle,
@@ -5,6 +6,7 @@ import {
   DemoStokeText,
   WhiteTransitionAnchor,
   FlexBox,
+  PitchDeckLink,
 } from '../../../styles';
 
 const IndyShaper = () => {
@@ -17,7 +19,12 @@ const IndyShaper = () => {
           <div>
             <FlexBox>
               <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' />
-              <h2 className='tab-header'>User Stories</h2>
+              <div>
+                <h2 className='tab-header'>User Stories</h2>
+                <PitchDeckLink href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
+                  Investor Pitch Deck <FileTextIcon aria-hidden="true" />
+                </PitchDeckLink>
+              </div>
             </FlexBox>
             <br />
             <DemoStokeTitle>The Independent Shaper</DemoStokeTitle>
