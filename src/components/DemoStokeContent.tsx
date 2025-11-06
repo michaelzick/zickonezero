@@ -350,7 +350,10 @@ const DemoStokeContent = () => {
                       <li className='prototype'>
                         <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
                           See the full site
-                        </WhiteTransitionAnchor>
+                        </WhiteTransitionAnchor> or{' '}
+                        <WhiteTransitionAnchor href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
+                          download the investor pitch deck
+                        </WhiteTransitionAnchor>.
                       </li>
                     </DemoStokeList>
                   </section>
