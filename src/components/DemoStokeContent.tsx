@@ -70,11 +70,14 @@ const DemoStokeContent = () => {
                     <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' />
                     <div>
                       <h2 className='tab-header'>Executive Summary</h2>
-                      <PitchDeckLink href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
+                      <PitchDeckLink className='pitch-link-desktop' href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
                         Investor Pitch Deck <FileTextIcon aria-hidden="true" />
                       </PitchDeckLink>
                     </div>
                   </FlexBox>
+                  <PitchDeckLink className='pitch-link-mobile' href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
+                    Investor Pitch Deck <FileTextIcon aria-hidden="true" />
+                  </PitchDeckLink>
                   <p>
                     <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
                       DemoStoke

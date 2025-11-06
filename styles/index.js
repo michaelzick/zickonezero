@@ -35,11 +35,22 @@ export const FlexBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1.5em;
 
   @media (max-width: ${THEME.breakpoints.phone}) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75em;
+
+    .ds-logo {
+      width: clamp(3.5rem, 28vw, 5.25rem);
+      height: auto;
+    }
+
     .tab-header {
-      font-size: 1em;
-      text-align: right
+      font-size: 1.05em;
+      text-align: left;
+      margin: 0;
     }
   }
 `;
@@ -60,10 +71,28 @@ export const PitchDeckLink = styled(WhiteTransitionAnchor)`
   gap: 0.35em;
   margin-top: 0.4em;
   font-size: 0.95em;
+  padding: 0.25em 0;
+
+  &.pitch-link-mobile {
+    display: none;
+  }
 
   svg {
     width: 1.1em;
     height: 1.1em;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    font-size: 0.9em;
+    padding: 0.35em 0;
+
+    &.pitch-link-desktop {
+      display: none;
+    }
+
+    &.pitch-link-mobile {
+      display: inline-flex;
+    }
   }
 `;
 
