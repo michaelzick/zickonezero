@@ -131,6 +131,15 @@
     "link": "/antisyphon-training"
   },
   {
+    "thumb": "/img/squares/ds-logo-mosaic-square.png",
+    "imgs": [],
+    "desc": "DemoStoke design system and component library",
+    "header": "DemoStoke Design System",
+    "group": "demostoke-design-system",
+    "link": "https://designsystem.demostoke.com/",
+    "linkOut": true
+  },
+  {
     "thumb": "/img/squares/demostoke-logo-ds-transparent-cropped.webp",
     "imgs": [],
     "desc": "Action sports gear rental system and lifestyle blog",
