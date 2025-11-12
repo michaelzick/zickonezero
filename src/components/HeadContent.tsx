@@ -9,17 +9,17 @@ const HeadContent = () => (
     <meta property="og:url" content="https://www.zickonezero.com" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content="Product Management, Engineering Management, UX Design, Frontend Development, Git/DevOps, and Creative Direction." />
-    <meta property="og:image" content="/img/squares/z10_logo.webp" />
-    <meta property="og:image:width" content="1500" />
-    <meta property="og:image:height" content="996" />
+    <meta property="og:image" content="/img/squares/lifeguard-tower-square-020817.webp" />
+    <meta property="og:image:width" content="1182" />
+    <meta property="og:image:height" content="1182" />
     <meta itemProp="name" content="ZICKONEZERO Creative" />
     <meta itemProp="url" content="https://www.zickonezero.com" />
     <meta itemProp="description" content="Product Management, Engineering Management, UX Design, Frontend Development, Git/DevOps, and Creative Direction." />
-    <meta itemProp="thumbnailUrl" content="/img/squares/z10_logo.webp" />
-    <link rel="image_src" href="/img/squares/z10_logo.webp" />
-    <meta itemProp="image" content="/img/squares/z10_logo.webp" />
+    <meta itemProp="thumbnailUrl" content="/img/squares/lifeguard-tower-square-020817.webp" />
+    <link rel="image_src" href="/img/squares/lifeguard-tower-square-020817.webp" />
+    <meta itemProp="image" content="/img/squares/lifeguard-tower-square-020817.webp" />
     <meta name="twitter:title" content="ZICKONEZERO Creative" />
-    <meta name="twitter:image" content="/img/squares/z10_logo.webp" />
+    <meta name="twitter:image" content="/img/squares/lifeguard-tower-square-020817.webp" />
     <meta name="twitter:url" content="https://www.zickonezero.com" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:description" content="Product Management, Engineering Management, UX Design, Frontend Development, Git/DevOps, and Creative Direction." />
