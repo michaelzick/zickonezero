@@ -18,7 +18,7 @@ const IndyShaper = () => {
         <div className='biobox-inner demostoke-inner'>
           <div>
             <FlexBox>
-              <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' />
+              <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
               <div>
                 <h2 className='tab-header'>User Stories</h2>
                 <PitchDeckLink href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>

@@ -67,7 +67,7 @@ const DemoStokeContent = () => {
               <div className='biobox-inner demostoke-inner'>
                 <div>
                   <FlexBox>
-                    <img className='ds-logo' src='/img/squares/demostoke-logo-ds-transparent-cropped.webp' alt='DemoStoke Logo' />
+                    <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
                     <div>
                       <h2 className='tab-header'>Executive Summary</h2>
                       <PitchDeckLink className='pitch-link-desktop' href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
