@@ -96,17 +96,55 @@
     "group": "saatchi"
   },
   {
+    "thumb": "/img/squares/mz-ppc-logo.webp",
+    "imgs": [],
+    "desc": "General information and booking site for Michael Zick Coaching",
+    "header": "Michael Zick Coaching",
+    "group": "michaelzickcoaching",
+    "link": "https://www.michaelzick.com/",
+    "linkOut": true
+  },
+  {
+    "thumb": "/img/squares/king-512.webp",
+    "imgs": [],
+    "desc": "Internal Family Systems journaling app",
+    "header": "Who’s In Charge?",
+    "group": "wic",
+    "link": "https://whosincharge.zickonezero.com/",
+    "linkOut": true
+  },
+  {
+    "thumb": "/img/squares/fyfs-wave-square.webp",
+    "imgs": [],
+    "desc": "Free career quiz & personality assessment",
+    "header": "Find Your Flow State",
+    "group": "fyfs",
+    "link": "https://findyourflowstate.zickonezero.com/",
+    "linkOut": true
+  },
+  {
     "thumb": "/img/squares/at_logo_purple.webp",
     "imgs": [],
     "desc": "Cybersecurity training marketplace and CMS",
     "header": "Antisyphon Training",
-    "group": "antisyphon-training"
+    "group": "antisyphon-training",
+    "link": "/antisyphon-training"
+  },
+  {
+    "thumb": "/img/squares/ds-logo-stripes-square.webp",
+    "imgs": [],
+    "desc": "DemoStoke design system and component library",
+    "header": "DemoStoke Design System",
+    "group": "demostoke-design-system",
+    "link": "https://designsystem.demostoke.com/",
+    "linkOut": true
   },
   {
     "thumb": "/img/squares/demostoke-logo-square.webp",
     "imgs": [],
     "desc": "Action sports gear rental system and lifestyle blog",
     "header": "DemoStoke",
-    "group": "demostoke"
+    "group": "demostoke",
+    "link": "/demostoke"
   }
 ]
