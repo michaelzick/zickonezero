@@ -368,6 +368,16 @@ export const Thumb = styled.div`
     }
   }
 
+  a {
+    color: inherit;
+    text-decoration: none;
+    display: inline;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+
   &:hover {
     h3, p {
       color: ${THEME.colors.hotRed};

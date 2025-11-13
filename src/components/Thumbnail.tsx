@@ -24,10 +24,13 @@ const Thumbnail = (props: WorksData & AdditionalThumbProps): ReactElement => {
         </Link> :
         <img src={thumb} width='240' height='240' alt={group} className='thumb' />}
 
-      <h3>{link ? <Link href={link || `/${group}`}>{header}</Link> : header}</h3>
+      <h3>{link ? <Link href={link || `/${group}`} target={linkOut ? '_blank' : '_self'} rel={linkOut ? 'noopener noreferrer' : undefined}>
+        {header}</Link> : header}
+      </h3>
 
       <p>
-        {link ? <Link href={link || `/${group}`}>{desc}</Link> : desc}
+        {link ? <Link href={link || `/${group}`} target={linkOut ? '_blank' : '_self'} rel={linkOut ? 'noopener noreferrer' : undefined}>
+          {desc}</Link> : desc}
         {linkOut ? (
           <span className='external-link-icon' aria-hidden='true'>
             <NewTabSVG />
