@@ -513,7 +513,7 @@ export const CaseStudiesDropdown = styled.ul`
   right: 0;
   list-style: none;
   margin: 0;
-  padding: 1.25em 1.75em;
+  padding: 1em 1.75em;
   background: ${THEME.colors.darkest};
   border-radius: 4px;
   border: 2px solid ${THEME.colors.white};
@@ -521,7 +521,8 @@ export const CaseStudiesDropdown = styled.ul`
   display: flex;
   flex-direction: column;
   min-width: 180px;
-  gap: 1em;
+  gap: 1.2em;
+  align-items: center;
   opacity: ${props => props.$isOpen ? 1 : 0};
   transform: ${props => props.$isOpen ? 'translateY(0)' : 'translateY(-10px)'};
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -530,12 +531,32 @@ export const CaseStudiesDropdown = styled.ul`
 
   li {
     margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   a {
-    border-bottom: 0.2em solid ${THEME.colors.white};
-    justify-content: center;
     color: ${THEME.colors.white};
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35em;
+    text-align: center;
+    width: auto;
+    align-self: center;
+    padding-bottom: 0;
+    text-decoration: none;
+    font-size: 1.1em;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 0.18em;
+      background: ${THEME.colors.white};
+      border-radius: 999px;
+    }
   }
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
@@ -649,6 +670,17 @@ export const CaseStudiesAccordionList = styled.ul`
 
   li:not(:first-child) {
     margin-top: 0;
+  }
+
+  a {
+    border-bottom: 0.2em solid ${THEME.colors.white};
+    color: ${THEME.colors.white};
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    align-self: flex-start;
+    padding-bottom: 0.1em;
+    justify-content: flex-start;
   }
 `;
 
