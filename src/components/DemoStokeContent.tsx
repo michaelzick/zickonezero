@@ -32,6 +32,7 @@ import * as UserStories from './userstories';
 type SectionKey = 'executive' | 'stories';
 
 const EXECUTIVE_SECTIONS: SidebarSectionConfig[] = [
+  { id: 'introduction', label: 'Introduction', hidden: true },
   { id: 'section-problem', label: 'The Problem' },
   { id: 'section-key-features', label: 'Key Features' },
   { id: 'section-admin', label: 'Admin Dashboard' },

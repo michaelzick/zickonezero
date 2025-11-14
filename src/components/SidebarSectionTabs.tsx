@@ -15,6 +15,7 @@ const DEFAULT_STICKY_TOP = 160;
 export type SidebarSectionConfig = {
   id: string;
   label: string;
+  hidden?: boolean;
 };
 
 type SidebarSectionTabsProps = {
@@ -135,8 +136,9 @@ const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
   } = props;
 
   const { stickyTop, activeSection, handleTabClick } = useSectionTabs(props);
+  const visibleSections = sections.filter(({ hidden }) => !hidden);
 
-  if (!sections.length) {
+  if (!visibleSections.length) {
     return null;
   }
 
@@ -146,7 +148,7 @@ const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
       aria-label='Page sections'
       style={{ '--sidebar-tabs-top': `${stickyTop}px` } as CSSProperties}
     >
-      {sections.map(({ id, label }) => (
+      {visibleSections.map(({ id, label }) => (
         <SectionTabButton
           key={id}
           type='button'
@@ -163,6 +165,7 @@ const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
 
 export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
   const { sections } = props;
+  const visibleSections = sections.filter(({ hidden }) => !hidden);
   const [wrapperEl, setWrapperEl] = useState<HTMLDivElement | null>(null);
   const wrapperSize = useSize(wrapperEl);
   const mobileExtraOffset = (wrapperSize?.height ?? 0) + 10;
@@ -174,7 +177,7 @@ export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
     extraOffset: mobileExtraOffset
   });
 
-  if (!sections.length) {
+  if (!visibleSections.length) {
     return null;
   }
 
@@ -186,7 +189,7 @@ export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
       style={{ '--mobile-tabs-top': `${stickyTop}px` } as CSSProperties}
     >
       <SectionTabsMobileInner>
-        {sections.map(({ id, label }) => (
+        {visibleSections.map(({ id, label }) => (
           <SectionTabsMobileButton
             key={id}
             type='button'
