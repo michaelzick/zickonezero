@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { NewTabSVG } from './svg/NewTab';
 import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
@@ -13,6 +13,7 @@ import {
 
 const LinkBoxContent = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const handleTriggerClick = () => {
     setIsDropdownOpen((prevState) => !prevState);
@@ -22,10 +23,31 @@ const LinkBoxContent = () => {
     setIsDropdownOpen(false);
   };
 
+  useEffect(() => {
+    if (!isDropdownOpen) {
+      return undefined;
+    }
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!dropdownRef.current) return;
+      if (!dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+
   return (
     <LinkBox>
       <Link href='/about'>About</Link>
-      <CaseStudiesDesktopWrapper>
+      <CaseStudiesDesktopWrapper ref={dropdownRef}>
         <CaseStudiesTrigger
           type='button'
           onClick={handleTriggerClick}
