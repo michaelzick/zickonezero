@@ -32,7 +32,7 @@ import * as UserStories from './userstories';
 type SectionKey = 'executive' | 'stories';
 
 const EXECUTIVE_SECTIONS: SidebarSectionConfig[] = [
-  { id: 'section-what-is-demostoke', label: 'What Is DemoStoke?' },
+  { id: 'introduction', label: 'Introduction' },
   { id: 'section-problem', label: 'The Problem' },
   { id: 'section-key-features', label: 'Key Features' },
   { id: 'section-admin', label: 'Admin Dashboard' },
@@ -105,8 +105,8 @@ const DemoStokeContent = () => {
                     </PitchDeckLink>
 
                     <br />
-                    <section id='section-what-is-demostoke' className='story-section'>
-                      <DemoStokeTitle>What Is DemoStoke?</DemoStokeTitle>
+                    <section id='introduction' className='story-section'>
+                      <DemoStokeTitle>Introduction</DemoStokeTitle>
                       <p>
                         <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
                           DemoStoke
