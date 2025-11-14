@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef, useCallback, type CSSProperties } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { FileTextIcon } from '@radix-ui/react-icons';
-import { useSize } from '@radix-ui/react-use-size';
 import {
   useAppDispatch,
   useAppSelector
@@ -22,19 +21,16 @@ import {
   PitchDeckLink,
   Video,
   Image,
-  DemoStokeContentGrid,
-  SectionTabsWrapper,
-  SectionTabButton
+  DemoStokeContentGrid
 } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
 import DemoStokeTabs from './DemoStokeTabs';
+import SidebarSectionTabs, { SidebarSectionConfig } from './SidebarSectionTabs';
 import * as UserStories from './userstories';
 
 type SectionKey = 'executive' | 'stories';
 
-const SECTION_SCROLL_BUFFER = 8;
-
-const EXECUTIVE_SECTIONS = [
+const EXECUTIVE_SECTIONS: SidebarSectionConfig[] = [
   { id: 'section-tldr', label: 'TL;DR' },
   { id: 'section-problem', label: 'The Problem' },
   { id: 'section-complaints', label: 'Current Complaints' },
@@ -47,19 +43,18 @@ const EXECUTIVE_SECTIONS = [
   { id: 'section-learnings', label: 'Misc' },
 ] as const;
 
-type ExecutiveSection = typeof EXECUTIVE_SECTIONS[number]['id'];
+const STORY_SECTIONS: SidebarSectionConfig[] = [
+  { id: 'story-independent-shaper', label: 'Independent Shaper' },
+  { id: 'story-weekend-warrior', label: 'Weekend Warrior' },
+  { id: 'story-small-ski-shop', label: 'Small Ski/Bike Shop' }
+] as const;
 
 const DemoStokeContent = () => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState<SectionKey>('executive');
-  const [activeSection, setActiveSection] = useState<ExecutiveSection>(EXECUTIVE_SECTIONS[0].id);
-  const [sidebarStickyTop, setSidebarStickyTop] = useState(160);
-  const topTabsNodeRef = useRef<HTMLDivElement | null>(null);
   const [topTabsEl, setTopTabsEl] = useState<HTMLDivElement | null>(null);
-  const topTabsSize = useSize(topTabsEl);
   const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {
-    topTabsNodeRef.current = node;
     setTopTabsEl(node);
   }, []);
 
@@ -76,87 +71,6 @@ const DemoStokeContent = () => {
       });
     });
   }, [activeTab]);
-
-  const updateSidebarStickyTop = useCallback(() => {
-    if (!topTabsNodeRef.current) {
-      setSidebarStickyTop(160);
-      return;
-    }
-
-    const tabsEl = topTabsNodeRef.current;
-    const computedStyle = window.getComputedStyle(tabsEl);
-    const topValue = parseFloat(computedStyle.top) || 0;
-    const margin = 12;
-    setSidebarStickyTop(topValue + tabsEl.offsetHeight + margin);
-  }, []);
-
-  useEffect(() => {
-    updateSidebarStickyTop();
-  }, [updateSidebarStickyTop, topTabsSize?.height]);
-
-  useEffect(() => {
-    window.addEventListener('resize', updateSidebarStickyTop);
-
-    return () => {
-      window.removeEventListener('resize', updateSidebarStickyTop);
-    };
-  }, [updateSidebarStickyTop]);
-
-  useEffect(() => {
-    if (activeTab !== 'executive') {
-      setActiveSection(EXECUTIVE_SECTIONS[0].id);
-      return;
-    }
-
-    const updateActiveSection = () => {
-      const stickyOffset = sidebarStickyTop || 160;
-      const detectionOffset = stickyOffset + SECTION_SCROLL_BUFFER + 20;
-      let currentSection: ExecutiveSection = EXECUTIVE_SECTIONS[0].id;
-
-      EXECUTIVE_SECTIONS.forEach(({ id }) => {
-        const sectionEl = document.getElementById(id);
-        if (!sectionEl) {
-          return;
-        }
-
-        const { top } = sectionEl.getBoundingClientRect();
-        if (top - detectionOffset <= 0) {
-          currentSection = id;
-        }
-      });
-
-      const doc = document.documentElement;
-      const isAtBottom = Math.ceil(window.innerHeight + window.scrollY) >= doc.scrollHeight - 2;
-
-      if (isAtBottom) {
-        currentSection = 'section-learnings';
-      }
-
-      setActiveSection((prev) => (prev === currentSection ? prev : currentSection));
-    };
-
-    updateActiveSection();
-    window.addEventListener('scroll', updateActiveSection, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', updateActiveSection);
-    };
-  }, [activeTab, sidebarStickyTop]);
-
-  const handleSectionTabClick = (sectionId: ExecutiveSection) => {
-    const sectionEl = document.getElementById(sectionId);
-    if (!sectionEl) {
-      return;
-    }
-
-    const offset = (sidebarStickyTop || 160) + SECTION_SCROLL_BUFFER;
-    const targetPosition = sectionEl.getBoundingClientRect().top + window.scrollY - offset;
-
-    window.scrollTo({
-      top: targetPosition,
-      behavior: 'smooth'
-    });
-  };
 
   return (
     <>
@@ -477,23 +391,12 @@ const DemoStokeContent = () => {
                     </DemoStokeList>
                   </section>
                 </div>
-                <SectionTabsWrapper
-                  role='navigation'
-                  aria-label='Executive summary sections'
-                  style={{ '--sidebar-tabs-top': `${sidebarStickyTop}px` } as CSSProperties}
-                >
-                  {EXECUTIVE_SECTIONS.map(({ id, label }) => (
-                    <SectionTabButton
-                      key={id}
-                      type='button'
-                      $isActive={activeSection === id}
-                      aria-current={activeSection === id ? 'true' : undefined}
-                      onClick={() => handleSectionTabClick(id)}
-                    >
-                      {label}
-                    </SectionTabButton>
-                  ))}
-                </SectionTabsWrapper>
+                <SidebarSectionTabs
+                  sections={EXECUTIVE_SECTIONS}
+                  topTabsEl={topTabsEl}
+                  isActive={activeTab === 'executive'}
+                  lockToBottomSectionId='section-learnings'
+                />
                 </DemoStokeContentGrid>
               </div>
             </BioBox>
@@ -502,9 +405,24 @@ const DemoStokeContent = () => {
 
         {activeTab === 'stories' && (
           <div id="stories-content">
-            <UserStories.IndieShaper />
-            <UserStories.WeekendWarrior />
-            <UserStories.SmallSkiBikeShop />
+            <DemoStokeContentGrid>
+              <div>
+                <section id='story-independent-shaper'>
+                  <UserStories.IndieShaper />
+                </section>
+                <section id='story-weekend-warrior'>
+                  <UserStories.WeekendWarrior />
+                </section>
+                <section id='story-small-ski-shop'>
+                  <UserStories.SmallSkiBikeShop />
+                </section>
+              </div>
+              <SidebarSectionTabs
+                sections={STORY_SECTIONS}
+                topTabsEl={topTabsEl}
+                isActive={activeTab === 'stories'}
+              />
+            </DemoStokeContentGrid>
           </div>
         )}
       </Wrapper>
