@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import * as Select from '@radix-ui/react-select';
 import { THEME } from './theme';
 
@@ -853,6 +853,9 @@ export const SectionTabsWrapper = styled.div`
   width: 100%;
   max-width: 5.5em;
   align-self: flex-start;
+  padding: 0.45em;
+  border-radius: 18px;
+  background-color: transparent;
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     display: none;
@@ -1239,7 +1242,27 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   }
 `;
 
+const sidebarTabButtonStyles = css`
+  background-color: transparent;
+  border: 1.5px solid ${THEME.colors.white};
+  color: ${THEME.colors.white};
+  box-shadow: none;
+  transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+
+  &:hover {
+    border-color: ${THEME.colors.hotRed};
+    color: ${THEME.colors.hotRed};
+  }
+
+  &[data-active='true'] {
+    background-color: ${THEME.colors.hotRed};
+    border-color: ${THEME.colors.hotRed};
+    color: ${THEME.colors.contrast};
+  }
+`;
+
 export const SectionTabButton = styled(HomeTabButton)`
+  ${sidebarTabButtonStyles}
   font-size: 0.575em;
   padding: 0.45em 0.5em 0.3em;
   justify-content: center;
@@ -1273,28 +1296,32 @@ export const SectionTabsMobileInner = styled.div`
   gap: 0.45em;
   padding: 0.4em;
   border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(3, 11, 23, 0.86);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  background: rgba(3, 11, 23, 0.82);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(6px);
   flex-wrap: nowrap;
   justify-content: space-between;
   overflow: hidden;
+
+  :root[data-theme='light'] & {
+    border-color: rgba(15, 23, 42, 0.2);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 12px 20px rgba(15, 23, 42, 0.15);
+  }
 `;
 
 export const SectionTabsMobileButton = styled(HomeTabButton)`
+  ${sidebarTabButtonStyles}
   flex: 1 1 0;
   min-width: 0;
   font-size: 0.92em;
   padding: 0.6em 1.1em;
   white-space: normal;
 
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    padding: 0.65em 0.55em 0.55em;
-  }
-
   @media (max-width: ${THEME.breakpoints.phone}) {
     font-size: 0.8em;
+    padding: 0.55em 0.95em;
   }
 `;
 
