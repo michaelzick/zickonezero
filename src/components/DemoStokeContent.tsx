@@ -45,7 +45,6 @@ const EXECUTIVE_SECTIONS = [
   { id: 'section-competitors', label: 'Competitor Overview' },
   { id: 'section-personas', label: 'Personas' },
   { id: 'section-learnings', label: 'Misc' },
-  { id: 'section-links', label: 'Links' }
 ] as const;
 
 type ExecutiveSection = typeof EXECUTIVE_SECTIONS[number]['id'];
