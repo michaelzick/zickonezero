@@ -934,7 +934,6 @@ export const DemoStokeTitle = styled.h2`
 `;
 
 export const DemoStokeList = styled.ul`
-  /* background: ${THEME.colors.darkest}; */
   padding: 0.8em 1.8em;
   font-size: 0.9em;
   font-weight: lighter;
@@ -984,6 +983,10 @@ export const DemoStokeList = styled.ul`
 
   li.prototype::before {
     content: '🤙🏻';
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    padding: 0.8em 1em;
   }
 `;
 
@@ -1263,7 +1266,7 @@ const sidebarTabButtonStyles = css`
 export const SectionTabButton = styled(HomeTabButton)`
   ${sidebarTabButtonStyles}
   font-size: 0.575em;
-  padding: 0.45em 0.5em 0.3em;
+  padding: 0.3em 0.5em;
   justify-content: center;
   text-align: center;
   width: 100%;
@@ -1311,7 +1314,7 @@ export const SectionTabsMobileButton = styled(HomeTabButton)`
   font-size: 0.92em;
   padding: 0.6em 1.1em;
   white-space: normal;
-  padding: 0.95em 0.55em 0.85em;
+  padding: 0.75em 0.55em;
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     font-size: 0.75em;

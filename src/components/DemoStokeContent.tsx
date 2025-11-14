@@ -196,6 +196,7 @@ const DemoStokeContent = () => {
                         <br />
                         <li>Demo events calendar with map and list views.</li>
                       </DemoStokeList>
+                      <br />
 
                       <Image src='/img/events-calendar.webp' alt='DemoStoke Events Calendar' loading="lazy" />
                       <br />
