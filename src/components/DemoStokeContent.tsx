@@ -32,13 +32,12 @@ import * as UserStories from './userstories';
 type SectionKey = 'executive' | 'stories';
 
 const EXECUTIVE_SECTIONS: SidebarSectionConfig[] = [
-  { id: 'introduction', label: 'Intro' },
   { id: 'section-problem', label: 'The Problem' },
   { id: 'section-key-features', label: 'Key Features' },
   { id: 'section-admin', label: 'Admin Dashboard' },
   { id: 'section-market-research', label: 'Market Research' },
-  { id: 'section-learnings', label: 'Misc' },
 ] as const;
+const EXECUTIVE_BOTTOM_SECTION_ID = EXECUTIVE_SECTIONS[EXECUTIVE_SECTIONS.length - 1]?.id;
 
 const STORY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'story-independent-shaper-title', label: 'Independent Shaper' },
@@ -60,7 +59,7 @@ const DemoStokeContent = () => {
   };
   const isExecutiveView = activeTab === 'executive';
   const currentSections = isExecutiveView ? EXECUTIVE_SECTIONS : STORY_SECTIONS;
-  const mobileLockSection = isExecutiveView ? 'section-learnings' : undefined;
+  const lockToBottomSectionId = isExecutiveView ? EXECUTIVE_BOTTOM_SECTION_ID : undefined;
 
   // Scroll to top after tab content changes
   useEffect(() => {
@@ -90,7 +89,7 @@ const DemoStokeContent = () => {
           sections={currentSections}
           topTabsEl={topTabsEl}
           isActive={true}
-          lockToBottomSectionId={mobileLockSection}
+          lockToBottomSectionId={lockToBottomSectionId}
         />
 
         {activeTab === 'executive' && (
@@ -408,7 +407,7 @@ const DemoStokeContent = () => {
                     sections={EXECUTIVE_SECTIONS}
                     topTabsEl={topTabsEl}
                     isActive={activeTab === 'executive'}
-                    lockToBottomSectionId='section-learnings'
+                    lockToBottomSectionId={EXECUTIVE_BOTTOM_SECTION_ID}
                   />
                 </DemoStokeContentGrid>
               </div>
