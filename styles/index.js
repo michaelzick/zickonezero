@@ -706,11 +706,23 @@ export const BioBox = styled.div`
     max-width: 50em;
 
     &.demostoke-inner {
+      max-width: 58em;
+
       .ds-logo {
         width: 6em;
       }
 
       section {
+        scroll-margin-top: 10em;
+
+        @media (max-width: ${THEME.breakpoints.largeTablet}) {
+          scroll-margin-top: 7.2em;
+        }
+
+        @media (max-width: ${THEME.breakpoints.smallTablet}) {
+          scroll-margin-top: 6.2em;
+        }
+
         h3 {
           color: ${THEME.colors.hotRed};
         }
@@ -813,6 +825,44 @@ export const BioBox = styled.div`
     padding: 1em;
     ${props => props.noBottomPadding && 'padding-bottom: 0;'}
     ${props => props.someTopPadding && 'padding-top: 1em;'}
+  }
+`;
+
+export const DemoStokeContentGrid = styled.div`
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(11em, 12.5em);
+  gap: clamp(1.5em, 3vw, 2.8em);
+  align-items: flex-start;
+  width: 100%;
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+`;
+
+export const SectionTabsWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 12.5em;
+  align-self: stretch;
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    display: none;
+  }
+`;
+
+export const SectionTabsSticky = styled.div`
+  position: sticky;
+  top: calc(5em + 4.4em);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65em;
+  width: 100%;
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    position: static;
   }
 `;
 
@@ -1191,6 +1241,18 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
 
   &:active {
     transform: translateY(1px);
+  }
+`;
+
+export const SectionTabButton = styled(HomeTabButton)`
+  font-size: 0.9em;
+  padding: 0.55em 0.95em 0.5em;
+  justify-content: flex-start;
+  text-align: left;
+  width: 100%;
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    font-size: 0.85em;
   }
 `;
 

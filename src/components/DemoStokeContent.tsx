@@ -20,7 +20,11 @@ import {
   FlexBox,
   PitchDeckLink,
   Video,
-  Image
+  Image,
+  DemoStokeContentGrid,
+  SectionTabsWrapper,
+  SectionTabsSticky,
+  SectionTabButton
 } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
 import DemoStokeTabs from './DemoStokeTabs';
@@ -28,10 +32,28 @@ import * as UserStories from './userstories';
 
 type SectionKey = 'executive' | 'stories';
 
+const EXECUTIVE_SECTIONS = [
+  { id: 'section-tldr', label: 'TL;DR' },
+  { id: 'section-problem', label: 'The Problem' },
+  { id: 'section-complaints', label: 'Current Complaints' },
+  { id: 'section-solution', label: 'The Solution' },
+  { id: 'section-key-features', label: 'Key Features' },
+  { id: 'section-admin', label: 'Admin Dashboard' },
+  { id: 'section-market-research', label: 'Market Research' },
+  { id: 'section-competitors', label: 'Competitor Overview' },
+  { id: 'section-personas', label: 'Personas' },
+  { id: 'section-build', label: 'Build Process' },
+  { id: 'section-learnings', label: 'Learnings' },
+  { id: 'section-links', label: 'Links' }
+] as const;
+
+type ExecutiveSection = typeof EXECUTIVE_SECTIONS[number]['id'];
+
 const DemoStokeContent = () => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState<SectionKey>('executive');
+  const [activeSection, setActiveSection] = useState<ExecutiveSection>(EXECUTIVE_SECTIONS[0].id);
 
   const handleTabClick = (tabKey: string) => {
     setActiveTab(tabKey as SectionKey);
@@ -46,6 +68,60 @@ const DemoStokeContent = () => {
       });
     });
   }, [activeTab]);
+
+  useEffect(() => {
+    if (activeTab !== 'executive') {
+      setActiveSection(EXECUTIVE_SECTIONS[0].id);
+      return;
+    }
+
+    const getStickyOffset = () => {
+      if (window.innerWidth <= 600) {
+        return 100;
+      }
+
+      if (window.innerWidth <= 1137) {
+        return 120;
+      }
+
+      return 160;
+    };
+
+    const updateActiveSection = () => {
+      const stickyOffset = getStickyOffset();
+      let currentSection: ExecutiveSection = EXECUTIVE_SECTIONS[0].id;
+
+      EXECUTIVE_SECTIONS.forEach(({ id }) => {
+        const sectionEl = document.getElementById(id);
+        if (!sectionEl) {
+          return;
+        }
+
+        const { top } = sectionEl.getBoundingClientRect();
+        if (top - stickyOffset <= 0) {
+          currentSection = id;
+        }
+      });
+
+      setActiveSection((prev) => (prev === currentSection ? prev : currentSection));
+    };
+
+    updateActiveSection();
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', updateActiveSection);
+    };
+  }, [activeTab]);
+
+  const handleSectionTabClick = (sectionId: ExecutiveSection) => {
+    const sectionEl = document.getElementById(sectionId);
+    if (!sectionEl) {
+      return;
+    }
+
+    sectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   return (
     <>
@@ -65,19 +141,21 @@ const DemoStokeContent = () => {
           <div id="executive-content">
             <BioBox direction='right' noBottomPadding top>
               <div className='biobox-inner demostoke-inner'>
-                <div>
-                  <FlexBox>
-                    <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
-                    <div>
-                      <h2 className='tab-header'>Executive Summary</h2>
-                      <PitchDeckLink className='pitch-link-desktop' href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
-                        Investor Pitch Deck <FileTextIcon aria-hidden="true" />
-                      </PitchDeckLink>
-                    </div>
-                  </FlexBox>
-                  <PitchDeckLink className='pitch-link-mobile' href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
-                    Investor Pitch Deck <FileTextIcon aria-hidden="true" />
-                  </PitchDeckLink>
+                <DemoStokeContentGrid>
+                  <div>
+                    <FlexBox>
+                      <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
+                      <div>
+                        <h2 className='tab-header'>Executive Summary</h2>
+                        <PitchDeckLink className='pitch-link-desktop' href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
+                          Investor Pitch Deck <FileTextIcon aria-hidden="true" />
+                        </PitchDeckLink>
+                      </div>
+                    </FlexBox>
+
+                    <PitchDeckLink className='pitch-link-mobile' href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
+                      Investor Pitch Deck <FileTextIcon aria-hidden="true" />
+                    </PitchDeckLink>
                   <p>
                     <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
                       DemoStoke
@@ -96,7 +174,7 @@ const DemoStokeContent = () => {
                   </Video>
                   <br />
 
-                  <section>
+                  <section id='section-tldr'>
                     <h3>TL;DR</h3>
                     <DemoStokeList>
                       <li><strong>What it is:</strong> A P2P and B2C platform to find and demo action sports gear from multiple sources.</li>
@@ -109,12 +187,14 @@ const DemoStokeContent = () => {
                     </DemoStokeList>
                   </section>
 
-                  <section>
+                  <section id='section-problem'>
                     <h3>The Problem</h3>
                     <p>Demo opportunities for rideable gear are limited, inconvenient, or nonexistent.
                       Many riders either blindly purchase expensive equipment or wait for infrequent on-site demos,
                       often leading to mismatched gear choices and wasted spending.</p>
+                  </section>
 
+                  <section id='section-complaints'>
                     <h3>Current Complaints</h3>
                     <DemoStokeList>
                       <li className='complaint'>“I wait in long rental lines without knowing if they have what I want.”</li>
@@ -129,7 +209,7 @@ const DemoStokeContent = () => {
                     </DemoStokeList>
                   </section>
 
-                  <section>
+                  <section id='section-solution'>
                     <h3>The Solution</h3>
                     <p>A comprehensive gear discovery and rental platform that connects riders with demo opportunities in their area.
                       By leveraging location-based services, we can help riders find available gear to try before they buy,
@@ -137,7 +217,9 @@ const DemoStokeContent = () => {
 
                     <Image src='/img/all-equipment-hybrid.webp' alt='DemoStoke Hybrid View' loading="lazy" />
                     <br />
+                  </section>
 
+                  <section id='section-key-features'>
                     <h3>Key Features</h3>
                     <DemoStokeList>
                       <li>Map and list-based gear discovery.</li>
@@ -157,7 +239,7 @@ const DemoStokeContent = () => {
                     <Image src='/img/blog-page.webp' alt='DemoStoke Blog Page' loading="lazy" />
                   </section>
 
-                  <section>
+                  <section id='section-admin'>
                     <h3>Admin Dashboard</h3>
                     <p>In addition to the client-facing site, DemoStoke is a full-featured admin dashboard
                       for managing users, gear listings, and demo events, built with a React frontend
@@ -167,14 +249,16 @@ const DemoStokeContent = () => {
                     <Image src='/img/admin-img-download.webp' alt='DemoStoke Admin Image Download' loading="lazy" />
                   </section>
 
-                  <section>
+                  <section id='section-market-research'>
                     <h3>Market Research & Competitive Analysis</h3>
                     <DemoStokeList>
                       <li className='interview'>I conducted user interviews and surveys with riders across snow, surf, and MTB.</li>
                       <br />
                       <li className='learning'><strong>Key insight:</strong> People would pay to demo gear if trust and ease were guaranteed.</li>
                     </DemoStokeList>
+                  </section>
 
+                  <section id='section-competitors'>
                     <h3>Competitor Overview</h3>
                     <TableWrapper>
                       <DemoStokeTable>
@@ -319,7 +403,7 @@ const DemoStokeContent = () => {
                     </TableWrapper>
                   </section>
 
-                  <section>
+                  <section id='section-personas'>
                     <h3>Personas</h3>
                     <DemoStokeList spaced>
                       <li className='persona'><strong>Weekend Warrior:</strong> Rachel (34, San Diego) is a marketing manager who rides 1-2x/month. She wants to try before buying expensive gear but is frustrated by limited demo options. She looks to Instagram and friends for recs, and wants DemoStoke to offer trusted peer reviews, easy filters, and clear pickup info.</li>
@@ -331,7 +415,7 @@ const DemoStokeContent = () => {
                     </DemoStokeList>
                   </section>
 
-                  <section>
+                  <section id='section-build'>
                     <h3>Build Process</h3>
                     <DemoStokeList>
                       <li>Rapid interactive prototyping using Vite, React, and Tailwind.{' '}
@@ -342,7 +426,7 @@ const DemoStokeContent = () => {
                     </DemoStokeList>
                   </section>
 
-                  <section>
+                  <section id='section-learnings'>
                     <h3>Learnings</h3>
                     <p>This case study was born from real interviews and market gaps. I learned:</p>
                     <DemoStokeList>
@@ -354,7 +438,7 @@ const DemoStokeContent = () => {
                     </DemoStokeList>
                   </section>
 
-                  <section>
+                  <section id='section-links'>
                     <h3>Links</h3>
                     <DemoStokeList>
                       <li className='prototype'>
@@ -368,6 +452,22 @@ const DemoStokeContent = () => {
                     </DemoStokeList>
                   </section>
                 </div>
+                <SectionTabsWrapper role='navigation' aria-label='Executive summary sections'>
+                  <SectionTabsSticky>
+                    {EXECUTIVE_SECTIONS.map(({ id, label }) => (
+                      <SectionTabButton
+                        key={id}
+                        type='button'
+                        $isActive={activeSection === id}
+                        aria-current={activeSection === id ? 'true' : undefined}
+                        onClick={() => handleSectionTabClick(id)}
+                      >
+                        {label}
+                      </SectionTabButton>
+                    ))}
+                  </SectionTabsSticky>
+                </SectionTabsWrapper>
+                </DemoStokeContentGrid>
               </div>
             </BioBox>
           </div>
