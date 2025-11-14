@@ -404,6 +404,8 @@ const DemoStokeContent = () => {
                         </li>
                       </DemoStokeList>
                     </section>
+                    <br />
+                    <br />
                   </div>
                   <SidebarSectionTabs
                     sections={EXECUTIVE_SECTIONS}
