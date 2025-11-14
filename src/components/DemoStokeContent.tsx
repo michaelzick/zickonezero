@@ -32,6 +32,7 @@ import * as UserStories from './userstories';
 type SectionKey = 'executive' | 'stories';
 
 const EXECUTIVE_SECTIONS: SidebarSectionConfig[] = [
+  { id: 'section-what-is-demostoke', label: 'What Is DemoStoke?' },
   { id: 'section-problem', label: 'The Problem' },
   { id: 'section-key-features', label: 'Key Features' },
   { id: 'section-admin', label: 'Admin Dashboard' },
@@ -103,13 +104,16 @@ const DemoStokeContent = () => {
                       Investor Pitch Deck <FileTextIcon aria-hidden="true" />
                     </PitchDeckLink>
 
-                    <div>
-                      <br />
+                    <br />
+                    <section id='section-what-is-demostoke' className='story-section'>
                       <DemoStokeTitle>What Is DemoStoke?</DemoStokeTitle>
-                      <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
-                        DemoStoke
-                      </WhiteTransitionAnchor> is the go-to platform to find, try, and buy the gear you’ll eventually fall in love with.
-                    </div>
+                      <p>
+                        <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
+                          DemoStoke
+                        </WhiteTransitionAnchor>{' '}
+                        is the go-to platform to find, try, and buy the gear you’ll eventually fall in love with.
+                      </p>
+                    </section>
 
                     <br />
                     <Video
