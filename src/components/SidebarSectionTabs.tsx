@@ -24,7 +24,9 @@ type SidebarSectionTabsProps = {
   lockToBottomSectionId?: string;
 };
 
-type SectionTabsHookParams = SidebarSectionTabsProps;
+type SectionTabsHookParams = SidebarSectionTabsProps & {
+  extraOffset?: number;
+};
 
 type SectionTabsHookResult = {
   stickyTop: number;
@@ -36,11 +38,13 @@ const useSectionTabs = ({
   sections,
   topTabsEl,
   isActive,
-  lockToBottomSectionId
+  lockToBottomSectionId,
+  extraOffset = 0
 }: SectionTabsHookParams): SectionTabsHookResult => {
   const [stickyTop, setStickyTop] = useState(DEFAULT_STICKY_TOP);
   const [activeSection, setActiveSection] = useState(sections[0]?.id ?? '');
   const topTabsSize = useSize(topTabsEl);
+  const totalOffset = stickyTop + extraOffset;
 
   const updateStickyTop = useCallback(() => {
     if (!topTabsEl) {
@@ -73,7 +77,7 @@ const useSectionTabs = ({
     }
 
     const updateActiveSection = () => {
-      const detectionOffset = stickyTop + DETECTION_BUFFER;
+      const detectionOffset = totalOffset + DETECTION_BUFFER;
       let currentSection = sections[0]?.id ?? '';
 
       sections.forEach(({ id }) => {
@@ -106,7 +110,7 @@ const useSectionTabs = ({
     return () => {
       window.removeEventListener('scroll', updateActiveSection);
     };
-  }, [isActive, sections, stickyTop, lockToBottomSectionId]);
+  }, [isActive, sections, totalOffset, lockToBottomSectionId]);
 
   const handleTabClick = useCallback((sectionId: string) => {
     const sectionEl = document.getElementById(sectionId);
@@ -114,14 +118,13 @@ const useSectionTabs = ({
       return;
     }
 
-    const offset = stickyTop;
-    const targetPosition = sectionEl.getBoundingClientRect().top + window.scrollY - offset;
+    const targetPosition = sectionEl.getBoundingClientRect().top + window.scrollY - totalOffset;
 
     window.scrollTo({
       top: targetPosition,
       behavior: 'smooth'
     });
-  }, [stickyTop]);
+  }, [totalOffset]);
 
   return { stickyTop, activeSection, handleTabClick };
 };
@@ -160,7 +163,16 @@ const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
 
 export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
   const { sections } = props;
-  const { stickyTop, activeSection, handleTabClick } = useSectionTabs(props);
+  const [wrapperEl, setWrapperEl] = useState<HTMLDivElement | null>(null);
+  const wrapperSize = useSize(wrapperEl);
+  const mobileExtraOffset = (wrapperSize?.height ?? 0) + 10;
+  const handleWrapperRef = useCallback((node: HTMLDivElement | null) => {
+    setWrapperEl(node);
+  }, []);
+  const { stickyTop, activeSection, handleTabClick } = useSectionTabs({
+    ...props,
+    extraOffset: mobileExtraOffset
+  });
 
   if (!sections.length) {
     return null;
@@ -168,6 +180,7 @@ export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
 
   return (
     <SectionTabsMobileWrapper
+      ref={handleWrapperRef}
       role='navigation'
       aria-label='Page sections'
       style={{ '--mobile-tabs-top': `${stickyTop}px` } as CSSProperties}
