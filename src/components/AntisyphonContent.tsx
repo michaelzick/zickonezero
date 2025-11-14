@@ -60,7 +60,7 @@ const AntisyphonContent = () => {
               />
             </div>
             <div className='text-wrapper'>
-              <HotRedTitle className='gets-mobile-margin'>Antisyphon Training</HotRedTitle>
+              <HotRedTitle className='gets-mobile-margin antisyphon'>Antisyphon Training</HotRedTitle>
               <br />
               Initially, I was hired at Black Hills Information Security/Antisyphon Training as a software engineer.
               However, that role quickly evolved into conceptualizing our new website.
@@ -73,7 +73,7 @@ const AntisyphonContent = () => {
         <BioBox direction='right' noBottomPadding>
           <div className='biobox-inner'>
             <div className='text-wrapper'>
-              <HotRedTitle>E-Commerce Evolution</HotRedTitle>
+              <HotRedTitle className='antisyphon'>E-Commerce Evolution</HotRedTitle>
               <br />
               Rather than creating just another static site that linked to third-party platforms, I envisioned an
               intuitive marketplace where users could seamlessly purchase any type of course through a shopping cart experience.
@@ -109,7 +109,7 @@ const AntisyphonContent = () => {
               />
             </div>
             <div className='text-wrapper bottom'>
-              <HotRedTitle className='gets-mobile-margin'>UX Design</HotRedTitle>
+              <HotRedTitle className='gets-mobile-margin antisyphon'>UX Design</HotRedTitle>
               <br />
               Using Figma, I designed over 50 wireframes, refining them through multiple rounds of discussion, feedback, and iterations.
               Since Black Hills Information Security was developing comics, I wanted the site to be both fun and user-friendly, with
@@ -133,7 +133,7 @@ const AntisyphonContent = () => {
 
               <br /><br />
               <div>
-                <HotRedTitle>Intuitive Dashboards</HotRedTitle>
+                <HotRedTitle className='antisyphon'>Intuitive Dashboards</HotRedTitle>
                 <br />
                 Starting with boilerplate WooCommerce and heavily customizing it, we built a seamless logged-in experience for user account management.
                 <br /><br />
@@ -160,7 +160,7 @@ const AntisyphonContent = () => {
         <BioBox direction='right'>
           <div className='biobox-inner'>
             <div className='text-wrapper bottom'>
-              <HotRedTitle>Admin Experiences</HotRedTitle>
+              <HotRedTitle className='antisyphon'>Admin Experiences</HotRedTitle>
               <br />
               In addition to the consumer-facing site, Antisyphon Training also serves as a full-featured WordPress CMS, which required its own UX considerations.
               While design played a smaller role here, our focus was on making content administration fast, intuitive, and reliable.

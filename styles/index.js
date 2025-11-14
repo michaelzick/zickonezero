@@ -813,7 +813,7 @@ export const BioBox = styled.div`
     }
   }
 
-  h2 {
+  h2.antisyphon {
     margin: 0;
   }
 
@@ -931,6 +931,7 @@ export const DemoStokeList = styled.ul`
   list-style: none;
   border: 1px solid ${THEME.colors.grey};
   border-radius: 20px;
+  margin-bottom: 0;
 
   li {
     ${props => props.spaced && 'padding: 0.7em 0;'}
