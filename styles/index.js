@@ -460,8 +460,8 @@ export const CaseStudiesChevron = styled.span`
   border: solid currentColor;
   border-width: 0 2px 2px 0;
   display: inline-flex;
-  width: 0.65em;
-  height: 0.65em;
+  width: 0.55em;
+  height: 0.55em;
   align-items: center;
   justify-content: center;
   padding: 0.18em;
@@ -469,6 +469,7 @@ export const CaseStudiesChevron = styled.span`
   transform: ${props => props.$isOpen ? 'rotate(-135deg)' : 'rotate(45deg)'};
   transition: transform 0.2s ease;
   vertical-align: middle;
+  margin-bottom: ${props => props.$isOpen ? '0' : '0.4em'};
 `;
 
 export const CaseStudiesDesktopWrapper = styled.div`
