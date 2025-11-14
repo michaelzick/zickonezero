@@ -32,6 +32,8 @@ import * as UserStories from './userstories';
 
 type SectionKey = 'executive' | 'stories';
 
+const SECTION_SCROLL_BUFFER = 8;
+
 const EXECUTIVE_SECTIONS = [
   { id: 'section-tldr', label: 'TL;DR' },
   { id: 'section-problem', label: 'The Problem' },
@@ -110,6 +112,7 @@ const DemoStokeContent = () => {
 
     const updateActiveSection = () => {
       const stickyOffset = sidebarStickyTop || 160;
+      const detectionOffset = stickyOffset + SECTION_SCROLL_BUFFER + 20;
       let currentSection: ExecutiveSection = EXECUTIVE_SECTIONS[0].id;
 
       EXECUTIVE_SECTIONS.forEach(({ id }) => {
@@ -119,7 +122,7 @@ const DemoStokeContent = () => {
         }
 
         const { top } = sectionEl.getBoundingClientRect();
-        if (top - stickyOffset <= 0) {
+        if (top - detectionOffset <= 0) {
           currentSection = id;
         }
       });
@@ -141,7 +144,13 @@ const DemoStokeContent = () => {
       return;
     }
 
-    sectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const offset = (sidebarStickyTop || 160) + SECTION_SCROLL_BUFFER;
+    const targetPosition = sectionEl.getBoundingClientRect().top + window.scrollY - offset;
+
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    });
   };
 
   return (
