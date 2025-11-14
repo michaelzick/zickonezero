@@ -1311,10 +1311,10 @@ export const SectionTabsMobileButton = styled(HomeTabButton)`
   font-size: 0.92em;
   padding: 0.6em 1.1em;
   white-space: normal;
+  padding: 0.95em 0.55em 0.85em;
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    font-size: 0.8em;
-    padding: 0.55em 0.95em;
+    font-size: 0.75em;
   }
 `;
 
