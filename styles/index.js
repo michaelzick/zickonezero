@@ -1297,7 +1297,7 @@ export const SectionTabsMobileInner = styled.div`
   border-radius: 18px;
   border: 2px solid rgba(255, 255, 255, 0.35);
   background: rgba(var(--color-dark-rgb), 0.78);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(6px);
   flex-wrap: nowrap;
   justify-content: space-between;
