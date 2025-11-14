@@ -657,13 +657,13 @@ export const CaseStudiesAccordionList = styled.ul`
   width: 100%;
   margin: ${props => props.$isOpen ? '1em 0 0' : '0'};
   padding: 0;
-  display: flex;
+  display: ${props => props.$isOpen ? 'flex' : 'none'};
   flex-direction: column;
   gap: 0.8em;
-  max-height: ${props => props.$isOpen ? '500px' : '0'};
-  overflow: hidden;
-  opacity: ${props => props.$isOpen ? 1 : 0};
-  transition: max-height 0.25s ease, opacity 0.25s ease;
+  max-height: none;
+  overflow: visible;
+  opacity: 1;
+  transition: none;
   pointer-events: ${props => props.$isOpen ? 'auto' : 'none'};
 
   li {
