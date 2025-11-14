@@ -410,13 +410,13 @@ const DemoStokeContent = () => {
                 <DemoStokeContentGrid>
                   <div>
                     <section id='story-independent-shaper'>
-                      <UserStories.IndieShaper />
+                      <UserStories.IndieShaper wrapWithBioBox={false} />
                     </section>
                     <section id='story-weekend-warrior'>
-                      <UserStories.WeekendWarrior />
+                      <UserStories.WeekendWarrior wrapWithBioBox={false} />
                     </section>
                     <section id='story-small-ski-shop'>
-                      <UserStories.SmallSkiBikeShop />
+                      <UserStories.SmallSkiBikeShop wrapWithBioBox={false} />
                     </section>
                   </div>
                   <SidebarSectionTabs
