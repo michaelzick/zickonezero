@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useState } from 'react';
 
 import {
   showMobileMenu,
@@ -8,7 +9,13 @@ import {
 } from '../hooks';
 
 import { NewTabSVG } from './svg/NewTab';
-import { LinkBoxMobile } from '../../styles';
+import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
+import {
+  LinkBoxMobile,
+  CaseStudiesAccordionButton,
+  CaseStudiesAccordionList,
+  CaseStudiesChevron
+} from '../../styles';
 
 type LinkBoxMobileContentProps = {
   isAnimating?: boolean;
@@ -16,24 +23,39 @@ type LinkBoxMobileContentProps = {
 
 const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps) => {
   const dispatch = useAppDispatch();
+  const [isCaseStudiesOpen, setIsCaseStudiesOpen] = useState(false);
+
+  const handleCloseMenu = () => dispatch(showMobileMenu(false));
 
   return (
-    <LinkBoxMobile $isAnimating={isAnimating}>
-      <li onClick={() => dispatch(showMobileMenu(false))}>
+    <LinkBoxMobile
+      $isAnimating={isAnimating}
+      onClick={(event) => event.stopPropagation()}>
+      <li onClick={handleCloseMenu}>
         <Link href='/about'>About</Link>
       </li>
-      <li onClick={() => dispatch(showMobileMenu(false))}>
-        <Link href='/demostoke'>DemoStoke</Link>
+      <li className='case-studies-accordion'>
+        <CaseStudiesAccordionButton
+          type='button'
+          onClick={() => setIsCaseStudiesOpen((prevState) => !prevState)}
+          aria-expanded={isCaseStudiesOpen}>
+          Case Studies
+          <CaseStudiesChevron $isOpen={isCaseStudiesOpen} aria-hidden='true' />
+        </CaseStudiesAccordionButton>
+        <CaseStudiesAccordionList $isOpen={isCaseStudiesOpen}>
+          {CASE_STUDIES_LINKS.map(({ href, label }) => (
+            <li key={href} onClick={handleCloseMenu}>
+              <Link href={href}>{label}</Link>
+            </li>
+          ))}
+        </CaseStudiesAccordionList>
       </li>
-      <li onClick={() => dispatch(showMobileMenu(false))}>
-        <Link href='/antisyphon-training'>Antisyphon</Link>
-      </li>
-      <li onClick={() => dispatch(showMobileMenu(false))}>
+      <li onClick={handleCloseMenu}>
         <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'>GitHub
           <NewTabSVG />
         </a>
       </li>
-      <li onClick={() => dispatch(showMobileMenu(false))}>
+      <li onClick={handleCloseMenu}>
         <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noopener noreferrer'>LinkedIn
           <NewTabSVG />
         </a>

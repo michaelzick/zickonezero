@@ -456,6 +456,93 @@ export const LinkBox = styled.div`
   }
 `;
 
+export const CaseStudiesChevron = styled.span`
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  display: inline-flex;
+  width: 0.65em;
+  height: 0.65em;
+  align-items: center;
+  justify-content: center;
+  padding: 0.18em;
+  box-sizing: border-box;
+  transform: ${props => props.$isOpen ? 'rotate(-135deg)' : 'rotate(45deg)'};
+  transition: transform 0.2s ease;
+  vertical-align: middle;
+`;
+
+export const CaseStudiesDesktopWrapper = styled.div`
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.8em;
+  color: ${THEME.colors.white};
+  font-family: Roboto, sans-serif;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-within {
+    color: ${THEME.colors.hotRed};
+  }
+
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+    display: none;
+  }
+`;
+
+export const CaseStudiesTrigger = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid ${THEME.colors.hotRed};
+    outline-offset: 4px;
+  }
+`;
+
+export const CaseStudiesDropdown = styled.ul`
+  position: absolute;
+  top: calc(100% + 0.65em);
+  right: 0;
+  list-style: none;
+  margin: 0;
+  padding: 1.25em 1.75em;
+  background: ${THEME.colors.darkest};
+  border-radius: 4px;
+  border: 2px solid ${THEME.colors.white};
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  gap: 1em;
+  opacity: ${props => props.$isOpen ? 1 : 0};
+  transform: ${props => props.$isOpen ? 'translateY(0)' : 'translateY(-10px)'};
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: ${props => props.$isOpen ? 'auto' : 'none'};
+  z-index: 500;
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    border-bottom: 0.2em solid ${THEME.colors.white};
+    justify-content: center;
+    color: ${THEME.colors.white};
+  }
+
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+    display: none;
+  }
+`;
+
 export const LinkBoxMobile = styled.ul`
   display: flex;
   flex-direction: column;
@@ -511,6 +598,57 @@ export const LinkBoxMobile = styled.ul`
       justify-content: center;
       color: ${THEME.colors.white};
     }
+  }
+
+  .case-studies-accordion {
+    width: 100%;
+  }
+`;
+
+export const CaseStudiesAccordionButton = styled.button`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-bottom: 0.2em solid ${THEME.colors.white};
+  color: ${THEME.colors.white};
+  font-family: Roboto, sans-serif;
+  font-size: 1em;
+  padding: 0 0 0.2em;
+  cursor: pointer;
+
+  &:hover {
+    color: ${THEME.colors.hotRed};
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${THEME.colors.hotRed};
+    outline-offset: 4px;
+  }
+`;
+
+export const CaseStudiesAccordionList = styled.ul`
+  list-style: none;
+  width: 100%;
+  margin: ${props => props.$isOpen ? '1em 0 0' : '0'};
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+  max-height: ${props => props.$isOpen ? '500px' : '0'};
+  overflow: hidden;
+  opacity: ${props => props.$isOpen ? 1 : 0};
+  transition: max-height 0.25s ease, opacity 0.25s ease;
+  pointer-events: ${props => props.$isOpen ? 'auto' : 'none'};
+
+  li {
+    margin: 0;
+  }
+
+  li:not(:first-child) {
+    margin-top: 0;
   }
 `;
 
