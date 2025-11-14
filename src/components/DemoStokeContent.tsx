@@ -44,8 +44,7 @@ const EXECUTIVE_SECTIONS = [
   { id: 'section-market-research', label: 'Market Research' },
   { id: 'section-competitors', label: 'Competitor Overview' },
   { id: 'section-personas', label: 'Personas' },
-  { id: 'section-build', label: 'Build Process' },
-  { id: 'section-learnings', label: 'Learnings' },
+  { id: 'section-learnings', label: 'Misc' },
   { id: 'section-links', label: 'Links' }
 ] as const;
 
@@ -126,6 +125,13 @@ const DemoStokeContent = () => {
           currentSection = id;
         }
       });
+
+      const doc = document.documentElement;
+      const isAtBottom = Math.ceil(window.innerHeight + window.scrollY) >= doc.scrollHeight - 2;
+
+      if (isAtBottom) {
+        currentSection = 'section-learnings';
+      }
 
       setActiveSection((prev) => (prev === currentSection ? prev : currentSection));
     };
@@ -443,17 +449,6 @@ const DemoStokeContent = () => {
                       <li className='persona'><strong>Local Shop Owner:</strong> Tony (45, South Lake Tahoe) co-owns a board shop and wants to run demos without building his own tech. He’s frustrated that most platforms don’t support niche gear. He wants DemoStoke to help list demo boards, drive traffic, and convert demos into sales.</li>
                       <li className='persona'><strong>Local Shaper:</strong> Dustin (38, Ventura) is a known surfboard shaper trying to grow his reputation. He wants to organize demos and track who rides his boards but lacks the tools. He wants DemoStoke to offer a shaper-specific feature, demo tracking, and review visibility.</li>
                       <li className='persona'><strong>Quiver Lender:</strong> Jessie (27, Encinitas) is a yoga instructor with extra boards. She wants to earn passive income but doesn’t trust Craigslist. She wants DemoStoke to provide a smooth listing flow, damage protection, reviews, verified users, and an earnings dashboard.</li>
-                    </DemoStokeList>
-                  </section>
-
-                  <section id='section-build'>
-                    <h3>Build Process</h3>
-                    <DemoStokeList>
-                      <li>Rapid interactive prototyping using Vite, React, and Tailwind.{' '}
-                        <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
-                          See the full site
-                        </WhiteTransitionAnchor>.
-                      </li>
                     </DemoStokeList>
                   </section>
 
