@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, type CSSProperties } from 'react';
 import { FileTextIcon } from '@radix-ui/react-icons';
 import { useSize } from '@radix-ui/react-use-size';
 import {
@@ -24,7 +24,6 @@ import {
   Image,
   DemoStokeContentGrid,
   SectionTabsWrapper,
-  SectionTabsSticky,
   SectionTabButton
 } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
@@ -475,20 +474,22 @@ const DemoStokeContent = () => {
                     </DemoStokeList>
                   </section>
                 </div>
-                <SectionTabsWrapper role='navigation' aria-label='Executive summary sections'>
-                  <SectionTabsSticky style={{ top: sidebarStickyTop }}>
-                    {EXECUTIVE_SECTIONS.map(({ id, label }) => (
-                      <SectionTabButton
-                        key={id}
-                        type='button'
-                        $isActive={activeSection === id}
-                        aria-current={activeSection === id ? 'true' : undefined}
-                        onClick={() => handleSectionTabClick(id)}
-                      >
-                        {label}
-                      </SectionTabButton>
-                    ))}
-                  </SectionTabsSticky>
+                <SectionTabsWrapper
+                  role='navigation'
+                  aria-label='Executive summary sections'
+                  style={{ '--sidebar-tabs-top': `${sidebarStickyTop}px` } as CSSProperties}
+                >
+                  {EXECUTIVE_SECTIONS.map(({ id, label }) => (
+                    <SectionTabButton
+                      key={id}
+                      type='button'
+                      $isActive={activeSection === id}
+                      aria-current={activeSection === id ? 'true' : undefined}
+                      onClick={() => handleSectionTabClick(id)}
+                    >
+                      {label}
+                    </SectionTabButton>
+                  ))}
                 </SectionTabsWrapper>
                 </DemoStokeContentGrid>
               </div>

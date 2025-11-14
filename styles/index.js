@@ -842,26 +842,17 @@ export const DemoStokeContentGrid = styled.div`
 `;
 
 export const SectionTabsWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  max-width: 9.5em;
-  align-self: stretch;
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    display: none;
-  }
-`;
-
-export const SectionTabsSticky = styled.div`
   position: sticky;
-  top: calc(5em + 4.4em);
+  top: var(--sidebar-tabs-top, calc(5em + 4.4em));
   display: flex;
   flex-direction: column;
   gap: 0.65em;
   width: 100%;
+  max-width: 9.5em;
+  align-self: flex-start;
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    display: none;
     position: static;
   }
 `;
