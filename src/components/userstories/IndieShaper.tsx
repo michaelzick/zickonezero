@@ -18,16 +18,18 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
 
   const content = (
     <div>
-      <FlexBox>
-        <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
-        <div>
-          <h2 className='tab-header'>User Stories</h2>
-          <PitchDeckLink href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
-            Investor Pitch Deck <FileTextIcon aria-hidden="true" />
-          </PitchDeckLink>
-        </div>
-      </FlexBox>
-      <br />
+      <section id='story-introduction' aria-hidden='true'>
+        <FlexBox>
+          <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
+          <div>
+            <h2 className='tab-header'>User Stories</h2>
+            <PitchDeckLink href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
+              Investor Pitch Deck <FileTextIcon aria-hidden="true" />
+            </PitchDeckLink>
+          </div>
+        </FlexBox>
+        <br />
+      </section>
       <DemoStokeTitle id='story-independent-shaper-title'>The Independent Shaper</DemoStokeTitle>
       <p>
         From the lens of Curtis, an independent Southern California surfboard shaper, {DSLink} has the potential
