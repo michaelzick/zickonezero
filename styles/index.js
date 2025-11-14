@@ -1292,7 +1292,7 @@ export const SectionTabsMobileInner = styled.div`
   padding: 0.4em;
   border-radius: 18px;
   border: 2px solid rgba(255, 255, 255, 0.35);
-  background: rgba(3, 11, 23, 0.82);
+  background: rgba(var(--color-dark-rgb), 0.82);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(6px);
   flex-wrap: nowrap;
@@ -1300,9 +1300,9 @@ export const SectionTabsMobileInner = styled.div`
   overflow: hidden;
 
   :root[data-theme='light'] & {
-    border-color: rgba(15, 23, 42, 0.2);
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 12px 20px rgba(15, 23, 42, 0.15);
+    border-color: rgba(15, 23, 42, 0.15);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 12px 18px rgba(15, 23, 42, 0.12);
   }
 `;
 

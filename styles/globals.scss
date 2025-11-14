@@ -1,6 +1,7 @@
 :root {
   color-scheme: dark;
   --color-dark: #020817;
+  --color-dark-rgb: 2, 8, 23;
   --color-darkest: #151515;
   --color-grey: #c7c5c5;
   --color-blue: #0071e3;
@@ -19,6 +20,7 @@
 :root[data-theme='light'] {
   color-scheme: light;
   --color-dark: #f8fafc;
+  --color-dark-rgb: 248, 250, 252;
   --color-darkest: #e2e8f0;
   --color-grey: #334155;
   --color-blue: #2563eb;
