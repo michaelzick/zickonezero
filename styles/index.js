@@ -37,6 +37,10 @@ export const FlexBox = styled.div`
   justify-content: space-between;
   gap: 1.5em;
 
+  .page-header {
+    margin: 0;
+  }
+
   @media (max-width: ${THEME.breakpoints.phone}) {
     flex-direction: column;
     align-items: flex-start;
@@ -766,7 +770,7 @@ export const BioBox = styled.div`
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
       ${props => !props.isAboutPage && 'flex-direction: column;'}
-      ${props => props.top && 'padding-top: 3em;'}
+      ${props => props.top && 'padding-top: 1.5em;'}
     }
 
     @media (max-width: ${THEME.breakpoints.smallTablet}) {

@@ -103,7 +103,7 @@ const DemoStokeContent = () => {
                     <FlexBox>
                       <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
                       <div>
-                        <h2 className='tab-header'>Executive Summary</h2>
+                        <h2 className='tab-header page-header'>Executive Summary</h2>
                         <PitchDeckLink className='pitch-link-desktop' href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
                           Investor Pitch Deck <FileTextIcon aria-hidden="true" />
                         </PitchDeckLink>

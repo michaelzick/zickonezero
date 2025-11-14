@@ -22,7 +22,7 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
         <FlexBox>
           <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
           <div>
-            <h2 className='tab-header'>User Stories</h2>
+            <h2 className='tab-header page-header'>User Stories</h2>
             <PitchDeckLink href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
               Investor Pitch Deck <FileTextIcon aria-hidden="true" />
             </PitchDeckLink>
