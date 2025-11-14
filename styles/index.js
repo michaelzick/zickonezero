@@ -659,7 +659,7 @@ export const CaseStudiesAccordionList = styled.ul`
   padding: 0;
   display: ${props => props.$isOpen ? 'flex' : 'none'};
   flex-direction: column;
-  gap: 0.8em;
+  gap: 1.1em;
   max-height: none;
   overflow: visible;
   opacity: 1;
