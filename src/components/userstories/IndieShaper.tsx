@@ -28,7 +28,7 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
         </div>
       </FlexBox>
       <br />
-      <DemoStokeTitle>The Independent Shaper</DemoStokeTitle>
+      <DemoStokeTitle id='story-independent-shaper-title'>The Independent Shaper</DemoStokeTitle>
       <p>
         From the lens of Curtis, an independent Southern California surfboard shaper, {DSLink} has the potential
         to radically simplify and expand his business by addressing key pain points around demo logistics, discovery,

@@ -41,7 +41,7 @@ const EXECUTIVE_SECTIONS: SidebarSectionConfig[] = [
 ] as const;
 
 const STORY_SECTIONS: SidebarSectionConfig[] = [
-  { id: 'story-independent-shaper', label: 'Independent Shaper' },
+  { id: 'story-independent-shaper-title', label: 'Independent Shaper' },
   { id: 'story-weekend-warrior', label: 'Weekend Warrior' },
   { id: 'story-small-ski-shop', label: 'Small Ski/Bike Shop' }
 ] as const;
