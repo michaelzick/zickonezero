@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { FileTextIcon } from '@radix-ui/react-icons';
+import { useSize } from '@radix-ui/react-use-size';
 import {
   useAppDispatch,
   useAppSelector
@@ -54,6 +55,14 @@ const DemoStokeContent = () => {
   const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState<SectionKey>('executive');
   const [activeSection, setActiveSection] = useState<ExecutiveSection>(EXECUTIVE_SECTIONS[0].id);
+  const [sidebarStickyTop, setSidebarStickyTop] = useState(160);
+  const topTabsNodeRef = useRef<HTMLDivElement | null>(null);
+  const [topTabsEl, setTopTabsEl] = useState<HTMLDivElement | null>(null);
+  const topTabsSize = useSize(topTabsEl);
+  const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {
+    topTabsNodeRef.current = node;
+    setTopTabsEl(node);
+  }, []);
 
   const handleTabClick = (tabKey: string) => {
     setActiveTab(tabKey as SectionKey);
@@ -69,26 +78,39 @@ const DemoStokeContent = () => {
     });
   }, [activeTab]);
 
+  const updateSidebarStickyTop = useCallback(() => {
+    if (!topTabsNodeRef.current) {
+      setSidebarStickyTop(160);
+      return;
+    }
+
+    const tabsEl = topTabsNodeRef.current;
+    const computedStyle = window.getComputedStyle(tabsEl);
+    const topValue = parseFloat(computedStyle.top) || 0;
+    const margin = 12;
+    setSidebarStickyTop(topValue + tabsEl.offsetHeight + margin);
+  }, []);
+
+  useEffect(() => {
+    updateSidebarStickyTop();
+  }, [updateSidebarStickyTop, topTabsSize?.height]);
+
+  useEffect(() => {
+    window.addEventListener('resize', updateSidebarStickyTop);
+
+    return () => {
+      window.removeEventListener('resize', updateSidebarStickyTop);
+    };
+  }, [updateSidebarStickyTop]);
+
   useEffect(() => {
     if (activeTab !== 'executive') {
       setActiveSection(EXECUTIVE_SECTIONS[0].id);
       return;
     }
 
-    const getStickyOffset = () => {
-      if (window.innerWidth <= 600) {
-        return 100;
-      }
-
-      if (window.innerWidth <= 1137) {
-        return 120;
-      }
-
-      return 160;
-    };
-
     const updateActiveSection = () => {
-      const stickyOffset = getStickyOffset();
+      const stickyOffset = sidebarStickyTop || 160;
       let currentSection: ExecutiveSection = EXECUTIVE_SECTIONS[0].id;
 
       EXECUTIVE_SECTIONS.forEach(({ id }) => {
@@ -112,7 +134,7 @@ const DemoStokeContent = () => {
     return () => {
       window.removeEventListener('scroll', updateActiveSection);
     };
-  }, [activeTab]);
+  }, [activeTab, sidebarStickyTop]);
 
   const handleSectionTabClick = (sectionId: ExecutiveSection) => {
     const sectionEl = document.getElementById(sectionId);
@@ -129,6 +151,7 @@ const DemoStokeContent = () => {
       <Wrapper isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
         <DemoStokeTabs
+          ref={handleTopTabsRef}
           tabs={[
             { key: 'executive', label: 'Executive Summary' },
             { key: 'stories', label: 'User Stories' }
@@ -156,11 +179,11 @@ const DemoStokeContent = () => {
                     <PitchDeckLink className='pitch-link-mobile' href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
                       Investor Pitch Deck <FileTextIcon aria-hidden="true" />
                     </PitchDeckLink>
-                  <p>
-                    <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
-                      DemoStoke
-                    </WhiteTransitionAnchor> is the go-to platform to find, try, and buy the gear you’ll eventually fall in love with.
-                  </p>
+                    <p>
+                      <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
+                        DemoStoke
+                      </WhiteTransitionAnchor> is the go-to platform to find, try, and buy the gear you’ll eventually fall in love with.
+                    </p>
 
                   <Video
                     autoPlay
@@ -453,7 +476,7 @@ const DemoStokeContent = () => {
                   </section>
                 </div>
                 <SectionTabsWrapper role='navigation' aria-label='Executive summary sections'>
-                  <SectionTabsSticky>
+                  <SectionTabsSticky style={{ top: sidebarStickyTop }}>
                     {EXECUTIVE_SECTIONS.map(({ id, label }) => (
                       <SectionTabButton
                         key={id}

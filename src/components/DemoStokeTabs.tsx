@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { HomeTabButton, DemoStokeTabsBar } from '../../styles';
 
 type TabConfig = {
@@ -11,9 +12,13 @@ type DemoStokeTabsProps = {
   onTabClick: (tabKey: string) => void;
 };
 
-const DemoStokeTabs = ({ tabs, activeTab, onTabClick }: DemoStokeTabsProps) => {
+const DemoStokeTabs = forwardRef<HTMLDivElement, DemoStokeTabsProps>(({
+  tabs,
+  activeTab,
+  onTabClick
+}, ref) => {
   return (
-    <DemoStokeTabsBar role='tablist' aria-label='Page sections'>
+    <DemoStokeTabsBar ref={ref} role='tablist' aria-label='Page sections'>
       {tabs.map((tab) => (
         <HomeTabButton
           key={tab.key}
@@ -31,6 +36,8 @@ const DemoStokeTabs = ({ tabs, activeTab, onTabClick }: DemoStokeTabsProps) => {
       ))}
     </DemoStokeTabsBar>
   );
-};
+});
+
+DemoStokeTabs.displayName = 'DemoStokeTabs';
 
 export default DemoStokeTabs;

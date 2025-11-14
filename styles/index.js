@@ -830,7 +830,7 @@ export const BioBox = styled.div`
 
 export const DemoStokeContentGrid = styled.div`
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(11em, 12.5em);
+  grid-template-columns: minmax(0, 1fr) minmax(8.5em, 9.5em);
   gap: clamp(1.5em, 3vw, 2.8em);
   align-items: flex-start;
   width: 100%;
@@ -845,7 +845,7 @@ export const SectionTabsWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  max-width: 12.5em;
+  max-width: 9.5em;
   align-self: stretch;
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
@@ -1245,15 +1245,15 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
 `;
 
 export const SectionTabButton = styled(HomeTabButton)`
-  font-size: 0.9em;
-  padding: 0.55em 0.95em 0.5em;
-  justify-content: flex-start;
-  text-align: left;
+  font-size: 0.72em;
+  padding: 0.4em 0.65em 0.35em;
+  justify-content: center;
+  text-align: center;
   width: 100%;
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    font-size: 0.85em;
-  }
+  min-height: 2.2em;
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+  border-radius: 8px;
 `;
 
 export const HomeTabsSpacer = styled.div`
