@@ -26,7 +26,7 @@ import {
 } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
 import DemoStokeTabs from './DemoStokeTabs';
-import SidebarSectionTabs, { SidebarSectionConfig } from './SidebarSectionTabs';
+import SidebarSectionTabs, { SidebarSectionConfig, SidebarSectionTabsMobile } from './SidebarSectionTabs';
 import * as UserStories from './userstories';
 
 type SectionKey = 'executive' | 'stories';
@@ -58,6 +58,9 @@ const DemoStokeContent = () => {
   const handleTabClick = (tabKey: string) => {
     setActiveTab(tabKey as SectionKey);
   };
+  const isExecutiveView = activeTab === 'executive';
+  const currentSections = isExecutiveView ? EXECUTIVE_SECTIONS : STORY_SECTIONS;
+  const mobileLockSection = isExecutiveView ? 'section-learnings' : undefined;
 
   // Scroll to top after tab content changes
   useEffect(() => {
@@ -82,6 +85,12 @@ const DemoStokeContent = () => {
           ]}
           activeTab={activeTab}
           onTabClick={handleTabClick}
+        />
+        <SidebarSectionTabsMobile
+          sections={currentSections}
+          topTabsEl={topTabsEl}
+          isActive={true}
+          lockToBottomSectionId={mobileLockSection}
         />
 
         {activeTab === 'executive' && (

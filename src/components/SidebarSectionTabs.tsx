@@ -3,7 +3,10 @@ import { useSize } from '@radix-ui/react-use-size';
 
 import {
   SectionTabsWrapper,
-  SectionTabButton
+  SectionTabButton,
+  SectionTabsMobileWrapper,
+  SectionTabsMobileInner,
+  SectionTabsMobileButton
 } from '../../styles';
 
 const DETECTION_BUFFER = 20;
@@ -21,12 +24,20 @@ type SidebarSectionTabsProps = {
   lockToBottomSectionId?: string;
 };
 
-const SidebarSectionTabs = ({
+type SectionTabsHookParams = SidebarSectionTabsProps;
+
+type SectionTabsHookResult = {
+  stickyTop: number;
+  activeSection: string;
+  handleTabClick: (sectionId: string) => void;
+};
+
+const useSectionTabs = ({
   sections,
   topTabsEl,
   isActive,
   lockToBottomSectionId
-}: SidebarSectionTabsProps) => {
+}: SectionTabsHookParams): SectionTabsHookResult => {
   const [stickyTop, setStickyTop] = useState(DEFAULT_STICKY_TOP);
   const [activeSection, setActiveSection] = useState(sections[0]?.id ?? '');
   const topTabsSize = useSize(topTabsEl);
@@ -98,7 +109,7 @@ const SidebarSectionTabs = ({
     };
   }, [isActive, sections, stickyTop, lockToBottomSectionId]);
 
-  const handleTabClick = (sectionId: string) => {
+  const handleTabClick = useCallback((sectionId: string) => {
     const sectionEl = document.getElementById(sectionId);
     if (!sectionEl) {
       return;
@@ -111,7 +122,17 @@ const SidebarSectionTabs = ({
       top: targetPosition,
       behavior: 'smooth'
     });
-  };
+  }, [stickyTop]);
+
+  return { stickyTop, activeSection, handleTabClick };
+};
+
+const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
+  const {
+    sections
+  } = props;
+
+  const { stickyTop, activeSection, handleTabClick } = useSectionTabs(props);
 
   if (!sections.length) {
     return null;
@@ -135,6 +156,37 @@ const SidebarSectionTabs = ({
         </SectionTabButton>
       ))}
     </SectionTabsWrapper>
+  );
+};
+
+export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
+  const { sections } = props;
+  const { stickyTop, activeSection, handleTabClick } = useSectionTabs(props);
+
+  if (!sections.length) {
+    return null;
+  }
+
+  return (
+    <SectionTabsMobileWrapper
+      role='navigation'
+      aria-label='Page sections'
+      style={{ '--mobile-tabs-top': `${stickyTop}px` } as CSSProperties}
+    >
+      <SectionTabsMobileInner>
+        {sections.map(({ id, label }) => (
+          <SectionTabsMobileButton
+            key={id}
+            type='button'
+            $isActive={activeSection === id}
+            aria-current={activeSection === id ? 'true' : undefined}
+            onClick={() => handleTabClick(id)}
+          >
+            {label}
+          </SectionTabsMobileButton>
+        ))}
+      </SectionTabsMobileInner>
+    </SectionTabsMobileWrapper>
   );
 };
 

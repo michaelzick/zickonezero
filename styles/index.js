@@ -1248,6 +1248,45 @@ export const SectionTabButton = styled(HomeTabButton)`
   border-radius: 6px;
 `;
 
+export const SectionTabsMobileWrapper = styled.div`
+  display: none;
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    display: flex;
+    position: sticky;
+    top: var(--mobile-tabs-top, 8.5em);
+    z-index: 94;
+    width: 100%;
+    padding: 0 1.2em;
+    margin: 0 auto 1.25em;
+  }
+`;
+
+export const SectionTabsMobileInner = styled.div`
+  display: flex;
+  width: 100%;
+  max-width: 46em;
+  margin: 0 auto;
+  gap: 0.45em;
+  padding: 0.4em;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(3, 11, 23, 0.86);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  overflow: hidden;
+`;
+
+export const SectionTabsMobileButton = styled(HomeTabButton)`
+  flex: 1 1 0;
+  min-width: 0;
+  font-size: 0.92em;
+  padding: 0.6em 1.1em;
+  white-space: normal;
+`;
+
 export const HomeTabsSpacer = styled.div`
   display: none;
 
