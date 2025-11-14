@@ -28,7 +28,7 @@ const LinkBoxContent = () => {
       return undefined;
     }
 
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (!dropdownRef.current) return;
       if (!dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
