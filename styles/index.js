@@ -548,6 +548,7 @@ export const CaseStudiesDropdown = styled.ul`
     padding-bottom: 0;
     text-decoration: none;
     font-size: 1.1em;
+    margin: 0;
 
     &::after {
       content: '';
@@ -681,6 +682,7 @@ export const CaseStudiesAccordionList = styled.ul`
     align-self: flex-start;
     padding-bottom: 0.1em;
     justify-content: flex-start;
+    margin: 0;
   }
 `;
 
