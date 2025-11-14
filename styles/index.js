@@ -834,6 +834,9 @@ export const DemoStokeContentGrid = styled.div`
   gap: clamp(1.5em, 3vw, 2.8em);
   align-items: flex-start;
   width: 100%;
+  & > * {
+    min-width: 0;
+  }
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     grid-template-columns: 1fr;
