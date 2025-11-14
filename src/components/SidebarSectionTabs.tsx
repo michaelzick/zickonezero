@@ -6,7 +6,6 @@ import {
   SectionTabButton
 } from '../../styles';
 
-const SECTION_SCROLL_BUFFER = 8;
 const DETECTION_BUFFER = 20;
 const DEFAULT_STICKY_TOP = 160;
 
@@ -64,7 +63,7 @@ const SidebarSectionTabs = ({
     }
 
     const updateActiveSection = () => {
-      const detectionOffset = stickyTop + SECTION_SCROLL_BUFFER + DETECTION_BUFFER;
+      const detectionOffset = stickyTop + DETECTION_BUFFER;
       let currentSection = sections[0]?.id ?? '';
 
       sections.forEach(({ id }) => {
@@ -105,7 +104,7 @@ const SidebarSectionTabs = ({
       return;
     }
 
-    const offset = stickyTop + SECTION_SCROLL_BUFFER;
+    const offset = stickyTop;
     const targetPosition = sectionEl.getBoundingClientRect().top + window.scrollY - offset;
 
     window.scrollTo({
