@@ -405,24 +405,28 @@ const DemoStokeContent = () => {
 
         {activeTab === 'stories' && (
           <div id="stories-content">
-            <DemoStokeContentGrid>
-              <div>
-                <section id='story-independent-shaper'>
-                  <UserStories.IndieShaper />
-                </section>
-                <section id='story-weekend-warrior'>
-                  <UserStories.WeekendWarrior />
-                </section>
-                <section id='story-small-ski-shop'>
-                  <UserStories.SmallSkiBikeShop />
-                </section>
+            <BioBox direction='right' noBottomPadding top>
+              <div className='biobox-inner demostoke-inner'>
+                <DemoStokeContentGrid>
+                  <div>
+                    <section id='story-independent-shaper'>
+                      <UserStories.IndieShaper />
+                    </section>
+                    <section id='story-weekend-warrior'>
+                      <UserStories.WeekendWarrior />
+                    </section>
+                    <section id='story-small-ski-shop'>
+                      <UserStories.SmallSkiBikeShop />
+                    </section>
+                  </div>
+                  <SidebarSectionTabs
+                    sections={STORY_SECTIONS}
+                    topTabsEl={topTabsEl}
+                    isActive={activeTab === 'stories'}
+                  />
+                </DemoStokeContentGrid>
               </div>
-              <SidebarSectionTabs
-                sections={STORY_SECTIONS}
-                topTabsEl={topTabsEl}
-                isActive={activeTab === 'stories'}
-              />
-            </DemoStokeContentGrid>
+            </BioBox>
           </div>
         )}
       </Wrapper>
