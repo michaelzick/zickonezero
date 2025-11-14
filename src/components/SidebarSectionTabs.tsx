@@ -50,8 +50,7 @@ const useSectionTabs = ({
 
     const computedStyle = window.getComputedStyle(topTabsEl);
     const topValue = parseFloat(computedStyle.top) || 0;
-    const margin = 12;
-    setStickyTop(topValue + topTabsEl.offsetHeight + margin);
+    setStickyTop(topValue + topTabsEl.offsetHeight);
   }, [topTabsEl]);
 
   useEffect(() => {
