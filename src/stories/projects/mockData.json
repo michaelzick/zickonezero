@@ -123,14 +123,6 @@
     "linkOut": true
   },
   {
-    "thumb": "/img/squares/at_logo_purple.webp",
-    "imgs": [],
-    "desc": "Cybersecurity training marketplace and CMS",
-    "header": "Antisyphon Training",
-    "group": "antisyphon-training",
-    "link": "/antisyphon-training"
-  },
-  {
     "thumb": "/img/squares/ds-logo-stripes-fuchsia-square.webp",
     "imgs": [],
     "desc": "DemoStoke design system and component library",
@@ -140,10 +132,18 @@
     "linkOut": true
   },
   {
+    "thumb": "/img/squares/at_logo_purple.webp",
+    "imgs": [],
+    "desc": "Cybersecurity training marketplace and CMS",
+    "header": "CASE STUDY: Antisyphon Training",
+    "group": "antisyphon-training",
+    "link": "/antisyphon-training"
+  },
+  {
     "thumb": "/img/squares/demostoke-logo-square.webp",
     "imgs": [],
     "desc": "Action sports gear rental system and lifestyle blog",
-    "header": "DemoStoke",
+    "header": "CASE STUDY: DemoStoke",
     "group": "demostoke",
     "link": "/demostoke"
   }

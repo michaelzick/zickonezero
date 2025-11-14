@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
 
 import {
   showMobileMenu,
@@ -30,7 +30,7 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
   return (
     <LinkBoxMobile
       $isAnimating={isAnimating}
-      onClick={(event) => event.stopPropagation()}>
+      onClick={(event: MouseEvent<HTMLUListElement>) => event.stopPropagation()}>
       <li onClick={handleCloseMenu}>
         <Link href='/about'>About</Link>
       </li>
