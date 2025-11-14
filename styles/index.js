@@ -1249,11 +1249,6 @@ const sidebarTabButtonStyles = css`
   box-shadow: none;
   transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 
-  &:hover {
-    border-color: ${THEME.colors.hotYellow};
-    color: ${THEME.colors.hotYellow};
-  }
-
   &[data-active='true'] {
     background-color: ${THEME.colors.hotYellow};
     border-color: ${THEME.colors.hotYellow};
