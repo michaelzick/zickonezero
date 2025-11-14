@@ -1237,7 +1237,7 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
 
 export const SectionTabButton = styled(HomeTabButton)`
   font-size: 0.575em;
-  padding: 0.29em 0.44em 0.29em;
+  padding: 0.45em 0.5em 0.3em;
   justify-content: center;
   text-align: center;
   width: 100%;
