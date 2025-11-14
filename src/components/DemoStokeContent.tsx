@@ -21,7 +21,8 @@ import {
   PitchDeckLink,
   Video,
   Image,
-  DemoStokeContentGrid
+  DemoStokeContentGrid,
+  DemoStokeTitle
 } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
 import DemoStokeTabs from './DemoStokeTabs';
@@ -133,7 +134,7 @@ const DemoStokeContent = () => {
                   </section>
 
                   <section id='section-problem'>
-                    <h3>The Problem</h3>
+                    <DemoStokeTitle>The Problem</DemoStokeTitle>
                     <p>Demo opportunities for rideable gear are limited, inconvenient, or nonexistent.
                       Many riders either blindly purchase expensive equipment or wait for infrequent on-site demos,
                       often leading to mismatched gear choices and wasted spending.</p>
@@ -165,7 +166,7 @@ const DemoStokeContent = () => {
                   </section>
 
                   <section id='section-key-features'>
-                    <h3>Key Features</h3>
+                    <DemoStokeTitle>Key Features</DemoStokeTitle>
                     <DemoStokeList>
                       <li>Map and list-based gear discovery.</li>
                       <br />
@@ -185,7 +186,7 @@ const DemoStokeContent = () => {
                   </section>
 
                   <section id='section-admin'>
-                    <h3>Admin Dashboard</h3>
+                    <DemoStokeTitle>Admin Dashboard</DemoStokeTitle>
                     <p>In addition to the client-facing site, DemoStoke is a full-featured admin dashboard
                       for managing users, gear listings, and demo events, built with a React frontend
                       and a Supabase/PostreSQL backend. Future iterations will include POS/API syncing
@@ -195,7 +196,7 @@ const DemoStokeContent = () => {
                   </section>
 
                   <section id='section-market-research'>
-                    <h3>Market Research & Competitive Analysis</h3>
+                    <DemoStokeTitle>Market Research &amp; Competitive Analysis</DemoStokeTitle>
                     <DemoStokeList>
                       <li className='interview'>I conducted user interviews and surveys with riders across snow, surf, and MTB.</li>
                       <br />
@@ -361,7 +362,7 @@ const DemoStokeContent = () => {
                   </section>
 
                   <section id='section-learnings'>
-                    <h3>Learnings</h3>
+                    <DemoStokeTitle>Misc</DemoStokeTitle>
                     <p>This case study was born from real interviews and market gaps. I learned:</p>
                     <DemoStokeList>
                       <li className='learning'>User trust is central to any peer-based platform.</li>
