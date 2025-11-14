@@ -31,15 +31,10 @@ import * as UserStories from './userstories';
 type SectionKey = 'executive' | 'stories';
 
 const EXECUTIVE_SECTIONS: SidebarSectionConfig[] = [
-  { id: 'section-tldr', label: 'TL;DR' },
   { id: 'section-problem', label: 'The Problem' },
-  { id: 'section-complaints', label: 'Current Complaints' },
-  { id: 'section-solution', label: 'The Solution' },
   { id: 'section-key-features', label: 'Key Features' },
   { id: 'section-admin', label: 'Admin Dashboard' },
   { id: 'section-market-research', label: 'Market Research' },
-  { id: 'section-competitors', label: 'Competitor Overview' },
-  { id: 'section-personas', label: 'Personas' },
   { id: 'section-learnings', label: 'Misc' },
 ] as const;
 
