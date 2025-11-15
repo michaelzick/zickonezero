@@ -1320,7 +1320,7 @@ export const SectionTabsMobileWrapper = styled.div`
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     display: flex;
-    position: sticky;
+    position: ${props => props.$isFixed ? 'fixed' : 'sticky'};
     top: var(--mobile-tabs-top, 8.5em);
     z-index: 94;
     width: 100%;

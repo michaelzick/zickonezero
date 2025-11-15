@@ -25,6 +25,8 @@ type SidebarSectionTabsProps = {
   lockToBottomSectionId?: string;
   fallbackStickyTop?: number;
   scrollOffsetAdjustment?: number;
+  isFixed?: boolean;
+  mobileTopAdjustment?: number;
 };
 
 type SectionTabsHookParams = SidebarSectionTabsProps & {
@@ -168,7 +170,7 @@ const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
 };
 
 export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
-  const { sections } = props;
+  const { sections, isFixed, mobileTopAdjustment = 0 } = props;
   const visibleSections = sections.filter(({ hidden }) => !hidden);
   const [wrapperEl, setWrapperEl] = useState<HTMLDivElement | null>(null);
   const wrapperSize = useSize(wrapperEl);
@@ -190,7 +192,8 @@ export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
       ref={handleWrapperRef}
       role='navigation'
       aria-label='Page sections'
-      style={{ '--mobile-tabs-top': `${stickyTop}px` } as CSSProperties}
+      $isFixed={isFixed}
+      style={{ '--mobile-tabs-top': `${stickyTop + mobileTopAdjustment}px` } as CSSProperties}
     >
       <SectionTabsMobileInner>
         {visibleSections.map(({ id, label }) => (

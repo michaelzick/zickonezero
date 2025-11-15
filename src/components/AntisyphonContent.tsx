@@ -76,6 +76,8 @@ const AntisyphonContent = () => {
           topTabsEl={topTabsEl}
           isActive={true}
           lockToBottomSectionId={ANTISYPHON_BOTTOM_SECTION_ID}
+          isFixed
+          mobileTopAdjustment={6}
           scrollOffsetAdjustment={24}
         />
         <AntisyphonColumnsWrapper>
