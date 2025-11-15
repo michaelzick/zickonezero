@@ -23,6 +23,7 @@ import { TopNavContent, FooterContent } from '.';
 import SidebarSectionTabs, { SidebarSectionConfig, SidebarSectionTabsMobile } from './SidebarSectionTabs';
 
 const ANTISYPHON_SECTIONS: SidebarSectionConfig[] = [
+  { id: 'section-at-intro', label: 'Intro', hidden: true },
   { id: 'section-the-beginning', label: 'The Beginning' },
   { id: 'section-the-evolution', label: 'The Evolution' },
   { id: 'section-ux-design', label: 'UX Design' },
@@ -76,12 +77,14 @@ const AntisyphonContent = () => {
           <AntisyphonColumnsInner>
             <DemoStokeContentGrid>
               <div>
-                <AntisyphonHeader>
-                  <img className='at-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
-                  <div>
-                    <h2 className='tab-header page-header'>Antisyphon Training</h2>
-                  </div>
-                </AntisyphonHeader>
+                <section id='section-at-intro' aria-hidden='true'>
+                  <AntisyphonHeader>
+                    <img className='at-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
+                    <div>
+                      <h2 className='tab-header page-header'>Antisyphon Training</h2>
+                    </div>
+                  </AntisyphonHeader>
+                </section>
                 <section id='section-the-beginning'>
                   <BioBox noBottomPadding direction='left' noLeftRightPadding>
                     <div className='biobox-inner demostoke-inner'>
