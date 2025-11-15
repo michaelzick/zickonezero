@@ -6,7 +6,7 @@ import {
   showMobileMenu,
   getMobileMenuState
 } from '../showMobileMenuSlice';
-import { useState, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 import FsLightbox from 'fslightbox-react';
 
@@ -37,8 +37,9 @@ const AntisyphonContent = () => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
   const [topTabsEl, setTopTabsEl] = useState<HTMLDivElement | null>(null);
-  const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {
-    setTopTabsEl(node);
+  useEffect(() => {
+    const navEl = document.getElementById('site-nav') as HTMLDivElement | null;
+    setTopTabsEl(navEl);
   }, []);
 
   // All images on the page for lightbox
@@ -67,9 +68,7 @@ const AntisyphonContent = () => {
 
   return (
     <>
-      <div ref={handleTopTabsRef}>
-        <TopNavContent />
-      </div>
+      <TopNavContent />
       <Wrapper isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
         <SidebarSectionTabsMobile

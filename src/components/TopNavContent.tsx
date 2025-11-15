@@ -24,7 +24,7 @@ const NavContent = (): ReactElement => {
   };
 
   return (
-    <Nav onClick={handleNavClick}>
+    <Nav id='site-nav' onClick={handleNavClick}>
       <ThemeSwitcherWrapper className="theme-switcher-container"
         isMobileMenuShown={isMobileMenuShown}>
         <Title isMobileMenuShown={isMobileMenuShown}
