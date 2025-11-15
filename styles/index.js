@@ -694,7 +694,8 @@ export const CaseStudiesAccordionList = styled.ul`
 export const BioBox = styled.div`
   display: flex;
   justify-content: center;
-  padding: 4em;
+  padding: ${props => props.noLeftRightPadding ? '4em 0' : '4em'};
+  padding-top: ${props => props.noTopPadding ? '0' : '4em'};
   ${props => props.noBottomPadding && 'padding-bottom: 0;'}
   ${props => props.someTopPadding && 'padding-top: 1em;'}
   width: 100%;

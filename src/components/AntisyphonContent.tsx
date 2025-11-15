@@ -76,8 +76,8 @@ const AntisyphonContent = () => {
             <DemoStokeContentGrid>
               <div>
                 <section id='section-antisyphon-training'>
-                  <BioBox noBottomPadding direction='left'>
-                    <div className='biobox-inner'>
+                  <BioBox noBottomPadding direction='left' noLeftRightPadding noTopPadding>
+                    <div className='biobox-inner demostoke-inner'>
                       <div className='product-screenshot'>
                         <img
                           className="antisyphon-image"
@@ -103,8 +103,8 @@ const AntisyphonContent = () => {
                 </section>
 
                 <section id='section-ecommerce-evolution'>
-                  <BioBox direction='right' noBottomPadding>
-                    <div className='biobox-inner'>
+                  <BioBox direction='right' noBottomPadding noLeftRightPadding>
+                    <div className='biobox-inner demostoke-inner'>
                       <div className='text-wrapper'>
                         <HotRedTitle className='antisyphon'>E-Commerce Evolution</HotRedTitle>
                         <br />
@@ -130,8 +130,8 @@ const AntisyphonContent = () => {
                 </section>
 
                 <section id='section-ux-design'>
-                  <BioBox direction='left' noBottomPadding>
-                    <div className='biobox-inner'>
+                  <BioBox direction='left' noBottomPadding noLeftRightPadding>
+                    <div className='biobox-inner demostoke-inner'>
                       <div className='product-screenshot'>
                         <img
                           className="antisyphon-image"
@@ -196,8 +196,8 @@ const AntisyphonContent = () => {
                 </section>
 
                 <section id='section-admin-experiences'>
-                  <BioBox direction='right'>
-                    <div className='biobox-inner'>
+                  <BioBox direction='right' noLeftRightPadding>
+                    <div className='biobox-inner demostoke-inner'>
                       <div className='text-wrapper bottom'>
                         <HotRedTitle className='antisyphon'>Admin Experiences</HotRedTitle>
                         <br />
