@@ -853,17 +853,17 @@ export const DemoStokeContentGrid = styled.div`
 export const AntisyphonColumnsWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding: 4em;
+  padding: 2.5em 4em;
   width: 100%;
   font-size: 25px;
   text-align: left;
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    padding: 2.5em 1.5em;
+    padding: 1em 1.5em;
   }
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    padding: 1.8em 1em;
+    padding: 1em;
   }
 `;
 
