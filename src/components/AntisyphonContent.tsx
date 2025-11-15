@@ -174,7 +174,7 @@ const AntisyphonContent = () => {
                         </div>
 
                         <br /><br />
-                    <section id='section-user-accounts'>
+                        <section id='section-user-accounts'>
                           <div>
                             <HotRedTitle className='antisyphon'>User Accounts</HotRedTitle>
                             <br />
