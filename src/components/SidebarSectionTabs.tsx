@@ -23,6 +23,7 @@ type SidebarSectionTabsProps = {
   topTabsEl: HTMLDivElement | null;
   isActive: boolean;
   lockToBottomSectionId?: string;
+  fallbackStickyTop?: number;
 };
 
 type SectionTabsHookParams = SidebarSectionTabsProps & {
@@ -40,27 +41,28 @@ const useSectionTabs = ({
   topTabsEl,
   isActive,
   lockToBottomSectionId,
-  extraOffset = 0
+  extraOffset = 0,
+  fallbackStickyTop = DEFAULT_STICKY_TOP
 }: SectionTabsHookParams): SectionTabsHookResult => {
-  const [stickyTop, setStickyTop] = useState(DEFAULT_STICKY_TOP);
+  const [stickyTop, setStickyTop] = useState(fallbackStickyTop);
   const [activeSection, setActiveSection] = useState(sections[0]?.id ?? '');
   const topTabsSize = useSize(topTabsEl);
   const totalOffset = stickyTop + extraOffset;
 
   const updateStickyTop = useCallback(() => {
     if (!topTabsEl) {
-      setStickyTop(DEFAULT_STICKY_TOP);
+      setStickyTop(fallbackStickyTop);
       return;
     }
 
     const computedStyle = window.getComputedStyle(topTabsEl);
     const topValue = parseFloat(computedStyle.top) || 0;
     setStickyTop(topValue + topTabsEl.offsetHeight);
-  }, [topTabsEl]);
+  }, [topTabsEl, fallbackStickyTop]);
 
   useEffect(() => {
     updateStickyTop();
-  }, [updateStickyTop, topTabsSize?.height]);
+  }, [updateStickyTop, topTabsSize?.height, fallbackStickyTop]);
 
   useEffect(() => {
     const handleResize = () => updateStickyTop();

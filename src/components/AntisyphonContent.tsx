@@ -253,6 +253,7 @@ const AntisyphonContent = () => {
                 topTabsEl={topTabsEl}
                 isActive={true}
                 lockToBottomSectionId={ANTISYPHON_BOTTOM_SECTION_ID}
+                fallbackStickyTop={110}
               />
             </DemoStokeContentGrid>
           </AntisyphonColumnsInner>
