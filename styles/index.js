@@ -882,12 +882,6 @@ export const AntisyphonHeader = styled(FlexBox)`
     height: auto;
   }
 
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    .at-logo {
-      width: clamp(3.5rem, 28vw, 5.25rem);
-    }
-  }
-
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     margin-bottom: 1.5em;
   }
