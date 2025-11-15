@@ -69,7 +69,7 @@ const AntisyphonContent = () => {
   return (
     <>
       <TopNavContent />
-      <Wrapper isMobileMenuShown={isMobileMenuShown}
+      <Wrapper isMobileMenuShown={isMobileMenuShown} isAtPage={true}
         onClick={() => dispatch(showMobileMenu(false))}>
         <SidebarSectionTabsMobile
           sections={ANTISYPHON_SECTIONS}
