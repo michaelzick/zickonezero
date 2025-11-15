@@ -848,6 +848,28 @@ export const DemoStokeContentGrid = styled.div`
   }
 `;
 
+export const AntisyphonColumnsWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 4em;
+  width: 100%;
+  font-size: 25px;
+  text-align: left;
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    padding: 2.5em 1.5em;
+  }
+
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+    padding: 1.8em 1em;
+  }
+`;
+
+export const AntisyphonColumnsInner = styled.div`
+  width: 100%;
+  max-width: 58em;
+`;
+
 export const SectionTabsWrapper = styled.div`
   position: sticky;
   top: var(--sidebar-tabs-top, calc(5em + 4.4em));
