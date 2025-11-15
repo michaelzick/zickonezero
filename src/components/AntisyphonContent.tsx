@@ -10,7 +10,7 @@ import { useState } from 'react';
 
 import FsLightbox from 'fslightbox-react';
 
-import { BioBox, Wrapper, HotRedTitle, AntisyphonContentGrid } from '../../styles';
+import { BioBox, Wrapper, HotRedTitle, DemoStokeContentGrid } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
 import SidebarSectionTabs, { SidebarSectionConfig, SidebarSectionTabsMobile } from './SidebarSectionTabs';
 
@@ -64,7 +64,7 @@ const AntisyphonContent = () => {
           isActive={true}
           lockToBottomSectionId={ANTISYPHON_BOTTOM_SECTION_ID}
         />
-        <AntisyphonContentGrid>
+        <DemoStokeContentGrid>
           <div>
             <section id='section-antisyphon-training'>
               <BioBox noBottomPadding direction='left'>
@@ -234,9 +234,8 @@ const AntisyphonContent = () => {
             topTabsEl={topTabsEl}
             isActive={true}
             lockToBottomSectionId={ANTISYPHON_BOTTOM_SECTION_ID}
-            sidebarWidth='100%'
           />
-        </AntisyphonContentGrid>
+        </DemoStokeContentGrid>
       </Wrapper>
       <FooterContent />
 

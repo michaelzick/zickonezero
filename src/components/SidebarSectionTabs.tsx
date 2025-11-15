@@ -23,7 +23,6 @@ type SidebarSectionTabsProps = {
   topTabsEl: HTMLDivElement | null;
   isActive: boolean;
   lockToBottomSectionId?: string;
-  sidebarWidth?: string;
 };
 
 type SectionTabsHookParams = SidebarSectionTabsProps & {
@@ -133,19 +132,11 @@ const useSectionTabs = ({
 
 const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
   const {
-    sections,
-    sidebarWidth
+    sections
   } = props;
 
   const { stickyTop, activeSection, handleTabClick } = useSectionTabs(props);
   const visibleSections = sections.filter(({ hidden }) => !hidden);
-  const wrapperStyle = {
-    '--sidebar-tabs-top': `${stickyTop}px`
-  } as CSSProperties;
-
-  if (sidebarWidth) {
-    wrapperStyle['--sidebar-tabs-width'] = sidebarWidth;
-  }
 
   if (!visibleSections.length) {
     return null;
@@ -155,7 +146,7 @@ const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
     <SectionTabsWrapper
       role='navigation'
       aria-label='Page sections'
-      style={wrapperStyle}
+      style={{ '--sidebar-tabs-top': `${stickyTop}px` } as CSSProperties}
     >
       {visibleSections.map(({ id, label }) => (
         <SectionTabButton

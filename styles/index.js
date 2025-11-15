@@ -848,23 +848,6 @@ export const DemoStokeContentGrid = styled.div`
   }
 `;
 
-export const AntisyphonContentGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(1.8em, 3.5vw, 3.4em);
-  align-items: flex-start;
-  width: 100%;
-
-  & > * {
-    min-width: 0;
-  }
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    grid-template-columns: 1fr;
-    gap: 1.8em;
-  }
-`;
-
 export const SectionTabsWrapper = styled.div`
   position: sticky;
   top: var(--sidebar-tabs-top, calc(5em + 4.4em));
@@ -872,7 +855,7 @@ export const SectionTabsWrapper = styled.div`
   flex-direction: column;
   gap: 0.65em;
   width: 100%;
-  max-width: var(--sidebar-tabs-width, 5.5em);
+  max-width: 5.5em;
   align-self: flex-start;
   padding: 0.45em;
   border-radius: 18px;
