@@ -85,21 +85,21 @@ const AntisyphonContent = () => {
                     </div>
                   </AntisyphonHeader>
                 </section>
-                <section id='section-the-beginning'>
-                  <BioBox noBottomPadding direction='left' noLeftRightPadding>
-                    <div className='biobox-inner demostoke-inner'>
-                      <div className='product-screenshot'>
-                        <img
-                          className="antisyphon-image"
-                          src="/img/antisyphon/home.webp"
-                          alt="Antisyphon Home"
-                          width='1200'
-                          height='663'
-                          loading='lazy'
-                          onClick={() => openLightbox(0)}
-                        />
-                      </div>
-                      <div className='text-wrapper'>
+                <BioBox noBottomPadding direction='left' noLeftRightPadding>
+                  <div className='biobox-inner demostoke-inner'>
+                    <div className='product-screenshot'>
+                      <img
+                        className="antisyphon-image"
+                        src="/img/antisyphon/home.webp"
+                        alt="Antisyphon Home"
+                        width='1200'
+                        height='663'
+                        loading='lazy'
+                        onClick={() => openLightbox(0)}
+                      />
+                    </div>
+                    <div className='text-wrapper'>
+                      <section id='section-the-beginning'>
                         <HotRedTitle className='gets-mobile-margin antisyphon'>The Beginning</HotRedTitle>
                         <br />
                         Initially, I was hired at Black Hills Information Security/Antisyphon Training as a software engineer.
@@ -107,15 +107,15 @@ const AntisyphonContent = () => {
                         <br /><br />
                         I partnered with creative directors and design teams, as well as key stakeholders to create an intuitive
                         experience for cybersecurity professionals.
-                      </div>
+                      </section>
                     </div>
-                  </BioBox>
-                </section>
+                  </div>
+                </BioBox>
 
-                <section id='section-the-evolution'>
-                  <BioBox direction='right' noBottomPadding noLeftRightPadding>
-                    <div className='biobox-inner demostoke-inner'>
-                      <div className='text-wrapper'>
+                <BioBox direction='right' noBottomPadding noLeftRightPadding>
+                  <div className='biobox-inner demostoke-inner'>
+                    <div className='text-wrapper'>
+                      <section id='section-the-evolution'>
                         <HotRedTitle className='antisyphon'>The Evolution</HotRedTitle>
                         <br />
                         Rather than creating just another static site that linked to third-party platforms, I envisioned an
@@ -123,37 +123,37 @@ const AntisyphonContent = () => {
                         <br /><br />
                         This would allow us to offer a wide range of courses, from live events to on-demand training, all in one place.
                         I also envisioned a system that would allow us to easily add new courses and manage existing ones.
-                      </div>
-                      <div className='product-screenshot'>
-                        <img
-                          className="antisyphon-image"
-                          src='/img/antisyphon/cart.webp'
-                          alt='Antisyphon Cart'
-                          width='1200'
-                          height='663'
-                          loading="lazy"
-                          onClick={() => openLightbox(1)}
-                        />
-                      </div>
+                      </section>
                     </div>
-                  </BioBox>
-                </section>
+                    <div className='product-screenshot'>
+                      <img
+                        className="antisyphon-image"
+                        src='/img/antisyphon/cart.webp'
+                        alt='Antisyphon Cart'
+                        width='1200'
+                        height='663'
+                        loading="lazy"
+                        onClick={() => openLightbox(1)}
+                      />
+                    </div>
+                  </div>
+                </BioBox>
 
-                <section id='section-ux-design'>
-                  <BioBox direction='left' noBottomPadding noLeftRightPadding>
-                    <div className='biobox-inner demostoke-inner'>
-                      <div className='product-screenshot'>
-                        <img
-                          className="antisyphon-image"
-                          src='/img/antisyphon/wireframe-home.webp'
-                          alt='Wireframe Home'
-                          width='664'
-                          height='2641'
-                          loading="lazy"
-                          onClick={() => openLightbox(2)}
-                        />
-                      </div>
-                      <div className='text-wrapper bottom'>
+                <BioBox direction='left' noBottomPadding noLeftRightPadding>
+                  <div className='biobox-inner demostoke-inner'>
+                    <div className='product-screenshot'>
+                      <img
+                        className="antisyphon-image"
+                        src='/img/antisyphon/wireframe-home.webp'
+                        alt='Wireframe Home'
+                        width='664'
+                        height='2641'
+                        loading="lazy"
+                        onClick={() => openLightbox(2)}
+                      />
+                    </div>
+                    <div className='text-wrapper bottom'>
+                      <section id='section-ux-design'>
                         <HotRedTitle className='gets-mobile-margin antisyphon'>UX Design</HotRedTitle>
                         <br />
                         Using Figma, I designed over 50 wireframes, refining them through multiple rounds of discussion, feedback, and iterations.
@@ -200,15 +200,15 @@ const AntisyphonContent = () => {
                             </div>
                           </div>
                         </section>
-                      </div>
+                      </section>
                     </div>
-                  </BioBox>
-                </section>
+                  </div>
+                </BioBox>
 
-                <section id='section-course-creation'>
-                  <BioBox direction='right' noLeftRightPadding>
-                    <div className='biobox-inner demostoke-inner'>
-                      <div className='text-wrapper bottom'>
+                <BioBox direction='right' noLeftRightPadding>
+                  <div className='biobox-inner demostoke-inner'>
+                    <div className='text-wrapper bottom'>
+                      <section id='section-course-creation'>
                         <HotRedTitle className='antisyphon'>Course Creation</HotRedTitle>
                         <br />
                         In addition to the consumer-facing site, Antisyphon Training also serves as a full-featured WordPress CMS, which required its own UX considerations.
@@ -220,33 +220,33 @@ const AntisyphonContent = () => {
                         <br /><br />
                         Surfacing API messages, generating unique IDs, and allowing admins to edit orders were just a few of the key features, much of which we built
                         from scratch.
-                      </div>
-                      <br />
-                      <div className='product-screenshot'>
-                        <img
-                          className="antisyphon-image"
-                          src='/img/antisyphon/dashboard-my-live-courses-prod.webp'
-                          alt='Dashboard Live Courses'
-                          width='1200'
-                          height='666'
-                          loading="lazy"
-                          onClick={() => openLightbox(5)}
-                        />
-                        <br /><br />
-                        <img
-                          className="antisyphon-image"
-                          src='/img/antisyphon/admin-course-edit.webp'
-                          alt='Admin Course Edit'
-                          width='1200'
-                          height='666'
-                          loading="lazy"
-                          onClick={() => openLightbox(6)}
-                        />
-                      </div>
-                      <br />
+                      </section>
                     </div>
-                  </BioBox>
-                </section>
+                    <br />
+                    <div className='product-screenshot'>
+                      <img
+                        className="antisyphon-image"
+                        src='/img/antisyphon/dashboard-my-live-courses-prod.webp'
+                        alt='Dashboard Live Courses'
+                        width='1200'
+                        height='666'
+                        loading="lazy"
+                        onClick={() => openLightbox(5)}
+                      />
+                      <br /><br />
+                      <img
+                        className="antisyphon-image"
+                        src='/img/antisyphon/admin-course-edit.webp'
+                        alt='Admin Course Edit'
+                        width='1200'
+                        height='666'
+                        loading="lazy"
+                        onClick={() => openLightbox(6)}
+                      />
+                    </div>
+                    <br />
+                  </div>
+                </BioBox>
               </div>
               <SidebarSectionTabs
                 sections={ANTISYPHON_SECTIONS}
