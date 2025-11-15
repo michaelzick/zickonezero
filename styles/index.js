@@ -887,6 +887,10 @@ export const AntisyphonHeader = styled(FlexBox)`
       width: clamp(3.5rem, 28vw, 5.25rem);
     }
   }
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    margin-bottom: 1.5em;
+  }
 `;
 
 export const SectionTabsWrapper = styled.div`

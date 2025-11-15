@@ -82,9 +82,8 @@ const AntisyphonContent = () => {
                     <h2 className='tab-header page-header'>Antisyphon Training</h2>
                   </div>
                 </AntisyphonHeader>
-                <br />
                 <section id='section-antisyphon-training'>
-                  <BioBox noBottomPadding direction='left' noLeftRightPadding noTopPadding>
+                  <BioBox noBottomPadding direction='left' noLeftRightPadding>
                     <div className='biobox-inner demostoke-inner'>
                       <div className='product-screenshot'>
                         <img
