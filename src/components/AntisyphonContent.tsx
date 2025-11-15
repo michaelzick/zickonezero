@@ -23,11 +23,11 @@ import { TopNavContent, FooterContent } from '.';
 import SidebarSectionTabs, { SidebarSectionConfig, SidebarSectionTabsMobile } from './SidebarSectionTabs';
 
 const ANTISYPHON_SECTIONS: SidebarSectionConfig[] = [
-  { id: 'section-antisyphon-training', label: 'The Beginning' },
-  { id: 'section-ecommerce-evolution', label: 'The Evolution' },
+  { id: 'section-the-beginning', label: 'The Beginning' },
+  { id: 'section-the-evolution', label: 'The Evolution' },
   { id: 'section-ux-design', label: 'UX Design' },
-  { id: 'section-intuitive-dashboards', label: 'User Accounts' },
-  { id: 'section-admin-experiences', label: 'Course Creation' }
+  { id: 'section-user-accounts', label: 'User Accounts' },
+  { id: 'section-course-creation', label: 'Course Creation' }
 ];
 
 const ANTISYPHON_BOTTOM_SECTION_ID = ANTISYPHON_SECTIONS[ANTISYPHON_SECTIONS.length - 1]?.id;
@@ -82,7 +82,7 @@ const AntisyphonContent = () => {
                     <h2 className='tab-header page-header'>Antisyphon Training</h2>
                   </div>
                 </AntisyphonHeader>
-                <section id='section-antisyphon-training'>
+                <section id='section-the-beginning'>
                   <BioBox noBottomPadding direction='left' noLeftRightPadding>
                     <div className='biobox-inner demostoke-inner'>
                       <div className='product-screenshot'>
@@ -109,7 +109,7 @@ const AntisyphonContent = () => {
                   </BioBox>
                 </section>
 
-                <section id='section-ecommerce-evolution'>
+                <section id='section-the-evolution'>
                   <BioBox direction='right' noBottomPadding noLeftRightPadding>
                     <div className='biobox-inner demostoke-inner'>
                       <div className='text-wrapper'>
@@ -174,7 +174,7 @@ const AntisyphonContent = () => {
                         </div>
 
                         <br /><br />
-                        <section id='section-intuitive-dashboards'>
+                    <section id='section-user-accounts'>
                           <div>
                             <HotRedTitle className='antisyphon'>User Accounts</HotRedTitle>
                             <br />
@@ -202,7 +202,7 @@ const AntisyphonContent = () => {
                   </BioBox>
                 </section>
 
-                <section id='section-admin-experiences'>
+                <section id='section-course-creation'>
                   <BioBox direction='right' noLeftRightPadding>
                     <div className='biobox-inner demostoke-inner'>
                       <div className='text-wrapper bottom'>
