@@ -16,7 +16,8 @@ import {
   HotRedTitle,
   DemoStokeContentGrid,
   AntisyphonColumnsWrapper,
-  AntisyphonColumnsInner
+  AntisyphonColumnsInner,
+  AntisyphonHeader
 } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
 import SidebarSectionTabs, { SidebarSectionConfig, SidebarSectionTabsMobile } from './SidebarSectionTabs';
@@ -75,6 +76,13 @@ const AntisyphonContent = () => {
           <AntisyphonColumnsInner>
             <DemoStokeContentGrid>
               <div>
+                <AntisyphonHeader>
+                  <img className='at-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
+                  <div>
+                    <h2 className='tab-header page-header'>Antisyphon Training</h2>
+                  </div>
+                </AntisyphonHeader>
+                <br />
                 <section id='section-antisyphon-training'>
                   <BioBox noBottomPadding direction='left' noLeftRightPadding noTopPadding>
                     <div className='biobox-inner demostoke-inner'>

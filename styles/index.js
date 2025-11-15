@@ -704,7 +704,7 @@ export const BioBox = styled.div`
   min-height: 84%;
   height: auto;
 
-  .biobox-inner {
+.biobox-inner {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -713,7 +713,8 @@ export const BioBox = styled.div`
     &.demostoke-inner {
       max-width: 58em;
 
-      .ds-logo {
+      .ds-logo,
+      .at-logo {
         width: 6em;
       }
 
@@ -869,6 +870,23 @@ export const AntisyphonColumnsWrapper = styled.div`
 export const AntisyphonColumnsInner = styled.div`
   width: 100%;
   max-width: 58em;
+`;
+
+export const AntisyphonHeader = styled(FlexBox)`
+  .page-header {
+    color: ${THEME.colors.white};
+  }
+
+  .at-logo {
+    width: 6em;
+    height: auto;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    .at-logo {
+      width: clamp(3.5rem, 28vw, 5.25rem);
+    }
+  }
 `;
 
 export const SectionTabsWrapper = styled.div`
