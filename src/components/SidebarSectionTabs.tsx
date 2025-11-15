@@ -24,6 +24,7 @@ type SidebarSectionTabsProps = {
   isActive: boolean;
   lockToBottomSectionId?: string;
   fallbackStickyTop?: number;
+  scrollOffsetAdjustment?: number;
 };
 
 type SectionTabsHookParams = SidebarSectionTabsProps & {
@@ -42,12 +43,13 @@ const useSectionTabs = ({
   isActive,
   lockToBottomSectionId,
   extraOffset = 0,
-  fallbackStickyTop = DEFAULT_STICKY_TOP
+  fallbackStickyTop = DEFAULT_STICKY_TOP,
+  scrollOffsetAdjustment = 0
 }: SectionTabsHookParams): SectionTabsHookResult => {
   const [stickyTop, setStickyTop] = useState(fallbackStickyTop);
   const [activeSection, setActiveSection] = useState(sections[0]?.id ?? '');
   const topTabsSize = useSize(topTabsEl);
-  const totalOffset = stickyTop + extraOffset;
+  const totalOffset = stickyTop + extraOffset + scrollOffsetAdjustment;
 
   const updateStickyTop = useCallback(() => {
     if (!topTabsEl) {
