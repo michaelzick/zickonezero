@@ -1224,7 +1224,7 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75em 1em 0.65em;
+  padding: 0.65em 1em;
   border-radius: 10px;
   font-family: Roboto, sans-serif;
   font-size: 1.05em;
