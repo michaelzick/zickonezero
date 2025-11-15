@@ -23,11 +23,11 @@ import { TopNavContent, FooterContent } from '.';
 import SidebarSectionTabs, { SidebarSectionConfig, SidebarSectionTabsMobile } from './SidebarSectionTabs';
 
 const ANTISYPHON_SECTIONS: SidebarSectionConfig[] = [
-  { id: 'section-antisyphon-training', label: 'Antisyphon Training' },
-  { id: 'section-ecommerce-evolution', label: 'E-Commerce Evolution' },
+  { id: 'section-antisyphon-training', label: 'The Beginning' },
+  { id: 'section-ecommerce-evolution', label: 'The Evolution' },
   { id: 'section-ux-design', label: 'UX Design' },
-  { id: 'section-intuitive-dashboards', label: 'Intuitive Dashboards' },
-  { id: 'section-admin-experiences', label: 'Admin Experiences' }
+  { id: 'section-intuitive-dashboards', label: 'User Accounts' },
+  { id: 'section-admin-experiences', label: 'Course Creation' }
 ];
 
 const ANTISYPHON_BOTTOM_SECTION_ID = ANTISYPHON_SECTIONS[ANTISYPHON_SECTIONS.length - 1]?.id;
@@ -97,7 +97,7 @@ const AntisyphonContent = () => {
                         />
                       </div>
                       <div className='text-wrapper'>
-                        <HotRedTitle className='gets-mobile-margin antisyphon'>Antisyphon Training</HotRedTitle>
+                        <HotRedTitle className='gets-mobile-margin antisyphon'>The Beginning</HotRedTitle>
                         <br />
                         Initially, I was hired at Black Hills Information Security/Antisyphon Training as a software engineer.
                         However, that role quickly evolved into conceptualizing our new website.
@@ -113,7 +113,7 @@ const AntisyphonContent = () => {
                   <BioBox direction='right' noBottomPadding noLeftRightPadding>
                     <div className='biobox-inner demostoke-inner'>
                       <div className='text-wrapper'>
-                        <HotRedTitle className='antisyphon'>E-Commerce Evolution</HotRedTitle>
+                        <HotRedTitle className='antisyphon'>The Evolution</HotRedTitle>
                         <br />
                         Rather than creating just another static site that linked to third-party platforms, I envisioned an
                         intuitive marketplace where users could seamlessly purchase any type of course through a shopping cart experience.
@@ -176,7 +176,7 @@ const AntisyphonContent = () => {
                         <br /><br />
                         <section id='section-intuitive-dashboards'>
                           <div>
-                            <HotRedTitle className='antisyphon'>Intuitive Dashboards</HotRedTitle>
+                            <HotRedTitle className='antisyphon'>User Accounts</HotRedTitle>
                             <br />
                             Starting with boilerplate WooCommerce and heavily customizing it, we built a seamless logged-in experience for user account management.
                             <br /><br />
@@ -206,7 +206,7 @@ const AntisyphonContent = () => {
                   <BioBox direction='right' noLeftRightPadding>
                     <div className='biobox-inner demostoke-inner'>
                       <div className='text-wrapper bottom'>
-                        <HotRedTitle className='antisyphon'>Admin Experiences</HotRedTitle>
+                        <HotRedTitle className='antisyphon'>Course Creation</HotRedTitle>
                         <br />
                         In addition to the consumer-facing site, Antisyphon Training also serves as a full-featured WordPress CMS, which required its own UX considerations.
                         While design played a smaller role here, our focus was on making content administration fast, intuitive, and reliable.
