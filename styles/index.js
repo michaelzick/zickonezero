@@ -207,7 +207,7 @@ export const Wrapper = styled.div`
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    ${props => props.isHomePage ? 'padding-top: 9.6em;' : 'padding-top: 9.2em;'}
+    ${props => props.isHomePage ? 'padding-top: 9.6em;' : 'padding-top: 8.7em;'}
   }
 `;
 
