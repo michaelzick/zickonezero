@@ -76,7 +76,7 @@ const AntisyphonContent = () => {
           topTabsEl={topTabsEl}
           isActive={true}
           lockToBottomSectionId={ANTISYPHON_BOTTOM_SECTION_ID}
-          scrollOffsetAdjustment={24}
+          scrollOffsetAdjustment={20}
         />
         <AntisyphonColumnsWrapper>
           <AntisyphonColumnsInner>
@@ -259,7 +259,7 @@ const AntisyphonContent = () => {
                 isActive={true}
                 lockToBottomSectionId={ANTISYPHON_BOTTOM_SECTION_ID}
                 fallbackStickyTop={110}
-                scrollOffsetAdjustment={24}
+                scrollOffsetAdjustment={20}
               />
             </DemoStokeContentGrid>
           </AntisyphonColumnsInner>
