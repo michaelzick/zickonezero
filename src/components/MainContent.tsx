@@ -19,8 +19,8 @@ import { SectionHeader, Wrapper, WorkSectionHeader, HomeTabsBar, HomeTabButton, 
 type SectionKey = 'ux' | 'ui';
 type ActiveSection = SectionKey | null;
 
-const DESKTOP_NAV_OFFSET = 120;
-const MOBILE_TABS_HEIGHT_PX = 13.3 * 16; // Keep in sync with mobile scroll target for Home tabs
+const DESKTOP_NAV_OFFSET = 92; // Tighten the gap so section headers sit closer to the tabs
+const MOBILE_TABS_HEIGHT_PX = 11.3 * 16; // Keep in sync with mobile scroll target for Home tabs
 const DETECTION_BUFFER = 12;
 
 const MainContent = () => {
