@@ -17,6 +17,11 @@ import { TopNavContent, GridContent, FooterContent, AnimatedHeadline } from '.';
 import { SectionHeader, Wrapper, WorkSectionHeader, HomeTabsBar, HomeTabButton, HomeTabsSpacer, IntroSection } from '../../styles';
 
 type SectionKey = 'ux' | 'ui';
+type ActiveSection = SectionKey | null;
+
+const DESKTOP_NAV_OFFSET = 120;
+const MOBILE_TABS_HEIGHT_PX = 13.3 * 16; // Keep in sync with mobile scroll target for Home tabs
+const DETECTION_BUFFER = 12;
 
 const MainContent = () => {
   const { worksDataReversed } = useAppSelector(selectData);
@@ -26,7 +31,7 @@ const MainContent = () => {
   const uiSectionRef = useRef<HTMLHeadingElement | null>(null);
   const uxContentRef = useRef<HTMLDivElement | null>(null);
   const uiContentRef = useRef<HTMLDivElement | null>(null);
-  const [activeSection, setActiveSection] = useState<SectionKey>('ux');
+  const [activeSection, setActiveSection] = useState<ActiveSection>(null);
   const isManualScrolling = useRef(false);
 
   // Parallax refs and state
@@ -53,7 +58,7 @@ const MainContent = () => {
   const { imgs } = worksDataReversed[lightboxController.productIndex] || [];
 
   const scrollToSection = useCallback((section: SectionKey) => {
-    // Set flag to prevent intersection observer from interfering
+    // Temporarily pause scroll-driven updates while we animate to the section
     isManualScrolling.current = true;
     setActiveSection(section);
 
@@ -65,14 +70,14 @@ const MainContent = () => {
       if (prefersMobile) {
         // On mobile, position the header right below the tabs
         // Tabs end at approximately 13.3em, so we want the header positioned there
-        const tabsHeight = 13.3 * 16; // Convert em to px (assuming 16px base font)
+        const tabsHeight = MOBILE_TABS_HEIGHT_PX; // Convert em to px (assuming 16px base font)
         const targetPosition = target.getBoundingClientRect().top + window.scrollY;
         const offsetPosition = targetPosition - tabsHeight;
 
         window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
       } else {
         // Desktop scrolling
-        const navOffset = 120;
+        const navOffset = DESKTOP_NAV_OFFSET;
         const targetPosition = target.getBoundingClientRect().top + window.scrollY;
         const offsetPosition = targetPosition - navOffset;
 
@@ -87,64 +92,41 @@ const MainContent = () => {
   }, [setActiveSection]);
 
   useEffect(() => {
-    const contentSections = [
-      { key: 'ux' as SectionKey, ref: uxContentRef },
-      { key: 'ui' as SectionKey, ref: uiContentRef },
-    ];
+    const getDetectionOffset = () => {
+      const prefersMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 899px)').matches;
+      const baseOffset = prefersMobile ? MOBILE_TABS_HEIGHT_PX : DESKTOP_NAV_OFFSET;
+      return baseOffset + DETECTION_BUFFER;
+    };
 
-    const observer = new IntersectionObserver((entries) => {
-      // Don't update if user just clicked a tab
+    const updateActiveSectionOnScroll = () => {
       if (isManualScrolling.current) {
         return;
       }
 
-      let uxRatio = 0;
-      let uiRatio = 0;
+      const detectionOffset = getDetectionOffset();
+      const uxTop = uxSectionRef.current?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
+      const uiTop = uiSectionRef.current?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
 
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (entry.target === uxContentRef.current) {
-            uxRatio = entry.intersectionRatio;
-          } else if (entry.target === uiContentRef.current) {
-            uiRatio = entry.intersectionRatio;
-          }
-        }
-      });
+      let nextActive: ActiveSection = null;
 
-      console.log('Observer fired:', { uxRatio, uiRatio, currentActive: activeSection });
-
-      // Asymmetric switching logic:
-      // - Switch to UI Engineering only when it has more visibility AND meets minimum threshold
-      // - Switch back to UX Design when it has any more visibility than UI Engineering
-      if (uiRatio > 0.05 && uiRatio > uxRatio) {
-        console.log('Switching to UI');
-        setActiveSection('ui');
-      } else if (uxRatio > uiRatio) {
-        console.log('Switching to UX');
-        setActiveSection('ux');
+      if (uiTop - detectionOffset <= 0) {
+        nextActive = 'ui';
+      } else if (uxTop - detectionOffset <= 0) {
+        nextActive = 'ux';
       }
-    }, {
-      root: null,
-      // Use a simpler rootMargin that works on all screen sizes
-      rootMargin: '-150px 0px -20% 0px',
-      threshold: [0.1, 0.3, 0.5, 0.7],
-    });
 
-    contentSections.forEach(({ ref }) => {
-      if (ref.current) {
-        observer.observe(ref.current);
-      }
-    });
+      setActiveSection((prev) => (prev === nextActive ? prev : nextActive));
+    };
+
+    updateActiveSectionOnScroll();
+    window.addEventListener('scroll', updateActiveSectionOnScroll, { passive: true });
+    window.addEventListener('resize', updateActiveSectionOnScroll);
 
     return () => {
-      contentSections.forEach(({ ref }) => {
-        if (ref.current) {
-          observer.unobserve(ref.current);
-        }
-      });
-      observer.disconnect();
+      window.removeEventListener('scroll', updateActiveSectionOnScroll);
+      window.removeEventListener('resize', updateActiveSectionOnScroll);
     };
-  }, [activeSection]);
+  }, []);
 
   // Parallax scroll effect
   useEffect(() => {
