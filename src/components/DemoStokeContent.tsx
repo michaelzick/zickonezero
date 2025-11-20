@@ -37,7 +37,7 @@ const EXECUTIVE_SECTIONS: SidebarSectionConfig[] = [
   { id: 'section-key-features', label: 'Key Features' },
   { id: 'section-admin', label: 'Admin' },
   { id: 'section-market-research', label: 'Analysis' },
-  { id: 'section-learnings', label: 'Misc' },
+  { id: 'section-lessons', label: 'Lessons' },
 ] as const;
 const EXECUTIVE_BOTTOM_SECTION_ID = EXECUTIVE_SECTIONS[EXECUTIVE_SECTIONS.length - 1]?.id;
 
@@ -382,8 +382,8 @@ const DemoStokeContent = () => {
                       </DemoStokeList>
                     </section>
 
-                    <section id='section-learnings' className='story-section'>
-                      <DemoStokeTitle>Misc</DemoStokeTitle>
+                    <section id='section-lessons' className='story-section'>
+                      <DemoStokeTitle>Lessons</DemoStokeTitle>
                       <p>This case study was born from real interviews and market gaps. I learned:</p>
                       <DemoStokeList>
                         <li className='learning'>User trust is central to any peer-based platform.</li>
