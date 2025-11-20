@@ -35,8 +35,9 @@ const EXECUTIVE_SECTIONS: SidebarSectionConfig[] = [
   { id: 'introduction', label: 'Introduction', hidden: true },
   { id: 'section-problem', label: 'The Problem' },
   { id: 'section-key-features', label: 'Key Features' },
-  { id: 'section-admin', label: 'Admin Dashboard' },
-  { id: 'section-market-research', label: 'Market Research' },
+  { id: 'section-admin', label: 'Admin' },
+  { id: 'section-market-research', label: 'Analysis' },
+  { id: 'section-learnings', label: 'Misc' },
 ] as const;
 const EXECUTIVE_BOTTOM_SECTION_ID = EXECUTIVE_SECTIONS[EXECUTIVE_SECTIONS.length - 1]?.id;
 
