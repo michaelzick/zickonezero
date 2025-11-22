@@ -51,18 +51,24 @@ const useSectionTabs = ({
   const [stickyTop, setStickyTop] = useState(fallbackStickyTop);
   const [activeSection, setActiveSection] = useState(sections[0]?.id ?? '');
   const topTabsSize = useSize(topTabsEl);
-  const totalOffset = stickyTop + extraOffset + scrollOffsetAdjustment;
 
-  const updateStickyTop = useCallback(() => {
+  const getResolvedStickyTop = useCallback(() => {
     if (!topTabsEl) {
-      setStickyTop(fallbackStickyTop);
-      return;
+      return fallbackStickyTop;
     }
 
     const computedStyle = window.getComputedStyle(topTabsEl);
     const topValue = parseFloat(computedStyle.top) || 0;
-    setStickyTop(topValue + topTabsEl.offsetHeight);
+    return topValue + topTabsEl.offsetHeight;
   }, [topTabsEl, fallbackStickyTop]);
+
+  const getTotalOffset = useCallback(() => {
+    return getResolvedStickyTop() + extraOffset + scrollOffsetAdjustment;
+  }, [getResolvedStickyTop, extraOffset, scrollOffsetAdjustment]);
+
+  const updateStickyTop = useCallback(() => {
+    setStickyTop(getResolvedStickyTop());
+  }, [getResolvedStickyTop]);
 
   useEffect(() => {
     updateStickyTop();
@@ -77,6 +83,22 @@ const useSectionTabs = ({
     };
   }, [updateStickyTop]);
 
+  const scrollToSection = useCallback((sectionId: string, behavior: ScrollBehavior = 'smooth') => {
+    const sectionEl = document.getElementById(sectionId);
+    if (!sectionEl) {
+      return;
+    }
+
+    const totalOffset = getTotalOffset();
+    const liveTop = sectionEl.getBoundingClientRect().top + window.scrollY;
+    const targetPosition = liveTop - totalOffset;
+
+    window.scrollTo({
+      top: targetPosition,
+      behavior
+    });
+  }, [getTotalOffset]);
+
   useEffect(() => {
     if (!isActive || !sections.length) {
       setActiveSection(sections[0]?.id ?? '');
@@ -84,7 +106,7 @@ const useSectionTabs = ({
     }
 
     const updateActiveSection = () => {
-      const detectionOffset = totalOffset + DETECTION_BUFFER;
+      const detectionOffset = getTotalOffset() + DETECTION_BUFFER;
       let currentSection = sections[0]?.id ?? '';
 
       sections.forEach(({ id }) => {
@@ -117,21 +139,29 @@ const useSectionTabs = ({
     return () => {
       window.removeEventListener('scroll', updateActiveSection);
     };
-  }, [isActive, sections, totalOffset, lockToBottomSectionId]);
+  }, [isActive, sections, getTotalOffset, lockToBottomSectionId]);
 
   const handleTabClick = useCallback((sectionId: string) => {
-    const sectionEl = document.getElementById(sectionId);
-    if (!sectionEl) {
-      return;
+    scrollToSection(sectionId, 'smooth');
+
+    const rerunAfterLoad = () => {
+      requestAnimationFrame(() => scrollToSection(sectionId, 'smooth'));
+    };
+
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', rerunAfterLoad, { once: true });
     }
 
-    const targetPosition = sectionEl.getBoundingClientRect().top + window.scrollY - totalOffset;
+    const pendingImages = Array.from(
+      document.querySelectorAll('.demostoke-inner img, .antisyphon-image, .product-screenshot img')
+    ).filter((img): img is HTMLImageElement => img instanceof HTMLImageElement && !img.complete);
 
-    window.scrollTo({
-      top: targetPosition,
-      behavior: 'smooth'
-    });
-  }, [totalOffset]);
+    if (pendingImages.length) {
+      pendingImages.forEach((img) => img.addEventListener('load', rerunAfterLoad, { once: true }));
+      // Fallback in case images load via lazy observers shortly after scroll starts.
+      setTimeout(rerunAfterLoad, 450);
+    }
+  }, [scrollToSection]);
 
   return { stickyTop, activeSection, handleTabClick };
 };
@@ -174,7 +204,7 @@ export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
   const visibleSections = sections.filter(({ hidden }) => !hidden);
   const [wrapperEl, setWrapperEl] = useState<HTMLDivElement | null>(null);
   const wrapperSize = useSize(wrapperEl);
-  const mobileExtraOffset = (wrapperSize?.height ?? 0) + 10;
+  const mobileExtraOffset = (wrapperSize?.height ?? wrapperEl?.offsetHeight ?? 0) + 10;
   const handleWrapperRef = useCallback((node: HTMLDivElement | null) => {
     setWrapperEl(node);
   }, []);
