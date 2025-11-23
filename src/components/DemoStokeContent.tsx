@@ -45,6 +45,7 @@ import * as UserStories from './userstories';
 type SectionKey = 'executive' | 'stories';
 
 const EXECUTIVE_SECTIONS: SidebarSectionConfig[] = [
+  { id: 'hero-spacer', label: 'Intro Spacer', hidden: true },
   { id: 'introduction', label: 'Introduction' },
   { id: 'section-the-why', label: 'The Why' },
   { id: 'section-the-who', label: 'The Who' },
@@ -336,6 +337,8 @@ const DemoStokeContent = () => {
                     </PitchDeckLink>
 
                     <br />
+                    <section id='hero-spacer' aria-hidden='true' />
+
                     <section id='introduction' className='story-section'>
                       <DemoStokeTitle>Introduction</DemoStokeTitle>
                     </section>
