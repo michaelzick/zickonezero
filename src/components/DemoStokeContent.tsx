@@ -319,7 +319,7 @@ const DemoStokeContent = () => {
                     </section>
 
                     <section id='section-how-gallery' className='story-section'>
-                      <DemoStokeTitle>Featured Demo Moments</DemoStokeTitle>
+                      <h3>Featured Demo Moments</h3>
                       <DemoStokeScrollSection>
                         <DemoStokeScrollRow>
                           {HOW_IMAGES.map(({ src, alt }, index) => (
