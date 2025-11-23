@@ -87,6 +87,75 @@ const TLDR_ITEMS: { title: string; description: ReactNode; }[] = [
   }
 ] as const;
 
+const RESEARCH_ITEMS = [
+  {
+    title: 'Primary Research',
+    bullets: [
+      '🔮 Interview riders across surf, snow, and MTB to understand demo frustrations.',
+      '🔮 Capture quotes and pain points tied to trust, convenience, and selection gaps.'
+    ]
+  },
+  {
+    title: 'Secondary Research',
+    bullets: [
+      '🔮 Review competitor offerings to benchmark discovery, safety, and community features.',
+      '🔮 Analyze demo availability patterns to find underserved locations and sports.'
+    ]
+  },
+  {
+    title: 'Insights',
+    bullets: [
+      '🔮 Riders will pay for demos if trust and ease are guaranteed.',
+      '🔮 Shapers and shops need lightweight tools to run demos and convert to sales.'
+    ]
+  }
+] as const;
+
+const UX_PROCESS_STEPS = [
+  {
+    title: 'Empathize',
+    bullets: [
+      '🔮 Stakeholder and rider interviews to uncover motivations, blockers, and context of use.',
+      '🔮 Field observations of demo flows (shops, events, P2P exchanges) to see friction first-hand.'
+    ]
+  },
+  {
+    title: 'Define',
+    bullets: [
+      '🔮 Synthesize themes into problem statements and opportunity areas tied to trust and convenience.',
+      '🔮 Frame measurable goals (demo conversion, repeat usage, lender activation) to guide design.'
+    ]
+  },
+  {
+    title: 'Ideate',
+    bullets: [
+      '🔮 Map end-to-end flows (discovery → booking → pickup → feedback) and prioritize must-have moments.',
+      '🔮 Co-design quick sketches for trust signals (verification, reviews) and discovery (filters, maps, events).'
+    ]
+  },
+  {
+    title: 'Prototype (Hi-Fi via Lovable AI)',
+    bullets: [
+      '🔮 Use Lovable AI to spin up working screens quickly, then refine with prompt engineering for UX polish.',
+      '🔮 Layer in custom frontend tweaks to reach hi-fi fidelity for realistic interactions and visuals.'
+    ]
+  },
+  {
+    title: 'Test & Refine',
+    bullets: [
+      '🔮 Run moderated walkthroughs on the hi-fi prototype to validate discovery, booking, and trust cues.',
+      '🔮 Iterate copy, visual hierarchy, and flows based on usability findings and success metrics.'
+    ]
+  },
+  {
+    title: 'Handoff & Build',
+    bullets: [
+      '🔮 Document flows, component states, and acceptance criteria for engineering.',
+      '🔮 Keep a feedback loop during build to preserve interaction details and performance.'
+    ]
+  }
+] as const;
+
 const PERSONA_ITEMS = [
   {
     title: 'Weekend Warrior',
@@ -415,16 +484,40 @@ const DemoStokeContent = () => {
                       </DemoStokeScrollSection>
                     </section>
 
-                    <section id='section-lessons' className='story-section'>
-                      <DemoStokeTitle>Lessons</DemoStokeTitle>
-                      <p>This case study was born from real interviews and market gaps. I learned:</p>
-                      <DemoStokeList>
-                        <li className='learning'>User trust is central to any peer-based platform.</li>
-                        <br />
-                        <li className='learning'>UX must speak the cultural language of the target audience.</li>
-                        <br />
-                        <li className='learning'>Foundational research is everything; it’s all about solving pain points.</li>
-                      </DemoStokeList>
+                    <section id='section-methodology' className='story-section'>
+                      <DemoStokeTitle>Foundational Research</DemoStokeTitle>
+                      <DemoStokeTwoColumnLayout>
+                        {RESEARCH_ITEMS.map(({ title, bullets }) => (
+                          <DemoStokeTwoColumnRow key={title}>
+                            <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
+                            <DemoStokeTwoColumnCopy>
+                              <DemoStokeList $frameless>
+                                {bullets.map((bullet) => (
+                                  <li className='crystal' key={bullet}>{bullet}</li>
+                                ))}
+                              </DemoStokeList>
+                            </DemoStokeTwoColumnCopy>
+                          </DemoStokeTwoColumnRow>
+                        ))}
+                      </DemoStokeTwoColumnLayout>
+                    </section>
+
+                    <section id='section-ux-process' className='story-section'>
+                      <DemoStokeTitle>UX Process</DemoStokeTitle>
+                      <DemoStokeTwoColumnLayout>
+                        {UX_PROCESS_STEPS.map(({ title, bullets }) => (
+                          <DemoStokeTwoColumnRow key={title}>
+                            <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
+                            <DemoStokeTwoColumnCopy>
+                              <DemoStokeList $frameless>
+                                {bullets.map((bullet) => (
+                                  <li className='crystal' key={bullet}>{bullet}</li>
+                                ))}
+                              </DemoStokeList>
+                            </DemoStokeTwoColumnCopy>
+                          </DemoStokeTwoColumnRow>
+                        ))}
+                      </DemoStokeTwoColumnLayout>
                     </section>
 
                     <section id='section-links'>

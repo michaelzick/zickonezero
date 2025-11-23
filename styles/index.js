@@ -1040,6 +1040,10 @@ export const DemoStokeList = styled.ul`
     content: '🤙🏻';
   }
 
+  li.crystal::before {
+    content: '🔮';
+  }
+
   @media (max-width: ${THEME.breakpoints.phone}) {
     padding: ${props => props.$frameless ? '0' : '0.8em 1.8em'};
   }
