@@ -1116,6 +1116,62 @@ export const DemoStokeBorderBox = styled.div`
   }
 `;
 
+export const DemoStokeScrollSection = styled.section`
+  margin-top: 2.4em;
+`;
+
+export const DemoStokeScrollRow = styled.div`
+  display: flex;
+  gap: clamp(0.9em, 2vw, 1.35em);
+  overflow-x: auto;
+  padding: 0.4em 0.2em 0.2em;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${THEME.colors.grey};
+    border-radius: 999px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    padding-right: 0.25em;
+  }
+`;
+
+export const DemoStokeScrollItem = styled.div`
+  min-width: clamp(12.8em, 45vw, 15em);
+  max-width: 18em;
+  flex: 0 0 auto;
+  border: 1px solid ${THEME.colors.grey};
+  border-radius: 18px;
+  overflow: hidden;
+  background: ${THEME.colors.darkest};
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: ${THEME.colors.white};
+  }
+`;
+
+export const DemoStokeScrollImage = styled.img`
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 4 / 5;
+`;
+
 export const TableWrapper = styled.div`
   width: 100%;
   overflow-x: auto;

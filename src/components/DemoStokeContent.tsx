@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, type ReactNode } from 'react';
+import FsLightbox from 'fslightbox-react';
 import { FileTextIcon } from '@radix-ui/react-icons';
 import {
   useAppDispatch,
@@ -27,7 +28,11 @@ import {
   DemoStokeTwoColumnHeader,
   DemoStokeTwoColumnCopy,
   DemoStokeTwoUp,
-  DemoStokeBorderBox
+  DemoStokeBorderBox,
+  DemoStokeScrollSection,
+  DemoStokeScrollRow,
+  DemoStokeScrollItem,
+  DemoStokeScrollImage
 } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
 import DemoStokeTabs from './DemoStokeTabs';
@@ -131,11 +136,20 @@ const PERSONA_ITEMS = [
   }
 ] as const;
 
+const HOW_IMAGES = [
+  { src: '/img/all-equipment-hybrid.webp', alt: 'Hybrid equipment view' },
+  { src: '/img/events-calendar.webp', alt: 'Events calendar' },
+  { src: '/img/blog-page.webp', alt: 'Blog page' },
+  { src: '/img/admin-img-download.webp', alt: 'Admin dashboard' },
+  { src: '/img/homepage_light_2025-07-22.webp', alt: 'Homepage preview' }
+] as const;
+
 const DemoStokeContent = () => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState<SectionKey>('executive');
   const [topTabsEl, setTopTabsEl] = useState<HTMLDivElement | null>(null);
+  const [lightboxController, setLightboxController] = useState({ toggler: false, slide: 1 });
   const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {
     setTopTabsEl(node);
   }, []);
@@ -156,6 +170,13 @@ const DemoStokeContent = () => {
       });
     });
   }, [activeTab]);
+
+  const openLightbox = (index: number) => {
+    setLightboxController({
+      toggler: !lightboxController.toggler,
+      slide: index + 1
+    });
+  };
 
   return (
     <>
@@ -297,6 +318,31 @@ const DemoStokeContent = () => {
                       </DemoStokeBorderBox>
                     </section>
 
+                    <section id='section-how-gallery' className='story-section'>
+                      <DemoStokeTitle>Featured Demo Moments</DemoStokeTitle>
+                      <DemoStokeScrollSection>
+                        <DemoStokeScrollRow>
+                          {HOW_IMAGES.map(({ src, alt }, index) => (
+                            <DemoStokeScrollItem
+                              key={src}
+                              onClick={() => openLightbox(index)}
+                              role='button'
+                              tabIndex={0}
+                              aria-label={`Open image: ${alt}`}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault();
+                                  openLightbox(index);
+                                }
+                              }}
+                            >
+                              <DemoStokeScrollImage src={src} alt={alt} loading='lazy' />
+                            </DemoStokeScrollItem>
+                          ))}
+                        </DemoStokeScrollRow>
+                      </DemoStokeScrollSection>
+                    </section>
+
                     <section id='section-lessons' className='story-section'>
                       <DemoStokeTitle>Lessons</DemoStokeTitle>
                       <p>This case study was born from real interviews and market gaps. I learned:</p>
@@ -366,6 +412,11 @@ const DemoStokeContent = () => {
           </div>
         )}
       </Wrapper>
+      <FsLightbox
+        toggler={lightboxController.toggler}
+        sources={HOW_IMAGES.map(({ src }) => src)}
+        slide={lightboxController.slide}
+      />
       <FooterContent />
     </>
   );
