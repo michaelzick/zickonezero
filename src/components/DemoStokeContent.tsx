@@ -201,6 +201,14 @@ const DemoStokeContent = () => {
     setCanScrollRight(!isAtEnd);
   }, []);
 
+  // Ensure gallery starts at the beginning on mount/page refresh.
+  useEffect(() => {
+    const row = scrollRowRef.current;
+    if (!row) return;
+    row.scrollLeft = 0;
+    updateScrollButtons();
+  }, [updateScrollButtons]);
+
   const scrollGalleryBy = useCallback((direction: number) => {
     const row = scrollRowRef.current;
     if (!row) return;
@@ -362,7 +370,7 @@ const DemoStokeContent = () => {
                       </DemoStokeBorderBox>
                     </section>
 
-                    <section id='section-how-gallery' className='story-section'>
+                    <section id='section-how-gallery'>
                       <DemoStokeScrollHeader>
                         <h3>Screenshots</h3>
                         <DemoStokeScrollControls aria-label='Gallery navigation'>
