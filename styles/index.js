@@ -1085,7 +1085,7 @@ export const DemoStokeTwoColumnRow = styled.div`
 
 export const DemoStokeTwoColumnHeader = styled.div`
   font-weight: 700;
-  color: ${THEME.colors.white};
+  color: ${THEME.colors.orange};
   letter-spacing: 0.04em;
   text-transform: capitalize;
   font-size: 0.95em;

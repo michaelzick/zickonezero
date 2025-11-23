@@ -17,6 +17,7 @@ export const THEME = {
     hotRed: 'var(--color-hotRed)',
     darkGreen: 'var(--color-darkGreen)',
     contrast: 'var(--color-contrast)',
+    orange: 'var(--color-orange)',
   },
 } as const;
 
