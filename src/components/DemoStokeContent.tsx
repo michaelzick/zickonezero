@@ -33,6 +33,7 @@ import {
   DemoStokeScrollRow,
   DemoStokeScrollItem,
   DemoStokeScrollImage,
+  DemoStokeScrollHeader,
   DemoStokeScrollControls,
   DemoStokeScrollButton
 } from '../../styles';
@@ -353,25 +354,27 @@ const DemoStokeContent = () => {
                     </section>
 
                     <section id='section-how-gallery' className='story-section'>
-                      <h3>Screenshots</h3>
-                      <DemoStokeScrollControls aria-label='Gallery navigation'>
-                        <DemoStokeScrollButton
-                          type='button'
-                          onClick={() => scrollGalleryBy(-1)}
-                          disabled={!canScrollLeft}
-                          aria-label='Scroll left'
-                        >
-                          ‹
-                        </DemoStokeScrollButton>
-                        <DemoStokeScrollButton
-                          type='button'
-                          onClick={() => scrollGalleryBy(1)}
-                          disabled={!canScrollRight}
-                          aria-label='Scroll right'
-                        >
-                          ›
-                        </DemoStokeScrollButton>
-                      </DemoStokeScrollControls>
+                      <DemoStokeScrollHeader>
+                        <h3>Screenshots</h3>
+                        <DemoStokeScrollControls aria-label='Gallery navigation'>
+                          <DemoStokeScrollButton
+                            type='button'
+                            onClick={() => scrollGalleryBy(-1)}
+                            disabled={!canScrollLeft}
+                            aria-label='Scroll left'
+                          >
+                            ‹
+                          </DemoStokeScrollButton>
+                          <DemoStokeScrollButton
+                            type='button'
+                            onClick={() => scrollGalleryBy(1)}
+                            disabled={!canScrollRight}
+                            aria-label='Scroll right'
+                          >
+                            ›
+                          </DemoStokeScrollButton>
+                        </DemoStokeScrollControls>
+                      </DemoStokeScrollHeader>
                       <DemoStokeScrollSection>
                         <DemoStokeScrollRow ref={scrollRowRef}>
                           {HOW_IMAGES.map(({ src, alt }, index) => (

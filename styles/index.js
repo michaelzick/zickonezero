@@ -1172,11 +1172,22 @@ export const DemoStokeScrollImage = styled.img`
   aspect-ratio: 4 / 5;
 `;
 
+export const DemoStokeScrollHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75em;
+  margin: 0.3em 0 0.7em;
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    gap: 0.5em;
+  }
+`;
+
 export const DemoStokeScrollControls = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 0.65em;
-  margin: 0.2em 0 0.8em;
 `;
 
 export const DemoStokeScrollButton = styled.button`
@@ -1184,8 +1195,8 @@ export const DemoStokeScrollButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.4em;
-  height: 2.4em;
+  width: 1.8em;
+  height: 1.8em;
   border-radius: 50%;
   border: 1px solid ${THEME.colors.grey};
   color: ${THEME.colors.white};
