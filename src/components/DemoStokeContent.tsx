@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, type ReactNode, type KeyboardEvent } from 'react';
+import { useState, useEffect, useCallback, useRef, type ReactNode, type KeyboardEvent } from 'react';
 import FsLightbox from 'fslightbox-react';
 import { FileTextIcon } from '@radix-ui/react-icons';
 import {
@@ -32,7 +32,9 @@ import {
   DemoStokeScrollSection,
   DemoStokeScrollRow,
   DemoStokeScrollItem,
-  DemoStokeScrollImage
+  DemoStokeScrollImage,
+  DemoStokeScrollControls,
+  DemoStokeScrollButton
 } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
 import DemoStokeTabs from './DemoStokeTabs';
@@ -150,6 +152,9 @@ const DemoStokeContent = () => {
   const [activeTab, setActiveTab] = useState<SectionKey>('executive');
   const [topTabsEl, setTopTabsEl] = useState<HTMLDivElement | null>(null);
   const [lightboxController, setLightboxController] = useState({ toggler: false, slide: 1 });
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const scrollRowRef = useRef<HTMLDivElement | null>(null);
   const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {
     setTopTabsEl(node);
   }, []);
@@ -177,6 +182,35 @@ const DemoStokeContent = () => {
       slide: index + 1
     });
   };
+
+  const updateScrollButtons = useCallback(() => {
+    const row = scrollRowRef.current;
+    if (!row) return;
+    const maxScroll = row.scrollWidth - row.clientWidth;
+    setCanScrollLeft(row.scrollLeft > 0);
+    setCanScrollRight(row.scrollLeft < maxScroll - 1);
+  }, []);
+
+  const scrollGalleryBy = useCallback((direction: number) => {
+    const row = scrollRowRef.current;
+    if (!row) return;
+    const firstItem = row.firstElementChild as HTMLElement | null;
+    const itemWidth = firstItem?.getBoundingClientRect().width ?? 240;
+    row.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
+  }, []);
+
+  useEffect(() => {
+    const row = scrollRowRef.current;
+    if (!row) return;
+    updateScrollButtons();
+    const handleScroll = () => updateScrollButtons();
+    row.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+    return () => {
+      row.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [updateScrollButtons]);
 
   return (
     <>
@@ -319,9 +353,27 @@ const DemoStokeContent = () => {
                     </section>
 
                     <section id='section-how-gallery' className='story-section'>
-                      <h3>Featured Demo Moments</h3>
+                      <h3>Screenshots</h3>
+                      <DemoStokeScrollControls aria-label='Gallery navigation'>
+                        <DemoStokeScrollButton
+                          type='button'
+                          onClick={() => scrollGalleryBy(-1)}
+                          disabled={!canScrollLeft}
+                          aria-label='Scroll left'
+                        >
+                          ‹
+                        </DemoStokeScrollButton>
+                        <DemoStokeScrollButton
+                          type='button'
+                          onClick={() => scrollGalleryBy(1)}
+                          disabled={!canScrollRight}
+                          aria-label='Scroll right'
+                        >
+                          ›
+                        </DemoStokeScrollButton>
+                      </DemoStokeScrollControls>
                       <DemoStokeScrollSection>
-                        <DemoStokeScrollRow>
+                        <DemoStokeScrollRow ref={scrollRowRef}>
                           {HOW_IMAGES.map(({ src, alt }, index) => (
                             <DemoStokeScrollItem
                               key={src}

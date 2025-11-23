@@ -1172,6 +1172,38 @@ export const DemoStokeScrollImage = styled.img`
   aspect-ratio: 4 / 5;
 `;
 
+export const DemoStokeScrollControls = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.65em;
+  margin: 0.2em 0 0.8em;
+`;
+
+export const DemoStokeScrollButton = styled.button`
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4em;
+  height: 2.4em;
+  border-radius: 50%;
+  border: 1px solid ${THEME.colors.grey};
+  color: ${THEME.colors.white};
+  background: ${THEME.colors.darkest};
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+  &:hover:enabled {
+    transform: translateY(-1px);
+    border-color: ${THEME.colors.white};
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+`;
+
 export const TableWrapper = styled.div`
   width: 100%;
   overflow-x: auto;
