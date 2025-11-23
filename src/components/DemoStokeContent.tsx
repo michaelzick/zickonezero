@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, type ReactNode } from 'react';
 import { FileTextIcon } from '@radix-ui/react-icons';
 import {
   useAppDispatch,
@@ -52,17 +52,24 @@ const STORY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'story-small-ski-shop', label: 'Small Ski/Bike Shop' }
 ] as const;
 
-const TLDR_ITEMS = [
+const TLDR_ITEMS: { title: string; description: ReactNode; }[] = [
   {
     title: 'What it is',
-    description: 'A P2P and B2C platform to find and demo action sports gear from multiple sources.'
+    description: (
+      <>
+        <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
+          DemoStoke
+        </WhiteTransitionAnchor>{' '}
+        is the go-to platform to find, try, and buy the gear you’ll eventually fall in love with.
+      </>
+    )
   },
   {
-    title: 'Problem',
+    title: 'The Problem',
     description: 'Riders want to try before they buy, but demos are rare, costly, and inconvenient.'
   },
   {
-    title: 'Solution',
+    title: 'The Solution',
     description: 'A location-based marketplace to safely connect riders and lenders.'
   },
   {
@@ -142,15 +149,8 @@ const DemoStokeContent = () => {
                     <br />
                     <section id='introduction' className='story-section'>
                       <DemoStokeTitle>Introduction</DemoStokeTitle>
-                      <p>
-                        <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
-                          DemoStoke
-                        </WhiteTransitionAnchor>{' '}
-                        is the go-to platform to find, try, and buy the gear you’ll eventually fall in love with.
-                      </p>
                     </section>
 
-                    <br />
                     <Video
                       autoPlay
                       loop
@@ -158,7 +158,7 @@ const DemoStokeContent = () => {
                       playsInline
                       poster='/img/homepage_light_2025-07-22.webp'
                     >
-                      <source src='/video/homepage_scroll_light_2025-07-22.mp4' type='video/mp4' />
+                      <source src='/video/homepage-2025-11-23.mp4' type='video/mp4' />
                       <source src='' type='video/mp4' />
                     </Video>
                     <br />

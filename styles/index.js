@@ -1038,7 +1038,6 @@ export const DemoStokeTwoColumnLayout = styled.div`
   padding: clamp(0.9em, 2vw, 1.45em) clamp(1.2em, 3vw, 2em);
   border: 1px solid ${THEME.colors.grey};
   border-radius: 20px;
-  background: ${THEME.colors.darkest};
 `;
 
 export const DemoStokeTwoColumnRow = styled.div`
