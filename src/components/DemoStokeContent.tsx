@@ -14,14 +14,11 @@ import {
   BioBox,
   Wrapper,
   DemoStokeList,
-  DemoStokeTable,
   WhiteTransitionAnchor,
-  TableWrapper,
   FlexBox,
   PitchDeckLink,
   Video,
   VideoFrame,
-  Image,
   FullBorderImage,
   DemoStokeContentGrid,
   DemoStokeTitle,
@@ -280,8 +277,8 @@ const DemoStokeContent = () => {
                       </DemoStokeTwoColumnLayout>
                     </section>
 
-                    <section id='section-solution'>
-                      <DemoStokeTitle>Solutions</DemoStokeTitle>
+                    <section id='section-the-how' className='story-section'>
+                      <DemoStokeTitle>The How</DemoStokeTitle>
                       <DemoStokeBorderBox>
                         <DemoStokeTwoUp>
                           <section>
@@ -298,19 +295,6 @@ const DemoStokeContent = () => {
                           </section>
                         </DemoStokeTwoUp>
                       </DemoStokeBorderBox>
-                    </section>
-
-                    <section id='section-key-features' className='story-section'>
-                      <DemoStokeTitle>The Beginning</DemoStokeTitle>
-                    </section>
-
-                    <section id='section-market-research' className='story-section'>
-                      <DemoStokeTitle>Market Research</DemoStokeTitle>
-                      <DemoStokeList>
-                        <li className='interview'>I conducted user interviews and surveys with riders across snow, surf, and MTB.</li>
-                        <br />
-                        <li className='learning'><strong>Key insight:</strong> People would pay to demo gear if trust and ease were guaranteed.</li>
-                      </DemoStokeList>
                     </section>
 
                     <section id='section-lessons' className='story-section'>
