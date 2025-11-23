@@ -181,9 +181,8 @@ const DemoStokeContent = () => {
                       </DemoStokeTwoColumnLayout>
                     </section>
 
-                    <DemoStokeTitle>Paint Points &amp; Solutions</DemoStokeTitle>
-
                     <section className='story-section' id='section-pain-points'>
+                      <DemoStokeTitle>Paint Points &amp; Solutions</DemoStokeTitle>
                       <DemoStokeTwoUp>
                         <section id='section-problem'>
                           <h3>The Problem</h3>
