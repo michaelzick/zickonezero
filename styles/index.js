@@ -983,6 +983,10 @@ export const DemoStokeList = styled.ul`
   margin-bottom: 0;
 
   li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: flex-start;
+    column-gap: 0.55em;
     ${props => props.spaced && 'padding: 0.7em 0;'}
 
     p {
@@ -993,8 +997,6 @@ export const DemoStokeList = styled.ul`
   li::before {
     content: '⚡️';
     display: inline-block;
-    width: 1em; /* Space between symbol and text */
-    margin-right: 0.5em;
   }
 
   li.monetization::before {
@@ -1038,6 +1040,7 @@ export const DemoStokeTwoColumnLayout = styled.div`
   padding: clamp(0.9em, 2vw, 1.45em) clamp(1.2em, 3vw, 2em);
   border: 1px solid ${THEME.colors.grey};
   border-radius: 20px;
+  background: transparent;
 `;
 
 export const DemoStokeTwoColumnRow = styled.div`
@@ -1085,7 +1088,7 @@ export const DemoStokeTwoUp = styled.div`
 
 export const DemoStokeBorderBox = styled.div`
   width: 100%;
-  background: ${THEME.colors.darkest};
+  background: transparent;
   padding: 1.05em 1.6em;
   font-size: 0.95em;
   line-height: 1.6;
@@ -1124,7 +1127,7 @@ export const DemoStokeTable = styled.table`
 
 export const DemoStokeText = styled.div`
   width: 100%;
-  background: ${THEME.colors.darkest};
+  background: transparent;
   padding: 0.8em 1.8em;
   font-size: 0.9em;
   font-weight: lighter;
