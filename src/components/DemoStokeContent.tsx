@@ -45,12 +45,11 @@ import * as UserStories from './userstories';
 type SectionKey = 'executive' | 'stories';
 
 const EXECUTIVE_SECTIONS: SidebarSectionConfig[] = [
-  { id: 'introduction', label: 'Introduction', hidden: true },
-  { id: 'section-problem', label: 'The Problem' },
-  { id: 'section-key-features', label: 'Key Features' },
-  { id: 'section-admin', label: 'Admin' },
-  { id: 'section-market-research', label: 'Analysis' },
-  { id: 'section-lessons', label: 'Lessons' },
+  { id: 'introduction', label: 'Introduction' },
+  { id: 'section-the-why', label: 'The Why' },
+  { id: 'section-the-who', label: 'The Who' },
+  { id: 'section-the-how', label: 'The How' },
+  { id: 'section-methodology', label: 'Methodology' }
 ] as const;
 const EXECUTIVE_BOTTOM_SECTION_ID = EXECUTIVE_SECTIONS[EXECUTIVE_SECTIONS.length - 1]?.id;
 
@@ -367,7 +366,7 @@ const DemoStokeContent = () => {
                       </DemoStokeTwoColumnLayout>
                     </section>
 
-                    <section id='section-pain-points' className='story-section'>
+                    <section id='section-the-why' className='story-section'>
                       <DemoStokeTitle>The Why</DemoStokeTitle>
                       <DemoStokeBorderBox>
                         <DemoStokeTwoUp>
@@ -396,7 +395,7 @@ const DemoStokeContent = () => {
                       </DemoStokeBorderBox>
                     </section>
 
-                    <section id='section-personas' className='story-section'>
+                    <section id='section-the-who' className='story-section'>
                       <DemoStokeTitle>The Who</DemoStokeTitle>
                       <DemoStokeTwoColumnLayout>
                         {PERSONA_ITEMS.map(({ title, bullets }) => (
@@ -480,7 +479,7 @@ const DemoStokeContent = () => {
                     </section>
 
                     <section id='section-methodology' className='story-section'>
-                      <DemoStokeTitle>Case Study Highlights</DemoStokeTitle>
+                      <DemoStokeTitle>Methodology</DemoStokeTitle>
                       <h3>Foundational Research</h3>
                       <DemoStokeTwoColumnLayout>
                         {RESEARCH_ITEMS.map(({ title, bullets }) => (
