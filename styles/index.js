@@ -1087,7 +1087,7 @@ export const DemoStokeTwoColumnHeader = styled.div`
   font-weight: 700;
   color: ${THEME.colors.white};
   letter-spacing: 0.04em;
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-size: 0.95em;
 `;
 
