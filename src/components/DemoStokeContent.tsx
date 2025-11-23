@@ -158,7 +158,7 @@ const DemoStokeContent = () => {
                       playsInline
                       poster='/img/homepage_light_2025-07-22.webp'
                     >
-                      <source src='/video/homepage-2025-11-23.mp4' type='video/mp4' />
+                      <source src='/video/homepage-2025-11-23-02.mp4' type='video/mp4' />
                       <source src='' type='video/mp4' />
                     </Video>
                     <br />
