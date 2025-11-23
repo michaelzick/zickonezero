@@ -336,7 +336,6 @@ const DemoStokeContent = () => {
                       Investor Pitch Deck <FileTextIcon aria-hidden="true" />
                     </PitchDeckLink>
 
-                    <br />
                     <section id='hero-spacer' aria-hidden='true' />
 
                     <section id='introduction' className='story-section'>
@@ -382,17 +381,15 @@ const DemoStokeContent = () => {
                           </section>
                           <section id='section-complaints'>
                             <h3>Current Complaints</h3>
-                            <DemoStokeList $frameless>
-                              <li className='complaint'>“I wait in long rental lines without knowing if they have what I want.”</li>
-                              <br />
-                              <li className='complaint'>“I can’t find the right gear in my size.”</li>
-                              <br />
-                              <li className='complaint'>“I don’t want to buy a $900 surfboard I’ve never ridden.”</li>
-                              <br />
-                              <li className='complaint'>“Demo days at the beach or mountain are few and far in between.”</li>
-                              <br />
-                              <li className='complaint'>“Demo boards at the resort are expensive and they have a limited selection.”</li>
-                            </DemoStokeList>
+                            <DemoStokeTwoColumnCopy>
+                              <div className='plain-lines'>
+                                <p>“I wait in long rental lines without knowing if they have what I want.”</p>
+                                <p>“I can’t find the right gear in my size.”</p>
+                                <p>“I don’t want to buy a $900 surfboard I’ve never ridden.”</p>
+                                <p>“Demo days at the beach or mountain are few and far in between.”</p>
+                                <p>“Demo boards at the resort are expensive and they have a limited selection.”</p>
+                              </div>
+                            </DemoStokeTwoColumnCopy>
                           </section>
                         </DemoStokeTwoUp>
                       </DemoStokeBorderBox>
@@ -405,11 +402,11 @@ const DemoStokeContent = () => {
                           <DemoStokeTwoColumnRow key={title}>
                             <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
                             <DemoStokeTwoColumnCopy>
-                              <DemoStokeList $frameless spaced>
+                              <div className='plain-lines'>
                                 {bullets.map((bullet) => (
-                                  <li className='prototype' key={bullet}>{bullet}</li>
+                                  <p key={bullet}>{bullet}</p>
                                 ))}
-                              </DemoStokeList>
+                              </div>
                             </DemoStokeTwoColumnCopy>
                           </DemoStokeTwoColumnRow>
                         ))}
@@ -489,11 +486,11 @@ const DemoStokeContent = () => {
                           <DemoStokeTwoColumnRow key={title}>
                           <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
                           <DemoStokeTwoColumnCopy>
-                            <DemoStokeList $frameless spaced>
+                            <div className='plain-lines'>
                               {bullets.map((bullet) => (
-                                <li className='crystal' key={bullet}>{bullet}</li>
+                                <p key={bullet}>{bullet}</p>
                               ))}
-                            </DemoStokeList>
+                            </div>
                           </DemoStokeTwoColumnCopy>
                         </DemoStokeTwoColumnRow>
                       ))}
@@ -505,16 +502,16 @@ const DemoStokeContent = () => {
                       <DemoStokeTwoColumnLayout>
                         {UX_PROCESS_STEPS.map(({ title, bullets }) => (
                           <DemoStokeTwoColumnRow key={title}>
-                            <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
-                            <DemoStokeTwoColumnCopy>
-                              <DemoStokeList $frameless spaced>
-                                {bullets.map((bullet) => (
-                                  <li className='heart' key={bullet}>{bullet}</li>
-                                ))}
-                              </DemoStokeList>
-                            </DemoStokeTwoColumnCopy>
-                          </DemoStokeTwoColumnRow>
-                        ))}
+                          <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
+                          <DemoStokeTwoColumnCopy>
+                            <div className='plain-lines'>
+                              {bullets.map((bullet) => (
+                                <p key={bullet}>{bullet}</p>
+                              ))}
+                            </div>
+                          </DemoStokeTwoColumnCopy>
+                        </DemoStokeTwoColumnRow>
+                      ))}
                       </DemoStokeTwoColumnLayout>
                     </section>
 

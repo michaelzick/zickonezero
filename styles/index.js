@@ -1094,6 +1094,16 @@ export const DemoStokeTwoColumnHeader = styled.div`
 export const DemoStokeTwoColumnCopy = styled.div`
   color: ${THEME.colors.white};
   line-height: 1.55;
+
+  .plain-lines {
+    p {
+      margin: 0 0 0.6em;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
 `;
 
 export const DemoStokeTwoUp = styled.div`
