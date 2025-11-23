@@ -1117,7 +1117,7 @@ export const DemoStokeBorderBox = styled.div`
 `;
 
 export const DemoStokeScrollSection = styled.section`
-  margin-top: 2.4em;
+  margin-top: 0.2em;
 `;
 
 export const DemoStokeScrollRow = styled.div`
@@ -1177,7 +1177,7 @@ export const DemoStokeScrollHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 0.75em;
-  margin: 0.3em 0 0.7em;
+  margin: 0.3em 0 0.3em;
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     gap: 0.5em;
