@@ -85,27 +85,52 @@ const TLDR_ITEMS: { title: string; description: ReactNode; }[] = [
 const PERSONA_ITEMS = [
   {
     title: 'Weekend Warrior',
-    description: 'Rachel (34, San Diego) is a marketing manager who rides 1-2x/month. She wants to try before buying expensive gear but is frustrated by limited demo options. She looks to Instagram and friends for recs, and wants DemoStoke to offer trusted peer reviews, easy filters, and clear pickup info.'
+    bullets: [
+      'Rachel (34, San Diego) is a marketing manager who rides 1-2x/month.',
+      'She wants to try before buying expensive gear but is frustrated by limited demo options.',
+      'She looks to Instagram and friends for recs, and wants DemoStoke to offer trusted peer reviews, easy filters, and clear pickup info.'
+    ]
   },
   {
     title: 'Die-Hard',
-    description: 'Chris (29, Truckee) is a remote project manager who snowboards 3-4x/week. He seeks variety in gear but shops don’t offer enough options. He’s active in forums and trades gear with friends. He wants DemoStoke to offer high-quality listings, flexible pickup, and rider reviews.'
+    bullets: [
+      'Chris (29, Truckee) is a remote project manager who snowboards 3-4x/week.',
+      'He seeks variety in gear but shops don’t offer enough options.',
+      'He’s active in forums and trades gear with friends.',
+      'He wants DemoStoke to offer high-quality listings, flexible pickup, and rider reviews.'
+    ]
   },
   {
     title: 'Nomadic Renter',
-    description: 'Maya (31, Santa Cruz) is a van-lifer and remote UX designer who rides 1-3x/week. She doesn’t want to own a ton of gear and struggles to find quality rentals in new locations. She wants DemoStoke to offer verified local lenders, easy to find gear specs, and fair prices.'
+    bullets: [
+      'Maya (31, Santa Cruz) is a van-lifer and remote UX designer who rides 1-3x/week.',
+      'She doesn’t want to own a ton of gear and struggles to find quality rentals in new locations.',
+      'She wants DemoStoke to offer verified local lenders, easy to find gear specs, and fair prices.'
+    ]
   },
   {
     title: 'Local Shop Owner',
-    description: 'Tony (45, South Lake Tahoe) co-owns a board shop and wants to run demos without building his own tech. He’s frustrated that most platforms don’t support niche gear. He wants DemoStoke to help list demo boards, drive traffic, and convert demos into sales.'
+    bullets: [
+      'Tony (45, South Lake Tahoe) co-owns a board shop and wants to run demos without building his own tech.',
+      'He’s frustrated that most platforms don’t support niche gear.',
+      'He wants DemoStoke to help list demo boards, drive traffic, and convert demos into sales.'
+    ]
   },
   {
     title: 'Local Shaper',
-    description: 'Dustin (38, Ventura) is a known surfboard shaper trying to grow his reputation. He wants to organize demos and track who rides his boards but lacks the tools. He wants DemoStoke to offer a shaper-specific feature, demo tracking, and review visibility.'
+    bullets: [
+      'Dustin (38, Ventura) is a known surfboard shaper trying to grow his reputation.',
+      'He wants to organize demos and track who rides his boards but lacks the tools.',
+      'He wants DemoStoke to offer a shaper-specific feature, demo tracking, and review visibility.'
+    ]
   },
   {
     title: 'Quiver Lender',
-    description: 'Jessie (27, Encinitas) is a yoga instructor with extra boards. She wants to earn passive income but doesn’t trust Craigslist. She wants DemoStoke to provide a smooth listing flow, damage protection, reviews, verified users, and an earnings dashboard.'
+    bullets: [
+      'Jessie (27, Encinitas) is a yoga instructor with extra boards.',
+      'She wants to earn passive income but doesn’t trust Craigslist.',
+      'She wants DemoStoke to provide a smooth listing flow, damage protection, reviews, verified users, and an earnings dashboard.'
+    ]
   }
 ] as const;
 
@@ -240,10 +265,16 @@ const DemoStokeContent = () => {
                     <section id='section-personas' className='story-section'>
                       <DemoStokeTitle>The Who</DemoStokeTitle>
                       <DemoStokeTwoColumnLayout>
-                        {PERSONA_ITEMS.map(({ title, description }) => (
+                        {PERSONA_ITEMS.map(({ title, bullets }) => (
                           <DemoStokeTwoColumnRow key={title}>
                             <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
-                            <DemoStokeTwoColumnCopy>{description}</DemoStokeTwoColumnCopy>
+                            <DemoStokeTwoColumnCopy>
+                              <DemoStokeList $frameless>
+                                {bullets.map((bullet) => (
+                                  <li className='prototype' key={bullet}>{bullet}</li>
+                                ))}
+                              </DemoStokeList>
+                            </DemoStokeTwoColumnCopy>
                           </DemoStokeTwoColumnRow>
                         ))}
                       </DemoStokeTwoColumnLayout>
