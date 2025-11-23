@@ -1103,6 +1103,18 @@ export const DemoStokeTwoUp = styled.div`
   align-items: flex-start;
   width: 100%;
 
+  & > section {
+    margin: 0;
+
+    h3 {
+      margin: 0 0 0.4em;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     grid-template-columns: 1fr;
   }

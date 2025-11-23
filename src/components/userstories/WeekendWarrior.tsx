@@ -113,13 +113,13 @@ const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
 
         <DemoStokeBorderBox>
           <DemoStokeTwoUp>
-            <section className='story-section'>
+            <section>
               <h3>Abstract</h3>
               <p>
                 Krista is a snowboarder who valued speed and precision, and wouldn’t buy a new board without riding it first. Her frustrations with traditional demo events opened the door for {DSLink} as a more flexible, trustworthy, and convenient solution.
               </p>
             </section>
-            <section className='story-section'>
+            <section>
               <h3>Use Case Scenario</h3>
               <p>
                 Krista was planning her next powder day at Palisades. She logged into {DSLink} and spotted a board she’d been curious about. It was available for pickup 5 minutes from the resort. She grabbed it, rode it all day, and decided it wasn’t quite the right fit, but she was stoked she didn’t waste $600 guessing.
