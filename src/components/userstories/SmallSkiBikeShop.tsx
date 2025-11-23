@@ -75,7 +75,11 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
     },
     {
       title: 'Light integration',
-      description: `${DSLink} became the discovery portal, syncing with Lightspeed and handling the UX lift without overhauling the site.`
+      description: (
+        <>
+          {DSLink} became the discovery portal, syncing with Lightspeed and handling the UX lift without overhauling the site.
+        </>
+      )
     }
   ];
 
@@ -94,7 +98,11 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
     },
     {
       title: 'Expands market reach',
-      description: `${DSLink} discovery tools brought in vacationers and new locals—not just Google Maps foot traffic.`
+      description: (
+        <>
+          {DSLink} discovery tools brought in vacationers and new locals—not just Google Maps foot traffic.
+        </>
+      )
     }
   ];
 

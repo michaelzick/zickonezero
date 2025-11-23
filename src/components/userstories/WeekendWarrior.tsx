@@ -98,7 +98,11 @@ const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
     },
     {
       title: 'Aligns with real riding flow',
-      description: 'No more wasting powder days waiting at demo booths—{DSLink} fit into her actual ride plans.'
+      description: (
+        <>
+          No more wasting powder days waiting at demo booths—{DSLink} fit into her actual ride plans.
+        </>
+      )
     }
   ];
 

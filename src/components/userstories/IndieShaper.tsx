@@ -93,7 +93,11 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
     },
     {
       title: 'New revenue streams',
-      description: `Curtis could even rent out boards on ${DSLink} during build waitlists to offset costs.`
+      description: (
+        <>
+          Curtis could even rent out boards on {DSLink} during build waitlists to offset costs.
+        </>
+      )
     },
     {
       title: 'Geo-expansion',
@@ -113,7 +117,6 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
             </PitchDeckLink>
           </div>
         </FlexBox>
-        <br />
       </section>
 
       <section id='story-independent-surfboard-shaper-title' className='story-section'>
