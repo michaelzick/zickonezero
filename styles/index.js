@@ -1215,8 +1215,6 @@ export const Video = styled.video`
   height: auto;
   border-radius: 20px;
   display: block;
-  clip-path: inset(0 0 48px 0 round 20px);
-  -webkit-clip-path: inset(0 0 48px 0 round 20px);
 `;
 
 export const VideoFrame = styled.div`
