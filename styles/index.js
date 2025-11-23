@@ -1162,6 +1162,11 @@ export const DemoStokeScrollItem = styled.div`
     transform: translateY(-2px);
     border-color: ${THEME.colors.white};
   }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    min-width: 11.5em;
+    max-width: 11.5em;
+  }
 `;
 
 export const DemoStokeScrollImage = styled.img`
