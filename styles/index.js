@@ -1030,6 +1030,48 @@ export const DemoStokeList = styled.ul`
   }
 `;
 
+export const DemoStokeTwoColumnLayout = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+  padding: clamp(0.9em, 2vw, 1.45em) clamp(1.2em, 3vw, 2em);
+  border: 1px solid ${THEME.colors.grey};
+  border-radius: 20px;
+  background: ${THEME.colors.darkest};
+`;
+
+export const DemoStokeTwoColumnRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(0.95em, 3vw, 2.6em);
+  row-gap: 0.35em;
+  padding: 0.45em 0;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid ${THEME.colors.grey};
+    padding-bottom: clamp(0.75em, 1.8vw, 1.1em);
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    grid-template-columns: 1fr;
+    padding: 0.6em 0;
+  }
+`;
+
+export const DemoStokeTwoColumnHeader = styled.div`
+  font-weight: 700;
+  color: ${THEME.colors.white};
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.95em;
+`;
+
+export const DemoStokeTwoColumnCopy = styled.div`
+  color: ${THEME.colors.white};
+  line-height: 1.55;
+`;
+
 export const TableWrapper = styled.div`
   width: 100%;
   overflow-x: auto;

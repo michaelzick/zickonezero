@@ -22,7 +22,11 @@ import {
   Video,
   Image,
   DemoStokeContentGrid,
-  DemoStokeTitle
+  DemoStokeTitle,
+  DemoStokeTwoColumnLayout,
+  DemoStokeTwoColumnRow,
+  DemoStokeTwoColumnHeader,
+  DemoStokeTwoColumnCopy
 } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
 import DemoStokeTabs from './DemoStokeTabs';
@@ -46,6 +50,25 @@ const STORY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'story-independent-shaper-title', label: 'Independent Shaper' },
   { id: 'story-weekend-warrior', label: 'Weekend Warrior' },
   { id: 'story-small-ski-shop', label: 'Small Ski/Bike Shop' }
+] as const;
+
+const TLDR_ITEMS = [
+  {
+    title: 'What it is',
+    description: 'A P2P and B2C platform to find and demo action sports gear from multiple sources.'
+  },
+  {
+    title: 'Problem',
+    description: 'Riders want to try before they buy, but demos are rare, costly, and inconvenient.'
+  },
+  {
+    title: 'Solution',
+    description: 'A location-based marketplace to safely connect riders and lenders.'
+  },
+  {
+    title: 'My Role',
+    description: 'Founder, Head of Product, UX strategist, MVP architect.'
+  }
 ] as const;
 
 const DemoStokeContent = () => {
@@ -142,15 +165,14 @@ const DemoStokeContent = () => {
 
                     <section id='section-tldr'>
                       <h3>TL;DR</h3>
-                      <DemoStokeList>
-                        <li><strong>What it is:</strong> A P2P and B2C platform to find and demo action sports gear from multiple sources.</li>
-                        <br />
-                        <li><strong>Problem:</strong> Riders want to try before they buy, but demos are rare, costly, and inconvenient.</li>
-                        <br />
-                        <li><strong>Solution:</strong> A location-based marketplace to safely connect riders and lenders.</li>
-                        <br />
-                        <li><strong>My Role:</strong> Founder, Head of Product, UX strategist, MVP architect.</li>
-                      </DemoStokeList>
+                      <DemoStokeTwoColumnLayout>
+                        {TLDR_ITEMS.map(({ title, description }) => (
+                          <DemoStokeTwoColumnRow key={title}>
+                            <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
+                            <DemoStokeTwoColumnCopy>{description}</DemoStokeTwoColumnCopy>
+                          </DemoStokeTwoColumnRow>
+                        ))}
+                      </DemoStokeTwoColumnLayout>
                     </section>
 
                     <section id='section-problem' className='story-section'>
