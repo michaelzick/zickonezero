@@ -1,9 +1,12 @@
 import { FileTextIcon } from '@radix-ui/react-icons';
+import { type ReactNode } from 'react';
 import {
   BioBox,
   DemoStokeTitle,
-  DemoStokeList,
-  DemoStokeText,
+  DemoStokeTwoColumnLayout,
+  DemoStokeTwoColumnRow,
+  DemoStokeTwoColumnHeader,
+  DemoStokeTwoColumnCopy,
   WhiteTransitionAnchor,
   FlexBox,
   PitchDeckLink,
@@ -17,6 +20,86 @@ type StoryProps = {
 
 const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
   const DSLink = <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>DemoStoke</WhiteTransitionAnchor>;
+
+  const renderTable = (items: { title: string; description: ReactNode; }[]) => (
+    <DemoStokeTwoColumnLayout>
+      {items.map(({ title, description }) => (
+        <DemoStokeTwoColumnRow key={title}>
+          <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
+          <DemoStokeTwoColumnCopy>{description}</DemoStokeTwoColumnCopy>
+        </DemoStokeTwoColumnRow>
+      ))}
+    </DemoStokeTwoColumnLayout>
+  );
+
+  const painPoints = [
+    {
+      title: 'High-effort demo days',
+      description: 'Curtis manually hauled a van of boards to the beach, set up, and hoped the right audience showed up—labor-intensive and hit-or-miss.'
+    },
+    {
+      title: 'Limited reach',
+      description: 'He relied on Instagram, local shops, and word-of-mouth with no centralized platform to connect him with serious buyers.'
+    },
+    {
+      title: 'Long wait times + uncertainty',
+      description: 'Boards took 3–6 months to build, requiring big deposits with no guarantee the board would ride well.'
+    },
+    {
+      title: 'Eco-niche under-leveraged',
+      description: 'His eco-conscious boards weren’t visible enough to differentiate or educate a broader surf audience.'
+    }
+  ];
+
+  const howHelps = [
+    {
+      title: 'Low-effort, high-reach demos',
+      description: (
+        <>
+          Curtis could list demo boards on {DSLink} and let buyers reserve and try them on their own schedule, with storage through lockers, shops, or reps.
+        </>
+      )
+    },
+    {
+      title: 'Visibility beyond his bubble',
+      description: (
+        <>
+          {DSLink} attracted surfers seeking to try gear; his eco angle and hand-shaped boards were highlighted to make values a selling point.
+        </>
+      )
+    },
+    {
+      title: 'Converts demos into deposits',
+      description: (
+        <>
+          “Try Before You Buy” built trust so surfers could demo, love a board, and place deposits through the app—without awkward sales pushes.
+        </>
+      )
+    },
+    {
+      title: 'Eco as a competitive edge',
+      description: 'Boards could be tagged with attributes like eco-epoxy or bio-resin so sustainability influenced decisions at the right moment.'
+    }
+  ];
+
+  const whyScale = [
+    {
+      title: 'From 1-to-1 to many-to-1',
+      description: 'Sales no longer depended solely on direct personal interactions.'
+    },
+    {
+      title: 'More feedback, faster iteration',
+      description: 'Demo feedback refined designs, revealed trends, and guided inventory.'
+    },
+    {
+      title: 'New revenue streams',
+      description: `Curtis could even rent out boards on ${DSLink} during build waitlists to offset costs.`
+    },
+    {
+      title: 'Geo-expansion',
+      description: 'Demo fleets could rotate across SD, LA, Ventura, and Santa Cruz without him leaving home.'
+    }
+  ];
 
   const content = (
     <div>
@@ -57,60 +140,17 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
 
       <section>
         <h3>Current Pain Points</h3>
-        <DemoStokeList spaced>
-          <li className='complaint'>
-            <strong>High-effort demo days:</strong> Curtis manually hauls a van of boards to the beach, sets up, and hopes the right audience shows up. This is labor-intensive and hit-or-miss.
-          </li>
-          <li className='complaint'>
-            <strong>Limited reach:</strong> He relies on Instagram, local shops, and word-of-mouth. There’s no centralized platform that connects him with stoked, serious potential buyers.
-          </li>
-          <li className='complaint'>
-            <strong>Long wait times + uncertainty:</strong> Boards take 3–6 months to build. Buyers must commit a big deposit up front with no guarantee the board will ride well for them.
-          </li>
-          <li className='complaint'>
-            <strong>Eco-niche is under-leveraged:</strong> He builds eco-conscious boards, but there’s no scalable way to differentiate or educate the broader surf audience about that value.
-          </li>
-        </DemoStokeList>
+        {renderTable(painPoints)}
       </section>
 
       <section>
         <h3>How DemoStoke Helps</h3>
-        <DemoStokeList spaced>
-          <li>
-            <strong>Low-effort, high-reach demo logistics:</strong> Instead of one demo day at one beach, Curtis can list all his demo boards on {DSLink} and have potential buyers reserve and try them on their own schedule.
-            <p>Boards can be stored with verified surf lockers, partner shops, or even designated reps. The app handles location, reservations, and messaging.</p>
-          </li>
-          <li>
-            <strong>Visibility beyond his bubble:</strong> {DSLink} attracts surfers specifically looking to try gear. It’s a highly targeted audience—people with intent to buy.
-            <p>His eco-conscious angle and hand-shaped custom boards get highlighted in his profile, making his values a selling point, not just a detail.</p>
-          </li>
-          <li>
-            <strong>Converts demos into deposits:</strong> The “Try Before You Buy” model builds trust. A surfer can try a board, love it, and put a deposit down through the app—no awkward sales push required.
-            <p>You can even use feedback from demo users to match surfers to the right shape.</p>
-          </li>
-          <li>
-            <strong>Turns environmental values into a competitive edge:</strong> Boards can be tagged with attributes like “eco-epoxy,” “sustainable blanks,” or “bio-resin.” Surfers increasingly care about
-            sustainability—{DSLink} makes that visible at the decision-making stage.
-          </li>
-        </DemoStokeList>
+        {renderTable(howHelps)}
       </section>
 
       <section>
         <h3>Why This Helps Curtis Scale</h3>
-        <DemoStokeList spaced>
-          <li>
-            <strong>From 1-to-1 to many-to-1:</strong> He no longer needs to sell only through direct personal interactions.
-          </li>
-          <li>
-            <strong>More feedback, faster iteration:</strong> Demo feedback helps refine designs, understand trends, and guide inventory decisions.
-          </li>
-          <li>
-            <strong>New revenue streams:</strong> Curtis could even rent out boards on {DSLink} during the build waitlist to offset costs.
-          </li>
-          <li>
-            <strong>Geo-expansion:</strong> Surfboards can live and rotate in demo fleets in SD, LA, Ventura, and Santa Cruz without him ever leaving home.
-          </li>
-        </DemoStokeList>
+        {renderTable(whyScale)}
       </section>
     </div>
   );

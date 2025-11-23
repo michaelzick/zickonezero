@@ -1,8 +1,11 @@
+import { type ReactNode } from 'react';
 import {
   BioBox,
   DemoStokeTitle,
-  DemoStokeList,
-  DemoStokeText,
+  DemoStokeTwoColumnLayout,
+  DemoStokeTwoColumnRow,
+  DemoStokeTwoColumnHeader,
+  DemoStokeTwoColumnCopy,
   WhiteTransitionAnchor,
   DemoStokeBorderBox,
   DemoStokeTwoUp,
@@ -14,6 +17,90 @@ type StoryProps = {
 
 const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
   const DSLink = <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>DemoStoke</WhiteTransitionAnchor>;
+
+  const renderTable = (items: { title: string; description: ReactNode; }[]) => (
+    <DemoStokeTwoColumnLayout>
+      {items.map(({ title, description }) => (
+        <DemoStokeTwoColumnRow key={title}>
+          <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
+          <DemoStokeTwoColumnCopy>{description}</DemoStokeTwoColumnCopy>
+        </DemoStokeTwoColumnRow>
+      ))}
+    </DemoStokeTwoColumnLayout>
+  );
+
+  const painPoints = [
+    {
+      title: 'Inconvenient demo process',
+      description: 'Resort demo days involved waivers and binding swaps that interrupted her riding flow.'
+    },
+    {
+      title: 'Limited availability and timing',
+      description: 'She often wanted to try new boards with updated tech, but they weren’t available or she missed the window.'
+    },
+    {
+      title: 'Gear guesswork',
+      description: 'She risked costly mismatches buying boots, bindings, and boards based on timing or availability instead of fit.'
+    },
+    {
+      title: 'No platform to lend unused gear',
+      description: 'She owned a board she never used but hadn’t considered renting it out.'
+    },
+    {
+      title: 'Trust concerns',
+      description: 'She was hesitant to demo unfamiliar gear without waxing, safety checks, or protection against damage.'
+    }
+  ];
+
+  const howHelps = [
+    {
+      title: 'Frictionless try-before-you-buy',
+      description: (
+        <>
+          Krista could demo boards near the resort on her own terms, without traditional setup hassles. She loved being able to just grab and ride.
+        </>
+      )
+    },
+    {
+      title: 'Safe and trustworthy rentals',
+      description: (
+        <>
+          Insurance, waivers, and ID verification made her feel safer lending or demoing gear through {DSLink}. Insurance add-ons or refundable deposits protected riders and lenders.
+        </>
+      )
+    },
+    {
+      title: 'Peer-to-peer gear access',
+      description: (
+        <>
+          She would list her unused powder board for $20–40/day, making use of idle gear and earning trust through reviews.
+        </>
+      )
+    },
+    {
+      title: 'Flexible subscription model',
+      description: 'She would pay $50–100/month to try up to 5 boards with insurance included, especially during seasons she hunted for a new setup.'
+    }
+  ];
+
+  const whyHelps = [
+    {
+      title: 'Gives her options she can trust',
+      description: 'Reviews, ID verification, and damage waivers built the confidence she needed to participate.'
+    },
+    {
+      title: 'Turns idle gear into income',
+      description: 'She saw potential to rent out rarely used gear while helping others ride more.'
+    },
+    {
+      title: 'Supports experimentation',
+      description: 'She wanted to try new tech without full commitment.'
+    },
+    {
+      title: 'Aligns with real riding flow',
+      description: 'No more wasting powder days waiting at demo booths—{DSLink} fit into her actual ride plans.'
+    }
+  ];
 
   const content = (
     <div>
@@ -40,64 +127,17 @@ const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
 
       <section>
         <h3>Current Pain Points</h3>
-        <DemoStokeList spaced>
-          <li className='complaint'>
-            <strong>Inconvenient demo process:</strong> Resort demo days involve waivers and time-consuming binding swaps that interrupt her riding flow.
-          </li>
-          <li className='complaint'>
-            <strong>Lack of availability and timing:</strong> She often wants to try new boards with updated tech, but they aren’t available.
-            Or, she misses the window because she just wants to ride.
-          </li>
-          <li className='complaint'>
-            <strong>Gear guesswork:</strong> She’s bought boots, bindings, and boards based on timing or availability, not fit, risking costly mismatches.
-          </li>
-          <li className='complaint'>
-            <strong>No platform to lend unused gear:</strong> She owns a board she never uses but never considered renting it out.
-          </li>
-          <li className='complaint'>
-            <strong>Trust concerns:</strong> Krista is hesitant to demo unfamiliar gear without waxing, safety checks, or protection against damage.
-          </li>
-        </DemoStokeList>
+        {renderTable(painPoints)}
       </section>
 
       <section>
         <h3>How DemoStoke Helps</h3>
-        <DemoStokeList spaced>
-          <li>
-            <strong>Frictionless try-before-you-buy:</strong> Krista can demo boards near the resort, on her own terms, without the hassle of traditional setup.
-            <p>She’s especially excited by the idea of being able to just grab and ride, with no binding swaps or paperwork holding her back.</p>
-          </li>
-          <li>
-            <strong>Safe and trustworthy rentals:</strong> Insurance, waivers, and ID verification make her feel safer lending or demoing gear through {DSLink}.
-            <p>She likes the insurance add-on or refundable deposit model to protect both lenders and riders.</p>
-          </li>
-          <li>
-            <strong>Peer-to-peer gear access:</strong> Krista would list her unused powder board for $20–40/day, adjusting based on demand.
-            <p>She sees value in making use of idle gear and appreciates that good reviews could help others trust her listings.</p>
-          </li>
-          <li>
-            <strong>Flexible subscription model:</strong> Krista would pay $50–100/month to try up to 5 boards with insurance included, especially during seasons
-            she’s hunting for a new setup.
-          </li>
-        </DemoStokeList>
+        {renderTable(howHelps)}
       </section>
 
       <section>
         <h3>Why This Helps Riders Like Krista</h3>
-        <DemoStokeList spaced>
-          <li>
-            <strong>Gives her options she can trust:</strong> Reviews, ID verification, and damage waivers build the confidence she needs to participate.
-          </li>
-          <li>
-            <strong>Turns idle gear into passive income:</strong> She sees potential to rent out her rarely used gear while helping others ride more.
-          </li>
-          <li>
-            <strong>Supports experimentation and tech curiosity:</strong> Krista wants to try new tech (rocker shapes, materials) without full commitment.
-          </li>
-          <li>
-            <strong>Aligns with real riding flow:</strong> No more wasting powder days waiting at demo booths. {DSLink} fits into her actual ride plans.
-          </li>
-        </DemoStokeList>
+        {renderTable(whyHelps)}
       </section>
     </div>
   );
