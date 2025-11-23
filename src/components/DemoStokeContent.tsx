@@ -403,7 +403,7 @@ const DemoStokeContent = () => {
                           <DemoStokeTwoColumnRow key={title}>
                             <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
                             <DemoStokeTwoColumnCopy>
-                              <DemoStokeList $frameless>
+                              <DemoStokeList $frameless spaced>
                                 {bullets.map((bullet) => (
                                   <li className='prototype' key={bullet}>{bullet}</li>
                                 ))}
@@ -487,7 +487,7 @@ const DemoStokeContent = () => {
                           <DemoStokeTwoColumnRow key={title}>
                             <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
                             <DemoStokeTwoColumnCopy>
-                              <DemoStokeList $frameless>
+                              <DemoStokeList $frameless spaced>
                                 {bullets.map((bullet) => (
                                   <li className='crystal' key={bullet}>{bullet}</li>
                                 ))}
@@ -505,7 +505,7 @@ const DemoStokeContent = () => {
                           <DemoStokeTwoColumnRow key={title}>
                             <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
                             <DemoStokeTwoColumnCopy>
-                              <DemoStokeList $frameless>
+                              <DemoStokeList $frameless spaced>
                                 {bullets.map((bullet) => (
                                   <li className='crystal' key={bullet}>{bullet}</li>
                                 ))}
