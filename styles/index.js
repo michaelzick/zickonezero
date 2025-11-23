@@ -335,6 +335,15 @@ export const Image = styled.img`
   border: 1px solid ${THEME.colors.white};
 `;
 
+export const FullBorderImage = styled(Image)`
+  border: none;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+`;
+
 export const Thumb = styled.div`
   text-align: center;
   font-family: Roboto, sans-serif;
@@ -1089,12 +1098,13 @@ export const DemoStokeTwoUp = styled.div`
 export const DemoStokeBorderBox = styled.div`
   width: 100%;
   background: transparent;
-  padding: 1.05em 1.6em;
+  padding: ${props => props.$noPadding ? '0' : '1.05em 1.6em'};
   font-size: 0.95em;
   line-height: 1.6;
   border: 1px solid ${THEME.colors.grey};
   border-radius: 20px;
   color: ${THEME.colors.white};
+  overflow: hidden;
 `;
 
 export const TableWrapper = styled.div`

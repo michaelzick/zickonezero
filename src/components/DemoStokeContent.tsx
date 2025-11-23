@@ -22,6 +22,7 @@ import {
   Video,
   VideoFrame,
   Image,
+  FullBorderImage,
   DemoStokeContentGrid,
   DemoStokeTitle,
   DemoStokeTwoColumnLayout,
@@ -207,14 +208,23 @@ const DemoStokeContent = () => {
                       </DemoStokeTwoUp>
                     </section>
 
-                    <section id='section-solution'>
-                      <h3>The Solution</h3>
-                      <p>A comprehensive gear discovery and rental platform that connects riders with demo opportunities in their area.
-                        By leveraging location-based services, we can help riders find available gear to try before they buy,
-                        while also providing a marketplace for gear owners to list their equipment for rent.</p>
-
-                      <Image src='/img/all-equipment-hybrid.webp' alt='DemoStoke Hybrid View' loading="lazy" />
-                      <br />
+                    <section id='section-solution' className='story-section'>
+                      <DemoStokeTwoUp>
+                        <section>
+                          <h3>The Solution</h3>
+                          <DemoStokeBorderBox>
+                            A comprehensive gear discovery and rental platform that connects riders with demo opportunities in their area.
+                            By leveraging location-based services, we can help riders find available gear to try before they buy,
+                            while also providing a marketplace for gear owners to list their equipment for rent.
+                          </DemoStokeBorderBox>
+                        </section>
+                        <section>
+                          <h3>Location-Based Discovery</h3>
+                          <DemoStokeBorderBox $noPadding>
+                            <FullBorderImage src='/img/all-equipment-hybrid.webp' alt='DemoStoke Hybrid View' loading="lazy" />
+                          </DemoStokeBorderBox>
+                        </section>
+                      </DemoStokeTwoUp>
                     </section>
 
                     <section id='section-key-features' className='story-section'>
