@@ -46,11 +46,11 @@ type SectionKey = 'executive' | 'stories';
 
 const EXECUTIVE_SECTIONS: SidebarSectionConfig[] = [
   { id: 'hero-spacer', label: 'Intro Spacer', hidden: true },
-  { id: 'introduction', label: 'Introduction' },
+  { id: 'introduction', label: 'Intro' },
   { id: 'section-the-why', label: 'The Why' },
   { id: 'section-the-who', label: 'The Who' },
   { id: 'section-the-how', label: 'The How' },
-  { id: 'section-methodology', label: 'Methodology' }
+  { id: 'section-methodology', label: 'Methods' }
 ] as const;
 const EXECUTIVE_BOTTOM_SECTION_ID = EXECUTIVE_SECTIONS[EXECUTIVE_SECTIONS.length - 1]?.id;
 
@@ -340,7 +340,7 @@ const DemoStokeContent = () => {
                     <section id='hero-spacer' aria-hidden='true' />
 
                     <section id='introduction' className='story-section'>
-                      <DemoStokeTitle>Introduction</DemoStokeTitle>
+                      <DemoStokeTitle>Intro</DemoStokeTitle>
                     </section>
 
                     <VideoFrame>
@@ -482,7 +482,7 @@ const DemoStokeContent = () => {
                     </section>
 
                     <section id='section-methodology' className='story-section'>
-                      <DemoStokeTitle>Methodology</DemoStokeTitle>
+                      <DemoStokeTitle>Methods</DemoStokeTitle>
                       <h3>Foundational Research</h3>
                       <DemoStokeTwoColumnLayout>
                         {RESEARCH_ITEMS.map(({ title, bullets }) => (
