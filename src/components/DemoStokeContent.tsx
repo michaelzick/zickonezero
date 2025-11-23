@@ -182,50 +182,52 @@ const DemoStokeContent = () => {
                     </section>
 
                     <section id='section-pain-points' className='story-section'>
-                      <DemoStokeTitle>Pain Points &amp; Solutions</DemoStokeTitle>
-                      <DemoStokeTwoUp>
-                        <section id='section-problem'>
-                          <h3>The Problem</h3>
-                          <DemoStokeBorderBox>
-                            Demo opportunities for rideable gear are limited, inconvenient, or nonexistent. Many riders either
-                            blindly purchase expensive equipment or wait for infrequent on-site demos, often leading to
-                            mismatched gear choices and wasted spending.
-                          </DemoStokeBorderBox>
-                        </section>
-                        <section id='section-complaints'>
-                          <h3>Current Complaints</h3>
-                          <DemoStokeList>
-                            <li className='complaint'>“I wait in long rental lines without knowing if they have what I want.”</li>
-                            <br />
-                            <li className='complaint'>“I can’t find the right gear in my size.”</li>
-                            <br />
-                            <li className='complaint'>“I don’t want to buy a $900 surfboard I’ve never ridden.”</li>
-                            <br />
-                            <li className='complaint'>“Demo days at the beach or mountain are few and far in between.”</li>
-                            <br />
-                            <li className='complaint'>“Demo boards at the resort are expensive and they have a limited selection.”</li>
-                          </DemoStokeList>
-                        </section>
-                      </DemoStokeTwoUp>
+                      <DemoStokeTitle>Pain Points</DemoStokeTitle>
+                      <DemoStokeBorderBox>
+                        <DemoStokeTwoUp>
+                          <section id='section-problem'>
+                            <h3>The Problem</h3>
+                            <p>
+                              Demo opportunities for rideable gear are limited, inconvenient, or nonexistent. Many riders either blindly purchase
+                              expensive equipment or wait for infrequent on-site demos, often leading to mismatched gear choices and wasted spending.
+                            </p>
+                          </section>
+                          <section id='section-complaints'>
+                            <h3>Current Complaints</h3>
+                            <DemoStokeList $frameless>
+                              <li className='complaint'>“I wait in long rental lines without knowing if they have what I want.”</li>
+                              <br />
+                              <li className='complaint'>“I can’t find the right gear in my size.”</li>
+                              <br />
+                              <li className='complaint'>“I don’t want to buy a $900 surfboard I’ve never ridden.”</li>
+                              <br />
+                              <li className='complaint'>“Demo days at the beach or mountain are few and far in between.”</li>
+                              <br />
+                              <li className='complaint'>“Demo boards at the resort are expensive and they have a limited selection.”</li>
+                            </DemoStokeList>
+                          </section>
+                        </DemoStokeTwoUp>
+                      </DemoStokeBorderBox>
                     </section>
 
                     <section id='section-solution'>
-                      <DemoStokeTwoUp>
-                        <section>
-                          <h3>The Solution</h3>
-                          <DemoStokeBorderBox>
-                            A comprehensive gear discovery and rental platform that connects riders with demo opportunities in their area.
-                            By leveraging location-based services, we can help riders find available gear to try before they buy,
-                            while also providing a marketplace for gear owners to list their equipment for rent.
-                          </DemoStokeBorderBox>
-                        </section>
-                        <section>
-                          <h3>Location-Based Discovery</h3>
-                          <DemoStokeBorderBox $noPadding>
+                      <DemoStokeTitle>Solutions</DemoStokeTitle>
+                      <DemoStokeBorderBox>
+                        <DemoStokeTwoUp>
+                          <section>
+                            <h3>Location-Based Discovery</h3>
+                            <p>
+                              A comprehensive gear discovery and rental platform that connects riders with demo opportunities in their area.
+                              By leveraging location-based services, we can help riders find available gear to try before they buy,
+                              while also providing a marketplace for gear owners to list their equipment for rent.
+                            </p>
+                          </section>
+                          <section>
+                            <h3>Marketplace for Gear Owners</h3>
                             <FullBorderImage src='/img/all-equipment-hybrid.webp' alt='DemoStoke Hybrid View' loading="lazy" />
-                          </DemoStokeBorderBox>
-                        </section>
-                      </DemoStokeTwoUp>
+                          </section>
+                        </DemoStokeTwoUp>
+                      </DemoStokeBorderBox>
                     </section>
 
                     <section id='section-key-features' className='story-section'>

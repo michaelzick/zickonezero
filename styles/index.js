@@ -987,12 +987,12 @@ export const DemoStokeTitle = styled.h2`
 `;
 
 export const DemoStokeList = styled.ul`
-  padding: 0.8em 1.8em;
+  padding: ${props => props.$frameless ? '0' : '0.8em 1.8em'};
   font-size: 0.9em;
   font-weight: lighter;
   list-style: none;
-  border: 1px solid ${THEME.colors.grey};
-  border-radius: 20px;
+  border: ${props => props.$frameless ? 'none' : `1px solid ${THEME.colors.grey}`};
+  border-radius: ${props => props.$frameless ? '0' : '20px'};
   margin-bottom: 0;
 
   li {
