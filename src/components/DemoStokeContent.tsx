@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, type ReactNode } from 'react';
+import { useState, useEffect, useCallback, type ReactNode, type KeyboardEvent } from 'react';
 import FsLightbox from 'fslightbox-react';
 import { FileTextIcon } from '@radix-ui/react-icons';
 import {
@@ -329,7 +329,7 @@ const DemoStokeContent = () => {
                               role='button'
                               tabIndex={0}
                               aria-label={`Open image: ${alt}`}
-                              onKeyDown={(e) => {
+                              onKeyDown={(e: KeyboardEvent<HTMLDivElement>) => {
                                 if (e.key === 'Enter' || e.key === ' ') {
                                   e.preventDefault();
                                   openLightbox(index);
