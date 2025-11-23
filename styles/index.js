@@ -1041,7 +1041,7 @@ export const DemoStokeList = styled.ul`
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: 0.8em 1em;
+    padding: ${props => props.$frameless ? '0' : '0.8em 1.8em'};
   }
 `;
 
