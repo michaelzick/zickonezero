@@ -485,16 +485,16 @@ const DemoStokeContent = () => {
                       <DemoStokeTwoColumnLayout>
                         {RESEARCH_ITEMS.map(({ title, bullets }) => (
                           <DemoStokeTwoColumnRow key={title}>
-                            <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
-                            <DemoStokeTwoColumnCopy>
-                              <DemoStokeList $frameless spaced>
-                                {bullets.map((bullet) => (
-                                  <li className='crystal' key={bullet}>{bullet}</li>
-                                ))}
-                              </DemoStokeList>
-                            </DemoStokeTwoColumnCopy>
-                          </DemoStokeTwoColumnRow>
-                        ))}
+                          <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
+                          <DemoStokeTwoColumnCopy>
+                            <DemoStokeList $frameless spaced>
+                              {bullets.map((bullet) => (
+                                <li className='crystal' key={bullet}>{bullet}</li>
+                              ))}
+                            </DemoStokeList>
+                          </DemoStokeTwoColumnCopy>
+                        </DemoStokeTwoColumnRow>
+                      ))}
                       </DemoStokeTwoColumnLayout>
                     </section>
 
@@ -507,7 +507,7 @@ const DemoStokeContent = () => {
                             <DemoStokeTwoColumnCopy>
                               <DemoStokeList $frameless spaced>
                                 {bullets.map((bullet) => (
-                                  <li className='crystal' key={bullet}>{bullet}</li>
+                                  <li className='heart' key={bullet}>{bullet}</li>
                                 ))}
                               </DemoStokeList>
                             </DemoStokeTwoColumnCopy>
