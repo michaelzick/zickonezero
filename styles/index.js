@@ -1110,6 +1110,10 @@ export const DemoStokeBorderBox = styled.div`
   border-radius: 20px;
   color: ${THEME.colors.white};
   overflow: hidden;
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    padding: ${props => props.$noPadding ? '0' : '0.9em 1.1em'};
+  }
 `;
 
 export const TableWrapper = styled.div`
