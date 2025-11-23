@@ -20,13 +20,16 @@ import {
   FlexBox,
   PitchDeckLink,
   Video,
+  VideoFrame,
   Image,
   DemoStokeContentGrid,
   DemoStokeTitle,
   DemoStokeTwoColumnLayout,
   DemoStokeTwoColumnRow,
   DemoStokeTwoColumnHeader,
-  DemoStokeTwoColumnCopy
+  DemoStokeTwoColumnCopy,
+  DemoStokeTwoUp,
+  DemoStokeBorderBox
 } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
 import DemoStokeTabs from './DemoStokeTabs';
@@ -151,16 +154,18 @@ const DemoStokeContent = () => {
                       <DemoStokeTitle>Introduction</DemoStokeTitle>
                     </section>
 
-                    <Video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      poster='/img/homepage_light_2025-07-22.webp'
-                    >
-                      <source src='/video/homepage-2025-11-23-02.mp4' type='video/mp4' />
-                      <source src='' type='video/mp4' />
-                    </Video>
+                    <VideoFrame>
+                      <Video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        poster='/img/homepage_light_2025-07-22.webp'
+                      >
+                        <source src='/video/homepage-2025-11-23-02.mp4' type='video/mp4' />
+                        <source src='' type='video/mp4' />
+                      </Video>
+                    </VideoFrame>
                     <br />
 
                     <section id='section-tldr'>
@@ -175,26 +180,31 @@ const DemoStokeContent = () => {
                       </DemoStokeTwoColumnLayout>
                     </section>
 
-                    <section id='section-problem' className='story-section'>
-                      <DemoStokeTitle>The Problem</DemoStokeTitle>
-                      <p>Demo opportunities for rideable gear are limited, inconvenient, or nonexistent.
-                        Many riders either blindly purchase expensive equipment or wait for infrequent on-site demos,
-                        often leading to mismatched gear choices and wasted spending.</p>
-                    </section>
-
-                    <section id='section-complaints'>
-                      <h3>Current Complaints</h3>
-                      <DemoStokeList>
-                        <li className='complaint'>“I wait in long rental lines without knowing if they have what I want.”</li>
-                        <br />
-                        <li className='complaint'>“I can’t find the right gear in my size.”</li>
-                        <br />
-                        <li className='complaint'>“I don’t want to buy a $900 surfboard I’ve never ridden.”</li>
-                        <br />
-                        <li className='complaint'>“Demo days at the beach or mountain are few and far in between.”</li>
-                        <br />
-                        <li className='complaint'>“Demo boards at the resort are expensive and they have a limited selection.”</li>
-                      </DemoStokeList>
+                    <section className='story-section'>
+                      <DemoStokeTwoUp>
+                        <section id='section-problem'>
+                          <h3>The Problem</h3>
+                          <DemoStokeBorderBox>
+                            Demo opportunities for rideable gear are limited, inconvenient, or nonexistent. Many riders either
+                            blindly purchase expensive equipment or wait for infrequent on-site demos, often leading to
+                            mismatched gear choices and wasted spending.
+                          </DemoStokeBorderBox>
+                        </section>
+                        <section id='section-complaints'>
+                          <h3>Current Complaints</h3>
+                          <DemoStokeList>
+                            <li className='complaint'>“I wait in long rental lines without knowing if they have what I want.”</li>
+                            <br />
+                            <li className='complaint'>“I can’t find the right gear in my size.”</li>
+                            <br />
+                            <li className='complaint'>“I don’t want to buy a $900 surfboard I’ve never ridden.”</li>
+                            <br />
+                            <li className='complaint'>“Demo days at the beach or mountain are few and far in between.”</li>
+                            <br />
+                            <li className='complaint'>“Demo boards at the resort are expensive and they have a limited selection.”</li>
+                          </DemoStokeList>
+                        </section>
+                      </DemoStokeTwoUp>
                     </section>
 
                     <section id='section-solution'>

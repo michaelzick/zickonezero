@@ -1071,6 +1071,29 @@ export const DemoStokeTwoColumnCopy = styled.div`
   line-height: 1.55;
 `;
 
+export const DemoStokeTwoUp = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.1em, 3vw, 2.4em);
+  align-items: flex-start;
+  width: 100%;
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+export const DemoStokeBorderBox = styled.div`
+  width: 100%;
+  background: ${THEME.colors.darkest};
+  padding: 1.05em 1.6em;
+  font-size: 0.95em;
+  line-height: 1.6;
+  border: 1px solid ${THEME.colors.grey};
+  border-radius: 20px;
+  color: ${THEME.colors.white};
+`;
+
 export const TableWrapper = styled.div`
   width: 100%;
   overflow-x: auto;
@@ -1178,8 +1201,15 @@ export const Video = styled.video`
   width: 100%;
   height: auto;
   border-radius: 20px;
-  border: 1px solid ${THEME.colors.white};
   display: block;
+  clip-path: inset(0 0 48px 0 round 20px);
+  -webkit-clip-path: inset(0 0 48px 0 round 20px);
+`;
+
+export const VideoFrame = styled.div`
+  border: 1px solid ${THEME.colors.white};
+  border-radius: 20px;
+  overflow: hidden;
 `;
 
 export const HotRedTitle = styled.h2`
