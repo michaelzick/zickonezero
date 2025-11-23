@@ -187,9 +187,16 @@ const DemoStokeContent = () => {
   const updateScrollButtons = useCallback(() => {
     const row = scrollRowRef.current;
     if (!row) return;
-    const maxScroll = row.scrollWidth - row.clientWidth;
-    setCanScrollLeft(row.scrollLeft > 0);
-    setCanScrollRight(row.scrollLeft < maxScroll - 1);
+    if (row.scrollLeft <= 1) {
+      row.scrollLeft = 0;
+    }
+    const firstItem = row.firstElementChild as HTMLElement | null;
+    const startThreshold = (firstItem?.offsetLeft ?? 0) + 1;
+    const maxScroll = Math.max(row.scrollWidth - row.clientWidth, 0);
+    const isAtStart = row.scrollLeft <= startThreshold;
+    const isAtEnd = row.scrollLeft >= maxScroll - 1;
+    setCanScrollLeft(!isAtStart);
+    setCanScrollRight(!isAtEnd);
   }, []);
 
   const scrollGalleryBy = useCallback((direction: number) => {
