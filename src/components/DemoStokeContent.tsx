@@ -91,22 +91,22 @@ const RESEARCH_ITEMS = [
   {
     title: 'Primary Research',
     bullets: [
-      '🔮 Interview riders across surf, snow, and MTB to understand demo frustrations.',
-      '🔮 Capture quotes and pain points tied to trust, convenience, and selection gaps.'
+      'Interview riders across surf, snow, and MTB to understand demo frustrations.',
+      'Capture quotes and pain points tied to trust, convenience, and selection gaps.'
     ]
   },
   {
     title: 'Secondary Research',
     bullets: [
-      '🔮 Review competitor offerings to benchmark discovery, safety, and community features.',
-      '🔮 Analyze demo availability patterns to find underserved locations and sports.'
+      'Review competitor offerings to benchmark discovery, safety, and community features.',
+      'Analyze demo availability patterns to find underserved locations and sports.'
     ]
   },
   {
     title: 'Insights',
     bullets: [
-      '🔮 Riders will pay for demos if trust and ease are guaranteed.',
-      '🔮 Shapers and shops need lightweight tools to run demos and convert to sales.'
+      'Riders will pay for demos if trust and ease are guaranteed.',
+      'Shapers and shops need lightweight tools to run demos and convert to sales.'
     ]
   }
 ] as const;
@@ -115,43 +115,36 @@ const UX_PROCESS_STEPS = [
   {
     title: 'Empathize',
     bullets: [
-      '🔮 Stakeholder and rider interviews to uncover motivations, blockers, and context of use.',
-      '🔮 Field observations of demo flows (shops, events, P2P exchanges) to see friction first-hand.'
+      'Stakeholder and rider interviews to uncover motivations, blockers, and context of use.',
+      'Field observations of demo flows (shops, events, P2P exchanges) to see friction first-hand.'
     ]
   },
   {
     title: 'Define',
     bullets: [
-      '🔮 Synthesize themes into problem statements and opportunity areas tied to trust and convenience.',
-      '🔮 Frame measurable goals (demo conversion, repeat usage, lender activation) to guide design.'
+      'Synthesize themes into problem statements and opportunity areas tied to trust and convenience.',
+      'Frame measurable goals (demo conversion, repeat usage, lender activation) to guide design.'
     ]
   },
   {
     title: 'Ideate',
     bullets: [
-      '🔮 Map end-to-end flows (discovery → booking → pickup → feedback) and prioritize must-have moments.',
-      '🔮 Co-design quick sketches for trust signals (verification, reviews) and discovery (filters, maps, events).'
+      'Map end-to-end flows (discovery → booking → pickup → feedback) and prioritize must-have moments.',
+      'Co-design quick sketches for trust signals (verification, reviews) and discovery (filters, maps, events).'
     ]
   },
   {
     title: 'Prototype (Hi-Fi via Lovable AI)',
     bullets: [
-      '🔮 Use Lovable AI to spin up working screens quickly, then refine with prompt engineering for UX polish.',
-      '🔮 Layer in custom frontend tweaks to reach hi-fi fidelity for realistic interactions and visuals.'
+      'Use Lovable AI to spin up working screens quickly, then refine with prompt engineering for UX polish.',
+      'Layer in custom frontend tweaks to reach hi-fi fidelity for realistic interactions and visuals.'
     ]
   },
   {
     title: 'Test & Refine',
     bullets: [
-      '🔮 Run moderated walkthroughs on the hi-fi prototype to validate discovery, booking, and trust cues.',
-      '🔮 Iterate copy, visual hierarchy, and flows based on usability findings and success metrics.'
-    ]
-  },
-  {
-    title: 'Handoff & Build',
-    bullets: [
-      '🔮 Document flows, component states, and acceptance criteria for engineering.',
-      '🔮 Keep a feedback loop during build to preserve interaction details and performance.'
+      'Run moderated walkthroughs on the hi-fi prototype to validate discovery, booking, and trust cues.',
+      'Iterate copy, visual hierarchy, and flows based on usability findings and success metrics.'
     ]
   }
 ] as const;
@@ -360,7 +353,7 @@ const DemoStokeContent = () => {
                     </VideoFrame>
                     <br />
 
-                    <section id='section-tldr'>
+                    <section id='section-tldr' className='story-section'>
                       <h3>TL;DR</h3>
                       <DemoStokeTwoColumnLayout>
                         {TLDR_ITEMS.map(({ title, description }) => (
@@ -485,7 +478,8 @@ const DemoStokeContent = () => {
                     </section>
 
                     <section id='section-methodology' className='story-section'>
-                      <DemoStokeTitle>Foundational Research</DemoStokeTitle>
+                      <DemoStokeTitle>Case Study Highlights</DemoStokeTitle>
+                      <h3>Foundational Research</h3>
                       <DemoStokeTwoColumnLayout>
                         {RESEARCH_ITEMS.map(({ title, bullets }) => (
                           <DemoStokeTwoColumnRow key={title}>
@@ -503,7 +497,7 @@ const DemoStokeContent = () => {
                     </section>
 
                     <section id='section-ux-process' className='story-section'>
-                      <DemoStokeTitle>UX Process</DemoStokeTitle>
+                      <h3>UX Process</h3>
                       <DemoStokeTwoColumnLayout>
                         {UX_PROCESS_STEPS.map(({ title, bullets }) => (
                           <DemoStokeTwoColumnRow key={title}>
@@ -520,16 +514,13 @@ const DemoStokeContent = () => {
                       </DemoStokeTwoColumnLayout>
                     </section>
 
-                    <section id='section-links'>
+                    <section id='section-links' className='story-section'>
                       <h3>Links</h3>
                       <DemoStokeList>
-                        <li className='prototype'>
+                        <li className='next-steps'>
                           <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
                             See the full site
-                          </WhiteTransitionAnchor> or{' '}
-                          <WhiteTransitionAnchor href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
-                            download the investor pitch deck
-                          </WhiteTransitionAnchor>.
+                          </WhiteTransitionAnchor>
                         </li>
                       </DemoStokeList>
                     </section>
