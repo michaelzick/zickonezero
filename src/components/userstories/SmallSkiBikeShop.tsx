@@ -4,6 +4,8 @@ import {
   DemoStokeList,
   DemoStokeText,
   WhiteTransitionAnchor,
+  DemoStokeBorderBox,
+  DemoStokeTwoUp,
 } from '../../../styles';
 
 type StoryProps = {
@@ -16,9 +18,27 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
   const content = (
     <div>
       <DemoStokeTitle>The Small Ski & Bike Shop</DemoStokeTitle>
-      <p>
-        For Jason, the owner of <strong>Town & Country Outfitters</strong>, a high-end ski and bike shop in a mountain town, {DSLink} offers a way to modernize without losing what makes his shop personal and trusted. DemoStoke solves his toughest problems around demo logistics, digital visibility, and customer trust.
-      </p>
+
+      <DemoStokeBorderBox>
+        <DemoStokeTwoUp>
+          <section>
+            <h3>Abstract</h3>
+            <p>
+              For Jason, the owner of <strong>Town &amp; Country Outfitters</strong>, a high-end ski and bike shop in a mountain town, {DSLink} offered a way to modernize without losing what made his shop personal and trusted. DemoStoke solved his toughest problems around demo logistics, digital visibility, and customer trust.
+            </p>
+          </section>
+          <section>
+            <h3>Use Case Scenario</h3>
+            <p>
+              A local rider wanted to try a Never Summer snowboard before buying. He visited Town &amp; Country’s {DSLink} page, saw that a 158cm Proto Synthesis was available for demo, and booked it for the weekend.
+              <br /><br />
+              He picked it up Saturday morning after signing the waiver digitally. He rode it at Mountain View, loved it, and left a 5-star review.
+              <br /><br />
+              That night, he placed an order for a brand new one—picked up the next week. Jason never had to explain sizing or features—the app did that work.
+            </p>
+          </section>
+        </DemoStokeTwoUp>
+      </DemoStokeBorderBox>
 
       <section>
         <h3>Current Pain Points</h3>
@@ -63,17 +83,6 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
             <strong>Light integration, big results:</strong> Jason doesn’t have to overhaul his site—{DSLink} becomes the gear discovery portal, syncing directly with Lightspeed and handling the UX lift.
           </li>
         </DemoStokeList>
-      </section>
-
-      <section>
-        <h3>Use Case Scenario</h3>
-        <DemoStokeText>
-          A local rider wants to try a Never Summer snowboard before buying. He visits Town & Country’s {DSLink} page, sees that a 158cm Proto Synthesis is available for demo, and books it for this weekend.
-          <br /><br />
-          He picks it up Saturday morning after signing the waiver digitally. He rides it at Mountain View, loves it, and leaves a 5-star review.
-          <br /><br />
-          That night, he places an order for a brand new one—picked up the next week. Jason never had to explain sizing or features—the app did that work.
-        </DemoStokeText>
       </section>
 
       <section>

@@ -7,6 +7,8 @@ import {
   WhiteTransitionAnchor,
   FlexBox,
   PitchDeckLink,
+  DemoStokeBorderBox,
+  DemoStokeTwoUp,
 } from '../../../styles';
 
 type StoryProps = {
@@ -30,12 +32,28 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
         </FlexBox>
         <br />
       </section>
-      <DemoStokeTitle id='story-independent-shaper-title'>The Independent Shaper</DemoStokeTitle>
-      <p>
-        From the lens of Curtis, an independent Southern California surfboard shaper, {DSLink} has the potential
-        to radically simplify and expand his business by addressing key pain points around demo logistics, discovery,
-        trust, and conversion.
-      </p>
+      <DemoStokeTitle id='story-independent-surfboard-shaper-title'>The Independent Surfboard Shaper</DemoStokeTitle>
+
+      <DemoStokeBorderBox>
+        <DemoStokeTwoUp>
+          <section>
+            <h3>Abstract</h3>
+            <p>
+              From the lens of Curtis, an independent Southern California surfboard shaper, {DSLink} had the potential to radically simplify and expand his business by addressing key pain points around demo logistics, discovery, trust, and conversion.
+            </p>
+          </section>
+          <section>
+            <h3>Use Case Scenario</h3>
+            <p>
+              Let’s say a surfer in San Clemente was curious about a 6’4 eco-friendly twin-fin but wasn’t ready to commit $900 + a 4-month wait. They browsed {DSLink}, saw glowing reviews, reserved the demo for a Saturday morning pickup near Trestles, rode it, and loved it.
+              <br /><br />
+              That evening, they tapped Custom Order, uploaded photos of the waves they ride and their height/weight, and left a deposit—all through the app.
+              <br /><br />
+              The shaper woke up Sunday with a new order, a stoked rider, and zero beach setup effort.
+            </p>
+          </section>
+        </DemoStokeTwoUp>
+      </DemoStokeBorderBox>
 
       <section>
         <h3>Current Pain Points</h3>
@@ -75,18 +93,6 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
             sustainability—{DSLink} makes that visible at the decision-making stage.
           </li>
         </DemoStokeList>
-      </section>
-
-      <section>
-        <h3>Use Case Scenario</h3>
-        <DemoStokeText>
-          Let’s say a surfer in San Clemente is curious about a 6’4 eco-friendly twin-fin but isn’t ready to commit $900 + a 4-month wait. They browse {DSLink}, see glowing reviews, reserve the demo
-          for a Saturday morning pickup near Trestles, ride it, and love it.
-          <br /><br />
-          That evening, they tap Custom Order, upload photos of the waves they ride and their height/weight, and leave a deposit—all through the app.
-          <br /><br />
-          The shaper wakes up Sunday with a new order, a stoked rider, and zero beach setup effort.
-        </DemoStokeText>
       </section>
 
       <section>

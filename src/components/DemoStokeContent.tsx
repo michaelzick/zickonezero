@@ -56,7 +56,7 @@ const EXECUTIVE_BOTTOM_SECTION_ID = EXECUTIVE_SECTIONS[EXECUTIVE_SECTIONS.length
 
 const STORY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'story-introduction', label: 'Intro', hidden: true },
-  { id: 'story-independent-shaper-title', label: 'Independent Shaper' },
+  { id: 'story-independent-surfboard-shaper-title', label: 'Independent Shaper' },
   { id: 'story-weekend-warrior', label: 'Weekend Warrior' },
   { id: 'story-small-ski-shop', label: 'Small Ski/Bike Shop' }
 ] as const;
