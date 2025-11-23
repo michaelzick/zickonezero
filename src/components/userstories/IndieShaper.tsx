@@ -115,40 +115,43 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
         </FlexBox>
         <br />
       </section>
-      <DemoStokeTitle id='story-independent-surfboard-shaper-title'>The Independent Surfboard Shaper</DemoStokeTitle>
 
-      <DemoStokeBorderBox>
-        <DemoStokeTwoUp>
-          <section>
-            <h3>Abstract</h3>
-            <p>
-              From the lens of Curtis, an independent Southern California surfboard shaper, {DSLink} had the potential to radically simplify and expand his business by addressing key pain points around demo logistics, discovery, trust, and conversion.
-            </p>
-          </section>
-          <section>
-            <h3>Use Case Scenario</h3>
-            <p>
-              Let’s say a surfer in San Clemente was curious about a 6’4 eco-friendly twin-fin but wasn’t ready to commit $900 + a 4-month wait. They browsed {DSLink}, saw glowing reviews, reserved the demo for a Saturday morning pickup near Trestles, rode it, and loved it.
-              <br /><br />
-              That evening, they tapped Custom Order, uploaded photos of the waves they ride and their height/weight, and left a deposit—all through the app.
-              <br /><br />
-              The shaper woke up Sunday with a new order, a stoked rider, and zero beach setup effort.
-            </p>
-          </section>
-        </DemoStokeTwoUp>
-      </DemoStokeBorderBox>
+      <section id='story-independent-surfboard-shaper-title' className='story-section'>
+        <DemoStokeTitle>The Independent Surfboard Shaper</DemoStokeTitle>
 
-      <section>
+        <DemoStokeBorderBox>
+          <DemoStokeTwoUp>
+            <section className='story-section'>
+              <h3>Abstract</h3>
+              <p>
+                From the lens of Curtis, an independent Southern California surfboard shaper, {DSLink} had the potential to radically simplify and expand his business by addressing key pain points around demo logistics, discovery, trust, and conversion.
+              </p>
+            </section>
+            <section className='story-section'>
+              <h3>Use Case Scenario</h3>
+              <p>
+                Let’s say a surfer in San Clemente was curious about a 6’4 eco-friendly twin-fin but wasn’t ready to commit $900 + a 4-month wait. They browsed {DSLink}, saw glowing reviews, reserved the demo for a Saturday morning pickup near Trestles, rode it, and loved it.
+                <br /><br />
+                That evening, they tapped Custom Order, uploaded photos of the waves they ride and their height/weight, and left a deposit—all through the app.
+                <br /><br />
+                The shaper woke up Sunday with a new order, a stoked rider, and zero beach setup effort.
+              </p>
+            </section>
+          </DemoStokeTwoUp>
+        </DemoStokeBorderBox>
+      </section>
+
+      <section className='story-section'>
         <h3>Current Pain Points</h3>
         {renderTable(painPoints)}
       </section>
 
-      <section>
+      <section className='story-section'>
         <h3>How DemoStoke Helps</h3>
         {renderTable(howHelps)}
       </section>
 
-      <section>
+      <section className='story-section'>
         <h3>Why This Helps Curtis Scale</h3>
         {renderTable(whyScale)}
       </section>

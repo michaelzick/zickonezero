@@ -100,40 +100,42 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
 
   const content = (
     <div>
-      <DemoStokeTitle>The Small Ski & Bike Shop</DemoStokeTitle>
+      <section id='story-small-ski-shop' className='story-section'>
+        <DemoStokeTitle>The Small Ski &amp; Bike Shop</DemoStokeTitle>
 
-      <DemoStokeBorderBox>
-        <DemoStokeTwoUp>
-          <section>
-            <h3>Abstract</h3>
-            <p>
-              For Jason, the owner of <strong>Town &amp; Country Outfitters</strong>, a high-end ski and bike shop in a mountain town, {DSLink} offered a way to modernize without losing what made his shop personal and trusted. DemoStoke solved his toughest problems around demo logistics, digital visibility, and customer trust.
-            </p>
-          </section>
-          <section>
-            <h3>Use Case Scenario</h3>
-            <p>
-              A local rider wanted to try a Never Summer snowboard before buying. He visited Town &amp; Country’s {DSLink} page, saw that a 158cm Proto Synthesis was available for demo, and booked it for the weekend.
-              <br /><br />
-              He picked it up Saturday morning after signing the waiver digitally. He rode it at Mountain View, loved it, and left a 5-star review.
-              <br /><br />
-              That night, he placed an order for a brand new one—picked up the next week. Jason never had to explain sizing or features—the app did that work.
-            </p>
-          </section>
-        </DemoStokeTwoUp>
-      </DemoStokeBorderBox>
+        <DemoStokeBorderBox>
+          <DemoStokeTwoUp>
+            <section className='story-section'>
+              <h3>Abstract</h3>
+              <p>
+                For Jason, the owner of <strong>Town &amp; Country Outfitters</strong>, a high-end ski and bike shop in a mountain town, {DSLink} offered a way to modernize without losing what made his shop personal and trusted. DemoStoke solved his toughest problems around demo logistics, digital visibility, and customer trust.
+              </p>
+            </section>
+            <section className='story-section'>
+              <h3>Use Case Scenario</h3>
+              <p>
+                A local rider wanted to try a Never Summer snowboard before buying. He visited Town &amp; Country’s {DSLink} page, saw that a 158cm Proto Synthesis was available for demo, and booked it for the weekend.
+                <br /><br />
+                He picked it up Saturday morning after signing the waiver digitally. He rode it at Mountain View, loved it, and left a 5-star review.
+                <br /><br />
+                That night, he placed an order for a brand new one—picked up the next week. Jason never had to explain sizing or features—the app did that work.
+              </p>
+            </section>
+          </DemoStokeTwoUp>
+        </DemoStokeBorderBox>
+      </section>
 
-      <section>
+      <section className='story-section'>
         <h3>Current Pain Points</h3>
         {renderTable(painPoints)}
       </section>
 
-      <section>
+      <section className='story-section'>
         <h3>How DemoStoke Helps</h3>
         {renderTable(howHelps)}
       </section>
 
-      <section>
+      <section className='story-section'>
         <h3>Why This Helps Jason Scale</h3>
         {renderTable(whyHelps)}
       </section>
