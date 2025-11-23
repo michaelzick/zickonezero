@@ -1077,7 +1077,7 @@ export const DemoStokeTwoColumnRow = styled.div`
     padding-bottom: clamp(0.75em, 1.8vw, 1.1em);
   }
 
-  @media (max-width: ${THEME.breakpoints.phone}) {
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
     grid-template-columns: 1fr;
     padding: 0.6em 0;
   }
