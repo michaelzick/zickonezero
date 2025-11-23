@@ -140,11 +140,13 @@ const PERSONA_ITEMS = [
 ] as const;
 
 const HOW_IMAGES = [
-  { src: '/img/all-equipment-hybrid.webp', alt: 'Hybrid equipment view' },
+  { src: '/img/feat-events.webp', alt: 'Featured events section' },
   { src: '/img/events-calendar.webp', alt: 'Events calendar' },
-  { src: '/img/blog-page.webp', alt: 'Blog page' },
+  { src: '/img/blog.webp', alt: 'Blog layout' },
   { src: '/img/admin-img-download.webp', alt: 'Admin dashboard' },
-  { src: '/img/homepage_light_2025-07-22.webp', alt: 'Homepage preview' }
+  { src: '/img/feat-posts.webp', alt: 'Featured posts section' },
+  { src: '/img/calendar.webp', alt: 'Calendar overview' },
+  { src: '/img/quiz.webp', alt: 'Quiz experience' }
 ] as const;
 
 const DemoStokeContent = () => {

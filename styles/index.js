@@ -1169,7 +1169,7 @@ export const DemoStokeScrollImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 16 / 9;
 `;
 
 export const DemoStokeScrollHeader = styled.div`
