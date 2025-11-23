@@ -833,6 +833,10 @@ export const BioBox = styled.div`
     margin: 0;
   }
 
+  .story-section {
+    margin-top: 2.5em;
+  }
+
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     height: auto;
   }
