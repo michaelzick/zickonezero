@@ -1061,6 +1061,7 @@ export const DemoStokeTwoColumnRow = styled.div`
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: clamp(0.95em, 3vw, 2.6em);
   row-gap: 0.35em;
+  align-items: baseline;
   padding: 0.45em 0;
 
   &:not(:last-child) {
