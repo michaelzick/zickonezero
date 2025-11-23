@@ -165,7 +165,7 @@ const DemoStokeContent = () => {
         <DemoStokeTabs
           ref={handleTopTabsRef}
           tabs={[
-            { key: 'executive', label: 'Executive Summary' },
+            { key: 'executive', label: 'UX Case Study' },
             { key: 'stories', label: 'User Stories' }
           ]}
           activeTab={activeTab}
@@ -188,7 +188,7 @@ const DemoStokeContent = () => {
                     <FlexBox>
                       <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
                       <div>
-                        <h2 className='tab-header page-header'>Executive Summary</h2>
+                        <h2 className='tab-header page-header'>UX Case Study</h2>
                         <PitchDeckLink className='pitch-link-desktop' href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
                           Investor Pitch Deck <FileTextIcon aria-hidden="true" />
                         </PitchDeckLink>
