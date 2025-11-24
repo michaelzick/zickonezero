@@ -1241,12 +1241,16 @@ export const DemoStokeAccordionChevron = styled.span`
   height: 2.1em;
   padding: 0;
   flex-shrink: 0;
-  color: ${props => props.$isOpen ? THEME.colors.hotRed : THEME.colors.white};
+  color: ${props => props.$isOpen ? THEME.colors.hotRed : 'inherit'};
+  background: transparent;
+  border: none;
+  box-shadow: none;
   transform-origin: center;
 
   svg {
     width: 1.35em;
     height: 1.35em;
+    fill: none;
     stroke: currentColor;
     stroke-width: 2;
     stroke-linecap: round;
