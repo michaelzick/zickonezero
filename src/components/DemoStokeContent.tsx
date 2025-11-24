@@ -150,7 +150,7 @@ const METHOD_SECTIONS = [
       'Used Lovable AI to generate hi-fi pages quickly, then refined with prompt engineering.',
       'Layered custom frontend polish and Supabase to demo discovery, admin, and AI integrations.',
       'Ran moderated/unmoderated walkthroughs to validate discovery, booking, and trust cues.',
-      'Iterated copy and hierarchy from usability findings; tracked analytics to guide next improvements.'
+      'Iterated features and UI from usability findings; tracked analytics to guide next improvements.'
     ],
     image: { src: '/img/computer.jpg', alt: 'Laptop showing a high-fidelity interface design' }
   }
