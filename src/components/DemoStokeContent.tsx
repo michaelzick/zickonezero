@@ -41,6 +41,7 @@ import {
   DemoStokeAccordionCopy,
   DemoStokeTwoUp,
   DemoStokeBorderBox,
+  DemoStokeWhyImageFrame,
   DemoStokeScrollSection,
   DemoStokeScrollRow,
   DemoStokeScrollItem,
@@ -440,6 +441,13 @@ const DemoStokeContent = () => {
                             </DemoStokeTwoColumnCopy>
                           </section>
                         </DemoStokeTwoUp>
+                        <DemoStokeWhyImageFrame>
+                          <FullBorderImage
+                            src='/img/stuf-figma.webp'
+                            alt='Early Stuf peer-to-peer gear lending concepts in Figma'
+                            loading='lazy'
+                          />
+                        </DemoStokeWhyImageFrame>
                       </DemoStokeBorderBox>
                     </section>
 

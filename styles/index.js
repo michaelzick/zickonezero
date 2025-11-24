@@ -1313,6 +1313,20 @@ export const DemoStokeBorderBox = styled.div`
   }
 `;
 
+export const DemoStokeWhyImageFrame = styled.div`
+  margin-top: clamp(1em, 2vw, 1.5em);
+  border: 1px solid ${THEME.colors.white};
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 16px 38px -24px rgb(0 0 0 / 75%);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+`;
+
 export const DemoStokeScrollSection = styled.section`
   margin-top: 0.2em;
 `;
