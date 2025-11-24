@@ -412,21 +412,30 @@ const DemoStokeContent = () => {
                       <DemoStokeBorderBox>
                         <DemoStokeTwoUp>
                           <section id='section-problem'>
-                            <h3>The Problem</h3>
+                            <h3>My Story</h3>
                             <p>
-                              Demo opportunities for rideable gear are limited, inconvenient, or nonexistent. Many riders either blindly purchase
-                              expensive equipment or wait for infrequent on-site demos, often leading to mismatched gear choices and wasted spending.
+                              For the longest time, I struggled to find a way to try new gear without the hassle of traditional
+                              demo days or the uncertainty of buying blind. I knew there had to be a better way for riders like
+                              me to connect with gear they wanted to test out before making a pricey purchase.
+                              <br />
+                              <br />
+                              It started with surfboards. I’d buy boards off Craigslist, hoping they’d match my style and skill
+                              level, or, I’d sink a lot of money on a new board because it looked cool or it was a popular model.
                             </p>
                           </section>
                           <section id='section-complaints'>
-                            <h3>Current Complaints</h3>
+                            <h3>Is There a Better Way?</h3>
                             <DemoStokeTwoColumnCopy>
                               <div className='plain-lines'>
-                                <p>I wait in long rental lines without knowing if they have what I want.</p>
-                                <p>I can’t find the right gear in my size.</p>
-                                <p>I don’t want to buy a $900 surfboard I’ve never ridden.</p>
-                                <p>Demo days at the beach or mountain are few and far in between.</p>
-                                <p>Demo boards at the resort are expensive and they have a limited selection.</p>
+                                <p>I started playing with ideas, and years before I built DemoStoke, I created designs for a peer-to-peer
+                                  lending app called <em>Stuf</em>. It wasn’t specific to action sports gear, but it planted the seed
+                                  for what DemoStoke would eventually become.
+                                  <br />
+                                  <br />
+                                  In late 2023, after demoing a Capita DOA snowboard at Palisades Tahoe and loving it, I realized
+                                  the power of trying before buying. I thought, why not create a platform that makes this process
+                                  seamless for everyone?
+                                </p>
                               </div>
                             </DemoStokeTwoColumnCopy>
                           </section>
@@ -551,16 +560,16 @@ const DemoStokeContent = () => {
                       <DemoStokeTwoColumnLayout>
                         {RESEARCH_ITEMS.map(({ title, bullets }) => (
                           <DemoStokeTwoColumnRow key={title}>
-                          <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
-                          <DemoStokeTwoColumnCopy>
-                            <div className='plain-lines'>
-                              {bullets.map((bullet) => (
-                                <p key={bullet}>{bullet}</p>
-                              ))}
-                            </div>
-                          </DemoStokeTwoColumnCopy>
-                        </DemoStokeTwoColumnRow>
-                      ))}
+                            <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
+                            <DemoStokeTwoColumnCopy>
+                              <div className='plain-lines'>
+                                {bullets.map((bullet) => (
+                                  <p key={bullet}>{bullet}</p>
+                                ))}
+                              </div>
+                            </DemoStokeTwoColumnCopy>
+                          </DemoStokeTwoColumnRow>
+                        ))}
                       </DemoStokeTwoColumnLayout>
                     </section>
 
@@ -569,16 +578,16 @@ const DemoStokeContent = () => {
                       <DemoStokeTwoColumnLayout>
                         {UX_PROCESS_STEPS.map(({ title, bullets }) => (
                           <DemoStokeTwoColumnRow key={title}>
-                          <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
-                          <DemoStokeTwoColumnCopy>
-                            <div className='plain-lines'>
-                              {bullets.map((bullet) => (
-                                <p key={bullet}>{bullet}</p>
-                              ))}
-                            </div>
-                          </DemoStokeTwoColumnCopy>
-                        </DemoStokeTwoColumnRow>
-                      ))}
+                            <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
+                            <DemoStokeTwoColumnCopy>
+                              <div className='plain-lines'>
+                                {bullets.map((bullet) => (
+                                  <p key={bullet}>{bullet}</p>
+                                ))}
+                              </div>
+                            </DemoStokeTwoColumnCopy>
+                          </DemoStokeTwoColumnRow>
+                        ))}
                       </DemoStokeTwoColumnLayout>
                     </section>
 
