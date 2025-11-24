@@ -11,6 +11,7 @@ import {
   DemoStokeStoryCardGrid,
   DemoStokeStoryCard,
 } from '../../../styles';
+import HelpsCarousel from './HelpsCarousel';
 
 type StoryProps = {
   wrapWithBioBox?: boolean;
@@ -141,7 +142,7 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
 
       <section className='story-section'>
         <h3>How DemoStoke Helps</h3>
-        {renderTable(howHelps)}
+        <HelpsCarousel items={howHelps} />
       </section>
 
       <section className='story-section'>

@@ -1565,6 +1565,187 @@ export const DemoStokeScrollButton = styled.button`
   }
 `;
 
+export const DemoStokeMiniCardRow = styled.div`
+  display: flex;
+  gap: clamp(0.9em, 2vw, 1.35em);
+  overflow-x: auto;
+  padding: 0.35em 0.2em 0.3em;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${THEME.colors.grey};
+    border-radius: 999px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    padding-right: 0.25em;
+  }
+`;
+
+export const DemoStokeMiniCard = styled.button`
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-width: clamp(13em, 48vw, 15.5em);
+  max-width: 18em;
+  padding: clamp(1em, 2.3vw, 1.4em);
+  border-radius: 16px;
+  background:
+    radial-gradient(120% 120% at 12% 12%, rgba(255, 255, 255, 0.04), rgba(2, 8, 23, 0)),
+    linear-gradient(140deg, rgba(0, 215, 255, 0.24), rgba(254, 0, 101, 0.14), rgba(0, 113, 227, 0.2));
+  box-shadow: 0 18px 36px -28px rgb(0 0 0 / 85%), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  color: ${THEME.colors.white};
+  scroll-snap-align: start;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.2s ease;
+  border: none;
+  text-align: left;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 44px -26px rgb(0 0 0 / 80%), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${THEME.colors.demostoke};
+    outline-offset: 3px;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    min-width: 12em;
+    max-width: 12em;
+  }
+`;
+
+export const DemoStokeMiniCardTitle = styled.div`
+  font-weight: 700;
+  color: ${THEME.colors.demostoke};
+  letter-spacing: 0.01em;
+  margin: 0 0 0.5em;
+  font-size: clamp(1.02em, 2vw, 1.2em);
+`;
+
+export const DemoStokeMiniCardPreview = styled.div`
+  color: ${THEME.colors.white};
+  opacity: 0.92;
+  line-height: 1.6;
+  font-size: 0.98em;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  p {
+    margin: 0;
+  }
+`;
+
+export const DemoStokeMiniCardHint = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  color: ${THEME.colors.white};
+  opacity: 0.75;
+  font-size: 0.86em;
+  letter-spacing: 0.02em;
+  margin-top: auto;
+  padding-top: clamp(0.6em, 1vw, 0.85em);
+
+  &::after {
+    content: '↗';
+    font-size: 0.95em;
+  }
+`;
+
+export const DemoStokeMiniCardModalOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background: rgb(2 8 23 / 0.82);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1em, 3vw, 2em);
+  z-index: 999;
+`;
+
+export const DemoStokeMiniCardModal = styled.div`
+  position: relative;
+  width: min(720px, 95vw);
+  max-height: 88vh;
+  overflow: hidden;
+  border-radius: 18px;
+  background:
+    radial-gradient(140% 140% at 10% 0%, rgba(0, 215, 255, 0.16), rgba(2, 8, 23, 0)),
+    linear-gradient(150deg, rgba(3, 7, 18, 0.95), rgba(2, 132, 199, 0.14));
+  box-shadow: 0 18px 44px -26px rgb(0 0 0 / 80%), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 215, 255, 0.2);
+  color: ${THEME.colors.white};
+  padding: clamp(1.2em, 2.5vw, 1.85em);
+`;
+
+export const DemoStokeMiniCardModalClose = styled.button`
+  all: unset;
+  position: absolute;
+  top: 0.85em;
+  right: 0.95em;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: ${THEME.colors.white};
+  background: rgba(0, 215, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${THEME.colors.demostoke};
+    outline-offset: 3px;
+  }
+`;
+
+export const DemoStokeMiniCardModalTitle = styled.h4`
+  margin: 0 0 0.65em;
+  font-size: clamp(1.25em, 2.3vw, 1.5em);
+  color: ${THEME.colors.demostoke};
+  letter-spacing: 0.01em;
+`;
+
+export const DemoStokeMiniCardModalCopy = styled.div`
+  color: ${THEME.colors.white};
+  line-height: 1.7;
+  font-size: 1em;
+  max-height: calc(88vh - 4em);
+  overflow-y: auto;
+  padding-right: 0.4em;
+
+  p {
+    margin: 0 0 0.8em;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+`;
+
 export const TableWrapper = styled.div`
   width: 100%;
   overflow-x: auto;
