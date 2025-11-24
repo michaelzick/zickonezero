@@ -721,7 +721,7 @@ export const BioBox = styled.div`
     max-width: 50em;
 
     &.demostoke-inner {
-      max-width: 58em;
+      max-width: 62em;
 
       .ds-logo,
       .at-logo {
