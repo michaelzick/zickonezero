@@ -1134,7 +1134,7 @@ export const DemoStokeTldrSection = styled.div`
   padding: clamp(1.1em, 2.8vw, 1.8em) clamp(1.2em, 3vw, 2.1em);
   border-radius: 20px;
   background: rgba(37, 99, 235, 0.08);
-  border: ${props => props.$borderless ? 'none' : `1px solid ${THEME.colors.grey}`};
+  border: none;
   box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
 `;
 
