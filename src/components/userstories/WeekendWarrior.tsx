@@ -7,9 +7,9 @@ import {
   DemoStokeTwoColumnHeader,
   DemoStokeTwoColumnCopy,
   WhiteTransitionAnchor,
-  DemoStokeBorderBox,
-  DemoStokeStoryCardGrid,
-  DemoStokeStoryCard,
+  DemoStokeTldrSection,
+  DemoStokeTldrTitle,
+  DemoStokeTldrCopy,
 } from '../../../styles';
 import HelpsCarousel from './HelpsCarousel';
 
@@ -113,24 +113,12 @@ const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
       <section id='story-weekend-warrior' className='story-section'>
         <DemoStokeTitle>The Weekend Warrior</DemoStokeTitle>
 
-        <DemoStokeBorderBox>
-          <DemoStokeStoryCardGrid>
-            <DemoStokeStoryCard>
-              <h3>Abstract</h3>
-              <p>
-                Krista is a snowboarder who valued speed and precision, and wouldn’t buy a new board without riding it first. Her frustrations with traditional demo events opened the door for {DSLink} as a more flexible, trustworthy, and convenient solution.
-              </p>
-            </DemoStokeStoryCard>
-            <DemoStokeStoryCard>
-              <h3>Use Case Scenario</h3>
-              <p>
-                Krista was planning her next powder day at Palisades. She logged into {DSLink} and spotted a board she’d been curious about. It was available for pickup 5 minutes from the resort. She grabbed it, rode it all day, and decided it wasn’t quite the right fit, but she was stoked she didn’t waste $600 guessing.
-                <br /><br />
-                The next weekend, she tried a different shape through the same app and this time it ripped. She booked it again and eventually bought it through the platform with confidence.
-              </p>
-            </DemoStokeStoryCard>
-          </DemoStokeStoryCardGrid>
-        </DemoStokeBorderBox>
+        <DemoStokeTldrSection>
+          <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
+          <DemoStokeTldrCopy>
+            Krista is a snowboarder who valued speed and precision, and wouldn’t buy a new board without riding it first. Her frustrations with traditional demo events opened the door for {DSLink} as a more flexible, trustworthy, and convenient solution.
+          </DemoStokeTldrCopy>
+        </DemoStokeTldrSection>
       </section>
 
       <section className='story-section'>
