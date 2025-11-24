@@ -141,8 +141,7 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
       </section>
 
       <section className='story-section'>
-        <h3>How DemoStoke Helps</h3>
-        <HelpsCarousel items={howHelps} />
+        <HelpsCarousel items={howHelps} title='How DemoStoke Helps' />
       </section>
 
       <section className='story-section'>

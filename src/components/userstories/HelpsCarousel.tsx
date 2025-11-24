@@ -22,9 +22,10 @@ type HelpsItem = {
 
 type HelpsCarouselProps = {
   items: HelpsItem[];
+  title?: string;
 };
 
-const HelpsCarousel = ({ items }: HelpsCarouselProps) => {
+const HelpsCarousel = ({ items, title = 'How DemoStoke Helps' }: HelpsCarouselProps) => {
   const rowRef = useRef<HTMLDivElement | null>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
@@ -90,8 +91,8 @@ const HelpsCarousel = ({ items }: HelpsCarouselProps) => {
   return (
     <div>
       <DemoStokeScrollHeader>
-        <span />
-        <DemoStokeScrollControls aria-label='Scroll How DemoStoke Helps cards'>
+        <h3 style={{ margin: 0 }}>{title}</h3>
+        <DemoStokeScrollControls aria-label={`Scroll ${title} cards`}>
           <DemoStokeScrollButton
             type='button'
             onClick={() => scrollByCards(-1)}
