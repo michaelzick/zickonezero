@@ -411,6 +411,8 @@ const DemoStokeContent = () => {
                       </DemoStokeTldrSection>
                     </section>
 
+                    <br />
+
                     <section id='section-the-why' className='story-section'>
                       <DemoStokeTitle>The Why / How It Started</DemoStokeTitle>
                       <DemoStokeBorderBox>
@@ -453,6 +455,8 @@ const DemoStokeContent = () => {
                         </DemoStokeWhyImageFrame>
                       </DemoStokeBorderBox>
                     </section>
+
+                    <br />
 
                     <section id='section-the-who' className='story-section'>
                       <DemoStokeTitle>The Who / User Personas</DemoStokeTitle>
@@ -499,6 +503,8 @@ const DemoStokeContent = () => {
                         })}
                       </DemoStokeAccordion>
                     </section>
+
+                    <br />
 
                     <section id='section-the-how' className='story-section'>
                       <DemoStokeTitle>The How / AI-Driven Development</DemoStokeTitle>
@@ -581,6 +587,8 @@ const DemoStokeContent = () => {
                         </DemoStokeScrollRow>
                       </DemoStokeScrollSection>
                     </section>
+
+                    <br />
 
                     <section id='section-methodology' className='story-section'>
                       <DemoStokeTitle>Methods / The UX Process</DemoStokeTitle>
