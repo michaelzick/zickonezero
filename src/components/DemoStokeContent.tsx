@@ -505,10 +505,15 @@ const DemoStokeContent = () => {
                             <h3>Location-Based Discovery</h3>
                             <p>
                               With DemoStoke, I created a comprehensive gear discovery and rental platform that connects riders with
-                              demo opportunities in their area. By leveraging location-based services, DemoStoke helps riders find
-                              available gear to try before they buy, while also providing a marketplace for gear owners to list their
-                              equipment for rent. Additionally, shop owners can easily manage their demo inventory and track rentals
-                              through an intuitive admin dashboard.
+                              demo opportunities in their area.
+                              <br />
+                              <br />
+                              By leveraging location-based services, DemoStoke helps riders find available gear to try before they buy,
+                              while also providing a marketplace for gear owners to list their equipment for rent.
+                              <br />
+                              <br />
+                              Additionally, shop owners can easily manage their demo inventory and track rentals through an intuitive
+                              admin dashboard.
                             </p>
                           </section>
                           <section>
