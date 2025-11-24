@@ -368,11 +368,13 @@ const DemoStokeContent = () => {
                     <br />
 
                     <h3 style={{ color: 'var(--color-hotRed)' }}>TL;DR</h3>
-                    <DemoStokeMethodCard style={{ border: '1px solid var(--color-grey)' }}>
-                      <p style={{ margin: 0, color: 'var(--color-white)', fontSize: 'clamp(0.78em, 1.75vw, 1.08em)', lineHeight: 1.6 }}>
-                        Riders and shops struggle with fragmented, offline demo and rental flows. I designed DemoStoke to be a unified marketplace to solve those issues. In validation sessions, 90% of shop owners said it would bring them more customers, and 100% of riders described it as "the thing that should already exist."
-                      </p>
-                    </DemoStokeMethodCard>
+                        <DemoStokeMethodCard style={{ border: '1px solid var(--color-grey)' }}>
+                          <p style={{ margin: 0, color: 'var(--color-white)', fontSize: 'clamp(0.78em, 1.75vw, 1.08em)', lineHeight: 1.6 }}>
+                            Riders and shops struggle with fragmented, offline demo and rental flows. I designed DemoStoke to be a unified
+                            marketplace to solve those issues. In validation sessions, 90% of shop owners said it would bring them more
+                            customers, and 100% of riders described it as &ldquo;the thing that should already exist.&rdquo;
+                          </p>
+                        </DemoStokeMethodCard>
 
                     <section id='section-tldr' className='story-section'>
                       <DemoStokeTldrSection>
