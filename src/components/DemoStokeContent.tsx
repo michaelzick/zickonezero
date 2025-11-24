@@ -508,7 +508,7 @@ const DemoStokeContent = () => {
 
                     <section id='section-the-how' className='story-section'>
                       <DemoStokeTitle>The How / AI-Driven Development</DemoStokeTitle>
-                      <DemoStokeBorderBox>
+                      <DemoStokeTldrSection>
                         <DemoStokeTwoUp>
                           <section>
                             <h3>Location-Based Discovery</h3>
@@ -540,7 +540,7 @@ const DemoStokeContent = () => {
                         <DemoStokeWhyImageFrame>
                           <FullBorderImage src='/img/all-equipment-hybrid.webp' alt='DemoStoke Hybrid View' loading="lazy" />
                         </DemoStokeWhyImageFrame>
-                      </DemoStokeBorderBox>
+                      </DemoStokeTldrSection>
                     </section>
 
                     <section id='section-how-gallery'>

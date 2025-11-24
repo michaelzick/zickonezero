@@ -1370,7 +1370,6 @@ export const DemoStokeBorderBox = styled.div`
 
 export const DemoStokeWhyImageFrame = styled.div`
   margin-top: clamp(1em, 2vw, 1.5em);
-  border: 1px solid ${THEME.colors.white};
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 16px 38px -24px rgb(0 0 0 / 75%);
