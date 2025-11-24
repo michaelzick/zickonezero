@@ -1757,10 +1757,8 @@ export const DemoStokeWhyCard = styled.div`
   position: relative;
   padding: clamp(1em, 2.4vw, 1.4em);
   border-radius: 16px;
-  background:
-    linear-gradient(135deg, rgba(0, 113, 227, 0.14), rgba(0, 215, 255, 0.08)),
-    radial-gradient(120% 120% at 15% 10%, rgba(255, 0, 101, 0.12), rgba(2, 8, 23, 0));
-  box-shadow: 0 12px 28px -20px rgb(0 0 0 / 70%);
+  background: rgba(37, 99, 235, 0.08);
+  box-shadow: 0 12px 28px -22px rgb(0 0 0 / 70%);
   color: ${THEME.colors.white};
   border: none;
   overflow: hidden;
