@@ -142,9 +142,11 @@ const useSectionTabs = ({
   }, [isActive, sections, getTotalOffset, lockToBottomSectionId]);
 
   const handleTabClick = useCallback((sectionId: string) => {
+    const clickedAt = performance.now();
     scrollToSection(sectionId, 'smooth');
 
     const rerunAfterLoad = () => {
+      if (performance.now() - clickedAt > 1200) return;
       requestAnimationFrame(() => scrollToSection(sectionId, 'smooth'));
     };
 
