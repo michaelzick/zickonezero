@@ -72,7 +72,7 @@ const TLDR_ITEMS: {
   image: { src: string; alt: string; };
 }[] = [
   {
-    title: 'What it is',
+    title: 'What It Is',
     description: (
       <>
         <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
@@ -364,7 +364,7 @@ const DemoStokeContent = () => {
                     <section id='hero-spacer' aria-hidden='true' />
 
                     <section id='introduction' className='story-section'>
-                      <DemoStokeTitle>Intro</DemoStokeTitle>
+                      <DemoStokeTitle>Introduction</DemoStokeTitle>
                     </section>
 
                     <VideoFrame>

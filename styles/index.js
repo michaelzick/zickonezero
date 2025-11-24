@@ -1109,7 +1109,7 @@ export const DemoStokeTwoColumnCopy = styled.div`
 export const DemoStokeTldrList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: clamp(1.05em, 2.2vw, 1.75em);
+  gap: 0;
 `;
 
 export const DemoStokeTldrRow = styled.div`
@@ -1117,6 +1117,10 @@ export const DemoStokeTldrRow = styled.div`
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: clamp(1em, 3vw, 2.35em);
   align-items: flex-start;
+
+  &:not(:first-of-type) {
+    margin-top: clamp(1.35em, 3.4vw, 2.7em);
+  }
 
   ${props => props.$reverse && `
     & > :first-child {
@@ -1131,6 +1135,10 @@ export const DemoStokeTldrRow = styled.div`
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     grid-template-columns: 1fr;
     gap: 0.9em;
+
+    &:not(:first-of-type) {
+      margin-top: clamp(1em, 2.6vw, 1.6em);
+    }
 
     ${props => props.$reverse && `
       & > :first-child {
