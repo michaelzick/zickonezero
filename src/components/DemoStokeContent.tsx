@@ -42,9 +42,9 @@ import DemoStokeTabs from './DemoStokeTabs';
 import SidebarSectionTabs, { SidebarSectionConfig, SidebarSectionTabsMobile } from './SidebarSectionTabs';
 import * as UserStories from './userstories';
 
-type SectionKey = 'executive' | 'stories';
+type SectionKey = 'case-study' | 'stories';
 
-const EXECUTIVE_SECTIONS: SidebarSectionConfig[] = [
+const CASE_STUDY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'hero-spacer', label: 'Intro Spacer', hidden: true },
   { id: 'introduction', label: 'Intro' },
   { id: 'section-the-why', label: 'The Why' },
@@ -52,7 +52,7 @@ const EXECUTIVE_SECTIONS: SidebarSectionConfig[] = [
   { id: 'section-the-how', label: 'The How' },
   { id: 'section-methodology', label: 'Methods' }
 ] as const;
-const EXECUTIVE_BOTTOM_SECTION_ID = EXECUTIVE_SECTIONS[EXECUTIVE_SECTIONS.length - 1]?.id;
+const CASE_STUDY_BOTTOM_SECTION_ID = CASE_STUDY_SECTIONS[CASE_STUDY_SECTIONS.length - 1]?.id;
 
 const STORY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'story-introduction', label: 'Intro', hidden: true },
@@ -216,7 +216,7 @@ const HOW_IMAGES = [
 const DemoStokeContent = () => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
-  const [activeTab, setActiveTab] = useState<SectionKey>('executive');
+  const [activeTab, setActiveTab] = useState<SectionKey>('case-study');
   const [topTabsEl, setTopTabsEl] = useState<HTMLDivElement | null>(null);
   const [lightboxController, setLightboxController] = useState({ toggler: false, slide: 1 });
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -229,9 +229,9 @@ const DemoStokeContent = () => {
   const handleTabClick = (tabKey: string) => {
     setActiveTab(tabKey as SectionKey);
   };
-  const isExecutiveView = activeTab === 'executive';
-  const currentSections = isExecutiveView ? EXECUTIVE_SECTIONS : STORY_SECTIONS;
-  const lockToBottomSectionId = isExecutiveView ? EXECUTIVE_BOTTOM_SECTION_ID : undefined;
+  const isCaseStudyView = activeTab === 'case-study';
+  const currentSections = isCaseStudyView ? CASE_STUDY_SECTIONS : STORY_SECTIONS;
+  const lockToBottomSectionId = isCaseStudyView ? CASE_STUDY_BOTTOM_SECTION_ID : undefined;
 
   // Scroll to top after tab content changes
   useEffect(() => {
@@ -302,7 +302,7 @@ const DemoStokeContent = () => {
         <DemoStokeTabs
           ref={handleTopTabsRef}
           tabs={[
-            { key: 'executive', label: 'UX Case Study' },
+            { key: 'case-study', label: 'UX Case Study' },
             { key: 'stories', label: 'User Stories' }
           ]}
           activeTab={activeTab}
@@ -316,7 +316,7 @@ const DemoStokeContent = () => {
           scrollOffsetAdjustment={20}
         />
 
-        {activeTab === 'executive' && (
+        {activeTab === 'case-study' && (
           <div id="executive-content">
             <BioBox direction='right' noBottomPadding top>
               <div className='biobox-inner demostoke-inner'>
@@ -529,10 +529,10 @@ const DemoStokeContent = () => {
                     <br />
                   </div>
                   <SidebarSectionTabs
-                    sections={EXECUTIVE_SECTIONS}
+                    sections={CASE_STUDY_SECTIONS}
                     topTabsEl={topTabsEl}
-                    isActive={activeTab === 'executive'}
-                    lockToBottomSectionId={EXECUTIVE_BOTTOM_SECTION_ID}
+                    isActive={activeTab === 'case-study'}
+                    lockToBottomSectionId={CASE_STUDY_BOTTOM_SECTION_ID}
                     scrollOffsetAdjustment={20}
                   />
                 </DemoStokeContentGrid>
