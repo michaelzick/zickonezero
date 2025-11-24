@@ -1282,6 +1282,10 @@ export const DemoStokeAccordionContent = styled.div`
   opacity: ${props => props.$isOpen ? 1 : 0};
   padding: ${props => props.$isOpen ? '0 1.05em 1.05em' : '0 1.05em 0'};
   transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.25s ease;
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    max-height: ${props => props.$isOpen ? '1200px' : '0px'};
+  }
 `;
 
 export const DemoStokeAccordionCopy = styled.div`
