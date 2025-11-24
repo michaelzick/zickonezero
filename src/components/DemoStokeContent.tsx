@@ -178,7 +178,7 @@ const UX_PROCESS_STEPS = [
     title: 'Test & Refine',
     bullets: [
       'Ran moderated and unmoderated walkthroughs on the hi-fi prototype to validate discovery, booking, and trust cues.',
-      'Iterated copy, visual hierarchy, and flows based on usability findings and success metrics.',
+      'Iterated copy, visual hierarchy, and features based on usability findings and feedback.',
       'Used Google Analytics and Amplitude on the live MVP to track engagement and SEO metrics for future improvements.'
     ]
   }

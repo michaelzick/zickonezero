@@ -1096,7 +1096,7 @@ export const DemoStokeTwoColumnHeader = styled.div`
   color: ${THEME.colors.orange};
   letter-spacing: 0.04em;
   text-transform: capitalize;
-  font-size: 0.95em;
+  font-size: clamp(1.05em, 2vw, 1.25em);
 `;
 
 export const DemoStokeTwoColumnCopy = styled.div`
