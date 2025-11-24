@@ -111,11 +111,11 @@ const TLDR_ITEMS: {
     }
   },
   {
-    title: 'My Role',
-    description: 'Founder, Head of Product, UX strategist, MVP architect.',
+    title: 'My Roles',
+    description: 'UX Designer, Full-Stack Developer.',
     image: {
-      src: '/img/ds-80s-game.webp',
-      alt: 'DemoStoke retro 80s game-inspired screen'
+      src: '/img/ds-design-system.webp',
+      alt: 'DemoStoke design system components'
     }
   }
 ] as const;
@@ -598,7 +598,6 @@ const DemoStokeContent = () => {
                     </section>
 
                     <section id='section-ux-process' className='story-section'>
-                      <h3>UX Process</h3>
                       <DemoStokeTwoColumnLayout>
                         {UX_PROCESS_STEPS.map(({ title, bullets }) => (
                           <DemoStokeTwoColumnRow key={title}>
@@ -625,13 +624,6 @@ const DemoStokeContent = () => {
                         </li>
                       </DemoStokeList>
                     </section>
-                    <DemoStokeWhyImageFrame>
-                      <FullBorderImage
-                        src='/img/ds-80s-game-purple.webp'
-                        alt='DemoStoke retro purple game-inspired screen'
-                        loading='lazy'
-                      />
-                    </DemoStokeWhyImageFrame>
                     <br />
                     <br />
                   </div>
