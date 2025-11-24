@@ -179,7 +179,7 @@ const PERSONA_ITEMS = [
     bullets: [
       'Maya (31, Santa Cruz) is a van-lifer and remote UX designer who rides 1-3x/week.',
       'She doesn’t want to own a ton of gear and struggles to find quality rentals in new locations.',
-      'She wants DemoStoke to offer verified local lenders, easy to find gear specs, and fair prices.'
+      'She wants DemoStoke to offer verified local lenders, easy-to-find gear specs, and fair prices.'
     ]
   },
   {
@@ -397,7 +397,7 @@ const DemoStokeContent = () => {
                               <br />
                               <br />
                               It started with surfboards. I’d buy boards off Craigslist, hoping they’d match my style and skill
-                              level, or, I’d sink a lot of money on a new board because it looked cool or it was a popular model.
+                              level—or I’d sink a lot of money on a new board because it looked cool or was a popular model.
                             </p>
                           </section>
                           <section id='section-complaints'>
