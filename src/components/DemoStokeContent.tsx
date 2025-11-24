@@ -658,6 +658,8 @@ const DemoStokeContent = () => {
                     <section id='story-small-ski-shop'>
                       <UserStories.SmallSkiBikeShop wrapWithBioBox={false} />
                     </section>
+                    <br />
+                    <br />
                   </div>
                   <SidebarSectionTabs
                     sections={STORY_SECTIONS}
