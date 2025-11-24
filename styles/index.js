@@ -1772,6 +1772,7 @@ export const DemoStokeWhyBadge = styled.span`
   height: 1.8em;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(15, 23, 42, 0.55);
   color: ${THEME.colors.white};
   font-weight: 700;
   font-size: 0.95em;
