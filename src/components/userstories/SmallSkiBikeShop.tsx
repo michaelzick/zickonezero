@@ -20,16 +20,22 @@ type StoryProps = {
 const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
   const DSLink = <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>DemoStoke</WhiteTransitionAnchor>;
 
-  const renderTable = (items: { title: string; description: ReactNode; }[]) => (
-    <DemoStokeTwoColumnLayout>
-      {items.map(({ title, description }) => (
-        <DemoStokeTwoColumnRow key={title}>
-          <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
-          <DemoStokeTwoColumnCopy>{description}</DemoStokeTwoColumnCopy>
-        </DemoStokeTwoColumnRow>
-      ))}
-    </DemoStokeTwoColumnLayout>
-  );
+  const renderTable = (
+    items: { title: string; description: ReactNode; }[],
+    options?: { variant?: 'default' | 'tinted'; }
+  ) => {
+    const isTinted = options?.variant === 'tinted';
+    return (
+      <DemoStokeTwoColumnLayout $variant={isTinted ? 'tinted' : undefined}>
+        {items.map(({ title, description }) => (
+          <DemoStokeTwoColumnRow key={title} $isBorderless={isTinted}>
+            <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
+            <DemoStokeTwoColumnCopy>{description}</DemoStokeTwoColumnCopy>
+          </DemoStokeTwoColumnRow>
+        ))}
+      </DemoStokeTwoColumnLayout>
+    );
+  };
 
   const painPoints = [
     {
@@ -113,7 +119,7 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
       <section id='story-small-ski-shop' className='story-section'>
         <DemoStokeTitle>The Small Ski &amp; Bike Shop</DemoStokeTitle>
 
-        <DemoStokeTldrSection>
+        <DemoStokeTldrSection $borderless>
           <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
           <DemoStokeTldrCopy>
             For Jason, the owner of <strong>Town &amp; Country Outfitters</strong>, a high-end ski and bike shop in a mountain town, {DSLink} offered a way to modernize without losing what made his shop personal and trusted. DemoStoke solved his toughest problems around demo logistics, digital visibility, and customer trust.
@@ -132,7 +138,7 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
 
       <section className='story-section'>
         <h3>Why This Helps Jason Scale</h3>
-        {renderTable(whyHelps)}
+        {renderTable(whyHelps, { variant: 'tinted' })}
       </section>
     </div>
   );

@@ -1067,9 +1067,9 @@ export const DemoStokeTwoColumnLayout = styled.div`
   flex-direction: column;
   gap: 0.35em;
   padding: clamp(0.9em, 2vw, 1.45em) clamp(1.2em, 3vw, 2em);
-  border: 1px solid ${THEME.colors.grey};
+  border: ${props => props.$variant === 'tinted' ? 'none' : `1px solid ${THEME.colors.grey}`};
   border-radius: 20px;
-  background: transparent;
+  background: ${props => props.$variant === 'tinted' ? 'rgba(37, 99, 235, 0.08)' : 'transparent'};
 `;
 
 export const DemoStokeTwoColumnRow = styled.div`
@@ -1081,7 +1081,7 @@ export const DemoStokeTwoColumnRow = styled.div`
   padding: 0.45em 0;
 
   &:not(:last-child) {
-    border-bottom: 1px solid ${THEME.colors.grey};
+    border-bottom: ${props => props.$isBorderless ? 'none' : `1px solid ${THEME.colors.grey}`};
     padding-bottom: clamp(0.75em, 1.8vw, 1.1em);
   }
 
@@ -1134,7 +1134,7 @@ export const DemoStokeTldrSection = styled.div`
   padding: clamp(1.1em, 2.8vw, 1.8em) clamp(1.2em, 3vw, 2.1em);
   border-radius: 20px;
   background: rgba(37, 99, 235, 0.08);
-  border: 1px solid ${THEME.colors.grey};
+  border: ${props => props.$borderless ? 'none' : `1px solid ${THEME.colors.grey}`};
   box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
 `;
 

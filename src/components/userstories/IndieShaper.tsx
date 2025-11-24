@@ -23,16 +23,22 @@ type StoryProps = {
 const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
   const DSLink = <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>DemoStoke</WhiteTransitionAnchor>;
 
-  const renderTable = (items: { title: string; description: ReactNode; }[]) => (
-    <DemoStokeTwoColumnLayout>
-      {items.map(({ title, description }) => (
-        <DemoStokeTwoColumnRow key={title}>
-          <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
-          <DemoStokeTwoColumnCopy>{description}</DemoStokeTwoColumnCopy>
-        </DemoStokeTwoColumnRow>
-      ))}
-    </DemoStokeTwoColumnLayout>
-  );
+  const renderTable = (
+    items: { title: string; description: ReactNode; }[],
+    options?: { variant?: 'default' | 'tinted'; }
+  ) => {
+    const isTinted = options?.variant === 'tinted';
+    return (
+      <DemoStokeTwoColumnLayout $variant={isTinted ? 'tinted' : undefined}>
+        {items.map(({ title, description }) => (
+          <DemoStokeTwoColumnRow key={title} $isBorderless={isTinted}>
+            <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
+            <DemoStokeTwoColumnCopy>{description}</DemoStokeTwoColumnCopy>
+          </DemoStokeTwoColumnRow>
+        ))}
+      </DemoStokeTwoColumnLayout>
+    );
+  };
 
   const painPoints = [
     {
@@ -124,7 +130,7 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
       <section id='story-independent-surfboard-shaper-title' className='story-section'>
         <DemoStokeTitle>The Independent Surfboard Shaper</DemoStokeTitle>
 
-        <DemoStokeTldrSection>
+        <DemoStokeTldrSection $borderless>
           <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
           <DemoStokeTldrCopy>
             From the lens of Curtis, an independent Southern California surfboard shaper, {DSLink} had the potential to radically simplify and expand his business by addressing key pain points around demo logistics, discovery, trust, and conversion.
@@ -143,7 +149,7 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
 
       <section className='story-section'>
         <h3>Why This Helps Curtis Scale</h3>
-        {renderTable(whyScale)}
+        {renderTable(whyScale, { variant: 'tinted' })}
       </section>
     </div>
   );

@@ -20,16 +20,22 @@ type StoryProps = {
 const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
   const DSLink = <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>DemoStoke</WhiteTransitionAnchor>;
 
-  const renderTable = (items: { title: string; description: ReactNode; }[]) => (
-    <DemoStokeTwoColumnLayout>
-      {items.map(({ title, description }) => (
-        <DemoStokeTwoColumnRow key={title}>
-          <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
-          <DemoStokeTwoColumnCopy>{description}</DemoStokeTwoColumnCopy>
-        </DemoStokeTwoColumnRow>
-      ))}
-    </DemoStokeTwoColumnLayout>
-  );
+  const renderTable = (
+    items: { title: string; description: ReactNode; }[],
+    options?: { variant?: 'default' | 'tinted'; }
+  ) => {
+    const isTinted = options?.variant === 'tinted';
+    return (
+      <DemoStokeTwoColumnLayout $variant={isTinted ? 'tinted' : undefined}>
+        {items.map(({ title, description }) => (
+          <DemoStokeTwoColumnRow key={title} $isBorderless={isTinted}>
+            <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
+            <DemoStokeTwoColumnCopy>{description}</DemoStokeTwoColumnCopy>
+          </DemoStokeTwoColumnRow>
+        ))}
+      </DemoStokeTwoColumnLayout>
+    );
+  };
 
   const painPoints = [
     {
@@ -113,7 +119,7 @@ const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
       <section id='story-weekend-warrior' className='story-section'>
         <DemoStokeTitle>The Weekend Warrior</DemoStokeTitle>
 
-        <DemoStokeTldrSection>
+        <DemoStokeTldrSection $borderless>
           <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
           <DemoStokeTldrCopy>
             Krista is a snowboarder who valued speed and precision, and wouldn’t buy a new board without riding it first. Her frustrations with traditional demo events opened the door for {DSLink} as a more flexible, trustworthy, and convenient solution.
@@ -132,7 +138,7 @@ const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
 
       <section className='story-section'>
         <h3>Why This Helps Riders Like Krista</h3>
-        {renderTable(whyHelps)}
+        {renderTable(whyHelps, { variant: 'tinted' })}
       </section>
     </div>
   );
