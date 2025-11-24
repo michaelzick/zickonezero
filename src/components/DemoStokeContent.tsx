@@ -483,12 +483,12 @@ const DemoStokeContent = () => {
                                 aria-label={`${title} details`}
                                 $isOpen={isOpen}
                               >
-                                <DemoStokeAccordionCopy>
-                                  <div className='plain-lines'>
+                              <DemoStokeAccordionCopy>
+                                  <ul className='plain-lines'>
                                     {bullets.map((bullet) => (
-                                      <p key={bullet}>{bullet}</p>
+                                      <li key={bullet}>{bullet}</li>
                                     ))}
-                                  </div>
+                                  </ul>
                                 </DemoStokeAccordionCopy>
                               </DemoStokeAccordionContent>
                             </DemoStokeAccordionItem>
@@ -586,11 +586,11 @@ const DemoStokeContent = () => {
                           <DemoStokeTwoColumnRow key={title}>
                             <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
                             <DemoStokeTwoColumnCopy>
-                              <div className='plain-lines'>
+                              <ul className='plain-lines'>
                                 {bullets.map((bullet) => (
-                                  <p key={bullet}>{bullet}</p>
+                                  <li key={bullet}>{bullet}</li>
                                 ))}
-                              </div>
+                              </ul>
                             </DemoStokeTwoColumnCopy>
                           </DemoStokeTwoColumnRow>
                         ))}
@@ -603,11 +603,11 @@ const DemoStokeContent = () => {
                           <DemoStokeTwoColumnRow key={title}>
                             <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
                             <DemoStokeTwoColumnCopy>
-                              <div className='plain-lines'>
+                              <ul className='plain-lines'>
                                 {bullets.map((bullet) => (
-                                  <p key={bullet}>{bullet}</p>
+                                  <li key={bullet}>{bullet}</li>
                                 ))}
-                              </div>
+                              </ul>
                             </DemoStokeTwoColumnCopy>
                           </DemoStokeTwoColumnRow>
                         ))}
@@ -620,11 +620,11 @@ const DemoStokeContent = () => {
                           <DemoStokeTwoColumnRow key={title}>
                             <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
                             <DemoStokeTwoColumnCopy>
-                              <div className='plain-lines'>
+                              <ul className='plain-lines'>
                                 {bullets.map((bullet) => (
-                                  <p key={bullet}>{bullet}</p>
+                                  <li key={bullet}>{bullet}</li>
                                 ))}
-                              </div>
+                              </ul>
                             </DemoStokeTwoColumnCopy>
                           </DemoStokeTwoColumnRow>
                         ))}

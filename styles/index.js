@@ -1104,6 +1104,21 @@ export const DemoStokeTwoColumnCopy = styled.div`
   line-height: 1.55;
 
   .plain-lines {
+    margin: 0;
+
+    ul& {
+      padding-left: 1.1em;
+      list-style: disc;
+    }
+
+    li {
+      margin: 0 0 0.5em;
+    }
+
+    li:last-child {
+      margin-bottom: 0;
+    }
+
     p {
       margin: 0 0 0.6em;
     }
