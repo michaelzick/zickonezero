@@ -1242,6 +1242,12 @@ export const DemoStokeMethodList = styled.div`
   gap: clamp(1.05em, 2.2vw, 1.5em);
 `;
 
+export const DemoStokeMethodCard = styled(DemoStokeTldrSection)`
+  border: none;
+  background: rgba(37, 99, 235, 0.08);
+  box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
+`;
+
 export const DemoStokeMethodRow = styled(DemoStokeTldrRow)`
   align-items: center;
   gap: clamp(1.2em, 3vw, 2.2em);

@@ -43,6 +43,7 @@ import {
   DemoStokeTwoUp,
   DemoStokeBorderBox,
   DemoStokeMethodList,
+  DemoStokeMethodCard,
   DemoStokeMethodRow,
   DemoStokeWhyImageFrame,
   DemoStokeScrollSection,
@@ -565,7 +566,7 @@ const DemoStokeContent = () => {
                       <DemoStokeTitle>Methods / The UX Process</DemoStokeTitle>
                       <DemoStokeMethodList>
                         {METHOD_SECTIONS.map(({ title, bullets, image }, index) => (
-                          <DemoStokeBorderBox key={title}>
+                          <DemoStokeMethodCard key={title}>
                             <DemoStokeMethodRow $reverse={index % 2 === 1}>
                               <div>
                                 <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
@@ -579,7 +580,7 @@ const DemoStokeContent = () => {
                               </div>
                               <DemoStokeTldrImage src={image.src} alt={image.alt} loading='lazy' />
                             </DemoStokeMethodRow>
-                          </DemoStokeBorderBox>
+                          </DemoStokeMethodCard>
                         ))}
                       </DemoStokeMethodList>
                     </section>
