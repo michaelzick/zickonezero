@@ -504,16 +504,28 @@ const DemoStokeContent = () => {
                           <section>
                             <h3>Location-Based Discovery</h3>
                             <p>
-                              A comprehensive gear discovery and rental platform that connects riders with demo opportunities in their area.
-                              By leveraging location-based services, we can help riders find available gear to try before they buy,
-                              while also providing a marketplace for gear owners to list their equipment for rent.
+                              With DemoStoke, I created a comprehensive gear discovery and rental platform that connects riders with
+                              demo opportunities in their area. By leveraging location-based services, DemoStoke helps riders find
+                              available gear to try before they buy, while also providing a marketplace for gear owners to list their
+                              equipment for rent. Additionally, shop owners can easily manage their demo inventory and track rentals
+                              through an intuitive admin dashboard.
                             </p>
                           </section>
                           <section>
-                            <h3>Intelligent Recommendations</h3>
-                            <FullBorderImage src='/img/all-equipment-hybrid.webp' alt='DemoStoke Hybrid View' loading="lazy" />
+                            <h3>Rapid Prototyping with AI</h3>
+                            <p>Using Lovable.dev, I was able to spin up the app’s foundation with a well-written prompt, then iterated
+                              rapidly to refine features and user experience.
+                              <br />
+                              <br />
+                              By combining AI-generated code, my years of front-end development experience, and a database integration,
+                              I created a fully-functional web application complete with signup/login, user and admin dashboards, and
+                              geolocation services with OpenAI API integrations.
+                            </p>
                           </section>
                         </DemoStokeTwoUp>
+                        <DemoStokeWhyImageFrame>
+                          <FullBorderImage src='/img/all-equipment-hybrid.webp' alt='DemoStoke Hybrid View' loading="lazy" />
+                        </DemoStokeWhyImageFrame>
                       </DemoStokeBorderBox>
                     </section>
 
