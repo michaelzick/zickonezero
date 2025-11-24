@@ -15,6 +15,7 @@ import {
   DemoStokeTldrCopy,
 } from '../../../styles';
 import HelpsCarousel from './HelpsCarousel';
+import WhyHighlights from './WhyHighlights';
 
 type StoryProps = {
   wrapWithBioBox?: boolean;
@@ -149,7 +150,7 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
 
       <section className='story-section'>
         <h3>Why This Helps Curtis Scale</h3>
-        {renderTable(whyScale, { variant: 'tinted' })}
+        <WhyHighlights items={whyScale} />
       </section>
     </div>
   );

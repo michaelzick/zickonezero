@@ -12,6 +12,7 @@ import {
   DemoStokeTldrCopy,
 } from '../../../styles';
 import HelpsCarousel from './HelpsCarousel';
+import WhyHighlights from './WhyHighlights';
 
 type StoryProps = {
   wrapWithBioBox?: boolean;
@@ -138,7 +139,7 @@ const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
 
       <section className='story-section'>
         <h3>Why This Helps Riders Like Krista</h3>
-        {renderTable(whyHelps, { variant: 'tinted' })}
+        <WhyHighlights items={whyHelps} />
       </section>
     </div>
   );

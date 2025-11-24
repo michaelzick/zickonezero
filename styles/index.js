@@ -1746,6 +1746,62 @@ export const DemoStokeMiniCardModalCopy = styled.div`
   }
 `;
 
+export const DemoStokeWhyGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(0.85em, 2vw, 1.45em);
+  margin-top: 0.6em;
+`;
+
+export const DemoStokeWhyCard = styled.div`
+  position: relative;
+  padding: clamp(1em, 2.4vw, 1.4em);
+  border-radius: 16px;
+  background:
+    linear-gradient(135deg, rgba(0, 113, 227, 0.14), rgba(0, 215, 255, 0.08)),
+    radial-gradient(120% 120% at 15% 10%, rgba(255, 0, 101, 0.12), rgba(2, 8, 23, 0));
+  box-shadow: 0 12px 28px -20px rgb(0 0 0 / 70%);
+  color: ${THEME.colors.white};
+  border: none;
+  overflow: hidden;
+`;
+
+export const DemoStokeWhyBadge = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.8em;
+  height: 1.8em;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: ${THEME.colors.white};
+  font-weight: 700;
+  font-size: 0.95em;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.55em;
+`;
+
+export const DemoStokeWhyTitle = styled.h4`
+  margin: 0 0 0.4em;
+  color: ${THEME.colors.demostoke};
+  font-size: clamp(1.05em, 2.2vw, 1.25em);
+  letter-spacing: 0.01em;
+`;
+
+export const DemoStokeWhyCopy = styled.div`
+  color: ${THEME.colors.white};
+  line-height: 1.65;
+  opacity: 0.96;
+
+  p {
+    margin: 0 0 0.7em;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+`;
+
 export const TableWrapper = styled.div`
   width: 100%;
   overflow-x: auto;
