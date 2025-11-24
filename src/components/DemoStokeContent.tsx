@@ -599,7 +599,24 @@ const DemoStokeContent = () => {
 
                     <section id='section-ux-process' className='story-section'>
                       <DemoStokeTwoColumnLayout>
-                        {UX_PROCESS_STEPS.map(({ title, bullets }) => (
+                        {UX_PROCESS_STEPS.slice(0, 3).map(({ title, bullets }) => (
+                          <DemoStokeTwoColumnRow key={title}>
+                            <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
+                            <DemoStokeTwoColumnCopy>
+                              <div className='plain-lines'>
+                                {bullets.map((bullet) => (
+                                  <p key={bullet}>{bullet}</p>
+                                ))}
+                              </div>
+                            </DemoStokeTwoColumnCopy>
+                          </DemoStokeTwoColumnRow>
+                        ))}
+                      </DemoStokeTwoColumnLayout>
+                    </section>
+
+                    <section className='story-section'>
+                      <DemoStokeTwoColumnLayout>
+                        {UX_PROCESS_STEPS.slice(3).map(({ title, bullets }) => (
                           <DemoStokeTwoColumnRow key={title}>
                             <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
                             <DemoStokeTwoColumnCopy>
