@@ -1187,6 +1187,87 @@ export const DemoStokeTldrImage = styled.img`
   display: block;
 `;
 
+export const DemoStokeAccordion = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.55em;
+`;
+
+export const DemoStokeAccordionItem = styled.div`
+  border: 1px solid ${THEME.colors.white};
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.005));
+  box-shadow: ${props => props.$isOpen ? '0 14px 28px -16px rgb(0 0 0 / 70%)' : 'none'};
+  transition: border-color 0.2s ease, box-shadow 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    border-color: ${THEME.colors.hotRed};
+    transform: translateY(-1px);
+  }
+`;
+
+export const DemoStokeAccordionHeader = styled.button`
+  all: unset;
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1em;
+  padding: 0.95em 1.05em;
+  cursor: pointer;
+  color: ${THEME.colors.white};
+`;
+
+export const DemoStokeAccordionTitle = styled.span`
+  font-size: clamp(1.1em, 2vw, 1.3em);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+`;
+
+export const DemoStokeAccordionChevron = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25em;
+  transform: rotate(${props => props.$isOpen ? '180deg' : '0deg'});
+  transition: transform 0.2s ease;
+  color: ${props => props.$isOpen ? THEME.colors.hotRed : THEME.colors.white};
+
+  svg {
+    width: 1.35em;
+    height: 1.35em;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+`;
+
+export const DemoStokeAccordionContent = styled.div`
+  overflow: hidden;
+  max-height: ${props => props.$isOpen ? '420px' : '0px'};
+  opacity: ${props => props.$isOpen ? 1 : 0};
+  padding: ${props => props.$isOpen ? '0 1.05em 1.05em' : '0 1.05em 0'};
+  transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.25s ease;
+`;
+
+export const DemoStokeAccordionCopy = styled.div`
+  color: ${THEME.colors.white};
+  font-size: 0.98em;
+  line-height: 1.65;
+
+  .plain-lines {
+    p {
+      margin: 0 0 0.6em;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+`;
+
 export const DemoStokeTwoUp = styled.div`
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

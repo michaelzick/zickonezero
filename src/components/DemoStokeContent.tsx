@@ -32,6 +32,13 @@ import {
   DemoStokeTldrTitle,
   DemoStokeTldrCopy,
   DemoStokeTldrImage,
+  DemoStokeAccordion,
+  DemoStokeAccordionItem,
+  DemoStokeAccordionHeader,
+  DemoStokeAccordionTitle,
+  DemoStokeAccordionChevron,
+  DemoStokeAccordionContent,
+  DemoStokeAccordionCopy,
   DemoStokeTwoUp,
   DemoStokeBorderBox,
   DemoStokeScrollSection,
@@ -246,6 +253,7 @@ const DemoStokeContent = () => {
   const [lightboxController, setLightboxController] = useState({ toggler: false, slide: 1 });
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
+  const [openPersonaId, setOpenPersonaId] = useState<string | null>(null);
   const scrollRowRef = useRef<HTMLDivElement | null>(null);
   const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {
     setTopTabsEl(node);
@@ -304,6 +312,10 @@ const DemoStokeContent = () => {
     const firstItem = row.firstElementChild as HTMLElement | null;
     const itemWidth = firstItem?.getBoundingClientRect().width ?? 240;
     row.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
+  }, []);
+
+  const togglePersona = useCallback((id: string) => {
+    setOpenPersonaId(current => current === id ? null : id);
   }, []);
 
   useEffect(() => {
@@ -424,20 +436,48 @@ const DemoStokeContent = () => {
 
                     <section id='section-the-who' className='story-section'>
                       <DemoStokeTitle>The Who</DemoStokeTitle>
-                      <DemoStokeTwoColumnLayout>
-                        {PERSONA_ITEMS.map(({ title, bullets }) => (
-                          <DemoStokeTwoColumnRow key={title}>
-                            <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
-                            <DemoStokeTwoColumnCopy>
-                              <div className='plain-lines'>
-                                {bullets.map((bullet) => (
-                                  <p key={bullet}>{bullet}</p>
-                                ))}
-                              </div>
-                            </DemoStokeTwoColumnCopy>
-                          </DemoStokeTwoColumnRow>
-                        ))}
-                      </DemoStokeTwoColumnLayout>
+                      <DemoStokeAccordion>
+                        {PERSONA_ITEMS.map(({ title, bullets }) => {
+                          const personaId = `persona-${title.toLowerCase().replace(/\s+/g, '-')}`;
+                          const isOpen = openPersonaId === personaId;
+                          return (
+                            <DemoStokeAccordionItem key={title} $isOpen={isOpen}>
+                              <DemoStokeAccordionHeader
+                                type='button'
+                                onClick={() => togglePersona(personaId)}
+                                aria-expanded={isOpen}
+                                aria-controls={`${personaId}-content`}
+                              >
+                                <DemoStokeAccordionTitle>{title}</DemoStokeAccordionTitle>
+                                <DemoStokeAccordionChevron aria-hidden='true' $isOpen={isOpen}>
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    role="presentation"
+                                    focusable="false"
+                                  >
+                                    <path d="m6 9 6 6 6-6" />
+                                  </svg>
+                                </DemoStokeAccordionChevron>
+                              </DemoStokeAccordionHeader>
+                              <DemoStokeAccordionContent
+                                id={`${personaId}-content`}
+                                role='region'
+                                aria-label={`${title} details`}
+                                $isOpen={isOpen}
+                              >
+                                <DemoStokeAccordionCopy>
+                                  <div className='plain-lines'>
+                                    {bullets.map((bullet) => (
+                                      <p key={bullet}>{bullet}</p>
+                                    ))}
+                                  </div>
+                                </DemoStokeAccordionCopy>
+                              </DemoStokeAccordionContent>
+                            </DemoStokeAccordionItem>
+                          );
+                        })}
+                      </DemoStokeAccordion>
                     </section>
 
                     <section id='section-the-how' className='story-section'>
