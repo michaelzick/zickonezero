@@ -619,9 +619,15 @@ const DemoStokeContent = () => {
                     <section id='story-independent-shaper'>
                       <UserStories.IndieShaper wrapWithBioBox={false} />
                     </section>
+
+                    <br />
+
                     <section id='story-weekend-warrior'>
                       <UserStories.WeekendWarrior wrapWithBioBox={false} />
                     </section>
+
+                    <br />
+
                     <section id='story-small-ski-shop'>
                       <UserStories.SmallSkiBikeShop wrapWithBioBox={false} />
                     </section>
