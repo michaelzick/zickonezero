@@ -27,6 +27,11 @@ import {
   DemoStokeTwoColumnRow,
   DemoStokeTwoColumnHeader,
   DemoStokeTwoColumnCopy,
+  DemoStokeTldrList,
+  DemoStokeTldrRow,
+  DemoStokeTldrTitle,
+  DemoStokeTldrCopy,
+  DemoStokeTldrImage,
   DemoStokeTwoUp,
   DemoStokeBorderBox,
   DemoStokeScrollSection,
@@ -61,7 +66,11 @@ const STORY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'story-small-ski-shop', label: 'Small Ski/Bike Shop' }
 ] as const;
 
-const TLDR_ITEMS: { title: string; description: ReactNode; }[] = [
+const TLDR_ITEMS: {
+  title: string;
+  description: ReactNode;
+  image: { src: string; alt: string; };
+}[] = [
   {
     title: 'What it is',
     description: (
@@ -71,19 +80,35 @@ const TLDR_ITEMS: { title: string; description: ReactNode; }[] = [
         </WhiteTransitionAnchor>{' '}
         is the go-to platform to find, try, and buy the gear you’ll eventually fall in love with.
       </>
-    )
+    ),
+    image: {
+      src: '/img/homepage_light_2025-07-22.webp',
+      alt: 'DemoStoke homepage with featured gear'
+    }
   },
   {
     title: 'The Problem',
-    description: 'Riders want to try before they buy, but demos are rare, costly, and inconvenient.'
+    description: 'Riders want to try before they buy, but demos are rare, costly, and inconvenient.',
+    image: {
+      src: '/img/feat-events.webp',
+      alt: 'DemoStoke events feed on desktop'
+    }
   },
   {
     title: 'The Solution',
-    description: 'A location-based marketplace to safely connect riders and lenders.'
+    description: 'A location-based marketplace to safely connect riders and lenders.',
+    image: {
+      src: '/img/events-calendar.webp',
+      alt: 'DemoStoke calendar view of nearby events'
+    }
   },
   {
     title: 'My Role',
-    description: 'Founder, Head of Product, UX strategist, MVP architect.'
+    description: 'Founder, Head of Product, UX strategist, MVP architect.',
+    image: {
+      src: '/img/admin-img-download.webp',
+      alt: 'DemoStoke admin dashboard'
+    }
   }
 ] as const;
 
@@ -357,15 +382,17 @@ const DemoStokeContent = () => {
                     <br />
 
                     <section id='section-tldr' className='story-section'>
-                      <h3>TL;DR</h3>
-                      <DemoStokeTwoColumnLayout>
-                        {TLDR_ITEMS.map(({ title, description }) => (
-                          <DemoStokeTwoColumnRow key={title}>
-                            <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
-                            <DemoStokeTwoColumnCopy>{description}</DemoStokeTwoColumnCopy>
-                          </DemoStokeTwoColumnRow>
+                      <DemoStokeTldrList>
+                        {TLDR_ITEMS.map(({ title, description, image }, index) => (
+                          <DemoStokeTldrRow key={title} $reverse={index % 2 === 1}>
+                            <div>
+                              <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
+                              <DemoStokeTldrCopy>{description}</DemoStokeTldrCopy>
+                            </div>
+                            <DemoStokeTldrImage src={image.src} alt={image.alt} loading='lazy' />
+                          </DemoStokeTldrRow>
                         ))}
-                      </DemoStokeTwoColumnLayout>
+                      </DemoStokeTldrList>
                     </section>
 
                     <section id='section-the-why' className='story-section'>

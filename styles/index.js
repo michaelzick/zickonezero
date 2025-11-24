@@ -1106,6 +1106,79 @@ export const DemoStokeTwoColumnCopy = styled.div`
   }
 `;
 
+export const DemoStokeTldrList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.05em, 2.2vw, 1.75em);
+`;
+
+export const DemoStokeTldrRow = styled.div`
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(1em, 3vw, 2.35em);
+  align-items: flex-start;
+
+  ${props => props.$reverse && `
+    & > :first-child {
+      order: 2;
+    }
+
+    & > :nth-child(2) {
+      order: 1;
+    }
+  `}
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    grid-template-columns: 1fr;
+    gap: 0.9em;
+
+    ${props => props.$reverse && `
+      & > :first-child {
+        order: 1;
+      }
+
+      & > :nth-child(2) {
+        order: 2;
+      }
+    `}
+  }
+`;
+
+export const DemoStokeTldrTitle = styled.h3`
+  margin: 0 0 0.35em;
+  font-size: clamp(1.55em, 3.5vw, 2.15em);
+  line-height: 1.1;
+  color: ${THEME.colors.white};
+  letter-spacing: 0.01em;
+`;
+
+export const DemoStokeTldrCopy = styled.div`
+  color: ${THEME.colors.white};
+  font-size: clamp(1em, 1.35vw, 1.05em);
+  line-height: 1.7;
+
+  a {
+    font-weight: 600;
+    color: ${THEME.colors.white};
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: ${THEME.colors.hotRed};
+    }
+  }
+`;
+
+export const DemoStokeTldrImage = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  border: 1px solid ${THEME.colors.grey};
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+  box-shadow: 0 12px 28px -16px rgb(0 0 0 / 60%);
+  display: block;
+`;
+
 export const DemoStokeTwoUp = styled.div`
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
