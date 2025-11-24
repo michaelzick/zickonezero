@@ -351,7 +351,7 @@ const DemoStokeContent = () => {
           topTabsEl={topTabsEl}
           isActive={true}
           lockToBottomSectionId={lockToBottomSectionId}
-          scrollOffsetAdjustment={20}
+          scrollOffsetAdjustment={8}
         />
 
         {activeTab === 'case-study' && (
@@ -635,7 +635,7 @@ const DemoStokeContent = () => {
                     topTabsEl={topTabsEl}
                     isActive={activeTab === 'case-study'}
                     lockToBottomSectionId={CASE_STUDY_BOTTOM_SECTION_ID}
-                    scrollOffsetAdjustment={20}
+                    scrollOffsetAdjustment={8}
                   />
                 </DemoStokeContentGrid>
               </div>
@@ -663,7 +663,7 @@ const DemoStokeContent = () => {
                     sections={STORY_SECTIONS}
                     topTabsEl={topTabsEl}
                     isActive={activeTab === 'stories'}
-                    scrollOffsetAdjustment={20}
+                    scrollOffsetAdjustment={8}
                   />
                 </DemoStokeContentGrid>
               </div>
