@@ -409,7 +409,7 @@ const DemoStokeContent = () => {
                     </section>
 
                     <section id='section-the-why' className='story-section'>
-                      <DemoStokeTitle>The Why</DemoStokeTitle>
+                      <DemoStokeTitle>The Why / How It Started</DemoStokeTitle>
                       <DemoStokeBorderBox>
                         <DemoStokeTwoUp>
                           <section id='section-problem'>
@@ -452,7 +452,7 @@ const DemoStokeContent = () => {
                     </section>
 
                     <section id='section-the-who' className='story-section'>
-                      <DemoStokeTitle>The Who</DemoStokeTitle>
+                      <DemoStokeTitle>The Who / User Personas</DemoStokeTitle>
                       <DemoStokeAccordion>
                         {PERSONA_ITEMS.map(({ title, bullets }) => {
                           const personaId = `persona-${title.toLowerCase().replace(/\s+/g, '-')}`;
@@ -498,7 +498,7 @@ const DemoStokeContent = () => {
                     </section>
 
                     <section id='section-the-how' className='story-section'>
-                      <DemoStokeTitle>The How</DemoStokeTitle>
+                      <DemoStokeTitle>The How / AI-Driven Development</DemoStokeTitle>
                       <DemoStokeBorderBox>
                         <DemoStokeTwoUp>
                           <section>
@@ -563,8 +563,7 @@ const DemoStokeContent = () => {
                     </section>
 
                     <section id='section-methodology' className='story-section'>
-                      <DemoStokeTitle>Methods</DemoStokeTitle>
-                      <h3>Foundational Research</h3>
+                      <DemoStokeTitle>Methods / The UX Process</DemoStokeTitle>
                       <DemoStokeTwoColumnLayout>
                         {RESEARCH_ITEMS.map(({ title, bullets }) => (
                           <DemoStokeTwoColumnRow key={title}>
