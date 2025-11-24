@@ -835,6 +835,10 @@ export const BioBox = styled.div`
 
   .story-section {
     margin-top: 2.5em;
+
+    &#section-tldr {
+      margin-top: clamp(1.1em, 3.2vw, 1.6em);
+    }
   }
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {

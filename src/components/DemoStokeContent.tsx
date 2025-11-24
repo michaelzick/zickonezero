@@ -608,6 +608,13 @@ const DemoStokeContent = () => {
                         </li>
                       </DemoStokeList>
                     </section>
+                    <DemoStokeWhyImageFrame>
+                      <FullBorderImage
+                        src='/img/ds-80s-game-purple.webp'
+                        alt='DemoStoke retro purple game-inspired screen'
+                        loading='lazy'
+                      />
+                    </DemoStokeWhyImageFrame>
                     <br />
                     <br />
                   </div>
