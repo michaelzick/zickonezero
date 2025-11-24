@@ -28,6 +28,7 @@ import {
   DemoStokeTwoColumnHeader,
   DemoStokeTwoColumnCopy,
   DemoStokeTldrList,
+  DemoStokeTldrSection,
   DemoStokeTldrRow,
   DemoStokeTldrTitle,
   DemoStokeTldrCopy,
@@ -395,17 +396,19 @@ const DemoStokeContent = () => {
                     <br />
 
                     <section id='section-tldr' className='story-section'>
-                      <DemoStokeTldrList>
-                        {TLDR_ITEMS.map(({ title, description, image }, index) => (
-                          <DemoStokeTldrRow key={title} $reverse={index % 2 === 1}>
-                            <div>
-                              <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
-                              <DemoStokeTldrCopy>{description}</DemoStokeTldrCopy>
-                            </div>
-                            <DemoStokeTldrImage src={image.src} alt={image.alt} loading='lazy' />
-                          </DemoStokeTldrRow>
-                        ))}
-                      </DemoStokeTldrList>
+                      <DemoStokeTldrSection>
+                        <DemoStokeTldrList>
+                          {TLDR_ITEMS.map(({ title, description, image }, index) => (
+                            <DemoStokeTldrRow key={title} $reverse={index % 2 === 1}>
+                              <div>
+                                <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
+                                <DemoStokeTldrCopy>{description}</DemoStokeTldrCopy>
+                              </div>
+                              <DemoStokeTldrImage src={image.src} alt={image.alt} loading='lazy' />
+                            </DemoStokeTldrRow>
+                          ))}
+                        </DemoStokeTldrList>
+                      </DemoStokeTldrSection>
                     </section>
 
                     <section id='section-the-why' className='story-section'>
