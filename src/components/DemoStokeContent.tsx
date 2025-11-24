@@ -42,6 +42,8 @@ import {
   DemoStokeAccordionCopy,
   DemoStokeTwoUp,
   DemoStokeBorderBox,
+  DemoStokeMethodList,
+  DemoStokeMethodRow,
   DemoStokeWhyImageFrame,
   DemoStokeScrollSection,
   DemoStokeScrollRow,
@@ -121,67 +123,36 @@ const TLDR_ITEMS: {
   }
 ] as const;
 
-const RESEARCH_ITEMS = [
+const METHOD_SECTIONS = [
   {
-    title: 'Primary Research',
+    title: 'Primary and Secondary Research + Insights',
     bullets: [
-      'Interviewed riders across surf, snow, and MTB to understand demo frustrations.',
-      'Captured quotes and pain points tied to trust, convenience, and selection gaps.'
-    ]
+      'Interviewed riders across surf, snow, and MTB to surface demo frustrations and trust gaps.',
+      'Captured quotes about convenience, selection, and safety to anchor problem statements.',
+      'Benchmarked competitors and availability patterns to spot underserved sports and locations.',
+      'Synthesized: riders will pay if trust/ease are guaranteed; shops/shapers need lightweight tools to convert demos.'
+    ],
+    image: { src: '/img/female-surfer.jpg', alt: 'Female surfer carrying a board at the beach' }
   },
   {
-    title: 'Secondary Research',
+    title: 'Empathize, Define, and Ideate With Users',
     bullets: [
-      'Reviewed competitor offerings to benchmark discovery, safety, and community features.',
-      'Analyzed demo availability patterns to find underserved locations and sports.'
-    ]
+      'Ran rider and stakeholder interviews plus field observations to see friction in context.',
+      'Framed trust-and-convenience problem statements with measurable goals for activation and conversion.',
+      'Mapped discovery-to-feedback flows and prioritized must-have moments for riders and lenders.',
+      'Documented trust signals and discovery levers: verification, reviews, filters, maps, and events.'
+    ],
+    image: { src: '/img/guys-talking.jpg', alt: 'Product discovery conversation between two people' }
   },
   {
-    title: 'Insights',
+    title: 'Prototype, Test, and Refine the Product',
     bullets: [
-      'Riders are willing to pay for demos if trust and ease are guaranteed.',
-      'Shapers and shops need lightweight tools to run demos and convert to sales.'
-    ]
-  }
-] as const;
-
-const UX_PROCESS_STEPS = [
-  {
-    title: 'Empathize',
-    bullets: [
-      'Ran stakeholder and rider interviews to uncover motivations, blockers, and context of use.',
-      'Conducted field observations of demo flows (shops, events, P2P exchanges) to see friction first-hand.'
-    ]
-  },
-  {
-    title: 'Define',
-    bullets: [
-      'Synthesized themes into problem statements and opportunity areas tied to trust and convenience.',
-      'Framed measurable goals (demo conversion, repeat usage, lender activation) to guide design.'
-    ]
-  },
-  {
-    title: 'Ideate',
-    bullets: [
-      'Mapped end-to-end flows (discovery → booking → pickup → feedback) and prioritized must-have moments.',
-      'Documented trust signals (verification, reviews) and discovery (filters, maps, events).'
-    ]
-  },
-  {
-    title: 'Hi-Fi Prototype Development',
-    bullets: [
-      'Used Lovable AI to spin up working pages quickly, then refined with prompt engineering for UX polish.',
-      'Layered in custom frontend tweaks to reach high fidelity for realistic interactions and visuals.',
-      'Wired up Supabase backend to demo core discovery, administration, and AI integrations.'
-    ]
-  },
-  {
-    title: 'Test & Refine',
-    bullets: [
-      'Ran moderated and unmoderated walkthroughs on the hi-fi prototype to validate discovery, booking, and trust cues.',
-      'Iterated copy, visual hierarchy, and features based on usability findings and feedback.',
-      'Used Google Analytics and Amplitude on the live MVP to track engagement and SEO metrics for future improvements.'
-    ]
+      'Used Lovable AI to generate hi-fi pages quickly, then refined with prompt engineering.',
+      'Layered custom frontend polish and Supabase to demo discovery, admin, and AI integrations.',
+      'Ran moderated/unmoderated walkthroughs to validate discovery, booking, and trust cues.',
+      'Iterated copy and hierarchy from usability findings; tracked analytics to guide next improvements.'
+    ],
+    image: { src: '/img/computer.jpg', alt: 'Laptop showing a high-fidelity interface design' }
   }
 ] as const;
 
@@ -592,54 +563,25 @@ const DemoStokeContent = () => {
 
                     <section id='section-methodology' className='story-section'>
                       <DemoStokeTitle>Methods / The UX Process</DemoStokeTitle>
-                      <DemoStokeTwoColumnLayout>
-                        {RESEARCH_ITEMS.map(({ title, bullets }) => (
-                          <DemoStokeTwoColumnRow key={title}>
-                            <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
-                            <DemoStokeTwoColumnCopy>
-                              <ul className='plain-lines'>
-                                {bullets.map((bullet) => (
-                                  <li key={bullet}>{bullet}</li>
-                                ))}
-                              </ul>
-                            </DemoStokeTwoColumnCopy>
-                          </DemoStokeTwoColumnRow>
+                      <DemoStokeMethodList>
+                        {METHOD_SECTIONS.map(({ title, bullets, image }, index) => (
+                          <DemoStokeBorderBox key={title}>
+                            <DemoStokeMethodRow $reverse={index % 2 === 1}>
+                              <div>
+                                <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
+                                <DemoStokeTldrCopy>
+                                  <ul className='plain-lines'>
+                                    {bullets.map((bullet) => (
+                                      <li key={bullet}>{bullet}</li>
+                                    ))}
+                                  </ul>
+                                </DemoStokeTldrCopy>
+                              </div>
+                              <DemoStokeTldrImage src={image.src} alt={image.alt} loading='lazy' />
+                            </DemoStokeMethodRow>
+                          </DemoStokeBorderBox>
                         ))}
-                      </DemoStokeTwoColumnLayout>
-                    </section>
-
-                    <section id='section-ux-process' className='story-section'>
-                      <DemoStokeTwoColumnLayout>
-                        {UX_PROCESS_STEPS.slice(0, 3).map(({ title, bullets }) => (
-                          <DemoStokeTwoColumnRow key={title}>
-                            <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
-                            <DemoStokeTwoColumnCopy>
-                              <ul className='plain-lines'>
-                                {bullets.map((bullet) => (
-                                  <li key={bullet}>{bullet}</li>
-                                ))}
-                              </ul>
-                            </DemoStokeTwoColumnCopy>
-                          </DemoStokeTwoColumnRow>
-                        ))}
-                      </DemoStokeTwoColumnLayout>
-                    </section>
-
-                    <section className='story-section'>
-                      <DemoStokeTwoColumnLayout>
-                        {UX_PROCESS_STEPS.slice(3).map(({ title, bullets }) => (
-                          <DemoStokeTwoColumnRow key={title}>
-                            <DemoStokeTwoColumnHeader>{title}</DemoStokeTwoColumnHeader>
-                            <DemoStokeTwoColumnCopy>
-                              <ul className='plain-lines'>
-                                {bullets.map((bullet) => (
-                                  <li key={bullet}>{bullet}</li>
-                                ))}
-                              </ul>
-                            </DemoStokeTwoColumnCopy>
-                          </DemoStokeTwoColumnRow>
-                        ))}
-                      </DemoStokeTwoColumnLayout>
+                      </DemoStokeMethodList>
                     </section>
 
                     <section id='section-links' className='story-section'>

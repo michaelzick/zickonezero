@@ -1138,12 +1138,6 @@ export const DemoStokeTldrSection = styled.div`
   box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
 `;
 
-export const DemoStokeTldrList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-`;
-
 export const DemoStokeTldrRow = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
@@ -1206,6 +1200,23 @@ export const DemoStokeTldrCopy = styled.div`
       color: ${THEME.colors.hotRed};
     }
   }
+
+  .plain-lines {
+    margin: 0;
+
+    ul& {
+      padding-left: 1.1em;
+      list-style: disc;
+    }
+
+    li {
+      margin: 0 0 0.5em;
+    }
+
+    li:last-child {
+      margin-bottom: 0;
+    }
+  }
 `;
 
 export const DemoStokeTldrImage = styled.img`
@@ -1217,6 +1228,27 @@ export const DemoStokeTldrImage = styled.img`
   aspect-ratio: 16 / 9;
   box-shadow: 0 12px 28px -16px rgb(0 0 0 / 60%);
   display: block;
+`;
+
+export const DemoStokeTldrList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+`;
+
+export const DemoStokeMethodList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.05em, 2.2vw, 1.5em);
+`;
+
+export const DemoStokeMethodRow = styled(DemoStokeTldrRow)`
+  align-items: center;
+  gap: clamp(1.2em, 3vw, 2.2em);
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    gap: 1em;
+  }
 `;
 
 export const DemoStokeAccordion = styled.div`
