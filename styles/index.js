@@ -1390,6 +1390,48 @@ export const DemoStokeTwoUp = styled.div`
   }
 `;
 
+export const DemoStokeStoryCardGrid = styled(DemoStokeTwoUp)`
+  gap: clamp(1.2em, 3vw, 2.6em);
+  align-items: stretch;
+`;
+
+export const DemoStokeStoryCard = styled.section`
+  position: relative;
+  isolation: isolate;
+  padding: clamp(1.15em, 2.4vw, 1.65em);
+  border-radius: 18px;
+  background:
+    radial-gradient(120% 140% at 12% 12%, rgba(0, 215, 255, 0.22), rgba(2, 8, 23, 0)),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(0, 113, 227, 0.12));
+  box-shadow: 0 18px 36px -28px rgb(0 0 0 / 85%), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  border: none;
+  overflow: hidden;
+  color: ${THEME.colors.white};
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(90% 90% at 85% 10%, rgba(255, 0, 101, 0.12), rgba(255, 0, 101, 0));
+    opacity: 0.9;
+    pointer-events: none;
+  }
+
+  h3 {
+    margin: 0 0 0.5em;
+    color: ${THEME.colors.demostoke};
+    letter-spacing: 0.01em;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.65;
+    color: ${THEME.colors.white};
+    opacity: 0.94;
+  }
+`;
+
 export const DemoStokeBorderBox = styled.div`
   width: 100%;
   background: transparent;

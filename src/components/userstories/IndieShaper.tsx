@@ -11,7 +11,8 @@ import {
   FlexBox,
   PitchDeckLink,
   DemoStokeBorderBox,
-  DemoStokeTwoUp,
+  DemoStokeStoryCardGrid,
+  DemoStokeStoryCard,
 } from '../../../styles';
 
 type StoryProps = {
@@ -123,14 +124,14 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
         <DemoStokeTitle>The Independent Surfboard Shaper</DemoStokeTitle>
 
         <DemoStokeBorderBox>
-          <DemoStokeTwoUp>
-            <section>
+          <DemoStokeStoryCardGrid>
+            <DemoStokeStoryCard>
               <h3>Abstract</h3>
               <p>
                 From the lens of Curtis, an independent Southern California surfboard shaper, {DSLink} had the potential to radically simplify and expand his business by addressing key pain points around demo logistics, discovery, trust, and conversion.
               </p>
-            </section>
-            <section>
+            </DemoStokeStoryCard>
+            <DemoStokeStoryCard>
               <h3>Use Case Scenario</h3>
               <p>
                 Let’s say a surfer in San Clemente was curious about a 6’4 eco-friendly twin-fin but wasn’t ready to commit $900 + a 4-month wait. They browsed {DSLink}, saw glowing reviews, reserved the demo for a Saturday morning pickup near Trestles, rode it, and loved it.
@@ -139,8 +140,8 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
                 <br /><br />
                 The shaper woke up Sunday with a new order, a stoked rider, and zero beach setup effort.
               </p>
-            </section>
-          </DemoStokeTwoUp>
+            </DemoStokeStoryCard>
+          </DemoStokeStoryCardGrid>
         </DemoStokeBorderBox>
       </section>
 

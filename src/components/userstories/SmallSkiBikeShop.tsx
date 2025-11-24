@@ -8,7 +8,8 @@ import {
   DemoStokeTwoColumnCopy,
   WhiteTransitionAnchor,
   DemoStokeBorderBox,
-  DemoStokeTwoUp,
+  DemoStokeStoryCardGrid,
+  DemoStokeStoryCard,
 } from '../../../styles';
 
 type StoryProps = {
@@ -112,14 +113,14 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
         <DemoStokeTitle>The Small Ski &amp; Bike Shop</DemoStokeTitle>
 
         <DemoStokeBorderBox>
-          <DemoStokeTwoUp>
-            <section>
+          <DemoStokeStoryCardGrid>
+            <DemoStokeStoryCard>
               <h3>Abstract</h3>
               <p>
                 For Jason, the owner of <strong>Town &amp; Country Outfitters</strong>, a high-end ski and bike shop in a mountain town, {DSLink} offered a way to modernize without losing what made his shop personal and trusted. DemoStoke solved his toughest problems around demo logistics, digital visibility, and customer trust.
               </p>
-            </section>
-            <section>
+            </DemoStokeStoryCard>
+            <DemoStokeStoryCard>
               <h3>Use Case Scenario</h3>
               <p>
                 A local rider wanted to try a Never Summer snowboard before buying. He visited Town &amp; Country’s {DSLink} page, saw that a 158cm Proto Synthesis was available for demo, and booked it for the weekend.
@@ -128,8 +129,8 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
                 <br /><br />
                 That night, he placed an order for a brand new one—picked up the next week. Jason never had to explain sizing or features—the app did that work.
               </p>
-            </section>
-          </DemoStokeTwoUp>
+            </DemoStokeStoryCard>
+          </DemoStokeStoryCardGrid>
         </DemoStokeBorderBox>
       </section>
 
