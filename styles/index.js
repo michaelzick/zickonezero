@@ -1229,10 +1229,12 @@ export const DemoStokeAccordionChevron = styled.span`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.25em;
-  transform: rotate(${props => props.$isOpen ? '180deg' : '0deg'});
-  transition: transform 0.2s ease;
+  width: 2.1em;
+  height: 2.1em;
+  padding: 0;
+  flex-shrink: 0;
   color: ${props => props.$isOpen ? THEME.colors.hotRed : THEME.colors.white};
+  transform-origin: center;
 
   svg {
     width: 1.35em;
@@ -1241,6 +1243,9 @@ export const DemoStokeAccordionChevron = styled.span`
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
+    transform: ${props => props.$isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
+    transform-origin: center;
+    transition: transform 0.2s ease;
   }
 `;
 

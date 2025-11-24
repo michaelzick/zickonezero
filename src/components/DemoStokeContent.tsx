@@ -89,32 +89,32 @@ const TLDR_ITEMS: {
       </>
     ),
     image: {
-      src: '/img/homepage_light_2025-07-22.webp',
-      alt: 'DemoStoke homepage with featured gear'
+      src: '/img/glob.webp',
+      alt: 'DemoStoke global gear discovery collage'
     }
   },
   {
     title: 'The Problem',
     description: 'Riders want to try before they buy, but demos are rare, costly, and inconvenient.',
     image: {
-      src: '/img/feat-events.webp',
-      alt: 'DemoStoke events feed on desktop'
+      src: '/img/demo-van.webp',
+      alt: 'DemoStoke mobile demo van in the field'
     }
   },
   {
     title: 'The Solution',
-    description: 'A location-based marketplace to safely connect riders and lenders.',
+    description: 'A location-based marketplace to safely connect riders, lenders, and shops.',
     image: {
-      src: '/img/events-calendar.webp',
-      alt: 'DemoStoke calendar view of nearby events'
+      src: '/img/surf-shop.webp',
+      alt: 'Surf shop displaying boards available for demo'
     }
   },
   {
     title: 'My Role',
     description: 'Founder, Head of Product, UX strategist, MVP architect.',
     image: {
-      src: '/img/admin-img-download.webp',
-      alt: 'DemoStoke admin dashboard'
+      src: '/img/ds-80s-game.webp',
+      alt: 'DemoStoke retro 80s game-inspired screen'
     }
   }
 ] as const;
@@ -493,7 +493,7 @@ const DemoStokeContent = () => {
                             </p>
                           </section>
                           <section>
-                            <h3>Marketplace for Gear Owners</h3>
+                            <h3>Intelligent Recommendations</h3>
                             <FullBorderImage src='/img/all-equipment-hybrid.webp' alt='DemoStoke Hybrid View' loading="lazy" />
                           </section>
                         </DemoStokeTwoUp>
