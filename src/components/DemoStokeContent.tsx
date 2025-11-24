@@ -112,7 +112,7 @@ const TLDR_ITEMS: {
   },
   {
     title: 'My Roles',
-    description: 'UX Designer, Full-Stack Developer.',
+    description: 'Founder, UX Designer, and Full-Stack Developer.',
     image: {
       src: '/img/ds-design-system.webp',
       alt: 'DemoStoke design system components'
