@@ -410,11 +410,11 @@ const DemoStokeContent = () => {
                             <h3>Current Complaints</h3>
                             <DemoStokeTwoColumnCopy>
                               <div className='plain-lines'>
-                                <p>“I wait in long rental lines without knowing if they have what I want.”</p>
-                                <p>“I can’t find the right gear in my size.”</p>
-                                <p>“I don’t want to buy a $900 surfboard I’ve never ridden.”</p>
-                                <p>“Demo days at the beach or mountain are few and far in between.”</p>
-                                <p>“Demo boards at the resort are expensive and they have a limited selection.”</p>
+                                <p>I wait in long rental lines without knowing if they have what I want.</p>
+                                <p>I can’t find the right gear in my size.</p>
+                                <p>I don’t want to buy a $900 surfboard I’ve never ridden.</p>
+                                <p>Demo days at the beach or mountain are few and far in between.</p>
+                                <p>Demo boards at the resort are expensive and they have a limited selection.</p>
                               </div>
                             </DemoStokeTwoColumnCopy>
                           </section>
