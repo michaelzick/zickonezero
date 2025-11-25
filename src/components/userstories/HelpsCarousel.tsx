@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type ReactNode, type KeyboardEvent as ReactKeyboardEvent } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent as ReactMouseEvent } from 'react';
 import {
   DemoStokeScrollHeader,
   DemoStokeScrollControls,
@@ -149,7 +149,7 @@ const HelpsCarousel = ({ items, title = 'How DemoStoke Helps' }: HelpsCarouselPr
             role='dialog'
             aria-modal='true'
             aria-label={`How DemoStoke Helps: ${activeItem.title}`}
-            onClick={(event: React.MouseEvent<HTMLDivElement>) => {
+            onClick={(event: ReactMouseEvent<HTMLDivElement>) => {
               event.stopPropagation();
             }}
           >
