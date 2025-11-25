@@ -1611,19 +1611,18 @@ export const DemoStokeMiniCard = styled.button`
   max-width: 18em;
   padding: clamp(1em, 2.3vw, 1.4em);
   border-radius: 16px;
-  background:
-    radial-gradient(120% 120% at 12% 12%, rgba(255, 255, 255, 0.04), rgba(2, 8, 23, 0)),
-    linear-gradient(140deg, rgba(0, 215, 255, 0.24), rgba(254, 0, 101, 0.14), rgba(0, 113, 227, 0.2));
+  background: transparent;
+  border: 2px solid ${THEME.colors.white};
   box-shadow: none;
   color: ${THEME.colors.white};
   scroll-snap-align: start;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.2s ease;
-  border: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.2s ease, border-color 0.25s ease;
   text-align: left;
 
   &:hover {
     transform: translateY(-2px);
     box-shadow: none;
+    border-color: ${THEME.colors.hotRed};
   }
 
   &:focus-visible {
