@@ -2123,6 +2123,11 @@ const sidebarTabButtonStyles = css`
     border-color: ${THEME.colors.hotYellow};
     color: ${THEME.colors.contrast};
   }
+
+  &:not([data-active='true']):hover {
+    border-color: ${THEME.colors.hotRed};
+    color: ${THEME.colors.white};
+  }
 `;
 
 export const SectionTabButton = styled(HomeTabButton)`
