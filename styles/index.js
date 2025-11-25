@@ -1706,8 +1706,8 @@ export const DemoStokeMiniCardModal = styled.div`
 export const DemoStokeMiniCardModalClose = styled.button`
   all: unset;
   position: absolute;
-  top: 0.85em;
-  right: 0.95em;
+  top: 0.3em;
+  right: 0.3em;
   width: 2em;
   height: 2em;
   border-radius: 50%;
