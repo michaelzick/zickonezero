@@ -1499,17 +1499,17 @@ export const DemoStokeScrollItem = styled.div`
   min-width: clamp(12.8em, 45vw, 15em);
   max-width: 18em;
   flex: 0 0 auto;
-  border: 1px solid ${THEME.colors.grey};
+  border: 1.5px solid ${THEME.colors.white};
   border-radius: 18px;
   overflow: hidden;
-  background: ${THEME.colors.darkest};
+  background: transparent;
   cursor: pointer;
   scroll-snap-align: start;
   transition: transform 0.25s ease, border-color 0.25s ease;
 
   &:hover {
     transform: translateY(-2px);
-    border-color: ${THEME.colors.white};
+    border-color: ${THEME.colors.hotRed};
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
@@ -1612,7 +1612,7 @@ export const DemoStokeMiniCard = styled.button`
   padding: clamp(1em, 2.3vw, 1.4em);
   border-radius: 16px;
   background: transparent;
-  border: 2px solid ${THEME.colors.white};
+  border: 1.5px solid ${THEME.colors.white};
   box-shadow: none;
   color: ${THEME.colors.white};
   scroll-snap-align: start;
