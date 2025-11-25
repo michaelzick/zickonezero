@@ -145,7 +145,7 @@ const HelpsCarousel = ({ items, title = 'How DemoStoke Helps' }: HelpsCarouselPr
             role='dialog'
             aria-modal='true'
             aria-label={`How DemoStoke Helps: ${activeItem.title}`}
-            onClick={(event) => {
+            onClick={(event: React.MouseEvent<HTMLDivElement>) => {
               event.stopPropagation();
             }}
           >
