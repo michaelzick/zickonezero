@@ -1690,8 +1690,17 @@ export const DemoStokeMiniCardModal = styled.div`
     linear-gradient(150deg, rgba(3, 7, 18, 0.95), rgba(2, 132, 199, 0.14));
   box-shadow: 0 18px 44px -26px rgb(0 0 0 / 80%), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(0, 215, 255, 0.2);
-  color: ${THEME.colors.white};
+  color: #f8fafc; /* lock light text regardless of theme */
   padding: clamp(1.2em, 2.5vw, 1.85em);
+
+  :root[data-theme='light'] & {
+    background:
+      radial-gradient(140% 140% at 10% 0%, rgba(0, 215, 255, 0.18), rgba(248, 250, 252, 0.02)),
+      linear-gradient(150deg, rgba(8, 47, 73, 0.9), rgba(12, 74, 110, 0.75));
+    color: ${THEME.colors.white};
+    border: 1px solid rgba(8, 47, 73, 0.5);
+    box-shadow: 0 18px 36px -24px rgb(15 23 42 / 45%);
+  }
 `;
 
 export const DemoStokeMiniCardModalClose = styled.button`
@@ -1706,7 +1715,7 @@ export const DemoStokeMiniCardModalClose = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: ${THEME.colors.white};
+  color: #f8fafc; /* keep icon visible in light mode */
   background: rgba(0, 215, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.25);
   transition: transform 0.2s ease, opacity 0.2s ease;
@@ -1725,12 +1734,12 @@ export const DemoStokeMiniCardModalClose = styled.button`
 export const DemoStokeMiniCardModalTitle = styled.h4`
   margin: 0 0 0.65em;
   font-size: clamp(1.25em, 2.3vw, 1.5em);
-  color: ${THEME.colors.demostoke};
+  color: #7dd3fc; /* lighter accent that stays visible on dark modal */
   letter-spacing: 0.01em;
 `;
 
 export const DemoStokeMiniCardModalCopy = styled.div`
-  color: ${THEME.colors.white};
+  color: #f8fafc; /* force light text so it reads on dark modal */
   line-height: 1.7;
   font-size: 1em;
   max-height: calc(88vh - 4em);
@@ -1743,6 +1752,16 @@ export const DemoStokeMiniCardModalCopy = styled.div`
 
   p:last-child {
     margin-bottom: 0;
+  }
+
+  a {
+    color: #f8fafc;
+    font-weight: 600;
+    text-decoration: underline;
+
+    &:hover {
+      color: ${THEME.colors.hotRed};
+    }
   }
 `;
 
