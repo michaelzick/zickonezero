@@ -105,6 +105,15 @@
     "linkOut": true
   },
   {
+    "thumb": "/img/squares/adam-chiappone-square.webp",
+    "imgs": [],
+    "desc": "General information site for family therapist Adam Chiappone",
+    "header": "Adam Chiappone",
+    "group": "adam-chiappone",
+    "link": "https://www.adamchiappone.com/",
+    "linkOut": true
+  },
+  {
     "thumb": "/img/squares/king-512.webp",
     "imgs": [],
     "desc": "Internal Family Systems journaling app",
