@@ -1614,7 +1614,7 @@ export const DemoStokeMiniCard = styled.button`
   background:
     radial-gradient(120% 120% at 12% 12%, rgba(255, 255, 255, 0.04), rgba(2, 8, 23, 0)),
     linear-gradient(140deg, rgba(0, 215, 255, 0.24), rgba(254, 0, 101, 0.14), rgba(0, 113, 227, 0.2));
-  box-shadow: 0 18px 36px -28px rgb(0 0 0 / 85%), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: none;
   color: ${THEME.colors.white};
   scroll-snap-align: start;
   transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.2s ease;
@@ -1623,7 +1623,7 @@ export const DemoStokeMiniCard = styled.button`
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 18px 44px -26px rgb(0 0 0 / 80%), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    box-shadow: none;
   }
 
   &:focus-visible {
