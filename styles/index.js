@@ -1567,6 +1567,13 @@ export const DemoStokeScrollButton = styled.button`
     opacity: 0.4;
     cursor: not-allowed;
   }
+
+  svg {
+    width: 1.1em;
+    height: 1.1em;
+    display: block;
+    transform: translateX(-0.10em);
+  }
 `;
 
 export const DemoStokeMiniCardRow = styled.div`
@@ -1723,6 +1730,13 @@ export const DemoStokeMiniCardModalClose = styled.button`
   background: rgba(0, 215, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.25);
   transition: transform 0.2s ease, opacity 0.2s ease;
+
+  svg {
+    width: 1em;
+    height: 1em;
+    display: block;
+    transform: translateX(-0.09em);
+  }
 
   &:hover {
     transform: translateY(-1px);
