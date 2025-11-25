@@ -129,7 +129,7 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
       </section>
 
       <section id='story-independent-surfboard-shaper-title' className='story-section'>
-        <DemoStokeTitle>The Independent Surfboard Shaper</DemoStokeTitle>
+        <DemoStokeTitle $noMobileTopPad>The Independent Surfboard Shaper</DemoStokeTitle>
 
         <DemoStokeTldrSection $borderless>
           <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>

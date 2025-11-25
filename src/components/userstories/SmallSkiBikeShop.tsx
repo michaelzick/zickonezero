@@ -118,7 +118,7 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
   const content = (
     <div>
       <section id='story-small-ski-shop' className='story-section'>
-        <DemoStokeTitle>The Small Ski &amp; Bike Shop</DemoStokeTitle>
+        <DemoStokeTitle $noMobileTopPad>The Small Ski &amp; Bike Shop</DemoStokeTitle>
 
         <DemoStokeTldrSection $borderless>
           <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>

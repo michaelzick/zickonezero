@@ -350,7 +350,7 @@ const DemoStokeContent = () => {
                     <section id='hero-spacer' aria-hidden='true' />
 
                     <section id='introduction' className='story-section'>
-                      <DemoStokeTitle>Introduction</DemoStokeTitle>
+                      <DemoStokeTitle $noMobileTopPad>Introduction</DemoStokeTitle>
                     </section>
 
                     <VideoFrame>

@@ -992,6 +992,10 @@ export const DemoStokeTitle = styled.h2`
   line-height: 1.1;
   margin: 0 0 0.45em;
   padding-top: clamp(0.65em, 1.8vw, 1.1em);
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    padding-top: 0;
+  }
 `;
 
 export const DemoStokeList = styled.ul`

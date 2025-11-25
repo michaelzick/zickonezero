@@ -118,7 +118,7 @@ const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
   const content = (
     <div>
       <section id='story-weekend-warrior' className='story-section'>
-        <DemoStokeTitle>The Weekend Warrior</DemoStokeTitle>
+        <DemoStokeTitle $noMobileTopPad>The Weekend Warrior</DemoStokeTitle>
 
         <DemoStokeTldrSection $borderless>
           <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
