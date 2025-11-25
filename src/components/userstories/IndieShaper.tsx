@@ -13,6 +13,7 @@ import {
   DemoStokeTldrSection,
   DemoStokeTldrTitle,
   DemoStokeTldrCopy,
+  DemoStokeStoryHero,
 } from '../../../styles';
 import HelpsCarousel from './HelpsCarousel';
 import WhyHighlights from './WhyHighlights';
@@ -130,6 +131,11 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
 
       <section id='story-independent-surfboard-shaper-title' className='story-section'>
         <DemoStokeTitle $noMobileTopPad>The Independent Surfboard Shaper</DemoStokeTitle>
+        <DemoStokeStoryHero
+          src='/img/surfboard-shaper-cp.webp'
+          alt='Independent surfboard shaper with demo boards'
+          loading='lazy'
+        />
 
         <DemoStokeTldrSection $borderless>
           <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>

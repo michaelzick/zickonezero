@@ -1678,6 +1678,16 @@ export const DemoStokeMiniCardHint = styled.span`
   }
 `;
 
+export const DemoStokeStoryHero = styled.img`
+  width: 100%;
+  display: block;
+  border-radius: 16px;
+  object-fit: cover;
+  object-position: top;
+  margin: 0 0 clamp(0.9em, 2vw, 1.4em);
+  box-shadow: 0 12px 28px -20px rgb(0 0 0 / 60%);
+`;
+
 export const DemoStokeMiniCardModalOverlay = styled.div`
   position: fixed;
   inset: 0;

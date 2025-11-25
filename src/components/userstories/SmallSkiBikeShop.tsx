@@ -10,6 +10,7 @@ import {
   DemoStokeTldrSection,
   DemoStokeTldrTitle,
   DemoStokeTldrCopy,
+  DemoStokeStoryHero,
 } from '../../../styles';
 import HelpsCarousel from './HelpsCarousel';
 import WhyHighlights from './WhyHighlights';
@@ -119,6 +120,11 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
     <div>
       <section id='story-small-ski-shop' className='story-section'>
         <DemoStokeTitle $noMobileTopPad>The Small Ski &amp; Bike Shop</DemoStokeTitle>
+        <DemoStokeStoryHero
+          src='/img/mtb-rental-counter-cp.webp'
+          alt='Mountain bike rental counter'
+          loading='lazy'
+        />
 
         <DemoStokeTldrSection $borderless>
           <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>

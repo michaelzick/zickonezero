@@ -10,6 +10,7 @@ import {
   DemoStokeTldrSection,
   DemoStokeTldrTitle,
   DemoStokeTldrCopy,
+  DemoStokeStoryHero,
 } from '../../../styles';
 import HelpsCarousel from './HelpsCarousel';
 import WhyHighlights from './WhyHighlights';
@@ -119,6 +120,11 @@ const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
     <div>
       <section id='story-weekend-warrior' className='story-section'>
         <DemoStokeTitle $noMobileTopPad>The Weekend Warrior</DemoStokeTitle>
+        <DemoStokeStoryHero
+          src='/img/snowboard-girl-cp.webp'
+          alt='Snowboarder carrying her board'
+          loading='lazy'
+        />
 
         <DemoStokeTldrSection $borderless>
           <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
