@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef, type ReactNode, type KeyboardEvent } from 'react';
 import FsLightbox from 'fslightbox-react';
-import { FileTextIcon } from '@radix-ui/react-icons';
+import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import {
   useAppDispatch,
   useAppSelector
@@ -337,14 +337,14 @@ const DemoStokeContent = () => {
                       <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
                       <div>
                         <h2 className='tab-header page-header'>UX Case Study</h2>
-                        <PitchDeckLink className='pitch-link-desktop' href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
-                          Investor Pitch Deck <FileTextIcon aria-hidden="true" />
+                        <PitchDeckLink className='pitch-link-desktop' href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
+                          DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
                         </PitchDeckLink>
                       </div>
                     </FlexBox>
 
-                    <PitchDeckLink className='pitch-link-mobile' href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
-                      Investor Pitch Deck <FileTextIcon aria-hidden="true" />
+                    <PitchDeckLink className='pitch-link-mobile' href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
+                      DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
                     </PitchDeckLink>
 
                     <section id='hero-spacer' aria-hidden='true' />

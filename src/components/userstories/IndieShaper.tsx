@@ -1,4 +1,4 @@
-import { FileTextIcon } from '@radix-ui/react-icons';
+import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { type ReactNode } from 'react';
 import {
   BioBox,
@@ -122,8 +122,8 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
           <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
           <div>
             <h2 className='tab-header page-header'>User Stories</h2>
-            <PitchDeckLink href="/demostoke-investor-deck.pdf" target='_blank' rel='noopener noreferrer'>
-              Investor Pitch Deck <FileTextIcon aria-hidden="true" />
+            <PitchDeckLink href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
+              DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
             </PitchDeckLink>
           </div>
         </FlexBox>
