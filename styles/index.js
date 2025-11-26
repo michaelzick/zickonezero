@@ -72,7 +72,7 @@ export const WhiteTransitionAnchor = styled.a`
 export const PitchDeckLink = styled(WhiteTransitionAnchor)`
   display: inline-flex;
   align-items: center;
-  gap: 0.35em;
+  gap: 0.2em;
   margin-top: 0.4em;
   font-size: 0.95em;
   padding: 0.25em 0;
@@ -84,6 +84,7 @@ export const PitchDeckLink = styled(WhiteTransitionAnchor)`
   svg {
     width: 1.1em;
     height: 1.1em;
+    margin-left: 0;
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
