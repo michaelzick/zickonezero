@@ -1,9 +1,9 @@
 import Link from 'next/link';
+import { ReactElement } from 'react';
+import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 
 import { WorksData } from '../types';
 import { Thumb } from '../../styles';
-import { NewTabSVG } from './svg/NewTab';
-import { ReactElement } from 'react';
 
 type AdditionalThumbProps = {
   index: number,
@@ -33,7 +33,7 @@ const Thumbnail = (props: WorksData & AdditionalThumbProps): ReactElement => {
           {desc}</Link> : desc}
         {linkOut ? (
           <span className='external-link-icon' aria-hidden='true'>
-            <NewTabSVG />
+            <OpenInNewWindowIcon />
           </span>
         ) : null}
       </p>
