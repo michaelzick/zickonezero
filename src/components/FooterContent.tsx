@@ -1,8 +1,8 @@
 import Link from 'next/link';
-
-import { NewTabSVG } from './svg/NewTab';
-import { Footer, CommandLine } from '../../styles';
 import { ReactElement } from 'react';
+import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
+
+import { Footer, CommandLine } from '../../styles';
 
 const FooterContent = (): ReactElement => (
   <Footer>
@@ -15,11 +15,11 @@ const FooterContent = (): ReactElement => (
       <Link href='/about'>About</Link>
       <Link href='/demostoke'>DemoStoke</Link>
       <Link href='/antisyphon-training'>Antisyphon</Link>
-      <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'>GitHub
-        <NewTabSVG />
+      <a className='external-link' href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'>GitHub
+        <OpenInNewWindowIcon aria-hidden='true' />
       </a>
-      <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noopener noreferrer'>LinkedIn
-        <NewTabSVG />
+      <a className='external-link' href='https://linkedin.com/in/michaelzick' target='_blank' rel='noopener noreferrer'>LinkedIn
+        <OpenInNewWindowIcon aria-hidden='true' />
       </a>
     </div>
   </Footer >

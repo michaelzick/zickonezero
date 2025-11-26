@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { MouseEvent, useState } from 'react';
+import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 
 import {
   showMobileMenu,
@@ -7,8 +8,6 @@ import {
 import {
   useAppDispatch,
 } from '../hooks';
-
-import { NewTabSVG } from './svg/NewTab';
 import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
 import {
   LinkBoxMobile,
@@ -51,13 +50,13 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
         </CaseStudiesAccordionList>
       </li>
       <li onClick={handleCloseMenu}>
-        <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'>GitHub
-          <NewTabSVG />
+        <a className='external-link' href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'>GitHub
+          <OpenInNewWindowIcon aria-hidden='true' />
         </a>
       </li>
       <li onClick={handleCloseMenu}>
-        <a href='https://linkedin.com/in/michaelzick' target='_blank' rel='noopener noreferrer'>LinkedIn
-          <NewTabSVG />
+        <a className='external-link' href='https://linkedin.com/in/michaelzick' target='_blank' rel='noopener noreferrer'>LinkedIn
+          <OpenInNewWindowIcon aria-hidden='true' />
         </a>
       </li>
     </LinkBoxMobile>

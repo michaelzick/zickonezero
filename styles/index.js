@@ -229,7 +229,9 @@ export const Nav = styled.div`
     transition: all 0.3s;
     font-family: Roboto, sans-serif;
     color: ${THEME.colors.white};
-    display: flex;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2em;
     text-decoration: none;
 
     &:hover {
@@ -238,7 +240,10 @@ export const Nav = styled.div`
   }
 
   svg {
-    fill: ${THEME.colors.white};
+    color: inherit;
+    fill: currentColor;
+    margin-left: 0;
+    transition: color 0.3s;
   }
 
   @media (max-width: 979px) {
@@ -623,7 +628,10 @@ export const LinkBoxMobile = styled.ul`
   }
 
   svg {
-    fill: ${THEME.colors.white};
+    color: inherit;
+    fill: currentColor;
+    margin-left: 0;
+    transition: color 0.3s;
   }
 
   li {
@@ -632,9 +640,17 @@ export const LinkBoxMobile = styled.ul`
     }
 
     a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2em;
       border-bottom: 0.2em solid ${THEME.colors.white};
       justify-content: center;
       color: ${THEME.colors.white};
+
+      &:hover {
+        color: ${THEME.colors.hotRed};
+        border-color: ${THEME.colors.hotRed};
+      }
     }
   }
 
@@ -956,7 +972,9 @@ export const Footer = styled.div`
 
     a {
       transition: all 0.3s;
-      display: flex;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2em;
       text-decoration: none;
       color: ${THEME.colors.white};
 
@@ -966,7 +984,10 @@ export const Footer = styled.div`
     }
 
     svg {
-      fill: ${THEME.colors.white};
+      color: inherit;
+      fill: currentColor;
+      margin-left: 0;
+      transition: color 0.3s;
     }
 
     @media (max-width: ${THEME.breakpoints.smallTablet}) {
