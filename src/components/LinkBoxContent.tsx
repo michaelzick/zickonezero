@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
-import { NewTabSVG } from './svg/NewTab';
 import {
   LinkBox,
   CaseStudiesDesktopWrapper,
@@ -66,10 +66,10 @@ const LinkBoxContent = () => {
         </CaseStudiesDropdown>
       </CaseStudiesDesktopWrapper>
       <a className='external-link' href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'>GitHub
-        <NewTabSVG />
+        <OpenInNewWindowIcon aria-hidden='true' />
       </a>
       <a className='external-link' href='https://linkedin.com/in/michaelzick' target='_blank' rel='noopener noreferrer'>LinkedIn
-        <NewTabSVG />
+        <OpenInNewWindowIcon aria-hidden='true' />
       </a>
     </LinkBox>
   );
