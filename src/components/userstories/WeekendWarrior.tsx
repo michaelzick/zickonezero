@@ -11,6 +11,7 @@ import {
   DemoStokeTldrTitle,
   DemoStokeTldrCopy,
   DemoStokeStoryHero,
+  DemoStokeHeroAbstractLayout,
 } from '../../../styles';
 import HelpsCarousel from './HelpsCarousel';
 import WhyHighlights from './WhyHighlights';
@@ -120,18 +121,20 @@ const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
     <div>
       <section id='story-weekend-warrior' className='story-section'>
         <DemoStokeTitle $noMobileTopPad>The Weekend Warrior</DemoStokeTitle>
-        <DemoStokeStoryHero
-          src='/img/snowboard-girl-cp.webp'
-          alt='Snowboarder carrying her board'
-          loading='lazy'
-        />
+        <DemoStokeHeroAbstractLayout>
+          <DemoStokeStoryHero
+            src='/img/snowboard-girl-cp.webp'
+            alt='Snowboarder carrying her board'
+            loading='lazy'
+          />
 
-        <DemoStokeTldrSection $borderless>
-          <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
-          <DemoStokeTldrCopy>
-            Krista is a snowboarder who valued speed and precision, and wouldn’t buy a new board without riding it first. Her frustrations with traditional demo events opened the door for {DSLink} as a more flexible, trustworthy, and convenient solution.
-          </DemoStokeTldrCopy>
-        </DemoStokeTldrSection>
+          <DemoStokeTldrSection $borderless>
+            <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
+            <DemoStokeTldrCopy>
+              Krista is a snowboarder who valued speed and precision, and wouldn’t buy a new board without riding it first. Her frustrations with traditional demo events opened the door for {DSLink} as a more flexible, trustworthy, and convenient solution.
+            </DemoStokeTldrCopy>
+          </DemoStokeTldrSection>
+        </DemoStokeHeroAbstractLayout>
       </section>
 
       <section className='story-section'>

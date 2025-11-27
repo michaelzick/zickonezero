@@ -1705,8 +1705,37 @@ export const DemoStokeStoryHero = styled.img`
   border-radius: 16px;
   object-fit: cover;
   object-position: top;
-  margin: 0 0 clamp(0.9em, 2vw, 1.4em);
+  margin: 0;
   box-shadow: 0 12px 28px -20px rgb(0 0 0 / 60%);
+`;
+
+export const DemoStokeHeroAbstractLayout = styled.div`
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(1em, 3vw, 2.6em);
+  align-items: stretch;
+  margin: clamp(0.8em, 2vw, 1.3em) 0 clamp(1.2em, 2.6vw, 2em);
+
+  ${DemoStokeStoryHero} {
+    height: 100%;
+  }
+
+  ${DemoStokeTldrSection} {
+    min-height: 100%;
+  }
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    grid-template-columns: 1fr;
+    gap: clamp(0.8em, 2.2vw, 1.3em);
+
+    ${DemoStokeStoryHero} {
+      height: auto;
+    }
+
+    ${DemoStokeTldrSection} {
+      min-height: 0;
+    }
+  }
 `;
 
 export const DemoStokeMiniCardModalOverlay = styled.div`

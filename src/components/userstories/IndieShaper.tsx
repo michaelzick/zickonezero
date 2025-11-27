@@ -14,6 +14,7 @@ import {
   DemoStokeTldrTitle,
   DemoStokeTldrCopy,
   DemoStokeStoryHero,
+  DemoStokeHeroAbstractLayout,
 } from '../../../styles';
 import HelpsCarousel from './HelpsCarousel';
 import WhyHighlights from './WhyHighlights';
@@ -131,18 +132,20 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
 
       <section id='story-independent-surfboard-shaper-title' className='story-section'>
         <DemoStokeTitle $noMobileTopPad>The Independent Surfboard Shaper</DemoStokeTitle>
-        <DemoStokeStoryHero
-          src='/img/surfboard-shaper-cp.webp'
-          alt='Independent surfboard shaper with demo boards'
-          loading='lazy'
-        />
+        <DemoStokeHeroAbstractLayout>
+          <DemoStokeStoryHero
+            src='/img/surfboard-shaper-cp.webp'
+            alt='Independent surfboard shaper with demo boards'
+            loading='lazy'
+          />
 
-        <DemoStokeTldrSection $borderless>
-          <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
-          <DemoStokeTldrCopy>
-            From the lens of Curtis, an independent Southern California surfboard shaper, {DSLink} had the potential to radically simplify and expand his business by addressing key pain points around demo logistics, discovery, trust, and conversion.
-          </DemoStokeTldrCopy>
-        </DemoStokeTldrSection>
+          <DemoStokeTldrSection $borderless>
+            <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
+            <DemoStokeTldrCopy>
+              From the lens of Curtis, an independent Southern California surfboard shaper, {DSLink} had the potential to radically simplify and expand his business by addressing key pain points around demo logistics, discovery, trust, and conversion.
+            </DemoStokeTldrCopy>
+          </DemoStokeTldrSection>
+        </DemoStokeHeroAbstractLayout>
       </section>
 
       <section className='story-section'>
