@@ -94,7 +94,7 @@ const TLDR_ITEMS: {
       </>
     ),
     image: {
-      src: '/img/glob.webp',
+      src: '/img/demostoke/globe.webp',
       alt: 'DemoStoke global gear discovery collage'
     }
   },
@@ -102,7 +102,7 @@ const TLDR_ITEMS: {
     title: 'The Problem',
     description: 'Riders want to try before they buy, but demos are rare, costly, and inconvenient.',
     image: {
-      src: '/img/demo-van.webp',
+      src: '/img/demostoke/demo-van.webp',
       alt: 'DemoStoke mobile demo van in the field'
     }
   },
@@ -110,7 +110,7 @@ const TLDR_ITEMS: {
     title: 'The Solution',
     description: 'A location-based marketplace to safely connect riders, lenders, and shops.',
     image: {
-      src: '/img/surf-shop.webp',
+      src: '/img/demostoke/surf-shop.webp',
       alt: 'Surf shop displaying boards available for demo'
     }
   },
@@ -118,7 +118,7 @@ const TLDR_ITEMS: {
     title: 'My Roles',
     description: 'Founder, UX Designer, and Full-Stack Developer.',
     image: {
-      src: '/img/ds-design-system.webp',
+      src: '/img/demostoke/ds-design-system.webp',
       alt: 'DemoStoke design system components'
     }
   }
@@ -133,7 +133,7 @@ const METHOD_SECTIONS = [
       'Benchmarked competitors and availability patterns to spot underserved sports and locations.',
       'Synthesized: riders will pay if trust/ease are guaranteed; shops/shapers need lightweight tools to convert demos.'
     ],
-    image: { src: '/img/female-surfer.jpg', alt: 'Female surfer carrying a board at the beach' }
+    image: { src: '/img/demostoke/female-surfer.jpg', alt: 'Female surfer carrying a board at the beach' }
   },
   {
     title: 'Empathize, Define, and Ideate With Users',
@@ -143,7 +143,7 @@ const METHOD_SECTIONS = [
       'Mapped discovery-to-feedback flows and prioritized must-have moments for riders and lenders.',
       'Documented trust signals and discovery levers: verification, reviews, filters, maps, and events.'
     ],
-    image: { src: '/img/guys-talking.jpg', alt: 'Product discovery conversation between two people' }
+    image: { src: '/img/demostoke/guys-talking.jpg', alt: 'Product discovery conversation between two people' }
   },
   {
     title: 'Prototype, Test, and Refine the Product',
@@ -153,7 +153,7 @@ const METHOD_SECTIONS = [
       'Ran moderated/unmoderated walkthroughs to validate discovery, booking, and trust cues.',
       'Iterated features and UI from usability findings; tracked analytics to guide next improvements.'
     ],
-    image: { src: '/img/computer.jpg', alt: 'Laptop showing a high-fidelity interface design' }
+    image: { src: '/img/demostoke/computer.jpg', alt: 'Laptop showing a high-fidelity interface design' }
   }
 ] as const;
 
@@ -210,13 +210,11 @@ const PERSONA_ITEMS = [
 ] as const;
 
 const HOW_IMAGES = [
-  { src: '/img/feat-events.webp', alt: 'Featured events section' },
-  { src: '/img/events-calendar.webp', alt: 'Events calendar' },
-  { src: '/img/blog.webp', alt: 'Blog layout' },
-  { src: '/img/admin-img-download.webp', alt: 'Admin dashboard' },
-  { src: '/img/feat-posts.webp', alt: 'Featured posts section' },
-  { src: '/img/calendar.webp', alt: 'Calendar overview' },
-  { src: '/img/quiz.webp', alt: 'Quiz experience' }
+  { src: '/img/demostoke/feat-events.webp', alt: 'Featured events section' },
+  { src: '/img/demostoke/events-calendar.webp', alt: 'Events calendar' },
+  { src: '/img/demostoke/admin-img-download.webp', alt: 'Admin dashboard' },
+  { src: '/img/demostoke/feat-posts.webp', alt: 'Featured posts section' },
+  { src: '/img/demostoke/gear-quiz.webp', alt: 'Quiz experience' },
 ] as const;
 
 const DemoStokeContent = () => {
@@ -429,7 +427,7 @@ const DemoStokeContent = () => {
                         </DemoStokeTwoUp>
                         <DemoStokeWhyImageFrame>
                           <FullBorderImage
-                            src='/img/stuf-figma.webp'
+                            src='/img/demostoke/stuf-figma.webp'
                             alt='Early Stuf peer-to-peer gear lending concepts in Figma'
                             loading='lazy'
                           />
@@ -519,7 +517,7 @@ const DemoStokeContent = () => {
                           </section>
                         </DemoStokeTwoUp>
                         <DemoStokeWhyImageFrame>
-                          <FullBorderImage src='/img/all-equipment-hybrid.webp' alt='DemoStoke Hybrid View' loading="lazy" />
+                          <FullBorderImage src='/img/demostoke/all-equipment-hybrid.webp' alt='DemoStoke Hybrid View' loading="lazy" />
                         </DemoStokeWhyImageFrame>
                       </DemoStokeTldrSection>
                     </section>

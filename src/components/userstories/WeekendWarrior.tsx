@@ -123,7 +123,7 @@ const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
         <DemoStokeTitle $noMobileTopPad>The Weekend Warrior</DemoStokeTitle>
         <DemoStokeHeroAbstractLayout>
           <DemoStokeStoryHero
-            src='/img/snowboard-girl-cp.webp'
+            src='/img/demostoke/snowboard-girl-cp.webp'
             alt='Snowboarder carrying her board'
             loading='lazy'
           />
