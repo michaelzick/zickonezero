@@ -134,7 +134,7 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
         <DemoStokeTitle $noMobileTopPad>The Independent Surfboard Shaper</DemoStokeTitle>
         <DemoStokeHeroAbstractLayout>
           <DemoStokeStoryHero
-            src='/img/demostoke/surfboard-shaper-cp.webp'
+            src='/img/demostoke/pop-art-shaper.webp'
             alt='Independent surfboard shaper with demo boards'
             loading='lazy'
           />

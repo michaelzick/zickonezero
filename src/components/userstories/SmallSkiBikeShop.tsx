@@ -123,7 +123,7 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
         <DemoStokeTitle $noMobileTopPad>The Small Ski &amp; Bike Shop</DemoStokeTitle>
         <DemoStokeHeroAbstractLayout>
           <DemoStokeStoryHero
-            src='/img/demostoke/mtb-rental-counter-cp.webp'
+            src='/img/demostoke/pop-art-mtb-man-woman.webp'
             alt='Mountain bike rental counter'
             loading='lazy'
           />
