@@ -101,8 +101,7 @@
     "desc": "General information and booking site for Michael Zick Coaching",
     "header": "Michael Zick Coaching",
     "group": "michaelzickcoaching",
-    "link": "https://www.michaelzick.com/",
-    "linkOut": true
+    "link": "/michael-zick-coaching"
   },
   {
     "thumb": "/img/squares/adam-chiappone-square.webp",
@@ -110,8 +109,7 @@
     "desc": "General information site for family therapist Adam Chiappone",
     "header": "Adam Chiappone",
     "group": "adam-chiappone",
-    "link": "https://www.adamchiappone.com/",
-    "linkOut": true
+    "link": "/adam-chiappone"
   },
   {
     "thumb": "/img/squares/king-512.webp",
@@ -119,8 +117,7 @@
     "desc": "Internal Family Systems journaling app",
     "header": "Who’s In Charge?",
     "group": "wic",
-    "link": "https://whosincharge.zickonezero.com/",
-    "linkOut": true
+    "link": "/whos-in-charge"
   },
   {
     "thumb": "/img/squares/fyfs-wave-square.webp",
@@ -128,8 +125,7 @@
     "desc": "Free career quiz & personality assessment",
     "header": "Find Your Flow State",
     "group": "fyfs",
-    "link": "https://findyourflowstate.zickonezero.com/",
-    "linkOut": true
+    "link": "/find-your-flow-state"
   },
   {
     "thumb": "/img/squares/ds-logo-stripes-fuchsia-square.webp",
