@@ -17,7 +17,6 @@ import {
   DemoStokeHeroAbstractLayout,
 } from '../../../styles';
 import HelpsCarousel from './HelpsCarousel';
-import WhyHighlights from './WhyHighlights';
 
 type StoryProps = {
   wrapWithBioBox?: boolean;
@@ -93,29 +92,6 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
     }
   ];
 
-  const whyScale = [
-    {
-      title: 'From 1-to-1 to many-to-1',
-      description: 'Sales no longer depended solely on direct personal interactions.'
-    },
-    {
-      title: 'More feedback, faster iteration',
-      description: 'Demo feedback refined designs, revealed trends, and guided inventory.'
-    },
-    {
-      title: 'New revenue streams',
-      description: (
-        <>
-          Curtis could even rent out boards on {DSLink} during build waitlists to offset costs.
-        </>
-      )
-    },
-    {
-      title: 'Geo-expansion',
-      description: 'Demo fleets could rotate across SD, LA, Ventura, and Santa Cruz without him leaving home.'
-    }
-  ];
-
   const content = (
     <div>
       <section id='story-introduction' aria-hidden='true'>
@@ -155,11 +131,6 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
 
       <section className='story-section'>
         <HelpsCarousel items={howHelps} title='How DemoStoke Helps' />
-      </section>
-
-      <section className='story-section'>
-        <h3>Why This Helps Curtis Scale</h3>
-        <WhyHighlights items={whyScale} />
       </section>
     </div>
   );

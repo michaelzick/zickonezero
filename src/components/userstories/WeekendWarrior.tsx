@@ -14,7 +14,6 @@ import {
   DemoStokeHeroAbstractLayout,
 } from '../../../styles';
 import HelpsCarousel from './HelpsCarousel';
-import WhyHighlights from './WhyHighlights';
 
 type StoryProps = {
   wrapWithBioBox?: boolean;
@@ -94,29 +93,6 @@ const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
     }
   ];
 
-  const whyHelps = [
-    {
-      title: 'Gives her options she can trust',
-      description: 'Reviews, ID verification, and damage waivers built the confidence she needed to participate.'
-    },
-    {
-      title: 'Turns idle gear into income',
-      description: 'She saw potential to rent out rarely used gear while helping others ride more.'
-    },
-    {
-      title: 'Supports experimentation',
-      description: 'She wanted to try new tech without full commitment.'
-    },
-    {
-      title: 'Aligns with real riding flow',
-      description: (
-        <>
-          No more wasting powder days waiting at demo booths—{DSLink} fit into her actual ride plans.
-        </>
-      )
-    }
-  ];
-
   const content = (
     <div>
       <section id='story-weekend-warrior' className='story-section'>
@@ -144,11 +120,6 @@ const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
 
       <section className='story-section'>
         <HelpsCarousel items={howHelps} title='How DemoStoke Helps' />
-      </section>
-
-      <section className='story-section'>
-        <h3>Why This Helps Riders Like Krista</h3>
-        <WhyHighlights items={whyHelps} />
       </section>
     </div>
   );

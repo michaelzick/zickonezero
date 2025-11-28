@@ -14,7 +14,6 @@ import {
   DemoStokeHeroAbstractLayout,
 } from '../../../styles';
 import HelpsCarousel from './HelpsCarousel';
-import WhyHighlights from './WhyHighlights';
 
 type StoryProps = {
   wrapWithBioBox?: boolean;
@@ -94,29 +93,6 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
     }
   ];
 
-  const whyHelps = [
-    {
-      title: 'Streamlined workflow',
-      description: 'Staff spent less time on paper forms and more time guiding customers.'
-    },
-    {
-      title: 'Converts demo into retail',
-      description: 'Try-before-buy increased confidence and drove more sales with less friction.'
-    },
-    {
-      title: 'Smart inventory utilization',
-      description: 'Idle gear could earn money or help convert new buyers.'
-    },
-    {
-      title: 'Expands market reach',
-      description: (
-        <>
-          {DSLink} discovery tools brought in vacationers and new locals—not just Google Maps foot traffic.
-        </>
-      )
-    }
-  ];
-
   const content = (
     <div>
       <section id='story-small-ski-shop' className='story-section'>
@@ -144,11 +120,6 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
 
       <section className='story-section'>
         <HelpsCarousel items={howHelps} title='How DemoStoke Helps' />
-      </section>
-
-      <section className='story-section'>
-        <h3>Why This Helps Jason Scale</h3>
-        <WhyHighlights items={whyHelps} />
       </section>
     </div>
   );
