@@ -4,7 +4,7 @@ const FindYourFlowStatePage = () => (
   <ProjectShowcase
     title='Find Your Flow State'
     summary='A free AI-powered career personality assessment quiz.'
-    heroImage={{ src: '/img/squares/fyfs-wave-square.webp', alt: 'Find Your Flow State logo' }}
+    heroImage={{ src: '/img/projects/fyfs/fyfs-wave.webp', alt: 'Find Your Flow State logo' }}
     roleBullets={[
       'Product strategy',
       'Quiz questions',

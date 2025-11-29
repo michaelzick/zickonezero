@@ -21,7 +21,7 @@ export const PageInner = styled.div`
 
 export const HeroGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   gap: clamp(1.2em, 3vw, 2.4em);
   align-items: center;
   padding: 0;
@@ -35,10 +35,9 @@ export const HeroGrid = styled.div`
 
 export const HeroImageFrame = styled.div`
   width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 16px;
+  aspect-ratio: 16 / 9;
+  border-radius: 0 16px 16px 0;
   overflow: hidden;
-  border: 1.5px solid ${THEME.colors.white};
   box-shadow: 0 18px 46px -28px rgb(0 0 0 / 80%);
   background: transparent;
 
