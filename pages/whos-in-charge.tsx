@@ -17,7 +17,7 @@ const WhosInChargePage = () => (
         title: 'Visually rich and provocative',
         body: (
           <>
-            Using a tarot-card motif, I designed a bold, engaging visual system that invites users to explore their inner parts
+            Using a tarot card motif, I designed a bold, engaging visual system that invites users to explore their inner parts
             while journaling. The homepage clearly communicates the app’s purpose with IFS information and instructions.
           </>
         ),
