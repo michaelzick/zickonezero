@@ -15,7 +15,6 @@ const AdamChiapponePage = () => (
     sections={[
       {
         title: 'Warm, low-friction intake',
-        subtitle: 'Experience design',
         body: (
           <>
             Crafted a lightweight inquiry flow that reassures visitors with clear expectations, transparent pricing cues,
@@ -26,7 +25,6 @@ const AdamChiapponePage = () => (
       },
       {
         title: 'Service clarity without jargon',
-        subtitle: 'Content design',
         body: (
           <>
             Organized specialties, modalities, and FAQs into skimmable sections with anchor links and pull quotes, so visitors
@@ -37,7 +35,6 @@ const AdamChiapponePage = () => (
       },
       {
         title: 'Maintainable by design',
-        subtitle: 'Delivery',
         body: (
           <>
             Set up a headless CMS with reusable page sections and color tokens, ensuring future edits stay on-brand without

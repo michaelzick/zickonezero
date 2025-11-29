@@ -15,7 +15,6 @@ const FindYourFlowStatePage = () => (
     sections={[
       {
         title: 'Quiz journey that feels like coaching',
-        subtitle: 'Experience design',
         body: (
           <>
             Crafted a calm, reassuring flow with microcopy that guides users through reflective prompts, while visual rhythm
@@ -26,7 +25,6 @@ const FindYourFlowStatePage = () => (
       },
       {
         title: 'Insightful results that nudge action',
-        subtitle: 'Product thinking',
         body: (
           <>
             Archetype scoring rolls into personalized next steps—downloadable PDFs, suggested coaching tracks, and email nurture
@@ -37,7 +35,6 @@ const FindYourFlowStatePage = () => (
       },
       {
         title: 'Conversion-ready from day one',
-        subtitle: 'Growth foundations',
         body: (
           <>
             Embedded event tracking for quiz completions, drop-offs, and CTA clicks, with server-side friendly linkouts so we can

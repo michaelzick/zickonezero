@@ -24,7 +24,6 @@ import {
 
 type ShowcaseSection = {
   title: string;
-  subtitle?: string;
   body: ReactNode;
   image: { src: string; alt: string; };
 };
@@ -44,6 +43,7 @@ const PageShell = styled.div`
   width: 100%;
   padding: clamp(1.6em, 4vw, 2.6em) clamp(1.2em, 3vw, 2.8em) clamp(2.4em, 5vw, 3.6em);
   color: ${THEME.colors.white};
+  font-size: 25px;
 `;
 
 const PageInner = styled.div`
@@ -51,6 +51,7 @@ const PageInner = styled.div`
   display: flex;
   flex-direction: column;
   gap: clamp(1.4em, 3vw, 2em);
+  text-align: left;
 `;
 
 const HeroGrid = styled.div`
@@ -60,11 +61,7 @@ const HeroGrid = styled.div`
   align-items: center;
   padding: clamp(1.4em, 3vw, 2em);
   border-radius: 18px;
-  background:
-    radial-gradient(120% 120% at 10% 10%, rgba(115, 255, 0, 0.12), rgba(255, 255, 255, 0)),
-    radial-gradient(90% 90% at 90% 10%, rgba(251, 146, 60, 0.18), rgba(255, 255, 255, 0)),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(115, 255, 0, 0.04));
-  box-shadow: 0 16px 34px -24px rgb(0 0 0 / 70%), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  border: 1.5px solid ${THEME.colors.white};
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     grid-template-columns: 1fr;
@@ -76,9 +73,9 @@ const HeroImageFrame = styled.div`
   aspect-ratio: 1 / 1;
   border-radius: 16px;
   overflow: hidden;
-  border: 2px solid rgba(115, 255, 0, 0.55);
+  border: 1.5px solid ${THEME.colors.white};
   box-shadow: 0 18px 46px -28px rgb(0 0 0 / 80%);
-  background: radial-gradient(110% 110% at 10% 10%, rgba(115, 255, 0, 0.08), rgba(255, 255, 255, 0));
+  background: transparent;
 
   img {
     width: 100%;
@@ -92,19 +89,22 @@ const HeroContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.7em;
+  text-align: left;
+  font-size: clamp(1em, 1.35vw, 1.05em);
+  line-height: 1.7;
 `;
 
 const Title = styled.h1`
   margin: 0;
   font-size: clamp(2rem, 4.6vw, 3.1rem);
   letter-spacing: 0.01em;
-  color: var(--color-hotGreen);
+  color: ${THEME.colors.white};
 `;
 
 const Summary = styled.p`
   margin: 0;
-  font-size: clamp(1.05rem, 2.1vw, 1.2rem);
-  line-height: 1.6;
+  font-size: inherit;
+  line-height: inherit;
   color: rgba(255, 255, 255, 0.86);
 `;
 
@@ -116,15 +116,15 @@ const HeroLabel = styled.span`
   letter-spacing: 0.08em;
   font-weight: 700;
   font-size: 0.86em;
-  color: var(--color-orange);
+  color: ${THEME.colors.white};
 
   &::before {
     content: '';
     width: 0.6em;
     height: 0.6em;
     border-radius: 50%;
-    background: var(--color-hotGreen);
-    box-shadow: 0 0 0 8px rgba(115, 255, 0, 0.12);
+    background: ${THEME.colors.white};
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.1);
   }
 `;
 
@@ -140,11 +140,11 @@ const RoleList = styled.ul`
     align-items: flex-start;
     gap: 0.5em;
     line-height: 1.5;
-    color: rgba(255, 255, 255, 0.9);
+    color: ${THEME.colors.white};
 
     &::before {
       content: '•';
-      color: var(--color-hotGreen);
+      color: ${THEME.colors.white};
       font-size: 1.2em;
       line-height: 1;
       transform: translateY(-0.05em);
@@ -166,12 +166,12 @@ const LinkRow = styled.div`
     align-items: center;
     gap: 0.3em;
     padding-bottom: 0.08em;
-    border-bottom: 2px solid var(--color-hotGreen);
+    border-bottom: 2px solid ${THEME.colors.white};
     transition: color 0.2s ease, border-color 0.2s ease;
 
     &:hover {
-      color: var(--color-hotGreen);
-      border-color: var(--color-orange);
+      color: rgba(255, 255, 255, 0.85);
+      border-color: rgba(255, 255, 255, 0.7);
     }
   }
 `;
@@ -180,20 +180,11 @@ const SectionsBlock = styled.div`
   display: flex;
   flex-direction: column;
   gap: clamp(1.2em, 3vw, 1.9em);
-`;
-
-const SectionKicker = styled.span`
-  display: inline-block;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-weight: 700;
-  font-size: 0.82em;
-  color: var(--color-orange);
-  margin-bottom: 0.35em;
+  text-align: left;
 `;
 
 const SectionTitle = styled(DemoStokeTldrTitle)`
-  color: var(--color-hotGreen);
+  color: ${THEME.colors.white};
   margin-bottom: 0.35em;
 `;
 
@@ -245,11 +236,10 @@ const ProjectShowcase = ({
 
             <SectionsBlock>
               <DemoStokeMethodList>
-                {sections.map(({ title: sectionTitle, subtitle, body, image }, index) => (
+                {sections.map(({ title: sectionTitle, body, image }, index) => (
                   <DemoStokeMethodCard key={sectionTitle}>
                     <DemoStokeMethodRow $reverse={index % 2 === 1}>
                       <div>
-                        {subtitle ? <SectionKicker>{subtitle}</SectionKicker> : null}
                         <SectionTitle as="h3">{sectionTitle}</SectionTitle>
                         <DemoStokeTldrCopy>{body}</DemoStokeTldrCopy>
                       </div>

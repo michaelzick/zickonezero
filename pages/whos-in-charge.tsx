@@ -15,7 +15,6 @@ const WhosInChargePage = () => (
     sections={[
       {
         title: 'Guided prompts without overwhelm',
-        subtitle: 'UX & copy',
         body: (
           <>
             Built a structured prompt flow with adaptive hints, keeping users focused on one reflection at a time.
@@ -26,7 +25,6 @@ const WhosInChargePage = () => (
       },
       {
         title: 'Parts library + mood snapshots',
-        subtitle: 'Product system',
         body: (
           <>
             Created a parts library to quickly tag protectors, exiles, and managers, paired with mood sliders and quick notes.
@@ -37,7 +35,6 @@ const WhosInChargePage = () => (
       },
       {
         title: 'Privacy-first journaling',
-        subtitle: 'Engineering',
         body: (
           <>
             Local-first storage with optional cloud backup keeps sensitive work private. Added export flows for therapists

@@ -15,7 +15,6 @@ const MichaelZickCoachingPage = () => (
     sections={[
       {
         title: 'Offer clarity that sparks action',
-        subtitle: 'Positioning',
         body: (
           <>
             Reframed offerings around outcomes—career pivots, leadership coaching, and habit systems—supported by concise proof
@@ -26,7 +25,6 @@ const MichaelZickCoachingPage = () => (
       },
       {
         title: 'Booking that respects momentum',
-        subtitle: 'UX flows',
         body: (
           <>
             Streamlined discovery and intro-call scheduling into a single flow, with contextual FAQs and assurances on prep,
@@ -37,7 +35,6 @@ const MichaelZickCoachingPage = () => (
       },
       {
         title: 'Always-on storytelling',
-        subtitle: 'Content & analytics',
         body: (
           <>
             Built modular content blocks for articles, workshop promos, and client wins. Layered event tracking to see which
