@@ -103,7 +103,7 @@ const Title = styled.h1`
 
 const Summary = styled.p`
   margin: 0;
-  font-size: inherit;
+  font-size: 1.2em;
   line-height: inherit;
   color: rgba(255, 255, 255, 0.86);
 `;
