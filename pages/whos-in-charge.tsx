@@ -3,13 +3,12 @@ import ProjectShowcase from '../src/components/ProjectShowcase';
 const WhosInChargePage = () => (
   <ProjectShowcase
     title='Who’s In Charge?'
-    summary='An Internal Family Systems journaling companion that helps users track parts work with calm, guided prompts.'
+    summary='An Internal Family Systems journaling app with tarot-style imagery.'
     heroImage={{ src: '/img/squares/king-512.webp', alt: 'Who’s In Charge? crown logo' }}
     roleBullets={[
-      'Concept, UX architecture, and interaction design',
-      'Tone + prompt writing to keep sessions grounded and safe',
-      'Front-end build with encrypted local-first storage',
-      'Session analytics to surface streaks and mood trends'
+      'UX architecture',
+      'Visual design',
+      'Images and text',
     ]}
     projectLink={{ href: 'https://whosincharge.zickonezero.com/', label: 'whosincharge.zickonezero.com' }}
     sections={[
