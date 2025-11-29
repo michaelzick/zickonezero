@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DemoStokeTldrTitle } from './index';
+import { DemoStokeTldrTitle, DemoStokeTldrImage } from './index';
 import { THEME } from './theme';
 
 export const PageShell = styled.div`
@@ -145,4 +145,8 @@ export const SectionsBlock = styled.div`
 export const SectionTitle = styled(DemoStokeTldrTitle)`
   color: ${THEME.colors.white};
   margin-bottom: 0.35em;
+`;
+
+export const ShowcaseImage = styled(DemoStokeTldrImage)`
+  ${props => props.$position && `object-position: ${props.$position};`}
 `;

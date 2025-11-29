@@ -21,7 +21,8 @@ import {
   RoleList,
   LinkRow,
   SectionsBlock,
-  SectionTitle
+  SectionTitle,
+  ShowcaseImage
 } from '../../styles/projectShowcases';
 import { TopNavContent, FooterContent } from '.';
 import {
@@ -36,7 +37,7 @@ import {
 type ShowcaseSection = {
   title: string;
   body: ReactNode;
-  image: { src: string; alt: string; };
+  image: { src: string; alt: string; position?: string; };
 };
 
 type ProjectShowcaseProps = {
@@ -110,7 +111,12 @@ const ProjectShowcase = ({
                         <SectionTitle as="h3">{sectionTitle}</SectionTitle>
                         <DemoStokeTldrCopy>{body}</DemoStokeTldrCopy>
                       </div>
-                      <DemoStokeTldrImage src={image.src} alt={image.alt} loading='lazy' />
+                      <ShowcaseImage
+                        src={image.src}
+                        alt={image.alt}
+                        loading='lazy'
+                        $position={image.position}
+                      />
                     </DemoStokeMethodRow>
                   </DemoStokeMethodCard>
                 ))}
