@@ -446,7 +446,7 @@ export const Title = styled.h1`
   .brand-line {
     display: inline;
     &.brand-first {
-      margin-right: 0.35em;
+      margin-right: 0.18em;
     }
 
     @media (max-width: ${THEME.breakpoints.phone}) {
