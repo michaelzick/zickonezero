@@ -39,7 +39,11 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
           onClick={() => setIsCaseStudiesOpen((prevState) => !prevState)}
           aria-expanded={isCaseStudiesOpen}>
           Case Studies
-          <CaseStudiesChevron $isOpen={isCaseStudiesOpen} aria-hidden='true' />
+          <CaseStudiesChevron $isOpen={isCaseStudiesOpen} aria-hidden='true'>
+            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </CaseStudiesChevron>
         </CaseStudiesAccordionButton>
         <CaseStudiesAccordionList $isOpen={isCaseStudiesOpen}>
           {CASE_STUDIES_LINKS.map(({ href, label, icon, iconAlt }) => (

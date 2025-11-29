@@ -53,7 +53,11 @@ const LinkBoxContent = () => {
           aria-haspopup='true'
           aria-expanded={isDropdownOpen}>
           Case Studies
-          <CaseStudiesChevron $isOpen={isDropdownOpen} aria-hidden='true' />
+          <CaseStudiesChevron $isOpen={isDropdownOpen} aria-hidden='true'>
+            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </CaseStudiesChevron>
         </CaseStudiesTrigger>
         <CaseStudiesDropdown
           $isOpen={isDropdownOpen}
