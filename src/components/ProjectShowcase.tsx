@@ -49,6 +49,7 @@ type ProjectShowcaseProps = {
   title: string;
   summary?: string;
   heroImage: { src: string; alt: string; };
+  subNavImage?: { src: string; alt: string; };
   roleBullets: string[];
   projectLink: { href: string; label?: string; };
   sections: ShowcaseSection[];
@@ -58,6 +59,7 @@ const ProjectShowcase = ({
   title,
   summary,
   heroImage,
+  subNavImage,
   roleBullets,
   projectLink,
   sections
@@ -101,7 +103,7 @@ const ProjectShowcase = ({
               aria-label="Project quick nav"
               aria-hidden={!isSubNavVisible}
               $isVisible={isSubNavVisible}>
-              <SubNavThumb src={heroImage.src} alt={heroImage.alt} />
+              <SubNavThumb src={(subNavImage || heroImage).src} alt={(subNavImage || heroImage).alt} />
               <SubNavTitle>{title}</SubNavTitle>
               <SubNavLink href={projectLink.href} target='_blank' rel='noopener noreferrer'>
                 {projectLink.label || 'View Project'} <OpenInNewWindowIcon aria-hidden="true" />

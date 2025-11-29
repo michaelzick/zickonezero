@@ -5,6 +5,7 @@ const AdamChiapponePage = () => (
     title='Adam Chiappone'
     summary='A welcoming therapy site that translates Adam’s in-person warmth into a digital experience.'
     heroImage={{ src: '/img/projects/adam-chiappone/ac-home-cropped.webp', alt: 'Adam Chiappone homepage hero' }}
+    subNavImage={{ src: '/img/squares/adam-chiappone-square.webp', alt: 'Adam Chiappone brand mark' }}
     roleBullets={[
       'Branding, imagery, and copywriting',
       'UX, layout, and technical direction',

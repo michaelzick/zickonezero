@@ -5,6 +5,7 @@ const MichaelZickCoachingPage = () => (
     title='Michael Zick Coaching'
     summary='A coaching hub that pairs clarity of services with a confident, energetic visual system.'
     heroImage={{ src: '/img/squares/mz-ppc-logo.webp', alt: 'Michael Zick Coaching logo' }}
+    subNavImage={{ src: '/img/squares/mz-ppc-logo.webp', alt: 'Michael Zick Coaching logo' }}
     roleBullets={[
       'Brand identity',
       'Visual design',

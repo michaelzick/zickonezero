@@ -5,6 +5,7 @@ const FindYourFlowStatePage = () => (
     title='Find Your Flow State'
     summary='A free AI-powered career personality assessment quiz.'
     heroImage={{ src: '/img/projects/fyfs/fyfs-wave.webp', alt: 'Find Your Flow State logo' }}
+    subNavImage={{ src: '/img/squares/fyfs-wave-square.webp', alt: 'Find Your Flow State logo' }}
     roleBullets={[
       'Product strategy',
       'Quiz questions',
