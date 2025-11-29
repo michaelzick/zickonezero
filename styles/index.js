@@ -586,7 +586,6 @@ export const CaseStudiesDropdown = styled.ul`
       border-radius: 6px;
       object-fit: cover;
       flex-shrink: 0;
-      filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.35));
     }
   }
 
