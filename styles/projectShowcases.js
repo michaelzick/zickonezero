@@ -45,6 +45,7 @@ export const HeroGrid = styled.div`
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     grid-template-columns: 1fr;
+    gap: clamp(2em, 4vw, 3em);
   }
 `;
 
