@@ -606,7 +606,8 @@ export const LinkBoxMobile = styled.ul`
   top: 3.4em;
   right: 1em;
   padding: 1.2em 1.5em;
-  min-width: 170px;
+  min-width: 18em;
+  width: 18em;
   background: ${THEME.colors.darkest};
   z-index: 400;
   border-radius: 4px;
