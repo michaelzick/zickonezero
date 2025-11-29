@@ -9,10 +9,16 @@ export const PageShell = styled.div`
   padding: clamp(1.6em, 4vw, 2.6em) clamp(1.2em, 3vw, 2.8em) clamp(2.4em, 5vw, 3.6em);
   color: ${THEME.colors.white};
   font-size: 25px;
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    font-size: 18px;
+    padding: clamp(1em, 5vw, 1.4em);
+  }
 `;
 
 export const PageInner = styled.div`
   max-width: 62em;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: clamp(1.4em, 3vw, 2em);

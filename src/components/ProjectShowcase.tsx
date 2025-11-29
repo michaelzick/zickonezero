@@ -66,7 +66,7 @@ const ProjectShowcase = ({
   return (
     <>
       <TopNavContent />
-      <Wrapper isMobileMenuShown={isMobileMenuShown} isAtPage
+      <Wrapper isMobileMenuShown={isMobileMenuShown} isAtPage $isProjectPage
         onClick={() => dispatch(showMobileMenu(false))}>
         <PageShell>
           <PageInner>

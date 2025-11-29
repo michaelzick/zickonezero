@@ -209,7 +209,7 @@ export const Wrapper = styled.div`
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     ${props => props.isHomePage && 'padding-top: 9.6em;'}
-    ${props => props.isAtPage ? 'padding-top: 13.5em;' : 'padding-top: 8.7em;'}
+    ${props => props.isAtPage ? `padding-top: ${props.$isProjectPage ? '8.5em' : '13.5em'};` : 'padding-top: 8.7em;'}
   }
 `;
 
