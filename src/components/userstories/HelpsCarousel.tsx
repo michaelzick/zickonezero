@@ -71,6 +71,10 @@ const HelpsCarousel = ({ items, title = 'How DemoStoke Helps' }: HelpsCarouselPr
     setActiveIndex(null);
   }, []);
 
+  const handleModalClick = useCallback((event: ReactMouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+  }, []);
+
   useEffect(() => {
     if (activeIndex === null) return undefined;
 
@@ -149,9 +153,7 @@ const HelpsCarousel = ({ items, title = 'How DemoStoke Helps' }: HelpsCarouselPr
             role='dialog'
             aria-modal='true'
             aria-label={`How DemoStoke Helps: ${activeItem.title}`}
-            onClick={(event: ReactMouseEvent<HTMLDivElement>) => {
-              event.stopPropagation();
-            }}
+            onClick={handleModalClick}
           >
             <DemoStokeMiniCardModalClose type='button' onClick={closeModal} aria-label='Close dialog'>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
