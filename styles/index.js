@@ -480,14 +480,14 @@ export const CaseStudiesChevron = styled.span`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 0.6em;
-  height: 0.6em;
+  width: 1.05em;
+  height: 1.05em;
   flex-shrink: 0;
   vertical-align: middle;
 
   svg {
-    width: 1.1em;
-    height: 1.1em;
+    width: 1.05em;
+    height: 1.05em;
     fill: none;
     stroke: currentColor;
     stroke-width: 2;
