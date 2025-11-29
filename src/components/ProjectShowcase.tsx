@@ -47,7 +47,7 @@ const PageShell = styled.div`
 `;
 
 const PageInner = styled.div`
-  width: min(1200px, 100%);
+  max-width: 62em;
   display: flex;
   flex-direction: column;
   gap: clamp(1.4em, 3vw, 2em);
