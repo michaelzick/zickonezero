@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
 import { CONTACT_LINKS } from './contactLinks';
+import { PROJECT_LINKS } from './projectLinks';
 import {
   LinkBox,
   CaseStudiesDesktopWrapper,
@@ -13,36 +14,49 @@ import {
 
 const LinkBoxContent = () => {
   const [isCaseStudiesOpen, setIsCaseStudiesOpen] = useState(false);
+  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const caseStudiesRef = useRef<HTMLDivElement | null>(null);
+  const projectsRef = useRef<HTMLDivElement | null>(null);
   const contactRef = useRef<HTMLDivElement | null>(null);
 
   const handleCaseTriggerClick = () => {
     setIsCaseStudiesOpen((prevState) => !prevState);
+    setIsProjectsOpen(false);
+    setIsContactOpen(false);
+  };
+
+  const handleProjectsTriggerClick = () => {
+    setIsProjectsOpen((prevState) => !prevState);
+    setIsCaseStudiesOpen(false);
     setIsContactOpen(false);
   };
 
   const handleContactTriggerClick = () => {
     setIsContactOpen((prevState) => !prevState);
     setIsCaseStudiesOpen(false);
+    setIsProjectsOpen(false);
   };
 
   const handleLinkClick = () => {
     setIsCaseStudiesOpen(false);
+    setIsProjectsOpen(false);
     setIsContactOpen(false);
   };
 
   useEffect(() => {
-    if (!isCaseStudiesOpen && !isContactOpen) {
+    if (!isCaseStudiesOpen && !isProjectsOpen && !isContactOpen) {
       return undefined;
     }
 
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       const target = event.target as Node;
       const clickedCase = caseStudiesRef.current?.contains(target);
+      const clickedProjects = projectsRef.current?.contains(target);
       const clickedContact = contactRef.current?.contains(target);
-      if (!clickedCase && !clickedContact) {
+      if (!clickedCase && !clickedProjects && !clickedContact) {
         setIsCaseStudiesOpen(false);
+        setIsProjectsOpen(false);
         setIsContactOpen(false);
       }
     };
@@ -54,7 +68,7 @@ const LinkBoxContent = () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
     };
-  }, [isCaseStudiesOpen, isContactOpen]);
+  }, [isCaseStudiesOpen, isProjectsOpen, isContactOpen]);
 
   return (
     <LinkBox>
@@ -78,6 +92,32 @@ const LinkBoxContent = () => {
           {CASE_STUDIES_LINKS.map(({ href, label, icon, iconAlt }) => (
             <li key={href} onClick={handleLinkClick}>
               <Link href={href} tabIndex={isCaseStudiesOpen ? 0 : -1}>
+                {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
+                {label}
+              </Link>
+            </li>
+          ))}
+        </CaseStudiesDropdown>
+      </CaseStudiesDesktopWrapper>
+      <CaseStudiesDesktopWrapper ref={projectsRef}>
+        <CaseStudiesTrigger
+          type='button'
+          onClick={handleProjectsTriggerClick}
+          aria-haspopup='true'
+          aria-expanded={isProjectsOpen}>
+          Projects
+          <CaseStudiesChevron $isOpen={isProjectsOpen} aria-hidden='true'>
+            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </CaseStudiesChevron>
+        </CaseStudiesTrigger>
+        <CaseStudiesDropdown
+          $isOpen={isProjectsOpen}
+          aria-hidden={!isProjectsOpen}>
+          {PROJECT_LINKS.map(({ href, label, icon, iconAlt }) => (
+            <li key={href} onClick={handleLinkClick}>
+              <Link href={href} tabIndex={isProjectsOpen ? 0 : -1}>
                 {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
                 {label}
               </Link>

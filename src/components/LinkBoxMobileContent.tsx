@@ -10,6 +10,7 @@ import {
 } from '../hooks';
 import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
 import { CONTACT_LINKS } from './contactLinks';
+import { PROJECT_LINKS } from './projectLinks';
 import {
   LinkBoxMobile,
   CaseStudiesAccordionButton,
@@ -24,6 +25,7 @@ type LinkBoxMobileContentProps = {
 const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps) => {
   const dispatch = useAppDispatch();
   const [isCaseStudiesOpen, setIsCaseStudiesOpen] = useState(false);
+  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
 
   const handleCloseMenu = () => dispatch(showMobileMenu(false));
@@ -40,6 +42,7 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
           type='button'
           onClick={() => {
             setIsCaseStudiesOpen((prevState) => !prevState);
+            setIsProjectsOpen(false);
             setIsContactOpen(false);
           }}
           aria-expanded={isCaseStudiesOpen}>
@@ -52,6 +55,33 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
         </CaseStudiesAccordionButton>
         <CaseStudiesAccordionList $isOpen={isCaseStudiesOpen}>
           {CASE_STUDIES_LINKS.map(({ href, label, icon, iconAlt }) => (
+            <li key={href} onClick={handleCloseMenu}>
+              <Link href={href}>
+                {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
+                {label}
+              </Link>
+            </li>
+          ))}
+        </CaseStudiesAccordionList>
+      </li>
+      <li className='case-studies-accordion'>
+        <CaseStudiesAccordionButton
+          type='button'
+          onClick={() => {
+            setIsProjectsOpen((prevState) => !prevState);
+            setIsCaseStudiesOpen(false);
+            setIsContactOpen(false);
+          }}
+          aria-expanded={isProjectsOpen}>
+          Projects
+          <CaseStudiesChevron $isOpen={isProjectsOpen} aria-hidden='true'>
+            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </CaseStudiesChevron>
+        </CaseStudiesAccordionButton>
+        <CaseStudiesAccordionList $isOpen={isProjectsOpen}>
+          {PROJECT_LINKS.map(({ href, label, icon, iconAlt }) => (
             <li key={href} onClick={handleCloseMenu}>
               <Link href={href}>
                 {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
