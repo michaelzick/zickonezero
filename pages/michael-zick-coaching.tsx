@@ -6,10 +6,9 @@ const MichaelZickCoachingPage = () => (
     summary='A coaching hub that pairs clarity of services with a confident, energetic visual system.'
     heroImage={{ src: '/img/squares/mz-ppc-logo.webp', alt: 'Michael Zick Coaching logo' }}
     roleBullets={[
-      'Brand identity, tone, and visual system',
-      'UX/UI for services, testimonials, and lead capture',
-      'Site build with fast, mobile-first performance',
-      'Scheduling + analytics instrumentation'
+      'Brand identity',
+      'Visual design',
+      'Scheduling instrumentation'
     ]}
     projectLink={{ href: 'https://www.michaelzick.com/', label: 'michaelzick.com' }}
     sections={[
@@ -42,6 +41,16 @@ const MichaelZickCoachingPage = () => (
           </>
         ),
         image: { src: '/img/demostoke/blog-with-drafts.webp', alt: 'Content layout showcasing articles and promos' }
+      },
+      {
+        title: 'Measure and iterate',
+        body: (
+          <>
+            Transparent analytics on bookings, content engagement, and campaign lift inform the next round of copy, offers,
+            and scheduling tweaks—keeping the site aligned to what prospects respond to.
+          </>
+        ),
+        image: { src: '/img/demostoke/admin-img-download.webp', alt: 'Analytics view showing engagement metrics' }
       }
     ]}
   />
