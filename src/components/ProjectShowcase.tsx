@@ -22,7 +22,11 @@ import {
   LinkRow,
   SectionsBlock,
   SectionTitle,
-  ShowcaseImage
+  ShowcaseImage,
+  SubNavBar,
+  SubNavThumb,
+  SubNavTitle,
+  SubNavLink
 } from '../../styles/projectShowcases';
 import { TopNavContent, FooterContent } from '.';
 import {
@@ -33,6 +37,7 @@ import {
   showMobileMenu,
   getMobileMenuState
 } from '../showMobileMenuSlice';
+import { useRef, useState, useCallback } from 'react';
 
 type ShowcaseSection = {
   title: string;
@@ -59,6 +64,27 @@ const ProjectShowcase = ({
 }: ProjectShowcaseProps) => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
+  const heroRef = useRef<HTMLDivElement | null>(null);
+  const [isSubNavVisible, setIsSubNavVisible] = useState(false);
+
+  const handleHeroIntersection = useCallback((entries: IntersectionObserverEntry[]) => {
+    const [entry] = entries;
+    setIsSubNavVisible(!entry.isIntersecting);
+  }, []);
+
+  useEffect(() => {
+    const heroEl = heroRef.current;
+    if (!heroEl) return;
+
+    const observer = new IntersectionObserver(handleHeroIntersection, {
+      root: null,
+      threshold: 0.35,
+      rootMargin: '-40px 0px 0px 0px'
+    });
+
+    observer.observe(heroEl);
+    return () => observer.disconnect();
+  }, [handleHeroIntersection]);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -71,7 +97,18 @@ const ProjectShowcase = ({
         onClick={() => dispatch(showMobileMenu(false))}>
         <PageShell>
           <PageInner>
-            <HeroGrid>
+            <SubNavBar
+              aria-label="Project quick nav"
+              aria-hidden={!isSubNavVisible}
+              $isVisible={isSubNavVisible}>
+              <SubNavThumb src={heroImage.src} alt={heroImage.alt} />
+              <SubNavTitle>{title}</SubNavTitle>
+              <SubNavLink href={projectLink.href} target='_blank' rel='noopener noreferrer'>
+                {projectLink.label || 'View Project'} <OpenInNewWindowIcon aria-hidden="true" />
+              </SubNavLink>
+            </SubNavBar>
+
+            <HeroGrid ref={heroRef}>
               <HeroImageFrame>
                 <img src={heroImage.src} alt={heroImage.alt} />
               </HeroImageFrame>

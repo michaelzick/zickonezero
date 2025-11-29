@@ -150,3 +150,76 @@ export const SectionTitle = styled(DemoStokeTldrTitle)`
 export const ShowcaseImage = styled(DemoStokeTldrImage)`
   ${props => props.$position && `object-position: ${props.$position};`}
 `;
+
+export const SubNavBar = styled.div`
+  position: sticky;
+  top: 4.4em;
+  z-index: 90;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.75em;
+  height: ${props => props.$isVisible ? 'auto' : '0'};
+  overflow: hidden;
+  padding: ${props => props.$isVisible ? '0.8em 1em' : '0'};
+  margin-bottom: ${props => props.$isVisible ? '1em' : '0'};
+  background: ${THEME.colors.darkest};
+  border: ${props => props.$isVisible ? '1px solid rgba(255, 255, 255, 0.18)' : '0 solid transparent'};
+  border-radius: 12px;
+  box-shadow: ${props => props.$isVisible ? '0 12px 28px -16px rgb(0 0 0 / 60%)' : 'none'};
+  transform: ${props => props.$isVisible ? 'translateY(0)' : 'translateY(-220%)'};
+  opacity: 1;
+  pointer-events: ${props => props.$isVisible ? 'auto' : 'none'};
+  transition: transform 0.32s ease;
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    top: 6.8em;
+    grid-template-columns: auto 1fr;
+    row-gap: 0.6em;
+    padding: 0.8em 1em;
+  }
+`;
+
+export const SubNavThumb = styled.img`
+  width: 3.2em;
+  height: 3.2em;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 12px 28px -16px rgb(0 0 0 / 60%);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    width: 2.8em;
+    height: 2.8em;
+  }
+`;
+
+export const SubNavTitle = styled.span`
+  color: ${THEME.colors.white};
+  font-weight: 700;
+  font-size: 1.05em;
+  line-height: 1.2;
+`;
+
+export const SubNavLink = styled.a`
+  color: ${THEME.colors.white};
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  font-size: 0.98em;
+  padding-bottom: 0.05em;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  justify-self: end;
+
+  &:hover {
+    color: ${THEME.colors.hotRed};
+    border-color: ${THEME.colors.hotRed};
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+`;
