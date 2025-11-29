@@ -13,6 +13,7 @@ export const PageShell = styled.div`
   @media (max-width: ${THEME.breakpoints.phone}) {
     font-size: 18px;
     padding: clamp(0.55em, 3.8vw, 0.9em);
+    margin-top: 2em;
   }
 `;
 
@@ -153,7 +154,7 @@ export const ShowcaseImage = styled(DemoStokeTldrImage)`
 
 export const SubNavBar = styled.div`
   position: sticky;
-  top: 5.35em;
+  top: 3.2em;
   z-index: 150;
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -173,7 +174,7 @@ export const SubNavBar = styled.div`
   transition: transform 0.32s ease;
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    top: 7.55em;
+    top: 7.6em;
     grid-template-columns: auto 1fr;
     grid-template-areas:
       "thumb title"

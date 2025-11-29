@@ -198,7 +198,11 @@ export const AnimatedHeadlineSizer = styled.span`
 `;
 
 export const Wrapper = styled.div`
-  ${props => props.isHomePage ? 'padding-top: 7.7em;' : 'padding-top: 5em;'}
+  ${props => props.isAtPage && props.$isProjectPage
+    ? 'padding-top: 2.6em;'
+    : props.isHomePage
+      ? 'padding-top: 7.7em;'
+      : 'padding-top: 5em;'}
   min-height: 84%;
   ${props => props.isMobileMenuShown && 'filter: blur(2px); z-index: 300;'}
   background-color: ${THEME.colors.dark};
@@ -209,7 +213,7 @@ export const Wrapper = styled.div`
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     ${props => props.isHomePage && 'padding-top: 9.6em;'}
-    ${props => props.isAtPage ? `padding-top: ${props.$isProjectPage ? '8.5em' : '13.5em'};` : 'padding-top: 8.7em;'}
+    ${props => props.isAtPage ? `padding-top: ${props.$isProjectPage ? '4.2em' : '13.5em'};` : 'padding-top: 8.7em;'}
   }
 `;
 
@@ -221,7 +225,7 @@ export const Nav = styled.div`
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  z-index: 100;
+  z-index: 999;
   background-color: ${THEME.colors.dark};
   transition: filter 0.3s;
 
