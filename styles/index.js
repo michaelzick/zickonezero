@@ -521,7 +521,7 @@ export const CaseStudiesDesktopWrapper = styled.div`
 export const CaseStudiesTrigger = styled.button`
   display: inline-flex;
   align-items: center;
-  gap: 0.45em;
+  gap: 0.25em;
   padding: 0;
   background: transparent;
   border: none;
@@ -642,13 +642,6 @@ export const LinkBoxMobile = styled.ul`
     }
   }
 
-  svg {
-    color: inherit;
-    fill: currentColor;
-    margin-left: 0;
-    transition: color 0.3s;
-  }
-
   li {
     &:not(:first-child) {
       margin-top: 1.5em;
@@ -699,6 +692,7 @@ export const CaseStudiesAccordionButton = styled.button`
   font-size: 1em;
   padding: 0 0 0.2em;
   cursor: pointer;
+  gap: 0.25em;
 
   &:hover {
     color: ${THEME.colors.hotRed};
