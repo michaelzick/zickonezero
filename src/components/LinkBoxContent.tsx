@@ -58,9 +58,12 @@ const LinkBoxContent = () => {
         <CaseStudiesDropdown
           $isOpen={isDropdownOpen}
           aria-hidden={!isDropdownOpen}>
-          {CASE_STUDIES_LINKS.map(({ href, label }) => (
+          {CASE_STUDIES_LINKS.map(({ href, label, icon, iconAlt }) => (
             <li key={href} onClick={handleLinkClick}>
-              <Link href={href} tabIndex={isDropdownOpen ? 0 : -1}>{label}</Link>
+              <Link href={href} tabIndex={isDropdownOpen ? 0 : -1}>
+                {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
+                {label}
+              </Link>
             </li>
           ))}
         </CaseStudiesDropdown>

@@ -560,15 +560,15 @@ export const CaseStudiesDropdown = styled.ul`
   a {
     color: ${THEME.colors.white};
     display: inline-flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 0.35em;
-    text-align: center;
+    gap: 0.5em;
+    text-align: left;
     width: auto;
     align-self: center;
     padding-bottom: 0;
     text-decoration: none;
-    font-size: 1.1em;
+    font-size: 1.3em;
     margin: 0;
 
     &::after {
@@ -578,6 +578,15 @@ export const CaseStudiesDropdown = styled.ul`
       height: 0.18em;
       background: ${THEME.colors.white};
       border-radius: 999px;
+    }
+
+    .case-logo {
+      width: 1.8em;
+      height: 1.8em;
+      border-radius: 6px;
+      object-fit: cover;
+      flex-shrink: 0;
+      filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.35));
     }
   }
 
