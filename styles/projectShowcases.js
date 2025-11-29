@@ -168,18 +168,19 @@ export const SubNavBar = styled.div`
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 0.75em;
-  height: ${props => props.$isVisible ? 'auto' : '0'};
-  overflow: ${props => props.$isVisible ? 'visible' : 'hidden'};
-  padding: ${props => props.$isVisible ? '0.55em 0.9em' : '0'};
+  max-height: ${props => props.$isVisible ? '120px' : '0'};
+  overflow: hidden;
+  padding: ${props => props.$isVisible ? '0.55em 0.9em' : '0 0.9em'};
   margin-bottom: ${props => props.$isVisible ? '1em' : '0'};
   background: ${THEME.colors.dark};
   border: ${props => props.$isVisible ? '1px solid rgba(255, 255, 255, 0.18)' : '0 solid transparent'};
   border-radius: 12px;
   box-shadow: ${props => props.$isVisible ? '0 12px 28px -16px rgb(0 0 0 / 60%)' : 'none'};
   transform: ${props => props.$isVisible ? 'translateY(0)' : 'translateY(-220%)'};
-  opacity: 1;
+  opacity: ${props => props.$isVisible ? 1 : 0};
   pointer-events: ${props => props.$isVisible ? 'auto' : 'none'};
-  transition: transform 0.32s ease;
+  transition: transform 0.32s ease, opacity 0.22s ease, max-height 0.32s ease, padding 0.32s ease, margin 0.32s ease;
+  will-change: transform, opacity, max-height, padding, margin;
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     top: 7.6em;
@@ -188,7 +189,7 @@ export const SubNavBar = styled.div`
       "thumb title"
       "thumb link";
     row-gap: 0.25em;
-    padding: ${props => props.$isVisible ? '0.45em 0.9em' : '0'};
+    padding: ${props => props.$isVisible ? '0.45em 0.9em' : '0 0.9em'};
   }
 `;
 
