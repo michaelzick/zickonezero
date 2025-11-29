@@ -69,7 +69,8 @@ export const Summary = styled.p`
   margin: 0;
   font-size: 1.2em;
   line-height: inherit;
-  color: rgba(255, 255, 255, 0.86);
+  color: ${THEME.colors.white};
+  opacity: 0.9;
 `;
 
 export const HeroLabel = styled.div`
@@ -111,7 +112,8 @@ export const LinkRow = styled.div`
   a {
     color: ${THEME.colors.white};
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 400;
+    line-height: 1;
     display: inline-flex;
     align-items: center;
     gap: 0.3em;

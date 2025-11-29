@@ -76,7 +76,12 @@ const ProjectShowcase = ({
               </HeroImageFrame>
               <HeroContent>
                 <Title>{title}</Title>
-                {summary ? <Summary>{summary}</Summary> : null}
+                {summary ? (
+                  <div>
+                    <HeroLabel>Description</HeroLabel>
+                    <Summary>{summary}</Summary>
+                  </div>
+                ) : null}
                 <div>
                   <HeroLabel>My Roles</HeroLabel>
                   <RoleList>
