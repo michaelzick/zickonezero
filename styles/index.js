@@ -554,7 +554,7 @@ export const CaseStudiesDropdown = styled.ul`
   flex-direction: column;
   min-width: 180px;
   gap: 1.2em;
-  align-items: center;
+  align-items: flex-start;
   opacity: ${props => props.$isOpen ? 1 : 0};
   transform: ${props => props.$isOpen ? 'translateY(0)' : 'translateY(-10px)'};
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -565,7 +565,8 @@ export const CaseStudiesDropdown = styled.ul`
     margin: 0;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 
   a {
@@ -599,7 +600,7 @@ export const CaseStudiesDropdown = styled.ul`
 export const LinkBoxMobile = styled.ul`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   list-style: none;
   position: absolute;
   top: 3.4em;
@@ -646,7 +647,7 @@ export const LinkBoxMobile = styled.ul`
       display: inline-flex;
       align-items: center;
       gap: 0.45em;
-      justify-content: center;
+      justify-content: flex-start;
       color: ${THEME.colors.white};
 
       &:hover {
@@ -663,25 +664,19 @@ export const LinkBoxMobile = styled.ul`
     }
   }
 
-  .case-studies-accordion {
-    width: 100%;
-  }
+  .contact-accordion {
+    button {
+      width: 100%;
+      padding: 0;
+      border-bottom: none;
+      justify-content: center;
+      color: ${THEME.colors.white};
+      margin: 0 auto;
 
-.contact-accordion {
-  width: 100%;
-  align-self: center;
-
-  button {
-    width: 100%;
-    padding: 0;
-    border-bottom: none;
-    justify-content: center;
-    color: ${THEME.colors.white};
-    margin: 0 auto;
-
-      &:hover {
-        color: ${THEME.colors.hotRed};
-        border-color: ${THEME.colors.hotRed};
+        &:hover {
+          color: ${THEME.colors.hotRed};
+          border-color: ${THEME.colors.hotRed};
+        }
       }
     }
   }
@@ -739,7 +734,7 @@ export const CaseStudiesAccordionList = styled.ul`
     color: ${THEME.colors.white};
     display: inline-flex;
     align-items: center;
-    width: auto;
+    width: 100%;
     align-self: flex-start;
     padding-bottom: 0.1em;
     justify-content: flex-start;
