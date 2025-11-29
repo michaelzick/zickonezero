@@ -10,14 +10,14 @@ const MichaelZickCoachingPage = () => (
       'Visual design',
       'Scheduling instrumentation'
     ]}
-    projectLink={{ href: 'https://www.michaelzick.com/', label: 'michaelzick.com' }}
+    projectLink={{ href: 'https://www.michaelzick.com/', label: 'www.michaelzick.com' }}
     sections={[
       {
-        title: 'Offer clarity that sparks action',
+        title: 'Clarity, flow, and conversion',
         body: (
           <>
-            The homepage stacks a focused headline, outcomes-oriented bullets, and a bold “Book Now” CTA so visitors immediately
-            see who it’s for and how to start. Services and pricing cues are above the fold to remove hesitation.
+            Using water as inspiration, I designed a vibrant, approachable brand identity that reflects my coaching style.
+            The site layout guides visitors through clear offers and benefits, while keeping the scheduling button in easy reach.
           </>
         ),
         image: { src: '/img/projects/michael-zick-coaching/mzc-home.webp', alt: 'Coaching homepage with clear offers and CTA' }
@@ -26,8 +26,8 @@ const MichaelZickCoachingPage = () => (
         title: 'Booking that respects momentum',
         body: (
           <>
-            Program cards pair outcomes with a simple “Book Now” rail, reinforcing value and making the next step frictionless.
-            Supporting copy answers objections up front, so the calendar click feels like a natural follow-through.
+            The Program card pairs outcomes with a simple “Book a Free Session” CTA, reinforcing value and making the next step frictionless.
+            Meanwhile, gracefully-animated tabs let visitors explore offerings without losing context.
           </>
         ),
         image: { src: '/img/projects/michael-zick-coaching/mzc-program.webp', alt: 'Program overview and booking call-to-action' }
@@ -43,11 +43,11 @@ const MichaelZickCoachingPage = () => (
         image: { src: '/img/projects/michael-zick-coaching/mzc-testimonial.webp', alt: 'Testimonials and social proof layout' }
       },
       {
-        title: 'Measure and iterate',
+        title: 'Responsiveness without compromise',
         body: (
           <>
-            The mobile flow mirrors the desktop journey—hero, value props, and testimonials—so visitors can scan and book from
-            their phone without losing context. Analytics track tap-to-book and scroll depth to refine the funnel.
+            The mobile flow mirrors the desktop journey, value props, and testimonials, so visitors can scan and book from
+            their phone with ease. Analytics track visitors, page views, and device types.
           </>
         ),
         image: {
