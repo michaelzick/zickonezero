@@ -13,41 +13,40 @@ const FindYourFlowStatePage = () => (
     projectLink={{ href: 'https://findyourflowstate.zickonezero.com/', label: 'findyourflowstate.zickonezero.com' }}
     sections={[
       {
-        title: 'Quiz journey that feels like coaching',
+        title: 'A quiz that feels like coaching',
         body: (
           <>
-            Crafted a calm, reassuring flow with microcopy that guides users through reflective prompts, while visual rhythm
-            (waves, motion, and warm gradients) keeps the experience playful instead of clinical.
+            I crafted a calm, simple flow with questions that guide users through reflective prompts, while visual rhythm
+            (waves, motion, and warm colors) keeps the experience playful instead of clinical.
           </>
         ),
         image: { src: '/img/projects/fyfs/fyfs-home.webp', alt: 'Find Your Flow State homepage' }
       },
       {
-        title: 'Insightful results that nudge action',
+        title: 'Intelligent questions based on research',
         body: (
           <>
-            Archetype scoring rolls into personalized next steps—downloadable PDFs, suggested coaching tracks, and email nurture
-            paths—so users leave with clarity instead of just a score.
+            Using top-tier research on career personality types, individual history, and mental models, I developed questions that
+            help users uncover their unique work preferences and optimal environments.
           </>
         ),
         image: { src: '/img/projects/fyfs/fyfs-quiz-1.webp', alt: 'Quiz question interface' }
       },
       {
-        title: 'Conversion-ready from day one',
+        title: 'Start where you left off or start from scratch',
         body: (
           <>
-            Embedded event tracking for quiz completions, drop-offs, and CTA clicks, with server-side friendly linkouts so we can
-            A/B copy, CTA placement, and follow-up offers without redeploys.
+            Users can upload previous answers as JSON from past attempts or start fresh with new responses.
           </>
         ),
         image: { src: '/img/projects/fyfs/fyfs-quiz-2.webp', alt: 'Second quiz step experience' }
       },
       {
-        title: 'Results that inspire next steps',
+        title: 'Results that inspire action',
         body: (
           <>
-            Clear archetype summaries paired with tailored recommendations (courses, coaching, resources) give users a confident
-            path forward instead of a dead-end quiz result.
+            Clear archetype summaries paired with tailored recommendations (jobs, relationships, and shadow work) give users a confident
+            path forward in multiple areas of life.
           </>
         ),
         image: { src: '/img/projects/fyfs/fyfs-results.webp', alt: 'Quiz results page with recommendations' }
