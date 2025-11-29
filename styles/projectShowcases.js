@@ -44,7 +44,7 @@ export const HeroImageFrame = styled.div`
   aspect-ratio: 16 / 9;
   border-radius: 0 16px 16px 0;
   overflow: hidden;
-  box-shadow: 0 18px 46px -28px rgb(0 0 0 / 80%);
+  box-shadow: 0 30px 38px -30px rgb(0 0 0 / 70%);
   background: transparent;
 
   img {
