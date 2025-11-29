@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
+import { CONTACT_LINKS } from './contactLinks';
 import {
   LinkBox,
   CaseStudiesDesktopWrapper,
@@ -11,26 +12,38 @@ import {
 } from '../../styles';
 
 const LinkBoxContent = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const [isCaseStudiesOpen, setIsCaseStudiesOpen] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const caseStudiesRef = useRef<HTMLDivElement | null>(null);
+  const contactRef = useRef<HTMLDivElement | null>(null);
 
-  const handleTriggerClick = () => {
-    setIsDropdownOpen((prevState) => !prevState);
+  const handleCaseTriggerClick = () => {
+    setIsCaseStudiesOpen((prevState) => !prevState);
+    setIsContactOpen(false);
+  };
+
+  const handleContactTriggerClick = () => {
+    setIsContactOpen((prevState) => !prevState);
+    setIsCaseStudiesOpen(false);
   };
 
   const handleLinkClick = () => {
-    setIsDropdownOpen(false);
+    setIsCaseStudiesOpen(false);
+    setIsContactOpen(false);
   };
 
   useEffect(() => {
-    if (!isDropdownOpen) {
+    if (!isCaseStudiesOpen && !isContactOpen) {
       return undefined;
     }
 
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      if (!dropdownRef.current) return;
-      if (!dropdownRef.current.contains(event.target as Node)) {
-        setIsDropdownOpen(false);
+      const target = event.target as Node;
+      const clickedCase = caseStudiesRef.current?.contains(target);
+      const clickedContact = contactRef.current?.contains(target);
+      if (!clickedCase && !clickedContact) {
+        setIsCaseStudiesOpen(false);
+        setIsContactOpen(false);
       }
     };
 
@@ -41,30 +54,30 @@ const LinkBoxContent = () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
     };
-  }, [isDropdownOpen]);
+  }, [isCaseStudiesOpen, isContactOpen]);
 
   return (
     <LinkBox>
       <Link href='/about'>About</Link>
-      <CaseStudiesDesktopWrapper ref={dropdownRef}>
+      <CaseStudiesDesktopWrapper ref={caseStudiesRef}>
         <CaseStudiesTrigger
           type='button'
-          onClick={handleTriggerClick}
+          onClick={handleCaseTriggerClick}
           aria-haspopup='true'
-          aria-expanded={isDropdownOpen}>
+          aria-expanded={isCaseStudiesOpen}>
           Case Studies
-          <CaseStudiesChevron $isOpen={isDropdownOpen} aria-hidden='true'>
+          <CaseStudiesChevron $isOpen={isCaseStudiesOpen} aria-hidden='true'>
             <svg viewBox="0 0 24 24" role="presentation" focusable="false">
               <path d="m6 9 6 6 6-6" />
             </svg>
           </CaseStudiesChevron>
         </CaseStudiesTrigger>
         <CaseStudiesDropdown
-          $isOpen={isDropdownOpen}
-          aria-hidden={!isDropdownOpen}>
+          $isOpen={isCaseStudiesOpen}
+          aria-hidden={!isCaseStudiesOpen}>
           {CASE_STUDIES_LINKS.map(({ href, label, icon, iconAlt }) => (
             <li key={href} onClick={handleLinkClick}>
-              <Link href={href} tabIndex={isDropdownOpen ? 0 : -1}>
+              <Link href={href} tabIndex={isCaseStudiesOpen ? 0 : -1}>
                 {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
                 {label}
               </Link>
@@ -72,12 +85,31 @@ const LinkBoxContent = () => {
           ))}
         </CaseStudiesDropdown>
       </CaseStudiesDesktopWrapper>
-      <a className='external-link' href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'>GitHub
-        <OpenInNewWindowIcon aria-hidden='true' />
-      </a>
-      <a className='external-link' href='https://linkedin.com/in/michaelzick' target='_blank' rel='noopener noreferrer'>LinkedIn
-        <OpenInNewWindowIcon aria-hidden='true' />
-      </a>
+      <CaseStudiesDesktopWrapper ref={contactRef}>
+        <CaseStudiesTrigger
+          type='button'
+          onClick={handleContactTriggerClick}
+          aria-haspopup='true'
+          aria-expanded={isContactOpen}>
+          Contact
+          <CaseStudiesChevron $isOpen={isContactOpen} aria-hidden='true'>
+            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </CaseStudiesChevron>
+        </CaseStudiesTrigger>
+        <CaseStudiesDropdown
+          $isOpen={isContactOpen}
+          aria-hidden={!isContactOpen}>
+          {CONTACT_LINKS.map(({ href, label }) => (
+            <li key={href} onClick={handleLinkClick}>
+              <a href={href} target='_blank' rel='noopener noreferrer' tabIndex={isContactOpen ? 0 : -1}>
+                {label} <OpenInNewWindowIcon aria-hidden='true' />
+              </a>
+            </li>
+          ))}
+        </CaseStudiesDropdown>
+      </CaseStudiesDesktopWrapper>
     </LinkBox>
   );
 };

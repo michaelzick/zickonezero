@@ -9,6 +9,7 @@ import {
   useAppDispatch,
 } from '../hooks';
 import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
+import { CONTACT_LINKS } from './contactLinks';
 import {
   LinkBoxMobile,
   CaseStudiesAccordionButton,
@@ -23,6 +24,7 @@ type LinkBoxMobileContentProps = {
 const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps) => {
   const dispatch = useAppDispatch();
   const [isCaseStudiesOpen, setIsCaseStudiesOpen] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   const handleCloseMenu = () => dispatch(showMobileMenu(false));
 
@@ -36,7 +38,10 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
       <li className='case-studies-accordion'>
         <CaseStudiesAccordionButton
           type='button'
-          onClick={() => setIsCaseStudiesOpen((prevState) => !prevState)}
+          onClick={() => {
+            setIsCaseStudiesOpen((prevState) => !prevState);
+            setIsContactOpen(false);
+          }}
           aria-expanded={isCaseStudiesOpen}>
           Case Studies
           <CaseStudiesChevron $isOpen={isCaseStudiesOpen} aria-hidden='true'>
@@ -56,15 +61,30 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
           ))}
         </CaseStudiesAccordionList>
       </li>
-      <li onClick={handleCloseMenu}>
-        <a className='external-link' href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'>GitHub
-          <OpenInNewWindowIcon aria-hidden='true' />
-        </a>
-      </li>
-      <li onClick={handleCloseMenu}>
-        <a className='external-link' href='https://linkedin.com/in/michaelzick' target='_blank' rel='noopener noreferrer'>LinkedIn
-          <OpenInNewWindowIcon aria-hidden='true' />
-        </a>
+      <li className='case-studies-accordion'>
+        <CaseStudiesAccordionButton
+          type='button'
+          onClick={() => {
+            setIsContactOpen((prevState) => !prevState);
+            setIsCaseStudiesOpen(false);
+          }}
+          aria-expanded={isContactOpen}>
+          Contact
+          <CaseStudiesChevron $isOpen={isContactOpen} aria-hidden='true'>
+            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </CaseStudiesChevron>
+        </CaseStudiesAccordionButton>
+        <CaseStudiesAccordionList $isOpen={isContactOpen}>
+          {CONTACT_LINKS.map(({ href, label }) => (
+            <li key={href} onClick={handleCloseMenu}>
+              <a className='external-link' href={href} target='_blank' rel='noopener noreferrer'>
+                {label} <OpenInNewWindowIcon aria-hidden='true' />
+              </a>
+            </li>
+          ))}
+        </CaseStudiesAccordionList>
       </li>
     </LinkBoxMobile>
   );
