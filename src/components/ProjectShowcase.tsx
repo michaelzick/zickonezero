@@ -59,9 +59,9 @@ const HeroGrid = styled.div`
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1.2em, 3vw, 2.4em);
   align-items: center;
-  padding: clamp(1.4em, 3vw, 2em);
-  border-radius: 18px;
-  border: 1.5px solid ${THEME.colors.white};
+  padding: 0;
+  border-radius: 0;
+  border: none;
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     grid-template-columns: 1fr;
@@ -108,8 +108,8 @@ const Summary = styled.p`
   color: rgba(255, 255, 255, 0.86);
 `;
 
-const HeroLabel = styled.span`
-  display: inline-flex;
+const HeroLabel = styled.div`
+  display: block;
   align-items: center;
   gap: 0.45em;
   text-transform: uppercase;
@@ -117,15 +117,6 @@ const HeroLabel = styled.span`
   font-weight: 700;
   font-size: 0.86em;
   color: ${THEME.colors.white};
-
-  &::before {
-    content: '';
-    width: 0.6em;
-    height: 0.6em;
-    border-radius: 50%;
-    background: ${THEME.colors.white};
-    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.1);
-  }
 `;
 
 const RoleList = styled.ul`
@@ -154,9 +145,6 @@ const RoleList = styled.ul`
 
 const LinkRow = styled.div`
   margin-top: 0.5em;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45em;
 
   a {
     color: ${THEME.colors.white};
@@ -218,7 +206,7 @@ const ProjectShowcase = ({
                 <Title>{title}</Title>
                 {summary ? <Summary>{summary}</Summary> : null}
                 <div>
-                  <HeroLabel>Role</HeroLabel>
+                  <HeroLabel>My Roles</HeroLabel>
                   <RoleList>
                     {roleBullets.map((bullet) => (
                       <li key={bullet}>{bullet}</li>
@@ -227,9 +215,11 @@ const ProjectShowcase = ({
                 </div>
                 <LinkRow>
                   <HeroLabel>Project Link</HeroLabel>
-                  <a href={projectLink.href} target='_blank' rel='noopener noreferrer'>
-                    {projectLink.label || 'View Project'} <OpenInNewWindowIcon aria-hidden="true" />
-                  </a>
+                  <div>
+                    <a href={projectLink.href} target='_blank' rel='noopener noreferrer'>
+                      {projectLink.label || 'View Project'} <OpenInNewWindowIcon aria-hidden="true" />
+                    </a>
+                  </div>
                 </LinkRow>
               </HeroContent>
             </HeroGrid>

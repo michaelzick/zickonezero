@@ -3,13 +3,12 @@ import ProjectShowcase from '../src/components/ProjectShowcase';
 const FindYourFlowStatePage = () => (
   <ProjectShowcase
     title='Find Your Flow State'
-    summary='A free career personality assessment that turns curiosity into tailored coaching offers.'
+    summary='A free AI-powered career personality assessment quiz.'
     heroImage={{ src: '/img/squares/fyfs-wave-square.webp', alt: 'Find Your Flow State logo' }}
     roleBullets={[
-      'Product strategy, quiz logic, and archetype mapping',
-      'UX/UI design system tailored to the brand’s wave motif',
-      'Front-end build with rapid experimentation hooks',
-      'Analytics + conversion tracking for funnel drop-off'
+      'Product strategy',
+      'Quiz questions',
+      'UX design'
     ]}
     projectLink={{ href: 'https://findyourflowstate.zickonezero.com/', label: 'findyourflowstate.zickonezero.com' }}
     sections={[
