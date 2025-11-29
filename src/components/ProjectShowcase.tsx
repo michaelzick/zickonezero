@@ -98,7 +98,7 @@ const Title = styled.h1`
   margin: 0;
   font-size: clamp(2rem, 4.6vw, 3.1rem);
   letter-spacing: 0.01em;
-  color: ${THEME.colors.white};
+  color: ${THEME.colors.hotRed};
 `;
 
 const Summary = styled.p`
@@ -110,13 +110,11 @@ const Summary = styled.p`
 
 const HeroLabel = styled.div`
   display: block;
-  align-items: center;
-  gap: 0.45em;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 700;
   font-size: 0.86em;
-  color: ${THEME.colors.white};
+  color: ${THEME.colors.orange};
 `;
 
 const RoleList = styled.ul`
