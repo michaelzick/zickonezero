@@ -650,7 +650,7 @@ export const LinkBoxMobile = styled.ul`
     a {
       display: inline-flex;
       align-items: center;
-      gap: 0.2em;
+      gap: 0.45em;
       border-bottom: 0.2em solid ${THEME.colors.white};
       justify-content: center;
       color: ${THEME.colors.white};
@@ -659,11 +659,23 @@ export const LinkBoxMobile = styled.ul`
         color: ${THEME.colors.hotRed};
         border-color: ${THEME.colors.hotRed};
       }
+
+      .case-logo {
+        width: 1.45em;
+        height: 1.45em;
+        border-radius: 5px;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
     }
   }
 
   .case-studies-accordion {
     width: 100%;
+
+    a {
+      border-bottom: none;
+    }
   }
 `;
 

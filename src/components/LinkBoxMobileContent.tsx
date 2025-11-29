@@ -42,9 +42,12 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
           <CaseStudiesChevron $isOpen={isCaseStudiesOpen} aria-hidden='true' />
         </CaseStudiesAccordionButton>
         <CaseStudiesAccordionList $isOpen={isCaseStudiesOpen}>
-          {CASE_STUDIES_LINKS.map(({ href, label }) => (
+          {CASE_STUDIES_LINKS.map(({ href, label, icon, iconAlt }) => (
             <li key={href} onClick={handleCloseMenu}>
-              <Link href={href}>{label}</Link>
+              <Link href={href}>
+                {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
+                {label}
+              </Link>
             </li>
           ))}
         </CaseStudiesAccordionList>
