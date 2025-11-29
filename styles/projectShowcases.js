@@ -6,13 +6,13 @@ export const PageShell = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: clamp(1.6em, 4vw, 2.6em) clamp(1.2em, 3vw, 2.8em) clamp(2.4em, 5vw, 3.6em);
+  padding: clamp(0.8em, 2.6vw, 1.4em) clamp(0.9em, 2.8vw, 2em) clamp(1.6em, 3.6vw, 2.8em);
   color: ${THEME.colors.white};
   font-size: 25px;
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     font-size: 18px;
-    padding: clamp(1em, 5vw, 1.4em);
+    padding: clamp(0.55em, 3.8vw, 0.9em);
   }
 `;
 
