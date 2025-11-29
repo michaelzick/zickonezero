@@ -175,6 +175,9 @@ export const SubNavBar = styled.div`
   @media (max-width: ${THEME.breakpoints.phone}) {
     top: 7.55em;
     grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "thumb title"
+      "thumb link";
     row-gap: 0.4em;
     padding: ${props => props.$isVisible ? '0.55em 0.9em' : '0'};
   }
@@ -191,6 +194,8 @@ export const SubNavThumb = styled.img`
   @media (max-width: ${THEME.breakpoints.phone}) {
     width: 2.4em;
     height: 2.4em;
+    grid-area: thumb;
+    align-self: center;
   }
 `;
 
@@ -200,6 +205,10 @@ export const SubNavTitle = styled.span`
   font-size: 1em;
   line-height: 1.1;
   display: block;
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    grid-area: title;
+  }
 `;
 
 export const SubNavLink = styled.a`
@@ -222,5 +231,6 @@ export const SubNavLink = styled.a`
   @media (max-width: ${THEME.breakpoints.phone}) {
     justify-self: start;
     margin-top: 0.05em;
+    grid-area: link;
   }
 `;
