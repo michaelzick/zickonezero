@@ -22,8 +22,16 @@ export const PageInner = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: clamp(2.8em, 6vw, 4em);
+  gap: clamp(0em,6vw,4em);
   text-align: left;
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    gap: clamp(0em, 6vw, 4em);
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    gap: clamp(2.3em, 6vw, 4em);
+  }
 `;
 
 export const HeroGrid = styled.div`
@@ -69,7 +77,6 @@ export const Title = styled.h1`
   margin: 0;
   font-size: clamp(2rem, 4.6vw, 3.1rem);
   letter-spacing: 0.01em;
-  color: ${THEME.colors.demostoke};
   line-height: 1.1;
 `;
 

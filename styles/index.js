@@ -225,7 +225,7 @@ export const Nav = styled.div`
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  z-index: 999;
+  z-index: 300;
   background-color: ${THEME.colors.dark};
   transition: filter 0.3s;
 
@@ -2103,7 +2103,7 @@ export const ThemeSwitcherContent = styled(Select.Content)`
   border-radius: 10px;
   border: 1px solid ${THEME.colors.grey};
   box-shadow: 0 18px 45px rgba(5, 5, 15, 0.35);
-  z-index: 200;
+  z-index: 400;
 `;
 
 export const ThemeSwitcherViewport = styled(Select.Viewport)`
