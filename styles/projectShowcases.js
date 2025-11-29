@@ -217,6 +217,10 @@ export const SubNavTitle = styled.span`
   @media (max-width: ${THEME.breakpoints.phone}) {
     grid-area: title;
   }
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    font-size: 0.8em;
+  }
 `;
 
 export const SubNavLink = styled.a`
@@ -234,6 +238,10 @@ export const SubNavLink = styled.a`
   &:hover {
     color: ${THEME.colors.hotRed};
     border-color: ${THEME.colors.hotRed};
+  }
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    font-size: 0.8em;
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
