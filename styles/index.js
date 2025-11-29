@@ -582,15 +582,6 @@ export const CaseStudiesDropdown = styled.ul`
     font-size: 1.3em;
     margin: 0;
 
-    &::after {
-      content: '';
-      display: block;
-      width: 100%;
-      height: 0.18em;
-      background: ${THEME.colors.white};
-      border-radius: 999px;
-    }
-
     .case-logo {
       width: 1.8em;
       height: 1.8em;
@@ -613,8 +604,8 @@ export const LinkBoxMobile = styled.ul`
   position: absolute;
   top: 3.4em;
   right: 1em;
-  padding: 1.5em 2em;
-  min-width: 180px;
+  padding: 1.2em 1.5em;
+  min-width: 170px;
   background: ${THEME.colors.darkest};
   z-index: 400;
   border-radius: 4px;
@@ -655,13 +646,11 @@ export const LinkBoxMobile = styled.ul`
       display: inline-flex;
       align-items: center;
       gap: 0.45em;
-      border-bottom: 0.2em solid ${THEME.colors.white};
       justify-content: center;
       color: ${THEME.colors.white};
 
       &:hover {
         color: ${THEME.colors.hotRed};
-        border-color: ${THEME.colors.hotRed};
       }
 
       .case-logo {
@@ -676,9 +665,24 @@ export const LinkBoxMobile = styled.ul`
 
   .case-studies-accordion {
     width: 100%;
+  }
 
-    a {
-      border-bottom: none;
+.contact-accordion {
+  width: 100%;
+  align-self: center;
+
+  button {
+    width: 100%;
+    padding: 0;
+    border-bottom: none;
+    justify-content: center;
+    color: ${THEME.colors.white};
+    margin: 0 auto;
+
+      &:hover {
+        color: ${THEME.colors.hotRed};
+        border-color: ${THEME.colors.hotRed};
+      }
     }
   }
 `;
@@ -690,7 +694,7 @@ export const CaseStudiesAccordionButton = styled.button`
   align-items: center;
   background: transparent;
   border: none;
-  border-bottom: 0.2em solid ${THEME.colors.white};
+  border-bottom: none;
   color: ${THEME.colors.white};
   font-family: Roboto, sans-serif;
   font-size: 1em;
@@ -731,7 +735,7 @@ export const CaseStudiesAccordionList = styled.ul`
   }
 
   a {
-    border-bottom: 0.2em solid ${THEME.colors.white};
+    border-bottom: none;
     color: ${THEME.colors.white};
     display: inline-flex;
     align-items: center;

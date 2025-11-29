@@ -61,7 +61,7 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
           ))}
         </CaseStudiesAccordionList>
       </li>
-      <li className='case-studies-accordion'>
+      <li className='contact-accordion'>
         <CaseStudiesAccordionButton
           type='button'
           onClick={() => {
