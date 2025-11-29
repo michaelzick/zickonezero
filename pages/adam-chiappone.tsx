@@ -4,44 +4,53 @@ const AdamChiapponePage = () => (
   <ProjectShowcase
     title='Adam Chiappone'
     summary='A welcoming therapy site that translates Adam’s in-person warmth into a digital experience.'
-    heroImage={{ src: '/img/squares/adam-chiappone-square.webp', alt: 'Adam Chiappone brand mark' }}
+    heroImage={{ src: '/img/projects/adam-chiappone/ac-home-cropped.webp', alt: 'Adam Chiappone homepage hero' }}
     roleBullets={[
-      'Brand voice, IA, and content architecture',
-      'UX/UI design with accessibility baked in',
-      'Headless CMS setup for effortless updates',
-      'Technical SEO and schema for local discovery'
+      'Branding, imagery, and copywriting',
+      'UX, layout, and technical direction',
+      'SEO and analytics',
     ]}
-    projectLink={{ href: 'https://www.adamchiappone.com/', label: 'adamchiappone.com' }}
+    projectLink={{ href: 'https://www.adamchiappone.com/', label: 'www.adamchiappone.com' }}
     sections={[
       {
-        title: 'Warm, low-friction intake',
+        title: 'Safety and warmth from the first scroll',
         body: (
           <>
-            Crafted a lightweight inquiry flow that reassures visitors with clear expectations, transparent pricing cues,
-            and friendly microcopy that mirrors Adam’s tone.
+            A calm hero, welcoming headshot, and immediate “Request appointment” CTA reduce anxiety for first-time visitors.
+            Clear hours, insurance, and contact cues build trust and make reaching out feel low-pressure.
           </>
         ),
-        image: { src: '/img/demostoke/blog-with-drafts.webp', alt: 'Intake flow with welcoming copy' }
+        image: { src: '/img/projects/adam-chiappone/ac-home.webp', alt: 'Homepage hero and contact details' }
       },
       {
-        title: 'Service clarity without jargon',
+        title: 'Approach that demystifies therapy',
         body: (
           <>
-            Organized specialties, modalities, and FAQs into skimmable sections with anchor links and pull quotes, so visitors
-            can quickly validate fit and reach out confidently.
+            The About section outlines Adam’s philosophy in plain language and invites visitors to start with a simple inquiry.
+            Friendly copy and a single CTA keep the path to booking clear and reassuring.
           </>
         ),
-        image: { src: '/img/demostoke/blog-drafts.webp', alt: 'Content blocks arranged for readability' }
+        image: { src: '/img/projects/adam-chiappone/ac-about.webp', alt: 'About section with philosophy and CTA' }
       },
       {
-        title: 'Maintainable by design',
+        title: 'Grounded visuals and tone',
         body: (
           <>
-            Set up a headless CMS with reusable page sections and color tokens, ensuring future edits stay on-brand without
-            touching code. Added structured data to lift local search visibility.
+            Soft textures and nature imagery set a supportive tone for visitors who may be anxious. The layout stays minimal so
+            the focus remains on contact details and what to expect in a first session.
           </>
         ),
-        image: { src: '/img/demostoke/feat-posts.webp', alt: 'CMS-driven components with consistent styling' }
+        image: { src: '/img/projects/adam-chiappone/ac-forest.webp', alt: 'Nature-inspired visual used in the layout' }
+      },
+      {
+        title: 'Easy next steps and scheduling',
+        body: (
+          <>
+            An Events page and calendar reinforce that Adam is active in the community and offers workshops. A concise footer
+            repeats contact and booking paths.
+          </>
+        ),
+        image: { src: '/img/projects/adam-chiappone/ac-event.webp', alt: 'Events and engagement section near footer' }
       }
     ]}
   />
