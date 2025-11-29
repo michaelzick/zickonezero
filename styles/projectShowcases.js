@@ -153,8 +153,8 @@ export const ShowcaseImage = styled(DemoStokeTldrImage)`
 
 export const SubNavBar = styled.div`
   position: sticky;
-  top: 3.2em;
-  z-index: 90;
+  top: 5.35em;
+  z-index: 150;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -173,10 +173,10 @@ export const SubNavBar = styled.div`
   transition: transform 0.32s ease;
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    top: 5.8em;
+    top: 7.55em;
     grid-template-columns: auto 1fr;
-    row-gap: 0.6em;
-    padding: 0.8em 1em;
+    row-gap: 0.4em;
+    padding: ${props => props.$isVisible ? '0.55em 0.9em' : '0'};
   }
 `;
 
@@ -199,6 +199,7 @@ export const SubNavTitle = styled.span`
   font-weight: 700;
   font-size: 1em;
   line-height: 1.1;
+  display: block;
 `;
 
 export const SubNavLink = styled.a`
@@ -219,7 +220,7 @@ export const SubNavLink = styled.a`
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    grid-column: 1 / -1;
     justify-self: start;
+    margin-top: 0.05em;
   }
 `;
