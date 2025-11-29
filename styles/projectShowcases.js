@@ -153,15 +153,15 @@ export const ShowcaseImage = styled(DemoStokeTldrImage)`
 
 export const SubNavBar = styled.div`
   position: sticky;
-  top: 4.4em;
+  top: 3.2em;
   z-index: 90;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 0.75em;
   height: ${props => props.$isVisible ? 'auto' : '0'};
-  overflow: hidden;
-  padding: ${props => props.$isVisible ? '0.8em 1em' : '0'};
+  overflow: ${props => props.$isVisible ? 'visible' : 'hidden'};
+  padding: ${props => props.$isVisible ? '0.55em 0.9em' : '0'};
   margin-bottom: ${props => props.$isVisible ? '1em' : '0'};
   background: ${THEME.colors.darkest};
   border: ${props => props.$isVisible ? '1px solid rgba(255, 255, 255, 0.18)' : '0 solid transparent'};
@@ -173,7 +173,7 @@ export const SubNavBar = styled.div`
   transition: transform 0.32s ease;
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    top: 6.8em;
+    top: 5.8em;
     grid-template-columns: auto 1fr;
     row-gap: 0.6em;
     padding: 0.8em 1em;
@@ -181,24 +181,24 @@ export const SubNavBar = styled.div`
 `;
 
 export const SubNavThumb = styled.img`
-  width: 3.2em;
-  height: 3.2em;
+  width: 2.6em;
+  height: 2.6em;
   border-radius: 10px;
   object-fit: cover;
   box-shadow: 0 12px 28px -16px rgb(0 0 0 / 60%);
   border: 1px solid rgba(255, 255, 255, 0.24);
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    width: 2.8em;
-    height: 2.8em;
+    width: 2.4em;
+    height: 2.4em;
   }
 `;
 
 export const SubNavTitle = styled.span`
   color: ${THEME.colors.white};
   font-weight: 700;
-  font-size: 1.05em;
-  line-height: 1.2;
+  font-size: 1em;
+  line-height: 1.1;
 `;
 
 export const SubNavLink = styled.a`
@@ -207,7 +207,7 @@ export const SubNavLink = styled.a`
   display: inline-flex;
   align-items: center;
   gap: 0.25em;
-  font-size: 0.98em;
+  font-size: 0.95em;
   padding-bottom: 0.05em;
   border-bottom: 2px solid transparent;
   transition: color 0.2s ease, border-color 0.2s ease;
