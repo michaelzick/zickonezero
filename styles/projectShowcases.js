@@ -68,7 +68,7 @@ export const Title = styled.h1`
   margin: 0;
   font-size: clamp(2rem, 4.6vw, 3.1rem);
   letter-spacing: 0.01em;
-  color: ${THEME.colors.hotRed};
+  color: ${THEME.colors.demostoke};
   line-height: 1.1;
 `;
 
