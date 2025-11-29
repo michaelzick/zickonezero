@@ -21,7 +21,7 @@ export const PageInner = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: clamp(1.4em, 3vw, 2em);
+  gap: clamp(2.8em, 6vw, 4em);
   text-align: left;
 `;
 
@@ -138,7 +138,7 @@ export const LinkRow = styled.div`
 export const SectionsBlock = styled.div`
   display: flex;
   flex-direction: column;
-  gap: clamp(1.2em, 3vw, 1.9em);
+  gap: clamp(2.4em, 6vw, 3.8em);
   text-align: left;
 `;
 
@@ -163,7 +163,7 @@ export const SubNavBar = styled.div`
   overflow: ${props => props.$isVisible ? 'visible' : 'hidden'};
   padding: ${props => props.$isVisible ? '0.55em 0.9em' : '0'};
   margin-bottom: ${props => props.$isVisible ? '1em' : '0'};
-  background: ${THEME.colors.darkest};
+  background: ${THEME.colors.dark};
   border: ${props => props.$isVisible ? '1px solid rgba(255, 255, 255, 0.18)' : '0 solid transparent'};
   border-radius: 12px;
   box-shadow: ${props => props.$isVisible ? '0 12px 28px -16px rgb(0 0 0 / 60%)' : 'none'};
