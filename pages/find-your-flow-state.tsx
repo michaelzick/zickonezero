@@ -20,7 +20,7 @@ const FindYourFlowStatePage = () => (
             (waves, motion, and warm gradients) keeps the experience playful instead of clinical.
           </>
         ),
-        image: { src: '/img/demostoke/gear-quiz.webp', alt: 'Quiz UI showcasing interactive questions' }
+        image: { src: '/img/projects/fyfs/fyfs-home.webp', alt: 'Find Your Flow State homepage' }
       },
       {
         title: 'Insightful results that nudge action',
@@ -30,7 +30,7 @@ const FindYourFlowStatePage = () => (
             paths—so users leave with clarity instead of just a score.
           </>
         ),
-        image: { src: '/img/demostoke/feat-posts.webp', alt: 'Results feed with highlighted recommendations' }
+        image: { src: '/img/projects/fyfs/fyfs-quiz-1.webp', alt: 'Quiz question interface' }
       },
       {
         title: 'Conversion-ready from day one',
@@ -40,7 +40,17 @@ const FindYourFlowStatePage = () => (
             A/B copy, CTA placement, and follow-up offers without redeploys.
           </>
         ),
-        image: { src: '/img/demostoke/events-calendar.webp', alt: 'Calendar and events view used for conversion experiments' }
+        image: { src: '/img/projects/fyfs/fyfs-quiz-2.webp', alt: 'Second quiz step experience' }
+      },
+      {
+        title: 'Results that inspire next steps',
+        body: (
+          <>
+            Clear archetype summaries paired with tailored recommendations (courses, coaching, resources) give users a confident
+            path forward instead of a dead-end quiz result.
+          </>
+        ),
+        image: { src: '/img/projects/fyfs/fyfs-results.webp', alt: 'Quiz results page with recommendations' }
       }
     ]}
   />
