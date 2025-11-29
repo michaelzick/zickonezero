@@ -13,34 +13,44 @@ const WhosInChargePage = () => (
     projectLink={{ href: 'https://whosincharge.zickonezero.com/', label: 'whosincharge.zickonezero.com' }}
     sections={[
       {
+        title: 'Visually rich and provocative',
+        body: (
+          <>
+            Using a tarot-card motif, I designed a bold, engaging visual system that invites users to explore their inner parts
+            while journaling. The homepage clearly communicates the app’s purpose with IFS information and instructions.
+          </>
+        ),
+        image: { src: '/img/projects/wic/wic-home.webp', alt: 'Homepage with primary CTA to start journaling' }
+      },
+      {
         title: 'Guided prompts without overwhelm',
         body: (
           <>
-            Built a structured prompt flow with adaptive hints, keeping users focused on one reflection at a time.
-            The tone balances warmth and clarity so journaling feels supported, not clinical.
+            The entry flow uses simple prompts and quick-tagging to help users capture their internal experience
+            without getting bogged down by the UI.
           </>
         ),
-        image: { src: '/img/demostoke/blog-edit-post.webp', alt: 'Writing interface with guided prompts' }
+        image: { src: '/img/projects/wic/wic-entry.webp', alt: 'Entry flow with prompts and quick tagging' }
       },
       {
-        title: 'Parts library + mood snapshots',
+        title: 'Rich IFS overviews',
         body: (
           <>
-            Created a parts library to quickly tag protectors, exiles, and managers, paired with mood sliders and quick notes.
-            Users can revisit entries and see patterns in what triggers each part.
+            Part details allow users to gain insights into their roles, relationships, and emotions,
+            while offering larger images to deepen the connection.
           </>
         ),
-        image: { src: '/img/demostoke/feat-events.webp', alt: 'Dashboard showing tagged entries and trends' }
+        image: { src: '/img/projects/wic/wic-parts.webp', alt: 'Parts overview showing current cast' }
       },
       {
         title: 'Privacy-first journaling',
         body: (
           <>
-            Local-first storage with optional cloud backup keeps sensitive work private. Added export flows for therapists
-            without exposing data server-side.
+            Given the sensitive nature of journaling, I built in privacy features like local storage and export options
+            so users can keep their data secure and in their control. No logins or accounts are required.
           </>
         ),
-        image: { src: '/img/demostoke/admin-img-download.webp', alt: 'Privacy and export controls interface' }
+        image: { src: '/img/projects/wic/wic-export.webp', alt: 'Export modal with sharing options' }
       }
     ]}
   />
