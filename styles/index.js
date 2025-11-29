@@ -919,11 +919,11 @@ export const AntisyphonColumnsWrapper = styled.div`
   text-align: left;
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    padding: 1em 1.5em;
+    padding: 6em 1.5em;
   }
 
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    padding: 1em;
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    padding: 2em 1.5em;
   }
 `;
 
