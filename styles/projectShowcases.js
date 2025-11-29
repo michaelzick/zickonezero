@@ -178,8 +178,8 @@ export const SubNavBar = styled.div`
     grid-template-areas:
       "thumb title"
       "thumb link";
-    row-gap: 0.4em;
-    padding: ${props => props.$isVisible ? '0.55em 0.9em' : '0'};
+    row-gap: 0.25em;
+    padding: ${props => props.$isVisible ? '0.45em 0.9em' : '0'};
   }
 `;
 
@@ -192,8 +192,8 @@ export const SubNavThumb = styled.img`
   border: 1px solid rgba(255, 255, 255, 0.24);
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    width: 2.4em;
-    height: 2.4em;
+    width: 2.7em;
+    height: 2.7em;
     grid-area: thumb;
     align-self: center;
   }
