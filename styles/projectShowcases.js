@@ -123,14 +123,14 @@ export const LinkRow = styled.div`
     line-height: 1;
     display: inline-flex;
     align-items: center;
-    gap: 0.3em;
+    gap: 0.2em;
     padding-bottom: 0.08em;
     border-bottom: 2px solid ${THEME.colors.white};
     transition: color 0.2s ease, border-color 0.2s ease;
 
     &:hover {
-      color: rgba(255, 255, 255, 0.85);
-      border-color: rgba(255, 255, 255, 0.7);
+      color: ${THEME.colors.hotRed};
+      border-color: ${THEME.colors.hotRed};
     }
   }
 `;
