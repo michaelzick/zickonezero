@@ -2342,11 +2342,29 @@ export const IntroSection = styled.div`
     max-width: 35em;
     will-change: transform; /* Optimize for transforms */
     transition: transform 0.1s ease-out; /* Smooth parallax movement */
+    position: relative;
 
     img {
       width: 100%;
       height: auto;
       border-radius: 4px;
+      display: block;
+    }
+
+    .neon-trail {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: 0;
+      transition: opacity 0.15s ease-out;
+      border-radius: 4px;
+    }
+
+    &:hover .neon-trail {
+      opacity: 1;
     }
   }
 

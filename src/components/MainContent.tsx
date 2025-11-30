@@ -38,6 +38,7 @@ const MainContent = () => {
   const introTextRef = useRef<HTMLDivElement | null>(null);
   const introImageRef = useRef<HTMLDivElement | null>(null);
   const [parallaxOffset, setParallaxOffset] = useState({ text: -60, image: -40 });
+  const neonCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
   // For lightbox
   const [lightboxController, setLightboxController] = useState({
@@ -153,6 +154,169 @@ const MainContent = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Neon trail effect on the intro image
+  useEffect(() => {
+    const canvas = neonCanvasRef.current;
+    const imageContainer = introImageRef.current;
+
+    if (!canvas || !imageContainer) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+    if (prefersReducedMotion || !hasFinePointer) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const pickNeonHue = () => 120 + Math.random() * 220; // Bright fluorescent range
+
+    type Segment = {
+      x1: number;
+      y1: number;
+      x2: number;
+      y2: number;
+      life: number;
+      width: number;
+      hue: number;
+    };
+
+    let segments: Segment[] = [];
+    let rafId = 0;
+    let dpr = 1;
+    let isHovering = false;
+    let lastPos: { x: number; y: number } | null = null;
+    let currentHue = pickNeonHue();
+
+    const setSize = () => {
+      const rect = imageContainer.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      canvas.style.width = `${rect.width}px`;
+      canvas.style.height = `${rect.height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    setSize();
+
+    const imageEl = imageContainer.querySelector('img');
+    if (imageEl) {
+      if (imageEl.complete) {
+        setSize();
+      } else {
+        imageEl.addEventListener('load', setSize);
+      }
+    }
+
+    const draw = () => {
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+      ctx.globalCompositeOperation = 'lighter';
+
+      segments = segments
+        .map((s) => ({
+          ...s,
+          life: s.life - 0.02
+        }))
+        .filter((s) => s.life > 0);
+
+      for (const s of segments) {
+        const alpha = Math.max(s.life, 0);
+        const grad = ctx.createLinearGradient(s.x1, s.y1, s.x2, s.y2);
+        grad.addColorStop(0, `hsla(${s.hue}, 100%, 65%, ${alpha})`);
+        grad.addColorStop(1, `hsla(${s.hue}, 100%, 50%, 0)`);
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = s.width;
+        ctx.lineCap = 'round';
+        ctx.shadowColor = `hsla(${s.hue}, 100%, 65%, ${alpha * 0.8})`;
+        ctx.shadowBlur = 18;
+        ctx.beginPath();
+        ctx.moveTo(s.x1, s.y1);
+        ctx.lineTo(s.x2, s.y2);
+        ctx.stroke();
+      }
+
+      if (segments.length) {
+        rafId = requestAnimationFrame(draw);
+        return;
+      }
+
+      rafId = 0;
+      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+    };
+
+    const addStreak = (event: MouseEvent) => {
+      const rect = imageContainer.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      const maxSegments = 120;
+
+      if (!lastPos) {
+        lastPos = { x, y };
+        currentHue = pickNeonHue();
+        return;
+      }
+
+      const width = 11 + Math.random() * 3;
+      segments.push({
+        x1: lastPos.x,
+        y1: lastPos.y,
+        x2: x,
+        y2: y,
+        life: 1,
+        width,
+        hue: currentHue
+      });
+
+      lastPos = { x, y };
+
+      if (segments.length > maxSegments) {
+        segments = segments.slice(segments.length - maxSegments);
+      }
+
+      if (!rafId) {
+        rafId = requestAnimationFrame(draw);
+      }
+    };
+
+    const handleMouseEnter = () => {
+      isHovering = true;
+      if (!rafId && segments.length) {
+        rafId = requestAnimationFrame(draw);
+      }
+    };
+
+    const handleMouseLeave = () => {
+      isHovering = false;
+      segments = [];
+      lastPos = null;
+      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = 0;
+      }
+    };
+
+    const handleResize = () => setSize();
+
+    imageContainer.addEventListener('mouseenter', handleMouseEnter);
+    imageContainer.addEventListener('mouseleave', handleMouseLeave);
+    imageContainer.addEventListener('mousemove', addStreak);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      if (imageEl) {
+        imageEl.removeEventListener('load', setSize);
+      }
+      imageContainer.removeEventListener('mouseenter', handleMouseEnter);
+      imageContainer.removeEventListener('mouseleave', handleMouseLeave);
+      imageContainer.removeEventListener('mousemove', addStreak);
+      window.removeEventListener('resize', handleResize);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
+
   return (
     <>
       <TopNavContent />
@@ -214,6 +378,7 @@ const MainContent = () => {
               alt="Florescent lifeguard tower"
               loading="lazy"
             />
+            <canvas ref={neonCanvasRef} className="neon-trail" aria-hidden="true" />
           </div>
         </IntroSection>
 
