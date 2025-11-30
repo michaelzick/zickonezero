@@ -409,6 +409,41 @@ export const Thumb = styled.div`
     }
   }
 
+  .thumb-media {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .neon-trail-thumb {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0.9;
+    transition: opacity 0.2s ease-out;
+    border-radius: 4px;
+  }
+
+  .thumb-media .cursor-dot {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0;
+    transform: translate3d(-9999px, -9999px, 0);
+    transition: opacity 0.2s ease-out;
+  }
+
+  .thumb-dot {
+    width: 12px;
+    height: 12px;
+    box-shadow: 0 0 14px hsla(170, 100%, 65%, 0.8);
+  }
+
   @media (max-width: ${THEME.breakpoints.phone}) {
     margin: 2em 0 1em;
   }
