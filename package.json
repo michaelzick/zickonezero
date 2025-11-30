@@ -13,7 +13,8 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "chromatic": "npx chromatic --project-token=8d72ce9e2021"
+    "chromatic": "npx chromatic --project-token=8d72ce9e2021",
+    "sitemap": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
     "@radix-ui/react-icons": "^1.3.2",
