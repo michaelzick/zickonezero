@@ -162,7 +162,6 @@ export const ShowcaseImage = styled(DemoStokeTldrImage)`
   ${props => props.$position && `object-position: ${props.$position};`}
   cursor: pointer;
   border: 4px solid transparent;
-  transition: border-color 0.3s ease;
 
   &:hover {
     border-color: ${THEME.colors.hotRed};
@@ -190,7 +189,7 @@ export const AnimatedSection = styled.div`
   .image-animate {
     opacity: 0;
     transform: translateY(12px);
-    transition: opacity 0.6s ease 0.18s, transform 0.6s ease 0.18s;
+    transition: opacity 0.6s ease 0.18s, transform 0.6s ease 0.18s, border 0.3s ease;
   }
 
   .text-animate {
