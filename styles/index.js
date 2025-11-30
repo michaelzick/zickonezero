@@ -666,13 +666,16 @@ export const LinkBoxMobile = styled.ul`
   }
 
   .contact-accordion {
+    width: 100%;
+    align-self: stretch;
+
     button {
-      width: 100%;
       padding: 0;
       border-bottom: none;
-      justify-content: center;
+      justify-content: space-between;
+      text-align: left;
       color: ${THEME.colors.white};
-      margin: 0 auto;
+      margin: 0;
 
         &:hover {
           color: ${THEME.colors.hotRed};
@@ -684,7 +687,6 @@ export const LinkBoxMobile = styled.ul`
 `;
 
 export const CaseStudiesAccordionButton = styled.button`
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
