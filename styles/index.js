@@ -545,16 +545,17 @@ export const CaseStudiesDropdown = styled.ul`
   right: 0;
   list-style: none;
   margin: 0;
-  padding: 1em 1.75em;
+  padding: 0.75em 1em;
   background: ${THEME.colors.darkest};
   border-radius: 4px;
   border: 2px solid ${THEME.colors.white};
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  min-width: 180px;
-  gap: 1.2em;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-auto-rows: auto;
+  gap: 0.9em 1.2em;
+  min-width: auto;
+  align-items: center;
   opacity: ${props => props.$isOpen ? 1 : 0};
   transform: ${props => props.$isOpen ? 'translateY(0)' : 'translateY(-10px)'};
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -563,10 +564,10 @@ export const CaseStudiesDropdown = styled.ul`
 
   li {
     margin: 0;
-    width: 100%;
-    display: flex;
+    width: auto;
+    display: inline-flex;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
   }
 
   a {
@@ -576,6 +577,7 @@ export const CaseStudiesDropdown = styled.ul`
     align-items: center;
     gap: 0.5em;
     text-align: left;
+    white-space: nowrap;
     width: auto;
     align-self: center;
     padding-bottom: 0;
