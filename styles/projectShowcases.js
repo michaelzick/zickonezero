@@ -158,6 +158,13 @@ export const SectionTitle = styled(DemoStokeTldrTitle)`
 
 export const ShowcaseImage = styled(DemoStokeTldrImage)`
   ${props => props.$position && `object-position: ${props.$position};`}
+  cursor: pointer;
+  border: 4px solid transparent;
+  transition: border-color 0.3s ease;
+
+  &:hover {
+    border-color: ${THEME.colors.hotRed};
+  }
 `;
 
 export const SubNavBar = styled.div`

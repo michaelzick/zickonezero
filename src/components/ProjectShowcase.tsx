@@ -38,6 +38,7 @@ import {
   getMobileMenuState
 } from '../showMobileMenuSlice';
 import { useRef, useState, useCallback } from 'react';
+import FsLightbox from 'fslightbox-react';
 
 type ShowcaseSection = {
   title: string;
@@ -68,6 +69,7 @@ const ProjectShowcase = ({
   const dispatch = useAppDispatch();
   const heroRef = useRef<HTMLDivElement | null>(null);
   const [isSubNavVisible, setIsSubNavVisible] = useState(false);
+  const [lightboxState, setLightboxState] = useState({ toggler: false, slide: 1 });
 
   const handleHeroIntersection = useCallback((entries: IntersectionObserverEntry[]) => {
     const [entry] = entries;
@@ -155,6 +157,15 @@ const ProjectShowcase = ({
                         alt={image.alt}
                         loading='lazy'
                         $position={image.position}
+                        role='button'
+                        tabIndex={0}
+                        onClick={() => setLightboxState(prev => ({ toggler: !prev.toggler, slide: index + 1 }))}
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            setLightboxState(prev => ({ toggler: !prev.toggler, slide: index + 1 }));
+                          }
+                        }}
                       />
                     </DemoStokeMethodRow>
                   </DemoStokeMethodCard>
@@ -164,6 +175,11 @@ const ProjectShowcase = ({
           </PageInner>
         </PageShell>
       </Wrapper>
+      <FsLightbox
+        toggler={lightboxState.toggler}
+        slide={lightboxState.slide}
+        sources={sections.map(({ image }) => image.src)}
+      />
       <FooterContent />
     </>
   );
