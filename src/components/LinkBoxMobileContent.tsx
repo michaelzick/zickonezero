@@ -97,6 +97,7 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
           onClick={() => {
             setIsContactOpen((prevState) => !prevState);
             setIsCaseStudiesOpen(false);
+            setIsProjectsOpen(false);
           }}
           aria-expanded={isContactOpen}>
           Contact
