@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useRef, useState, useCallback } from 'react';
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 
 import {
@@ -6,7 +6,6 @@ import {
   DemoStokeMethodList,
   DemoStokeMethodRow,
   DemoStokeTldrCopy,
-  DemoStokeTldrImage,
   Wrapper
 } from '../../styles';
 import {
@@ -26,7 +25,8 @@ import {
   SubNavBar,
   SubNavThumb,
   SubNavTitle,
-  SubNavLink
+  SubNavLink,
+  AnimatedSection
 } from '../../styles/projectShowcases';
 import { TopNavContent, FooterContent } from '.';
 import {
@@ -37,7 +37,6 @@ import {
   showMobileMenu,
   getMobileMenuState
 } from '../showMobileMenuSlice';
-import { useRef, useState, useCallback } from 'react';
 import FsLightbox from 'fslightbox-react';
 
 type ShowcaseSection = {
@@ -70,6 +69,8 @@ const ProjectShowcase = ({
   const heroRef = useRef<HTMLDivElement | null>(null);
   const [isSubNavVisible, setIsSubNavVisible] = useState(false);
   const [lightboxState, setLightboxState] = useState({ toggler: false, slide: 1 });
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [visibleSections, setVisibleSections] = useState<Record<number, boolean>>({});
 
   const handleHeroIntersection = useCallback((entries: IntersectionObserverEntry[]) => {
     const [entry] = entries;
@@ -89,6 +90,21 @@ const ProjectShowcase = ({
     observer.observe(heroEl);
     return () => observer.disconnect();
   }, [handleHeroIntersection]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const idx = Number(entry.target.getAttribute('data-section-index'));
+        if (entry.isIntersecting && !Number.isNaN(idx)) {
+          setVisibleSections((prev) => (prev[idx] ? prev : { ...prev, [idx]: true }));
+        }
+      });
+    }, { threshold: 0.22 });
+
+    sectionRefs.current.forEach((node) => node && observer.observe(node));
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -146,29 +162,37 @@ const ProjectShowcase = ({
             <SectionsBlock>
               <DemoStokeMethodList>
                 {sections.map(({ title: sectionTitle, body, image }, index) => (
-                  <DemoStokeMethodCard key={sectionTitle}>
-                    <DemoStokeMethodRow $reverse={index % 2 === 1}>
-                      <div>
-                        <SectionTitle as="h3">{sectionTitle}</SectionTitle>
-                        <DemoStokeTldrCopy>{body}</DemoStokeTldrCopy>
-                      </div>
-                      <ShowcaseImage
-                        src={image.src}
-                        alt={image.alt}
-                        loading='lazy'
-                        $position={image.position}
-                        role='button'
-                        tabIndex={0}
-                        onClick={() => setLightboxState(prev => ({ toggler: !prev.toggler, slide: index + 1 }))}
-                        onKeyDown={(event) => {
-                          if (event.key === 'Enter' || event.key === ' ') {
-                            event.preventDefault();
-                            setLightboxState(prev => ({ toggler: !prev.toggler, slide: index + 1 }));
-                          }
-                        }}
-                      />
-                    </DemoStokeMethodRow>
-                  </DemoStokeMethodCard>
+                  <AnimatedSection
+                    key={sectionTitle}
+                    ref={(el) => { sectionRefs.current[index] = el; }}
+                    data-section-index={index}
+                    className={visibleSections[index] ? 'visible' : undefined}
+                  >
+                    <DemoStokeMethodCard>
+                      <DemoStokeMethodRow $reverse={index % 2 === 1}>
+                        <div className="text-animate">
+                          <SectionTitle as="h3">{sectionTitle}</SectionTitle>
+                          <DemoStokeTldrCopy>{body}</DemoStokeTldrCopy>
+                        </div>
+                        <ShowcaseImage
+                          className="image-animate"
+                          src={image.src}
+                          alt={image.alt}
+                          loading='lazy'
+                          $position={image.position}
+                          role='button'
+                          tabIndex={0}
+                          onClick={() => setLightboxState(prev => ({ toggler: !prev.toggler, slide: index + 1 }))}
+                          onKeyDown={(event) => {
+                            if (event.key === 'Enter' || event.key === ' ') {
+                              event.preventDefault();
+                              setLightboxState(prev => ({ toggler: !prev.toggler, slide: index + 1 }));
+                            }
+                          }}
+                        />
+                      </DemoStokeMethodRow>
+                    </DemoStokeMethodCard>
+                  </AnimatedSection>
                 ))}
               </DemoStokeMethodList>
             </SectionsBlock>

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { DemoStokeTldrTitle, DemoStokeTldrImage } from './index';
 import { THEME } from './theme';
+import { keyframes, css } from 'styled-components';
 
 export const PageShell = styled.div`
   display: flex;
@@ -164,6 +165,47 @@ export const ShowcaseImage = styled(DemoStokeTldrImage)`
 
   &:hover {
     border-color: ${THEME.colors.hotRed};
+  }
+`;
+
+const fadeUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+export const AnimatedSection = styled.div`
+  opacity: 0;
+  transform: translateY(18px);
+  &.visible {
+    animation: ${fadeUp} 0.7s ease forwards;
+  }
+
+  .image-animate {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.6s ease 0.18s, transform 0.6s ease 0.18s;
+  }
+
+  .text-animate {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.6s ease 0.32s, transform 0.6s ease 0.32s;
+  }
+
+  &.visible .image-animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &.visible .text-animate {
+    opacity: 1;
+    transform: translateY(0);
   }
 `;
 
