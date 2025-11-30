@@ -80,6 +80,7 @@ export const Title = styled.h1`
   font-size: clamp(2rem, 4.6vw, 3.1rem);
   letter-spacing: 0.01em;
   line-height: 1.1;
+  color: ${THEME.colors.hotRed};
 `;
 
 export const Summary = styled.p`
@@ -259,7 +260,7 @@ export const SubNavThumb = styled.img`
 `;
 
 export const SubNavTitle = styled.span`
-  color: ${THEME.colors.white};
+  color: ${THEME.colors.hotRed};
   font-weight: 700;
   font-size: 1em;
   line-height: 1.1;
