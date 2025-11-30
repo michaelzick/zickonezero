@@ -237,7 +237,7 @@ export const SubNavBar = styled.div`
     grid-template-areas:
       "thumb title"
       "thumb link";
-    row-gap: 0.25em;
+    row-gap: 0;
     padding: ${props => props.$isVisible ? '0.45em 0.9em' : '0 0.9em'};
   }
 `;
