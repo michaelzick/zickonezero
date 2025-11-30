@@ -643,8 +643,8 @@ export const LinkBoxMobile = styled.ul`
   top: 3.4em;
   right: 1em;
   padding: 1.2em 1.5em;
-  min-width: 18em;
-  width: 18em;
+  min-width: 15.5em;
+  width: 15.5em;
   background: ${THEME.colors.darkest};
   z-index: 400;
   border-radius: 4px;
@@ -703,9 +703,6 @@ export const LinkBoxMobile = styled.ul`
   }
 
   .contact-accordion {
-    width: 100%;
-    align-self: stretch;
-
     button {
       padding: 0;
       border-bottom: none;
@@ -714,10 +711,9 @@ export const LinkBoxMobile = styled.ul`
       color: ${THEME.colors.white};
       margin: 0;
 
-        &:hover {
-          color: ${THEME.colors.hotRed};
-          border-color: ${THEME.colors.hotRed};
-        }
+      &:hover {
+        color: ${THEME.colors.hotRed};
+        border-color: ${THEME.colors.hotRed};
       }
     }
   }
