@@ -23,7 +23,7 @@ export const PageInner = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: clamp(0em,6vw,4em);
+  gap: clamp(0em, 5vw, 4em);
   text-align: left;
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
