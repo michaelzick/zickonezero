@@ -221,7 +221,7 @@ const MainContent = () => {
         .filter((s) => s.life > 0);
 
       for (const s of segments) {
-        const alpha = Math.max(s.life, 0);
+        const alpha = Math.min(1, Math.max(s.life, 0) * 1.35);
         const grad = ctx.createLinearGradient(s.x1, s.y1, s.x2, s.y2);
         grad.addColorStop(0, `hsla(${s.hue}, 100%, 65%, ${alpha})`);
         grad.addColorStop(1, `hsla(${s.hue}, 100%, 50%, 0)`);
@@ -229,7 +229,7 @@ const MainContent = () => {
         ctx.strokeStyle = grad;
         ctx.lineWidth = s.width;
         ctx.lineCap = 'round';
-        ctx.shadowColor = `hsla(${s.hue}, 100%, 65%, ${alpha * 0.8})`;
+        ctx.shadowColor = `hsla(${s.hue}, 100%, 65%, ${alpha * 0.9})`;
         ctx.shadowBlur = 18;
         ctx.beginPath();
         ctx.moveTo(s.x1, s.y1);
