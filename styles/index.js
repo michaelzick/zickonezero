@@ -2051,7 +2051,7 @@ export const HotRedTitle = styled.h2`
 export const ThemeSwitcherWrapper = styled.div`
   display: inline-flex;
   align-items: center;
-  gap: 0.75em;
+  gap: 0.9em;
   transition: filter 0.3s;
   pointer-events: ${props => props.isMobileMenuShown ? 'none' : 'auto'};
   ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
