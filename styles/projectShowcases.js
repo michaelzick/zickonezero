@@ -228,7 +228,7 @@ export const SubNavBar = styled.div`
   transform: ${props => props.$isVisible ? 'translateY(0)' : 'translateY(-220%)'};
   opacity: ${props => props.$isVisible ? 1 : 0};
   pointer-events: ${props => props.$isVisible ? 'auto' : 'none'};
-  transition: transform 0.32s ease, opacity 0.22s ease, max-height 0.32s ease, padding 0.32s ease, margin 0.32s ease;
+  transition: transform 0.64s ease, opacity 0.44s ease, max-height 0.64s ease, padding 0.64s ease, margin 0.64s ease;
   will-change: transform, opacity, max-height, padding, margin;
 
   @media (max-width: ${THEME.breakpoints.phone}) {
