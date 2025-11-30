@@ -2358,13 +2358,9 @@ export const IntroSection = styled.div`
       height: 100%;
       pointer-events: none;
       mix-blend-mode: screen;
-      opacity: 0;
-      transition: opacity 0.15s ease-out;
+      opacity: 0.9; /* Keep visible so the streak can finish fading after hover ends */
+      transition: opacity 0.2s ease-out;
       border-radius: 4px;
-    }
-
-    &:hover .neon-trail {
-      opacity: 1;
     }
   }
 

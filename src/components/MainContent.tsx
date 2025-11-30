@@ -216,7 +216,7 @@ const MainContent = () => {
       segments = segments
         .map((s) => ({
           ...s,
-          life: s.life - 0.02
+          life: s.life - 0.01
         }))
         .filter((s) => s.life > 0);
 
@@ -289,12 +289,10 @@ const MainContent = () => {
 
     const handleMouseLeave = () => {
       isHovering = false;
-      segments = [];
       lastPos = null;
-      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-        rafId = 0;
+      // Let existing streaks finish fading out
+      if (!rafId && segments.length) {
+        rafId = requestAnimationFrame(draw);
       }
     };
 
