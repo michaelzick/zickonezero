@@ -3,7 +3,6 @@ import {
   useEffect,
   useRef,
   useState,
-  useCallback,
   type KeyboardEvent as ReactKeyboardEvent
 } from 'react';
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
@@ -29,10 +28,6 @@ import {
   SectionsBlock,
   SectionTitle,
   ShowcaseImage,
-  SubNavBar,
-  SubNavThumb,
-  SubNavTitle,
-  SubNavLink,
   AnimatedSection
 } from '../../styles/projectShowcases';
 import { TopNavContent, FooterContent } from '.';
@@ -56,7 +51,6 @@ type ProjectShowcaseProps = {
   title: string;
   summary?: string;
   heroImage: { src: string; alt: string; };
-  subNavImage?: { src: string; alt: string; };
   roleBullets: string[];
   projectLink: { href: string; label?: string; };
   sections: ShowcaseSection[];
@@ -66,37 +60,15 @@ const ProjectShowcase = ({
   title,
   summary,
   heroImage,
-  subNavImage,
   roleBullets,
   projectLink,
   sections
 }: ProjectShowcaseProps) => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
-  const heroRef = useRef<HTMLDivElement | null>(null);
-  const [isSubNavVisible, setIsSubNavVisible] = useState(false);
   const [lightboxState, setLightboxState] = useState({ toggler: false, slide: 1 });
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [visibleSections, setVisibleSections] = useState<Record<number, boolean>>({});
-
-  const handleHeroIntersection = useCallback((entries: IntersectionObserverEntry[]) => {
-    const [entry] = entries;
-    setIsSubNavVisible(!entry.isIntersecting);
-  }, []);
-
-  useEffect(() => {
-    const heroEl = heroRef.current;
-    if (!heroEl) return;
-
-    const observer = new IntersectionObserver(handleHeroIntersection, {
-      root: null,
-      threshold: 0.35,
-      rootMargin: '-40px 0px 0px 0px'
-    });
-
-    observer.observe(heroEl);
-    return () => observer.disconnect();
-  }, [handleHeroIntersection]);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -124,18 +96,7 @@ const ProjectShowcase = ({
         onClick={() => dispatch(showMobileMenu(false))}>
         <PageShell>
           <PageInner>
-            <SubNavBar
-              aria-label="Project quick nav"
-              aria-hidden={!isSubNavVisible}
-              $isVisible={isSubNavVisible}>
-              <SubNavThumb src={(subNavImage || heroImage).src} alt={(subNavImage || heroImage).alt} />
-              <SubNavTitle>{title}</SubNavTitle>
-              <SubNavLink href={projectLink.href} target='_blank' rel='noopener noreferrer'>
-                {projectLink.label || 'View Project'} <OpenInNewWindowIcon aria-hidden="true" />
-              </SubNavLink>
-            </SubNavBar>
-
-            <HeroGrid ref={heroRef}>
+            <HeroGrid>
               <HeroImageFrame>
                 <img src={heroImage.src} alt={heroImage.alt} />
               </HeroImageFrame>

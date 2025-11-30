@@ -5,7 +5,6 @@ const WhosInChargePage = () => (
     title='Who’s In Charge?'
     summary='An Internal Family Systems journaling app with tarot-style imagery.'
     heroImage={{ src: '/img/squares/king-512.webp', alt: 'Who’s In Charge? crown logo' }}
-    subNavImage={{ src: '/img/squares/king-512.webp', alt: 'Who’s In Charge? crown logo' }}
     roleBullets={[
       'UX architecture',
       'Visual design',
