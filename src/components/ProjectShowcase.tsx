@@ -1,4 +1,11 @@
-import { ReactNode, useEffect, useRef, useState, useCallback } from 'react';
+import {
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  type KeyboardEvent as ReactKeyboardEvent
+} from 'react';
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 
 import {
@@ -164,7 +171,7 @@ const ProjectShowcase = ({
                 {sections.map(({ title: sectionTitle, body, image }, index) => (
                   <AnimatedSection
                     key={sectionTitle}
-                    ref={(el) => { sectionRefs.current[index] = el; }}
+                    ref={(el: HTMLDivElement | null) => { sectionRefs.current[index] = el; }}
                     data-section-index={index}
                     className={visibleSections[index] ? 'visible' : undefined}
                   >
@@ -183,7 +190,7 @@ const ProjectShowcase = ({
                           role='button'
                           tabIndex={0}
                           onClick={() => setLightboxState(prev => ({ toggler: !prev.toggler, slide: index + 1 }))}
-                          onKeyDown={(event) => {
+                          onKeyDown={(event: ReactKeyboardEvent<HTMLImageElement>) => {
                             if (event.key === 'Enter' || event.key === ' ') {
                               event.preventDefault();
                               setLightboxState(prev => ({ toggler: !prev.toggler, slide: index + 1 }));
