@@ -133,7 +133,7 @@ const METHOD_SECTIONS = [
       'Benchmarked competitors and availability patterns to spot underserved sports and locations.',
       'Synthesized: riders will pay if trust/ease are guaranteed; shops/shapers need lightweight tools to convert demos.'
     ],
-    image: { src: '/img/demostoke/female-surfer.jpg', alt: 'Female surfer carrying a board at the beach' }
+    image: { src: '/img/demostoke/landscape-zoom-call.webp', alt: 'Female surfer carrying a board at the beach' }
   },
   {
     title: 'Empathize, Define, and Ideate With Users',
@@ -143,7 +143,7 @@ const METHOD_SECTIONS = [
       'Mapped discovery-to-feedback flows and prioritized must-have moments for riders and lenders.',
       'Documented trust signals and discovery levers: verification, reviews, filters, maps, and events.'
     ],
-    image: { src: '/img/demostoke/guys-talking.jpg', alt: 'Product discovery conversation between two people' }
+    image: { src: '/img/demostoke/sticky-notes.webp', alt: 'Product discovery conversation between two people' }
   },
   {
     title: 'Prototype, Test, and Refine the Product',
@@ -153,7 +153,7 @@ const METHOD_SECTIONS = [
       'Ran moderated/unmoderated walkthroughs to validate discovery, booking, and trust cues.',
       'Iterated features and UI from usability findings; tracked analytics to guide next improvements.'
     ],
-    image: { src: '/img/demostoke/computer.jpg', alt: 'Laptop showing a high-fidelity interface design' }
+    image: { src: '/img/demostoke/landscape-laptop-map.webp', alt: 'Laptop showing a high-fidelity interface design' }
   }
 ] as const;
 

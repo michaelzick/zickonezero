@@ -1315,11 +1315,11 @@ export const DemoStokeTldrCopy = styled.div`
 
 export const DemoStokeTldrImage = styled.img`
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-width: 100%;
   border-radius: 16px;
   border: 1px solid ${THEME.colors.grey};
-  object-fit: cover;
-  aspect-ratio: 16 / 9;
+  object-fit: contain;
   box-shadow: 0 12px 28px -16px rgb(0 0 0 / 60%);
   display: block;
 `;
