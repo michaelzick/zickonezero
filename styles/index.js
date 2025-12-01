@@ -1237,6 +1237,9 @@ export const DemoStokeTldrRow = styled.div`
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: clamp(1em, 3vw, 2.35em);
   align-items: flex-start;
+  > * {
+    min-width: 0;
+  }
 
   &:not(:first-of-type) {
     margin-top: clamp(1.35em, 3.4vw, 2.7em);
@@ -1348,6 +1351,10 @@ export const DemoStokeMethodRow = styled(DemoStokeTldrRow)`
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     gap: 1em;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    gap: 0.8em;
   }
 `;
 
