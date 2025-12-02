@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type FocusEvent } from 'react';
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
 import { CONTACT_LINKS } from './contactLinks';
@@ -99,11 +99,12 @@ const LinkBoxContent = () => {
         onMouseEnter={openCaseStudies}
         onMouseLeave={scheduleCloseAll}
         onFocus={openCaseStudies}
-        onBlur={(event) => {
+        onBlur={(event: FocusEvent<HTMLDivElement>) => {
           const current = caseStudiesRef.current;
-          if (current && !current.contains(event.relatedTarget as Node)) {
-            closeAll();
-          }
+          const next = event.relatedTarget as Node | null;
+          if (!current) return;
+          if (next && current.contains(next)) return;
+          closeAll();
         }}
       >
         <CaseStudiesTrigger
@@ -138,11 +139,12 @@ const LinkBoxContent = () => {
         onMouseEnter={openProjects}
         onMouseLeave={scheduleCloseAll}
         onFocus={openProjects}
-        onBlur={(event) => {
+        onBlur={(event: FocusEvent<HTMLDivElement>) => {
           const current = projectsRef.current;
-          if (current && !current.contains(event.relatedTarget as Node)) {
-            closeAll();
-          }
+          const next = event.relatedTarget as Node | null;
+          if (!current) return;
+          if (next && current.contains(next)) return;
+          closeAll();
         }}
       >
         <CaseStudiesTrigger
@@ -177,11 +179,12 @@ const LinkBoxContent = () => {
         onMouseEnter={openContact}
         onMouseLeave={scheduleCloseAll}
         onFocus={openContact}
-        onBlur={(event) => {
+        onBlur={(event: FocusEvent<HTMLDivElement>) => {
           const current = contactRef.current;
-          if (current && !current.contains(event.relatedTarget as Node)) {
-            closeAll();
-          }
+          const next = event.relatedTarget as Node | null;
+          if (!current) return;
+          if (next && current.contains(next)) return;
+          closeAll();
         }}
       >
         <CaseStudiesTrigger
