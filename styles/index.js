@@ -543,7 +543,7 @@ export const CaseStudiesChevron = styled.span`
     transform: ${props => props.$isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
     transform-origin: center;
     transition: transform 0.2s ease;
-    color: ${THEME.colors.white};
+    color: inherit;
   }
 `;
 
@@ -555,11 +555,6 @@ export const CaseStudiesDesktopWrapper = styled.div`
   color: ${THEME.colors.white};
   font-family: Roboto, sans-serif;
   cursor: pointer;
-
-  &:hover,
-  &:focus-within {
-    color: ${THEME.colors.white};
-  }
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     display: none;
