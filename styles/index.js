@@ -543,6 +543,7 @@ export const CaseStudiesChevron = styled.span`
     transform: ${props => props.$isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
     transform-origin: center;
     transition: transform 0.2s ease;
+    color: ${THEME.colors.white};
   }
 `;
 
@@ -557,7 +558,7 @@ export const CaseStudiesDesktopWrapper = styled.div`
 
   &:hover,
   &:focus-within {
-    color: ${THEME.colors.hotRed};
+    color: ${THEME.colors.white};
   }
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
@@ -575,6 +576,12 @@ export const CaseStudiesTrigger = styled.button`
   color: inherit;
   font: inherit;
   cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: ${THEME.colors.hotRed};
+  }
 
   &:focus-visible {
     outline: 2px solid ${THEME.colors.hotRed};

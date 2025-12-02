@@ -19,29 +19,50 @@ const LinkBoxContent = () => {
   const caseStudiesRef = useRef<HTMLDivElement | null>(null);
   const projectsRef = useRef<HTMLDivElement | null>(null);
   const contactRef = useRef<HTMLDivElement | null>(null);
+  const hoverCloseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleCaseTriggerClick = () => {
-    setIsCaseStudiesOpen((prevState) => !prevState);
+  const clearHoverTimeout = () => {
+    if (hoverCloseTimeout.current) {
+      clearTimeout(hoverCloseTimeout.current);
+      hoverCloseTimeout.current = null;
+    }
+  };
+
+  const openCaseStudies = () => {
+    clearHoverTimeout();
+    setIsCaseStudiesOpen(true);
     setIsProjectsOpen(false);
     setIsContactOpen(false);
   };
 
-  const handleProjectsTriggerClick = () => {
-    setIsProjectsOpen((prevState) => !prevState);
+  const openProjects = () => {
+    clearHoverTimeout();
+    setIsProjectsOpen(true);
     setIsCaseStudiesOpen(false);
     setIsContactOpen(false);
   };
 
-  const handleContactTriggerClick = () => {
-    setIsContactOpen((prevState) => !prevState);
+  const openContact = () => {
+    clearHoverTimeout();
+    setIsContactOpen(true);
     setIsCaseStudiesOpen(false);
     setIsProjectsOpen(false);
+  };
+
+  const closeAll = () => {
+    clearHoverTimeout();
+    setIsCaseStudiesOpen(false);
+    setIsProjectsOpen(false);
+    setIsContactOpen(false);
+  };
+
+  const scheduleCloseAll = () => {
+    clearHoverTimeout();
+    hoverCloseTimeout.current = setTimeout(closeAll, 120);
   };
 
   const handleLinkClick = () => {
-    setIsCaseStudiesOpen(false);
-    setIsProjectsOpen(false);
-    setIsContactOpen(false);
+    closeAll();
   };
 
   useEffect(() => {
@@ -73,10 +94,21 @@ const LinkBoxContent = () => {
   return (
     <LinkBox>
       <Link href='/about'>About</Link>
-      <CaseStudiesDesktopWrapper ref={caseStudiesRef}>
+      <CaseStudiesDesktopWrapper
+        ref={caseStudiesRef}
+        onMouseEnter={openCaseStudies}
+        onMouseLeave={scheduleCloseAll}
+        onFocus={openCaseStudies}
+        onBlur={(event) => {
+          const current = caseStudiesRef.current;
+          if (current && !current.contains(event.relatedTarget as Node)) {
+            closeAll();
+          }
+        }}
+      >
         <CaseStudiesTrigger
           type='button'
-          onClick={handleCaseTriggerClick}
+          onClick={openCaseStudies}
           aria-haspopup='true'
           aria-expanded={isCaseStudiesOpen}>
           Case Studies
@@ -87,6 +119,8 @@ const LinkBoxContent = () => {
           </CaseStudiesChevron>
         </CaseStudiesTrigger>
         <CaseStudiesDropdown
+          onMouseEnter={openCaseStudies}
+          onMouseLeave={scheduleCloseAll}
           $isOpen={isCaseStudiesOpen}
           aria-hidden={!isCaseStudiesOpen}>
           {CASE_STUDIES_LINKS.map(({ href, label, icon, iconAlt }) => (
@@ -97,12 +131,23 @@ const LinkBoxContent = () => {
               </Link>
             </li>
           ))}
-        </CaseStudiesDropdown>
+          </CaseStudiesDropdown>
       </CaseStudiesDesktopWrapper>
-      <CaseStudiesDesktopWrapper ref={projectsRef}>
+      <CaseStudiesDesktopWrapper
+        ref={projectsRef}
+        onMouseEnter={openProjects}
+        onMouseLeave={scheduleCloseAll}
+        onFocus={openProjects}
+        onBlur={(event) => {
+          const current = projectsRef.current;
+          if (current && !current.contains(event.relatedTarget as Node)) {
+            closeAll();
+          }
+        }}
+      >
         <CaseStudiesTrigger
           type='button'
-          onClick={handleProjectsTriggerClick}
+          onClick={openProjects}
           aria-haspopup='true'
           aria-expanded={isProjectsOpen}>
           Projects
@@ -113,6 +158,8 @@ const LinkBoxContent = () => {
           </CaseStudiesChevron>
         </CaseStudiesTrigger>
         <CaseStudiesDropdown
+          onMouseEnter={openProjects}
+          onMouseLeave={scheduleCloseAll}
           $isOpen={isProjectsOpen}
           aria-hidden={!isProjectsOpen}>
           {PROJECT_LINKS.map(({ href, label, icon, iconAlt }) => (
@@ -123,12 +170,23 @@ const LinkBoxContent = () => {
               </Link>
             </li>
           ))}
-        </CaseStudiesDropdown>
+          </CaseStudiesDropdown>
       </CaseStudiesDesktopWrapper>
-      <CaseStudiesDesktopWrapper ref={contactRef}>
+      <CaseStudiesDesktopWrapper
+        ref={contactRef}
+        onMouseEnter={openContact}
+        onMouseLeave={scheduleCloseAll}
+        onFocus={openContact}
+        onBlur={(event) => {
+          const current = contactRef.current;
+          if (current && !current.contains(event.relatedTarget as Node)) {
+            closeAll();
+          }
+        }}
+      >
         <CaseStudiesTrigger
           type='button'
-          onClick={handleContactTriggerClick}
+          onClick={openContact}
           aria-haspopup='true'
           aria-expanded={isContactOpen}>
           Contact
@@ -139,6 +197,8 @@ const LinkBoxContent = () => {
           </CaseStudiesChevron>
         </CaseStudiesTrigger>
         <CaseStudiesDropdown
+          onMouseEnter={openContact}
+          onMouseLeave={scheduleCloseAll}
           $isOpen={isContactOpen}
           aria-hidden={!isContactOpen}>
           {CONTACT_LINKS.map(({ href, label }) => (
