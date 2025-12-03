@@ -14,7 +14,19 @@ import { useState, useRef, useEffect, memo, useCallback } from 'react';
 import FsLightbox from 'fslightbox-react';
 
 import { TopNavContent, GridContent, FooterContent, AnimatedHeadline } from '.';
-import { SectionHeader, Wrapper, WorkSectionHeader, HomeTabsBar, HomeTabButton, HomeTabsSpacer, IntroSection } from '../../styles';
+import {
+  SectionHeader,
+  Wrapper,
+  WorkSectionHeader,
+  HomeTabsBar,
+  HomeTabButton,
+  HomeTabsSpacer,
+  IntroSection,
+  WorksParallaxStage,
+  WorksRevealCurtain,
+  WorksFixedIllustration,
+  WorksSectionContent
+} from '../../styles';
 
 type SectionKey = 'ux' | 'ui';
 type ActiveSection = SectionKey | null;
@@ -380,31 +392,45 @@ const MainContent = () => {
           </div>
         </IntroSection>
 
-        <div ref={uxContentRef}>
-          <SectionHeader ref={uxSectionRef} id='ux-design'>
-            {/* Projects I{"'"}ve <CommandLine>#managed</CommandLine> */}
-            <WorkSectionHeader>UX Design</WorkSectionHeader>
-          </SectionHeader>
+        <WorksParallaxStage>
+          <WorksRevealCurtain aria-hidden="true" />
 
-          <GridContent
-            worksDataReversed={worksDataReversed}
-            onThumbClick={onThumbClick}
-            isManagedWork
-          />
-        </div>
+          <WorksFixedIllustration aria-hidden="true">
+            <img
+              src="/img/illustrated-mt-hood-selfie.webp"
+              alt=""
+              loading="lazy"
+            />
+          </WorksFixedIllustration>
 
-        <br />
-        <div ref={uiContentRef}>
-          <SectionHeader ref={uiSectionRef} id='ui-engineering'>
-            {/* Projects I{"'"}ve <CommandLine>$built</CommandLine> */}
-            <WorkSectionHeader>UI Engineering</WorkSectionHeader>
-          </SectionHeader>
+          <WorksSectionContent>
+            <div ref={uxContentRef}>
+              <SectionHeader ref={uxSectionRef} id='ux-design'>
+                {/* Projects I{"'"}ve <CommandLine>#managed</CommandLine> */}
+                <WorkSectionHeader>UX Design</WorkSectionHeader>
+              </SectionHeader>
 
-          <GridContent
-            worksDataReversed={worksDataReversed}
-            onThumbClick={onThumbClick}
-          />
-        </div>
+              <GridContent
+                worksDataReversed={worksDataReversed}
+                onThumbClick={onThumbClick}
+                isManagedWork
+              />
+            </div>
+
+            <br />
+            <div ref={uiContentRef}>
+              <SectionHeader ref={uiSectionRef} id='ui-engineering'>
+                {/* Projects I{"'"}ve <CommandLine>$built</CommandLine> */}
+                <WorkSectionHeader>UI Engineering</WorkSectionHeader>
+              </SectionHeader>
+
+              <GridContent
+                worksDataReversed={worksDataReversed}
+                onThumbClick={onThumbClick}
+              />
+            </div>
+          </WorksSectionContent>
+        </WorksParallaxStage>
 
         {imgs && <FsLightbox
           toggler={lightboxController.toggler}

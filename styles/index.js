@@ -2466,3 +2466,85 @@ export const IntroSection = styled.div`
     }
   }
 `;
+
+export const WorksParallaxStage = styled.section`
+  position: relative;
+  isolation: isolate;
+  margin: clamp(1em, 2.8vw, 2em) 0 0;
+  background: ${THEME.colors.dark};
+`;
+
+export const WorksRevealCurtain = styled.div`
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--color-dark-rgb), 1) 0%,
+    rgba(var(--color-dark-rgb), 0.98) 42%,
+    rgba(var(--color-dark-rgb), 0.92) 100%
+  );
+  box-shadow: inset 0 -24px 64px rgba(0, 0, 0, 0.55);
+
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+    height: 82vh;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    height: 70vh;
+  }
+`;
+
+export const WorksFixedIllustration = styled.div`
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.95;
+  transform: translateZ(0);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.02);
+    filter: saturate(1.05) contrast(1.03);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(var(--color-dark-rgb), 0.35) 0%,
+      rgba(var(--color-dark-rgb), 0.7) 100%
+    );
+  }
+`;
+
+export const WorksSectionContent = styled.div`
+  position: relative;
+  z-index: 2;
+  background: rgba(var(--color-dark-rgb), 0.97);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 -18px 50px rgba(0, 0, 0, 0.4);
+  margin-top: -45vh;
+  padding-top: clamp(2em, 5vw, 3.5em);
+
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+    margin-top: -28vh;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    margin-top: -18vh;
+  }
+
+  @supports not (backdrop-filter: blur(2px)) {
+    background: ${THEME.colors.dark};
+  }
+`;
