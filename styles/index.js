@@ -2505,6 +2505,14 @@ export const WorksFixedIllustration = styled.div`
     filter: saturate(1.05) contrast(1.03);
   }
 
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+  }
+
 `;
 
 export const WorksSectionContent = styled.div`
