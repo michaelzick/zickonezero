@@ -23,9 +23,6 @@ import {
   FullBorderImage,
   DemoStokeContentGrid,
   DemoStokeTitle,
-  DemoStokeTwoColumnLayout,
-  DemoStokeTwoColumnRow,
-  DemoStokeTwoColumnHeader,
   DemoStokeTwoColumnCopy,
   DemoStokeTldrList,
   DemoStokeTldrSection,
@@ -133,17 +130,17 @@ const METHOD_SECTIONS = [
       'Benchmarked competitors and availability patterns to spot underserved sports and locations.',
       'Synthesized: riders will pay if trust/ease are guaranteed; shops/shapers need lightweight tools to convert demos.'
     ],
-    image: { src: '/img/demostoke/landscape-zoom-call.webp', alt: 'Female surfer carrying a board at the beach' }
+    image: { src: '/img/demostoke/zoom-call-good.webp', alt: 'Two people talking during a video call' }
   },
   {
     title: 'Empathize, Define, and Ideate With Users',
     bullets: [
-      'Ran rider and stakeholder interviews plus field observations to see friction in context.',
+      'Ran rider and shop employee interviews plus field observations to see friction in context.',
       'Framed trust-and-convenience problem statements with measurable goals for activation and conversion.',
       'Mapped discovery-to-feedback flows and prioritized must-have moments for riders and lenders.',
       'Documented trust signals and discovery levers: verification, reviews, filters, maps, and events.'
     ],
-    image: { src: '/img/demostoke/sticky-notes.webp', alt: 'Product discovery conversation between two people' }
+    image: { src: '/img/demostoke/skiiers-on-lift.webp', alt: 'Skiers riding a chairlift together' }
   },
   {
     title: 'Prototype, Test, and Refine the Product',
@@ -153,7 +150,7 @@ const METHOD_SECTIONS = [
       'Ran moderated and unmoderated walkthroughs to validate discovery, booking, and trust cues.',
       'Iterated features and UI from usability findings; tracked analytics to guide next improvements.'
     ],
-    image: { src: '/img/demostoke/landscape-laptop-map.webp', alt: 'Laptop showing a high-fidelity interface design' }
+    image: { src: '/img/demostoke/surfer-and-guy-with-phone.webp', alt: 'Surfer carrying a board while walking beside a man on his phone' }
   }
 ] as const;
 
