@@ -1348,10 +1348,12 @@ export const DemoStokeMethodCard = styled(DemoStokeTldrSection)`
 `;
 
 export const DemoStokeMethodRow = styled(DemoStokeTldrRow)`
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: center;
   gap: clamp(1.2em, 3vw, 2.2em);
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    grid-template-columns: 1fr;
     gap: 1em;
   }
 

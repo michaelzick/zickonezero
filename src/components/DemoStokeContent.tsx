@@ -123,12 +123,11 @@ const TLDR_ITEMS: {
 
 const METHOD_SECTIONS = [
   {
-    title: 'Primary and Secondary Research + Insights',
+    title: 'Primary and Secondary Research',
     bullets: [
       'Interviewed riders across surf, snow, and MTB to surface demo frustrations and trust gaps.',
       'Captured quotes about convenience, selection, and safety to anchor problem statements.',
-      'Benchmarked competitors and availability patterns to spot underserved sports and locations.',
-      'Synthesized: riders will pay if trust/ease are guaranteed; shops/shapers need lightweight tools to convert demos.'
+      'Benchmarked competitors and availability patterns to spot underserved sports and locations.'
     ],
     image: { src: '/img/demostoke/zoom-call-good.webp', alt: 'Two people talking during a video call' }
   },
@@ -137,8 +136,7 @@ const METHOD_SECTIONS = [
     bullets: [
       'Ran rider and shop employee interviews plus field observations to see friction in context.',
       'Framed trust-and-convenience problem statements with measurable goals for activation and conversion.',
-      'Mapped discovery-to-feedback flows and prioritized must-have moments for riders and lenders.',
-      'Documented trust signals and discovery levers: verification, reviews, filters, maps, and events.'
+      'Mapped discovery-to-feedback flows and prioritized must-have moments for riders and lenders.'
     ],
     image: { src: '/img/demostoke/skiiers-on-lift.webp', alt: 'Skiers riding a chairlift together' }
   },
@@ -147,8 +145,7 @@ const METHOD_SECTIONS = [
     bullets: [
       'Used Lovable AI to generate hi-fi pages quickly, then refined with prompt engineering.',
       'Layered custom frontend polish and Supabase to demo discovery, admin, and AI integrations.',
-      'Ran moderated and unmoderated walkthroughs to validate discovery, booking, and trust cues.',
-      'Iterated features and UI from usability findings; tracked analytics to guide next improvements.'
+      'Ran moderated and unmoderated walkthroughs to validate discovery, booking, and trust cues.'
     ],
     image: { src: '/img/demostoke/surfer-and-guy-with-phone.webp', alt: 'Surfer carrying a board while walking beside a man on his phone' }
   }
@@ -469,7 +466,7 @@ const DemoStokeContent = () => {
                                 aria-label={`${title} details`}
                                 $isOpen={isOpen}
                               >
-                              <DemoStokeAccordionCopy>
+                                <DemoStokeAccordionCopy>
                                   <ul className='plain-lines'>
                                     {bullets.map((bullet) => (
                                       <li key={bullet}>{bullet}</li>
