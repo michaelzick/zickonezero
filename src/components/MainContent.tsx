@@ -393,8 +393,6 @@ const MainContent = () => {
         </IntroSection>
 
         <WorksParallaxStage>
-          <WorksRevealCurtain aria-hidden="true" />
-
           <WorksFixedIllustration aria-hidden="true">
             <img
               src="/img/illustrated-mt-hood-selfie.webp"
@@ -402,6 +400,8 @@ const MainContent = () => {
               loading="lazy"
             />
           </WorksFixedIllustration>
+
+          <WorksRevealCurtain aria-hidden="true" />
 
           <WorksSectionContent>
             <div ref={uxContentRef}>
