@@ -2494,7 +2494,6 @@ export const WorksFixedIllustration = styled.div`
   z-index: 1;
   pointer-events: none;
   overflow: hidden;
-  opacity: 0.95;
   transform: translateZ(0);
 
   img {
@@ -2506,16 +2505,6 @@ export const WorksFixedIllustration = styled.div`
     filter: saturate(1.05) contrast(1.03);
   }
 
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(var(--color-dark-rgb), 0.35) 0%,
-      rgba(var(--color-dark-rgb), 0.7) 100%
-    );
-  }
 `;
 
 export const WorksSectionContent = styled.div`
