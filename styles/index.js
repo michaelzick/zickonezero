@@ -2478,22 +2478,11 @@ export const WorksRevealCurtain = styled.div`
   position: relative;
   z-index: 2;
   height: clamp(50vh, 58vw, 65vh);
-  background: linear-gradient(
-    180deg,
-    rgba(var(--color-dark-rgb), 0.98) 0%,
-    rgba(var(--color-dark-rgb), 0.9) 42%,
-    rgba(var(--color-dark-rgb), 0.72) 64%,
-    rgba(var(--color-dark-rgb), 0.4) 82%,
-    rgba(var(--color-dark-rgb), 0) 100%
-  );
-  box-shadow: inset 0 -24px 64px rgba(0, 0, 0, 0.55);
+  background: ${THEME.colors.dark};
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    height: 70vh;
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    height: 60vh;
+    display: none;
+    height: 0;
   }
 `;
 
@@ -2532,9 +2521,7 @@ export const WorksFixedIllustration = styled.div`
 export const WorksSectionContent = styled.div`
   position: relative;
   z-index: 2;
-  background: rgba(var(--color-dark-rgb), 0.97);
-  backdrop-filter: blur(2px);
-  box-shadow: 0 -18px 50px rgba(0, 0, 0, 0.4);
+  background: ${THEME.colors.dark};
   margin-top: -60vh;
   padding-top: clamp(2em, 5vw, 3.5em);
 
@@ -2544,9 +2531,5 @@ export const WorksSectionContent = styled.div`
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     margin-top: -28vh;
-  }
-
-  @supports not (backdrop-filter: blur(2px)) {
-    background: ${THEME.colors.dark};
   }
 `;
