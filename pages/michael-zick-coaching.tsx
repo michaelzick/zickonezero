@@ -6,9 +6,9 @@ const MichaelZickCoachingPage = () => (
     summary='A coaching hub that pairs clarity of services with a confident, energetic visual system.'
     heroImage={{ src: '/img/squares/mz-ppc-logo.webp', alt: 'Michael Zick Coaching logo' }}
     roleBullets={[
-      'Brand identity',
-      'Visual design',
-      'Scheduling instrumentation'
+      'Branding, text, and design',
+      'UX and product strategy',
+      'Technical implementation',
     ]}
     projectLink={{ href: 'https://www.michaelzick.com/', label: 'www.michaelzick.com' }}
     sections={[
@@ -23,21 +23,22 @@ const MichaelZickCoachingPage = () => (
         image: { src: '/img/projects/michael-zick-coaching/mzc-home.webp', alt: 'Coaching homepage with clear offers and CTA' }
       },
       {
-        title: 'Booking that respects momentum',
+        title: 'Presenting value and building momentum',
         body: (
           <>
-            The Program card pairs outcomes with a simple “Book a Free Session” CTA, reinforcing value and making the next step frictionless.
-            Meanwhile, gracefully-animated tabs let visitors explore offerings without losing context.
+            Prospects see the three-step journey (identifying beliefs, working through feelings, taking conscious action),
+            presenting a high-level view of what to expect. Tabs on the right keep them oriented while the CTA stays present,
+            turning understanding into bookings.
           </>
         ),
-        image: { src: '/img/projects/michael-zick-coaching/mzc-process.webp', alt: 'Program booking journey with CTA' }
+        image: { src: '/img/projects/michael-zick-coaching/mzc-process.webp', alt: 'Process overview cards with navigation and a booking CTA' }
       },
       {
-        title: 'Always-on storytelling',
+        title: 'Past wins build trust',
         body: (
           <>
             Testimonials and proof points are woven into the page, highlighting past client wins and credibility signals to build
-            trust before the booking step. Social proof stays close to CTAs to lift conversion.
+            trust before the booking step. Social proof lifts conversion with strong images and engaging stories.
           </>
         ),
         image: { src: '/img/projects/michael-zick-coaching/mzc-testimonial.webp', alt: 'Testimonials and social proof layout' }
@@ -47,7 +48,7 @@ const MichaelZickCoachingPage = () => (
         body: (
           <>
             The mobile flow mirrors the desktop journey, value props, and testimonials, so visitors can scan and book from
-            their phone with ease. Analytics track visitors, page views, and device types.
+            their phone with ease. Analytics track visitors, page views, and devices.
           </>
         ),
         image: {
