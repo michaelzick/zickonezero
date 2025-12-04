@@ -30,7 +30,7 @@ const MichaelZickCoachingPage = () => (
             Meanwhile, gracefully-animated tabs let visitors explore offerings without losing context.
           </>
         ),
-        image: { src: '/img/projects/michael-zick-coaching/mzc-program.webp', alt: 'Program overview and booking call-to-action' }
+        image: { src: '/img/projects/michael-zick-coaching/mzc-process.webp', alt: 'Program booking journey with CTA' }
       },
       {
         title: 'Always-on storytelling',
