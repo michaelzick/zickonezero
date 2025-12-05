@@ -2540,7 +2540,7 @@ export const WorksRevealCurtain = styled.div`
 
 export const WorksFixedIllustration = styled.div`
   position: sticky;
-  top: 0;
+  top: 5.1em;
   height: 100vh;
   width: 100%;
   z-index: 1;
@@ -2568,11 +2568,16 @@ export const WorksFixedIllustration = styled.div`
     z-index: 1;
   }
 
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    top: 5em;
+  }
+
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     height: clamp(78vh, 120vw, 96vh);
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
+    top: 8.5em;
     height: auto;
     min-height: 72vh;
   }
