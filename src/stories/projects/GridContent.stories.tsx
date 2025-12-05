@@ -20,8 +20,10 @@ export default {
   },
 } as Meta<typeof GridContent>;
 
+type GridContentStoryProps = Omit<React.ComponentProps<typeof GridContent>, "onThumbClick">;
+
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof GridContent> = (args) => (
+const Template: StoryFn<typeof GridContent> = (args: GridContentStoryProps) => (
   <GridContent {...args} onThumbClick={onThumbClick} />
 );
 

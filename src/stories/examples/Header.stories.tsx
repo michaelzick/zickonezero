@@ -12,7 +12,7 @@ export default {
   },
 } as Meta<typeof Header>;
 
-const Template: StoryFn<typeof Header> = (args) => <Header {...args} />;
+const Template: StoryFn<typeof Header> = (args: React.ComponentProps<typeof Header>) => <Header {...args} />;
 
 export const LoggedIn = Template.bind({});
 LoggedIn.args = {

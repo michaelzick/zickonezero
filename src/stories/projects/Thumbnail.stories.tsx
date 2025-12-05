@@ -5,7 +5,9 @@ import { StoryFn, Meta } from "@storybook/react";
 import { Thumbnail } from "../../components";
 import { string } from "prop-types";
 
-const ThumbnailWrapper = (args: any) => {
+type ThumbnailStoryProps = Omit<React.ComponentProps<typeof Thumbnail>, "onThumbClick">;
+
+const ThumbnailWrapper = (args: ThumbnailStoryProps) => {
   const [lightboxController, setLightboxController] = useState({
     toggler: false,
     productIndex: 0,
@@ -49,7 +51,7 @@ export default {
 } as Meta<typeof Thumbnail>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn<typeof Thumbnail> = (args) => (
+const Template: StoryFn<typeof Thumbnail> = (args: ThumbnailStoryProps) => (
   <ThumbnailWrapper {...args} />
 );
 
