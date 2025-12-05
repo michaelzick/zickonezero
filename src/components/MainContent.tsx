@@ -49,7 +49,7 @@ const MainContent = () => {
   // Parallax refs and state
   const introTextRef = useRef<HTMLDivElement | null>(null);
   const introImageRef = useRef<HTMLDivElement | null>(null);
-  const [parallaxOffset, setParallaxOffset] = useState({ text: -60, image: -40 });
+  const [parallaxOffset, setParallaxOffset] = useState({ text: 5, image: -20 });
   const neonCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
   // For lightbox
@@ -154,10 +154,10 @@ const MainContent = () => {
       const scrollY = window.scrollY;
 
       // Simple parallax calculation based on scroll position
-      // Text starts at -60px and moves slower (positive direction, slower than scroll)
-      const textOffset = -60 + (scrollY * 0.2); // Start higher, then move 20% of scroll speed
-      // Image moves in opposite direction (slower)
-      const imageOffset = -40 + (scrollY * -0.05); // Image starts higher, then glides slightly upward
+      // Text starts near baseline and glides down slightly with scroll
+      const textOffset = 5 + (scrollY * 0.1);
+      // Image lifts a touch for depth without losing the baseline alignment
+      const imageOffset = -20 + (scrollY * -0.035);
 
       setParallaxOffset({ text: textOffset, image: imageOffset });
     };

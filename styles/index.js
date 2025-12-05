@@ -2348,14 +2348,14 @@ export const DemoStokeTabsBar = styled.div`
 `;
 export const IntroSection = styled.div`
   display: flex;
-  align-items: stretch;
+  align-items: flex-end;
   justify-content: space-between;
   padding: clamp(2.6em, 6vw, 4.6em) clamp(1.6em, 5vw, 3.4em);
   max-width: 100em;
   margin: 0 auto;
   gap: clamp(2.5em, 6vw, 5.25em);
   overflow: hidden; /* Prevent parallax elements from creating horizontal scroll */
-  min-height: clamp(24em, 52vw, 36em);
+  min-height: clamp(64vh, 80vh, 88vh);
 
   .intro-text {
     flex: 1;
@@ -2364,12 +2364,12 @@ export const IntroSection = styled.div`
     will-change: transform; /* Optimize for transforms */
     transition: transform 0.1s ease-out; /* Smooth parallax movement */
     order: 2;
-    align-self: flex-start;
-    padding-bottom: clamp(0.25em, 3vw, 1.5em);
-    padding-top: clamp(0.25em, 2.5vw, 1.4em);
+    align-self: stretch;
+    padding-bottom: clamp(1em, 3vw, 2.6em);
+    padding-top: clamp(0.1em, 1.5vw, 1.1em);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: flex-end;
     gap: clamp(0.7em, 2vw, 1.35em);
 
     h2 {
@@ -2420,7 +2420,7 @@ export const IntroSection = styled.div`
     transition: transform 0.1s ease-out; /* Smooth parallax movement */
     position: relative;
     order: 1;
-    align-self: flex-start;
+    align-self: flex-end;
 
     img {
       width: 100%;
@@ -2445,6 +2445,7 @@ export const IntroSection = styled.div`
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-start;
     gap: 2.5em;
     padding: 2em 1.5em;
     min-height: auto;
@@ -2457,6 +2458,8 @@ export const IntroSection = styled.div`
       padding-bottom: 0;
       padding-top: 0;
       gap: 0.8em;
+      justify-content: flex-start;
+      align-self: stretch;
 
       h2 {
         font-size: 3.1em;
