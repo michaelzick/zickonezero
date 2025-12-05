@@ -181,10 +181,14 @@ const MainContent = () => {
       const progressRaw = (window.scrollY + window.innerHeight - stageTop) / (stageHeight + window.innerHeight);
       const progress = Math.min(1, Math.max(0, progressRaw));
 
-      const startOffset = 60;
+      const startOffset = 100;
       const endOffset = -35;
       const translateY = startOffset + (endOffset - startOffset) * progress;
-      const opacity = 0.55 + (0.45 * progress);
+      const viewportHeight = window.innerHeight || 1;
+      const visibleHeight = Math.min(stageRect.bottom, viewportHeight) - Math.max(stageRect.top, 0);
+      const coverage = Math.min(1, Math.max(0, visibleHeight / viewportHeight));
+      const fadeStart = 0.9;
+      const opacity = coverage <= fadeStart ? 0 : Math.min(1, (coverage - fadeStart) / (1 - fadeStart));
 
       bubble.style.transform = `translateY(${translateY}px)`;
       bubble.style.opacity = `${opacity}`;

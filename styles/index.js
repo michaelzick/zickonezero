@@ -2550,13 +2550,13 @@ export const WorksFixedIllustration = styled.div`
 
   .speech-bubble {
     position: absolute;
-    right: clamp(4.2em, 9vw, 11em);
-    bottom: clamp(28vh, 34vh, 42vh);
-    width: min(18.5em, 40vw);
-    max-width: min(24em, 46vw);
+    right: clamp(0.2em, 20vw, 17em);
+    bottom: clamp(88vh, 34vh, 42vh);
+    width: min(22em, 46vw);
+    max-width: min(28em, 52vw);
     z-index: 3;
     transform: translateY(60px);
-    opacity: 0.85;
+    opacity: 0;
     pointer-events: none;
 
     img {
@@ -2595,7 +2595,7 @@ export const WorksFixedIllustration = styled.div`
       left: clamp(1.5em, 8vw, 3.2em);
       bottom: clamp(18vh, 24vh, 32vh);
       width: auto;
-      max-width: clamp(18em, 78vw, 32em);
+      max-width: clamp(22em, 82vw, 36em);
       transform: translateY(36px);
     }
   }
