@@ -12,7 +12,7 @@ export default {
   },
 } as Meta<typeof Page>;
 
-const Template: StoryFn<typeof Page> = (args) => <Page {...args} />;
+const Template: StoryFn<typeof Page> = (args: React.ComponentProps<typeof Page>) => <Page {...args} />;
 
 export const LoggedOut = Template.bind({});
 
