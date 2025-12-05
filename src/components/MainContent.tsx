@@ -187,7 +187,7 @@ const MainContent = () => {
       const viewportHeight = window.innerHeight || 1;
       const visibleHeight = Math.min(stageRect.bottom, viewportHeight) - Math.max(stageRect.top, 0);
       const coverage = Math.min(1, Math.max(0, visibleHeight / viewportHeight));
-      const fadeStart = 0.9;
+      const fadeStart = 0.82;
       const opacity = coverage <= fadeStart ? 0 : Math.min(1, (coverage - fadeStart) / (1 - fadeStart));
 
       bubble.style.transform = `translateY(${translateY}px)`;
