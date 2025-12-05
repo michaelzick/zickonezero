@@ -2548,29 +2548,22 @@ export const WorksFixedIllustration = styled.div`
   overflow: hidden;
   transform: translateZ(0);
 
-  .works-image-copy {
+  .speech-bubble {
     position: absolute;
-    bottom: clamp(1.5em, 6vw, 4.5em);
-    left: clamp(1.25em, 7vw, 5.5em);
-    max-width: min(42em, 72vw);
-    background: rgba(var(--color-dark-rgb), 0.68);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    padding: clamp(1.25em, 3vw, 2.5em);
-    color: ${THEME.colors.white};
-    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(10px);
-    line-height: 1.6;
-    font-size: clamp(1.05em, 1.25vw, 1.25em);
-    z-index: 2;
-    pointer-events: auto;
+    right: clamp(4.2em, 9vw, 11em);
+    bottom: clamp(28vh, 34vh, 42vh);
+    width: min(18.5em, 40vw);
+    max-width: min(24em, 46vw);
+    z-index: 3;
+    transform: translateY(60px);
+    opacity: 0.85;
+    pointer-events: none;
 
-    p {
-      margin: 0 0 0.9em 0;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.28));
     }
   }
 
@@ -2597,13 +2590,13 @@ export const WorksFixedIllustration = styled.div`
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     height: clamp(78vh, 120vw, 96vh);
 
-    .works-image-copy {
-      left: clamp(1em, 6vw, 2.5em);
-      right: clamp(1em, 6vw, 2.5em);
-      bottom: clamp(1em, 7vw, 3em);
-      max-width: none;
-      background: rgba(var(--color-dark-rgb), 0.82);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    .speech-bubble {
+      right: clamp(1.5em, 8vw, 3.2em);
+      left: clamp(1.5em, 8vw, 3.2em);
+      bottom: clamp(18vh, 24vh, 32vh);
+      width: auto;
+      max-width: clamp(18em, 78vw, 32em);
+      transform: translateY(36px);
     }
   }
 
@@ -2611,10 +2604,11 @@ export const WorksFixedIllustration = styled.div`
     height: auto;
     min-height: 72vh;
 
-    .works-image-copy {
-      font-size: 1em;
-      padding: 1.2em;
-      bottom: clamp(0.75em, 5vw, 2em);
+    .speech-bubble {
+      right: clamp(1em, 8vw, 2.4em);
+      left: clamp(1em, 8vw, 2.4em);
+      bottom: clamp(16vh, 24vh, 30vh);
+      transform: translateY(28px);
     }
   }
 `;

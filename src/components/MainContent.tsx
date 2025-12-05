@@ -43,6 +43,8 @@ const MainContent = () => {
   const uiSectionRef = useRef<HTMLHeadingElement | null>(null);
   const uxContentRef = useRef<HTMLDivElement | null>(null);
   const uiContentRef = useRef<HTMLDivElement | null>(null);
+  const worksStageRef = useRef<HTMLElement | null>(null);
+  const speechBubbleRef = useRef<HTMLDivElement | null>(null);
   const [activeSection, setActiveSection] = useState<ActiveSection>(null);
   const isManualScrolling = useRef(false);
 
@@ -164,6 +166,38 @@ const MainContent = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Speech bubble parallax in the works illustration
+  useEffect(() => {
+    const bubble = speechBubbleRef.current;
+    const stage = worksStageRef.current;
+    if (!bubble || !stage) return;
+
+    const updateBubble = () => {
+      const stageRect = stage.getBoundingClientRect();
+      const stageTop = stageRect.top + window.scrollY;
+      const stageHeight = stageRect.height || stage.offsetHeight || window.innerHeight;
+      const progressRaw = (window.scrollY + window.innerHeight - stageTop) / (stageHeight + window.innerHeight);
+      const progress = Math.min(1, Math.max(0, progressRaw));
+
+      const startOffset = 60;
+      const endOffset = -35;
+      const translateY = startOffset + (endOffset - startOffset) * progress;
+      const opacity = 0.55 + (0.45 * progress);
+
+      bubble.style.transform = `translateY(${translateY}px)`;
+      bubble.style.opacity = `${opacity}`;
+    };
+
+    const onScroll = () => requestAnimationFrame(updateBubble);
+    updateBubble();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', updateBubble);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', updateBubble);
+    };
   }, []);
 
   // Neon trail effect on the intro image
@@ -385,13 +419,20 @@ const MainContent = () => {
           </div>
         </IntroSection>
 
-        <WorksParallaxStage>
+        <WorksParallaxStage ref={worksStageRef}>
           <WorksFixedIllustration>
             <img
               src="/img/illustrated-mt-hood-selfie.webp"
               alt="Illustrated self-portrait near Mt. Hood"
               loading="lazy"
             />
+            <div className="speech-bubble" ref={speechBubbleRef}>
+              <img
+                src="/img/speech-bubble.webp"
+                alt="YEW! Keep scrolling for work samples..."
+                loading="lazy"
+              />
+            </div>
           </WorksFixedIllustration>
 
           <WorksRevealCurtain aria-hidden="true" />
