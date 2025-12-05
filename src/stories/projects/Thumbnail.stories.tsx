@@ -3,7 +3,6 @@ import FsLightbox from "fslightbox-react";
 import { StoryFn, Meta } from "@storybook/react";
 
 import { Thumbnail } from "../../components";
-import { string } from "prop-types";
 
 type ThumbnailStoryProps = Omit<React.ComponentProps<typeof Thumbnail>, "onThumbClick">;
 
@@ -40,13 +39,12 @@ export default {
   component: Thumbnail,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    thumb: string,
-    imgs: Array,
-    desc: string,
-    header: string,
-    group: string,
-    index: Number,
-    onThumbClick: Function,
+    thumb: { control: "text" },
+    imgs: { control: "object" },
+    desc: { control: "text" },
+    header: { control: "text" },
+    group: { control: "text" },
+    index: { control: "number" },
   },
 } as Meta<typeof Thumbnail>;
 

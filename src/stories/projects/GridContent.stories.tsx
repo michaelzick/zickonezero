@@ -15,8 +15,8 @@ export default {
   component: GridContent,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    worksDataReversed: Array<string>,
-    onThumbClick: Function,
+    worksDataReversed: { control: "object" },
+    onThumbClick: { action: "clicked" },
   },
 } as Meta<typeof GridContent>;
 
