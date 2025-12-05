@@ -180,7 +180,7 @@ export const AnimatedHeadlinePhrase = styled.span`
   width: 100%;
   min-height: 1.25em;
   line-height: 1.25;
-  color: ${THEME.colors.white};
+  color: ${THEME.colors.hotRed};
   transform: translateY(100%);
   opacity: 0;
   animation: ${phraseCycle} 16s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
