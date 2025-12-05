@@ -2548,25 +2548,6 @@ export const WorksFixedIllustration = styled.div`
   overflow: hidden;
   transform: translateZ(0);
 
-  .speech-bubble {
-    position: absolute;
-    right: clamp(0.2em, 20vw, 17em);
-    bottom: clamp(88vh, 34vh, 42vh);
-    width: min(22em, 46vw);
-    max-width: min(28em, 52vw);
-    z-index: 3;
-    transform: translateY(60px);
-    opacity: 0;
-    pointer-events: none;
-
-    img {
-      display: block;
-      width: 100%;
-      height: auto;
-      filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.28));
-    }
-  }
-
   img {
     position: absolute;
     inset: 0;
@@ -2589,27 +2570,11 @@ export const WorksFixedIllustration = styled.div`
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     height: clamp(78vh, 120vw, 96vh);
-
-    .speech-bubble {
-      right: clamp(1.5em, 8vw, 3.2em);
-      left: clamp(1.5em, 8vw, 3.2em);
-      bottom: clamp(18vh, 24vh, 32vh);
-      width: auto;
-      max-width: clamp(22em, 82vw, 36em);
-      transform: translateY(36px);
-    }
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     height: auto;
     min-height: 72vh;
-
-    .speech-bubble {
-      right: clamp(1em, 8vw, 2.4em);
-      left: clamp(1em, 8vw, 2.4em);
-      bottom: clamp(16vh, 24vh, 30vh);
-      transform: translateY(28px);
-    }
   }
 `;
 
