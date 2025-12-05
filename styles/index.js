@@ -2323,7 +2323,7 @@ export const HomeTabsSpacer = styled.div`
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     display: block;
-    height: 4.2em;
+    height: 2.2em;
   }
 `;
 
