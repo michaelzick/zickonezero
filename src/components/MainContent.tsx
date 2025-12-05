@@ -364,7 +364,7 @@ const MainContent = () => {
           <div
             className="intro-image"
             ref={introImageRef}
-            style={{ transform: `translateY(${parallaxOffset.image}px)` }}
+            style={{ transform: `translateY(${parallaxOffset.image - 20}px)` }}
           >
             <img
               src="/img/lifeguard-tower-transparent.webp"
