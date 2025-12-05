@@ -2348,28 +2348,35 @@ export const DemoStokeTabsBar = styled.div`
 `;
 export const IntroSection = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 3em 2em;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: clamp(2.6em, 6vw, 4.6em) clamp(1.6em, 5vw, 3.4em);
   max-width: 100em;
   margin: 0 auto;
-  gap: 4em;
+  gap: clamp(2.5em, 6vw, 5.25em);
   overflow: hidden; /* Prevent parallax elements from creating horizontal scroll */
+  min-height: clamp(24em, 52vw, 36em);
 
   .intro-text {
     flex: 1;
-    max-width: 35em;
+    max-width: 32em;
     text-align: left;
     will-change: transform; /* Optimize for transforms */
     transition: transform 0.1s ease-out; /* Smooth parallax movement */
+    order: 2;
+    align-self: flex-end;
+    padding-bottom: clamp(0.5em, 7vw, 3.5em);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 
     h2 {
       color: ${THEME.colors.white};
       font-family: Roboto, sans-serif;
-      font-size: 3.2em;
+      font-size: 3.3em;
       font-weight: 600;
-      margin: 0 0 1em 0;
-      line-height: 1.2;
+      margin: 0;
+      line-height: 1.15;
       text-align: left;
     }
 
@@ -2389,10 +2396,12 @@ export const IntroSection = styled.div`
 
   .intro-image {
     flex: 1;
-    max-width: 35em;
+    max-width: 38em;
     will-change: transform; /* Optimize for transforms */
     transition: transform 0.1s ease-out; /* Smooth parallax movement */
     position: relative;
+    order: 1;
+    align-self: flex-start;
 
     img {
       width: 100%;
@@ -2416,13 +2425,17 @@ export const IntroSection = styled.div`
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     flex-direction: column;
+    align-items: flex-start;
     gap: 2.5em;
     padding: 2em 1.5em;
+    min-height: auto;
 
     .intro-text {
       max-width: none;
       text-align: left;
       transform: none !important; /* Disable parallax on tablets and mobile */
+      order: 2;
+      padding-bottom: 0;
 
       h2 {
         font-size: 2.8em;
@@ -2441,8 +2454,10 @@ export const IntroSection = styled.div`
     }
 
     .intro-image {
-      max-width: 30em;
+      max-width: 34em;
       transform: none !important; /* Disable parallax on tablets and mobile */
+      order: 1;
+      align-self: center;
     }
   }
 
@@ -2492,11 +2507,39 @@ export const WorksFixedIllustration = styled.div`
   height: 100vh;
   width: 100%;
   z-index: 1;
-  pointer-events: none;
+  pointer-events: auto;
   overflow: hidden;
   transform: translateZ(0);
 
+  .works-image-copy {
+    position: absolute;
+    bottom: clamp(1.5em, 6vw, 4.5em);
+    left: clamp(1.25em, 7vw, 5.5em);
+    max-width: min(42em, 72vw);
+    background: rgba(var(--color-dark-rgb), 0.68);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: clamp(1.25em, 3vw, 2.5em);
+    color: ${THEME.colors.white};
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+    line-height: 1.6;
+    font-size: clamp(1.05em, 1.25vw, 1.25em);
+    z-index: 2;
+    pointer-events: auto;
+
+    p {
+      margin: 0 0 0.9em 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
   img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -2509,10 +2552,34 @@ export const WorksFixedIllustration = styled.div`
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.2);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.35) 55%, rgba(0, 0, 0, 0.5) 100%);
     pointer-events: none;
+    z-index: 1;
   }
 
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+    height: clamp(78vh, 120vw, 96vh);
+
+    .works-image-copy {
+      left: clamp(1em, 6vw, 2.5em);
+      right: clamp(1em, 6vw, 2.5em);
+      bottom: clamp(1em, 7vw, 3em);
+      max-width: none;
+      background: rgba(var(--color-dark-rgb), 0.82);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    height: auto;
+    min-height: 72vh;
+
+    .works-image-copy {
+      font-size: 1em;
+      padding: 1.2em;
+      bottom: clamp(0.75em, 5vw, 2em);
+    }
+  }
 `;
 
 export const WorksSectionContent = styled.div`
@@ -2523,10 +2590,10 @@ export const WorksSectionContent = styled.div`
   padding-top: clamp(2em, 5vw, 3.5em);
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    margin-top: -40vh;
+    margin-top: -24vh;
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    margin-top: -28vh;
+    margin-top: -12vh;
   }
 `;

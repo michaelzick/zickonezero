@@ -363,22 +363,6 @@ const MainContent = () => {
 
         <IntroSection className="intro-section">
           <div
-            className="intro-text"
-            ref={introTextRef}
-            style={{ transform: `translateY(${parallaxOffset.text}px)` }}
-          >
-            <h2>Michael Zick is ZICKONEZERO Creative.</h2>
-            <p>
-              Starting out as a frontend developer for digital agencies, Michael began crafting user experiences across a wide range of industries.
-              After spending many years as a React and then full-stack Node developer, Michael realized he has a passion for UX design, where he&apos;s
-              currently focusing his attention.
-            </p>
-            <p>
-              From UX designs to rapid prototypes, to production-ready apps, Michael&apos;s range of experience and AI fluency can bring any project to
-              life in record time.
-            </p>
-          </div>
-          <div
             className="intro-image"
             ref={introImageRef}
             style={{ transform: `translateY(${parallaxOffset.image}px)` }}
@@ -390,15 +374,33 @@ const MainContent = () => {
             />
             <canvas ref={neonCanvasRef} className="neon-trail" aria-hidden="true" />
           </div>
+          <div
+            className="intro-text"
+            ref={introTextRef}
+            style={{ transform: `translateY(${parallaxOffset.text}px)` }}
+          >
+            <h2>Michael Zick is ZICKONEZERO Creative.</h2>
+          </div>
         </IntroSection>
 
         <WorksParallaxStage>
-          <WorksFixedIllustration aria-hidden="true">
+          <WorksFixedIllustration>
             <img
               src="/img/illustrated-mt-hood-selfie.webp"
-              alt=""
+              alt="Illustrated self-portrait near Mt. Hood"
               loading="lazy"
             />
+            <div className="works-image-copy">
+              <p>
+                Starting out as a frontend developer for digital agencies, Michael began crafting user experiences across a wide range of
+                industries. After spending many years as a React and then full-stack Node developer, Michael realized he has a passion for UX
+                design, where he&apos;s currently focusing his attention.
+              </p>
+              <p>
+                From UX designs to rapid prototypes, to production-ready apps, Michael&apos;s range of experience and AI fluency can bring any
+                project to life in record time.
+              </p>
+            </div>
           </WorksFixedIllustration>
 
           <WorksRevealCurtain aria-hidden="true" />
