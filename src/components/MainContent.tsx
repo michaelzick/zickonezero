@@ -196,7 +196,7 @@ const MainContent = () => {
     let rafId = 0;
     let dpr = 1;
     let isHovering = false;
-    let lastPos: { x: number; y: number } | null = null;
+    let lastPos: { x: number; y: number; } | null = null;
     let currentHue = pickNeonHue();
 
     const setSize = () => {
@@ -392,17 +392,6 @@ const MainContent = () => {
               alt="Illustrated self-portrait near Mt. Hood"
               loading="lazy"
             />
-            <div className="works-image-copy">
-              <p>
-                Starting out as a frontend developer for digital agencies, Michael began crafting user experiences across a wide range of
-                industries. After spending many years as a React and then full-stack Node developer, Michael realized he has a passion for UX
-                design, where he&apos;s currently focusing his attention.
-              </p>
-              <p>
-                From UX designs to rapid prototypes, to production-ready apps, Michael&apos;s range of experience and AI fluency can bring any
-                project to life in record time.
-              </p>
-            </div>
           </WorksFixedIllustration>
 
           <WorksRevealCurtain aria-hidden="true" />
