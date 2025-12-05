@@ -9,7 +9,7 @@ import {
 
 const HEADLINE_PHRASES = [
   'UX Design',
-  'Prototyping',
+  'UX Research',
   'Product Leadership',
   'Web Development'
 ] as const;
@@ -29,9 +29,9 @@ const AnimatedHeadline = ({ className }: AnimatedHeadlineProps) => {
     <AnimatedHeadlineWrapper
       className={className}
       role="text"
-      aria-label="Michael enjoys UX Design, Prototyping, Product Leadership, Web Development"
+      aria-label="I Do: UX Design, UX Research, Product Leadership, Web Development"
     >
-      {/* <AnimatedHeadlineStatic>Michael enjoys</AnimatedHeadlineStatic> */}
+      <AnimatedHeadlineStatic>I Do:</AnimatedHeadlineStatic>
       <AnimatedHeadlineDynamic aria-hidden="true">
         <AnimatedHeadlineSizer aria-hidden="true">{LONGEST_PHRASE}</AnimatedHeadlineSizer>
         <AnimatedHeadlineTrack>
