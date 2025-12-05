@@ -2540,7 +2540,7 @@ export const WorksRevealCurtain = styled.div`
 
 export const WorksFixedIllustration = styled.div`
   position: sticky;
-  top: 5.1em;
+  top: 4.9em;
   height: 100vh;
   width: 100%;
   z-index: 1;
@@ -2566,10 +2566,6 @@ export const WorksFixedIllustration = styled.div`
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.35) 55%, rgba(0, 0, 0, 0.5) 100%);
     pointer-events: none;
     z-index: 1;
-  }
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    top: 5em;
   }
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
