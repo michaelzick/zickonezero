@@ -359,7 +359,6 @@ const MainContent = () => {
         </HomeTabsBar>
 
         <HomeTabsSpacer aria-hidden='true' />
-        <AnimatedHeadline />
 
         <IntroSection className="intro-section">
           <div
@@ -379,7 +378,10 @@ const MainContent = () => {
             ref={introTextRef}
             style={{ transform: `translateY(${parallaxOffset.text}px)` }}
           >
-            <h2>Michael Zick is ZICKONEZERO Creative.</h2>
+            <h2>
+              Michael Zick is <span className="hotword">ZICKONEZERO Creative</span>.
+            </h2>
+            <AnimatedHeadline className="intro-rotator-headline" />
           </div>
         </IntroSection>
 

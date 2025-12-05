@@ -180,7 +180,7 @@ export const AnimatedHeadlinePhrase = styled.span`
   width: 100%;
   min-height: 1.25em;
   line-height: 1.25;
-  color: ${THEME.colors.hotRed};
+  color: ${THEME.colors.white};
   transform: translateY(100%);
   opacity: 0;
   animation: ${phraseCycle} 16s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
@@ -2359,24 +2359,26 @@ export const IntroSection = styled.div`
 
   .intro-text {
     flex: 1;
-    max-width: 32em;
+    max-width: 34em;
     text-align: left;
     will-change: transform; /* Optimize for transforms */
     transition: transform 0.1s ease-out; /* Smooth parallax movement */
     order: 2;
-    align-self: flex-end;
-    padding-bottom: clamp(0.5em, 7vw, 3.5em);
+    align-self: flex-start;
+    padding-bottom: clamp(0.25em, 3vw, 1.5em);
+    padding-top: clamp(0.25em, 2.5vw, 1.4em);
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    gap: clamp(0.7em, 2vw, 1.35em);
 
     h2 {
       color: ${THEME.colors.white};
       font-family: Roboto, sans-serif;
-      font-size: 3.3em;
+      font-size: clamp(3.4em, 6vw, 4.8em);
       font-weight: 600;
       margin: 0;
-      line-height: 1.15;
+      line-height: 1.08;
       text-align: left;
     }
 
@@ -2391,6 +2393,23 @@ export const IntroSection = styled.div`
       &:last-child {
         margin-bottom: 0;
       }
+    }
+
+    .hotword {
+      color: ${THEME.colors.hotRed};
+    }
+
+    .intro-rotator-headline {
+      border-top: 2px dotted ${THEME.colors.grey};
+      padding-top: clamp(0.55em, 1.8vw, 0.9em);
+      margin: clamp(0.2em, 1vw, 0.5em) 0 0;
+      max-width: none;
+      width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+      color: ${THEME.colors.white};
+      gap: 0.3em;
+      font-size: clamp(1.9rem, 3.6vw, 3rem);
     }
   }
 
@@ -2436,9 +2455,11 @@ export const IntroSection = styled.div`
       transform: none !important; /* Disable parallax on tablets and mobile */
       order: 2;
       padding-bottom: 0;
+      padding-top: 0;
+      gap: 0.8em;
 
       h2 {
-        font-size: 2.8em;
+        font-size: 3.1em;
         text-align: left;
       }
 
@@ -2450,6 +2471,13 @@ export const IntroSection = styled.div`
         &:last-child {
           margin-bottom: 0;
         }
+      }
+
+      .intro-rotator-headline {
+        border-top: 2px dotted ${THEME.colors.grey};
+        padding-top: 0.7em;
+        margin-top: 0.4em;
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
       }
     }
 
@@ -2467,7 +2495,7 @@ export const IntroSection = styled.div`
 
     .intro-text {
       h2 {
-        font-size: 2.2em;
+        font-size: 2.6em;
       }
 
       p {
@@ -2477,6 +2505,12 @@ export const IntroSection = styled.div`
         &:last-child {
           margin-bottom: 0;
         }
+      }
+
+      .intro-rotator-headline {
+        font-size: clamp(1.6rem, 5vw, 2.2rem);
+        padding-top: 0.6em;
+        margin-top: 0.35em;
       }
     }
   }

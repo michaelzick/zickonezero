@@ -20,9 +20,14 @@ const LONGEST_PHRASE = HEADLINE_PHRASES.reduce((longest, phrase) =>
 
 const PHRASE_DURATION_MS = 4000;
 
-const AnimatedHeadline = () => {
+type AnimatedHeadlineProps = {
+  className?: string;
+};
+
+const AnimatedHeadline = ({ className }: AnimatedHeadlineProps) => {
   return (
     <AnimatedHeadlineWrapper
+      className={className}
       role="text"
       aria-label="Michael enjoys UX Design, Prototyping, Product Leadership, Web Development"
     >
