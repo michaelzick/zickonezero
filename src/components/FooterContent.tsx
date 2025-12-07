@@ -54,7 +54,8 @@ const FooterContent = (): ReactElement => (
     </FooterInner>
 
     <FooterBottom>
-      Site designed and built by Michael Zick using React, Next.js, and Redux Toolkit.
+      <span>Site designed and built by Michael Zick using React, Next.js, and Redux Toolkit.</span>
+      <span>© 2025 ZICKONEZERO Creative</span>
     </FooterBottom>
   </Footer>
 );

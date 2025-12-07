@@ -1105,12 +1105,22 @@ export const FooterColumnLinks = styled.ul`
 `;
 
 export const FooterBottom = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5em;
   font-size: 0.85em;
   color: ${THEME.colors.grey};
   padding-top: 1em;
   border-top: 1px solid ${THEME.colors.white};
   width: 100%;
-  text-align: left;
+
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75em;
+  }
 `;
 
 export const DemoStokeTitle = styled.h2`
