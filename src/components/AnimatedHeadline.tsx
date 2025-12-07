@@ -19,7 +19,7 @@ const LONGEST_PHRASE = HEADLINE_PHRASES.reduce((longest, phrase) =>
   phrase.length > longest.length ? phrase : longest
   , HEADLINE_PHRASES[0]);
 
-const PHRASE_DURATION_MS = 4000;
+const PHRASE_DURATION_MS = 3000;
 
 type AnimatedHeadlineProps = {
   className?: string;
