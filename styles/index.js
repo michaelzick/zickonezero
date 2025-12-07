@@ -1113,7 +1113,6 @@ export const FooterBottom = styled.div`
   font-size: 0.85em;
   color: ${THEME.colors.grey};
   padding-top: 1em;
-  border-top: 1px solid ${THEME.colors.white};
   width: 100%;
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
