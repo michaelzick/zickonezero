@@ -7,13 +7,13 @@ export const PageShell = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: clamp(0.8em, 2.6vw, 1.4em) clamp(0.9em, 2.8vw, 2em) clamp(1.6em, 3.6vw, 2.8em);
+  padding: clamp(0.8em, 2.6vw, 1.4em) clamp(0.9em, 2.8vw, 2em) clamp(3.5em, 7vw, 6em);
   color: ${THEME.colors.white};
   font-size: 25px;
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     font-size: 18px;
-    padding: clamp(0.55em, 3.8vw, 0.9em);
+    padding: clamp(0.55em, 3.8vw, 0.9em) clamp(0.55em, 3.8vw, 0.9em) clamp(3.5em, 7vw, 6em);
     margin-top: 2em;
   }
 `;
