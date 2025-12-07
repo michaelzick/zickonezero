@@ -35,7 +35,7 @@ const AnimatedHeadline = ({ className }: AnimatedHeadlineProps) => {
       <AnimatedHeadlineStatic>
         I{' '}
         <span style={{ position: 'relative', display: 'inline-block' }}>
-          Fuck
+          Freak
           <Image
             src="/img/white-scribble.webp"
             alt=""
