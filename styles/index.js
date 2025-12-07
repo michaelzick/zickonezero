@@ -126,25 +126,25 @@ export const AnimatedHeadlineWrapper = styled.h1`
   gap: 0.35em;
   max-width: 100em;
   width: 100%;
-  margin: 0 auto clamp(0.82em, 2.25vw, 1.7em);
+  margin: 0 auto 1em;
   padding: 0 0.5em;
   color: ${THEME.colors.white};
   font-family: Roboto, sans-serif;
-  font-size: clamp(2.4rem, 5.8vw, 4.4rem);
+  font-size: 1.8em;
   font-weight: 500;
   line-height: 1.1;
   text-align: left;
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    font-size: clamp(2.6rem, 6.2vw, 3.8rem);
-    margin: 0 auto clamp(0.68em, 3.4vw, 1.43em);
+    font-size: 1.5em;
+    margin: 0 auto 0.9em;
     padding: 0 0.5em;
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    font-size: clamp(2.1rem, 7vw, 3.1rem);
+    font-size: 1.2em;
     gap: 0.25em;
-    margin: 0 auto 0.9em;
+    margin: 0 auto 0.8em;
     padding: 0 0.5em;
   }
 `;
@@ -2407,7 +2407,7 @@ export const IntroSection = styled.div`
       padding-right: 0;
       color: ${THEME.colors.white};
       gap: 0.3em;
-      font-size: clamp(1.9rem, 3.6vw, 3rem);
+      font-size: 2.8em;
     }
   }
 

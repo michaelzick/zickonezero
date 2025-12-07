@@ -35,7 +35,7 @@ const AnimatedHeadline = ({ className }: AnimatedHeadlineProps) => {
       <AnimatedHeadlineStatic>
         I{' '}
         <span style={{ position: 'relative', display: 'inline-block' }}>
-          Freak
+          funk
           <Image
             src="/img/white-scribble.webp"
             alt=""
@@ -69,7 +69,7 @@ const AnimatedHeadline = ({ className }: AnimatedHeadlineProps) => {
             aria-hidden="true"
           />
         </span>
-        :
+        with:
       </AnimatedHeadlineStatic>
       <AnimatedHeadlineDynamic aria-hidden="true">
         <AnimatedHeadlineSizer aria-hidden="true">{LONGEST_PHRASE}</AnimatedHeadlineSizer>
