@@ -10,9 +10,9 @@ import {
 
 const HEADLINE_PHRASES = [
   'UX Design',
-  'UX Research',
-  'Product Leadership',
-  'Web Development'
+  'UX Engineering',
+  'Product Mgmt.',
+  'Analytics'
 ] as const;
 
 const LONGEST_PHRASE = HEADLINE_PHRASES.reduce((longest, phrase) =>

@@ -122,7 +122,7 @@ export const WorkSectionHeader = styled.span`
 export const AnimatedHeadlineWrapper = styled.h1`
   display: flex;
   align-items: baseline;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.35em;
   max-width: 100em;
   width: 100%;
