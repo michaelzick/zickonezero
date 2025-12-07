@@ -859,6 +859,7 @@ export const BioBox = styled.div`
           cursor: pointer;
           border: 1.5px solid ${THEME.colors.white};
           border-radius: 16px;
+          box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
           transition: border-color 0.2s ease;
 
           &:hover {
