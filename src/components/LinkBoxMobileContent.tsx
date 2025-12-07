@@ -73,7 +73,7 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
             setIsContactOpen(false);
           }}
           aria-expanded={isProjectsOpen}>
-          Projects
+          UX Design
           <CaseStudiesChevron $isOpen={isProjectsOpen} aria-hidden='true'>
             <svg viewBox="0 0 24 24" role="presentation" focusable="false">
               <path d="m6 9 6 6 6-6" />

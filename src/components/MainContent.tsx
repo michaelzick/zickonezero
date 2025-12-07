@@ -399,7 +399,6 @@ const MainContent = () => {
           <WorksSectionContent>
             <div ref={uxContentRef}>
               <SectionHeader ref={uxSectionRef} id='ux-design'>
-                {/* Projects I{"'"}ve <CommandLine>#managed</CommandLine> */}
                 <WorkSectionHeader>UX Design</WorkSectionHeader>
               </SectionHeader>
 
@@ -413,7 +412,6 @@ const MainContent = () => {
             <br />
             <div ref={uiContentRef}>
               <SectionHeader ref={uiSectionRef} id='ui-engineering'>
-                {/* Projects I{"'"}ve <CommandLine>$built</CommandLine> */}
                 <WorkSectionHeader>UI Engineering</WorkSectionHeader>
               </SectionHeader>
 
