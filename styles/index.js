@@ -350,7 +350,7 @@ export const GridContainer = styled.div`
 export const Image = styled.img`
   width: 100%;
   border-radius: 20px;
-  border: 1px solid ${THEME.colors.white};
+  border: 1.5px solid ${THEME.colors.white};
 `;
 
 export const FullBorderImage = styled(Image)`
@@ -857,8 +857,9 @@ export const BioBox = styled.div`
 
         &.antisyphon-image {
           cursor: pointer;
-          border: 4px solid transparent;
-          transition: border 0.3s ease;
+          border: 1.5px solid ${THEME.colors.white};
+          border-radius: 16px;
+          transition: border-color 0.2s ease;
 
           &:hover {
             border-color: ${THEME.colors.hotRed};
@@ -1323,7 +1324,7 @@ export const DemoStokeTldrImage = styled.img`
   height: auto;
   max-width: 100%;
   border-radius: 16px;
-  border: 1px solid ${THEME.colors.grey};
+  border: 1.5px solid ${THEME.colors.grey};
   object-fit: contain;
   box-shadow: 0 12px 28px -16px rgb(0 0 0 / 60%);
   display: block;
@@ -2086,7 +2087,7 @@ export const Video = styled.video`
 `;
 
 export const VideoFrame = styled.div`
-  border: 1px solid ${THEME.colors.white};
+  border: 1.5px solid ${THEME.colors.white};
   border-radius: 20px;
   overflow: hidden;
 `;
