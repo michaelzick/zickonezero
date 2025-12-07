@@ -23,15 +23,15 @@ export const PageInner = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: clamp(0em, 5vw, 4em);
+  gap: clamp(3.5em, 7vw, 6em);
   text-align: left;
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    gap: clamp(0em, 6vw, 4em);
+    gap: clamp(3.5em, 7vw, 6em);
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    gap: clamp(2.3em, 6vw, 4em);
+    gap: clamp(3.5em, 7vw, 6em);
   }
 `;
 

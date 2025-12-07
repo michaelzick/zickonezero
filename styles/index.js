@@ -1338,7 +1338,7 @@ export const DemoStokeTldrList = styled.div`
 export const DemoStokeMethodList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: clamp(2.5em, 5vw, 4em);
+  gap: clamp(3.5em, 7vw, 6em);
 `;
 
 export const DemoStokeMethodCard = styled.div`
