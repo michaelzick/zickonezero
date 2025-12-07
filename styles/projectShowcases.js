@@ -162,9 +162,18 @@ export const ShowcaseImage = styled(DemoStokeTldrImage)`
   ${props => props.$position && `object-position: ${props.$position};`}
   cursor: pointer;
   border: 4px solid transparent;
+  box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
+  width: calc(100% + 1.5em);
+  max-width: none;
+  margin: -0.75em;
 
   &:hover {
     border-color: ${THEME.colors.hotRed};
+  }
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    width: 100%;
+    margin: 0;
   }
 `;
 

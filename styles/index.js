@@ -1338,13 +1338,11 @@ export const DemoStokeTldrList = styled.div`
 export const DemoStokeMethodList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: clamp(1.05em, 2.2vw, 1.5em);
+  gap: clamp(2.5em, 5vw, 4em);
 `;
 
-export const DemoStokeMethodCard = styled(DemoStokeTldrSection)`
-  border: none;
-  background: rgba(37, 99, 235, 0.08);
-  box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
+export const DemoStokeMethodCard = styled.div`
+  width: 100%;
 `;
 
 export const DemoStokeMethodRow = styled(DemoStokeTldrRow)`
