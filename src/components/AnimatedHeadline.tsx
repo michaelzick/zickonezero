@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import {
   AnimatedHeadlineWrapper,
   AnimatedHeadlineStatic,
@@ -29,9 +30,47 @@ const AnimatedHeadline = ({ className }: AnimatedHeadlineProps) => {
     <AnimatedHeadlineWrapper
       className={className}
       role="text"
-      aria-label="I Do: UX Design, UX Research, Product Leadership, Web Development"
+      aria-label="I ****: UX Design, UX Research, Product Leadership, Web Development"
     >
-      <AnimatedHeadlineStatic>I Do:</AnimatedHeadlineStatic>
+      <AnimatedHeadlineStatic>
+        I{' '}
+        <span style={{ position: 'relative', display: 'inline-block' }}>
+          Fuck
+          <Image
+            src="/img/white-scribble.webp"
+            alt=""
+            width={100}
+            height={82}
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '120%',
+              height: 'auto',
+              pointerEvents: 'none',
+            }}
+            aria-hidden="true"
+          />
+          <Image
+            src="/img/white-scribble.webp"
+            alt=""
+            width={100}
+            height={82}
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%) scaleX(-1)',
+              width: '120%',
+              height: 'auto',
+              pointerEvents: 'none',
+            }}
+            aria-hidden="true"
+          />
+        </span>
+        :
+      </AnimatedHeadlineStatic>
       <AnimatedHeadlineDynamic aria-hidden="true">
         <AnimatedHeadlineSizer aria-hidden="true">{LONGEST_PHRASE}</AnimatedHeadlineSizer>
         <AnimatedHeadlineTrack>
