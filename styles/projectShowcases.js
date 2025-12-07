@@ -161,7 +161,7 @@ export const SectionTitle = styled(DemoStokeTldrTitle)`
 export const ShowcaseImage = styled(DemoStokeTldrImage)`
   ${props => props.$position && `object-position: ${props.$position};`}
   cursor: pointer;
-  border: 4px solid transparent;
+  border: 1.5px solid ${THEME.colors.white};
   box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
   width: calc(100% + 1.5em);
   max-width: none;
