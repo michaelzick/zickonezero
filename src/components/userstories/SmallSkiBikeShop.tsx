@@ -13,13 +13,16 @@ import {
   DemoStokeStoryHero,
   DemoStokeHeroAbstractLayout,
 } from '../../../styles';
+import { AnimatedSection } from '../../../styles/projectShowcases';
 import HelpsCarousel from './HelpsCarousel';
 
 type StoryProps = {
   wrapWithBioBox?: boolean;
+  setAnimatedSectionRef?: (id: string) => (el: HTMLDivElement | null) => void;
+  visibleSections?: Record<string, boolean>;
 };
 
-const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
+const SmallSkiBikeShop = ({ wrapWithBioBox = true, setAnimatedSectionRef, visibleSections }: StoryProps) => {
   const DSLink = <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>DemoStoke</WhiteTransitionAnchor>;
 
   const renderTable = (
@@ -38,6 +41,12 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
       </DemoStokeTwoColumnLayout>
     );
   };
+
+  const getAnimateProps = (id: string) => ({
+    ref: setAnimatedSectionRef ? setAnimatedSectionRef(id) : undefined,
+    'data-animate-id': id,
+    className: visibleSections ? (visibleSections[id] ? 'visible' : undefined) : 'visible'
+  });
 
   const painPoints = [
     {
@@ -95,32 +104,39 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true }: StoryProps) => {
 
   const content = (
     <div>
-      <section id='story-small-ski-shop' className='story-section'>
-        <DemoStokeTitle $noMobileTopPad>The Small Ski &amp; Bike Shop</DemoStokeTitle>
-        <DemoStokeHeroAbstractLayout>
-          <DemoStokeStoryHero
-            src='/img/demostoke/pop-art-mtb-man-woman.webp'
-            alt='Mountain bike rental counter'
-            loading='lazy'
-          />
+      <AnimatedSection {...getAnimateProps('story-small-ski-shop')}>
+        <section id='story-small-ski-shop' className='story-section'>
+          <DemoStokeTitle $noMobileTopPad>The Small Ski &amp; Bike Shop</DemoStokeTitle>
+          <DemoStokeHeroAbstractLayout>
+            <DemoStokeStoryHero
+              className='image-animate'
+              src='/img/demostoke/pop-art-mtb-man-woman.webp'
+              alt='Mountain bike rental counter'
+              loading='lazy'
+            />
 
-          <DemoStokeTldrSection $borderless>
-            <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
-            <DemoStokeTldrCopy>
-              For Jason, the owner of <strong>Town &amp; Country Outfitters</strong>, a high-end ski and bike shop in a mountain town, {DSLink} offered a way to modernize without losing what made his shop personal and trusted. DemoStoke solved his toughest problems around demo logistics, digital visibility, and customer trust.
-            </DemoStokeTldrCopy>
-          </DemoStokeTldrSection>
-        </DemoStokeHeroAbstractLayout>
-      </section>
+            <DemoStokeTldrSection className='text-animate' $borderless>
+              <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
+              <DemoStokeTldrCopy>
+                For Jason, the owner of <strong>Town &amp; Country Outfitters</strong>, a high-end ski and bike shop in a mountain town, {DSLink} offered a way to modernize without losing what made his shop personal and trusted. DemoStoke solved his toughest problems around demo logistics, digital visibility, and customer trust.
+              </DemoStokeTldrCopy>
+            </DemoStokeTldrSection>
+          </DemoStokeHeroAbstractLayout>
+        </section>
+      </AnimatedSection>
 
-      <section className='story-section'>
-        <h3>Current Pain Points</h3>
-        {renderTable(painPoints)}
-      </section>
+      <AnimatedSection {...getAnimateProps('story-small-ski-shop-pain')}>
+        <section className='story-section'>
+          <h3>Current Pain Points</h3>
+          {renderTable(painPoints)}
+        </section>
+      </AnimatedSection>
 
-      <section className='story-section'>
-        <HelpsCarousel items={howHelps} title='How DemoStoke Helps' />
-      </section>
+      <AnimatedSection {...getAnimateProps('story-small-ski-shop-helps')}>
+        <section className='story-section'>
+          <HelpsCarousel items={howHelps} title='How DemoStoke Helps' />
+        </section>
+      </AnimatedSection>
     </div>
   );
 

@@ -16,13 +16,16 @@ import {
   DemoStokeStoryHero,
   DemoStokeHeroAbstractLayout,
 } from '../../../styles';
+import { AnimatedSection } from '../../../styles/projectShowcases';
 import HelpsCarousel from './HelpsCarousel';
 
 type StoryProps = {
   wrapWithBioBox?: boolean;
+  setAnimatedSectionRef?: (id: string) => (el: HTMLDivElement | null) => void;
+  visibleSections?: Record<string, boolean>;
 };
 
-const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
+const IndieShaper = ({ wrapWithBioBox = true, setAnimatedSectionRef, visibleSections }: StoryProps) => {
   const DSLink = <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>DemoStoke</WhiteTransitionAnchor>;
 
   const renderTable = (
@@ -41,6 +44,12 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
       </DemoStokeTwoColumnLayout>
     );
   };
+
+  const getAnimateProps = (id: string) => ({
+    ref: setAnimatedSectionRef ? setAnimatedSectionRef(id) : undefined,
+    'data-animate-id': id,
+    className: visibleSections ? (visibleSections[id] ? 'visible' : undefined) : 'visible'
+  });
 
   const painPoints = [
     {
@@ -94,44 +103,53 @@ const IndieShaper = ({ wrapWithBioBox = true }: StoryProps) => {
 
   const content = (
     <div>
-      <section id='story-introduction' aria-hidden='true'>
-        <FlexBox>
-          <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
-          <div>
-            <h2 className='tab-header page-header'>User Stories</h2>
-            <PitchDeckLink href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
-              DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
-            </PitchDeckLink>
-          </div>
-        </FlexBox>
-      </section>
+      <AnimatedSection {...getAnimateProps('story-introduction')}>
+        <section id='story-introduction' aria-hidden='true'>
+          <FlexBox>
+            <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
+            <div>
+              <h2 className='tab-header page-header'>User Stories</h2>
+              <PitchDeckLink href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
+                DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
+              </PitchDeckLink>
+            </div>
+          </FlexBox>
+        </section>
+      </AnimatedSection>
 
-      <section id='story-independent-surfboard-shaper-title' className='story-section'>
-        <DemoStokeTitle $noMobileTopPad>The Independent Surfboard Shaper</DemoStokeTitle>
-        <DemoStokeHeroAbstractLayout>
-          <DemoStokeStoryHero
-            src='/img/demostoke/pop-art-shaper.webp'
-            alt='Independent surfboard shaper with demo boards'
-            loading='lazy'
-          />
+      <AnimatedSection {...getAnimateProps('story-independent-surfboard-shaper-title')}>
+        <section id='story-independent-surfboard-shaper-title' className='story-section'>
+          <DemoStokeTitle $noMobileTopPad>The Independent Surfboard Shaper</DemoStokeTitle>
+          <DemoStokeHeroAbstractLayout>
+            <DemoStokeStoryHero
+              className='image-animate'
+              src='/img/demostoke/pop-art-shaper.webp'
+              alt='Independent surfboard shaper with demo boards'
+              loading='lazy'
+            />
 
-          <DemoStokeTldrSection $borderless>
-            <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
-            <DemoStokeTldrCopy>
-              From the lens of Curtis, an independent Southern California surfboard shaper, {DSLink} had the potential to radically simplify and expand his business by addressing key pain points around demo logistics, discovery, trust, and conversion.
-            </DemoStokeTldrCopy>
-          </DemoStokeTldrSection>
-        </DemoStokeHeroAbstractLayout>
-      </section>
+            <DemoStokeTldrSection className='text-animate' $borderless>
+              <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
+              <DemoStokeTldrCopy>
+                From the lens of Curtis, an independent Southern California surfboard shaper, {DSLink} had the potential to radically simplify and expand his business by addressing key pain points around demo logistics, discovery, trust, and conversion.
+              </DemoStokeTldrCopy>
+            </DemoStokeTldrSection>
+          </DemoStokeHeroAbstractLayout>
+        </section>
+      </AnimatedSection>
 
-      <section className='story-section'>
-        <h3>Current Pain Points</h3>
-        {renderTable(painPoints)}
-      </section>
+      <AnimatedSection {...getAnimateProps('story-independent-surfboard-shaper-pain')}>
+        <section className='story-section'>
+          <h3>Current Pain Points</h3>
+          {renderTable(painPoints)}
+        </section>
+      </AnimatedSection>
 
-      <section className='story-section'>
-        <HelpsCarousel items={howHelps} title='How DemoStoke Helps' />
-      </section>
+      <AnimatedSection {...getAnimateProps('story-independent-surfboard-shaper-helps')}>
+        <section className='story-section'>
+          <HelpsCarousel items={howHelps} title='How DemoStoke Helps' />
+        </section>
+      </AnimatedSection>
     </div>
   );
 

@@ -13,13 +13,16 @@ import {
   DemoStokeStoryHero,
   DemoStokeHeroAbstractLayout,
 } from '../../../styles';
+import { AnimatedSection } from '../../../styles/projectShowcases';
 import HelpsCarousel from './HelpsCarousel';
 
 type StoryProps = {
   wrapWithBioBox?: boolean;
+  setAnimatedSectionRef?: (id: string) => (el: HTMLDivElement | null) => void;
+  visibleSections?: Record<string, boolean>;
 };
 
-const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
+const WeekendWarrior = ({ wrapWithBioBox = true, setAnimatedSectionRef, visibleSections }: StoryProps) => {
   const DSLink = <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>DemoStoke</WhiteTransitionAnchor>;
 
   const renderTable = (
@@ -38,6 +41,12 @@ const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
       </DemoStokeTwoColumnLayout>
     );
   };
+
+  const getAnimateProps = (id: string) => ({
+    ref: setAnimatedSectionRef ? setAnimatedSectionRef(id) : undefined,
+    'data-animate-id': id,
+    className: visibleSections ? (visibleSections[id] ? 'visible' : undefined) : 'visible'
+  });
 
   const painPoints = [
     {
@@ -95,32 +104,39 @@ const WeekendWarrior = ({ wrapWithBioBox = true }: StoryProps) => {
 
   const content = (
     <div>
-      <section id='story-weekend-warrior' className='story-section'>
-        <DemoStokeTitle $noMobileTopPad>The Weekend Warrior</DemoStokeTitle>
-        <DemoStokeHeroAbstractLayout>
-          <DemoStokeStoryHero
-            src='/img/demostoke/pop-art-snowboarder.webp'
-            alt='Snowboarder carrying her board'
-            loading='lazy'
-          />
+      <AnimatedSection {...getAnimateProps('story-weekend-warrior')}>
+        <section id='story-weekend-warrior' className='story-section'>
+          <DemoStokeTitle $noMobileTopPad>The Weekend Warrior</DemoStokeTitle>
+          <DemoStokeHeroAbstractLayout>
+            <DemoStokeStoryHero
+              className='image-animate'
+              src='/img/demostoke/pop-art-snowboarder.webp'
+              alt='Snowboarder carrying her board'
+              loading='lazy'
+            />
 
-          <DemoStokeTldrSection $borderless>
-            <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
-            <DemoStokeTldrCopy>
-              Krista is a snowboarder who valued speed and precision, and wouldn’t buy a new board without riding it first. Her frustrations with traditional demo events opened the door for {DSLink} as a more flexible, trustworthy, and convenient solution.
-            </DemoStokeTldrCopy>
-          </DemoStokeTldrSection>
-        </DemoStokeHeroAbstractLayout>
-      </section>
+            <DemoStokeTldrSection className='text-animate' $borderless>
+              <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
+              <DemoStokeTldrCopy>
+                Krista is a snowboarder who valued speed and precision, and wouldn’t buy a new board without riding it first. Her frustrations with traditional demo events opened the door for {DSLink} as a more flexible, trustworthy, and convenient solution.
+              </DemoStokeTldrCopy>
+            </DemoStokeTldrSection>
+          </DemoStokeHeroAbstractLayout>
+        </section>
+      </AnimatedSection>
 
-      <section className='story-section'>
-        <h3>Current Pain Points</h3>
-        {renderTable(painPoints)}
-      </section>
+      <AnimatedSection {...getAnimateProps('story-weekend-warrior-pain')}>
+        <section className='story-section'>
+          <h3>Current Pain Points</h3>
+          {renderTable(painPoints)}
+        </section>
+      </AnimatedSection>
 
-      <section className='story-section'>
-        <HelpsCarousel items={howHelps} title='How DemoStoke Helps' />
-      </section>
+      <AnimatedSection {...getAnimateProps('story-weekend-warrior-helps')}>
+        <section className='story-section'>
+          <HelpsCarousel items={howHelps} title='How DemoStoke Helps' />
+        </section>
+      </AnimatedSection>
     </div>
   );
 

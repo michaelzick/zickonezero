@@ -699,19 +699,31 @@ const DemoStokeContent = () => {
                 <DemoStokeContentGrid>
                   <div>
                     <section id='story-independent-shaper'>
-                      <UserStories.IndieShaper wrapWithBioBox={false} />
+                      <UserStories.IndieShaper
+                        wrapWithBioBox={false}
+                        setAnimatedSectionRef={setAnimatedSectionRef}
+                        visibleSections={visibleSections}
+                      />
                     </section>
 
                     <br />
 
                     <section id='story-weekend-warrior'>
-                      <UserStories.WeekendWarrior wrapWithBioBox={false} />
+                      <UserStories.WeekendWarrior
+                        wrapWithBioBox={false}
+                        setAnimatedSectionRef={setAnimatedSectionRef}
+                        visibleSections={visibleSections}
+                      />
                     </section>
 
                     <br />
 
                     <section id='story-small-ski-shop'>
-                      <UserStories.SmallSkiBikeShop wrapWithBioBox={false} />
+                      <UserStories.SmallSkiBikeShop
+                        wrapWithBioBox={false}
+                        setAnimatedSectionRef={setAnimatedSectionRef}
+                        visibleSections={visibleSections}
+                      />
                     </section>
                     <br />
                     <br />
