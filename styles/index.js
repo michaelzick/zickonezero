@@ -976,7 +976,7 @@ export const AntisyphonColumnsWrapper = styled.div`
 
 export const AntisyphonColumnsInner = styled.div`
   width: 100%;
-  max-width: 58em;
+  max-width: 62em;
 `;
 
 export const AntisyphonHeader = styled(FlexBox)`
