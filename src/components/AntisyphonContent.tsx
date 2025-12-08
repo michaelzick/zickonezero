@@ -71,7 +71,8 @@ const AntisyphonContent = () => {
       <TopNavContent />
       <Wrapper isMobileMenuShown={isMobileMenuShown} isAtPage={true}
         onClick={() => dispatch(showMobileMenu(false))}>
-        <SidebarSectionTabsMobile
+        <h1 style={{ textAlign: 'center', marginTop: '3em' }}>Antisyphon Training Case Study Coming Soon!</h1>
+        {/* <SidebarSectionTabsMobile
           sections={ANTISYPHON_SECTIONS}
           topTabsEl={topTabsEl}
           isActive={true}
@@ -265,7 +266,7 @@ const AntisyphonContent = () => {
               />
             </DemoStokeContentGrid>
           </AntisyphonColumnsInner>
-        </AntisyphonColumnsWrapper>
+        </AntisyphonColumnsWrapper> */}
       </Wrapper>
       <FooterContent />
 
