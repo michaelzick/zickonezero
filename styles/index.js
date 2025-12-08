@@ -852,7 +852,7 @@ export const BioBox = styled.div`
           cursor: pointer;
           border: 1.5px solid ${THEME.colors.white};
           border-radius: ${THEME.radii.md};
-          box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
+          box-shadow: 0 30px 38px -30px rgb(0 0 0 / 75%);
           transition: border-color 0.2s ease;
 
           &:hover {
@@ -1362,7 +1362,7 @@ export const DemoStokeTldrImage = styled.img`
   border-radius: ${THEME.radii.md};
   border: 1.5px solid ${THEME.colors.grey};
   object-fit: contain;
-  box-shadow: 0 12px 28px -16px rgb(0 0 0 / 60%);
+  box-shadow: 0 30px 38px -30px rgb(0 0 0 / 75%);
   display: block;
 `;
 
