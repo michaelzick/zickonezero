@@ -54,6 +54,7 @@ const MainContent = () => {
   const neonCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const introAnimatedRef = useRef<HTMLDivElement | null>(null);
   const [introVisible, setIntroVisible] = useState(false);
+  const [showWorksIllustration, setShowWorksIllustration] = useState(false);
 
   // For lightbox
   const [lightboxController, setLightboxController] = useState({
@@ -185,6 +186,12 @@ const MainContent = () => {
 
     observer.observe(node);
     return () => observer.disconnect();
+  }, []);
+
+  // Delay mounting the Works illustration to avoid alt-text flashing on hard refresh
+  useEffect(() => {
+    const rafId = requestAnimationFrame(() => setShowWorksIllustration(true));
+    return () => cancelAnimationFrame(rafId);
   }, []);
 
   // Neon trail effect on the intro image
@@ -416,13 +423,15 @@ const MainContent = () => {
         </AnimatedSection>
 
         <WorksParallaxStage>
-          <WorksFixedIllustration>
-            <img
-              src="/img/illustrated-mt-hood-selfie.webp"
-              alt="Illustrated self-portrait near Mt. Hood"
-              loading="lazy"
-            />
-          </WorksFixedIllustration>
+          {showWorksIllustration && (
+            <WorksFixedIllustration>
+              <img
+                src="/img/illustrated-mt-hood-selfie.webp"
+                alt="Illustrated self-portrait near Mt. Hood"
+                loading="lazy"
+              />
+            </WorksFixedIllustration>
+          )}
 
           <WorksRevealCurtain aria-hidden="true" />
 
