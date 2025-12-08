@@ -1383,6 +1383,10 @@ export const DemoStokeMethodList = styled.div`
   display: flex;
   flex-direction: column;
   gap: clamp(3.5em, 7vw, 6em);
+
+  h3 {
+    font-size: clamp(1.15em, 2.8vw, 1.75em);
+  }
 `;
 
 export const DemoStokeMethodCard = styled.div`
