@@ -1279,10 +1279,6 @@ export const DemoStokeTldrRow = styled.div`
     min-width: 0;
   }
 
-  &:not(:first-of-type) {
-    margin-top: clamp(1.35em, 3.4vw, 2.7em);
-  }
-
   ${props => props.$reverse && `
     & > :first-child {
       order: 2;
@@ -1296,10 +1292,6 @@ export const DemoStokeTldrRow = styled.div`
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     grid-template-columns: 1fr;
     gap: 0.9em;
-
-    &:not(:first-of-type) {
-      margin-top: clamp(1em, 2.6vw, 1.6em);
-    }
 
     ${props => props.$reverse && `
       & > :first-child {
@@ -1368,7 +1360,11 @@ export const DemoStokeTldrImage = styled.img`
 export const DemoStokeTldrList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: clamp(1.35em, 3.4vw, 2.7em);
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    gap: clamp(1em, 2.6vw, 1.6em);
+  }
 `;
 
 export const DemoStokeMethodList = styled.div`
