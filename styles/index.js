@@ -820,7 +820,7 @@ export const BioBox = styled.div`
         }
 
         h3 {
-          color: ${THEME.colors.hotRed};
+          color: ${THEME.colors.orange};
         }
       }
     }
@@ -1226,7 +1226,6 @@ export const DemoStokeTwoColumnRow = styled.div`
 
 export const DemoStokeTwoColumnHeader = styled.div`
   font-weight: 700;
-  color: ${THEME.colors.orange};
   letter-spacing: 0.04em;
   text-transform: capitalize;
   font-size: clamp(1.05em, 2vw, 1.25em);

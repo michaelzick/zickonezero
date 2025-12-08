@@ -33,7 +33,7 @@ const AnimatedHeadline = ({ className }: AnimatedHeadlineProps) => {
       aria-label="I ****: UX Design, UX Research, Product Leadership, Web Development"
     >
       <AnimatedHeadlineStatic>
-        I{' '}
+        I&nbsp;
         <span style={{ position: 'relative', display: 'inline-block' }}>
           funk
           <Image
@@ -69,7 +69,7 @@ const AnimatedHeadline = ({ className }: AnimatedHeadlineProps) => {
             aria-hidden="true"
           />
         </span>
-        with:
+        &nbsp;with:
       </AnimatedHeadlineStatic>
       <AnimatedHeadlineDynamic aria-hidden="true">
         <AnimatedHeadlineSizer aria-hidden="true">{LONGEST_PHRASE}</AnimatedHeadlineSizer>

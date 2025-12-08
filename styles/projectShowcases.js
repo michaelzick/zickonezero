@@ -80,14 +80,12 @@ export const Title = styled.h1`
   font-size: clamp(2rem, 4.6vw, 3.1rem);
   letter-spacing: 0.01em;
   line-height: 1.1;
-  color: ${THEME.colors.hotRed};
 `;
 
 export const Summary = styled.p`
   margin: 0;
   clamp(1em,1.35vw,1.05em);
   line-height: inherit;
-  color: ${THEME.colors.white};
   opacity: 0.9;
 `;
 
@@ -154,7 +152,7 @@ export const SectionsBlock = styled.div`
 `;
 
 export const SectionTitle = styled(DemoStokeTldrTitle)`
-  color: ${THEME.colors.white};
+  color: ${THEME.colors.orange};
   margin-bottom: 0.35em;
 `;
 
