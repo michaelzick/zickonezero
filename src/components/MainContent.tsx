@@ -27,6 +27,7 @@ import {
   WorksFixedIllustration,
   WorksSectionContent
 } from '../../styles';
+import { AnimatedSection } from '../../styles/projectShowcases';
 
 type SectionKey = 'ux' | 'ui';
 type ActiveSection = SectionKey | null;
@@ -51,6 +52,8 @@ const MainContent = () => {
   const introImageRef = useRef<HTMLDivElement | null>(null);
   const [parallaxOffset, setParallaxOffset] = useState({ text: 5, image: -20 });
   const neonCanvasRef = useRef<HTMLCanvasElement | null>(null);
+  const introAnimatedRef = useRef<HTMLDivElement | null>(null);
+  const [introVisible, setIntroVisible] = useState(false);
 
   // For lightbox
   const [lightboxController, setLightboxController] = useState({
@@ -164,6 +167,24 @@ const MainContent = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Fade-in animation for intro hero
+  useEffect(() => {
+    const node = introAnimatedRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIntroVisible(true);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.25 });
+
+    observer.observe(node);
+    return () => observer.disconnect();
   }, []);
 
   // Neon trail effect on the intro image
@@ -360,30 +381,39 @@ const MainContent = () => {
 
         <HomeTabsSpacer aria-hidden='true' />
 
-        <IntroSection className="intro-section">
-          <div
-            className="intro-image"
-            ref={introImageRef}
-            style={{ transform: `translateY(${parallaxOffset.image - 20}px)` }}
-          >
-            <img
-              src="/img/lifeguard-tower-transparent.webp"
-              alt="Florescent lifeguard tower"
-              loading="lazy"
-            />
-            <canvas ref={neonCanvasRef} className="neon-trail" aria-hidden="true" />
-          </div>
-          <div
-            className="intro-text"
-            ref={introTextRef}
-            style={{ transform: `translateY(${parallaxOffset.text}px)` }}
-          >
-            <h2>
-              Michael Zick is <span className="hotword">ZICKONEZERO Creative</span>.
-            </h2>
-            <AnimatedHeadline className="intro-rotator-headline" />
-          </div>
-        </IntroSection>
+        <AnimatedSection
+          ref={introAnimatedRef}
+          data-animate-id='home-intro'
+          className={introVisible ? 'visible' : undefined}
+        >
+          <IntroSection className="intro-section">
+            <div
+              className="intro-image"
+              ref={introImageRef}
+              style={{ transform: `translateY(${parallaxOffset.image - 20}px)` }}
+            >
+              <img
+                className="image-animate"
+                src="/img/lifeguard-tower-transparent.webp"
+                alt="Florescent lifeguard tower"
+                loading="lazy"
+              />
+              <canvas ref={neonCanvasRef} className="neon-trail" aria-hidden="true" />
+            </div>
+            <div
+              className="intro-text"
+              ref={introTextRef}
+              style={{ transform: `translateY(${parallaxOffset.text}px)` }}
+            >
+              <div className="text-animate">
+                <h2>
+                  Michael Zick is <span className="hotword">ZICKONEZERO Creative</span>.
+                </h2>
+                <AnimatedHeadline className="intro-rotator-headline" />
+              </div>
+            </div>
+          </IntroSection>
+        </AnimatedSection>
 
         <WorksParallaxStage>
           <WorksFixedIllustration>
