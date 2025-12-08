@@ -69,6 +69,8 @@ const ProjectShowcase = ({
   const [lightboxState, setLightboxState] = useState({ toggler: false, slide: 1 });
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [visibleSections, setVisibleSections] = useState<Record<number, boolean>>({});
+  const heroRef = useRef<HTMLDivElement | null>(null);
+  const [isHeroVisible, setIsHeroVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -86,6 +88,23 @@ const ProjectShowcase = ({
   }, []);
 
   useEffect(() => {
+    const node = heroRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsHeroVisible(true);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.25 });
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     window.scrollTo({ top: 0 });
   }, []);
 
@@ -96,36 +115,42 @@ const ProjectShowcase = ({
         onClick={() => dispatch(showMobileMenu(false))}>
         <PageShell>
           <PageInner>
-            <HeroGrid>
-              <HeroImageFrame>
-                <img src={heroImage.src} alt={heroImage.alt} />
-              </HeroImageFrame>
-              <HeroContent>
-                <Title>{title}</Title>
-                {summary ? (
+            <AnimatedSection
+              ref={heroRef}
+              data-section-index={-1}
+              className={isHeroVisible ? 'visible' : undefined}
+            >
+              <HeroGrid>
+                <HeroImageFrame>
+                  <img className="image-animate" src={heroImage.src} alt={heroImage.alt} />
+                </HeroImageFrame>
+                <HeroContent className="text-animate">
+                  <Title>{title}</Title>
+                  {summary ? (
+                    <div>
+                      <HeroLabel>Description</HeroLabel>
+                      <Summary>{summary}</Summary>
+                    </div>
+                  ) : null}
                   <div>
-                    <HeroLabel>Description</HeroLabel>
-                    <Summary>{summary}</Summary>
+                    <HeroLabel>My Roles</HeroLabel>
+                    <RoleList>
+                      {roleBullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </RoleList>
                   </div>
-                ) : null}
-                <div>
-                  <HeroLabel>My Roles</HeroLabel>
-                  <RoleList>
-                    {roleBullets.map((bullet) => (
-                      <li key={bullet}>{bullet}</li>
-                    ))}
-                  </RoleList>
-                </div>
-                <LinkRow>
-                  <HeroLabel>Project Link</HeroLabel>
-                  <div>
-                    <a href={projectLink.href} target='_blank' rel='noopener noreferrer'>
-                      {projectLink.label || 'View Project'} <OpenInNewWindowIcon aria-hidden="true" />
-                    </a>
-                  </div>
-                </LinkRow>
-              </HeroContent>
-            </HeroGrid>
+                  <LinkRow>
+                    <HeroLabel>Project Link</HeroLabel>
+                    <div>
+                      <a href={projectLink.href} target='_blank' rel='noopener noreferrer'>
+                        {projectLink.label || 'View Project'} <OpenInNewWindowIcon aria-hidden="true" />
+                      </a>
+                    </div>
+                  </LinkRow>
+                </HeroContent>
+              </HeroGrid>
+            </AnimatedSection>
 
             <SectionsBlock>
               <DemoStokeMethodList>
