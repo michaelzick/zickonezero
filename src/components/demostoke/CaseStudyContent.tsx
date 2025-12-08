@@ -41,7 +41,7 @@ import {
 } from '../../../styles';
 import SidebarSectionTabs from '../SidebarSectionTabs';
 import { AnimatedSection } from '../../../styles/projectShowcases';
-import { CASE_STUDY_SECTIONS, CASE_STUDY_BOTTOM_SECTION_ID, HOW_IMAGES, METHOD_SECTIONS, PERSONA_ITEMS, TLDR_ITEMS } from './data.tsx';
+import { CASE_STUDY_SECTIONS, CASE_STUDY_BOTTOM_SECTION_ID, HOW_IMAGES, METHOD_SECTIONS, PERSONA_ITEMS, TLDR_ITEMS } from './data';
 
 type CaseStudyContentProps = {
   setAnimatedSectionRef: (id: string) => (el: HTMLDivElement | null) => void;
