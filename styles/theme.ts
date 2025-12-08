@@ -19,7 +19,11 @@ export const THEME = {
     contrast: 'var(--color-contrast)',
     orange: 'var(--color-orange)',
   },
+  radii: {
+    md: '6px',
+  },
 } as const;
 
 export type ThemeBreakpoints = typeof THEME.breakpoints;
 export type ThemeColors = typeof THEME.colors;
+export type ThemeRadii = typeof THEME.radii;

@@ -101,13 +101,6 @@ export const PitchDeckLink = styled(WhiteTransitionAnchor)`
   }
 `;
 
-export const CommandLine = styled.span`
-  font-family: monospace;
-  color: ${THEME.colors.white};
-  border-radius: 3px;
-  max-width: 49em;
-`;
-
 export const WorkSectionHeader = styled.span`
   display: inline-block;
   font-family: monospace;
@@ -310,7 +303,7 @@ export const Button = styled.a`
   grid-auto-columns: 1fr;
   grid-template-columns: auto;
   grid-template-rows: auto;
-  border-radius: 4px;
+  border-radius: ${THEME.radii.md};
   background-color: ${props => props.bgColor || THEME.colors.grey};
   transition: transform 150ms,box-shadow 150ms,-webkit-transform 150ms;
   color: #fff;
@@ -349,13 +342,13 @@ export const GridContainer = styled.div`
 
 export const Image = styled.img`
   width: 100%;
-  border-radius: 20px;
+  border-radius: ${THEME.radii.md};
   border: 1.5px solid ${THEME.colors.white};
 `;
 
 export const FullBorderImage = styled(Image)`
   border: none;
-  border-radius: inherit;
+  border-radius: ${THEME.radii.md};
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -370,7 +363,7 @@ export const Thumb = styled.div`
 
   img {
     transition: all 0.3s;
-    border-radius: 4px;
+    border-radius: ${THEME.radii.md};
     cursor: pointer;
   }
 
@@ -421,7 +414,7 @@ export const Thumb = styled.div`
     position: relative;
     display: inline-block;
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: ${THEME.radii.md};
   }
 
   .neon-trail-thumb {
@@ -433,7 +426,7 @@ export const Thumb = styled.div`
     mix-blend-mode: screen;
     opacity: 0.9;
     transition: opacity 0.2s ease-out;
-    border-radius: 4px;
+    border-radius: ${THEME.radii.md};
   }
 
   .thumb-media .cursor-dot {
@@ -592,7 +585,7 @@ export const CaseStudiesDropdown = styled.ul`
   margin: 0;
   padding: 0.75em 1em;
   background: ${THEME.colors.darkest};
-  border-radius: 4px;
+  border-radius: ${THEME.radii.md};
   border: 2px solid ${THEME.colors.white};
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   display: grid;
@@ -633,7 +626,7 @@ export const CaseStudiesDropdown = styled.ul`
     .case-logo {
       width: 1.8em;
       height: 1.8em;
-      border-radius: 6px;
+      border-radius: ${THEME.radii.md};
       object-fit: cover;
       flex-shrink: 0;
     }
@@ -657,7 +650,7 @@ export const LinkBoxMobile = styled.ul`
   width: 15.5em;
   background: ${THEME.colors.darkest};
   z-index: 400;
-  border-radius: 4px;
+  border-radius: ${THEME.radii.md};
   border: 2px solid ${THEME.colors.white};
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   animation: ${props => props.$isAnimating
@@ -705,7 +698,7 @@ export const LinkBoxMobile = styled.ul`
       .case-logo {
         width: 1.45em;
         height: 1.45em;
-        border-radius: 5px;
+        border-radius: ${THEME.radii.md};
         object-fit: cover;
         flex-shrink: 0;
       }
@@ -840,7 +833,7 @@ export const BioBox = styled.div`
 
     .headshot {
       img {
-        border-radius: 4px;
+        border-radius: ${THEME.radii.md};
         width: 100%;
         height: auto;
         max-width: 18em;
@@ -853,12 +846,12 @@ export const BioBox = styled.div`
       img {
         width: 100%;
         height: auto;
-        border-radius: 4px;
+        border-radius: ${THEME.radii.md};
 
         &.antisyphon-image {
           cursor: pointer;
           border: 1.5px solid ${THEME.colors.white};
-          border-radius: 16px;
+          border-radius: ${THEME.radii.md};
           box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
           transition: border-color 0.2s ease;
 
@@ -1004,7 +997,7 @@ export const SectionTabsWrapper = styled.div`
   max-width: 5.5em;
   align-self: flex-start;
   padding: 0.45em;
-  border-radius: 18px;
+  border-radius: ${THEME.radii.md};
   background-color: transparent;
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
@@ -1140,7 +1133,7 @@ export const DemoStokeList = styled.ul`
   font-weight: lighter;
   list-style: none;
   border: ${props => props.$frameless ? 'none' : `1px solid ${THEME.colors.grey}`};
-  border-radius: ${props => props.$frameless ? '0' : '20px'};
+  border-radius: ${props => props.$frameless ? '0' : THEME.radii.md};
   margin-bottom: 0;
 
   li {
@@ -1208,7 +1201,7 @@ export const DemoStokeTwoColumnLayout = styled.div`
   gap: 0.35em;
   padding: clamp(0.9em, 2vw, 1.45em) clamp(1.2em, 3vw, 2em);
   border: ${props => props.$variant === 'tinted' ? 'none' : `1px solid ${THEME.colors.grey}`};
-  border-radius: 20px;
+  border-radius: ${THEME.radii.md};
   background: ${props => props.$variant === 'tinted' ? 'rgba(37, 99, 235, 0.08)' : 'transparent'};
 `;
 
@@ -1272,7 +1265,7 @@ export const DemoStokeTwoColumnCopy = styled.div`
 export const DemoStokeTldrSection = styled.div`
   width: 100%;
   padding: clamp(1.1em, 2.8vw, 1.8em) clamp(1.2em, 3vw, 2.1em);
-  border-radius: 20px;
+  border-radius: ${THEME.radii.md};
   background: rgba(37, 99, 235, 0.08);
   border: none;
   box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
@@ -1366,7 +1359,7 @@ export const DemoStokeTldrImage = styled.img`
   width: 100%;
   height: auto;
   max-width: 100%;
-  border-radius: 16px;
+  border-radius: ${THEME.radii.md};
   border: 1.5px solid ${THEME.colors.grey};
   object-fit: contain;
   box-shadow: 0 12px 28px -16px rgb(0 0 0 / 60%);
@@ -1416,7 +1409,7 @@ export const DemoStokeAccordion = styled.div`
 
 export const DemoStokeAccordionItem = styled.div`
   border: 1px solid ${THEME.colors.white};
-  border-radius: 14px;
+  border-radius: ${THEME.radii.md};
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.005));
   box-shadow: ${props => props.$isOpen ? '0 14px 28px -16px rgb(0 0 0 / 70%)' : 'none'};
   transition: border-color 0.2s ease, box-shadow 0.3s ease, transform 0.2s ease;
@@ -1550,7 +1543,7 @@ export const DemoStokeStoryCard = styled.section`
   position: relative;
   isolation: isolate;
   padding: clamp(1.15em, 2.4vw, 1.65em);
-  border-radius: 18px;
+  border-radius: ${THEME.radii.md};
   background:
     radial-gradient(120% 140% at 12% 12%, rgba(0, 215, 255, 0.22), rgba(2, 8, 23, 0)),
     linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(0, 113, 227, 0.12));
@@ -1590,7 +1583,7 @@ export const DemoStokeBorderBox = styled.div`
   font-size: 0.95em;
   line-height: 1.6;
   border: 1px solid ${THEME.colors.grey};
-  border-radius: 20px;
+  border-radius: ${THEME.radii.md};
   color: ${THEME.colors.white};
   overflow: hidden;
 
@@ -1601,7 +1594,7 @@ export const DemoStokeBorderBox = styled.div`
 
 export const DemoStokeWhyImageFrame = styled.div`
   margin-top: clamp(1em, 2vw, 1.5em);
-  border-radius: 18px;
+  border-radius: ${THEME.radii.md};
   overflow: hidden;
   box-shadow: 0 16px 38px -24px rgb(0 0 0 / 75%);
 
@@ -1647,7 +1640,7 @@ export const DemoStokeScrollItem = styled.div`
   max-width: 18em;
   flex: 0 0 auto;
   border: 1.5px solid ${THEME.colors.white};
-  border-radius: 18px;
+  border-radius: ${THEME.radii.md};
   overflow: hidden;
   background: transparent;
   cursor: pointer;
@@ -1757,7 +1750,7 @@ export const DemoStokeMiniCard = styled.button`
   min-width: clamp(13em, 48vw, 15.5em);
   max-width: 18em;
   padding: clamp(1em, 2.3vw, 1.4em);
-  border-radius: 16px;
+  border-radius: ${THEME.radii.md};
   background: transparent;
   border: 1.5px solid ${THEME.colors.white};
   box-shadow: none;
@@ -1827,7 +1820,7 @@ export const DemoStokeMiniCardHint = styled.span`
 export const DemoStokeStoryHero = styled.img`
   width: 100%;
   display: block;
-  border-radius: 16px;
+  border-radius: ${THEME.radii.md};
   object-fit: cover;
   object-position: top;
   margin: 0;
@@ -1880,7 +1873,7 @@ export const DemoStokeMiniCardModal = styled.div`
   width: min(720px, 95vw);
   max-height: 88vh;
   overflow: hidden;
-  border-radius: 18px;
+  border-radius: ${THEME.radii.md};
   background:
     radial-gradient(140% 140% at 10% 0%, rgba(0, 215, 255, 0.16), rgba(2, 8, 23, 0)),
     linear-gradient(150deg, rgba(3, 7, 18, 0.95), rgba(2, 132, 199, 0.14));
@@ -1978,7 +1971,7 @@ export const DemoStokeWhyGrid = styled.div`
 export const DemoStokeWhyCard = styled.div`
   position: relative;
   padding: clamp(1em, 2.4vw, 1.4em);
-  border-radius: 16px;
+  border-radius: ${THEME.radii.md};
   background: rgba(37, 99, 235, 0.08);
   box-shadow: 0 12px 28px -22px rgb(0 0 0 / 70%);
   color: ${THEME.colors.white};
@@ -2027,7 +2020,7 @@ export const TableWrapper = styled.div`
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  border-radius: 20px;
+  border-radius: ${THEME.radii.md};
   border: 1px solid ${THEME.colors.grey};
 
   table {
@@ -2058,7 +2051,7 @@ export const DemoStokeText = styled.div`
   font-size: 0.9em;
   font-weight: lighter;
   border: 1px solid ${THEME.colors.grey};
-  border-radius: 20px;
+  border-radius: ${THEME.radii.md};
 `;
 
 // Tabs
@@ -2129,13 +2122,13 @@ export const TabWrapper = styled.div`
 export const Video = styled.video`
   width: 100%;
   height: auto;
-  border-radius: 20px;
+  border-radius: ${THEME.radii.md};
   display: block;
 `;
 
 export const VideoFrame = styled.div`
   border: 1.5px solid ${THEME.colors.white};
-  border-radius: 20px;
+  border-radius: ${THEME.radii.md};
   overflow: hidden;
 `;
 
@@ -2167,7 +2160,7 @@ export const ThemeSwitcherTrigger = styled(Select.Trigger)`
   gap: 0;
   min-width: 0;
   padding: 0.25em 1em 0.22em;
-  border-radius: 6px;
+  border-radius: ${THEME.radii.md};
   border: 1px solid ${THEME.colors.grey};
   color: ${THEME.colors.white};
   background-color: transparent;
@@ -2200,7 +2193,7 @@ export const ThemeSwitcherContent = styled(Select.Content)`
   overflow: hidden;
   background-color: ${THEME.colors.darkest};
   color: ${THEME.colors.white};
-  border-radius: 10px;
+  border-radius: ${THEME.radii.md};
   border: 1px solid ${THEME.colors.grey};
   box-shadow: 0 18px 45px rgba(5, 5, 15, 0.35);
   z-index: 400;
@@ -2263,7 +2256,7 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   align-items: center;
   justify-content: center;
   padding: 0.65em 1em;
-  border-radius: 10px;
+  border-radius: ${THEME.radii.md};
   font-family: Roboto, sans-serif;
   font-size: 1.05em;
   font-weight: 600;
@@ -2316,7 +2309,7 @@ export const SectionTabButton = styled(HomeTabButton)`
   min-height: 1.6em;
   letter-spacing: 0.011em;
   line-height: 1.3;
-  border-radius: 6px;
+  border-radius: ${THEME.radii.md};
 `;
 
 export const SectionTabsMobileWrapper = styled.div`
@@ -2340,7 +2333,7 @@ export const SectionTabsMobileInner = styled.div`
   margin: 0 auto;
   gap: 0.45em;
   padding: 0.4em;
-  border-radius: 18px;
+  border-radius: ${THEME.radii.md};
   border: 2px solid rgba(255, 255, 255, 0.35);
   background: rgba(var(--color-dark-rgb), 0.78);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
@@ -2471,7 +2464,7 @@ export const IntroSection = styled.div`
     img {
       width: 100%;
       height: auto;
-      border-radius: 4px;
+      border-radius: ${THEME.radii.md};
       display: block;
     }
 
@@ -2484,7 +2477,7 @@ export const IntroSection = styled.div`
       mix-blend-mode: screen;
       opacity: 0.9; /* Keep visible so the streak can finish fading after hover ends */
       transition: opacity 0.2s ease-out;
-      border-radius: 4px;
+      border-radius: ${THEME.radii.md};
     }
   }
 
