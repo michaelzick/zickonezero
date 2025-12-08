@@ -2,6 +2,7 @@ import {
   useAppDispatch,
   useAppSelector
 } from '../hooks';
+import { useEffect, useRef, useState } from 'react';
 import {
   showMobileMenu,
   getMobileMenuState
@@ -10,11 +11,31 @@ import {
 import Link from 'next/link';
 
 import { BioBox, Wrapper } from '../../styles';
+import { AnimatedSection } from '../../styles/projectShowcases';
 import { TopNavContent, FooterContent } from '../components';
 
 const AboutContent = () => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
+  const aboutSectionRef = useRef<HTMLDivElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const node = aboutSectionRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.2 });
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -22,28 +43,34 @@ const AboutContent = () => {
       <Wrapper isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
         <BioBox isAboutPage>
-          <div className='biobox-inner'>
-            <div className='text-wrapper bottom'>
-              Michael is a Product Leader and Founder with a strong background in UX design, frontend development,
-              DevOps, SEO, and e-commerce platforms. He has hired and led engineering teams to build products from 0 to 1
-              under tight deadlines, aligning cross-functional stakeholders in highly ambiguous environments.
-              <br /><br />
-              He specializes in the WordPress and React ecosystems (including Next.js, Redux, and TypeScript).
-              He also has experience with Python, PHP, and MySQL.
-              <br /><br />
-              With a CompTIA Security+ certification and over 18 years in IT, Michael brings deep technical
-              expertise and leadership to every project. In addition to his technical background, he has guided
-              individuals and teams to personal and professional success through coaching.
-              <br /><br />
-              Samples of his work can be found in the <span className='underline'><Link href='/'>main gallery</Link></span>,
-              with code examples on <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'
-                className='underline'>GitHub</a>, and a full list of qualifications on <a href='https://linkedin.com/in/michaelzick'
-                  target='_blank' rel='noopener noreferrer' className='underline'>LinkedIn</a>.
+          <AnimatedSection
+            ref={aboutSectionRef}
+            data-animate-id='about-hero'
+            className={isVisible ? 'visible' : undefined}
+          >
+            <div className='biobox-inner'>
+              <div className='text-wrapper bottom text-animate'>
+                Michael is a Product Leader and Founder with a strong background in UX design, frontend development,
+                DevOps, SEO, and e-commerce platforms. He has hired and led engineering teams to build products from 0 to 1
+                under tight deadlines, aligning cross-functional stakeholders in highly ambiguous environments.
+                <br /><br />
+                He specializes in the WordPress and React ecosystems (including Next.js, Redux, and TypeScript).
+                He also has experience with Python, PHP, and MySQL.
+                <br /><br />
+                With a CompTIA Security+ certification and over 18 years in IT, Michael brings deep technical
+                expertise and leadership to every project. In addition to his technical background, he has guided
+                individuals and teams to personal and professional success through coaching.
+                <br /><br />
+                Samples of his work can be found in the <span className='underline'><Link href='/'>main gallery</Link></span>,
+                with code examples on <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'
+                  className='underline'>GitHub</a>, and a full list of qualifications on <a href='https://linkedin.com/in/michaelzick'
+                    target='_blank' rel='noopener noreferrer' className='underline'>LinkedIn</a>.
+              </div>
+              <div className='headshot image-animate'>
+                <img src='/img/mt-hood-selfie-resized.jpg' alt='Mt. Hood Selfie' width='350' height='392' />
+              </div>
             </div>
-            <div className='headshot'>
-              <img src='/img/mt-hood-selfie-resized.jpg' alt='Mt. Hood Selfie' width='350' height='392' />
-            </div>
-          </div>
+          </AnimatedSection>
         </BioBox>
       </Wrapper>
       <FooterContent />
