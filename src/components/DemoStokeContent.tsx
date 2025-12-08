@@ -367,32 +367,38 @@ const DemoStokeContent = () => {
 
                     <section id='hero-spacer' aria-hidden='true' />
 
-                    <section id='introduction' className='story-section'>
-                      <DemoStokeTitle $noMobileTopPad>Introduction</DemoStokeTitle>
-                    </section>
+                    <AnimatedSection
+                      ref={setAnimatedSectionRef('section-intro')}
+                      data-animate-id='section-intro'
+                      className={visibleSections['section-intro'] ? 'visible' : undefined}
+                    >
+                      <section id='introduction' className='story-section'>
+                        <DemoStokeTitle $noMobileTopPad>Introduction</DemoStokeTitle>
+                      </section>
 
-                    <VideoFrame>
-                      <Video
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        poster='/img/homepage_light_2025-07-22.webp'
-                      >
-                        <source src='/video/homepage-2025-11-23-02.mp4' type='video/mp4' />
-                        <source src='' type='video/mp4' />
-                      </Video>
-                    </VideoFrame>
-                    <br />
+                      <VideoFrame>
+                        <Video
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          poster='/img/homepage_light_2025-07-22.webp'
+                        >
+                          <source src='/video/homepage-2025-11-23-02.mp4' type='video/mp4' />
+                          <source src='' type='video/mp4' />
+                        </Video>
+                      </VideoFrame>
+                      <br />
 
-                    <DemoStokeTldrSection>
-                      <DemoStokeTldrTitle>TL;DR</DemoStokeTldrTitle>
-                      <DemoStokeTldrCopy>
-                        Riders and shops struggle with fragmented, offline demo and rental flows. I designed DemoStoke to be a unified
-                        marketplace to solve those issues. In validation sessions, 90% of shop owners said it would bring them more
-                        customers, and 100% of riders described it as &ldquo;the thing that should already exist.&rdquo;
-                      </DemoStokeTldrCopy>
-                    </DemoStokeTldrSection>
+                      <DemoStokeTldrSection>
+                        <DemoStokeTldrTitle>TL;DR</DemoStokeTldrTitle>
+                        <DemoStokeTldrCopy>
+                          Riders and shops struggle with fragmented, offline demo and rental flows. I designed DemoStoke to be a unified
+                          marketplace to solve those issues. In validation sessions, 90% of shop owners said it would bring them more
+                          customers, and 100% of riders described it as &ldquo;the thing that should already exist.&rdquo;
+                        </DemoStokeTldrCopy>
+                      </DemoStokeTldrSection>
+                    </AnimatedSection>
 
                     <section id='section-tldr' className='story-section'>
                       <DemoStokeTldrSection>
