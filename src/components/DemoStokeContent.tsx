@@ -51,6 +51,7 @@ import {
   DemoStokeScrollControls,
   DemoStokeScrollButton
 } from '../../styles';
+import { AnimatedSection } from '../../styles/projectShowcases';
 import { TopNavContent, FooterContent } from '.';
 import DemoStokeTabs from './DemoStokeTabs';
 import SidebarSectionTabs, { SidebarSectionConfig, SidebarSectionTabsMobile } from './SidebarSectionTabs';
@@ -223,9 +224,15 @@ const DemoStokeContent = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [openPersonaId, setOpenPersonaId] = useState<string | null>(null);
+  const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
   const scrollRowRef = useRef<HTMLDivElement | null>(null);
+  const animatedSectionRefs = useRef<Map<string, HTMLDivElement | null>>(new Map());
   const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {
     setTopTabsEl(node);
+  }, []);
+
+  const setAnimatedSectionRef = useCallback((id: string) => (el: HTMLDivElement | null) => {
+    animatedSectionRefs.current.set(id, el);
   }, []);
 
   const handleTabClick = (tabKey: string) => {
@@ -243,6 +250,22 @@ const DemoStokeContent = () => {
         scrollToTop();
       });
     });
+  }, [activeTab]);
+
+  // IntersectionObserver for fade-in animations
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const sectionId = entry.target.getAttribute('data-animate-id');
+        if (entry.isIntersecting && sectionId) {
+          setVisibleSections((prev) => (prev[sectionId] ? prev : { ...prev, [sectionId]: true }));
+        }
+      });
+    }, { threshold: 0.22 });
+
+    animatedSectionRefs.current.forEach((node) => node && observer.observe(node));
+
+    return () => observer.disconnect();
   }, [activeTab]);
 
   const openLightbox = (index: number) => {
@@ -375,13 +398,20 @@ const DemoStokeContent = () => {
                       <DemoStokeTldrSection>
                         <DemoStokeTldrList>
                           {TLDR_ITEMS.map(({ title, description, image }, index) => (
-                            <DemoStokeTldrRow key={title} $reverse={index % 2 === 1}>
-                              <div>
-                                <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
-                                <DemoStokeTldrCopy>{description}</DemoStokeTldrCopy>
-                              </div>
-                              <DemoStokeTldrImage src={image.src} alt={image.alt} loading='lazy' />
-                            </DemoStokeTldrRow>
+                            <AnimatedSection
+                              key={title}
+                              ref={setAnimatedSectionRef(`tldr-${index}`)}
+                              data-animate-id={`tldr-${index}`}
+                              className={visibleSections[`tldr-${index}`] ? 'visible' : undefined}
+                            >
+                              <DemoStokeTldrRow $reverse={index % 2 === 1}>
+                                <div className="text-animate">
+                                  <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
+                                  <DemoStokeTldrCopy>{description}</DemoStokeTldrCopy>
+                                </div>
+                                <DemoStokeTldrImage className="image-animate" src={image.src} alt={image.alt} loading='lazy' />
+                              </DemoStokeTldrRow>
+                            </AnimatedSection>
                           ))}
                         </DemoStokeTldrList>
                       </DemoStokeTldrSection>
@@ -389,12 +419,17 @@ const DemoStokeContent = () => {
 
                     <br />
 
-                    <section id='section-the-why' className='story-section'>
-                      <DemoStokeTitle>The Why / How It Started</DemoStokeTitle>
-                      <DemoStokeBorderBox>
-                        <DemoStokeTwoUp>
-                          <section id='section-problem'>
-                            <h3>My Story</h3>
+                    <AnimatedSection
+                      ref={setAnimatedSectionRef('section-the-why')}
+                      data-animate-id='section-the-why'
+                      className={visibleSections['section-the-why'] ? 'visible' : undefined}
+                    >
+                      <section id='section-the-why' className='story-section'>
+                        <DemoStokeTitle>The Why / How It Started</DemoStokeTitle>
+                        <DemoStokeBorderBox>
+                          <DemoStokeTwoUp className="text-animate">
+                            <section id='section-problem'>
+                              <h3>My Story</h3>
                             <p>
                               For the longest time, I struggled to find a way to try new gear without the hassle of traditional
                               demo days or the uncertainty of buying blind. I knew there had to be a better way for riders like
@@ -422,21 +457,27 @@ const DemoStokeContent = () => {
                             </DemoStokeTwoColumnCopy>
                           </section>
                         </DemoStokeTwoUp>
-                        <DemoStokeWhyImageFrame>
+                        <DemoStokeWhyImageFrame className="image-animate">
                           <FullBorderImage
                             src='/img/demostoke/stuf-figma.webp'
                             alt='Early Stuf peer-to-peer gear lending concepts in Figma'
                             loading='lazy'
                           />
                         </DemoStokeWhyImageFrame>
-                      </DemoStokeBorderBox>
-                    </section>
+                        </DemoStokeBorderBox>
+                      </section>
+                    </AnimatedSection>
 
                     <br />
 
-                    <section id='section-the-who' className='story-section'>
-                      <DemoStokeTitle>The Who / User Personas</DemoStokeTitle>
-                      <DemoStokeAccordion>
+                    <AnimatedSection
+                      ref={setAnimatedSectionRef('section-the-who')}
+                      data-animate-id='section-the-who'
+                      className={visibleSections['section-the-who'] ? 'visible' : undefined}
+                    >
+                      <section id='section-the-who' className='story-section'>
+                        <DemoStokeTitle>The Who / User Personas</DemoStokeTitle>
+                        <DemoStokeAccordion className="text-animate">
                         {PERSONA_ITEMS.map(({ title, bullets }) => {
                           const personaId = `persona-${title.toLowerCase().replace(/\s+/g, '-')}`;
                           const isOpen = openPersonaId === personaId;
@@ -478,16 +519,22 @@ const DemoStokeContent = () => {
                           );
                         })}
                       </DemoStokeAccordion>
-                    </section>
+                      </section>
+                    </AnimatedSection>
 
                     <br />
 
-                    <section id='section-the-how' className='story-section'>
-                      <DemoStokeTitle>The How / AI-Driven Development</DemoStokeTitle>
-                      <DemoStokeTldrSection>
-                        <DemoStokeTwoUp>
-                          <section>
-                            <h3>Location-Based Discovery</h3>
+                    <AnimatedSection
+                      ref={setAnimatedSectionRef('section-the-how')}
+                      data-animate-id='section-the-how'
+                      className={visibleSections['section-the-how'] ? 'visible' : undefined}
+                    >
+                      <section id='section-the-how' className='story-section'>
+                        <DemoStokeTitle>The How / AI-Driven Development</DemoStokeTitle>
+                        <DemoStokeTldrSection>
+                          <DemoStokeTwoUp className="text-animate">
+                            <section>
+                              <h3>Location-Based Discovery</h3>
                             <p>
                               With DemoStoke, I created a comprehensive gear discovery and rental platform that connects riders with
                               demo opportunities in their area.
@@ -513,13 +560,19 @@ const DemoStokeContent = () => {
                             </p>
                           </section>
                         </DemoStokeTwoUp>
-                        <DemoStokeWhyImageFrame>
+                        <DemoStokeWhyImageFrame className="image-animate">
                           <FullBorderImage src='/img/demostoke/all-equipment-hybrid.webp' alt='DemoStoke Hybrid View' loading="lazy" />
                         </DemoStokeWhyImageFrame>
                       </DemoStokeTldrSection>
-                    </section>
+                      </section>
+                    </AnimatedSection>
 
-                    <section id='section-how-gallery'>
+                    <AnimatedSection
+                      ref={setAnimatedSectionRef('section-how-gallery')}
+                      data-animate-id='section-how-gallery'
+                      className={visibleSections['section-how-gallery'] ? 'visible' : undefined}
+                    >
+                      <section id='section-how-gallery'>
                       <DemoStokeScrollHeader>
                         <h3>Screenshots</h3>
                         <DemoStokeScrollControls aria-label='Gallery navigation'>
@@ -566,7 +619,8 @@ const DemoStokeContent = () => {
                           ))}
                         </DemoStokeScrollRow>
                       </DemoStokeScrollSection>
-                    </section>
+                      </section>
+                    </AnimatedSection>
 
                     <br />
 
@@ -574,21 +628,28 @@ const DemoStokeContent = () => {
                       <DemoStokeTitle>Methods / The UX Process</DemoStokeTitle>
                       <DemoStokeMethodList>
                         {METHOD_SECTIONS.map(({ title, bullets, image }, index) => (
-                          <DemoStokeMethodCard key={title}>
-                            <DemoStokeMethodRow $reverse={index % 2 === 1}>
-                              <div>
-                                <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
-                                <DemoStokeTldrCopy>
-                                  <ul className='plain-lines'>
-                                    {bullets.map((bullet) => (
-                                      <li key={bullet}>{bullet}</li>
-                                    ))}
-                                  </ul>
-                                </DemoStokeTldrCopy>
-                              </div>
-                              <DemoStokeTldrImage src={image.src} alt={image.alt} loading='lazy' />
-                            </DemoStokeMethodRow>
-                          </DemoStokeMethodCard>
+                          <AnimatedSection
+                            key={title}
+                            ref={setAnimatedSectionRef(`method-${index}`)}
+                            data-animate-id={`method-${index}`}
+                            className={visibleSections[`method-${index}`] ? 'visible' : undefined}
+                          >
+                            <DemoStokeMethodCard>
+                              <DemoStokeMethodRow $reverse={index % 2 === 1}>
+                                <div className="text-animate">
+                                  <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
+                                  <DemoStokeTldrCopy>
+                                    <ul className='plain-lines'>
+                                      {bullets.map((bullet) => (
+                                        <li key={bullet}>{bullet}</li>
+                                      ))}
+                                    </ul>
+                                  </DemoStokeTldrCopy>
+                                </div>
+                                <DemoStokeTldrImage className="image-animate" src={image.src} alt={image.alt} loading='lazy' />
+                              </DemoStokeMethodRow>
+                            </DemoStokeMethodCard>
+                          </AnimatedSection>
                         ))}
                       </DemoStokeMethodList>
                     </section>
