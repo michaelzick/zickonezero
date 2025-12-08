@@ -104,7 +104,7 @@ const IndieShaper = ({ wrapWithBioBox = true, setAnimatedSectionRef, visibleSect
   const content = (
     <div>
       <AnimatedSection {...getAnimateProps('story-introduction')}>
-        <section id='story-introduction' aria-hidden='true'>
+        <section id='story-introduction'>
           <FlexBox>
             <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
             <div>

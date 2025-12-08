@@ -189,6 +189,7 @@ const fadeUp = keyframes`
 export const AnimatedSection = styled.div`
   opacity: 0;
   transform: translateY(18px);
+
   &.visible {
     animation: ${fadeUp} 0.7s ease forwards;
   }
@@ -213,5 +214,21 @@ export const AnimatedSection = styled.div`
   &.visible .text-animate {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transform: none;
+
+    &.visible {
+      animation: none;
+    }
+
+    .image-animate,
+    .text-animate {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 `;
