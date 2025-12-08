@@ -389,7 +389,13 @@ const DemoStokeContent = () => {
                         </Video>
                       </VideoFrame>
                       <br />
+                    </AnimatedSection>
 
+                    <AnimatedSection
+                      ref={setAnimatedSectionRef('section-intro-tldr')}
+                      data-animate-id='section-intro-tldr'
+                      className={visibleSections['section-intro-tldr'] ? 'visible' : undefined}
+                    >
                       <DemoStokeTldrSection>
                         <DemoStokeTldrTitle>TL;DR</DemoStokeTldrTitle>
                         <DemoStokeTldrCopy>
