@@ -60,9 +60,11 @@ type CaseStudyContentProps = {
 
 const DemoStokeExternalLink = styled(WhiteTransitionAnchor)`
   display: inline-flex;
+  justify-self: start;
   align-items: center;
   gap: 0.35em;
   line-height: 1.15;
+  width: max-content;
 
   svg {
     width: 1.05em;
