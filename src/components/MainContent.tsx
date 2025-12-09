@@ -148,8 +148,7 @@ const MainContent = () => {
   }, []);
 
   useEffect(() => {
-    const cloudTimer = setTimeout(() => setCloudsActive(true), 2000);
-    return () => clearTimeout(cloudTimer);
+    setCloudsActive(true);
   }, []);
 
   // Parallax scroll effect
