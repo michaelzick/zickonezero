@@ -8,12 +8,6 @@ const phraseCycle = keyframes`
   31%, 100% { transform: translateY(100%); opacity: 0; }
 `;
 
-const cloudDrift = keyframes`
-  0% { transform: translateX(60vw); }
-  100% { transform: translateX(-90vw); }
-`;
-
-
 export const Container = styled.div`
   background-size: cover;
   text-align: center;
@@ -2379,6 +2373,16 @@ export const FloatingCloudsViewport = styled.div`
   z-index: 0;
 `;
 
+const cloudDrift = keyframes`
+  0% { transform: translateX(60vw); }
+  100% { transform: translateX(-90vw); }
+`;
+
+const cloudDriftMobile = keyframes`
+  0% { transform: translateX(60vw); }
+  100% { transform: translateX(-140vw); }
+`;
+
 export const FloatingClouds = styled.div`
   position: absolute;
   top: clamp(2em, 9vw, 6.5em);
@@ -2408,6 +2412,9 @@ export const FloatingClouds = styled.div`
   @media (max-width: ${THEME.breakpoints.phone}) {
     top: clamp(5.2em, 16vw, 7.5em);
     width: clamp(12em, 70vw, 17em);
+    ${props => props.$isActive && css`
+      animation: ${cloudDriftMobile} 40s linear infinite;
+    `}
   }
 `;
 
