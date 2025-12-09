@@ -8,6 +8,12 @@ const phraseCycle = keyframes`
   31%, 100% { transform: translateY(100%); opacity: 0; }
 `;
 
+const cloudDrift = keyframes`
+  0% { transform: translateX(60vw); }
+  88.889% { transform: translateX(-140vw); }
+  100% { transform: translateX(-140vw); }
+`;
+
 
 export const Container = styled.div`
   background-size: cover;
@@ -198,6 +204,10 @@ export const Wrapper = styled.div`
   }}
   min-height: 84%;
   ${props => props.isMobileMenuShown && 'filter: blur(2px); z-index: 300;'}
+  ${props => props.isHomePage && `
+    position: relative;
+    overflow: hidden;
+  `}
   background-color: ${THEME.colors.dark};
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
@@ -2358,6 +2368,33 @@ export const HomeTabsSpacer = styled.div`
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     display: block;
     height: 2.2em;
+  }
+`;
+
+export const FloatingClouds = styled.div`
+  position: absolute;
+  top: clamp(1em, 8vw, 5em);
+  left: 50%;
+  width: clamp(12em, 45vw, 19em);
+  transform: translateX(60vw);
+  will-change: transform;
+  pointer-events: none;
+  z-index: 0;
+
+  ${props => props.$isActive && css`
+    animation: ${cloudDrift} 45s linear infinite;
+  `}
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    top: clamp(1.5em, 12vw, 4em);
+    width: clamp(11em, 65vw, 17em);
   }
 `;
 

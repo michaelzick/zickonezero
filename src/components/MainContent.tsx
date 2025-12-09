@@ -22,6 +22,7 @@ import {
   HomeTabButton,
   HomeTabsSpacer,
   IntroSection,
+  FloatingClouds,
   WorksParallaxStage,
   WorksRevealCurtain,
   WorksFixedIllustration,
@@ -55,6 +56,7 @@ const MainContent = () => {
   const introAnimatedRef = useRef<HTMLDivElement | null>(null);
   const [introVisible, setIntroVisible] = useState(false);
   const [showWorksIllustration, setShowWorksIllustration] = useState(false);
+  const [cloudsActive, setCloudsActive] = useState(false);
 
   // For lightbox
   const [lightboxController, setLightboxController] = useState({
@@ -143,6 +145,11 @@ const MainContent = () => {
       window.removeEventListener('scroll', updateActiveSectionOnScroll);
       window.removeEventListener('resize', updateActiveSectionOnScroll);
     };
+  }, []);
+
+  useEffect(() => {
+    const cloudTimer = setTimeout(() => setCloudsActive(true), 2000);
+    return () => clearTimeout(cloudTimer);
   }, []);
 
   // Parallax scroll effect
@@ -361,6 +368,14 @@ const MainContent = () => {
 
       <Wrapper isHomePage isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
+        <FloatingClouds $isActive={cloudsActive} aria-hidden="true">
+          <img
+            src="/img/neon-clouds-cropped.webp"
+            alt=""
+            loading="lazy"
+          />
+        </FloatingClouds>
+
         <HomeTabsBar role='tablist' aria-label='Homepage sections'>
           <HomeTabButton
             type="button"
