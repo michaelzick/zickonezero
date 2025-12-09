@@ -2391,9 +2391,14 @@ export const FloatingClouds = styled.div`
     box-shadow: none;
   }
 
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+    top: clamp(4.5em, 13vw, 7em);
+    width: clamp(12em, 55vw, 18em);
+  }
+
   @media (max-width: ${THEME.breakpoints.phone}) {
-    top: clamp(2.4em, 13vw, 4.8em);
-    width: clamp(11em, 65vw, 17em);
+    top: clamp(5.2em, 16vw, 7.5em);
+    width: clamp(12em, 70vw, 17em);
   }
 `;
 
