@@ -1,6 +1,5 @@
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { type KeyboardEvent, type RefObject } from 'react';
-import styled from 'styled-components';
 import {
   BioBox,
   DemoStokeAccordion,
@@ -33,12 +32,12 @@ import {
   DemoStokeTwoColumnCopy,
   DemoStokeTwoUp,
   DemoStokeWhyImageFrame,
+  DemoStokeExternalLink,
   FlexBox,
   FullBorderImage,
   PitchDeckLink,
   Video,
   VideoFrame,
-  WhiteTransitionAnchor
 } from '../../../styles';
 import SidebarSectionTabs from '../SidebarSectionTabs';
 import { AnimatedSection } from '../../../styles/projectShowcases';
@@ -57,21 +56,6 @@ type CaseStudyContentProps = {
   topTabsEl: HTMLDivElement | null;
   isActive: boolean;
 };
-
-const DemoStokeExternalLink = styled(WhiteTransitionAnchor)`
-  display: inline-flex;
-  justify-self: start;
-  align-items: center;
-  gap: 0.35em;
-  line-height: 1.15;
-  width: max-content;
-
-  svg {
-    width: 1.05em;
-    height: 1.05em;
-    margin-left: 0;
-  }
-`;
 
 const CaseStudyContent = ({
   setAnimatedSectionRef,

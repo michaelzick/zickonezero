@@ -68,6 +68,21 @@ export const WhiteTransitionAnchor = styled.a`
   }
 `;
 
+export const DemoStokeExternalLink = styled(WhiteTransitionAnchor)`
+  display: inline-flex;
+  justify-self: start;
+  align-items: center;
+  gap: 0.35em;
+  line-height: 1.15;
+  width: max-content;
+
+  svg {
+    width: 1.05em;
+    height: 1.05em;
+    margin-left: 0;
+  }
+`;
+
 export const PitchDeckLink = styled(WhiteTransitionAnchor)`
   display: inline-flex;
   align-items: center;
