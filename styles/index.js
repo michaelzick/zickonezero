@@ -235,7 +235,7 @@ export const Nav = styled.div`
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  z-index: 300;
+  z-index: 400;
   background-color: ${THEME.colors.dark};
   transition: filter 0.3s;
 
