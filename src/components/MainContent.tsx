@@ -22,6 +22,7 @@ import {
   HomeTabButton,
   HomeTabsSpacer,
   IntroSection,
+  FloatingCloudsViewport,
   FloatingClouds,
   WorksParallaxStage,
   WorksRevealCurtain,
@@ -367,13 +368,15 @@ const MainContent = () => {
 
       <Wrapper isHomePage isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
-        <FloatingClouds $isActive={cloudsActive} aria-hidden="true">
-          <img
-            src="/img/neon-clouds-cropped.webp"
-            alt=""
-            loading="lazy"
-          />
-        </FloatingClouds>
+        <FloatingCloudsViewport aria-hidden="true">
+          <FloatingClouds $isActive={cloudsActive}>
+            <img
+              src="/img/neon-clouds-cropped.webp"
+              alt=""
+              loading="lazy"
+            />
+          </FloatingClouds>
+        </FloatingCloudsViewport>
 
         <HomeTabsBar role='tablist' aria-label='Homepage sections'>
           <HomeTabButton

@@ -205,7 +205,6 @@ export const Wrapper = styled.div`
   ${props => props.isMobileMenuShown && 'filter: blur(2px); z-index: 300;'}
   ${props => props.isHomePage && `
     position: relative;
-    overflow: hidden;
   `}
   background-color: ${THEME.colors.dark};
 
@@ -2368,6 +2367,16 @@ export const HomeTabsSpacer = styled.div`
     display: block;
     height: 2.2em;
   }
+`;
+
+export const FloatingCloudsViewport = styled.div`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  pointer-events: none;
+  z-index: 0;
 `;
 
 export const FloatingClouds = styled.div`
