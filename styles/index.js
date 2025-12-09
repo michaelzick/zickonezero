@@ -10,8 +10,7 @@ const phraseCycle = keyframes`
 
 const cloudDrift = keyframes`
   0% { transform: translateX(60vw); }
-  88.889% { transform: translateX(-140vw); }
-  100% { transform: translateX(-140vw); }
+  100% { transform: translateX(-90vw); }
 `;
 
 
@@ -2373,7 +2372,7 @@ export const HomeTabsSpacer = styled.div`
 
 export const FloatingClouds = styled.div`
   position: absolute;
-  top: clamp(1em, 8vw, 5em);
+  top: clamp(2em, 9vw, 6.5em);
   left: 50%;
   width: clamp(12em, 45vw, 19em);
   transform: translateX(60vw);
@@ -2382,7 +2381,7 @@ export const FloatingClouds = styled.div`
   z-index: 0;
 
   ${props => props.$isActive && css`
-    animation: ${cloudDrift} 45s linear infinite;
+    animation: ${cloudDrift} 60s linear infinite;
   `}
 
   img {
@@ -2393,7 +2392,7 @@ export const FloatingClouds = styled.div`
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    top: clamp(1.5em, 12vw, 4em);
+    top: clamp(2.4em, 13vw, 4.8em);
     width: clamp(11em, 65vw, 17em);
   }
 `;
