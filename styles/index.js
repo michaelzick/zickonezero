@@ -2533,6 +2533,7 @@ export const IntroSection = styled.div`
       height: auto;
       border-radius: ${THEME.radii.md};
       display: block;
+      filter: drop-shadow(0 30px 38px rgb(0 0 0 / 37.5%));
     }
 
     .neon-trail {
