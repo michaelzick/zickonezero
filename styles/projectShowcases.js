@@ -7,13 +7,15 @@ export const PageShell = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: clamp(0.8em, 2.6vw, 1.4em) clamp(0.9em, 2.8vw, 2em) clamp(3.5em, 7vw, 6em);
+  padding: clamp(0.8em, 2.6vw, 1.4em) clamp(0.9em, 2.8vw, 2em)
+    clamp(3.5em, 7vw, 6em);
   color: ${THEME.colors.white};
   font-size: 25px;
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     font-size: 18px;
-    padding: clamp(0.55em, 3.8vw, 0.9em) clamp(0.55em, 3.8vw, 0.9em) clamp(3.5em, 7vw, 6em);
+    padding: clamp(0.55em, 3.8vw, 0.9em) clamp(0.55em, 3.8vw, 0.9em)
+      clamp(3.5em, 7vw, 6em);
     margin-top: 2em;
   }
 `;
@@ -84,7 +86,7 @@ export const Title = styled.h1`
 
 export const Summary = styled.p`
   margin: 0;
-  clamp(1em,1.35vw,1.05em);
+  font-size: clamp(1em, 1.35vw, 1.05em);
   line-height: inherit;
   opacity: 0.9;
 `;
@@ -157,7 +159,7 @@ export const SectionTitle = styled(DemoStokeTldrTitle)`
 `;
 
 export const ShowcaseImage = styled(DemoStokeTldrImage)`
-  ${props => props.$position && `object-position: ${props.$position};`}
+  ${(props) => props.$position && `object-position: ${props.$position};`}
   cursor: pointer;
   border: 1.5px solid ${THEME.colors.white};
   box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
@@ -197,7 +199,8 @@ export const AnimatedSection = styled.div`
   .image-animate {
     opacity: 0;
     transform: translateY(12px);
-    transition: opacity 0.6s ease 0.18s, transform 0.6s ease 0.18s, border 0.3s ease;
+    transition: opacity 0.6s ease 0.18s, transform 0.6s ease 0.18s,
+      border 0.3s ease;
   }
 
   .text-animate {
