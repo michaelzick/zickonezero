@@ -1,5 +1,6 @@
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { type KeyboardEvent, type RefObject } from 'react';
+import styled from 'styled-components';
 import {
   BioBox,
   DemoStokeAccordion,
@@ -56,6 +57,19 @@ type CaseStudyContentProps = {
   topTabsEl: HTMLDivElement | null;
   isActive: boolean;
 };
+
+const DemoStokeExternalLink = styled(WhiteTransitionAnchor)`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  line-height: 1.15;
+
+  svg {
+    width: 1.05em;
+    height: 1.05em;
+    margin-left: 0;
+  }
+`;
 
 const CaseStudyContent = ({
   setAnimatedSectionRef,
@@ -394,9 +408,9 @@ const CaseStudyContent = ({
                 <h3>Links</h3>
                 <DemoStokeList>
                   <li className='next-steps'>
-                    <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
-                      www.demostoke.com
-                    </WhiteTransitionAnchor>
+                    <DemoStokeExternalLink href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
+                      DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
+                    </DemoStokeExternalLink>
                   </li>
                 </DemoStokeList>
               </section>
