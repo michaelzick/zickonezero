@@ -128,6 +128,8 @@ const CaseStudyContent = ({
                   />
                 </DemoStokeWhyImageFrame>
 
+                <br />
+
                 <DemoStokeTldrSection className="text-animate">
                   <DemoStokeTldrTitle>TL;DR</DemoStokeTldrTitle>
                   <DemoStokeTldrCopy>
