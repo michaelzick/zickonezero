@@ -99,14 +99,6 @@ const CaseStudyContent = ({
                   <DemoStokeTitle $noMobileTopPad>Introduction</DemoStokeTitle>
                 </section>
 
-                <DemoStokeTldrSection className="text-animate">
-                  <DemoStokeTldrCopy>
-                    I was initially hired as a software engineer at Black Hills Information Security but quickly shifted into reimagining
-                    the Antisyphon Training experience. The goal: replace a static marketing site and scattered LMS flows with a cohesive
-                    marketplace that serves learners, instructors, corporate buyers, and operations teams.
-                  </DemoStokeTldrCopy>
-                </DemoStokeTldrSection>
-
                 <DemoStokeWhyImageFrame className="image-animate">
                   <FullBorderImage
                     src='/img/antisyphon/home.webp'
@@ -114,6 +106,16 @@ const CaseStudyContent = ({
                     loading='lazy'
                   />
                 </DemoStokeWhyImageFrame>
+
+                <DemoStokeTldrSection className="text-animate">
+                  <DemoStokeTldrTitle>TL;DR</DemoStokeTldrTitle>
+                  <DemoStokeTldrCopy>
+                    I was initially hired as a software engineer at Black Hills Information Security but quickly shifted into reimagining
+                    the Antisyphon Training experience. The goal: replace a static marketing site and scattered LMS flows with a cohesive
+                    marketplace that serves learners, instructors, corporate buyers, and operations teams.
+                  </DemoStokeTldrCopy>
+                </DemoStokeTldrSection>
+
                 <br />
               </AnimatedSection>
 
