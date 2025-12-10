@@ -35,7 +35,7 @@ const AnimatedHeadline = ({ className }: AnimatedHeadlineProps) => {
       <AnimatedHeadlineStatic>
         I&nbsp;
         <span style={{ position: 'relative', display: 'inline-block' }}>
-          fuck
+          work
           <Image
             src="/img/white-scribble.webp"
             alt=""
@@ -44,7 +44,7 @@ const AnimatedHeadline = ({ className }: AnimatedHeadlineProps) => {
             style={{
               position: 'absolute',
               top: '50%',
-              left: '50%',
+              left: '39%',
               transform: 'translate(-50%, -50%)',
               width: '120%',
               height: 'auto',
@@ -60,8 +60,24 @@ const AnimatedHeadline = ({ className }: AnimatedHeadlineProps) => {
             style={{
               position: 'absolute',
               top: '50%',
-              left: '50%',
+              left: '43%',
               transform: 'translate(-50%, -50%) scaleX(-1)',
+              width: '120%',
+              height: 'auto',
+              pointerEvents: 'none',
+            }}
+            aria-hidden="true"
+          />
+          <Image
+            src="/img/white-scribble.webp"
+            alt=""
+            width={100}
+            height={82}
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '37%',
+              transform: 'translate(-50%, -50%)',
               width: '120%',
               height: 'auto',
               pointerEvents: 'none',
