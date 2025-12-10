@@ -1,5 +1,6 @@
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { type KeyboardEvent, type RefObject } from 'react';
+import styled from 'styled-components';
 import {
   BioBox,
   DemoStokeAccordion,
@@ -39,7 +40,27 @@ import {
 } from '../../../styles';
 import SidebarSectionTabs from '../SidebarSectionTabs';
 import { AnimatedSection } from '../../../styles/projectShowcases';
+import { THEME } from '../../../styles/theme';
 import { CASE_STUDY_BOTTOM_SECTION_ID, CASE_STUDY_SECTIONS, HOW_IMAGES, METHOD_SECTIONS, PERSONA_ITEMS, TLDR_ITEMS } from './data';
+
+const OutcomeSection = styled(DemoStokeTldrSection)`
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.14), rgba(0, 113, 227, 0.22));
+  border: 1px solid ${THEME.colors.blue};
+  box-shadow: 0 26px 48px -32px rgb(0 0 0 / 75%), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+`;
+
+const OutcomeHeading = styled(DemoStokeTitle)`
+  color: ${THEME.colors.demostoke};
+  margin-bottom: 0.35em;
+`;
+
+const OutcomeCopy = styled(DemoStokeTldrCopy)`
+  font-size: clamp(1.1em, 2vw, 1.35em);
+  line-height: 1.85;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  width: 100%;
+`;
 
 type CaseStudyContentProps = {
   setAnimatedSectionRef: (id: string) => (el: HTMLDivElement | null) => void;
@@ -119,21 +140,6 @@ const CaseStudyContent = ({
                 <br />
               </AnimatedSection>
 
-              <AnimatedSection
-                ref={setAnimatedSectionRef('section-intro-tldr')}
-                data-animate-id='section-intro-tldr'
-                className={visibleSections['section-intro-tldr'] ? 'visible' : undefined}
-              >
-                <DemoStokeTldrSection>
-                  <DemoStokeTldrTitle>TL;DR</DemoStokeTldrTitle>
-                  <DemoStokeTldrCopy>
-                    We transformed Antisyphon into a full training marketplace with checkout, pay-what-you-can, learner dashboards,
-                    and admin tooling. WordPress, WooCommerce, and LMS integrations now power a cohesive experience and cut course
-                    setup time by roughly 85%.
-                  </DemoStokeTldrCopy>
-                </DemoStokeTldrSection>
-              </AnimatedSection>
-
               <section id='section-tldr' className='story-section'>
                 <DemoStokeTldrSection>
                   <DemoStokeTldrList>
@@ -156,6 +162,25 @@ const CaseStudyContent = ({
                   </DemoStokeTldrList>
                 </DemoStokeTldrSection>
               </section>
+
+              <br />
+
+              <AnimatedSection
+                ref={setAnimatedSectionRef('section-outcome')}
+                data-animate-id='section-outcome'
+                className={visibleSections['section-outcome'] ? 'visible' : undefined}
+              >
+                <section id='section-outcome' className='story-section'>
+                  <OutcomeHeading>The Outcome</OutcomeHeading>
+                  <OutcomeSection className="text-animate">
+                    <OutcomeCopy>
+                      We transformed Antisyphon into a full training marketplace with checkout, pay-what-you-can, learner dashboards,
+                      and admin tooling. WordPress, WooCommerce, and LMS integrations now power a cohesive experience and cut course
+                      setup time by roughly 85%.
+                    </OutcomeCopy>
+                  </OutcomeSection>
+                </section>
+              </AnimatedSection>
 
               <br />
 
