@@ -10,7 +10,6 @@ import {
   DemoStokeAccordionHeader,
   DemoStokeAccordionItem,
   DemoStokeAccordionTitle,
-  DemoStokeBorderBox,
   DemoStokeContentGrid,
   DemoStokeList,
   DemoStokeMethodCard,
@@ -30,7 +29,6 @@ import {
   DemoStokeTldrRow,
   DemoStokeTldrSection,
   DemoStokeTldrTitle,
-  DemoStokeTwoColumnCopy,
   DemoStokeTwoUp,
   DemoStokeWhyImageFrame,
   DemoStokeExternalLink,
@@ -181,53 +179,6 @@ const CaseStudyContent = ({
                       setup time by roughly 85%.
                     </OutcomeCopy>
                   </OutcomeSection>
-                </section>
-              </AnimatedSection>
-
-              <br />
-
-              <AnimatedSection
-                ref={setAnimatedSectionRef('section-the-why')}
-                data-animate-id='section-the-why'
-                className={visibleSections['section-the-why'] ? 'visible' : undefined}
-              >
-                <section id='section-the-why' className='story-section'>
-                  <DemoStokeTitle>The Why / Starting Point</DemoStokeTitle>
-                  <DemoStokeBorderBox>
-                    <DemoStokeTwoUp className="text-animate">
-                      <section id='section-beginning'>
-                        <h3>The Beginning</h3>
-                        <p>
-                          Early on, the Antisyphon site was a collection of marketing pages pointing to third-party platforms.
-                          The team needed something more cohesive that matched the playful BHIS brand while staying professional enough
-                          for enterprise security buyers.
-                        </p>
-                        <p>
-                          I stepped in to define the product direction, partner with creative directors, and translate ideas into
-                          usable flows that could grow beyond a simple brochure site.
-                        </p>
-                      </section>
-                      <section id='section-evolution'>
-                        <h3>The Opportunity</h3>
-                        <DemoStokeTwoColumnCopy>
-                          <div className='plain-lines'>
-                            <p>
-                              Instead of shipping another static site, we built a true commerce experience with course discovery, a
-                              shopping cart, and account dashboards. That meant new flows for live and on-demand courses, donations,
-                              and coupons&mdash;all while keeping operations simple.
-                            </p>
-                          </div>
-                        </DemoStokeTwoColumnCopy>
-                      </section>
-                    </DemoStokeTwoUp>
-                    <DemoStokeWhyImageFrame className="image-animate">
-                      <FullBorderImage
-                        src='/img/antisyphon/wireframe-home.webp'
-                        alt='Figma wireframes for the Antisyphon homepage'
-                        loading='lazy'
-                      />
-                    </DemoStokeWhyImageFrame>
-                  </DemoStokeBorderBox>
                 </section>
               </AnimatedSection>
 
