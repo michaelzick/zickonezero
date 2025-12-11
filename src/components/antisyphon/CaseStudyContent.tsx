@@ -230,7 +230,6 @@ const CaseStudyContent = ({
                   <OutcomeHeading>The Outcome</OutcomeHeading>
                   <OutcomeSection className="text-animate">
                     <OutcomeCopy>
-                      By transforming AntisyphonTraining.com into a full e-commerce marketplace built on WordPress and WooCommerce, we:
                       <ul className='plain-lines'>
                         <li>Increased enrollments by 49%</li>
                         <li>Reduced customer support tickets by 67%</li>
