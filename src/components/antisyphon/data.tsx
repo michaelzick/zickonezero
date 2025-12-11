@@ -113,7 +113,7 @@ export const METHOD_SECTIONS: MethodSection[] = [
       'Designed roster and reporting flows so team leads can manage seats, compliance statuses, and constraints without breaking LMS sync.'
     ],
     images: [
-      { src: '/img/antisyphon/corporate-dashboard.webp', alt: 'Corporate dashboard with course progress' }
+      { src: '/img/antisyphon/wireframe-corporate-dashboard.webp', alt: 'Corporate dashboard with course progress' }
     ]
   }
 ] ;
