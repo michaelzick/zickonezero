@@ -76,6 +76,8 @@ const FlowStorySection = styled.section`
   width: 100%;
 `;
 
+type FlowBlock = (typeof FLOW_BLOCKS)[number];
+
 type ScreensContentProps = {
   setAnimatedSectionRef: (id: string) => (el: HTMLDivElement | null) => void;
   visibleSections: Record<string, boolean>;
