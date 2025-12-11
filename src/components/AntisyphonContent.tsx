@@ -18,7 +18,7 @@ import { SidebarSectionTabsMobile } from './SidebarSectionTabs';
 import useAnimatedSections from './demostoke/useAnimatedSections';
 import CaseStudyContent from './antisyphon/CaseStudyContent';
 import ScreensContent from './antisyphon/ScreensContent';
-import { CASE_STUDY_BOTTOM_SECTION_ID, CASE_STUDY_SECTIONS, FLOW_BOTTOM_SECTION_ID, FLOW_SECTIONS, HOW_IMAGES, METHOD_SECTIONS } from './antisyphon/data';
+import { CASE_STUDY_BOTTOM_SECTION_ID, CASE_STUDY_SECTIONS, FLOW_BLOCKS, FLOW_BOTTOM_SECTION_ID, FLOW_SECTIONS, HOW_IMAGES, METHOD_SECTIONS } from './antisyphon/data';
 
 type SectionKey = 'case-study' | 'flows';
 
@@ -29,12 +29,14 @@ const AntisyphonContent = () => {
   const [topTabsEl, setTopTabsEl] = useState<HTMLDivElement | null>(null);
   const [lightboxController, setLightboxController] = useState({ toggler: false, slide: 1 });
   const [methodLightboxController, setMethodLightboxController] = useState({ toggler: false, slide: 1 });
+  const [flowLightboxController, setFlowLightboxController] = useState({ toggler: false, slide: 1 });
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [openPersonaId, setOpenPersonaId] = useState<string | null>(null);
   const { visibleSections, setAnimatedSectionRef } = useAnimatedSections(activeTab);
   const scrollRowRef = useRef<HTMLDivElement | null>(null);
   const methodImages = useMemo(() => METHOD_SECTIONS.flatMap(({ images }) => images), []);
+  const flowImages = useMemo(() => FLOW_BLOCKS.flatMap(({ images }) => images), []);
 
   const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {
     setTopTabsEl(node);
@@ -65,6 +67,13 @@ const AntisyphonContent = () => {
 
   const openMethodLightbox = useCallback((index: number) => {
     setMethodLightboxController((prev) => ({
+      toggler: !prev.toggler,
+      slide: index + 1
+    }));
+  }, []);
+
+  const openFlowLightbox = useCallback((index: number) => {
+    setFlowLightboxController((prev) => ({
       toggler: !prev.toggler,
       slide: index + 1
     }));
@@ -165,6 +174,7 @@ const AntisyphonContent = () => {
             topTabsEl={topTabsEl}
             sections={FLOW_SECTIONS}
             isActive={!isCaseStudyView}
+            openFlowLightbox={openFlowLightbox}
           />
         )}
       </Wrapper>
@@ -177,6 +187,11 @@ const AntisyphonContent = () => {
         toggler={methodLightboxController.toggler}
         sources={methodImages.map(({ src }) => src)}
         slide={methodLightboxController.slide}
+      />
+      <FsLightbox
+        toggler={flowLightboxController.toggler}
+        sources={flowImages.map(({ src }) => src)}
+        slide={flowLightboxController.slide}
       />
       <FooterContent />
     </>

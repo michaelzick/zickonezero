@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import {
   BioBox,
   DemoStokeContentGrid,
@@ -11,7 +12,38 @@ import {
 } from '../../../styles';
 import SidebarSectionTabs, { SidebarSectionConfig } from '../SidebarSectionTabs';
 import { AnimatedSection } from '../../../styles/projectShowcases';
+import { THEME } from '../../../styles/theme';
 import { FLOW_BLOCKS } from './data';
+
+const FlowImageButton = styled.button`
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  border-radius: ${THEME.radii.md};
+
+  &:focus-visible {
+    outline: 2px solid ${THEME.colors.demostoke};
+    outline-offset: 4px;
+  }
+`;
+
+const FlowImage = styled(DemoStokeTldrImage)`
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: ${THEME.radii.md};
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+
+  ${FlowImageButton}:hover &,
+  ${FlowImageButton}:focus-visible & {
+    border-color: ${THEME.colors.hotRed};
+    box-shadow: 0 24px 48px -32px rgb(0 0 0 / 70%), 0 0 0 1px ${THEME.colors.hotRed};
+  }
+`;
 
 type ScreensContentProps = {
   setAnimatedSectionRef: (id: string) => (el: HTMLDivElement | null) => void;
@@ -19,6 +51,7 @@ type ScreensContentProps = {
   topTabsEl: HTMLDivElement | null;
   sections: SidebarSectionConfig[];
   isActive: boolean;
+  openFlowLightbox: (index: number) => void;
 };
 
 const ScreensContent = ({
@@ -26,8 +59,16 @@ const ScreensContent = ({
   visibleSections,
   topTabsEl,
   sections,
-  isActive
+  isActive,
+  openFlowLightbox
 }: ScreensContentProps) => {
+  const flowImageOffsets = FLOW_BLOCKS.reduce<number[]>((offsets, _section, idx) => {
+    const priorCount = idx > 0 ? FLOW_BLOCKS[idx - 1]?.images.length ?? 0 : 0;
+    const previous = offsets[idx - 1] ?? 0;
+    offsets[idx] = idx === 0 ? 0 : previous + priorCount;
+    return offsets;
+  }, []);
+
   return (
     <div id="screens-content">
       <BioBox direction='right' noBottomPadding top>
@@ -58,15 +99,24 @@ const ScreensContent = ({
                             <DemoStokeTldrCopy>{copy}</DemoStokeTldrCopy>
                           </div>
                           <div className="image-animate">
-                            {images.map((image, imageIndex) => (
-                              <DemoStokeTldrImage
-                                key={image.src}
-                                src={image.src}
-                                alt={image.alt}
-                                loading='lazy'
-                                style={imageIndex > 0 ? { marginTop: '12px' } : undefined}
-                              />
-                            ))}
+                            {images.map((image, imageIndex) => {
+                              const globalIndex = (flowImageOffsets[index] ?? 0) + imageIndex;
+                              return (
+                                <FlowImageButton
+                                  key={image.src}
+                                  type='button'
+                                  onClick={() => openFlowLightbox(globalIndex)}
+                                  aria-label={`Open image: ${image.alt}`}
+                                  style={imageIndex > 0 ? { marginTop: '12px' } : undefined}
+                                >
+                                  <FlowImage
+                                    src={image.src}
+                                    alt={image.alt}
+                                    loading='lazy'
+                                  />
+                                </FlowImageButton>
+                              );
+                            })}
                           </div>
                         </DemoStokeMethodRow>
                       </DemoStokeMethodCard>

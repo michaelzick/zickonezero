@@ -91,12 +91,19 @@ const MethodImageFrame = styled.div`
   overflow: hidden;
   box-shadow: 0 30px 38px -30px rgb(0 0 0 / 75%);
   background: ${THEME.colors.darkest};
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+
+  ${MethodImageButton}:hover &,
+  ${MethodImageButton}:focus-visible & {
+    border-color: ${THEME.colors.hotRed};
+    box-shadow: 0 24px 48px -32px rgb(0 0 0 / 70%), 0 0 0 1px ${THEME.colors.hotRed};
   }
 `;
 
