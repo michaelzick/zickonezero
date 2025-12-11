@@ -95,17 +95,6 @@ export const METHOD_SECTIONS: MethodSection[] = [
     images: [{ src: '/img/antisyphon/wireframe-live-courses.webp', alt: 'Course catalog layout with badge styling' }]
   },
   {
-    title: 'Build the Customer and Admin Interfaces',
-    bullets: [
-      'Customized WooCommerce and WordPress templates for live/on-demand courses and subscriptions.',
-      'Integrated with the LMS plus PHP/MySQL services for progress tracking, certificates, and reporting.',
-      'Streamlined admin forms and ACF-driven inputs, cutting course setup time by roughly 85%.'
-    ],
-    images: [
-      { src: '/img/antisyphon/admin-order-edit.webp', alt: 'Admin order edit view with custom fields' }
-    ]
-  },
-  {
     title: 'Corporate Teams and Admin Dashboards',
     bullets: [
       'Wireframed a full corporate administration dashboard for team-based cybersecurity training with explicit roles and guardrails.',
@@ -114,6 +103,17 @@ export const METHOD_SECTIONS: MethodSection[] = [
     ],
     images: [
       { src: '/img/antisyphon/wireframe-corporate-dashboard.webp', alt: 'Corporate dashboard with course progress' }
+    ]
+  },
+  {
+    title: 'Build the Customer and Admin Interfaces',
+    bullets: [
+      'Customized WooCommerce and WordPress templates for live/on-demand courses and subscriptions.',
+      'Integrated with the LMS plus PHP/MySQL services for progress tracking, certificates, and reporting.',
+      'Streamlined admin forms and ACF-driven inputs, cutting course setup time by roughly 85%.'
+    ],
+    images: [
+      { src: '/img/antisyphon/admin-order-edit.webp', alt: 'Admin order edit view with custom fields' }
     ]
   }
 ] ;
