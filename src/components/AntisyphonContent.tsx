@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import FsLightbox from 'fslightbox-react';
 
 import {
@@ -18,7 +18,7 @@ import { SidebarSectionTabsMobile } from './SidebarSectionTabs';
 import useAnimatedSections from './demostoke/useAnimatedSections';
 import CaseStudyContent from './antisyphon/CaseStudyContent';
 import ScreensContent from './antisyphon/ScreensContent';
-import { CASE_STUDY_BOTTOM_SECTION_ID, CASE_STUDY_SECTIONS, FLOW_BOTTOM_SECTION_ID, FLOW_SECTIONS, HOW_IMAGES } from './antisyphon/data';
+import { CASE_STUDY_BOTTOM_SECTION_ID, CASE_STUDY_SECTIONS, FLOW_BOTTOM_SECTION_ID, FLOW_SECTIONS, HOW_IMAGES, METHOD_SECTIONS } from './antisyphon/data';
 
 type SectionKey = 'case-study' | 'flows';
 
@@ -28,11 +28,13 @@ const AntisyphonContent = () => {
   const [activeTab, setActiveTab] = useState<SectionKey>('case-study');
   const [topTabsEl, setTopTabsEl] = useState<HTMLDivElement | null>(null);
   const [lightboxController, setLightboxController] = useState({ toggler: false, slide: 1 });
+  const [methodLightboxController, setMethodLightboxController] = useState({ toggler: false, slide: 1 });
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [openPersonaId, setOpenPersonaId] = useState<string | null>(null);
   const { visibleSections, setAnimatedSectionRef } = useAnimatedSections(activeTab);
   const scrollRowRef = useRef<HTMLDivElement | null>(null);
+  const methodImages = useMemo(() => METHOD_SECTIONS.flatMap(({ images }) => images), []);
 
   const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {
     setTopTabsEl(node);
@@ -60,6 +62,13 @@ const AntisyphonContent = () => {
       slide: index + 1
     });
   };
+
+  const openMethodLightbox = useCallback((index: number) => {
+    setMethodLightboxController((prev) => ({
+      toggler: !prev.toggler,
+      slide: index + 1
+    }));
+  }, []);
 
   const updateScrollButtons = useCallback(() => {
     const row = scrollRowRef.current;
@@ -141,6 +150,7 @@ const AntisyphonContent = () => {
             canScrollRight={canScrollRight}
             scrollGalleryBy={scrollGalleryBy}
             openLightbox={openLightbox}
+            openMethodLightbox={openMethodLightbox}
             openPersonaId={openPersonaId}
             togglePersona={togglePersona}
             topTabsEl={topTabsEl}
@@ -162,6 +172,11 @@ const AntisyphonContent = () => {
         toggler={lightboxController.toggler}
         sources={HOW_IMAGES.map(({ src }) => src)}
         slide={lightboxController.slide}
+      />
+      <FsLightbox
+        toggler={methodLightboxController.toggler}
+        sources={methodImages.map(({ src }) => src)}
+        slide={methodLightboxController.slide}
       />
       <FooterContent />
     </>

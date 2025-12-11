@@ -77,7 +77,7 @@ export const METHOD_SECTIONS = [
       'Mapped pain points across third-party sales, LMS enrollment, and communications.',
       'Captured requirements for live events, on-demand courses, coupons, and corporate purchasing.'
     ],
-    image: { src: '/img/antisyphon/wireframe-home.webp', alt: 'Early Antisyphon homepage wireframe' }
+    images: [{ src: '/img/antisyphon/wireframe-home.webp', alt: 'Early Antisyphon homepage wireframe' }]
   },
   {
     title: 'Design and Validate the Experience',
@@ -86,7 +86,7 @@ export const METHOD_SECTIONS = [
       'Iterated on achievement-style course badges to keep the tone fun but credible.',
       'Validated flows with stakeholders and instructors before handing hi-fis to Fried Design for visual polish.'
     ],
-    image: { src: '/img/antisyphon/course-catalog-full.webp', alt: 'Course catalog layout with badge styling' }
+    images: [{ src: '/img/antisyphon/course-catalog-full.webp', alt: 'Course catalog layout with badge styling' }]
   },
   {
     title: 'Build and Operate the Platform',
@@ -95,7 +95,10 @@ export const METHOD_SECTIONS = [
       'Integrated with the LMS plus PHP/MySQL services for progress tracking, certificates, and reporting.',
       'Streamlined admin forms and ACF-driven inputs, cutting course setup time by roughly 85%.'
     ],
-    image: { src: '/img/antisyphon/admin-order-edit.webp', alt: 'Admin order edit view with custom fields' }
+    images: [
+      { src: '/img/antisyphon/admin-order-edit.webp', alt: 'Admin order edit view with custom fields' },
+      { src: '/img/antisyphon/corporate-dashboard.webp', alt: 'Corporate dashboard with course progress' }
+    ]
   }
 ] as const;
 

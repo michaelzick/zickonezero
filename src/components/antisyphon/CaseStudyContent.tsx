@@ -60,6 +60,46 @@ const OutcomeCopy = styled(DemoStokeTldrCopy)`
   width: 100%;
 `;
 
+const MethodImages = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+`;
+
+const MethodImageButton = styled.button`
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  border-radius: ${THEME.radii.md};
+
+  &:focus-visible {
+    outline: 2px solid ${THEME.colors.demostoke};
+    outline-offset: 4px;
+  }
+`;
+
+const MethodImageFrame = styled.div`
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: ${THEME.radii.md};
+  border: 1.5px solid ${THEME.colors.grey};
+  overflow: hidden;
+  box-shadow: 0 30px 38px -30px rgb(0 0 0 / 75%);
+  background: ${THEME.colors.darkest};
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+`;
+
 type CaseStudyContentProps = {
   setAnimatedSectionRef: (id: string) => (el: HTMLDivElement | null) => void;
   visibleSections: Record<string, boolean>;
@@ -68,6 +108,7 @@ type CaseStudyContentProps = {
   canScrollRight: boolean;
   scrollGalleryBy: (direction: number) => void;
   openLightbox: (index: number) => void;
+  openMethodLightbox: (index: number) => void;
   openPersonaId: string | null;
   togglePersona: (id: string) => void;
   topTabsEl: HTMLDivElement | null;
@@ -82,11 +123,19 @@ const CaseStudyContent = ({
   canScrollRight,
   scrollGalleryBy,
   openLightbox,
+  openMethodLightbox,
   openPersonaId,
   togglePersona,
   topTabsEl,
   isActive
 }: CaseStudyContentProps) => {
+  const methodImageOffsets = METHOD_SECTIONS.reduce<number[]>((offsets, _section, idx) => {
+    const priorCount = idx > 0 ? METHOD_SECTIONS[idx - 1]?.images.length ?? 0 : 0;
+    const previous = offsets[idx - 1] ?? 0;
+    offsets[idx] = idx === 0 ? 0 : previous + priorCount;
+    return offsets;
+  }, []);
+
   return (
     <div id="executive-content">
       <BioBox direction='right' noBottomPadding top>
@@ -329,35 +378,51 @@ const CaseStudyContent = ({
 
               <br />
 
-              <section id='section-methodology' className='story-section'>
-                <DemoStokeTitle>Methods / The UX Process</DemoStokeTitle>
-                <DemoStokeMethodList>
-                  {METHOD_SECTIONS.map(({ title, bullets, image }, index) => (
-                    <AnimatedSection
-                      key={title}
-                      ref={setAnimatedSectionRef(`method-${index}`)}
-                      data-animate-id={`method-${index}`}
-                      className={visibleSections[`method-${index}`] ? 'visible' : undefined}
-                    >
-                      <DemoStokeMethodCard>
-                        <DemoStokeMethodRow $reverse={index % 2 === 1}>
-                          <div className="text-animate">
-                            <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
-                            <DemoStokeTldrCopy>
-                              <ul className='plain-lines'>
-                                {bullets.map((bullet) => (
-                                  <li key={bullet}>{bullet}</li>
-                                ))}
-                              </ul>
-                            </DemoStokeTldrCopy>
-                          </div>
-                          <DemoStokeTldrImage className="image-animate" src={image.src} alt={image.alt} loading='lazy' />
-                        </DemoStokeMethodRow>
-                      </DemoStokeMethodCard>
-                    </AnimatedSection>
-                  ))}
-                </DemoStokeMethodList>
-              </section>
+                <section id='section-methodology' className='story-section'>
+                  <DemoStokeTitle>Methods / The UX Process</DemoStokeTitle>
+                  <DemoStokeMethodList>
+                    {METHOD_SECTIONS.map(({ title, bullets, images }, index) => (
+                      <AnimatedSection
+                        key={title}
+                        ref={setAnimatedSectionRef(`method-${index}`)}
+                        data-animate-id={`method-${index}`}
+                        className={visibleSections[`method-${index}`] ? 'visible' : undefined}
+                      >
+                        <DemoStokeMethodCard>
+                          <DemoStokeMethodRow $reverse={index % 2 === 1}>
+                            <div className="text-animate">
+                              <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
+                              <DemoStokeTldrCopy>
+                                <ul className='plain-lines'>
+                                  {bullets.map((bullet) => (
+                                    <li key={bullet}>{bullet}</li>
+                                  ))}
+                                </ul>
+                              </DemoStokeTldrCopy>
+                            </div>
+                            <MethodImages className="image-animate">
+                              {images.map((image, imageIndex) => {
+                                const globalIndex = (methodImageOffsets[index] ?? 0) + imageIndex;
+                                return (
+                                  <MethodImageButton
+                                    key={image.src}
+                                    type='button'
+                                    onClick={() => openMethodLightbox(globalIndex)}
+                                    aria-label={`Open image: ${image.alt}`}
+                                  >
+                                    <MethodImageFrame>
+                                      <img src={image.src} alt={image.alt} loading='lazy' />
+                                    </MethodImageFrame>
+                                  </MethodImageButton>
+                                );
+                              })}
+                            </MethodImages>
+                          </DemoStokeMethodRow>
+                        </DemoStokeMethodCard>
+                      </AnimatedSection>
+                    ))}
+                  </DemoStokeMethodList>
+                </section>
 
               <section id='section-links' className='story-section'>
                 <h3>Links</h3>
