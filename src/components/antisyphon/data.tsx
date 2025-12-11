@@ -69,7 +69,13 @@ export const TLDR_ITEMS: {
   }
 ] as const;
 
-export const METHOD_SECTIONS = [
+type MethodSection = {
+  title: string;
+  bullets: string[];
+  images: { src: string; alt: string; }[];
+};
+
+export const METHOD_SECTIONS: MethodSection[] = [
   {
     title: 'Discovery and Alignment',
     bullets: [
@@ -110,7 +116,7 @@ export const METHOD_SECTIONS = [
       { src: '/img/antisyphon/corporate-dashboard.webp', alt: 'Corporate dashboard with course progress' }
     ]
   }
-] as const;
+] ;
 
 export const PERSONA_ITEMS = [
   {

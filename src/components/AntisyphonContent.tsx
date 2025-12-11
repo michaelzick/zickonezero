@@ -35,8 +35,8 @@ const AntisyphonContent = () => {
   const [openPersonaId, setOpenPersonaId] = useState<string | null>(null);
   const { visibleSections, setAnimatedSectionRef } = useAnimatedSections(activeTab);
   const scrollRowRef = useRef<HTMLDivElement | null>(null);
-  const methodImages = useMemo(() => METHOD_SECTIONS.flatMap(({ images }) => images), []);
-  const flowImages = useMemo(() => FLOW_BLOCKS.flatMap(({ images }) => images), []);
+  const methodImages = useMemo(() => METHOD_SECTIONS.flatMap(({ images }) => images), [METHOD_SECTIONS]);
+  const flowImages = useMemo(() => FLOW_BLOCKS.flatMap(({ images }) => images), [FLOW_BLOCKS]);
 
   const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {
     setTopTabsEl(node);

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import {
   BioBox,
   DemoStokeContentGrid,
@@ -7,12 +8,21 @@ import {
   DemoStokeTitle,
   DemoStokeTldrCopy,
   DemoStokeTldrImage,
-  DemoStokeTldrTitle
+  DemoStokeTldrSection,
+  DemoStokeTldrTitle,
+  DemoStokeWhyImageFrame,
+  FlexBox,
+  FullBorderImage,
+  PitchDeckLink
 } from '../../../styles';
 import SidebarSectionTabs, { SidebarSectionConfig } from '../SidebarSectionTabs';
 import { AnimatedSection } from '../../../styles/projectShowcases';
 import { THEME } from '../../../styles/theme';
 import { FLOW_BLOCKS } from './data';
+
+const FlowMethodList = styled(DemoStokeMethodList)`
+  gap: clamp(1.6em, 3vw, 2.6em);
+`;
 
 const FlowSection = styled(DemoStokeMethodCard)`
   display: flex;
@@ -95,15 +105,41 @@ const ScreensContent = ({
           <DemoStokeContentGrid>
             <div>
               <section id='screens-introduction' className='story-section'>
-                <DemoStokeTitle $noMobileTopPad>Product Screens and Flows</DemoStokeTitle>
-                <DemoStokeTldrCopy>
-                  A sampling of the core Antisyphon experiences, from catalog browsing to admin operations,
-                  built on top of WordPress, WooCommerce, and LMS integrations.
-                </DemoStokeTldrCopy>
+                <FlexBox>
+                  <img className='ds-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
+                  <div>
+                    <DemoStokeTitle $noMobileTopPad>Product Screens and Flows</DemoStokeTitle>
+                    <PitchDeckLink className='pitch-link-desktop' href="https://www.antisyphontraining.com/" target='_blank' rel='noopener noreferrer'>
+                      AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden="true" />
+                    </PitchDeckLink>
+                  </div>
+                </FlexBox>
+
+                <PitchDeckLink className='pitch-link-mobile' href="https://www.antisyphontraining.com/" target='_blank' rel='noopener noreferrer'>
+                  AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden="true" />
+                </PitchDeckLink>
+
+                <DemoStokeWhyImageFrame className="image-animate" style={{ marginTop: '0.75em' }}>
+                  <FullBorderImage
+                    src='/img/antisyphon/course-catalog-full.webp'
+                    alt='Antisyphon course catalog layout'
+                    loading='lazy'
+                  />
+                </DemoStokeWhyImageFrame>
+
+                <br />
+
+                <DemoStokeTldrSection className="text-animate">
+                  <DemoStokeTldrTitle>TL;DR</DemoStokeTldrTitle>
+                  <DemoStokeTldrCopy>
+                    A sampling of the core Antisyphon experiences—from catalog browsing to admin operations—built on top of
+                    WordPress, WooCommerce, and LMS integrations.
+                  </DemoStokeTldrCopy>
+                </DemoStokeTldrSection>
               </section>
 
-              <DemoStokeMethodList>
-                {FLOW_BLOCKS.map(({ id, title, copy, images, reverse }, index) => (
+              <FlowMethodList>
+                {FLOW_BLOCKS.map(({ id, title, copy, images }, index) => (
                   <AnimatedSection
                     key={id}
                     ref={setAnimatedSectionRef(id)}
@@ -139,7 +175,7 @@ const ScreensContent = ({
                     </section>
                   </AnimatedSection>
                 ))}
-              </DemoStokeMethodList>
+              </FlowMethodList>
 
               <br />
               <br />
