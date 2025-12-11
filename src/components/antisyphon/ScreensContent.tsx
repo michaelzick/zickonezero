@@ -19,7 +19,7 @@ import { THEME } from '../../../styles/theme';
 import { FLOW_BLOCKS } from './data';
 
 const FlowMethodList = styled(DemoStokeMethodList)`
-  gap: clamp(1.6em, 3vw, 2.6em);
+  gap: 2.5em;
 `;
 
 const FlowSection = styled(DemoStokeMethodCard)`
@@ -70,6 +70,11 @@ const FlowImagesRow = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: clamp(0.75em, 1.8vw, 1.2em);
+`;
+
+const FlowStorySection = styled.section`
+  margin-top: 0;
+  width: 100%;
 `;
 
 type ScreensContentProps = {
@@ -133,7 +138,7 @@ const ScreensContent = ({
                   data-animate-id={catalogBlock.id}
                   className={visibleSections[catalogBlock.id] ? 'visible' : undefined}
                 >
-                  <section id={catalogBlock.id} className='story-section' style={{ marginTop: '1.2em' }}>
+                  <FlowStorySection id={catalogBlock.id}>
                     <FlowSection>
                       <FlowText className="text-animate">
                         <DemoStokeTitle>{catalogBlock.title}</DemoStokeTitle>
@@ -163,7 +168,7 @@ const ScreensContent = ({
                         ))}
                       </FlowImagesRow>
                     </FlowSection>
-                  </section>
+                  </FlowStorySection>
                 </AnimatedSection>
               )}
 
@@ -175,7 +180,7 @@ const ScreensContent = ({
                     data-animate-id={id}
                     className={visibleSections[id] ? 'visible' : undefined}
                   >
-                    <section id={id} className='story-section'>
+                    <FlowStorySection id={id}>
                       <FlowSection>
                         <FlowText className="text-animate">
                           <DemoStokeTitle>{title}</DemoStokeTitle>
@@ -198,7 +203,7 @@ const ScreensContent = ({
                           ))}
                         </FlowImagesRow>
                       </FlowSection>
-                    </section>
+                    </FlowStorySection>
                   </AnimatedSection>
                 ))}
               </FlowMethodList>
