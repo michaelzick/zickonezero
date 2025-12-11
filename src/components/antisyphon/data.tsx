@@ -135,12 +135,10 @@ export const PERSONA_ITEMS = [
 ] as const;
 
 export const HOW_IMAGES = [
-  { src: '/img/antisyphon/home.webp', alt: 'Antisyphon Training homepage' },
   { src: '/img/antisyphon/course-catalog.webp', alt: 'Course catalog with category filters' },
   { src: '/img/antisyphon/pwyc-open.webp', alt: 'Pay-what-you-can options in the cart' },
   { src: '/img/antisyphon/checkout-1.webp', alt: 'Checkout form with billing details' },
   { src: '/img/antisyphon/dashboard-my-live-courses-prod.webp', alt: 'Learner dashboard showing live courses' },
-  { src: '/img/antisyphon/corporate-dashboard.webp', alt: 'Corporate dashboard with course progress' },
   { src: '/img/antisyphon/cis-course.webp', alt: 'Course detail page with syllabus and schedule' },
   { src: '/img/antisyphon/admin-course-edit.webp', alt: 'Admin course edit screen with custom fields' },
 ] as const;
