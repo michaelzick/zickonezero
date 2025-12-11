@@ -196,7 +196,7 @@ export const FLOW_BLOCKS: FlowBlock[] = [
     ),
     images: [
       { src: '/img/antisyphon/cart.webp', alt: 'Cart showing courses and donations' },
-      { src: '/img/antisyphon/pwyc.webp', alt: 'Cart with pay-what-you-can controls' }
+      { src: '/img/antisyphon/checkout-1.webp', alt: 'Cart with pay-what-you-can controls' }
     ],
     reverse: true
   },
