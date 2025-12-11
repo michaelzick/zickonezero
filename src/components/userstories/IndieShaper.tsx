@@ -108,7 +108,7 @@ const IndieShaper = ({ wrapWithBioBox = true, setAnimatedSectionRef, visibleSect
           <FlexBox>
             <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
             <div>
-              <h2 className='tab-header page-header'>User Stories</h2>
+              <h2 className='tab-header page-header'>DemoStoke User Stories</h2>
               <PitchDeckLink href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
                 DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
               </PitchDeckLink>

@@ -79,7 +79,7 @@ const CaseStudyContent = ({
               <FlexBox>
                 <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
                 <div>
-                  <h2 className='tab-header page-header'>UX Case Study</h2>
+                  <h2 className='tab-header page-header'>DemoStoke UX Case Study</h2>
                   <PitchDeckLink className='pitch-link-desktop' href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
                     DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
                   </PitchDeckLink>

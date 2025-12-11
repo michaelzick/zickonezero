@@ -152,7 +152,7 @@ const CaseStudyContent = ({
               <FlexBox>
                 <img className='ds-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
                 <div>
-                  <h2 className='tab-header page-header'>UX Case Study</h2>
+                  <h2 className='tab-header page-header'>Antisyphon Training UX Case Study</h2>
                   <PitchDeckLink className='pitch-link-desktop' href="https://www.antisyphontraining.com/" target='_blank' rel='noopener noreferrer'>
                     AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden="true" />
                   </PitchDeckLink>
