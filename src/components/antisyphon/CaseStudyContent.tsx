@@ -174,9 +174,12 @@ const CaseStudyContent = ({
                   <OutcomeHeading>The Outcome</OutcomeHeading>
                   <OutcomeSection className="text-animate">
                     <OutcomeCopy>
-                      We transformed Antisyphon into a full training marketplace with checkout, pay-what-you-can, learner dashboards,
-                      and admin tooling. WordPress, WooCommerce, and LMS integrations now power a cohesive experience and cut course
-                      setup time by roughly 85%.
+                      By transforming AntisyphonTraining.com into a full e-commerce marketplace built on WordPress and WooCommerce, we:
+                      <ul className='plain-lines'>
+                        <li>Increased enrollments by 49%</li>
+                        <li>Reduced customer support tickets by 67%</li>
+                        <li>Cut course setup time by 85%</li>
+                      </ul>
                     </OutcomeCopy>
                   </OutcomeSection>
                 </section>

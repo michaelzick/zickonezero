@@ -101,7 +101,7 @@ export const METHOD_SECTIONS = [
 
 export const PERSONA_ITEMS = [
   {
-    title: 'Security Learners',
+    title: 'Cybersecurity Students',
     bullets: [
       'Need transparent pricing for live and on-demand courses with quick checkout.',
       'Expect dashboards that track progress, certificates, and replays.',
@@ -127,7 +127,7 @@ export const PERSONA_ITEMS = [
   {
     title: 'Support & Admin',
     bullets: [
-      'Edit orders, honor coupons, and resolve pay-what-you-can requests safely.',
+      'Edit orders, honor coupons, and resolve customer issues quickly.',
       'Manage events, tickets, and email templates without breaking LMS sync.',
       'Monitor API responses so rosters and certificates stay accurate.'
     ]
