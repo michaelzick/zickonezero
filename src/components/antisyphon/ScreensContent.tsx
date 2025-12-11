@@ -4,7 +4,6 @@ import {
   DemoStokeContentGrid,
   DemoStokeMethodCard,
   DemoStokeMethodList,
-  DemoStokeMethodRow,
   DemoStokeTitle,
   DemoStokeTldrCopy,
   DemoStokeTldrImage,
@@ -15,11 +14,18 @@ import { AnimatedSection } from '../../../styles/projectShowcases';
 import { THEME } from '../../../styles/theme';
 import { FLOW_BLOCKS } from './data';
 
+const FlowSection = styled(DemoStokeMethodCard)`
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.85em, 2vw, 1.3em);
+`;
+
 const FlowText = styled.div`
   align-self: flex-start;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  gap: 0.35em;
 `;
 
 const FlowImageButton = styled.button`
@@ -50,6 +56,12 @@ const FlowImage = styled(DemoStokeTldrImage)`
     border-color: ${THEME.colors.hotRed};
     box-shadow: 0 24px 48px -32px rgb(0 0 0 / 70%), 0 0 0 1px ${THEME.colors.hotRed};
   }
+`;
+
+const FlowImagesRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(0.75em, 1.8vw, 1.2em);
 `;
 
 type ScreensContentProps = {
@@ -85,8 +97,8 @@ const ScreensContent = ({
               <section id='screens-introduction' className='story-section'>
                 <DemoStokeTitle $noMobileTopPad>Product Screens and Flows</DemoStokeTitle>
                 <DemoStokeTldrCopy>
-                  A sampling of the core Antisyphon experiences&mdash;from catalog browsing to admin operations&mdash;built on top of
-                  WordPress, WooCommerce, and LMS integrations.
+                  A sampling of the core Antisyphon experiences, from catalog browsing to admin operations,
+                  built on top of WordPress, WooCommerce, and LMS integrations.
                 </DemoStokeTldrCopy>
               </section>
 
@@ -99,34 +111,31 @@ const ScreensContent = ({
                     className={visibleSections[id] ? 'visible' : undefined}
                   >
                     <section id={id} className='story-section'>
-                      <DemoStokeMethodCard>
-                        <DemoStokeMethodRow $reverse={reverse ?? (index % 2 === 1)}>
-                          <FlowText className="text-animate">
-                            <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
-                            <DemoStokeTldrCopy>{copy}</DemoStokeTldrCopy>
-                          </FlowText>
-                          <div className="image-animate">
-                            {images.map((image, imageIndex) => {
-                              const globalIndex = (flowImageOffsets[index] ?? 0) + imageIndex;
-                              return (
-                                <FlowImageButton
-                                  key={image.src}
-                                  type='button'
-                                  onClick={() => openFlowLightbox(globalIndex)}
-                                  aria-label={`Open image: ${image.alt}`}
-                                  style={imageIndex > 0 ? { marginTop: '12px' } : undefined}
-                                >
-                                  <FlowImage
-                                    src={image.src}
-                                    alt={image.alt}
-                                    loading='lazy'
-                                  />
-                                </FlowImageButton>
-                              );
-                            })}
-                          </div>
-                        </DemoStokeMethodRow>
-                      </DemoStokeMethodCard>
+                      <FlowSection>
+                        <FlowText className="text-animate">
+                          <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
+                          <DemoStokeTldrCopy>{copy}</DemoStokeTldrCopy>
+                        </FlowText>
+                        <FlowImagesRow className="image-animate">
+                          {images.map((image, imageIndex) => {
+                            const globalIndex = (flowImageOffsets[index] ?? 0) + imageIndex;
+                            return (
+                              <FlowImageButton
+                                key={image.src}
+                                type='button'
+                                onClick={() => openFlowLightbox(globalIndex)}
+                                aria-label={`Open image: ${image.alt}`}
+                              >
+                                <FlowImage
+                                  src={image.src}
+                                  alt={image.alt}
+                                  loading='lazy'
+                                />
+                              </FlowImageButton>
+                            );
+                          })}
+                        </FlowImagesRow>
+                      </FlowSection>
                     </section>
                   </AnimatedSection>
                 ))}
