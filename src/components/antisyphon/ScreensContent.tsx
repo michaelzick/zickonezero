@@ -15,6 +15,13 @@ import { AnimatedSection } from '../../../styles/projectShowcases';
 import { THEME } from '../../../styles/theme';
 import { FLOW_BLOCKS } from './data';
 
+const FlowText = styled.div`
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+`;
+
 const FlowImageButton = styled.button`
   display: block;
   width: 100%;
@@ -94,10 +101,10 @@ const ScreensContent = ({
                     <section id={id} className='story-section'>
                       <DemoStokeMethodCard>
                         <DemoStokeMethodRow $reverse={reverse ?? (index % 2 === 1)}>
-                          <div className="text-animate">
+                          <FlowText className="text-animate">
                             <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
                             <DemoStokeTldrCopy>{copy}</DemoStokeTldrCopy>
-                          </div>
+                          </FlowText>
                           <div className="image-animate">
                             {images.map((image, imageIndex) => {
                               const globalIndex = (flowImageOffsets[index] ?? 0) + imageIndex;
