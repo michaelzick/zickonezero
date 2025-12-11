@@ -85,7 +85,7 @@ const MethodImageButton = styled.button`
 const MethodImageFrame = styled.div`
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 3;
   border-radius: ${THEME.radii.md};
   border: 1.5px solid ${THEME.colors.grey};
   overflow: hidden;
