@@ -96,7 +96,17 @@ export const METHOD_SECTIONS = [
       'Streamlined admin forms and ACF-driven inputs, cutting course setup time by roughly 85%.'
     ],
     images: [
-      { src: '/img/antisyphon/admin-order-edit.webp', alt: 'Admin order edit view with custom fields' },
+      { src: '/img/antisyphon/admin-order-edit.webp', alt: 'Admin order edit view with custom fields' }
+    ]
+  },
+  {
+    title: 'Corporate Teams and Admin Dashboards',
+    bullets: [
+      'Wireframed a full corporate administration dashboard for team-based cybersecurity training with explicit roles and guardrails.',
+      'Mapped hierarchies for organizations, teams, team leads, and learners to ensure correct access to enrollments, receipts, and certificates.',
+      'Designed roster and reporting flows so team leads can manage seats, compliance statuses, and constraints without breaking LMS sync.'
+    ],
+    images: [
       { src: '/img/antisyphon/corporate-dashboard.webp', alt: 'Corporate dashboard with course progress' }
     ]
   }
