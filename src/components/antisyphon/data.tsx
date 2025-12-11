@@ -181,7 +181,7 @@ export const FLOW_BLOCKS: FlowBlock[] = [
       </>
     ),
     images: [
-      { src: '/img/antisyphon/course-catalog.webp', alt: 'Catalog cards for live and on-demand courses' },
+      { src: '/img/antisyphon/course-catalog-list.webp', alt: 'Catalog cards for live and on-demand courses' },
       { src: '/img/antisyphon/search-open.webp', alt: 'Search bar expanded over the course list' }
     ]
   },

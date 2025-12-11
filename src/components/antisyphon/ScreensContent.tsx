@@ -73,7 +73,6 @@ const FlowImagesRow = styled.div`
 `;
 
 const FlowStorySection = styled.section`
-  margin-top: 0;
   width: 100%;
 `;
 
@@ -114,11 +113,11 @@ const ScreensContent = ({
         <div className='biobox-inner demostoke-inner'>
           <DemoStokeContentGrid>
             <div>
-              <section id='screens-introduction' className='story-section'>
+              <section id='screens-introduction'>
                 <FlexBox>
                   <img className='ds-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
                   <div>
-                    <h2 className='tab-header page-header'>Product Screens and Flows</h2>
+                    <h2 className='tab-header page-header'>Product Screens</h2>
                     <PitchDeckLink className='pitch-link-desktop' href="https://www.antisyphontraining.com/" target='_blank' rel='noopener noreferrer'>
                       AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden="true" />
                     </PitchDeckLink>
@@ -138,7 +137,7 @@ const ScreensContent = ({
                   data-animate-id={catalogBlock.id}
                   className={visibleSections[catalogBlock.id] ? 'visible' : undefined}
                 >
-                  <FlowStorySection id={catalogBlock.id}>
+                  <FlowStorySection id={catalogBlock.id} className='story-section'>
                     <FlowSection>
                       <FlowText className="text-animate">
                         <DemoStokeTitle>{catalogBlock.title}</DemoStokeTitle>
@@ -172,7 +171,7 @@ const ScreensContent = ({
                 </AnimatedSection>
               )}
 
-              <FlowMethodList>
+              <FlowMethodList className='story-section'>
                 {remainingFlowBlocks.map(({ id, title, copy, images }) => (
                   <AnimatedSection
                     key={id}
