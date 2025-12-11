@@ -8,8 +8,6 @@ import {
   DemoStokeTitle,
   DemoStokeTldrCopy,
   DemoStokeTldrImage,
-  DemoStokeTldrSection,
-  DemoStokeTldrTitle,
   DemoStokeWhyImageFrame,
   FlexBox,
   FullBorderImage,
@@ -91,12 +89,19 @@ const ScreensContent = ({
   isActive,
   openFlowLightbox
 }: ScreensContentProps) => {
+  const catalogBlock = FLOW_BLOCKS.find(({ id }) => id === 'screens-catalog');
+  const remainingFlowBlocks = FLOW_BLOCKS.filter(({ id }) => id !== 'screens-catalog');
   const flowImageOffsets = FLOW_BLOCKS.reduce<number[]>((offsets, _section, idx) => {
     const priorCount = idx > 0 ? FLOW_BLOCKS[idx - 1]?.images.length ?? 0 : 0;
     const previous = offsets[idx - 1] ?? 0;
     offsets[idx] = idx === 0 ? 0 : previous + priorCount;
     return offsets;
   }, []);
+
+  const getImageGlobalIndex = (blockId: string, imageIndex: number) => {
+    const originalIndex = FLOW_BLOCKS.findIndex(({ id }) => id === blockId);
+    return (flowImageOffsets[originalIndex] ?? 0) + imageIndex;
+  };
 
   return (
     <div id="screens-content">
@@ -108,7 +113,7 @@ const ScreensContent = ({
                 <FlexBox>
                   <img className='ds-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
                   <div>
-                    <DemoStokeTitle $noMobileTopPad>Product Screens and Flows</DemoStokeTitle>
+                    <h2 className='tab-header page-header'>Product Screens and Flows</h2>
                     <PitchDeckLink className='pitch-link-desktop' href="https://www.antisyphontraining.com/" target='_blank' rel='noopener noreferrer'>
                       AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden="true" />
                     </PitchDeckLink>
@@ -119,27 +124,51 @@ const ScreensContent = ({
                   AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden="true" />
                 </PitchDeckLink>
 
-                <DemoStokeWhyImageFrame className="image-animate" style={{ marginTop: '0.75em' }}>
-                  <FullBorderImage
-                    src='/img/antisyphon/course-catalog-full.webp'
-                    alt='Antisyphon course catalog layout'
-                    loading='lazy'
-                  />
-                </DemoStokeWhyImageFrame>
-
-                <br />
-
-                <DemoStokeTldrSection className="text-animate">
-                  <DemoStokeTldrTitle>TL;DR</DemoStokeTldrTitle>
-                  <DemoStokeTldrCopy>
-                    A sampling of the core Antisyphon experiences—from catalog browsing to admin operations—built on top of
-                    WordPress, WooCommerce, and LMS integrations.
-                  </DemoStokeTldrCopy>
-                </DemoStokeTldrSection>
+                <section id='hero-spacer' aria-hidden='true' />
               </section>
 
+              {catalogBlock && (
+                <AnimatedSection
+                  ref={setAnimatedSectionRef(catalogBlock.id)}
+                  data-animate-id={catalogBlock.id}
+                  className={visibleSections[catalogBlock.id] ? 'visible' : undefined}
+                >
+                  <section id={catalogBlock.id} className='story-section' style={{ marginTop: '1.2em' }}>
+                    <FlowSection>
+                      <FlowText className="text-animate">
+                        <DemoStokeTitle>{catalogBlock.title}</DemoStokeTitle>
+                        <DemoStokeTldrCopy>{catalogBlock.copy}</DemoStokeTldrCopy>
+                      </FlowText>
+                      <DemoStokeWhyImageFrame className="image-animate" style={{ marginTop: '0.75em' }}>
+                        <FullBorderImage
+                          src='/img/antisyphon/course-catalog.webp'
+                          alt='Antisyphon course catalog layout'
+                          loading='lazy'
+                        />
+                      </DemoStokeWhyImageFrame>
+                      <FlowImagesRow className="image-animate">
+                        {catalogBlock.images.map((image, imageIndex) => (
+                          <FlowImageButton
+                            key={image.src}
+                            type='button'
+                            onClick={() => openFlowLightbox(getImageGlobalIndex(catalogBlock.id, imageIndex))}
+                            aria-label={`Open image: ${image.alt}`}
+                          >
+                            <FlowImage
+                              src={image.src}
+                              alt={image.alt}
+                              loading='lazy'
+                            />
+                          </FlowImageButton>
+                        ))}
+                      </FlowImagesRow>
+                    </FlowSection>
+                  </section>
+                </AnimatedSection>
+              )}
+
               <FlowMethodList>
-                {FLOW_BLOCKS.map(({ id, title, copy, images }, index) => (
+                {remainingFlowBlocks.map(({ id, title, copy, images }) => (
                   <AnimatedSection
                     key={id}
                     ref={setAnimatedSectionRef(id)}
@@ -149,27 +178,24 @@ const ScreensContent = ({
                     <section id={id} className='story-section'>
                       <FlowSection>
                         <FlowText className="text-animate">
-                          <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
+                          <DemoStokeTitle>{title}</DemoStokeTitle>
                           <DemoStokeTldrCopy>{copy}</DemoStokeTldrCopy>
                         </FlowText>
                         <FlowImagesRow className="image-animate">
-                          {images.map((image, imageIndex) => {
-                            const globalIndex = (flowImageOffsets[index] ?? 0) + imageIndex;
-                            return (
-                              <FlowImageButton
-                                key={image.src}
-                                type='button'
-                                onClick={() => openFlowLightbox(globalIndex)}
-                                aria-label={`Open image: ${image.alt}`}
-                              >
-                                <FlowImage
-                                  src={image.src}
-                                  alt={image.alt}
-                                  loading='lazy'
-                                />
-                              </FlowImageButton>
-                            );
-                          })}
+                          {images.map((image, imageIndex) => (
+                            <FlowImageButton
+                              key={image.src}
+                              type='button'
+                              onClick={() => openFlowLightbox(getImageGlobalIndex(id, imageIndex))}
+                              aria-label={`Open image: ${image.alt}`}
+                            >
+                              <FlowImage
+                                src={image.src}
+                                alt={image.alt}
+                                loading='lazy'
+                              />
+                            </FlowImageButton>
+                          ))}
                         </FlowImagesRow>
                       </FlowSection>
                     </section>
