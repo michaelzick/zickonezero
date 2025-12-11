@@ -222,7 +222,7 @@ export const FLOW_BLOCKS: FlowBlock[] = [
     copy: (
       <>
         Admin tools built on Advanced Custom Fields, Events Tickets Plus, and custom PHP endpoints let ops teams edit orders,
-        manage course dates, and monitor LMS sync without developer help.
+        manage course dates, and monitor syncing.
       </>
     ),
     images: [
