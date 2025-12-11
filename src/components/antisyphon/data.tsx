@@ -92,12 +92,12 @@ export const METHOD_SECTIONS: MethodSection[] = [
       'Iterated on achievement-style course badges to keep the tone fun but credible.',
       'Validated flows with stakeholders and instructors before handing hi-fis to Fried Design for visual polish.'
     ],
-    images: [{ src: '/img/antisyphon/course-catalog-full.webp', alt: 'Course catalog layout with badge styling' }]
+    images: [{ src: '/img/antisyphon/wireframe-live-courses.webp', alt: 'Course catalog layout with badge styling' }]
   },
   {
-    title: 'Build and Operate the Platform',
+    title: 'Build the Customer and Admin Interfaces',
     bullets: [
-      'Customized WooCommerce and WordPress templates for live/on-demand products, bundles, and donations.',
+      'Customized WooCommerce and WordPress templates for live/on-demand courses and subscriptions.',
       'Integrated with the LMS plus PHP/MySQL services for progress tracking, certificates, and reporting.',
       'Streamlined admin forms and ACF-driven inputs, cutting course setup time by roughly 85%.'
     ],
