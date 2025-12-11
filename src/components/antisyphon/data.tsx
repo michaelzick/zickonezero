@@ -7,7 +7,7 @@ export const CASE_STUDY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'introduction', label: 'Intro' },
   { id: 'section-outcome', label: 'Outcome' },
   { id: 'section-the-who', label: 'The Who' },
-  { id: 'section-the-how', label: 'Experience' },
+  { id: 'section-the-how', label: 'The How' },
   { id: 'section-methodology', label: 'Methods' }
 ] as const;
 
@@ -113,7 +113,7 @@ export const METHOD_SECTIONS: MethodSection[] = [
       'Streamlined admin forms and ACF-driven inputs, cutting course setup time by roughly 85%.'
     ],
     images: [
-      { src: '/img/antisyphon/admin-order-edit.webp', alt: 'Admin order edit view with custom fields' }
+      { src: '/img/antisyphon/admin-event-tickets.webp', alt: 'Admin order edit view with custom fields' }
     ]
   }
 ] ;
@@ -154,12 +154,14 @@ export const PERSONA_ITEMS = [
 ] as const;
 
 export const HOW_IMAGES = [
-  { src: '/img/antisyphon/course-catalog.webp', alt: 'Course catalog with category filters' },
+  { src: '/img/antisyphon/calendar.webp', alt: 'Course catalog with category filters' },
   { src: '/img/antisyphon/pwyc-open.webp', alt: 'Pay-what-you-can options in the cart' },
   { src: '/img/antisyphon/checkout-1.webp', alt: 'Checkout form with billing details' },
   { src: '/img/antisyphon/dashboard-my-live-courses-prod.webp', alt: 'Learner dashboard showing live courses' },
   { src: '/img/antisyphon/cis-course.webp', alt: 'Course detail page with syllabus and schedule' },
+  { src: '/img/antisyphon/community.webp', alt: 'Community page with social links' },
   { src: '/img/antisyphon/admin-course-edit.webp', alt: 'Admin course edit screen with custom fields' },
+  { src: '/img/antisyphon/admin-order-edit.webp', alt: 'Admin order edit screen with custom fields' },
 ] as const;
 
 type FlowBlock = {
