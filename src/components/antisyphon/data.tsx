@@ -15,10 +15,10 @@ export const CASE_STUDY_BOTTOM_SECTION_ID = CASE_STUDY_SECTIONS[CASE_STUDY_SECTI
 
 export const FLOW_SECTIONS: SidebarSectionConfig[] = [
   { id: 'screens-introduction', label: 'Intro', hidden: true },
-  { id: 'screens-catalog', label: 'Catalog' },
-  { id: 'screens-checkout', label: 'Checkout' },
-  { id: 'screens-accounts', label: 'Accounts' },
-  { id: 'screens-admin', label: 'Admin' }
+  { id: 'screens-catalog', label: 'Course Catalog' },
+  { id: 'screens-checkout', label: 'Cart & Checkout' },
+  { id: 'screens-accounts', label: 'User Accounts' },
+  { id: 'screens-admin', label: 'Admin Dashboard' }
 ] as const;
 
 export const FLOW_BOTTOM_SECTION_ID = FLOW_SECTIONS[FLOW_SECTIONS.length - 1]?.id;
