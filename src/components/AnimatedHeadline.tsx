@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import {
   AnimatedHeadlineWrapper,
   AnimatedHeadlineStatic,
@@ -7,13 +6,7 @@ import {
   AnimatedHeadlinePhrase,
   AnimatedHeadlineSizer
 } from '../../styles';
-
-const HEADLINE_PHRASES = [
-  'UX Design',
-  'Branding',
-  'Product Management',
-  'Development'
-] as const;
+import { HEADLINE_PHRASES } from './headlinePhrases';
 
 const LONGEST_PHRASE = HEADLINE_PHRASES.reduce((longest, phrase) =>
   phrase.length > longest.length ? phrase : longest
