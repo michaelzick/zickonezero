@@ -175,7 +175,7 @@ type FlowBlock = {
 export const FLOW_BLOCKS: FlowBlock[] = [
   {
     id: 'screens-catalog',
-    title: 'Catalog and Discovery',
+    title: 'Course Catalog',
     copy: (
       <>
         Responsive cards, filters, and search make it easy to compare live versus on-demand courses. Category callouts and
@@ -191,7 +191,7 @@ export const FLOW_BLOCKS: FlowBlock[] = [
   },
   {
     id: 'screens-checkout',
-    title: 'Cart and Checkout',
+    title: 'Cart & Checkout',
     copy: (
       <>
         WooCommerce flows were customized for multi-course carts, pay-what-you-can pricing, and streamlined tax handling.
@@ -206,7 +206,7 @@ export const FLOW_BLOCKS: FlowBlock[] = [
   },
   {
     id: 'screens-accounts',
-    title: 'Learner Accounts',
+    title: 'User Accounts',
     copy: (
       <>
         Logged-in dashboards separate live and on-demand enrollments, store saved payment methods, and surface certificates.
@@ -220,7 +220,7 @@ export const FLOW_BLOCKS: FlowBlock[] = [
   },
   {
     id: 'screens-admin',
-    title: 'Admin and Operations',
+    title: 'Admin Dashboard',
     copy: (
       <>
         Admin tools built on Advanced Custom Fields, Events Tickets Plus, and custom PHP endpoints let ops teams edit orders,
