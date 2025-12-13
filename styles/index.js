@@ -2471,7 +2471,7 @@ export const IntroSection = styled.div`
     transition: transform 0.1s ease-out; /* Smooth parallax movement */
     order: 2;
     align-self: stretch;
-    padding-bottom: clamp(1em, 3vw, 2.6em);
+    padding-bottom: clamp(1.25em, 3.3vw, 3em);
     padding-top: clamp(0.1em, 1.5vw, 1.1em);
     display: flex;
     flex-direction: column;
@@ -2507,8 +2507,8 @@ export const IntroSection = styled.div`
 
     .intro-rotator-headline {
       border-top: 2px dotted ${THEME.colors.grey};
-      padding-top: clamp(0.55em, 1.8vw, 0.9em);
-      margin: clamp(0.2em, 1vw, 0.5em) 0 0;
+      padding-top: clamp(0.4em, 1.4vw, 0.7em);
+      margin: clamp(0.1em, 0.6vw, 0.25em) 0 0;
       max-width: none;
       width: 100%;
       padding-left: 0;
@@ -2518,31 +2518,31 @@ export const IntroSection = styled.div`
       font-size: 2.8em;
     }
 
-    .case-studies-cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      align-self: flex-start;
-      margin-top: clamp(0.7em, 1.6vw, 1em);
-      padding: 0.65em 1.2em;
-      border-radius: ${THEME.radii.md};
-      border: 2px solid ${THEME.colors.hotYellow};
-      background: ${THEME.colors.hotYellow};
-      color: ${THEME.colors.contrast};
-      font-family: Roboto, sans-serif;
-      font-size: 1.1em;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      cursor: pointer;
-      box-shadow: 0 10px 20px -8px rgb(0 0 0 / 55%);
-      transition: transform 150ms, box-shadow 150ms, background-color 150ms, border-color 150ms, color 150ms;
+	    .case-studies-cta {
+	      display: inline-flex;
+	      align-items: center;
+	      justify-content: center;
+	      align-self: flex-start;
+	      margin-top: clamp(0.7em, 1.6vw, 1em);
+	      padding: 0.65em 1.2em;
+	      border-radius: ${THEME.radii.md};
+	      border: 2px solid ${THEME.colors.hotYellow};
+	      background-color: ${THEME.colors.hotYellow};
+	      color: ${THEME.colors.contrast};
+	      font-family: Roboto, sans-serif;
+	      font-size: 1.1em;
+	      font-weight: 700;
+	      letter-spacing: 0.02em;
+	      cursor: pointer;
+	      box-shadow: 0 10px 20px -8px rgb(0 0 0 / 55%);
+	      transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s, border-color 0.2s, color 0.2s;
 
-      &:hover {
-        background: ${THEME.colors.hotRed};
-        border-color: ${THEME.colors.hotRed};
-        color: ${THEME.colors.white};
-        box-shadow: 0 12px 24px -10px rgb(0 0 0 / 60%);
-      }
+	      &:hover {
+	        background-color: ${THEME.colors.hotRed};
+	        border-color: ${THEME.colors.hotRed};
+	        color: ${THEME.colors.white};
+	        box-shadow: 0 12px 24px -10px rgb(0 0 0 / 60%);
+	      }
 
       &:active {
         transform: translateY(1px);
@@ -2621,8 +2621,8 @@ export const IntroSection = styled.div`
 
       .intro-rotator-headline {
         border-top: 2px dotted ${THEME.colors.grey};
-        padding-top: 0.7em;
-        margin-top: 0.4em;
+        padding-top: 0.55em;
+        margin-top: 0.25em;
         font-size: clamp(1.8rem, 4vw, 2.5rem);
       }
     }
@@ -2655,8 +2655,8 @@ export const IntroSection = styled.div`
 
       .intro-rotator-headline {
         font-size: clamp(1.6rem, 5vw, 2.2rem);
-        padding-top: 0.6em;
-        margin-top: 0.35em;
+        padding-top: 0.5em;
+        margin-top: 0.22em;
       }
     }
   }

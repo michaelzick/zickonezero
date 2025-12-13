@@ -54,7 +54,7 @@ const MainContent = () => {
   // Parallax refs and state
   const introTextRef = useRef<HTMLDivElement | null>(null);
   const introImageRef = useRef<HTMLDivElement | null>(null);
-  const [parallaxOffset, setParallaxOffset] = useState({ text: 5, image: -20 });
+  const [parallaxOffset, setParallaxOffset] = useState({ text: 0, image: -20 });
   const neonCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const introAnimatedRef = useRef<HTMLDivElement | null>(null);
   const [introVisible, setIntroVisible] = useState(false);
@@ -113,6 +113,42 @@ const MainContent = () => {
     }, 1000);
   }, [setActiveSection]);
 
+  const animateScrollTo = useCallback((targetY: number) => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      window.scrollTo({ top: targetY, behavior: 'auto' });
+      return;
+    }
+
+    const startY = window.scrollY;
+    const delta = targetY - startY;
+    if (Math.abs(delta) < 1) {
+      return;
+    }
+
+    const distance = Math.abs(delta);
+    const durationMs = Math.min(1800, Math.max(900, distance * 0.7));
+    const startTime = performance.now();
+
+    const easeInOutCubic = (t: number) => (
+      t < 0.5
+        ? 4 * t * t * t
+        : 1 - Math.pow(-2 * t + 2, 3) / 2
+    );
+
+    const tick = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / durationMs, 1);
+      const eased = easeInOutCubic(progress);
+      window.scrollTo(0, startY + delta * eased);
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      }
+    };
+
+    requestAnimationFrame(tick);
+  }, []);
+
   const scrollToCaseStudies = useCallback(() => {
     const target = caseStudiesSectionRef.current;
     if (!target) return;
@@ -122,8 +158,8 @@ const MainContent = () => {
     const targetPosition = target.getBoundingClientRect().top + window.scrollY;
     const offsetPosition = targetPosition - offset;
 
-    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-  }, []);
+    animateScrollTo(offsetPosition);
+  }, [animateScrollTo]);
 
   useEffect(() => {
     const getDetectionOffset = () => {
@@ -180,7 +216,7 @@ const MainContent = () => {
 
       // Simple parallax calculation based on scroll position
       // Text starts near baseline and glides down slightly with scroll
-      const textOffset = 5 + (scrollY * 0.1);
+      const textOffset = scrollY * 0.1;
       // Image lifts a touch for depth without losing the baseline alignment
       const imageOffset = -20 + (scrollY * -0.035);
 
