@@ -2270,7 +2270,7 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   padding: 0.65em 1em;
   border-radius: ${THEME.radii.md};
   font-family: Roboto, sans-serif;
-  font-size: 0.79em;
+  font-size: 1.05em;
   font-weight: 600;
   letter-spacing: 0.02em;
   text-align: center;
@@ -2295,6 +2295,10 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
 
   &:active {
     transform: translateY(1px);
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    font-size: 0.79em;
   }
 `;
 
