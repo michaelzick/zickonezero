@@ -2518,31 +2518,30 @@ export const IntroSection = styled.div`
       font-size: 2.8em;
     }
 
-	    .case-studies-cta {
-	      display: inline-flex;
-	      align-items: center;
-	      justify-content: center;
-	      align-self: flex-start;
-	      margin-top: clamp(0.7em, 1.6vw, 1em);
-	      padding: 0.65em 1.2em;
-	      border-radius: ${THEME.radii.md};
-	      border: 2px solid ${THEME.colors.hotGreen};
-	      background-color: ${THEME.colors.hotGreen};
-	      color: ${THEME.colors.contrast};
-	      font-family: Roboto, sans-serif;
-	      font-size: 1.1em;
-	      font-weight: 700;
-	      letter-spacing: 0.02em;
-	      cursor: pointer;
-	      box-shadow: 0 8px 18px -10px rgb(0 0 0 / 50%);
-	      transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s, border-color 0.2s, color 0.2s;
+    .case-studies-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      align-self: flex-start;
+      margin-top: clamp(0.7em, 1.6vw, 1em);
+      padding: 0.65em 1.2em;
+      border-radius: ${THEME.radii.md};
+      border: 2px solid ${THEME.colors.hotGreen};
+      background-color: ${THEME.colors.hotGreen};
+      color: ${THEME.colors.contrast};
+      font-family: Roboto, sans-serif;
+      font-size: 1.1em;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 8px 18px -10px rgb(0 0 0 / 45%);
+      transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 
-	      &:hover {
-	        background-color: ${THEME.colors.hotYellow};
-	        border-color: ${THEME.colors.hotYellow};
-	        color: #020817;
-	        box-shadow: 0 10px 22px -12px rgb(0 0 0 / 55%);
-	      }
+      &:hover {
+        background-color: ${THEME.colors.hotYellow};
+        border-color: ${THEME.colors.hotYellow};
+        color: #020817;
+      }
 
       &:active {
         transform: translateY(1px);
