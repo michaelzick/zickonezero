@@ -13,7 +13,7 @@ import { useState, useRef, useEffect, memo, useCallback } from 'react';
 
 import FsLightbox from 'fslightbox-react';
 
-import { TopNavContent, GridContent, FooterContent, AnimatedHeadline } from '.';
+import { TopNavContent, GridContent, FooterContent } from '.';
 import {
   SectionHeader,
   Wrapper,
@@ -43,6 +43,7 @@ const MainContent = () => {
   const { worksDataReversed } = useAppSelector(selectData);
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
+  const caseStudiesSectionRef = useRef<HTMLHeadingElement | null>(null);
   const uxSectionRef = useRef<HTMLHeadingElement | null>(null);
   const uiSectionRef = useRef<HTMLHeadingElement | null>(null);
   const uxContentRef = useRef<HTMLDivElement | null>(null);
@@ -111,6 +112,18 @@ const MainContent = () => {
       isManualScrolling.current = false;
     }, 1000);
   }, [setActiveSection]);
+
+  const scrollToCaseStudies = useCallback(() => {
+    const target = caseStudiesSectionRef.current;
+    if (!target) return;
+
+    const prefersMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 600px)').matches;
+    const offset = prefersMobile ? MOBILE_TABS_HEIGHT_PX : DESKTOP_NAV_OFFSET;
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+    const offsetPosition = targetPosition - offset;
+
+    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+  }, []);
 
   useEffect(() => {
     const getDetectionOffset = () => {
@@ -434,7 +447,14 @@ const MainContent = () => {
                 <h2>
                   Michael Zick is <span className="hotword">ZICKONEZERO Creative</span>.
                 </h2>
-                <AnimatedHeadline className="intro-rotator-headline" />
+                <p className="intro-rotator-headline">Product / UX / Dev</p>
+                <button
+                  type="button"
+                  className="case-studies-cta"
+                  onClick={scrollToCaseStudies}
+                >
+                  See Case Studies
+                </button>
               </div>
             </div>
           </IntroSection>
@@ -455,7 +475,7 @@ const MainContent = () => {
 
           <WorksSectionContent>
             <div>
-              <SectionHeader id='case-studies'>
+              <SectionHeader ref={caseStudiesSectionRef} id='case-studies'>
                 <WorkSectionHeader>Case Studies</WorkSectionHeader>
               </SectionHeader>
 

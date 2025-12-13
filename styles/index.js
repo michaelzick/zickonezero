@@ -2517,6 +2517,42 @@ export const IntroSection = styled.div`
       gap: 0.3em;
       font-size: 2.8em;
     }
+
+    .case-studies-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      align-self: flex-start;
+      margin-top: clamp(0.7em, 1.6vw, 1em);
+      padding: 0.65em 1.2em;
+      border-radius: ${THEME.radii.md};
+      border: 2px solid ${THEME.colors.hotYellow};
+      background: ${THEME.colors.hotYellow};
+      color: ${THEME.colors.contrast};
+      font-family: Roboto, sans-serif;
+      font-size: 1.1em;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 10px 20px -8px rgb(0 0 0 / 55%);
+      transition: transform 150ms, box-shadow 150ms, background-color 150ms, border-color 150ms, color 150ms;
+
+      &:hover {
+        background: ${THEME.colors.hotRed};
+        border-color: ${THEME.colors.hotRed};
+        color: ${THEME.colors.white};
+        box-shadow: 0 12px 24px -10px rgb(0 0 0 / 60%);
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+
+      &:focus-visible {
+        outline: 2px solid ${THEME.colors.hotRed};
+        outline-offset: 4px;
+      }
+    }
   }
 
   .intro-image {
