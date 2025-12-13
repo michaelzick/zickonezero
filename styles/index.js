@@ -2278,8 +2278,8 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   word-wrap: break-word;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-  background-color: ${props => props.$isActive ? THEME.colors.hotYellow : THEME.colors.hotGreen};
-  color: ${props => props.$isActive ? '#020817' : THEME.colors.contrast};
+  background-color: ${props => props.$isActive ? THEME.colors.darkGreen : THEME.colors.hotYellow};
+  color: ${props => props.$isActive ? '#fff' : THEME.colors.contrast};
   box-shadow: ${props => props.$isActive ? 'none' : '0 8px 18px -10px rgb(0 0 0 / 50%)'};
 
   &:focus-visible {
@@ -2526,8 +2526,8 @@ export const IntroSection = styled.div`
       margin-top: clamp(0.7em, 1.6vw, 1em);
       padding: 0.65em 1.2em;
       border-radius: ${THEME.radii.md};
-      border: 2px solid ${THEME.colors.hotGreen};
-      background-color: ${THEME.colors.hotGreen};
+      border: 2px solid ${THEME.colors.hotYellow};
+      background-color: ${THEME.colors.hotYellow};
       color: ${THEME.colors.contrast};
       font-family: Roboto, sans-serif;
       font-size: 1.1em;
@@ -2538,9 +2538,9 @@ export const IntroSection = styled.div`
       transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 
       &:hover {
-        background-color: ${THEME.colors.hotYellow};
-        border-color: ${THEME.colors.hotYellow};
-        color: #020817;
+        background-color: ${THEME.colors.darkGreen};
+        border-color: ${THEME.colors.darkGreen};
+        color: #fff;
       }
 
       &:active {
