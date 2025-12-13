@@ -31,8 +31,8 @@ import {
 } from '../../styles';
 import { AnimatedSection } from '../../styles/projectShowcases';
 
-type SectionKey = 'ux' | 'ui';
-type ActiveSection = SectionKey | 'case-studies' | null;
+type HomeSectionKey = 'case-studies' | 'ux' | 'ui';
+type ActiveSection = HomeSectionKey | null;
 
 const DESKTOP_NAV_OFFSET = 92; // Tighten the gap so section headers sit closer to the tabs
 const MOBILE_TABS_HEIGHT_PX = 11.3 * 16; // Keep in sync with mobile scroll target for Home tabs
@@ -50,6 +50,8 @@ const MainContent = () => {
   const uiContentRef = useRef<HTMLDivElement | null>(null);
   const [activeSection, setActiveSection] = useState<ActiveSection>(null);
   const isManualScrolling = useRef(false);
+  const manualScrollTimeoutRef = useRef<number | null>(null);
+  const scrollAnimationRef = useRef<number | null>(null);
 
   // Parallax refs and state
   const introTextRef = useRef<HTMLDivElement | null>(null);
@@ -79,51 +81,31 @@ const MainContent = () => {
   // Grab the images from the correct index supplied by Lightbox
   const { imgs } = worksDataReversed[lightboxController.productIndex] || [];
 
-  const scrollToSection = useCallback((section: SectionKey) => {
-    // Temporarily pause scroll-driven updates while we animate to the section
-    isManualScrolling.current = true;
-    setActiveSection(section);
+  const clearManualScrollTimeout = useCallback(() => {
+    if (manualScrollTimeoutRef.current === null) return;
+    window.clearTimeout(manualScrollTimeoutRef.current);
+    manualScrollTimeoutRef.current = null;
+  }, []);
 
-    const target = section === 'ux' ? uxSectionRef.current : uiSectionRef.current;
-
-    if (target) {
-      const prefersMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 600px)').matches;
-
-      if (prefersMobile) {
-        // On mobile, position the header right below the tabs
-        // Tabs end at approximately 13.3em, so we want the header positioned there
-        const tabsHeight = MOBILE_TABS_HEIGHT_PX; // Convert em to px (assuming 16px base font)
-        const targetPosition = target.getBoundingClientRect().top + window.scrollY;
-        const offsetPosition = targetPosition - tabsHeight;
-
-        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-      } else {
-        // Desktop scrolling
-        const navOffset = DESKTOP_NAV_OFFSET;
-        const targetPosition = target.getBoundingClientRect().top + window.scrollY;
-        const offsetPosition = targetPosition - navOffset;
-
-        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-      }
-    }
-
-    // Clear the flag after a delay to allow manual scroll to complete
-    setTimeout(() => {
-      isManualScrolling.current = false;
-    }, 1000);
-  }, [setActiveSection]);
+  const cancelScrollAnimation = useCallback(() => {
+    if (scrollAnimationRef.current === null) return;
+    cancelAnimationFrame(scrollAnimationRef.current);
+    scrollAnimationRef.current = null;
+  }, []);
 
   const animateScrollTo = useCallback((targetY: number) => {
+    cancelScrollAnimation();
+
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       window.scrollTo({ top: targetY, behavior: 'auto' });
-      return;
+      return 0;
     }
 
     const startY = window.scrollY;
     const delta = targetY - startY;
     if (Math.abs(delta) < 1) {
-      return;
+      return 0;
     }
 
     const distance = Math.abs(delta);
@@ -142,34 +124,57 @@ const MainContent = () => {
       const eased = easeInOutCubic(progress);
       window.scrollTo(0, startY + delta * eased);
       if (progress < 1) {
-        requestAnimationFrame(tick);
+        scrollAnimationRef.current = requestAnimationFrame(tick);
+        return;
       }
+
+      scrollAnimationRef.current = null;
     };
 
-    requestAnimationFrame(tick);
-  }, []);
+    scrollAnimationRef.current = requestAnimationFrame(tick);
+    return durationMs;
+  }, [cancelScrollAnimation]);
 
-  const scrollToCaseStudies = useCallback(() => {
-    const target = caseStudiesSectionRef.current;
+  const startManualScroll = useCallback((durationMs: number) => {
+    clearManualScrollTimeout();
+    isManualScrolling.current = true;
+
+    if (durationMs <= 0) {
+      isManualScrolling.current = false;
+      return;
+    }
+
+    manualScrollTimeoutRef.current = window.setTimeout(() => {
+      isManualScrolling.current = false;
+      manualScrollTimeoutRef.current = null;
+    }, Math.ceil(durationMs) + 50);
+  }, [clearManualScrollTimeout]);
+
+  const scrollToHomeSection = useCallback((section: HomeSectionKey) => {
+    const target = section === 'case-studies'
+      ? caseStudiesSectionRef.current
+      : section === 'ux'
+        ? uxSectionRef.current
+        : uiSectionRef.current;
+
     if (!target) return;
 
-    const prefersMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 600px)').matches;
+    setActiveSection(section);
+
+    const prefersMobile = window.matchMedia('(max-width: 600px)').matches;
     const offset = prefersMobile ? MOBILE_TABS_HEIGHT_PX : DESKTOP_NAV_OFFSET;
     const targetPosition = target.getBoundingClientRect().top + window.scrollY;
     const offsetPosition = targetPosition - offset;
+    const durationMs = animateScrollTo(offsetPosition);
+    startManualScroll(durationMs);
+  }, [animateScrollTo, startManualScroll]);
 
-    animateScrollTo(offsetPosition);
-  }, [animateScrollTo]);
-
-  const handleCaseStudiesTabClick = useCallback(() => {
-    isManualScrolling.current = true;
-    setActiveSection('case-studies');
-    scrollToCaseStudies();
-    // Keep in sync with the max duration in animateScrollTo.
-    setTimeout(() => {
-      isManualScrolling.current = false;
-    }, 1800);
-  }, [scrollToCaseStudies]);
+  useEffect(() => {
+    return () => {
+      clearManualScrollTimeout();
+      cancelScrollAnimation();
+    };
+  }, [cancelScrollAnimation, clearManualScrollTimeout]);
 
   useEffect(() => {
     const getDetectionOffset = () => {
@@ -449,7 +454,7 @@ const MainContent = () => {
             aria-controls='case-studies'
             tabIndex={activeSection === 'case-studies' ? 0 : -1}
             $isActive={activeSection === 'case-studies'}
-            onClick={handleCaseStudiesTabClick}
+            onClick={() => scrollToHomeSection('case-studies')}
           >
             Case Studies
           </HomeTabButton>
@@ -460,7 +465,7 @@ const MainContent = () => {
             aria-controls='ux-design'
             tabIndex={activeSection === 'ux' ? 0 : -1}
             $isActive={activeSection === 'ux'}
-            onClick={() => scrollToSection('ux')}
+            onClick={() => scrollToHomeSection('ux')}
           >
             UX Design
           </HomeTabButton>
@@ -471,7 +476,7 @@ const MainContent = () => {
             aria-controls='ui-engineering'
             tabIndex={activeSection === 'ui' ? 0 : -1}
             $isActive={activeSection === 'ui'}
-            onClick={() => scrollToSection('ui')}
+            onClick={() => scrollToHomeSection('ui')}
           >
             UI Engineering
           </HomeTabButton>
@@ -511,7 +516,7 @@ const MainContent = () => {
                 <button
                   type="button"
                   className="case-studies-cta"
-                  onClick={scrollToCaseStudies}
+                  onClick={() => scrollToHomeSection('case-studies')}
                 >
                   See Case Studies
                 </button>
