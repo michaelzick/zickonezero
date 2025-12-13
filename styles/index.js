@@ -2270,7 +2270,7 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   padding: 0.65em 1em;
   border-radius: ${THEME.radii.md};
   font-family: Roboto, sans-serif;
-  font-size: 1.05em;
+  font-size: 0.79em;
   font-weight: 600;
   letter-spacing: 0.02em;
   text-align: center;

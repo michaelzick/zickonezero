@@ -473,12 +473,12 @@ const MainContent = () => {
             type="button"
             aria-selected={activeSection === 'ui'}
             role='tab'
-            aria-controls='ui-engineering'
+            aria-controls='web-development'
             tabIndex={activeSection === 'ui' ? 0 : -1}
             $isActive={activeSection === 'ui'}
             onClick={() => scrollToHomeSection('ui')}
           >
-            UI Engineering
+            Web Dev
           </HomeTabButton>
         </HomeTabsBar>
 
@@ -569,8 +569,8 @@ const MainContent = () => {
 
             <br />
             <div ref={uiContentRef}>
-              <SectionHeader ref={uiSectionRef} id='ui-engineering'>
-                <WorkSectionHeader>UI Engineering</WorkSectionHeader>
+              <SectionHeader ref={uiSectionRef} id='web-development'>
+                <WorkSectionHeader>Web Development</WorkSectionHeader>
               </SectionHeader>
 
               <GridContent
