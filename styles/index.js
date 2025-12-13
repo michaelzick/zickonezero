@@ -2282,6 +2282,12 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   color: ${props => props.$isActive ? '#fff' : THEME.colors.contrast};
   box-shadow: ${props => props.$isActive ? 'none' : '0 8px 18px -10px rgb(0 0 0 / 50%)'};
 
+  &:hover {
+    background-color: ${THEME.colors.darkGreen};
+    border-color: ${THEME.colors.darkGreen};
+    color: #fff;
+  }
+
   &:focus-visible {
     outline: 2px solid ${THEME.colors.hotYellow};
     outline-offset: 3px;
@@ -2300,14 +2306,14 @@ const sidebarTabButtonStyles = css`
   transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 
   &[data-active='true'] {
-    background-color: ${THEME.colors.hotYellow};
-    border-color: ${THEME.colors.hotYellow};
-    color: ${THEME.colors.contrast};
+    background-color: ${THEME.colors.darkGreen};
+    border-color: ${THEME.colors.darkGreen};
+    color: #fff;
   }
 
   &:not([data-active='true']):hover {
-    border-color: ${THEME.colors.hotRed};
-    color: ${THEME.colors.white};
+    border-color: ${THEME.colors.darkGreen};
+    color: #fff;
   }
 `;
 
@@ -2452,6 +2458,7 @@ export const DemoStokeTabsBar = styled.div`
     top: 8.48em;
   }
 `;
+
 export const IntroSection = styled.div`
   display: flex;
   align-items: flex-end;
