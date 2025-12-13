@@ -1,56 +1,38 @@
 import { GridContainer } from '../../styles';
 import { Thumbnail } from '.';
 
-import { WorksDataType } from '../types';
+import { WorksData, WorksDataType } from '../types';
 
 type Props = WorksDataType & {
-  onThumbClick: Function;
-  isManagedWork?: boolean;
+  onThumbClick: (index: number) => void;
+  includeItem?: (item: WorksData) => boolean;
+  disableThumbClick?: boolean;
 };
 
 const GridContent = (props: Props) => {
-  const { worksDataReversed, onThumbClick, isManagedWork } = props;
-  const WorkItem = isManagedWork ? (
+  const { worksDataReversed, onThumbClick, includeItem, disableThumbClick } = props;
+  const handleThumbClick: (index: number) => void = disableThumbClick ? (() => undefined) : onThumbClick;
+
+  return (
     <GridContainer>
       <div className='grid'>
         {worksDataReversed.map((item, index) => {
-          const { group } = item;
-
-          if (index < 7) {
-            return (
-              <Thumbnail
-                key={group}
-                index={index}
-                onThumbClick={() => onThumbClick(null, true)}
-                {...item}
-              />
-            );
+          if (includeItem && !includeItem(item)) {
+            return null;
           }
-        })}
-      </div>
-    </GridContainer>
-  ) : (
-    <GridContainer>
-      <div className='grid'>
-        {worksDataReversed.map((item, index) => {
-          const { group } = item;
 
-          if (index > 6) {
-            return (
-              <Thumbnail
-                key={group}
-                index={index}
-                onThumbClick={onThumbClick}
-                {...item}
-              />
-            );
-          }
+          return (
+            <Thumbnail
+              key={item.group}
+              index={index}
+              onThumbClick={handleThumbClick}
+              {...item}
+            />
+          );
         })}
       </div>
     </GridContainer>
   );
-
-  return WorkItem;
 };
 
 export default GridContent;

@@ -4,9 +4,8 @@ import { StoryFn, Meta } from "@storybook/react";
 import { GridContent } from "../../components";
 import mockData from "./mockData.json";
 
-const onThumbClick = (e: React.MouseEvent, isManagedWork: boolean) => {
-  // Handle thumbnail click event
-  console.log("Thumbnail clicked!", e, isManagedWork);
+const onThumbClick = (index: number) => {
+  console.log("Thumbnail clicked!", index);
 };
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

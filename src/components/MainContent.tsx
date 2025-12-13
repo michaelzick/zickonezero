@@ -37,6 +37,7 @@ type ActiveSection = SectionKey | null;
 const DESKTOP_NAV_OFFSET = 92; // Tighten the gap so section headers sit closer to the tabs
 const MOBILE_TABS_HEIGHT_PX = 11.3 * 16; // Keep in sync with mobile scroll target for Home tabs
 const DETECTION_BUFFER = 12;
+const CASE_STUDY_GROUPS = new Set(['demostoke', 'antisyphon-training']);
 
 const MainContent = () => {
   const { worksDataReversed } = useAppSelector(selectData);
@@ -453,6 +454,21 @@ const MainContent = () => {
           <WorksRevealCurtain aria-hidden="true" />
 
           <WorksSectionContent>
+            <div>
+              <SectionHeader id='case-studies'>
+                <WorkSectionHeader>Case Studies</WorkSectionHeader>
+              </SectionHeader>
+
+              <GridContent
+                worksDataReversed={worksDataReversed}
+                onThumbClick={onThumbClick}
+                includeItem={({ group }) => CASE_STUDY_GROUPS.has(group)}
+                disableThumbClick
+              />
+            </div>
+
+            <br />
+
             <div ref={uxContentRef}>
               <SectionHeader ref={uxSectionRef} id='ux-design'>
                 <WorkSectionHeader>UX Design</WorkSectionHeader>
@@ -461,7 +477,8 @@ const MainContent = () => {
               <GridContent
                 worksDataReversed={worksDataReversed}
                 onThumbClick={onThumbClick}
-                isManagedWork
+                includeItem={(item) => Boolean(item.link) && !CASE_STUDY_GROUPS.has(item.group)}
+                disableThumbClick
               />
             </div>
 
@@ -474,6 +491,7 @@ const MainContent = () => {
               <GridContent
                 worksDataReversed={worksDataReversed}
                 onThumbClick={onThumbClick}
+                includeItem={(item) => !item.link}
               />
             </div>
           </WorksSectionContent>

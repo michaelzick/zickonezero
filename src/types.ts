@@ -4,6 +4,8 @@ export type WorksData = {
   desc: string,
   header: string,
   group: string;
+  link?: string;
+  linkOut?: boolean;
 };
 
 export type WorksDataType = {
