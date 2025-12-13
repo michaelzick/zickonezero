@@ -2540,7 +2540,7 @@ export const IntroSection = styled.div`
 	      &:hover {
 	        background-color: ${THEME.colors.hotRed};
 	        border-color: ${THEME.colors.hotRed};
-	        color: ${THEME.colors.white};
+	        color: #fff;
 	        box-shadow: 0 12px 24px -10px rgb(0 0 0 / 60%);
 	      }
 
