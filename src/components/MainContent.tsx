@@ -32,7 +32,7 @@ import {
 import { AnimatedSection } from '../../styles/projectShowcases';
 
 type SectionKey = 'ux' | 'ui';
-type ActiveSection = SectionKey | null;
+type ActiveSection = SectionKey | 'case-studies' | null;
 
 const DESKTOP_NAV_OFFSET = 92; // Tighten the gap so section headers sit closer to the tabs
 const MOBILE_TABS_HEIGHT_PX = 11.3 * 16; // Keep in sync with mobile scroll target for Home tabs
@@ -161,6 +161,16 @@ const MainContent = () => {
     animateScrollTo(offsetPosition);
   }, [animateScrollTo]);
 
+  const handleCaseStudiesTabClick = useCallback(() => {
+    isManualScrolling.current = true;
+    setActiveSection('case-studies');
+    scrollToCaseStudies();
+    // Keep in sync with the max duration in animateScrollTo.
+    setTimeout(() => {
+      isManualScrolling.current = false;
+    }, 1800);
+  }, [scrollToCaseStudies]);
+
   useEffect(() => {
     const getDetectionOffset = () => {
       const prefersMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 899px)').matches;
@@ -174,6 +184,7 @@ const MainContent = () => {
       }
 
       const detectionOffset = getDetectionOffset();
+      const caseStudiesTop = caseStudiesSectionRef.current?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
       const uxTop = uxSectionRef.current?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
       const uiTop = uiSectionRef.current?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
 
@@ -183,6 +194,8 @@ const MainContent = () => {
         nextActive = 'ui';
       } else if (uxTop - detectionOffset <= 0) {
         nextActive = 'ux';
+      } else if (caseStudiesTop - detectionOffset <= 0) {
+        nextActive = 'case-studies';
       }
 
       setActiveSection((prev) => (prev === nextActive ? prev : nextActive));
@@ -429,6 +442,17 @@ const MainContent = () => {
         </FloatingCloudsViewport>
 
         <HomeTabsBar role='tablist' aria-label='Homepage sections'>
+          <HomeTabButton
+            type="button"
+            aria-selected={activeSection === 'case-studies'}
+            role='tab'
+            aria-controls='case-studies'
+            tabIndex={activeSection === 'case-studies' ? 0 : -1}
+            $isActive={activeSection === 'case-studies'}
+            onClick={handleCaseStudiesTabClick}
+          >
+            Case Studies
+          </HomeTabButton>
           <HomeTabButton
             type="button"
             aria-selected={activeSection === 'ux'}
