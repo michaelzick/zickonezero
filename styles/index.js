@@ -2278,9 +2278,9 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   word-wrap: break-word;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-  background-color: ${props => props.$isActive ? THEME.colors.hotYellow : THEME.colors.darkGreen};
-  color: ${props => props.$isActive ? '#020817' : '#fff'};
-  box-shadow: ${props => props.$isActive ? 'none' : '0 8px 20px rgba(0, 0, 0, 0.25)'};
+  background-color: ${props => props.$isActive ? THEME.colors.hotYellow : THEME.colors.hotGreen};
+  color: ${props => props.$isActive ? '#020817' : THEME.colors.contrast};
+  box-shadow: ${props => props.$isActive ? 'none' : '0 8px 18px -10px rgb(0 0 0 / 50%)'};
 
   &:focus-visible {
     outline: 2px solid ${THEME.colors.hotYellow};
@@ -2526,22 +2526,22 @@ export const IntroSection = styled.div`
 	      margin-top: clamp(0.7em, 1.6vw, 1em);
 	      padding: 0.65em 1.2em;
 	      border-radius: ${THEME.radii.md};
-	      border: 2px solid ${THEME.colors.hotYellow};
-	      background-color: ${THEME.colors.hotYellow};
+	      border: 2px solid ${THEME.colors.hotGreen};
+	      background-color: ${THEME.colors.hotGreen};
 	      color: ${THEME.colors.contrast};
 	      font-family: Roboto, sans-serif;
 	      font-size: 1.1em;
 	      font-weight: 700;
 	      letter-spacing: 0.02em;
 	      cursor: pointer;
-	      box-shadow: 0 10px 20px -8px rgb(0 0 0 / 55%);
+	      box-shadow: 0 8px 18px -10px rgb(0 0 0 / 50%);
 	      transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s, border-color 0.2s, color 0.2s;
 
 	      &:hover {
-	        background-color: ${THEME.colors.hotRed};
-	        border-color: ${THEME.colors.hotRed};
-	        color: #fff;
-	        box-shadow: 0 12px 24px -10px rgb(0 0 0 / 60%);
+	        background-color: ${THEME.colors.hotYellow};
+	        border-color: ${THEME.colors.hotYellow};
+	        color: #020817;
+	        box-shadow: 0 10px 22px -12px rgb(0 0 0 / 55%);
 	      }
 
       &:active {

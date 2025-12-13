@@ -14,6 +14,7 @@ export const THEME = {
     white: 'var(--color-white)',
     demostoke: 'var(--color-demostoke)',
     hotYellow: 'var(--color-hotYellow)',
+    hotGreen: 'var(--color-hotGreen)',
     hotRed: 'var(--color-hotRed)',
     darkGreen: 'var(--color-darkGreen)',
     contrast: 'var(--color-contrast)',
