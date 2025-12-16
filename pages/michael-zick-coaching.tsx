@@ -4,7 +4,7 @@ const MichaelZickCoachingPage = () => (
   <ProjectShowcase
     title='Michael Zick Coaching'
     summary='A coaching hub that pairs clarity of services with a confident, energetic visual system.'
-    heroImage={{ src: '/img/squares/mz-ppc-logo.webp', alt: 'Michael Zick Coaching logo' }}
+    heroImage={{ src: '/img/squares/mz-rac-logo.webp', alt: 'Michael Zick Coaching logo' }}
     roleBullets={[
       'Branding, text, and design',
       'UX and product strategy',
@@ -20,7 +20,7 @@ const MichaelZickCoachingPage = () => (
             The site layout guides visitors through clear offers and benefits, while keeping the scheduling button in easy reach.
           </>
         ),
-        image: { src: '/img/projects/michael-zick-coaching/mzc-home.webp', alt: 'Coaching homepage with clear offers and CTA' }
+        image: { src: '/img/projects/michael-zick-coaching/mz-home-rac.webp', alt: 'Coaching homepage with clear offers and CTA' }
       },
       {
         title: 'Presenting value and building momentum',
@@ -31,7 +31,7 @@ const MichaelZickCoachingPage = () => (
             turning understanding into bookings.
           </>
         ),
-        image: { src: '/img/projects/michael-zick-coaching/mzc-process.webp', alt: 'Process overview cards with navigation and a booking CTA' }
+        image: { src: '/img/projects/michael-zick-coaching/mz-program-rac.webp', alt: 'Process overview with navigation and booking CTA' }
       },
       {
         title: 'Past wins build trust',
@@ -52,7 +52,7 @@ const MichaelZickCoachingPage = () => (
           </>
         ),
         image: {
-          src: '/img/projects/michael-zick-coaching/mzc-mobile.webp',
+          src: '/img/projects/michael-zick-coaching/mz-mobile-rac.webp',
           alt: 'Mobile experience for booking and offers',
           position: 'top'
         }
