@@ -23,12 +23,11 @@ const MichaelZickCoachingPage = () => (
         image: { src: '/img/projects/michael-zick-coaching/mz-home-rac.webp', alt: 'Coaching homepage with clear offers and CTA' }
       },
       {
-        title: 'Presenting value and building momentum',
+        title: 'Presenting benefits and building momentum',
         body: (
           <>
-            Prospects see the three-step journey (identifying beliefs, working through feelings, taking conscious action),
-            presenting a high-level view of what to expect. Tabs on the right keep them oriented while the CTA stays present,
-            turning understanding into bookings.
+            Prospects see the features and benefits of the coaching program up front, presenting a high-level view of what to expect.
+            Tabs on the right keep them oriented while the prominent CTA turns momentum into bookings.
           </>
         ),
         image: { src: '/img/projects/michael-zick-coaching/mz-program-rac.webp', alt: 'Process overview with navigation and booking CTA' }
