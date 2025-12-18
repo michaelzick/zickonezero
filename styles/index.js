@@ -849,11 +849,17 @@ export const BioBox = styled.div`
     }
 
     .headshot {
+      background: #000;
+      border-radius: ${THEME.radii.md};
+      overflow: hidden;
+
       img {
+        display: block;
         border-radius: ${THEME.radii.md};
         width: 100%;
         height: auto;
         max-width: 18em;
+        opacity: 0.9;
       }
     }
 
