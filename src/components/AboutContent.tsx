@@ -50,16 +50,13 @@ const AboutContent = () => {
           >
             <div className='biobox-inner'>
               <div className='text-wrapper bottom text-animate'>
-                Michael is a Product Leader and Founder with a strong background in UX design, frontend development,
-                DevOps, SEO, and e-commerce platforms. He has hired and led engineering teams to build products from 0 to 1
+                Michael is a results-oriented Product Leader with a background in UX design, frontend development,
+                DevOps, SEO, and e-commerce platforms.
+                <br /><br />
+                He has hired and led engineering teams to build high-engagement products from 0 to 1
                 under tight deadlines, aligning cross-functional stakeholders in highly ambiguous environments.
                 <br /><br />
-                He specializes in the WordPress and React ecosystems (including Next.js, Redux, and TypeScript).
-                He also has experience with Python, PHP, and MySQL.
-                <br /><br />
-                With a CompTIA Security+ certification and over 18 years in IT, Michael brings deep technical
-                expertise and leadership to every project. In addition to his technical background, he has guided
-                individuals and teams to personal and professional success through coaching.
+                From concept to launch, Michael thrives on solving complex problems with elegant, user-centered solutions.
                 <br /><br />
                 Samples of his work can be found in the <span className='underline'><Link href='/'>main gallery</Link></span>,
                 with code examples on <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'
