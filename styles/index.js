@@ -904,6 +904,11 @@ export const BioBox = styled.div`
 
     .underline {
       text-decoration: underline;
+      transition: all 0.3s;
+
+      &:hover {
+        color: ${THEME.colors.hotRed};
+      }
     }
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
