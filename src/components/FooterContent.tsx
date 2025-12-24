@@ -40,7 +40,7 @@ const FooterContent = (): ReactElement => (
       </FooterColumn>
 
       <FooterColumn>
-        <FooterColumnTitle>Contact</FooterColumnTitle>
+        <FooterColumnTitle>Links</FooterColumnTitle>
         <FooterColumnLinks>
           {CONTACT_LINKS.map(({ href, label }) => (
             <li key={href}>
