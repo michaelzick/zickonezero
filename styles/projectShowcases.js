@@ -57,7 +57,8 @@ export const HeroImageFrame = styled.div`
   aspect-ratio: 16 / 9;
   border-radius: 0 ${THEME.radii.md} ${THEME.radii.md} 0;
   overflow: hidden;
-  box-shadow: 0 30px 38px -30px rgb(0 0 0 / 70%);
+  border: 3px solid ${THEME.colors.white};
+  box-shadow: 8px 8px 0 ${THEME.colors.hotYellow};
   background: transparent;
 
   img {
@@ -130,7 +131,7 @@ export const LinkRow = styled.div`
   a {
     color: ${THEME.colors.white};
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 900;
     line-height: 1;
     display: inline-flex;
     align-items: center;
@@ -161,8 +162,8 @@ export const SectionTitle = styled(DemoStokeTldrTitle)`
 export const ShowcaseImage = styled(DemoStokeTldrImage)`
   ${(props) => props.$position && `object-position: ${props.$position};`}
   cursor: pointer;
-  border: 1.5px solid ${THEME.colors.white};
-  box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
+  border: 3px solid ${THEME.colors.white};
+  box-shadow: 8px 8px 0 ${THEME.colors.orange};
   width: calc(100% + 1.5em);
   max-width: none;
   margin: -0.75em;

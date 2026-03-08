@@ -21,7 +21,7 @@ export const THEME = {
     orange: 'var(--color-orange)',
   },
   radii: {
-    md: '6px',
+    md: '0px',
   },
 } as const;
 

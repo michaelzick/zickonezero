@@ -52,8 +52,8 @@ export const FlowImage = styled(DemoStokeTldrImage)`
 
   ${FlowImageButton}:hover &,
   ${FlowImageButton}:focus-visible & {
-    border-color: ${THEME.colors.hotRed};
-    box-shadow: 0 24px 48px -32px rgb(0 0 0 / 70%), 0 0 0 1px ${THEME.colors.hotRed};
+    border: 3px solid ${THEME.colors.hotRed};
+    box-shadow: 6px 6px 0 ${THEME.colors.hotRed};
   }
 `;
 

@@ -11,7 +11,7 @@ const phraseCycle = keyframes`
 export const Container = styled.div`
   background-size: cover;
   text-align: center;
-  font-family: Roboto, sans-serif;
+  font-family: inherit; text-transform: uppercase;
   height: 100%;
   position: relative;
 
@@ -136,9 +136,9 @@ export const AnimatedHeadlineWrapper = styled.h1`
   margin: 0 auto 1em;
   padding: 0 0.5em;
   color: ${THEME.colors.white};
-  font-family: Roboto, sans-serif;
+  font-family: inherit; text-transform: uppercase;
   font-size: 1.8em;
-  font-weight: 500;
+  font-weight: 900;
   line-height: 1.1;
   text-align: left;
 
@@ -219,19 +219,19 @@ export const Wrapper = styled.div`
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     ${props => {
-      if (props.isAtPage && props.$isProjectPage) return 'padding-top: 6em;';
-      if (props.isHomePage) return 'padding-top: 6.9em;';
-      return 'padding-top: 5.2em;';
-    }}
+    if (props.isAtPage && props.$isProjectPage) return 'padding-top: 6em;';
+    if (props.isHomePage) return 'padding-top: 6.9em;';
+    return 'padding-top: 5.2em;';
+  }}
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     ${props => {
-      if (props.isHomePage) return 'padding-top: 9.6em;';
-      if (props.isAtPage && props.$isProjectPage) return 'padding-top: 7em;';
-      if (props.isAtPage) return 'padding-top: 13.5em;';
-      return 'padding-top: 8.7em;';
-    }}
+    if (props.isHomePage) return 'padding-top: 9.6em;';
+    if (props.isAtPage && props.$isProjectPage) return 'padding-top: 7em;';
+    if (props.isAtPage) return 'padding-top: 13.5em;';
+    return 'padding-top: 8.7em;';
+  }}
   }
 `;
 
@@ -249,7 +249,7 @@ export const Nav = styled.div`
 
   a {
     transition: all 0.3s;
-    font-family: Roboto, sans-serif;
+    font-family: inherit; text-transform: uppercase;
     color: ${THEME.colors.white};
     display: inline-flex;
     align-items: center;
@@ -326,11 +326,12 @@ export const Button = styled.a`
   color: #fff;
   font-size: 16px;
   line-height: 1.4em;
-  font-weight: 500;
+  font-weight: 900;
   text-align: center;
   letter-spacing: .5px;
   &:hover {
-    box-shadow: 0 10px 20px -8px rgb(0 0 0 / 53%);
+    border: 2px solid var(--color-white);
+    box-shadow: 4px 4px 0 var(--color-hotYellow);
   }
 `;
 
@@ -374,7 +375,7 @@ export const FullBorderImage = styled(Image)`
 
 export const Thumb = styled.div`
   text-align: center;
-  font-family: Roboto, sans-serif;
+  font-family: inherit; text-transform: uppercase;
   margin: 3em 2em 1.5em;
   color: ${THEME.colors.white};
 
@@ -425,6 +426,10 @@ export const Thumb = styled.div`
       color: ${THEME.colors.hotRed};
       cursor: pointer;
     }
+    .thumb-media {
+      box-shadow: 8px 8px 0 ${THEME.colors.orange};
+      border-color: ${THEME.colors.hotYellow};
+    }
   }
 
   .thumb-media {
@@ -432,6 +437,9 @@ export const Thumb = styled.div`
     display: inline-block;
     overflow: hidden;
     border-radius: ${THEME.radii.md};
+    border: 3px solid ${THEME.colors.white};
+    box-shadow: 8px 8px 0 ${THEME.colors.demostoke};
+    transition: box-shadow 0.2s, border-color 0.2s;
   }
 
   .neon-trail-thumb {
@@ -448,7 +456,7 @@ export const Thumb = styled.div`
 
   .thumb-media .cursor-dot {
     position: absolute;
-    border-radius: 50%;
+    border-radius: 0;
     pointer-events: none;
     mix-blend-mode: screen;
     opacity: 0;
@@ -563,7 +571,7 @@ export const CaseStudiesDesktopWrapper = styled.div`
   align-items: center;
   margin-top: 0.8em;
   color: ${THEME.colors.white};
-  font-family: Roboto, sans-serif;
+  font-family: inherit; text-transform: uppercase;
   cursor: pointer;
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
@@ -604,7 +612,8 @@ export const CaseStudiesDropdown = styled.ul`
   background: ${THEME.colors.darkest};
   border-radius: ${THEME.radii.md};
   border: 2px solid ${THEME.colors.white};
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  border: 2px solid ${THEME.colors.white};
+  box-shadow: 6px 6px 0 ${THEME.colors.demostoke};
   display: grid;
   grid-template-columns: repeat(2, auto);
   grid-auto-rows: auto;
@@ -669,7 +678,8 @@ export const LinkBoxMobile = styled.ul`
   z-index: 400;
   border-radius: ${THEME.radii.md};
   border: 2px solid ${THEME.colors.white};
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  border: 2px solid ${THEME.colors.white};
+  box-shadow: 6px 6px 0 ${THEME.colors.demostoke};
   animation: ${props => props.$isAnimating
     ? 'slideInFromRight 0.3s ease-out forwards'
     : 'slideOutToRight 0.3s ease-in forwards'};
@@ -747,7 +757,7 @@ export const CaseStudiesAccordionButton = styled.button`
   border: none;
   border-bottom: none;
   color: ${THEME.colors.white};
-  font-family: Roboto, sans-serif;
+  font-family: inherit; text-transform: uppercase;
   font-size: 1em;
   padding: 0 0 0.2em;
   cursor: pointer;
@@ -875,7 +885,8 @@ export const BioBox = styled.div`
           cursor: pointer;
           border: 1.5px solid ${THEME.colors.white};
           border-radius: ${THEME.radii.md};
-          box-shadow: 0 30px 38px -30px rgb(0 0 0 / 75%);
+          border: 3px solid ${THEME.colors.white};
+          box-shadow: 8px 8px 0 ${THEME.colors.hotYellow};
           transition: border-color 0.2s ease;
 
           &:hover {
@@ -1038,7 +1049,7 @@ export const SectionHeader = styled.h2`
   padding: 1.2em 0 0.6em;
   margin: 0;
   text-align: center;
-  font-family: Roboto, sans-serif;
+  font-family: inherit; text-transform: uppercase;
   font-size: 2em;
   background: ${THEME.colors.dark};
 
@@ -1054,7 +1065,7 @@ export const Footer = styled.footer`
   padding: 2.5em 2em 2em;
   width: 100%;
   border-top: 1px solid ${THEME.colors.white};
-  font-family: Roboto, sans-serif;
+  font-family: inherit; text-transform: uppercase;
   text-align: left;
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
@@ -1295,7 +1306,8 @@ export const DemoStokeTldrSection = styled.div`
   border-radius: ${THEME.radii.md};
   background: rgba(37, 99, 235, 0.08);
   border: none;
-  box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
+  border: 3px solid ${THEME.colors.white};
+  box-shadow: 8px 8px 0 ${THEME.colors.orange};
 `;
 
 export const DemoStokeTldrRow = styled.div`
@@ -1381,7 +1393,8 @@ export const DemoStokeTldrImage = styled.img`
   border-radius: ${THEME.radii.md};
   border: 1.5px solid ${THEME.colors.grey};
   object-fit: contain;
-  box-shadow: 0 30px 38px -30px rgb(0 0 0 / 75%);
+  border: 3px solid ${THEME.colors.white};
+  box-shadow: 8px 8px 0 ${THEME.colors.demostoke};
   display: block;
 `;
 
@@ -1570,7 +1583,8 @@ export const DemoStokeStoryCard = styled.section`
   background:
     radial-gradient(120% 140% at 12% 12%, rgba(0, 215, 255, 0.22), rgba(2, 8, 23, 0)),
     linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(0, 113, 227, 0.12));
-  box-shadow: 0 18px 36px -28px rgb(0 0 0 / 85%), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  border: 3px solid ${THEME.colors.white};
+  box-shadow: 8px 8px 0 ${THEME.colors.hotRed};
   border: none;
   overflow: hidden;
   color: ${THEME.colors.white};
@@ -1619,7 +1633,8 @@ export const DemoStokeWhyImageFrame = styled.div`
   margin-top: clamp(1em, 2vw, 1.5em);
   border-radius: ${THEME.radii.md};
   overflow: hidden;
-  box-shadow: 0 16px 38px -24px rgb(0 0 0 / 75%);
+  border: 2px solid ${THEME.colors.white};
+  box-shadow: 6px 6px 0 ${THEME.colors.hotGreen};
 
   img {
     display: block;
@@ -1646,7 +1661,7 @@ export const DemoStokeScrollRow = styled.div`
 
   &::-webkit-scrollbar-thumb {
     background: ${THEME.colors.grey};
-    border-radius: 999px;
+    border-radius: 0;
   }
 
   &::-webkit-scrollbar-track {
@@ -1714,7 +1729,7 @@ export const DemoStokeScrollButton = styled.button`
   justify-content: center;
   width: 1.8em;
   height: 1.8em;
-  border-radius: 50%;
+  border-radius: 0;
   border: 1px solid ${THEME.colors.grey};
   color: ${THEME.colors.white};
   background: ${THEME.colors.darkest};
@@ -1753,7 +1768,7 @@ export const DemoStokeMiniCardRow = styled.div`
 
   &::-webkit-scrollbar-thumb {
     background: ${THEME.colors.grey};
-    border-radius: 999px;
+    border-radius: 0;
   }
 
   &::-webkit-scrollbar-track {
@@ -1847,7 +1862,8 @@ export const DemoStokeStoryHero = styled.img`
   object-fit: cover;
   object-position: top;
   margin: 0;
-  box-shadow: 0 12px 28px -20px rgb(0 0 0 / 60%);
+  border: 2px solid ${THEME.colors.white};
+  box-shadow: 6px 6px 0 ${THEME.colors.demostoke};
 `;
 
 export const DemoStokeHeroAbstractLayout = styled.div`
@@ -1900,7 +1916,8 @@ export const DemoStokeMiniCardModal = styled.div`
   background:
     radial-gradient(140% 140% at 10% 0%, rgba(0, 215, 255, 0.16), rgba(2, 8, 23, 0)),
     linear-gradient(150deg, rgba(3, 7, 18, 0.95), rgba(2, 132, 199, 0.14));
-  box-shadow: 0 18px 44px -26px rgb(0 0 0 / 80%), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border: 3px solid ${THEME.colors.white};
+  box-shadow: 8px 8px 0 ${THEME.colors.hotYellow};
   border: 1px solid rgba(0, 215, 255, 0.2);
   color: #f8fafc; /* lock light text regardless of theme */
   padding: clamp(1.2em, 2.5vw, 1.85em);
@@ -1922,7 +1939,7 @@ export const DemoStokeMiniCardModalClose = styled.button`
   right: 0.3em;
   width: 2em;
   height: 2em;
-  border-radius: 50%;
+  border-radius: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1996,7 +2013,8 @@ export const DemoStokeWhyCard = styled.div`
   padding: clamp(1em, 2.4vw, 1.4em);
   border-radius: ${THEME.radii.md};
   background: rgba(37, 99, 235, 0.08);
-  box-shadow: 0 12px 28px -22px rgb(0 0 0 / 70%);
+  border: 2px solid ${THEME.colors.white};
+  box-shadow: 4px 4px 0 ${THEME.colors.orange};
   color: ${THEME.colors.white};
   border: none;
   overflow: hidden;
@@ -2008,7 +2026,7 @@ export const DemoStokeWhyBadge = styled.span`
   justify-content: center;
   min-width: 1.8em;
   height: 1.8em;
-  border-radius: 999px;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(15, 23, 42, 0.55);
   color: ${THEME.colors.white};
@@ -2218,7 +2236,8 @@ export const ThemeSwitcherContent = styled(Select.Content)`
   color: ${THEME.colors.white};
   border-radius: ${THEME.radii.md};
   border: 1px solid ${THEME.colors.grey};
-  box-shadow: 0 18px 45px rgba(5, 5, 15, 0.35);
+  border: 3px solid ${THEME.colors.white};
+  box-shadow: 8px 8px 0 ${THEME.colors.demostoke};
   z-index: 400;
 `;
 
@@ -2280,7 +2299,7 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   justify-content: center;
   padding: 0.65em 1em;
   border-radius: ${THEME.radii.md};
-  font-family: Roboto, sans-serif;
+  font-family: inherit; text-transform: uppercase;
   font-size: 1.05em;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -2369,7 +2388,8 @@ export const SectionTabsMobileInner = styled.div`
   border-radius: ${THEME.radii.md};
   border: 2px solid rgba(255, 255, 255, 0.35);
   background: rgba(var(--color-dark-rgb), 0.78);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+  border: 2px solid ${THEME.colors.white};
+  box-shadow: 4px 4px 0 ${THEME.colors.hotRed};
   backdrop-filter: blur(6px);
   flex-wrap: nowrap;
   justify-content: space-between;
@@ -2502,7 +2522,7 @@ export const IntroSection = styled.div`
 
     h2 {
       color: ${THEME.colors.white};
-      font-family: Roboto, sans-serif;
+      font-family: inherit; text-transform: uppercase;
       font-size: clamp(3.4em, 6vw, 4.8em);
       font-weight: 600;
       margin: 0;
@@ -2512,7 +2532,7 @@ export const IntroSection = styled.div`
 
     p {
       color: ${THEME.colors.white};
-      font-family: Roboto, sans-serif;
+      font-family: inherit; text-transform: uppercase;
       font-size: 1.6em;
       line-height: 1.5;
       margin: 0 0 1em 0;
@@ -2551,7 +2571,7 @@ export const IntroSection = styled.div`
       border: 2px solid ${THEME.colors.hotYellow};
       background-color: ${THEME.colors.hotYellow};
       color: ${THEME.colors.contrast};
-      font-family: Roboto, sans-serif;
+      font-family: inherit; text-transform: uppercase;
       font-size: 1.1em;
       font-weight: 700;
       letter-spacing: 0.02em;
