@@ -2322,72 +2322,58 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
 `;
 
 export const CaseStudyTopTabButton = styled(HomeTabButton)`
-  border: 1.5px solid rgba(255, 255, 255, 0.32);
-  background: rgba(2, 8, 23, 0.78);
-  color: #fff;
+  border: 1.5px solid var(--case-study-top-tab-border);
+  background: var(--case-study-top-tab-bg);
+  color: var(--case-study-top-tab-color);
   box-shadow: 0 10px 22px -14px rgb(0 0 0 / 55%);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 
   &[data-active='true'] {
-    background-color: ${THEME.colors.demostoke};
-    border-color: ${THEME.colors.demostoke};
-    color: ${THEME.colors.contrast};
+    background-color: var(--case-study-top-tab-active-bg);
+    border-color: var(--case-study-top-tab-active-border);
+    color: var(--case-study-top-tab-active-color);
   }
 
   &:hover {
-    background-color: ${THEME.colors.darkGreen};
-    border-color: ${THEME.colors.darkGreen};
-    color: #fff;
+    background-color: var(--case-study-top-tab-hover-bg);
+    border-color: var(--case-study-top-tab-hover-border);
+    color: var(--case-study-top-tab-hover-color);
+  }
+
+  &[data-active='true']:hover {
+    background-color: var(--case-study-top-tab-active-bg);
+    border-color: var(--case-study-top-tab-active-border);
+    color: var(--case-study-top-tab-active-color);
   }
 
   &:focus-visible {
     outline: 2px solid ${THEME.colors.demostoke};
   }
-
-  :root[data-theme='light'] & {
-    background: rgba(2, 8, 23, 0.82);
-    border-color: rgba(255, 255, 255, 0.36);
-    color: #fff;
-    box-shadow: 0 10px 22px -14px rgba(15, 23, 42, 0.28);
-
-    &[data-active='true'] {
-      background: rgba(255, 255, 255, 0.72);
-      border-color: rgba(15, 23, 42, 0.55);
-      color: ${THEME.colors.contrast};
-    }
-  }
 `;
 
 const sidebarTabButtonStyles = css`
-  background-color: transparent;
-  border: 1.5px solid ${THEME.colors.white};
-  color: ${THEME.colors.white};
+  background-color: var(--section-tab-bg);
+  border: 1.5px solid var(--section-tab-border);
+  color: var(--section-tab-color);
   box-shadow: none;
   transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 
   &[data-active='true'] {
-    background-color: ${THEME.colors.demostoke};
-    border-color: ${THEME.colors.demostoke};
-    color: ${THEME.colors.contrast};
+    background-color: var(--section-tab-active-bg);
+    border-color: var(--section-tab-active-border);
+    color: var(--section-tab-active-color);
   }
 
   &:not([data-active='true']):hover {
-    border-color: ${THEME.colors.darkGreen};
-    color: #fff;
+    border-color: var(--section-tab-hover-border);
+    color: var(--section-tab-hover-color);
   }
 
-  :root[data-theme='light'] & {
-    background: rgba(2, 8, 23, 0.82);
-    border-color: rgba(255, 255, 255, 0.36);
-    color: #fff;
-    box-shadow: 0 10px 22px -14px rgba(15, 23, 42, 0.28);
-
-    &[data-active='true'] {
-      background: rgba(255, 255, 255, 0.72);
-      border-color: rgba(15, 23, 42, 0.55);
-      color: ${THEME.colors.contrast};
-    }
+  &[data-active='true']:hover {
+    background-color: var(--section-tab-active-bg);
+    border-color: var(--section-tab-active-border);
+    color: var(--section-tab-active-color);
   }
 `;
 

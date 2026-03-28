@@ -146,9 +146,9 @@ const CaseStudyContent = ({
                 </HeroContent>
               </HeroGrid>
 
-              <SectionNavRevealAnchor id='section-the-what' aria-hidden='true' />
+              <SectionNavRevealAnchor id='demostoke-case-study-nav-anchor' aria-hidden='true' />
 
-              <div style={{ marginTop: 'clamp(1.8em, 4vw, 3em)' }}>
+              <div id='section-the-what' style={{ marginTop: 'clamp(1.8em, 4vw, 3em)' }}>
                 <DemoStokeTldrSection>
                   <DemoStokeTldrList>
                     {TLDR_ITEMS.map(({ title, description, image }, index) => (
@@ -193,7 +193,7 @@ const CaseStudyContent = ({
             isActive={isActive}
             lockToBottomSectionId={CASE_STUDY_BOTTOM_SECTION_ID}
             scrollOffsetAdjustment={8}
-            desktopRevealAnchorId='section-the-what'
+            desktopRevealAnchorId='demostoke-case-study-nav-anchor'
           />
 
           <SectionsBlock as="div">
