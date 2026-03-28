@@ -1917,7 +1917,7 @@ export const DemoStokeMiniCardModal = styled.div`
     background:
       radial-gradient(140% 140% at 10% 0%, rgba(0, 215, 255, 0.18), rgba(248, 250, 252, 0.02)),
       linear-gradient(150deg, rgba(8, 47, 73, 0.9), rgba(12, 74, 110, 0.75));
-    color: ${THEME.colors.white};
+    color: #f8fafc; /* keep light text inside the modal in light theme */
     border: 1px solid rgba(8, 47, 73, 0.5);
     box-shadow: 0 18px 36px -24px rgb(15 23 42 / 45%);
   }
@@ -1961,7 +1961,7 @@ export const DemoStokeMiniCardModalClose = styled.button`
 export const DemoStokeMiniCardModalTitle = styled.h4`
   margin: 0 0 0.65em;
   font-size: clamp(1.25em, 2.3vw, 1.5em);
-  color: ${THEME.colors.white};
+  color: #f8fafc; /* lock light text regardless of theme */
   letter-spacing: 0.01em;
 `;
 
