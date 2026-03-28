@@ -2700,15 +2700,15 @@ export const IntroSection = styled.div`
 export const WorksParallaxStage = styled.section`
   position: relative;
   isolation: isolate;
-  margin: clamp(1em, 2.8vw, 2em) 0 0;
+  margin: clamp(0.25em, 1vw, 0.75em) 0 0;
   background: ${THEME.colors.dark};
 `;
 
 export const WorksRevealCurtain = styled.div`
   position: relative;
   z-index: 2;
-  height: clamp(50vh, 58vw, 65vh);
-  background: ${THEME.colors.dark};
+  height: clamp(32vh, 36vw, 42vh);
+  background: transparent;
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     display: none;
@@ -2737,15 +2737,6 @@ export const WorksFixedIllustration = styled.div`
     filter: saturate(1.05) contrast(1.03);
   }
 
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.35) 55%, rgba(0, 0, 0, 0.5) 100%);
-    pointer-events: none;
-    z-index: 1;
-  }
-
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     height: clamp(78vh, 120vw, 96vh);
   }
@@ -2758,9 +2749,7 @@ export const WorksFixedIllustration = styled.div`
 `;
 
 export const WorksCarouselFrame = styled(WorksFixedIllustration)`
-  background:
-    radial-gradient(120% 120% at 8% 18%, rgba(0, 215, 255, 0.18), rgba(2, 8, 23, 0)),
-    linear-gradient(180deg, rgba(8, 47, 73, 0.42), rgba(2, 8, 23, 0.86));
+  background: transparent;
   pointer-events: none;
 `;
 
@@ -2770,15 +2759,15 @@ export const WorksCarouselViewport = styled.div`
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding: clamp(2em, 6vw, 4.5em);
+  padding: clamp(0.75em, 2vw, 1.4em) clamp(1.25em, 3.8vw, 3em);
   z-index: 0;
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    padding: clamp(1.5em, 5vw, 2.6em);
+    padding: clamp(0.65em, 2.4vw, 1.1em) clamp(1em, 3.8vw, 1.8em);
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: clamp(1em, 4vw, 1.5em);
+    padding: clamp(0.5em, 2.8vw, 0.85em) clamp(0.75em, 3.6vw, 1.1em);
   }
 `;
 
@@ -2802,14 +2791,6 @@ export const WorksCarouselItem = styled.div`
   box-shadow: 0 34px 48px -30px rgb(0 0 0 / 82%);
   background: ${THEME.colors.darkest};
 
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(2, 8, 23, 0.12) 100%);
-    pointer-events: none;
-  }
-
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     flex-basis: clamp(20rem, 78vw, 36rem);
   }
@@ -2831,8 +2812,8 @@ export const WorksSectionContent = styled.div`
   position: relative;
   z-index: 2;
   background: ${THEME.colors.dark};
-  margin-top: -60vh;
-  padding-top: clamp(2em, 5vw, 3.5em);
+  margin-top: -44vh;
+  padding-top: clamp(1em, 2.5vw, 1.75em);
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     margin-top: -24vh;
