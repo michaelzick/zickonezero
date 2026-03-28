@@ -15,7 +15,7 @@ import { TopNavContent, FooterContent } from '.';
 import DemoStokeTabs from './DemoStokeTabs';
 import { SidebarSectionTabsMobile } from './SidebarSectionTabs';
 import useAnimatedSections from './demostoke/useAnimatedSections';
-import { CASE_STUDY_BOTTOM_SECTION_ID, CASE_STUDY_SECTIONS, HOW_IMAGES, STORY_SECTIONS } from './demostoke/data';
+import { CASE_STUDY_BOTTOM_SECTION_ID, CASE_STUDY_SECTIONS, HOW_IMAGES, STORY_HERO_IMAGES, STORY_SECTIONS, TLDR_ITEMS } from './demostoke/data';
 import CaseStudyContent from './demostoke/CaseStudyContent';
 import StoriesContent from './demostoke/StoriesContent';
 
@@ -27,11 +27,13 @@ const DemoStokeContent = () => {
   const [activeTab, setActiveTab] = useState<SectionKey>('case-study');
   const [topTabsEl, setTopTabsEl] = useState<HTMLDivElement | null>(null);
   const [lightboxController, setLightboxController] = useState({ toggler: false, slide: 1 });
+  const [storyLightboxController, setStoryLightboxController] = useState({ toggler: false, slide: 1 });
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [openPersonaId, setOpenPersonaId] = useState<string | null>(null);
   const { visibleSections, setAnimatedSectionRef } = useAnimatedSections(activeTab);
   const scrollRowRef = useRef<HTMLDivElement | null>(null);
+  const caseStudyImages = [...TLDR_ITEMS.map(({ image }) => image), ...HOW_IMAGES];
   const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {
     setTopTabsEl(node);
   }, []);
@@ -59,6 +61,13 @@ const DemoStokeContent = () => {
       slide: index + 1
     });
   };
+
+  const openStoryLightbox = useCallback((index: number) => {
+    setStoryLightboxController((prev) => ({
+      toggler: !prev.toggler,
+      slide: index + 1
+    }));
+  }, []);
 
   const updateScrollButtons = useCallback(() => {
     const row = scrollRowRef.current;
@@ -153,13 +162,19 @@ const DemoStokeContent = () => {
             topTabsEl={topTabsEl}
             sections={STORY_SECTIONS}
             isActive={activeTab === 'stories'}
+            openStoryLightbox={openStoryLightbox}
           />
         )}
       </Wrapper>
       <FsLightbox
         toggler={lightboxController.toggler}
-        sources={HOW_IMAGES.map(({ src }) => src)}
+        sources={caseStudyImages.map(({ src }) => src)}
         slide={lightboxController.slide}
+      />
+      <FsLightbox
+        toggler={storyLightboxController.toggler}
+        sources={STORY_HERO_IMAGES.map(({ src }) => src)}
+        slide={storyLightboxController.slide}
       />
       <FooterContent />
     </>

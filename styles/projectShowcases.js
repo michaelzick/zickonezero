@@ -201,6 +201,12 @@ export const SectionsBlock = styled.div`
   text-align: left;
 `;
 
+export const SectionNavRevealAnchor = styled.div`
+  width: 100%;
+  height: 1px;
+  margin-top: clamp(0.9em, 2vw, 1.4em);
+`;
+
 export const SectionTitle = styled(DemoStokeTldrTitle)`
   color: ${THEME.colors.orange};
   margin-bottom: 0.35em;
@@ -222,6 +228,19 @@ export const ShowcaseImage = styled(DemoStokeTldrImage)`
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     width: 100%;
     margin: 0;
+  }
+`;
+
+export const ShowcaseMediaButton = styled.button`
+  all: unset;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  border-radius: ${THEME.radii.md};
+
+  &:focus-visible {
+    outline: 2px solid ${THEME.colors.hotYellow};
+    outline-offset: 4px;
   }
 `;
 

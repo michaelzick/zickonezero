@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import FsLightbox from 'fslightbox-react';
 
 import {
@@ -18,7 +18,16 @@ import { SidebarSectionTabsMobile } from './SidebarSectionTabs';
 import useAnimatedSections from './demostoke/useAnimatedSections';
 import CaseStudyContent from './antisyphon/CaseStudyContent';
 import ScreensContent from './antisyphon/ScreensContent';
-import { CASE_STUDY_BOTTOM_SECTION_ID, CASE_STUDY_SECTIONS, FLOW_BLOCKS, FLOW_BOTTOM_SECTION_ID, FLOW_SECTIONS, HOW_IMAGES, METHOD_SECTIONS } from './antisyphon/data';
+import {
+  CASE_STUDY_BOTTOM_SECTION_ID,
+  CASE_STUDY_SECTIONS,
+  FLOW_BLOCKS,
+  FLOW_BOTTOM_SECTION_ID,
+  FLOW_SECTIONS,
+  HOW_IMAGES,
+  METHOD_SECTIONS,
+  TLDR_ITEMS
+} from './antisyphon/data';
 
 type SectionKey = 'case-study' | 'flows';
 
@@ -35,8 +44,9 @@ const AntisyphonContent = () => {
   const [openPersonaId, setOpenPersonaId] = useState<string | null>(null);
   const { visibleSections, setAnimatedSectionRef } = useAnimatedSections(activeTab);
   const scrollRowRef = useRef<HTMLDivElement | null>(null);
-  const methodImages = useMemo(() => METHOD_SECTIONS.flatMap(({ images }) => images), [METHOD_SECTIONS]);
-  const flowImages = useMemo(() => FLOW_BLOCKS.flatMap(({ images }) => images), [FLOW_BLOCKS]);
+  const methodImages = METHOD_SECTIONS.flatMap(({ images }) => images);
+  const flowImages = FLOW_BLOCKS.flatMap(({ images }) => images);
+  const caseStudyImages = [...TLDR_ITEMS.map(({ image }) => image), ...HOW_IMAGES];
 
   const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {
     setTopTabsEl(node);
@@ -180,7 +190,7 @@ const AntisyphonContent = () => {
       </Wrapper>
       <FsLightbox
         toggler={lightboxController.toggler}
-        sources={HOW_IMAGES.map(({ src }) => src)}
+        sources={caseStudyImages.map(({ src }) => src)}
         slide={lightboxController.slide}
       />
       <FsLightbox

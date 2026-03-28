@@ -1,4 +1,3 @@
-import { DemoStokeContentGrid } from '../../../styles';
 import SidebarSectionTabs, { SidebarSectionConfig } from '../SidebarSectionTabs';
 import * as UserStories from '../userstories';
 import {
@@ -13,6 +12,7 @@ type StoriesContentProps = {
   topTabsEl: HTMLDivElement | null;
   sections: SidebarSectionConfig[];
   isActive: boolean;
+  openStoryLightbox: (index: number) => void;
 };
 
 const StoriesContent = ({
@@ -20,47 +20,50 @@ const StoriesContent = ({
   visibleSections,
   topTabsEl,
   sections,
-  isActive
+  isActive,
+  openStoryLightbox
 }: StoriesContentProps) => {
   return (
     <div id="stories-content">
       <PageShell>
         <CaseStudyPageInner className='demostoke-inner'>
-          <DemoStokeContentGrid>
-            <div>
-              <SectionsBlock as="div">
-                <section id='story-independent-shaper'>
-                  <UserStories.IndieShaper
-                    wrapWithBioBox={false}
-                    setAnimatedSectionRef={setAnimatedSectionRef}
-                    visibleSections={visibleSections}
-                  />
-                </section>
+          <SidebarSectionTabs
+            sections={sections}
+            topTabsEl={topTabsEl}
+            isActive={isActive}
+            scrollOffsetAdjustment={8}
+            desktopRevealAnchorId='demostoke-stories-nav-anchor'
+          />
 
-                <section id='story-weekend-warrior'>
-                  <UserStories.WeekendWarrior
-                    wrapWithBioBox={false}
-                    setAnimatedSectionRef={setAnimatedSectionRef}
-                    visibleSections={visibleSections}
-                  />
-                </section>
+          <SectionsBlock as="div">
+            <section id='story-independent-shaper'>
+              <UserStories.IndieShaper
+                wrapWithBioBox={false}
+                setAnimatedSectionRef={setAnimatedSectionRef}
+                visibleSections={visibleSections}
+                openHeroLightbox={() => openStoryLightbox(0)}
+                renderDesktopRevealAnchor
+              />
+            </section>
 
-                <section id='story-small-ski-shop'>
-                  <UserStories.SmallSkiBikeShop
-                    wrapWithBioBox={false}
-                    setAnimatedSectionRef={setAnimatedSectionRef}
-                    visibleSections={visibleSections}
-                  />
-                </section>
-              </SectionsBlock>
-            </div>
-            <SidebarSectionTabs
-              sections={sections}
-              topTabsEl={topTabsEl}
-              isActive={isActive}
-              scrollOffsetAdjustment={8}
-            />
-          </DemoStokeContentGrid>
+            <section id='story-weekend-warrior'>
+              <UserStories.WeekendWarrior
+                wrapWithBioBox={false}
+                setAnimatedSectionRef={setAnimatedSectionRef}
+                visibleSections={visibleSections}
+                openHeroLightbox={() => openStoryLightbox(1)}
+              />
+            </section>
+
+            <section id='story-small-ski-shop'>
+              <UserStories.SmallSkiBikeShop
+                wrapWithBioBox={false}
+                setAnimatedSectionRef={setAnimatedSectionRef}
+                visibleSections={visibleSections}
+                openHeroLightbox={() => openStoryLightbox(2)}
+              />
+            </section>
+          </SectionsBlock>
         </CaseStudyPageInner>
       </PageShell>
     </div>

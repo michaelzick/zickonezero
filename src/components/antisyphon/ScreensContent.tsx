@@ -1,14 +1,26 @@
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import {
-  BioBox,
-  DemoStokeContentGrid,
-  DemoStokeTitle,
   DemoStokeTldrCopy,
-  FlexBox,
-  PitchDeckLink
+  DemoStokeTldrTitle,
 } from '../../../styles';
 import SidebarSectionTabs, { SidebarSectionConfig } from '../SidebarSectionTabs';
-import { AnimatedSection } from '../../../styles/projectShowcases';
+import {
+  AnimatedSection,
+  CaseStudyPageInner,
+  HeroContent,
+  HeroGrid,
+  HeroLabel,
+  HeroMediaFrame,
+  LinkRow,
+  PageShell,
+  RoleList,
+  SectionNavRevealAnchor,
+  SectionTitle,
+  SectionsBlock,
+  ShowcaseMediaButton,
+  Summary,
+  Title,
+} from '../../../styles/projectShowcases';
 import { FLOW_BLOCKS } from './data';
 import {
   FlowImage,
@@ -30,6 +42,14 @@ type ScreensContentProps = {
   isActive: boolean;
   openFlowLightbox: (index: number) => void;
 };
+
+const ROLE_BULLETS = [
+  'Catalog UX',
+  'Checkout architecture',
+  'Admin tooling'
+];
+
+const INTRO_SUMMARY = 'The product screens below show how the Antisyphon marketplace scales from discovery through checkout, account management, and operations tooling. On desktop, the experience now follows the same editorial showcase rhythm as the rest of the case-study system instead of a split sidebar layout.';
 
 const ScreensContent = ({
   setAnimatedSectionRef,
@@ -61,115 +81,155 @@ const ScreensContent = ({
 
   return (
     <div id="screens-content">
-      <BioBox direction='right' noBottomPadding top>
-        <div className='biobox-inner demostoke-inner'>
-          <DemoStokeContentGrid>
-            <div>
-              <section id='screens-introduction'>
-                <FlexBox>
-                  <img className='ds-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
+      <PageShell>
+        <CaseStudyPageInner className='demostoke-inner'>
+          <section id='screens-introduction'>
+            <HeroGrid>
+              <ShowcaseMediaButton
+                type='button'
+                aria-label='Open image: Full course catalog with category filters and badges'
+                onClick={() => openFlowLightbox(0)}
+              >
+                <HeroMediaFrame className='image-animate'>
+                  <img
+                    src='/img/antisyphon/course-catalog.webp'
+                    alt='Full course catalog with category filters and badges'
+                    loading='lazy'
+                  />
+                </HeroMediaFrame>
+              </ShowcaseMediaButton>
+
+              <HeroContent className='text-animate'>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1em', marginBottom: '0.25em' }}>
+                  <img className='at-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
+                  <HeroLabel>Product Screens</HeroLabel>
+                </div>
+
+                <Title>Antisyphon Product Screens</Title>
+
+                <div>
+                  <HeroLabel>Description</HeroLabel>
+                  <Summary>{INTRO_SUMMARY}</Summary>
+                </div>
+
+                <div>
+                  <HeroLabel>Focus Areas</HeroLabel>
+                  <RoleList>
+                    {ROLE_BULLETS.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </RoleList>
+                </div>
+
+                <LinkRow>
+                  <HeroLabel>Project Link</HeroLabel>
                   <div>
-                    <h2 className='tab-header page-header'>Antisyphon Product Screens</h2>
-                    <PitchDeckLink className='pitch-link-desktop' href="https://www.antisyphontraining.com/" target='_blank' rel='noopener noreferrer'>
+                    <a href="https://www.antisyphontraining.com/" target='_blank' rel='noopener noreferrer'>
                       AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden="true" />
-                    </PitchDeckLink>
+                    </a>
                   </div>
-                </FlexBox>
+                </LinkRow>
+              </HeroContent>
+            </HeroGrid>
+          </section>
 
-                <PitchDeckLink className='pitch-link-mobile' href="https://www.antisyphontraining.com/" target='_blank' rel='noopener noreferrer'>
-                  AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden="true" />
-                </PitchDeckLink>
+          <SectionNavRevealAnchor id='antisyphon-screens-nav-anchor' aria-hidden='true' />
 
-                <section id='hero-spacer' aria-hidden='true' />
-              </section>
+          <SidebarSectionTabs
+            sections={sections}
+            topTabsEl={topTabsEl}
+            isActive={isActive}
+            scrollOffsetAdjustment={8}
+            desktopRevealAnchorId='antisyphon-screens-nav-anchor'
+          />
 
-              {catalogBlock && (
+          <SectionsBlock as='div'>
+            {catalogBlock && (
+              <AnimatedSection
+                ref={setAnimatedSectionRef(catalogBlock.id)}
+                data-animate-id={catalogBlock.id}
+                className={visibleSections[catalogBlock.id] ? 'visible' : undefined}
+              >
+                <FlowStorySection id={catalogBlock.id} className='story-section'>
+                  <FlowSection>
+                    <FlowText className='text-animate'>
+                      <SectionTitle as='h2'>{catalogBlock.title}</SectionTitle>
+                      <DemoStokeTldrCopy>{catalogBlock.copy}</DemoStokeTldrCopy>
+                    </FlowText>
+                    {catalogImageRows.map((row, rowIndex) => (
+                      <FlowImagesRow
+                        key={`${catalogBlock.id}-row-${rowIndex}`}
+                        className='image-animate'
+                        style={rowIndex === 0 ? { marginTop: '0.75em' } : undefined}
+                      >
+                        {row.map(({ image, index }) => (
+                          <FlowImageButton
+                            key={image.src}
+                            type='button'
+                            onClick={() => openFlowLightbox(getImageGlobalIndex(catalogBlock.id, index))}
+                            aria-label={`Open image: ${image.alt}`}
+                          >
+                            <FlowImage
+                              src={image.src}
+                              alt={image.alt}
+                              loading='lazy'
+                            />
+                          </FlowImageButton>
+                        ))}
+                      </FlowImagesRow>
+                    ))}
+                  </FlowSection>
+                </FlowStorySection>
+              </AnimatedSection>
+            )}
+
+            <FlowMethodList className='story-section'>
+              {remainingFlowBlocks.map(({ id, title, copy, images }) => (
                 <AnimatedSection
-                  ref={setAnimatedSectionRef(catalogBlock.id)}
-                  data-animate-id={catalogBlock.id}
-                  className={visibleSections[catalogBlock.id] ? 'visible' : undefined}
+                  key={id}
+                  ref={setAnimatedSectionRef(id)}
+                  data-animate-id={id}
+                  className={visibleSections[id] ? 'visible' : undefined}
                 >
-                  <FlowStorySection id={catalogBlock.id} className='story-section'>
+                  <FlowStorySection id={id}>
                     <FlowSection>
-                      <FlowText className="text-animate">
-                        <DemoStokeTitle>{catalogBlock.title}</DemoStokeTitle>
-                        <DemoStokeTldrCopy>{catalogBlock.copy}</DemoStokeTldrCopy>
+                      <FlowText className='text-animate'>
+                        <SectionTitle as='h2'>{title}</SectionTitle>
+                        <DemoStokeTldrCopy>{copy}</DemoStokeTldrCopy>
                       </FlowText>
-                      {catalogImageRows.map((row, rowIndex) => (
-                        <FlowImagesRow
-                          key={`${catalogBlock.id}-row-${rowIndex}`}
-                          className="image-animate"
-                          style={rowIndex === 0 ? { marginTop: '0.75em' } : undefined}
-                        >
-                          {row.map(({ image, index }) => (
-                            <FlowImageButton
-                              key={image.src}
-                              type='button'
-                              onClick={() => openFlowLightbox(getImageGlobalIndex(catalogBlock.id, index))}
-                              aria-label={`Open image: ${image.alt}`}
-                            >
-                              <FlowImage
-                                src={image.src}
-                                alt={image.alt}
-                                loading='lazy'
-                              />
-                            </FlowImageButton>
-                          ))}
-                        </FlowImagesRow>
-                      ))}
+                      <FlowImagesRow className='image-animate'>
+                        {images.map((image, imageIndex) => (
+                          <FlowImageButton
+                            key={image.src}
+                            type='button'
+                            onClick={() => openFlowLightbox(getImageGlobalIndex(id, imageIndex))}
+                            aria-label={`Open image: ${image.alt}`}
+                          >
+                            <FlowImage
+                              src={image.src}
+                              alt={image.alt}
+                              loading='lazy'
+                            />
+                          </FlowImageButton>
+                        ))}
+                      </FlowImagesRow>
                     </FlowSection>
                   </FlowStorySection>
                 </AnimatedSection>
-              )}
+              ))}
+            </FlowMethodList>
 
-              <FlowMethodList className='story-section'>
-                {remainingFlowBlocks.map(({ id, title, copy, images }) => (
-                  <AnimatedSection
-                    key={id}
-                    ref={setAnimatedSectionRef(id)}
-                    data-animate-id={id}
-                    className={visibleSections[id] ? 'visible' : undefined}
-                  >
-                    <FlowStorySection id={id}>
-                      <FlowSection>
-                        <FlowText className="text-animate">
-                          <DemoStokeTitle>{title}</DemoStokeTitle>
-                          <DemoStokeTldrCopy>{copy}</DemoStokeTldrCopy>
-                        </FlowText>
-                        <FlowImagesRow className="image-animate">
-                          {images.map((image, imageIndex) => (
-                            <FlowImageButton
-                              key={image.src}
-                              type='button'
-                              onClick={() => openFlowLightbox(getImageGlobalIndex(id, imageIndex))}
-                              aria-label={`Open image: ${image.alt}`}
-                            >
-                              <FlowImage
-                                src={image.src}
-                                alt={image.alt}
-                                loading='lazy'
-                              />
-                            </FlowImageButton>
-                          ))}
-                        </FlowImagesRow>
-                      </FlowSection>
-                    </FlowStorySection>
-                  </AnimatedSection>
-                ))}
-              </FlowMethodList>
-
-              <br />
-              <br />
-            </div>
-            <SidebarSectionTabs
-              sections={sections}
-              topTabsEl={topTabsEl}
-              isActive={isActive}
-              scrollOffsetAdjustment={8}
-            />
-          </DemoStokeContentGrid>
-        </div>
-      </BioBox>
+            <section className='story-section'>
+              <DemoStokeTldrTitle>Context</DemoStokeTldrTitle>
+              <DemoStokeTldrCopy>
+                These product views stay tied to the same live course, on-demand, checkout, and operations patterns documented in the
+                Antisyphon UX case study. The desktop shell now mirrors the showcase pages, but the underlying screen content and
+                lightbox interactions remain unchanged.
+              </DemoStokeTldrCopy>
+            </section>
+          </SectionsBlock>
+        </CaseStudyPageInner>
+      </PageShell>
     </div>
   );
 };

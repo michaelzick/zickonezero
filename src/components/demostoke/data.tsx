@@ -19,6 +19,21 @@ export const STORY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'story-small-ski-shop', label: 'Small Ski/Bike Shop' }
 ] as const;
 
+export const STORY_HERO_IMAGES = [
+  {
+    src: '/img/demostoke/pop-art-shaper.webp',
+    alt: 'Independent surfboard shaper with demo boards'
+  },
+  {
+    src: '/img/demostoke/pop-art-snowboarder.webp',
+    alt: 'Snowboarder carrying her board'
+  },
+  {
+    src: '/img/demostoke/pop-art-mtb-man-woman.webp',
+    alt: 'Mountain bike rental counter'
+  }
+] as const;
+
 export const TLDR_ITEMS: {
   title: string;
   description: ReactNode;

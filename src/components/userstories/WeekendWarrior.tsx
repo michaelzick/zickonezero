@@ -13,16 +13,17 @@ import {
   DemoStokeStoryHero,
   DemoStokeHeroAbstractLayout,
 } from '../../../styles';
-import { AnimatedSection } from '../../../styles/projectShowcases';
+import { AnimatedSection, ShowcaseMediaButton } from '../../../styles/projectShowcases';
 import HelpsCarousel from './HelpsCarousel';
 
 type StoryProps = {
   wrapWithBioBox?: boolean;
   setAnimatedSectionRef?: (id: string) => (el: HTMLDivElement | null) => void;
   visibleSections?: Record<string, boolean>;
+  openHeroLightbox?: () => void;
 };
 
-const WeekendWarrior = ({ wrapWithBioBox = true, setAnimatedSectionRef, visibleSections }: StoryProps) => {
+const WeekendWarrior = ({ wrapWithBioBox = true, setAnimatedSectionRef, visibleSections, openHeroLightbox }: StoryProps) => {
   const DSLink = <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>DemoStoke</WhiteTransitionAnchor>;
 
   const renderTable = (
@@ -108,12 +109,18 @@ const WeekendWarrior = ({ wrapWithBioBox = true, setAnimatedSectionRef, visibleS
         <section id='story-weekend-warrior' className='story-section'>
           <DemoStokeTitle $noMobileTopPad>The Weekend Warrior</DemoStokeTitle>
           <DemoStokeHeroAbstractLayout>
-            <DemoStokeStoryHero
+            <ShowcaseMediaButton
+              type='button'
               className='image-animate'
-              src='/img/demostoke/pop-art-snowboarder.webp'
-              alt='Snowboarder carrying her board'
-              loading='lazy'
-            />
+              onClick={openHeroLightbox}
+              aria-label='Open image: Snowboarder carrying her board'
+            >
+              <DemoStokeStoryHero
+                src='/img/demostoke/pop-art-snowboarder.webp'
+                alt='Snowboarder carrying her board'
+                loading='lazy'
+              />
+            </ShowcaseMediaButton>
 
             <DemoStokeTldrSection className='text-animate' $borderless>
               <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>

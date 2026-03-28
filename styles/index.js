@@ -1016,17 +1016,25 @@ export const AntisyphonHeader = styled(FlexBox)`
 `;
 
 export const SectionTabsWrapper = styled.div`
-  position: sticky;
+  position: fixed;
   top: var(--sidebar-tabs-top, calc(5em + 4.4em));
+  left: 50%;
+  transform: translate(-50%, ${props => props.$isVisible ? '0' : '-10px'});
   display: flex;
-  flex-direction: column;
-  gap: 0.65em;
-  width: 100%;
-  max-width: 5.5em;
-  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45em;
+  width: min(calc(100% - 2.4em), 62em);
   padding: 0.45em;
   border-radius: ${THEME.radii.md};
-  background-color: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  background: rgba(var(--color-dark-rgb), 0.82);
+  box-shadow: 0 10px 28px -18px rgb(0 0 0 / 65%);
+  backdrop-filter: blur(10px);
+  opacity: ${props => props.$isVisible ? 1 : 0};
+  pointer-events: ${props => props.$isVisible ? 'auto' : 'none'};
+  transition: opacity 0.28s ease, transform 0.28s ease, border-color 0.25s ease;
+  z-index: 94;
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     display: none;
@@ -2334,15 +2342,22 @@ const sidebarTabButtonStyles = css`
 
 export const SectionTabButton = styled(HomeTabButton)`
   ${sidebarTabButtonStyles}
-  font-size: 0.575em;
-  padding: 0.3em 0.5em;
+  flex: 1 1 0;
+  min-width: 0;
+  font-size: 0.72em;
+  padding: 0.7em 0.9em;
   justify-content: center;
   text-align: center;
-  width: 100%;
-  min-height: 1.6em;
+  width: auto;
+  min-height: 2.2em;
   letter-spacing: 0.011em;
   line-height: 1.3;
   border-radius: ${THEME.radii.md};
+
+  @media (max-width: 1280px) {
+    font-size: 0.65em;
+    padding: 0.65em 0.75em;
+  }
 `;
 
 export const SectionTabsMobileWrapper = styled.div`
