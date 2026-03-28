@@ -218,8 +218,25 @@ const CaseStudyContent = ({
               </HeroGrid>
 
               <SectionNavRevealAnchor id='antisyphon-case-study-nav-anchor' aria-hidden='true' />
+            </section>
+          </AnimatedSection>
 
-              <div id='section-the-what' style={{ marginTop: 'clamp(1.8em, 4vw, 3em)' }}>
+          <SidebarSectionTabs
+            sections={CASE_STUDY_SECTIONS}
+            topTabsEl={topTabsEl}
+            isActive={isActive}
+            lockToBottomSectionId={CASE_STUDY_BOTTOM_SECTION_ID}
+            scrollOffsetAdjustment={8}
+            desktopRevealAnchorId='antisyphon-case-study-nav-anchor'
+          />
+
+          <SectionsBlock as='div'>
+            <AnimatedSection
+              ref={setAnimatedSectionRef('section-the-what')}
+              data-animate-id='section-the-what'
+              className={visibleSections['section-the-what'] ? 'visible' : undefined}
+            >
+              <section id='section-the-what' className='story-section'>
                 <DemoStokeTldrSection>
                   <DemoStokeTldrList>
                     {TLDR_ITEMS.map(({ title, description, image }, index) => (
@@ -254,20 +271,9 @@ const CaseStudyContent = ({
                     ))}
                   </DemoStokeTldrList>
                 </DemoStokeTldrSection>
-              </div>
-            </section>
-          </AnimatedSection>
+              </section>
+            </AnimatedSection>
 
-          <SidebarSectionTabs
-            sections={CASE_STUDY_SECTIONS}
-            topTabsEl={topTabsEl}
-            isActive={isActive}
-            lockToBottomSectionId={CASE_STUDY_BOTTOM_SECTION_ID}
-            scrollOffsetAdjustment={8}
-            desktopRevealAnchorId='antisyphon-case-study-nav-anchor'
-          />
-
-          <SectionsBlock as='div'>
             <AnimatedSection
               ref={setAnimatedSectionRef('section-outcome')}
               data-animate-id='section-outcome'

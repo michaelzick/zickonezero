@@ -1,4 +1,3 @@
-import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { type ReactNode } from 'react';
 import {
   BioBox,
@@ -8,14 +7,13 @@ import {
   DemoStokeTwoColumnHeader,
   DemoStokeTwoColumnCopy,
   WhiteTransitionAnchor,
-  PitchDeckLink,
   DemoStokeTldrSection,
   DemoStokeTldrTitle,
   DemoStokeTldrCopy,
   DemoStokeStoryHero,
   DemoStokeHeroAbstractLayout,
 } from '../../../styles';
-import { AnimatedSection, IntroHeaderRow, SectionNavRevealAnchor, ShowcaseMediaButton } from '../../../styles/projectShowcases';
+import { AnimatedSection, ShowcaseMediaButton } from '../../../styles/projectShowcases';
 import HelpsCarousel from './HelpsCarousel';
 
 type StoryProps = {
@@ -23,15 +21,13 @@ type StoryProps = {
   setAnimatedSectionRef?: (id: string) => (el: HTMLDivElement | null) => void;
   visibleSections?: Record<string, boolean>;
   openHeroLightbox?: () => void;
-  renderDesktopRevealAnchor?: boolean;
 };
 
 const IndieShaper = ({
   wrapWithBioBox = true,
   setAnimatedSectionRef,
   visibleSections,
-  openHeroLightbox,
-  renderDesktopRevealAnchor = false
+  openHeroLightbox
 }: StoryProps) => {
   const DSLink = <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>DemoStoke</WhiteTransitionAnchor>;
 
@@ -110,24 +106,6 @@ const IndieShaper = ({
 
   const content = (
     <div>
-      <AnimatedSection {...getAnimateProps('story-introduction')}>
-        <section id='story-introduction'>
-          <IntroHeaderRow>
-            <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
-            <div>
-              <h2 className='tab-header page-header'>DemoStoke User Stories</h2>
-              <PitchDeckLink href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
-                DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
-              </PitchDeckLink>
-            </div>
-          </IntroHeaderRow>
-        </section>
-      </AnimatedSection>
-
-      {renderDesktopRevealAnchor ? (
-        <SectionNavRevealAnchor id='demostoke-stories-nav-anchor' aria-hidden='true' />
-      ) : null}
-
       <AnimatedSection {...getAnimateProps('story-independent-surfboard-shaper-title')}>
         <section id='story-independent-surfboard-shaper-title' className='story-section'>
           <DemoStokeTitle $noMobileTopPad>The Independent Surfboard Shaper</DemoStokeTitle>

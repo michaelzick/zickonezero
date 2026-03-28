@@ -1,8 +1,13 @@
 import SidebarSectionTabs, { SidebarSectionConfig } from '../SidebarSectionTabs';
 import * as UserStories from '../userstories';
+import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
+import { PitchDeckLink } from '../../../styles';
 import {
+  AnimatedSection,
   CaseStudyPageInner,
+  IntroHeaderRow,
   PageShell,
+  SectionNavRevealAnchor,
   SectionsBlock
 } from '../../../styles/projectShowcases';
 
@@ -27,6 +32,26 @@ const StoriesContent = ({
     <div id="stories-content">
       <PageShell>
         <CaseStudyPageInner className='demostoke-inner'>
+          <AnimatedSection
+            ref={setAnimatedSectionRef('story-introduction')}
+            data-animate-id='story-introduction'
+            className={visibleSections['story-introduction'] ? 'visible' : undefined}
+          >
+            <section id='story-introduction'>
+              <IntroHeaderRow>
+                <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
+                <div>
+                  <h2 className='tab-header page-header'>DemoStoke User Stories</h2>
+                  <PitchDeckLink href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
+                    DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
+                  </PitchDeckLink>
+                </div>
+              </IntroHeaderRow>
+            </section>
+
+            <SectionNavRevealAnchor id='demostoke-stories-nav-anchor' aria-hidden='true' />
+          </AnimatedSection>
+
           <SidebarSectionTabs
             sections={sections}
             topTabsEl={topTabsEl}
@@ -36,33 +61,32 @@ const StoriesContent = ({
           />
 
           <SectionsBlock as="div">
-            <section id='story-independent-shaper'>
+            <div>
               <UserStories.IndieShaper
                 wrapWithBioBox={false}
                 setAnimatedSectionRef={setAnimatedSectionRef}
                 visibleSections={visibleSections}
                 openHeroLightbox={() => openStoryLightbox(0)}
-                renderDesktopRevealAnchor
               />
-            </section>
+            </div>
 
-            <section id='story-weekend-warrior'>
+            <div>
               <UserStories.WeekendWarrior
                 wrapWithBioBox={false}
                 setAnimatedSectionRef={setAnimatedSectionRef}
                 visibleSections={visibleSections}
                 openHeroLightbox={() => openStoryLightbox(1)}
               />
-            </section>
+            </div>
 
-            <section id='story-small-ski-shop'>
+            <div>
               <UserStories.SmallSkiBikeShop
                 wrapWithBioBox={false}
                 setAnimatedSectionRef={setAnimatedSectionRef}
                 visibleSections={visibleSections}
                 openHeroLightbox={() => openStoryLightbox(2)}
               />
-            </section>
+            </div>
           </SectionsBlock>
         </CaseStudyPageInner>
       </PageShell>

@@ -1156,7 +1156,7 @@ export const DemoStokeTitle = styled.h2`
   font-size: clamp(1.55em, 3.5vw, 2.15em);
   line-height: 1.1;
   margin: 0 0 0.45em;
-  padding-top: clamp(0.65em, 1.8vw, 1.1em);
+  padding-top: ${props => (props.$noMobileTopPad ? '0' : 'clamp(0.65em, 1.8vw, 1.1em)')};
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     padding-top: 0;
