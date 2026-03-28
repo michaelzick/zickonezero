@@ -2710,9 +2710,16 @@ export const WorksRevealCurtain = styled.div`
   height: clamp(116vh, 128vw, 146vh);
   background: transparent;
 
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    height: clamp(148vh, 148vw, 170vh);
+  }
+
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    display: none;
-    height: 0;
+    height: clamp(128vh, 148vw, 154vh);
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    height: clamp(276vh, 360vw, 336vh);
   }
 `;
 
