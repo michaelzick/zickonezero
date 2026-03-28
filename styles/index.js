@@ -2707,7 +2707,7 @@ export const WorksParallaxStage = styled.section`
 export const WorksRevealCurtain = styled.div`
   position: relative;
   z-index: 2;
-  height: clamp(32vh, 36vw, 42vh);
+  height: clamp(116vh, 128vw, 146vh);
   background: transparent;
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
