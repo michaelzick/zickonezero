@@ -2366,6 +2366,7 @@ const sidebarTabButtonStyles = css`
   }
 
   &:not([data-active='true']):hover {
+    background-color: var(--section-tab-hover-bg);
     border-color: var(--section-tab-hover-border);
     color: var(--section-tab-hover-color);
   }

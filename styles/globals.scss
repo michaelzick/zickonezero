@@ -28,6 +28,7 @@
   --section-tab-active-bg: var(--color-demostoke);
   --section-tab-active-border: var(--color-demostoke);
   --section-tab-active-color: var(--color-contrast);
+  --section-tab-hover-bg: transparent;
   --section-tab-hover-border: var(--color-darkGreen);
   --section-tab-hover-color: #ffffff;
 }
@@ -56,17 +57,18 @@
   --case-study-top-tab-active-bg: var(--color-demostoke);
   --case-study-top-tab-active-border: var(--color-demostoke);
   --case-study-top-tab-active-color: #ffffff;
-  --case-study-top-tab-hover-bg: rgba(255, 255, 255, 0.72);
-  --case-study-top-tab-hover-border: rgba(15, 23, 42, 0.55);
-  --case-study-top-tab-hover-color: var(--color-contrast);
+  --case-study-top-tab-hover-bg: var(--color-darkGreen);
+  --case-study-top-tab-hover-border: var(--color-darkGreen);
+  --case-study-top-tab-hover-color: #ffffff;
   --section-tab-bg: rgba(255, 255, 255, 0.72);
   --section-tab-border: rgba(15, 23, 42, 0.55);
   --section-tab-color: var(--color-contrast);
   --section-tab-active-bg: var(--color-demostoke);
   --section-tab-active-border: var(--color-demostoke);
   --section-tab-active-color: #ffffff;
-  --section-tab-hover-border: rgba(15, 23, 42, 0.55);
-  --section-tab-hover-color: var(--color-contrast);
+  --section-tab-hover-bg: var(--color-darkGreen);
+  --section-tab-hover-border: var(--color-darkGreen);
+  --section-tab-hover-color: #ffffff;
 }
 
 html,
