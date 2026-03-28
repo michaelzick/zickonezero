@@ -187,7 +187,7 @@ export const HeroLabel = styled.div`
 `;
 
 export const CaseStudyHeroLabel = styled(HeroLabel)`
-  color: ${THEME.colors.white};
+  color: ${THEME.colors.demostoke};
 `;
 
 export const RoleList = styled.ul`

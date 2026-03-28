@@ -1809,7 +1809,7 @@ export const DemoStokeMiniCard = styled.button`
 
 export const DemoStokeMiniCardTitle = styled.div`
   font-weight: 700;
-  color: ${THEME.colors.demostoke};
+  color: ${THEME.colors.white};
   letter-spacing: 0.01em;
   margin: 0 0 0.5em;
   font-size: clamp(1.02em, 2vw, 1.2em);
@@ -1835,8 +1835,8 @@ export const DemoStokeMiniCardHint = styled.span`
   display: inline-flex;
   align-items: center;
   gap: 0.3em;
-  color: ${THEME.colors.white};
-  opacity: 0.75;
+  color: ${THEME.colors.demostoke};
+  opacity: 1;
   font-size: 0.86em;
   letter-spacing: 0.02em;
   margin-top: auto;
