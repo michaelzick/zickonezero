@@ -1152,7 +1152,7 @@ export const FooterBottom = styled.div`
 `;
 
 export const DemoStokeTitle = styled.h2`
-  color: ${THEME.colors.demostoke};
+  color: ${THEME.colors.white};
   font-size: clamp(1.55em, 3.5vw, 2.15em);
   line-height: 1.1;
   margin: 0 0 0.45em;
@@ -1961,7 +1961,7 @@ export const DemoStokeMiniCardModalClose = styled.button`
 export const DemoStokeMiniCardModalTitle = styled.h4`
   margin: 0 0 0.65em;
   font-size: clamp(1.25em, 2.3vw, 1.5em);
-  color: #7dd3fc; /* lighter accent that stays visible on dark modal */
+  color: ${THEME.colors.white};
   letter-spacing: 0.01em;
 `;
 
@@ -2028,7 +2028,7 @@ export const DemoStokeWhyBadge = styled.span`
 
 export const DemoStokeWhyTitle = styled.h4`
   margin: 0 0 0.4em;
-  color: ${THEME.colors.demostoke};
+  color: ${THEME.colors.white};
   font-size: clamp(1.05em, 2.2vw, 1.25em);
   letter-spacing: 0.01em;
 `;

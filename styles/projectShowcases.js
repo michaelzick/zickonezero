@@ -187,7 +187,7 @@ export const HeroLabel = styled.div`
 `;
 
 export const CaseStudyHeroLabel = styled(HeroLabel)`
-  color: ${THEME.colors.demostoke};
+  color: ${THEME.colors.white};
 `;
 
 export const RoleList = styled.ul`
@@ -271,7 +271,7 @@ export const SectionTitle = styled(DemoStokeTldrTitle)`
 `;
 
 export const CaseStudySectionTitle = styled(SectionTitle)`
-  color: ${THEME.colors.demostoke};
+  color: ${THEME.colors.white};
 `;
 
 export const ShowcaseImage = styled(DemoStokeTldrImage)`
