@@ -3,6 +3,7 @@ import {
   useAppSelector
 } from '../hooks';
 import { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
 import {
   showMobileMenu,
   getMobileMenuState
@@ -10,9 +11,80 @@ import {
 
 import Link from 'next/link';
 
-import { BioBox, Wrapper } from '../../styles';
+import { Wrapper } from '../../styles';
 import { AnimatedSection } from '../../styles/projectShowcases';
+import { THEME } from '../../styles/theme';
 import { TopNavContent, FooterContent } from '../components';
+
+const AboutHero = styled.section`
+  position: relative;
+  min-height: calc(100svh - 5em);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    linear-gradient(115deg, rgba(2, 8, 23, 0.78) 0%, rgba(2, 8, 23, 0.38) 42%, rgba(2, 8, 23, 0.68) 100%),
+    url('/img/illustrated-mt-hood-selfie.webp') center center / cover no-repeat;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(90% 110% at 20% 20%, rgba(255, 0, 101, 0.18), rgba(255, 0, 101, 0)),
+      linear-gradient(180deg, rgba(2, 8, 23, 0.04) 0%, rgba(2, 8, 23, 0.5) 75%, rgba(2, 8, 23, 0.85) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    min-height: calc(100svh - 5.2em);
+    background-position: 62% center;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    min-height: calc(100svh - 8.7em);
+    background-position: 68% center;
+  }
+`;
+
+const AboutCopy = styled.div`
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 41em;
+  padding: clamp(2em, 6vw, 4.8em);
+  font-size: clamp(1.2rem, 2vw, 1.65rem);
+  line-height: 1.7;
+  color: ${THEME.colors.white};
+  text-shadow: 0 14px 28px rgb(0 0 0 / 35%);
+
+  a {
+    color: ${THEME.colors.white};
+    text-decoration: underline;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: ${THEME.colors.hotRed};
+    }
+  }
+
+  .underline {
+    text-decoration: underline;
+  }
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    max-width: 34em;
+    padding: clamp(1.5em, 5vw, 2.8em);
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    padding: 1.2em 1em 1.6em;
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+`;
 
 const AboutContent = () => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
@@ -40,35 +112,32 @@ const AboutContent = () => {
   return (
     <>
       <TopNavContent />
-      <Wrapper isMobileMenuShown={isMobileMenuShown}
-        onClick={() => dispatch(showMobileMenu(false))}>
-        <BioBox isAboutPage>
-          <AnimatedSection
-            ref={aboutSectionRef}
-            data-animate-id='about-hero'
-            className={isVisible ? 'visible' : undefined}
-          >
-            <div className='biobox-inner'>
-              <div className='text-wrapper bottom text-animate'>
-                Michael is a results-oriented Product Leader with a background in UX design, frontend development,
-                DevOps, SEO, and e-commerce platforms.
-                <br /><br />
-                He has hired and led engineering teams to build high-engagement products from 0 to 1
-                under tight deadlines, while aligning cross-functional stakeholders in highly ambiguous environments.
-                <br /><br />
-                From concept to launch, Michael thrives on solving complex problems with elegant, user-centered solutions.
-                <br /><br />
-                Samples of his work can be found in the <span className='underline'><Link href='/'>main gallery</Link></span>,
-                with code examples on <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'>
-                  GitHub</a>, and a full list of qualifications on <a href='https://linkedin.com/in/michaelzick'
-                    target='_blank' rel='noopener noreferrer'>LinkedIn</a>.
-              </div>
-              <div className='headshot image-animate'>
-                <img src='/img/mt-hood-selfie-resized.jpg' alt='Mt. Hood Selfie' width='350' height='392' />
-              </div>
-            </div>
-          </AnimatedSection>
-        </BioBox>
+      <Wrapper
+        isMobileMenuShown={isMobileMenuShown}
+        onClick={() => dispatch(showMobileMenu(false))}
+      >
+        <AnimatedSection
+          ref={aboutSectionRef}
+          data-animate-id='about-hero'
+          className={isVisible ? 'visible' : undefined}
+        >
+          <AboutHero aria-label='About page hero'>
+            <AboutCopy className='text-animate'>
+              Michael is a results-oriented Product Leader with a background in UX design, frontend development,
+              DevOps, SEO, and e-commerce platforms.
+              <br /><br />
+              He has hired and led engineering teams to build high-engagement products from 0 to 1
+              under tight deadlines, while aligning cross-functional stakeholders in highly ambiguous environments.
+              <br /><br />
+              From concept to launch, Michael thrives on solving complex problems with elegant, user-centered solutions.
+              <br /><br />
+              Samples of his work can be found in the <span className='underline'><Link href='/'>main gallery</Link></span>,
+              with code examples on <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'>
+                GitHub</a>, and a full list of qualifications on <a href='https://linkedin.com/in/michaelzick'
+                target='_blank' rel='noopener noreferrer'>LinkedIn</a>.
+            </AboutCopy>
+          </AboutHero>
+        </AnimatedSection>
       </Wrapper>
       <FooterContent />
     </>

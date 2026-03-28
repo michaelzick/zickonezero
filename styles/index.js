@@ -2742,6 +2742,76 @@ export const WorksFixedIllustration = styled.div`
   }
 `;
 
+export const WorksCarouselFrame = styled(WorksFixedIllustration)`
+  background:
+    radial-gradient(120% 120% at 8% 18%, rgba(0, 215, 255, 0.18), rgba(2, 8, 23, 0)),
+    linear-gradient(180deg, rgba(8, 47, 73, 0.42), rgba(2, 8, 23, 0.86));
+  pointer-events: none;
+`;
+
+export const WorksCarouselViewport = styled.div`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: clamp(2em, 6vw, 4.5em);
+  z-index: 0;
+
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+    padding: clamp(1.5em, 5vw, 2.6em);
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    padding: clamp(1em, 4vw, 1.5em);
+  }
+`;
+
+export const WorksCarouselTrack = styled.div`
+  display: flex;
+  align-items: center;
+  gap: clamp(1.1em, 2.8vw, 2em);
+  width: max-content;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  padding-right: clamp(4em, 12vw, 10em);
+`;
+
+export const WorksCarouselItem = styled.div`
+  position: relative;
+  flex: 0 0 clamp(23rem, 58vw, 52rem);
+  aspect-ratio: 16 / 9;
+  border-radius: ${THEME.radii.md};
+  overflow: hidden;
+  border: 1.5px solid rgba(255, 255, 255, 0.82);
+  box-shadow: 0 34px 48px -30px rgb(0 0 0 / 82%);
+  background: ${THEME.colors.darkest};
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(2, 8, 23, 0.12) 100%);
+    pointer-events: none;
+  }
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    flex-basis: clamp(20rem, 78vw, 36rem);
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    flex-basis: 84vw;
+  }
+`;
+
+export const WorksCarouselImage = styled.img`
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: top;
+`;
+
 export const WorksSectionContent = styled.div`
   position: relative;
   z-index: 2;

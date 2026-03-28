@@ -37,6 +37,41 @@ export const PageInner = styled.div`
   }
 `;
 
+export const CaseStudyPageInner = styled(PageInner)`
+  .ds-logo,
+  .at-logo {
+    width: 6em;
+    height: auto;
+  }
+
+  section {
+    scroll-margin-top: 10em;
+
+    @media (max-width: ${THEME.breakpoints.largeTablet}) {
+      scroll-margin-top: 7.2em;
+    }
+
+    @media (max-width: ${THEME.breakpoints.smallTablet}) {
+      scroll-margin-top: 6.2em;
+    }
+
+    h3 {
+      color: ${THEME.colors.orange};
+    }
+  }
+
+  section.story-section {
+    margin-top: 2.5em;
+  }
+
+  section#introduction.story-section,
+  section#story-independent-surfboard-shaper-title.story-section,
+  section#story-weekend-warrior.story-section,
+  section#story-small-ski-shop.story-section {
+    margin-top: 0;
+  }
+`;
+
 export const HeroGrid = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
@@ -61,6 +96,19 @@ export const HeroImageFrame = styled.div`
   background: transparent;
 
   img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+`;
+
+export const HeroMediaFrame = styled(HeroImageFrame)`
+  border: 1.5px solid ${THEME.colors.white};
+  background: ${THEME.colors.darkest};
+
+  img,
+  video {
     width: 100%;
     height: 100%;
     object-fit: cover;
