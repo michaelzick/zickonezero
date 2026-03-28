@@ -2759,15 +2759,15 @@ export const WorksCarouselViewport = styled.div`
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding: clamp(0.75em, 2vw, 1.4em) clamp(1.25em, 3.8vw, 3em);
+  padding: clamp(0.375em, 1vw, 0.7em) clamp(1.25em, 3.8vw, 3em);
   z-index: 0;
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    padding: clamp(0.65em, 2.4vw, 1.1em) clamp(1em, 3.8vw, 1.8em);
+    padding: clamp(0.325em, 1.2vw, 0.55em) clamp(1em, 3.8vw, 1.8em);
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: clamp(0.5em, 2.8vw, 0.85em) clamp(0.75em, 3.6vw, 1.1em);
+    padding: clamp(0.25em, 1.4vw, 0.425em) clamp(0.75em, 3.6vw, 1.1em);
   }
 `;
 
