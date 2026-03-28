@@ -3,7 +3,7 @@ import { SidebarSectionConfig } from '../SidebarSectionTabs';
 
 export const CASE_STUDY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'hero-spacer', label: 'Intro Spacer', hidden: true },
-  { id: 'introduction', label: 'Intro' },
+  { id: 'section-the-what', label: 'The What' },
   { id: 'section-outcome', label: 'Outcome' },
   { id: 'section-the-who', label: 'The Who' },
   { id: 'section-the-how', label: 'The How' },

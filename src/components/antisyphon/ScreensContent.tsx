@@ -2,24 +2,19 @@ import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import {
   DemoStokeTldrCopy,
   DemoStokeTldrTitle,
+  PitchDeckLink,
 } from '../../../styles';
 import SidebarSectionTabs, { SidebarSectionConfig } from '../SidebarSectionTabs';
 import {
   AnimatedSection,
-  CaseStudyHeroLabel,
   CaseStudySectionTitle,
   CaseStudyPageInner,
-  HeroContent,
-  HeroGrid,
   HeroMediaFrame,
-  LinkRow,
+  IntroHeaderRow,
   PageShell,
-  RoleList,
   SectionNavRevealAnchor,
   SectionsBlock,
   ShowcaseMediaButton,
-  Summary,
-  Title,
 } from '../../../styles/projectShowcases';
 import { FLOW_BLOCKS } from './data';
 import {
@@ -42,14 +37,6 @@ type ScreensContentProps = {
   isActive: boolean;
   openFlowLightbox: (index: number) => void;
 };
-
-const ROLE_BULLETS = [
-  'Catalog UX',
-  'Checkout architecture',
-  'Admin tooling'
-];
-
-const INTRO_SUMMARY = 'The product screens below show how the Antisyphon marketplace scales from discovery through checkout, account management, and operations tooling. On desktop, the experience now follows the same editorial showcase rhythm as the rest of the case-study system instead of a split sidebar layout.';
 
 const ScreensContent = ({
   setAnimatedSectionRef,
@@ -84,56 +71,33 @@ const ScreensContent = ({
       <PageShell>
         <CaseStudyPageInner className='demostoke-inner'>
           <section id='screens-introduction'>
-            <HeroGrid>
-              <ShowcaseMediaButton
-                type='button'
-                aria-label='Open image: Full course catalog with category filters and badges'
-                onClick={() => openFlowLightbox(0)}
-              >
-                <HeroMediaFrame className='image-animate'>
-                  <img
-                    src='/img/antisyphon/course-catalog.webp'
-                    alt='Full course catalog with category filters and badges'
-                    loading='lazy'
-                  />
-                </HeroMediaFrame>
-              </ShowcaseMediaButton>
+            <IntroHeaderRow className='text-animate'>
+              <img className='at-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
+              <div>
+                <h2 className='tab-header page-header'>Antisyphon Product Screens</h2>
+                <PitchDeckLink href="https://www.antisyphontraining.com/" target='_blank' rel='noopener noreferrer'>
+                  AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden="true" />
+                </PitchDeckLink>
+              </div>
+            </IntroHeaderRow>
 
-              <HeroContent className='text-animate'>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1em', marginBottom: '0.25em' }}>
-                  <img className='at-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
-                  <CaseStudyHeroLabel>Product Screens</CaseStudyHeroLabel>
-                </div>
+            <ShowcaseMediaButton
+              type='button'
+              className='image-animate'
+              aria-label='Open image: Full course catalog with category filters and badges'
+              onClick={() => openFlowLightbox(0)}
+            >
+              <HeroMediaFrame>
+                <img
+                  src='/img/antisyphon/course-catalog.webp'
+                  alt='Full course catalog with category filters and badges'
+                  loading='lazy'
+                />
+              </HeroMediaFrame>
+            </ShowcaseMediaButton>
 
-                <Title>Antisyphon Product Screens</Title>
-
-                <div>
-                  <CaseStudyHeroLabel>Description</CaseStudyHeroLabel>
-                  <Summary>{INTRO_SUMMARY}</Summary>
-                </div>
-
-                <div>
-                  <CaseStudyHeroLabel>Focus Areas</CaseStudyHeroLabel>
-                  <RoleList>
-                    {ROLE_BULLETS.map((bullet) => (
-                      <li key={bullet}>{bullet}</li>
-                    ))}
-                  </RoleList>
-                </div>
-
-                <LinkRow>
-                  <CaseStudyHeroLabel>Project Link</CaseStudyHeroLabel>
-                  <div>
-                    <a href="https://www.antisyphontraining.com/" target='_blank' rel='noopener noreferrer'>
-                      AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden="true" />
-                    </a>
-                  </div>
-                </LinkRow>
-              </HeroContent>
-            </HeroGrid>
+            <SectionNavRevealAnchor id='antisyphon-screens-nav-anchor' aria-hidden='true' />
           </section>
-
-          <SectionNavRevealAnchor id='antisyphon-screens-nav-anchor' aria-hidden='true' />
 
           <SidebarSectionTabs
             sections={sections}

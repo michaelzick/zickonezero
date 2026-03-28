@@ -3,7 +3,7 @@ import { SidebarSectionConfig } from '../SidebarSectionTabs';
 
 export const CASE_STUDY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'hero-spacer', label: 'Intro Spacer', hidden: true },
-  { id: 'introduction', label: 'Intro' },
+  { id: 'section-the-what', label: 'The What' },
   { id: 'section-the-who', label: 'The Who' },
   { id: 'section-the-how', label: 'The How' },
   { id: 'section-methodology', label: 'Methods' }
@@ -48,7 +48,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'The Problem',
-    description: 'Riders want to try before they buy, but demos are rare, costly, and inconvenient.',
+    description: 'Riders want to try gear before committing, but most demos still depend on scattered shop events, word of mouth, or expensive short-term rentals. Shops and independent makers also lack a shared digital system for surfacing availability, building trust, and converting a successful demo into a sale.',
     image: {
       src: '/img/demostoke/demo-van.webp',
       alt: 'DemoStoke mobile demo van in the field'
@@ -56,7 +56,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'The Solution',
-    description: 'A location-based marketplace to safely connect riders, lenders, and shops.',
+    description: 'DemoStoke turns those fragmented offline workflows into a location-aware marketplace where riders can discover gear nearby, compare listings, and book demos or rentals with more confidence. The platform also gives shops, shapers, and individual lenders tools to showcase inventory, manage availability, and turn trial experiences into repeat business.',
     image: {
       src: '/img/demostoke/surf-shop.webp',
       alt: 'Surf shop displaying boards available for demo'
@@ -64,7 +64,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'My Roles',
-    description: 'Founder, UX Designer, and Full-Stack Developer.',
+    description: 'I led DemoStoke end to end as founder, UX designer, and full-stack developer, shaping the product strategy, research, information architecture, user flows, and visual system. I also built the front end, auth and dashboard flows, database-backed features, and AI-assisted discovery tooling needed to turn the concept into a working web application.',
     image: {
       src: '/img/demostoke/ds-design-system.webp',
       alt: 'DemoStoke design system components'

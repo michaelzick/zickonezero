@@ -2344,6 +2344,19 @@ export const CaseStudyTopTabButton = styled(HomeTabButton)`
   &:focus-visible {
     outline: 2px solid ${THEME.colors.demostoke};
   }
+
+  :root[data-theme='light'] & {
+    background: rgba(2, 8, 23, 0.82);
+    border-color: rgba(255, 255, 255, 0.36);
+    color: #fff;
+    box-shadow: 0 10px 22px -14px rgba(15, 23, 42, 0.28);
+
+    &[data-active='true'] {
+      background: rgba(255, 255, 255, 0.72);
+      border-color: rgba(15, 23, 42, 0.55);
+      color: ${THEME.colors.contrast};
+    }
+  }
 `;
 
 const sidebarTabButtonStyles = css`
@@ -2362,6 +2375,19 @@ const sidebarTabButtonStyles = css`
   &:not([data-active='true']):hover {
     border-color: ${THEME.colors.darkGreen};
     color: #fff;
+  }
+
+  :root[data-theme='light'] & {
+    background: rgba(2, 8, 23, 0.82);
+    border-color: rgba(255, 255, 255, 0.36);
+    color: #fff;
+    box-shadow: 0 10px 22px -14px rgba(15, 23, 42, 0.28);
+
+    &[data-active='true'] {
+      background: rgba(255, 255, 255, 0.72);
+      border-color: rgba(15, 23, 42, 0.55);
+      color: ${THEME.colors.contrast};
+    }
   }
 `;
 

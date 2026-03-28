@@ -146,7 +146,7 @@ const CaseStudyContent = ({
                 </HeroContent>
               </HeroGrid>
 
-              <SectionNavRevealAnchor id='demostoke-case-study-nav-anchor' aria-hidden='true' />
+              <SectionNavRevealAnchor id='section-the-what' aria-hidden='true' />
 
               <div style={{ marginTop: 'clamp(1.8em, 4vw, 3em)' }}>
                 <DemoStokeTldrSection>
@@ -193,7 +193,7 @@ const CaseStudyContent = ({
             isActive={isActive}
             lockToBottomSectionId={CASE_STUDY_BOTTOM_SECTION_ID}
             scrollOffsetAdjustment={8}
-            desktopRevealAnchorId='demostoke-case-study-nav-anchor'
+            desktopRevealAnchorId='section-the-what'
           />
 
           <SectionsBlock as="div">

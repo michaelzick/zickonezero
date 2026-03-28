@@ -8,7 +8,6 @@ import {
   DemoStokeTwoColumnHeader,
   DemoStokeTwoColumnCopy,
   WhiteTransitionAnchor,
-  FlexBox,
   PitchDeckLink,
   DemoStokeTldrSection,
   DemoStokeTldrTitle,
@@ -16,7 +15,7 @@ import {
   DemoStokeStoryHero,
   DemoStokeHeroAbstractLayout,
 } from '../../../styles';
-import { AnimatedSection, SectionNavRevealAnchor, ShowcaseMediaButton } from '../../../styles/projectShowcases';
+import { AnimatedSection, IntroHeaderRow, SectionNavRevealAnchor, ShowcaseMediaButton } from '../../../styles/projectShowcases';
 import HelpsCarousel from './HelpsCarousel';
 
 type StoryProps = {
@@ -113,7 +112,7 @@ const IndieShaper = ({
     <div>
       <AnimatedSection {...getAnimateProps('story-introduction')}>
         <section id='story-introduction'>
-          <FlexBox>
+          <IntroHeaderRow>
             <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
             <div>
               <h2 className='tab-header page-header'>DemoStoke User Stories</h2>
@@ -121,7 +120,7 @@ const IndieShaper = ({
                 DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
               </PitchDeckLink>
             </div>
-          </FlexBox>
+          </IntroHeaderRow>
         </section>
       </AnimatedSection>
 

@@ -125,6 +125,31 @@ export const HeroContent = styled.div`
   line-height: 1.7;
 `;
 
+export const IntroHeaderRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5em;
+  margin-top: clamp(0.75em, 2vw, 1.2em);
+  margin-bottom: clamp(0.8em, 2vw, 1.35em);
+
+  .page-header {
+    margin: 0;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75em;
+
+    .tab-header {
+      font-size: 1.05em;
+      text-align: left;
+      margin: 0;
+    }
+  }
+`;
+
 export const Title = styled.h1`
   margin: 0;
   font-size: clamp(2rem, 4.6vw, 3.1rem);
