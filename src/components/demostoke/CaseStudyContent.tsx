@@ -32,16 +32,16 @@ import {
 import SidebarSectionTabs from '../SidebarSectionTabs';
 import {
   AnimatedSection,
+  CaseStudyHeroLabel,
+  CaseStudySectionTitle,
   CaseStudyPageInner,
   HeroContent,
   HeroGrid,
-  HeroLabel,
   HeroMediaFrame,
   LinkRow,
   PageShell,
   RoleList,
   SectionNavRevealAnchor,
-  SectionTitle,
   SectionsBlock,
   Summary,
   Title,
@@ -75,7 +75,7 @@ const ROLE_BULLETS = [
   'Full-stack developer'
 ];
 
-const INTRO_SUMMARY = 'Riders and shops struggle with fragmented, offline demo and rental flows. I designed DemoStoke to be a unified marketplace to solve those issues. In validation sessions, 90% of shop owners said it would bring them more customers, and 100% of riders described it as "the thing that should already exist."';
+const INTRO_SUMMARY = 'DemoStoke is a unified marketplace that helps riders and shops discover, book, and manage demo and rental gear in one place.';
 
 const CaseStudyContent = ({
   setAnimatedSectionRef,
@@ -119,20 +119,15 @@ const CaseStudyContent = ({
                 </HeroMediaFrame>
 
                 <HeroContent className='text-animate'>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1em', marginBottom: '0.25em' }}>
-                    <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
-                    <HeroLabel>UX Case Study</HeroLabel>
-                  </div>
-
                   <Title>DemoStoke UX Case Study</Title>
 
                   <div>
-                    <HeroLabel>Description</HeroLabel>
+                    <CaseStudyHeroLabel>Description</CaseStudyHeroLabel>
                     <Summary>{INTRO_SUMMARY}</Summary>
                   </div>
 
                   <div>
-                    <HeroLabel>My Roles</HeroLabel>
+                    <CaseStudyHeroLabel>My Roles</CaseStudyHeroLabel>
                     <RoleList>
                       {ROLE_BULLETS.map((bullet) => (
                         <li key={bullet}>{bullet}</li>
@@ -141,7 +136,7 @@ const CaseStudyContent = ({
                   </div>
 
                   <LinkRow>
-                    <HeroLabel>Project Link</HeroLabel>
+                    <CaseStudyHeroLabel>Project Link</CaseStudyHeroLabel>
                     <div>
                       <a href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
                         DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
@@ -151,9 +146,10 @@ const CaseStudyContent = ({
                 </HeroContent>
               </HeroGrid>
 
+              <SectionNavRevealAnchor id='demostoke-case-study-nav-anchor' aria-hidden='true' />
+
               <div style={{ marginTop: 'clamp(1.8em, 4vw, 3em)' }}>
                 <DemoStokeTldrSection>
-                  <DemoStokeTldrTitle>Highlights</DemoStokeTldrTitle>
                   <DemoStokeTldrList>
                     {TLDR_ITEMS.map(({ title, description, image }, index) => (
                       <AnimatedSection
@@ -191,8 +187,6 @@ const CaseStudyContent = ({
             </section>
           </AnimatedSection>
 
-          <SectionNavRevealAnchor id='demostoke-case-study-nav-anchor' aria-hidden='true' />
-
           <SidebarSectionTabs
             sections={CASE_STUDY_SECTIONS}
             topTabsEl={topTabsEl}
@@ -209,7 +203,7 @@ const CaseStudyContent = ({
               className={visibleSections['section-the-who'] ? 'visible' : undefined}
             >
               <section id='section-the-who' className='story-section'>
-                <SectionTitle as="h2">The Who / User Personas</SectionTitle>
+                <CaseStudySectionTitle as="h2">The Who / User Personas</CaseStudySectionTitle>
                 <DemoStokeAccordion className="text-animate">
                   {PERSONA_ITEMS.map(({ title, bullets }) => {
                     const personaId = `persona-${title.toLowerCase().replace(/\s+/g, '-')}`;
@@ -261,7 +255,7 @@ const CaseStudyContent = ({
               className={visibleSections['section-the-how'] ? 'visible' : undefined}
             >
               <section id='section-the-how' className='story-section'>
-                <SectionTitle as="h2">The How / AI-Driven Development</SectionTitle>
+                <CaseStudySectionTitle as="h2">The How / AI-Driven Development</CaseStudySectionTitle>
                 <DemoStokeTldrSection>
                   <DemoStokeTwoUp className="text-animate">
                     <section>
@@ -269,14 +263,6 @@ const CaseStudyContent = ({
                       <p>
                         With DemoStoke, I created a comprehensive gear discovery and rental platform that connects riders with
                         demo opportunities in their area.
-                        <br />
-                        <br />
-                        By leveraging location-based services, DemoStoke helps riders find available gear to try before they buy,
-                        while also providing a marketplace for gear owners to list their equipment for rent.
-                        <br />
-                        <br />
-                        Additionally, shop owners can easily manage their demo inventory and track rentals through an intuitive
-                        admin dashboard.
                       </p>
                     </section>
                     <section>
@@ -284,11 +270,6 @@ const CaseStudyContent = ({
                       <p>
                         Using Lovable.dev, I was able to spin up the app’s foundation with a well-written prompt, then iterated
                         rapidly to refine features and user experience.
-                        <br />
-                        <br />
-                        By combining AI-generated code, my years of front-end development experience, and a database integration,
-                        I created a fully-functional web application complete with signup/login, user and admin dashboards, and
-                        geolocation services with OpenAI API integrations.
                       </p>
                     </section>
                   </DemoStokeTwoUp>
@@ -349,7 +330,7 @@ const CaseStudyContent = ({
             </AnimatedSection>
 
             <section id='section-methodology' className='story-section'>
-              <SectionTitle as="h2">Methods / The UX Process</SectionTitle>
+              <CaseStudySectionTitle as="h2">Methods / The UX Process</CaseStudySectionTitle>
               <DemoStokeMethodList>
                 {METHOD_SECTIONS.map(({ title, bullets, image }, index) => (
                   <AnimatedSection

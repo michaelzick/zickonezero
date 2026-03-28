@@ -30,16 +30,16 @@ import {
 import SidebarSectionTabs from '../SidebarSectionTabs';
 import {
   AnimatedSection,
+  CaseStudyHeroLabel,
+  CaseStudySectionTitle,
   CaseStudyPageInner,
   HeroContent,
   HeroGrid,
-  HeroLabel,
   HeroMediaFrame,
   LinkRow,
   PageShell,
   RoleList,
   SectionNavRevealAnchor,
-  SectionTitle,
   SectionsBlock,
   ShowcaseImage,
   ShowcaseMediaButton,
@@ -123,7 +123,7 @@ const ROLE_BULLETS = [
   'WordPress and WooCommerce engineering'
 ];
 
-const INTRO_SUMMARY = 'I helped reimagine Antisyphon Training from a static marketing site and fragmented LMS touchpoints into a cohesive marketplace for live, on-demand, and pay-what-you-can security education. The redesign improved enrollment, reduced support load, and gave learners, instructors, and operations teams a more coherent end-to-end experience.';
+const INTRO_SUMMARY = 'Antisyphon Training is a cohesive marketplace experience for live, on-demand, and pay-what-you-can security education.';
 
 type CaseStudyContentProps = {
   setAnimatedSectionRef: (id: string) => (el: HTMLDivElement | null) => void;
@@ -190,20 +190,15 @@ const CaseStudyContent = ({
                 </ShowcaseMediaButton>
 
                 <HeroContent className='text-animate'>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1em', marginBottom: '0.25em' }}>
-                    <img className='at-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
-                    <HeroLabel>UX Case Study</HeroLabel>
-                  </div>
-
                   <Title>Antisyphon UX Case Study</Title>
 
                   <div>
-                    <HeroLabel>Description</HeroLabel>
+                    <CaseStudyHeroLabel>Description</CaseStudyHeroLabel>
                     <Summary>{INTRO_SUMMARY}</Summary>
                   </div>
 
                   <div>
-                    <HeroLabel>My Roles</HeroLabel>
+                    <CaseStudyHeroLabel>My Roles</CaseStudyHeroLabel>
                     <RoleList>
                       {ROLE_BULLETS.map((bullet) => (
                         <li key={bullet}>{bullet}</li>
@@ -212,7 +207,7 @@ const CaseStudyContent = ({
                   </div>
 
                   <LinkRow>
-                    <HeroLabel>Project Link</HeroLabel>
+                    <CaseStudyHeroLabel>Project Link</CaseStudyHeroLabel>
                     <div>
                       <a href="https://www.antisyphontraining.com/" target='_blank' rel='noopener noreferrer'>
                         AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden="true" />
@@ -222,9 +217,10 @@ const CaseStudyContent = ({
                 </HeroContent>
               </HeroGrid>
 
+              <SectionNavRevealAnchor id='antisyphon-case-study-nav-anchor' aria-hidden='true' />
+
               <div style={{ marginTop: 'clamp(1.8em, 4vw, 3em)' }}>
                 <DemoStokeTldrSection>
-                  <DemoStokeTldrTitle>Highlights</DemoStokeTldrTitle>
                   <DemoStokeTldrList>
                     {TLDR_ITEMS.map(({ title, description, image }, index) => (
                       <AnimatedSection
@@ -262,8 +258,6 @@ const CaseStudyContent = ({
             </section>
           </AnimatedSection>
 
-          <SectionNavRevealAnchor id='antisyphon-case-study-nav-anchor' aria-hidden='true' />
-
           <SidebarSectionTabs
             sections={CASE_STUDY_SECTIONS}
             topTabsEl={topTabsEl}
@@ -280,7 +274,7 @@ const CaseStudyContent = ({
               className={visibleSections['section-outcome'] ? 'visible' : undefined}
             >
               <section id='section-outcome' className='story-section'>
-                <SectionTitle as='h2'>The Outcome</SectionTitle>
+                <CaseStudySectionTitle as='h2'>The Outcome</CaseStudySectionTitle>
                 <OutcomeSection className='text-animate'>
                   <OutcomeCopy>
                     <ul className='plain-lines'>
@@ -299,7 +293,7 @@ const CaseStudyContent = ({
               className={visibleSections['section-the-who'] ? 'visible' : undefined}
             >
               <section id='section-the-who' className='story-section'>
-                <SectionTitle as='h2'>The Who / Audiences and Stakeholders</SectionTitle>
+                <CaseStudySectionTitle as='h2'>The Who / Audiences and Stakeholders</CaseStudySectionTitle>
                 <DemoStokeAccordion className='text-animate'>
                   {PERSONA_ITEMS.map(({ title, bullets }) => {
                     const personaId = `persona-${title.toLowerCase().replace(/\s+/g, '-')}`;
@@ -351,7 +345,7 @@ const CaseStudyContent = ({
               className={visibleSections['section-the-how'] ? 'visible' : undefined}
             >
               <section id='section-the-how' className='story-section'>
-                <SectionTitle as='h2'>The How / End-to-End Experience</SectionTitle>
+                <CaseStudySectionTitle as='h2'>The How / End-to-End Experience</CaseStudySectionTitle>
                 <DemoStokeTldrSection>
                   <DemoStokeTwoUp className='text-animate'>
                     <section>
@@ -437,7 +431,7 @@ const CaseStudyContent = ({
             </AnimatedSection>
 
             <section id='section-methodology' className='story-section'>
-              <SectionTitle as='h2'>Methods / The UX Process</SectionTitle>
+              <CaseStudySectionTitle as='h2'>Methods / The UX Process</CaseStudySectionTitle>
               <DemoStokeMethodList>
                 {METHOD_SECTIONS.map(({ title, bullets, images }, index) => (
                   <AnimatedSection
@@ -483,7 +477,7 @@ const CaseStudyContent = ({
             </section>
 
             <section id='section-links' className='story-section'>
-              <SectionTitle as='h2'>Links</SectionTitle>
+              <CaseStudySectionTitle as='h2'>Links</CaseStudySectionTitle>
               <DemoStokeTldrCopy>
                 <a href='https://www.antisyphontraining.com/' target='_blank' rel='noopener noreferrer'>
                   AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden='true' />

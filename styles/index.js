@@ -2321,6 +2321,31 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   }
 `;
 
+export const CaseStudyTopTabButton = styled(HomeTabButton)`
+  border: 1.5px solid rgba(255, 255, 255, 0.32);
+  background: rgba(2, 8, 23, 0.78);
+  color: #fff;
+  box-shadow: 0 10px 22px -14px rgb(0 0 0 / 55%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  &[data-active='true'] {
+    background-color: ${THEME.colors.demostoke};
+    border-color: ${THEME.colors.demostoke};
+    color: ${THEME.colors.contrast};
+  }
+
+  &:hover {
+    background-color: ${THEME.colors.darkGreen};
+    border-color: ${THEME.colors.darkGreen};
+    color: #fff;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${THEME.colors.demostoke};
+  }
+`;
+
 const sidebarTabButtonStyles = css`
   background-color: transparent;
   border: 1.5px solid ${THEME.colors.white};
@@ -2329,9 +2354,9 @@ const sidebarTabButtonStyles = css`
   transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 
   &[data-active='true'] {
-    background-color: ${THEME.colors.darkGreen};
-    border-color: ${THEME.colors.darkGreen};
-    color: #fff;
+    background-color: ${THEME.colors.demostoke};
+    border-color: ${THEME.colors.demostoke};
+    color: ${THEME.colors.contrast};
   }
 
   &:not([data-active='true']):hover {

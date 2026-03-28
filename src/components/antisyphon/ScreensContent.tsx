@@ -6,16 +6,16 @@ import {
 import SidebarSectionTabs, { SidebarSectionConfig } from '../SidebarSectionTabs';
 import {
   AnimatedSection,
+  CaseStudyHeroLabel,
+  CaseStudySectionTitle,
   CaseStudyPageInner,
   HeroContent,
   HeroGrid,
-  HeroLabel,
   HeroMediaFrame,
   LinkRow,
   PageShell,
   RoleList,
   SectionNavRevealAnchor,
-  SectionTitle,
   SectionsBlock,
   ShowcaseMediaButton,
   Summary,
@@ -102,18 +102,18 @@ const ScreensContent = ({
               <HeroContent className='text-animate'>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1em', marginBottom: '0.25em' }}>
                   <img className='at-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
-                  <HeroLabel>Product Screens</HeroLabel>
+                  <CaseStudyHeroLabel>Product Screens</CaseStudyHeroLabel>
                 </div>
 
                 <Title>Antisyphon Product Screens</Title>
 
                 <div>
-                  <HeroLabel>Description</HeroLabel>
+                  <CaseStudyHeroLabel>Description</CaseStudyHeroLabel>
                   <Summary>{INTRO_SUMMARY}</Summary>
                 </div>
 
                 <div>
-                  <HeroLabel>Focus Areas</HeroLabel>
+                  <CaseStudyHeroLabel>Focus Areas</CaseStudyHeroLabel>
                   <RoleList>
                     {ROLE_BULLETS.map((bullet) => (
                       <li key={bullet}>{bullet}</li>
@@ -122,7 +122,7 @@ const ScreensContent = ({
                 </div>
 
                 <LinkRow>
-                  <HeroLabel>Project Link</HeroLabel>
+                  <CaseStudyHeroLabel>Project Link</CaseStudyHeroLabel>
                   <div>
                     <a href="https://www.antisyphontraining.com/" target='_blank' rel='noopener noreferrer'>
                       AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden="true" />
@@ -153,7 +153,7 @@ const ScreensContent = ({
                 <FlowStorySection id={catalogBlock.id} className='story-section'>
                   <FlowSection>
                     <FlowText className='text-animate'>
-                      <SectionTitle as='h2'>{catalogBlock.title}</SectionTitle>
+                      <CaseStudySectionTitle as='h2'>{catalogBlock.title}</CaseStudySectionTitle>
                       <DemoStokeTldrCopy>{catalogBlock.copy}</DemoStokeTldrCopy>
                     </FlowText>
                     {catalogImageRows.map((row, rowIndex) => (
@@ -194,7 +194,7 @@ const ScreensContent = ({
                   <FlowStorySection id={id}>
                     <FlowSection>
                       <FlowText className='text-animate'>
-                        <SectionTitle as='h2'>{title}</SectionTitle>
+                        <CaseStudySectionTitle as='h2'>{title}</CaseStudySectionTitle>
                         <DemoStokeTldrCopy>{copy}</DemoStokeTldrCopy>
                       </FlowText>
                       <FlowImagesRow className='image-animate'>

@@ -1,5 +1,4 @@
 import { type ReactNode } from 'react';
-import { WhiteTransitionAnchor } from '../../../styles';
 import { SidebarSectionConfig } from '../SidebarSectionTabs';
 
 export const CASE_STUDY_SECTIONS: SidebarSectionConfig[] = [
@@ -41,14 +40,7 @@ export const TLDR_ITEMS: {
 }[] = [
   {
     title: 'What It Is',
-    description: (
-      <>
-        <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
-          DemoStoke
-        </WhiteTransitionAnchor>{' '}
-        is the go-to platform to find, try, and buy the gear you’ll eventually fall in love with.
-      </>
-    ),
+    description: 'Riders and shops struggle with fragmented, offline demo and rental flows. I designed DemoStoke to be a unified marketplace to solve those issues. In validation sessions, 90% of shop owners said it would bring them more customers, and 100% of riders described it as "the thing that should already exist."',
     image: {
       src: '/img/demostoke/globe.webp',
       alt: 'DemoStoke global gear discovery collage'

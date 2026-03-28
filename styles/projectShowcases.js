@@ -56,7 +56,7 @@ export const CaseStudyPageInner = styled(PageInner)`
     }
 
     h3 {
-      color: ${THEME.colors.orange};
+      color: ${THEME.colors.demostoke};
     }
   }
 
@@ -148,6 +148,10 @@ export const HeroLabel = styled.div`
   color: ${THEME.colors.orange};
 `;
 
+export const CaseStudyHeroLabel = styled(HeroLabel)`
+  color: ${THEME.colors.demostoke};
+`;
+
 export const RoleList = styled.ul`
   list-style: none;
   padding: 0;
@@ -199,6 +203,11 @@ export const SectionsBlock = styled.div`
   flex-direction: column;
   gap: clamp(2.4em, 6vw, 3.8em);
   text-align: left;
+
+  > *:first-child > section.story-section,
+  > section.story-section:first-child {
+    margin-top: 0;
+  }
 `;
 
 export const SectionNavRevealAnchor = styled.div`
@@ -210,6 +219,10 @@ export const SectionNavRevealAnchor = styled.div`
 export const SectionTitle = styled(DemoStokeTldrTitle)`
   color: ${THEME.colors.orange};
   margin-bottom: 0.35em;
+`;
+
+export const CaseStudySectionTitle = styled(SectionTitle)`
+  color: ${THEME.colors.demostoke};
 `;
 
 export const ShowcaseImage = styled(DemoStokeTldrImage)`

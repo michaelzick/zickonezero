@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { HomeTabButton, DemoStokeTabsBar } from '../../styles';
+import { CaseStudyTopTabButton, DemoStokeTabsBar } from '../../styles';
 
 type TabConfig = {
   key: string;
@@ -20,7 +20,7 @@ const DemoStokeTabs = forwardRef<HTMLDivElement, DemoStokeTabsProps>(({
   return (
     <DemoStokeTabsBar ref={ref} role='tablist' aria-label='Page sections'>
       {tabs.map((tab) => (
-        <HomeTabButton
+        <CaseStudyTopTabButton
           key={tab.key}
           type="button"
           aria-selected={activeTab === tab.key}
@@ -32,7 +32,7 @@ const DemoStokeTabs = forwardRef<HTMLDivElement, DemoStokeTabsProps>(({
           onClick={() => onTabClick(tab.key)}
         >
           {tab.label}
-        </HomeTabButton>
+        </CaseStudyTopTabButton>
       ))}
     </DemoStokeTabsBar>
   );

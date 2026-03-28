@@ -1,5 +1,4 @@
 import { type ReactNode } from 'react';
-import { WhiteTransitionAnchor } from '../../../styles';
 import { SidebarSectionConfig } from '../SidebarSectionTabs';
 
 export const CASE_STUDY_SECTIONS: SidebarSectionConfig[] = [
@@ -30,14 +29,7 @@ export const TLDR_ITEMS: {
 }[] = [
   {
     title: 'What It Is',
-    description: (
-      <>
-        <WhiteTransitionAnchor href="https://www.antisyphontraining.com/" target='_blank' rel='noopener noreferrer'>
-          Antisyphon Training
-        </WhiteTransitionAnchor>{' '}
-        is Black Hills Information Security&rsquo;s learning platform for live, on-demand, and pay-what-you-can security courses.
-      </>
-    ),
+    description: 'I helped reimagine Antisyphon Training from a static marketing site and fragmented LMS touchpoints into a cohesive marketplace for live, on-demand, and pay-what-you-can security education. The redesign improved enrollment, reduced support load, and gave learners, instructors, and operations teams a more coherent end-to-end experience.',
     image: {
       src: '/img/antisyphon/home.webp',
       alt: 'Antisyphon Training homepage hero'
