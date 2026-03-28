@@ -30,11 +30,13 @@ import {
 import SidebarSectionTabs from '../SidebarSectionTabs';
 import {
   AnimatedSection,
+  CaseStudyIntroOffset,
   CaseStudyHeroLabel,
   CaseStudySectionTitle,
   CaseStudyPageInner,
   HeroContent,
   HeroGrid,
+  HiddenSectionAnchor,
   HeroMediaFrame,
   LinkRow,
   PageShell,
@@ -166,60 +168,62 @@ const CaseStudyContent = ({
     <div id="executive-content">
       <PageShell>
         <CaseStudyPageInner className='demostoke-inner'>
-          <section id='hero-spacer' aria-hidden='true' />
+          <CaseStudyIntroOffset>
+            <AnimatedSection
+              ref={setAnimatedSectionRef('section-intro')}
+              data-animate-id='section-intro'
+              className={visibleSections['section-intro'] ? 'visible' : undefined}
+            >
+              <section id='introduction' className='story-section'>
+                <HiddenSectionAnchor id='hero-spacer' aria-hidden='true' />
 
-          <AnimatedSection
-            ref={setAnimatedSectionRef('section-intro')}
-            data-animate-id='section-intro'
-            className={visibleSections['section-intro'] ? 'visible' : undefined}
-          >
-            <section id='introduction' className='story-section'>
-              <HeroGrid>
-                <ShowcaseMediaButton
-                  type='button'
-                  aria-label='Open image: Antisyphon Training homepage with course cards'
-                  onClick={() => openLightbox(0)}
-                >
-                  <HeroMediaFrame className='image-animate'>
-                    <img
-                      src='/img/antisyphon/home.webp'
-                      alt='Antisyphon Training homepage with course cards'
-                      loading='lazy'
-                    />
-                  </HeroMediaFrame>
-                </ShowcaseMediaButton>
+                <HeroGrid>
+                  <ShowcaseMediaButton
+                    type='button'
+                    aria-label='Open image: Antisyphon Training homepage with course cards'
+                    onClick={() => openLightbox(0)}
+                  >
+                    <HeroMediaFrame className='image-animate'>
+                      <img
+                        src='/img/antisyphon/home.webp'
+                        alt='Antisyphon Training homepage with course cards'
+                        loading='lazy'
+                      />
+                    </HeroMediaFrame>
+                  </ShowcaseMediaButton>
 
-                <HeroContent className='text-animate'>
-                  <Title>Antisyphon UX Case Study</Title>
+                  <HeroContent className='text-animate'>
+                    <Title>Antisyphon UX Case Study</Title>
 
-                  <div>
-                    <CaseStudyHeroLabel>Description</CaseStudyHeroLabel>
-                    <Summary>{INTRO_SUMMARY}</Summary>
-                  </div>
-
-                  <div>
-                    <CaseStudyHeroLabel>My Roles</CaseStudyHeroLabel>
-                    <RoleList>
-                      {ROLE_BULLETS.map((bullet) => (
-                        <li key={bullet}>{bullet}</li>
-                      ))}
-                    </RoleList>
-                  </div>
-
-                  <LinkRow>
-                    <CaseStudyHeroLabel>Project Link</CaseStudyHeroLabel>
                     <div>
-                      <a href="https://www.antisyphontraining.com/" target='_blank' rel='noopener noreferrer'>
-                        AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden="true" />
-                      </a>
+                      <CaseStudyHeroLabel>Description</CaseStudyHeroLabel>
+                      <Summary>{INTRO_SUMMARY}</Summary>
                     </div>
-                  </LinkRow>
-                </HeroContent>
-              </HeroGrid>
 
-              <SectionNavRevealAnchor id='antisyphon-case-study-nav-anchor' aria-hidden='true' />
-            </section>
-          </AnimatedSection>
+                    <div>
+                      <CaseStudyHeroLabel>My Roles</CaseStudyHeroLabel>
+                      <RoleList>
+                        {ROLE_BULLETS.map((bullet) => (
+                          <li key={bullet}>{bullet}</li>
+                        ))}
+                      </RoleList>
+                    </div>
+
+                    <LinkRow>
+                      <CaseStudyHeroLabel>Project Link</CaseStudyHeroLabel>
+                      <div>
+                        <a href="https://www.antisyphontraining.com/" target='_blank' rel='noopener noreferrer'>
+                          AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden="true" />
+                        </a>
+                      </div>
+                    </LinkRow>
+                  </HeroContent>
+                </HeroGrid>
+
+                <SectionNavRevealAnchor id='antisyphon-case-study-nav-anchor' aria-hidden='true' />
+              </section>
+            </AnimatedSection>
+          </CaseStudyIntroOffset>
 
           <SidebarSectionTabs
             sections={CASE_STUDY_SECTIONS}

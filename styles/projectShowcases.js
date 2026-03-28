@@ -72,6 +72,15 @@ export const CaseStudyPageInner = styled(PageInner)`
   }
 `;
 
+export const CompactCaseStudyPageInner = styled(CaseStudyPageInner)`
+  gap: clamp(1.75em, 3.5vw, 3em);
+`;
+
+export const CaseStudyIntroOffset = styled.div`
+  width: 100%;
+  margin-top: clamp(1.75em, 3.5vw, 3em);
+`;
+
 export const HeroGrid = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
@@ -148,6 +157,10 @@ export const IntroHeaderRow = styled.div`
       margin: 0;
     }
   }
+`;
+
+export const CompactIntroHeaderRow = styled(IntroHeaderRow)`
+  margin-bottom: clamp(0.4em, 1vw, 0.675em);
 `;
 
 export const Title = styled.h1`
@@ -239,6 +252,17 @@ export const SectionNavRevealAnchor = styled.div`
   width: 100%;
   height: 1px;
   margin-top: clamp(0.9em, 2vw, 1.4em);
+`;
+
+export const CompactSectionNavRevealAnchor = styled(SectionNavRevealAnchor)`
+  margin-top: clamp(0.45em, 1vw, 0.7em);
+`;
+
+export const HiddenSectionAnchor = styled.div`
+  width: 100%;
+  height: 0;
+  margin: 0;
+  padding: 0;
 `;
 
 export const SectionTitle = styled(DemoStokeTldrTitle)`

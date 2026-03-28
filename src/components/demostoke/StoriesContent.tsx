@@ -4,10 +4,10 @@ import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { PitchDeckLink } from '../../../styles';
 import {
   AnimatedSection,
-  CaseStudyPageInner,
-  IntroHeaderRow,
+  CompactCaseStudyPageInner,
+  CompactIntroHeaderRow,
+  CompactSectionNavRevealAnchor,
   PageShell,
-  SectionNavRevealAnchor,
   SectionsBlock
 } from '../../../styles/projectShowcases';
 
@@ -31,14 +31,14 @@ const StoriesContent = ({
   return (
     <div id="stories-content">
       <PageShell>
-        <CaseStudyPageInner className='demostoke-inner'>
+        <CompactCaseStudyPageInner className='demostoke-inner'>
           <AnimatedSection
             ref={setAnimatedSectionRef('story-introduction')}
             data-animate-id='story-introduction'
             className={visibleSections['story-introduction'] ? 'visible' : undefined}
           >
             <section id='story-introduction'>
-              <IntroHeaderRow>
+              <CompactIntroHeaderRow>
                 <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
                 <div>
                   <h2 className='tab-header page-header'>DemoStoke User Stories</h2>
@@ -46,10 +46,10 @@ const StoriesContent = ({
                     DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
                   </PitchDeckLink>
                 </div>
-              </IntroHeaderRow>
+              </CompactIntroHeaderRow>
             </section>
 
-            <SectionNavRevealAnchor id='demostoke-stories-nav-anchor' aria-hidden='true' />
+            <CompactSectionNavRevealAnchor id='demostoke-stories-nav-anchor' aria-hidden='true' />
           </AnimatedSection>
 
           <SidebarSectionTabs
@@ -88,7 +88,7 @@ const StoriesContent = ({
               />
             </div>
           </SectionsBlock>
-        </CaseStudyPageInner>
+        </CompactCaseStudyPageInner>
       </PageShell>
     </div>
   );

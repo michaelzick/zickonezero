@@ -32,11 +32,13 @@ import {
 import SidebarSectionTabs from '../SidebarSectionTabs';
 import {
   AnimatedSection,
+  CaseStudyIntroOffset,
   CaseStudyHeroLabel,
   CaseStudySectionTitle,
   CaseStudyPageInner,
   HeroContent,
   HeroGrid,
+  HiddenSectionAnchor,
   HeroMediaFrame,
   LinkRow,
   PageShell,
@@ -96,59 +98,61 @@ const CaseStudyContent = ({
     <div id="executive-content">
       <PageShell>
         <CaseStudyPageInner className='demostoke-inner'>
-          <section id='hero-spacer' aria-hidden='true' />
+          <CaseStudyIntroOffset>
+            <AnimatedSection
+              ref={setAnimatedSectionRef('section-intro')}
+              data-animate-id='section-intro'
+              className={visibleSections['section-intro'] ? 'visible' : undefined}
+            >
+              <section id='introduction' className='story-section'>
+                <HiddenSectionAnchor id='hero-spacer' aria-hidden='true' />
 
-          <AnimatedSection
-            ref={setAnimatedSectionRef('section-intro')}
-            data-animate-id='section-intro'
-            className={visibleSections['section-intro'] ? 'visible' : undefined}
-          >
-            <section id='introduction' className='story-section'>
-              <HeroGrid>
-                <HeroMediaFrame>
-                  <Video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    poster='/img/homepage_light_2025-07-22.webp'
-                    aria-label='DemoStoke hero video'
-                  >
-                    <source src='/video/homepage-2025-11-23-02.mp4' type='video/mp4' />
-                  </Video>
-                </HeroMediaFrame>
+                <HeroGrid>
+                  <HeroMediaFrame>
+                    <Video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      poster='/img/homepage_light_2025-07-22.webp'
+                      aria-label='DemoStoke hero video'
+                    >
+                      <source src='/video/homepage-2025-11-23-02.mp4' type='video/mp4' />
+                    </Video>
+                  </HeroMediaFrame>
 
-                <HeroContent className='text-animate'>
-                  <Title>DemoStoke UX Case Study</Title>
+                  <HeroContent className='text-animate'>
+                    <Title>DemoStoke UX Case Study</Title>
 
-                  <div>
-                    <CaseStudyHeroLabel>Description</CaseStudyHeroLabel>
-                    <Summary>{INTRO_SUMMARY}</Summary>
-                  </div>
-
-                  <div>
-                    <CaseStudyHeroLabel>My Roles</CaseStudyHeroLabel>
-                    <RoleList>
-                      {ROLE_BULLETS.map((bullet) => (
-                        <li key={bullet}>{bullet}</li>
-                      ))}
-                    </RoleList>
-                  </div>
-
-                  <LinkRow>
-                    <CaseStudyHeroLabel>Project Link</CaseStudyHeroLabel>
                     <div>
-                      <a href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
-                        DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
-                      </a>
+                      <CaseStudyHeroLabel>Description</CaseStudyHeroLabel>
+                      <Summary>{INTRO_SUMMARY}</Summary>
                     </div>
-                  </LinkRow>
-                </HeroContent>
-              </HeroGrid>
 
-              <SectionNavRevealAnchor id='demostoke-case-study-nav-anchor' aria-hidden='true' />
-            </section>
-          </AnimatedSection>
+                    <div>
+                      <CaseStudyHeroLabel>My Roles</CaseStudyHeroLabel>
+                      <RoleList>
+                        {ROLE_BULLETS.map((bullet) => (
+                          <li key={bullet}>{bullet}</li>
+                        ))}
+                      </RoleList>
+                    </div>
+
+                    <LinkRow>
+                      <CaseStudyHeroLabel>Project Link</CaseStudyHeroLabel>
+                      <div>
+                        <a href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
+                          DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
+                        </a>
+                      </div>
+                    </LinkRow>
+                  </HeroContent>
+                </HeroGrid>
+
+                <SectionNavRevealAnchor id='demostoke-case-study-nav-anchor' aria-hidden='true' />
+              </section>
+            </AnimatedSection>
+          </CaseStudyIntroOffset>
 
           <SidebarSectionTabs
             sections={CASE_STUDY_SECTIONS}
