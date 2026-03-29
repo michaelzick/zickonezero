@@ -122,6 +122,12 @@ const MainContent = () => {
     scrollAnimationRef.current = null;
   }, []);
 
+  const cancelWorksCarouselSync = useCallback(() => {
+    if (worksCarouselRafRef.current === null) return;
+    cancelAnimationFrame(worksCarouselRafRef.current);
+    worksCarouselRafRef.current = null;
+  }, []);
+
   const animateScrollTo = useCallback((targetY: number) => {
     cancelScrollAnimation();
 
@@ -292,41 +298,43 @@ const MainContent = () => {
     return () => observer.disconnect();
   }, []);
 
+  const syncWorksCarousel = useCallback(() => {
+    const stage = worksStageRef.current;
+    const viewport = worksCarouselViewportRef.current;
+    const track = worksCarouselTrackRef.current;
+    if (!stage || !viewport || !track) return;
+
+    const rect = stage.getBoundingClientRect();
+    const totalDistance = Math.max(stage.offsetHeight - window.innerHeight, 1);
+    const progress = Math.min(Math.max((-rect.top) / totalDistance, 0), 1);
+    const maxTranslate = Math.max(track.scrollWidth - viewport.clientWidth, 0);
+    const translateX = maxTranslate * progress * -1;
+    track.style.transform = `translate3d(${translateX}px, 0, 0)`;
+  }, []);
+
+  const scheduleWorksCarouselSync = useCallback(() => {
+    if (worksCarouselRafRef.current !== null) return;
+    worksCarouselRafRef.current = requestAnimationFrame(() => {
+      worksCarouselRafRef.current = null;
+      syncWorksCarousel();
+    });
+  }, [syncWorksCarousel]);
+
   useEffect(() => {
-    const syncWorksCarousel = () => {
-      const stage = worksStageRef.current;
-      const viewport = worksCarouselViewportRef.current;
-      const track = worksCarouselTrackRef.current;
-      if (!stage || !viewport || !track) return;
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    scheduleWorksCarouselSync();
+  }, [scheduleWorksCarouselSync]);
 
-      const rect = stage.getBoundingClientRect();
-      const totalDistance = Math.max(stage.offsetHeight - window.innerHeight, 1);
-      const progress = Math.min(Math.max((-rect.top) / totalDistance, 0), 1);
-      const maxTranslate = Math.max(track.scrollWidth - viewport.clientWidth, 0);
-      const translateX = maxTranslate * progress * -1;
-      track.style.transform = `translate3d(${translateX}px, 0, 0)`;
-    };
-
-    const scheduleSync = () => {
-      if (worksCarouselRafRef.current !== null) return;
-      worksCarouselRafRef.current = requestAnimationFrame(() => {
-        worksCarouselRafRef.current = null;
-        syncWorksCarousel();
-      });
-    };
-
-    scheduleSync();
-    window.addEventListener('scroll', scheduleSync, { passive: true });
-    window.addEventListener('resize', scheduleSync);
+  useEffect(() => {
+    window.addEventListener('scroll', scheduleWorksCarouselSync, { passive: true });
+    window.addEventListener('resize', scheduleWorksCarouselSync);
 
     return () => {
-      window.removeEventListener('scroll', scheduleSync);
-      window.removeEventListener('resize', scheduleSync);
-      if (worksCarouselRafRef.current !== null) {
-        cancelAnimationFrame(worksCarouselRafRef.current);
-      }
+      window.removeEventListener('scroll', scheduleWorksCarouselSync);
+      window.removeEventListener('resize', scheduleWorksCarouselSync);
+      cancelWorksCarouselSync();
     };
-  }, []);
+  }, [cancelWorksCarouselSync, scheduleWorksCarouselSync]);
 
   // Neon trail effect on the intro image
   useEffect(() => {
