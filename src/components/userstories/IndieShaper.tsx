@@ -1,4 +1,3 @@
-import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { type ReactNode } from 'react';
 import {
   BioBox,
@@ -8,8 +7,6 @@ import {
   DemoStokeTwoColumnHeader,
   DemoStokeTwoColumnCopy,
   WhiteTransitionAnchor,
-  FlexBox,
-  PitchDeckLink,
   DemoStokeTldrSection,
   DemoStokeTldrTitle,
   DemoStokeTldrCopy,
@@ -25,7 +22,11 @@ type StoryProps = {
   visibleSections?: Record<string, boolean>;
 };
 
-const IndieShaper = ({ wrapWithBioBox = true, setAnimatedSectionRef, visibleSections }: StoryProps) => {
+const IndieShaper = ({
+  wrapWithBioBox = true,
+  setAnimatedSectionRef,
+  visibleSections
+}: StoryProps) => {
   const DSLink = <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>DemoStoke</WhiteTransitionAnchor>;
 
   const renderTable = (
@@ -103,20 +104,6 @@ const IndieShaper = ({ wrapWithBioBox = true, setAnimatedSectionRef, visibleSect
 
   const content = (
     <div>
-      <AnimatedSection {...getAnimateProps('story-introduction')}>
-        <section id='story-introduction'>
-          <FlexBox>
-            <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
-            <div>
-              <h2 className='tab-header page-header'>DemoStoke User Stories</h2>
-              <PitchDeckLink href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
-                DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
-              </PitchDeckLink>
-            </div>
-          </FlexBox>
-        </section>
-      </AnimatedSection>
-
       <AnimatedSection {...getAnimateProps('story-independent-surfboard-shaper-title')}>
         <section id='story-independent-surfboard-shaper-title' className='story-section'>
           <DemoStokeTitle $noMobileTopPad>The Independent Surfboard Shaper</DemoStokeTitle>

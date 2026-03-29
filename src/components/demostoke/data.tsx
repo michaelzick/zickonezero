@@ -1,14 +1,12 @@
 import { type ReactNode } from 'react';
-import { WhiteTransitionAnchor } from '../../../styles';
 import { SidebarSectionConfig } from '../SidebarSectionTabs';
 
 export const CASE_STUDY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'hero-spacer', label: 'Intro Spacer', hidden: true },
-  { id: 'introduction', label: 'Intro' },
-  { id: 'section-the-why', label: 'The Why' },
-  { id: 'section-the-who', label: 'The Who' },
+  { id: 'section-the-what', label: 'The What' },
   { id: 'section-the-how', label: 'The How' },
-  { id: 'section-methodology', label: 'Methods' }
+  { id: 'section-methodology', label: 'Methods' },
+  { id: 'section-the-who', label: 'The Who' }
 ] as const;
 
 export const CASE_STUDY_BOTTOM_SECTION_ID = CASE_STUDY_SECTIONS[CASE_STUDY_SECTIONS.length - 1]?.id;
@@ -20,6 +18,21 @@ export const STORY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'story-small-ski-shop', label: 'Small Ski/Bike Shop' }
 ] as const;
 
+export const STORY_HERO_IMAGES = [
+  {
+    src: '/img/demostoke/pop-art-shaper.webp',
+    alt: 'Independent surfboard shaper with demo boards'
+  },
+  {
+    src: '/img/demostoke/pop-art-snowboarder.webp',
+    alt: 'Snowboarder carrying her board'
+  },
+  {
+    src: '/img/demostoke/pop-art-mtb-man-woman.webp',
+    alt: 'Mountain bike rental counter'
+  }
+] as const;
+
 export const TLDR_ITEMS: {
   title: string;
   description: ReactNode;
@@ -27,14 +40,7 @@ export const TLDR_ITEMS: {
 }[] = [
   {
     title: 'What It Is',
-    description: (
-      <>
-        <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
-          DemoStoke
-        </WhiteTransitionAnchor>{' '}
-        is the go-to platform to find, try, and buy the gear you’ll eventually fall in love with.
-      </>
-    ),
+    description: 'Riders and shops struggle with fragmented, offline demo and rental flows. I designed DemoStoke to be a unified marketplace to solve those issues. In validation sessions, 90% of shop owners said it would bring them more customers, and 100% of riders described it as "the thing that should already exist."',
     image: {
       src: '/img/demostoke/globe.webp',
       alt: 'DemoStoke global gear discovery collage'
@@ -42,7 +48,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'The Problem',
-    description: 'Riders want to try before they buy, but demos are rare, costly, and inconvenient.',
+    description: 'Riders want to try gear before committing, but most demos still depend on scattered shop events, word of mouth, or expensive short-term rentals. Shops and independent makers also lack a shared digital system for surfacing availability, building trust, and converting a successful demo into a sale.',
     image: {
       src: '/img/demostoke/demo-van.webp',
       alt: 'DemoStoke mobile demo van in the field'
@@ -50,7 +56,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'The Solution',
-    description: 'A location-based marketplace to safely connect riders, lenders, and shops.',
+    description: 'DemoStoke turns those fragmented offline workflows into a location-aware marketplace where riders can discover gear nearby, compare listings, and book demos or rentals with more confidence. The platform also gives shops, shapers, and individual lenders tools to showcase inventory, manage availability, and turn trial experiences into repeat business.',
     image: {
       src: '/img/demostoke/surf-shop.webp',
       alt: 'Surf shop displaying boards available for demo'
@@ -58,7 +64,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'My Roles',
-    description: 'Founder, UX Designer, and Full-Stack Developer.',
+    description: 'I led DemoStoke end to end as founder, UX designer, and full-stack developer, shaping the product strategy, research, information architecture, user flows, and visual system. I also built the front end, auth and dashboard flows, database-backed features, and AI-assisted discovery tooling needed to turn the concept into a working web application.',
     image: {
       src: '/img/demostoke/ds-design-system.webp',
       alt: 'DemoStoke design system components'

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import FsLightbox from 'fslightbox-react';
 
 import {
@@ -15,10 +15,23 @@ import { Wrapper } from '../../styles';
 import { TopNavContent, FooterContent } from '.';
 import DemoStokeTabs from './DemoStokeTabs';
 import { SidebarSectionTabsMobile } from './SidebarSectionTabs';
-import useAnimatedSections from './demostoke/useAnimatedSections';
 import CaseStudyContent from './antisyphon/CaseStudyContent';
 import ScreensContent from './antisyphon/ScreensContent';
-import { CASE_STUDY_BOTTOM_SECTION_ID, CASE_STUDY_SECTIONS, FLOW_BLOCKS, FLOW_BOTTOM_SECTION_ID, FLOW_SECTIONS, HOW_IMAGES, METHOD_SECTIONS } from './antisyphon/data';
+import {
+  CASE_STUDY_BOTTOM_SECTION_ID,
+  CASE_STUDY_SECTIONS,
+  HOW_IMAGES,
+  METHOD_SECTIONS,
+  TLDR_ITEMS
+} from './antisyphon/caseStudyData';
+import {
+  FLOW_BLOCKS,
+  FLOW_BOTTOM_SECTION_ID,
+  FLOW_SECTIONS,
+} from './antisyphon/flowData';
+import useAnimatedSections from '../hooks/useAnimatedSections';
+import useHorizontalGallery from '../hooks/useHorizontalGallery';
+import useLightboxController from '../hooks/useLightboxController';
 
 type SectionKey = 'case-study' | 'flows';
 
@@ -27,16 +40,15 @@ const AntisyphonContent = () => {
   const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState<SectionKey>('case-study');
   const [topTabsEl, setTopTabsEl] = useState<HTMLDivElement | null>(null);
-  const [lightboxController, setLightboxController] = useState({ toggler: false, slide: 1 });
-  const [methodLightboxController, setMethodLightboxController] = useState({ toggler: false, slide: 1 });
-  const [flowLightboxController, setFlowLightboxController] = useState({ toggler: false, slide: 1 });
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
   const [openPersonaId, setOpenPersonaId] = useState<string | null>(null);
   const { visibleSections, setAnimatedSectionRef } = useAnimatedSections(activeTab);
-  const scrollRowRef = useRef<HTMLDivElement | null>(null);
-  const methodImages = useMemo(() => METHOD_SECTIONS.flatMap(({ images }) => images), [METHOD_SECTIONS]);
-  const flowImages = useMemo(() => FLOW_BLOCKS.flatMap(({ images }) => images), [FLOW_BLOCKS]);
+  const { lightboxController, openLightbox } = useLightboxController();
+  const { lightboxController: methodLightboxController, openLightbox: openMethodLightbox } = useLightboxController();
+  const { lightboxController: flowLightboxController, openLightbox: openFlowLightbox } = useLightboxController();
+  const { rowRef, canScrollLeft, canScrollRight, scrollGalleryBy } = useHorizontalGallery(activeTab);
+  const methodImages = METHOD_SECTIONS.flatMap(({ images }) => images);
+  const flowImages = FLOW_BLOCKS.flatMap(({ images }) => images);
+  const caseStudyImages = [...TLDR_ITEMS.map(({ image }) => image), ...HOW_IMAGES];
 
   const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {
     setTopTabsEl(node);
@@ -58,73 +70,9 @@ const AntisyphonContent = () => {
     });
   }, [activeTab]);
 
-  const openLightbox = (index: number) => {
-    setLightboxController({
-      toggler: !lightboxController.toggler,
-      slide: index + 1
-    });
-  };
-
-  const openMethodLightbox = useCallback((index: number) => {
-    setMethodLightboxController((prev) => ({
-      toggler: !prev.toggler,
-      slide: index + 1
-    }));
-  }, []);
-
-  const openFlowLightbox = useCallback((index: number) => {
-    setFlowLightboxController((prev) => ({
-      toggler: !prev.toggler,
-      slide: index + 1
-    }));
-  }, []);
-
-  const updateScrollButtons = useCallback(() => {
-    const row = scrollRowRef.current;
-    if (!row) return;
-    if (row.scrollLeft <= 1) {
-      row.scrollLeft = 0;
-    }
-    const firstItem = row.firstElementChild as HTMLElement | null;
-    const startThreshold = (firstItem?.offsetLeft ?? 0) + 1;
-    const maxScroll = Math.max(row.scrollWidth - row.clientWidth, 0);
-    const isAtStart = row.scrollLeft <= startThreshold;
-    const isAtEnd = row.scrollLeft >= maxScroll - 1;
-    setCanScrollLeft(!isAtStart);
-    setCanScrollRight(!isAtEnd);
-  }, []);
-
-  useEffect(() => {
-    const row = scrollRowRef.current;
-    if (!row) return;
-    row.scrollLeft = 0;
-    updateScrollButtons();
-  }, [updateScrollButtons]);
-
-  const scrollGalleryBy = useCallback((direction: number) => {
-    const row = scrollRowRef.current;
-    if (!row) return;
-    const firstItem = row.firstElementChild as HTMLElement | null;
-    const itemWidth = firstItem?.getBoundingClientRect().width ?? 240;
-    row.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
-  }, []);
-
   const togglePersona = useCallback((id: string) => {
     setOpenPersonaId(current => current === id ? null : id);
   }, []);
-
-  useEffect(() => {
-    const row = scrollRowRef.current;
-    if (!row) return;
-    updateScrollButtons();
-    const handleScroll = () => updateScrollButtons();
-    row.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleScroll);
-    return () => {
-      row.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
-  }, [updateScrollButtons]);
 
   return (
     <>
@@ -154,7 +102,7 @@ const AntisyphonContent = () => {
           <CaseStudyContent
             setAnimatedSectionRef={setAnimatedSectionRef}
             visibleSections={visibleSections}
-            scrollRowRef={scrollRowRef}
+            scrollRowRef={rowRef}
             canScrollLeft={canScrollLeft}
             canScrollRight={canScrollRight}
             scrollGalleryBy={scrollGalleryBy}
@@ -180,7 +128,7 @@ const AntisyphonContent = () => {
       </Wrapper>
       <FsLightbox
         toggler={lightboxController.toggler}
-        sources={HOW_IMAGES.map(({ src }) => src)}
+        sources={caseStudyImages.map(({ src }) => src)}
         slide={lightboxController.slide}
       />
       <FsLightbox

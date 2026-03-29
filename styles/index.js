@@ -364,7 +364,7 @@ export const Image = styled.img`
 `;
 
 export const FullBorderImage = styled(Image)`
-  border: none;
+  border: 1.5px solid ${THEME.colors.grey};
   border-radius: ${THEME.radii.md};
   width: 100%;
   height: 100%;
@@ -1016,17 +1016,25 @@ export const AntisyphonHeader = styled(FlexBox)`
 `;
 
 export const SectionTabsWrapper = styled.div`
-  position: sticky;
+  position: fixed;
   top: var(--sidebar-tabs-top, calc(5em + 4.4em));
+  left: 50%;
+  transform: translate(-50%, ${props => props.$isVisible ? '0' : '-10px'});
   display: flex;
-  flex-direction: column;
-  gap: 0.65em;
-  width: 100%;
-  max-width: 5.5em;
-  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45em;
+  width: min(calc(100% - 2.4em), 62em);
   padding: 0.45em;
   border-radius: ${THEME.radii.md};
-  background-color: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  background: rgba(var(--color-dark-rgb), 0.82);
+  box-shadow: 0 10px 28px -18px rgb(0 0 0 / 65%);
+  backdrop-filter: blur(10px);
+  opacity: ${props => props.$isVisible ? 1 : 0};
+  pointer-events: ${props => props.$isVisible ? 'auto' : 'none'};
+  transition: opacity 0.28s ease, transform 0.28s ease, border-color 0.25s ease;
+  z-index: 94;
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     display: none;
@@ -1144,11 +1152,11 @@ export const FooterBottom = styled.div`
 `;
 
 export const DemoStokeTitle = styled.h2`
-  color: ${THEME.colors.demostoke};
+  color: ${THEME.colors.white};
   font-size: clamp(1.55em, 3.5vw, 2.15em);
   line-height: 1.1;
   margin: 0 0 0.45em;
-  padding-top: clamp(0.65em, 1.8vw, 1.1em);
+  padding-top: ${props => (props.$noMobileTopPad ? '0' : 'clamp(0.65em, 1.8vw, 1.1em)')};
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     padding-top: 0;
@@ -1290,12 +1298,6 @@ export const DemoStokeTwoColumnCopy = styled.div`
 `;
 
 export const DemoStokeTldrSection = styled.div`
-  width: 100%;
-  padding: clamp(1.1em, 2.8vw, 1.8em) clamp(1.2em, 3vw, 2.1em);
-  border-radius: ${THEME.radii.md};
-  background: rgba(37, 99, 235, 0.08);
-  border: none;
-  box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
 `;
 
 export const DemoStokeTldrRow = styled.div`
@@ -1662,7 +1664,7 @@ export const DemoStokeScrollItem = styled.div`
   min-width: clamp(12.8em, 45vw, 15em);
   max-width: 18em;
   flex: 0 0 auto;
-  border: 1.5px solid ${THEME.colors.white};
+  border: 1.5px solid ${THEME.colors.grey};
   border-radius: ${THEME.radii.md};
   overflow: hidden;
   background: transparent;
@@ -1801,7 +1803,7 @@ export const DemoStokeMiniCard = styled.button`
 
 export const DemoStokeMiniCardTitle = styled.div`
   font-weight: 700;
-  color: ${THEME.colors.demostoke};
+  color: ${THEME.colors.white};
   letter-spacing: 0.01em;
   margin: 0 0 0.5em;
   font-size: clamp(1.02em, 2vw, 1.2em);
@@ -1827,8 +1829,8 @@ export const DemoStokeMiniCardHint = styled.span`
   display: inline-flex;
   align-items: center;
   gap: 0.3em;
-  color: ${THEME.colors.white};
-  opacity: 0.75;
+  color: ${THEME.colors.demostoke};
+  opacity: 1;
   font-size: 0.86em;
   letter-spacing: 0.02em;
   margin-top: auto;
@@ -1844,6 +1846,7 @@ export const DemoStokeStoryHero = styled.img`
   width: 100%;
   display: block;
   border-radius: ${THEME.radii.md};
+  border: 1.5px solid ${THEME.colors.grey};
   object-fit: cover;
   object-position: top;
   margin: 0;
@@ -1909,7 +1912,7 @@ export const DemoStokeMiniCardModal = styled.div`
     background:
       radial-gradient(140% 140% at 10% 0%, rgba(0, 215, 255, 0.18), rgba(248, 250, 252, 0.02)),
       linear-gradient(150deg, rgba(8, 47, 73, 0.9), rgba(12, 74, 110, 0.75));
-    color: ${THEME.colors.white};
+    color: #f8fafc; /* keep light text inside the modal in light theme */
     border: 1px solid rgba(8, 47, 73, 0.5);
     box-shadow: 0 18px 36px -24px rgb(15 23 42 / 45%);
   }
@@ -1953,7 +1956,7 @@ export const DemoStokeMiniCardModalClose = styled.button`
 export const DemoStokeMiniCardModalTitle = styled.h4`
   margin: 0 0 0.65em;
   font-size: clamp(1.25em, 2.3vw, 1.5em);
-  color: #7dd3fc; /* lighter accent that stays visible on dark modal */
+  color: #f8fafc; /* lock light text regardless of theme */
   letter-spacing: 0.01em;
 `;
 
@@ -2020,7 +2023,7 @@ export const DemoStokeWhyBadge = styled.span`
 
 export const DemoStokeWhyTitle = styled.h4`
   margin: 0 0 0.4em;
-  color: ${THEME.colors.demostoke};
+  color: ${THEME.colors.white};
   font-size: clamp(1.05em, 2.2vw, 1.25em);
   letter-spacing: 0.01em;
 `;
@@ -2313,10 +2316,37 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   }
 `;
 
+export const CaseStudyTopTabButton = styled(HomeTabButton)`
+  border: 1.5px solid var(--case-study-top-tab-border);
+  background: var(--case-study-top-tab-bg);
+  color: var(--case-study-top-tab-color);
+  box-shadow: 0 10px 22px -14px rgb(0 0 0 / 55%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  &[data-active='true'] {
+    background-color: ${THEME.colors.darkGreen};
+    border-color: ${THEME.colors.darkGreen};
+    color: #fff;
+  }
+
+  &:hover {
+    background-color: ${THEME.colors.darkGreen};
+    border-color: ${THEME.colors.darkGreen};
+    color: #fff;
+  }
+
+  &[data-active='true']:hover {
+    background-color: ${THEME.colors.darkGreen};
+    border-color: ${THEME.colors.darkGreen};
+    color: #fff;
+  }
+`;
+
 const sidebarTabButtonStyles = css`
-  background-color: transparent;
-  border: 1.5px solid ${THEME.colors.white};
-  color: ${THEME.colors.white};
+  background-color: var(--section-tab-bg);
+  border: 1.5px solid var(--section-tab-border);
+  color: var(--section-tab-color);
   box-shadow: none;
   transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 
@@ -2327,6 +2357,13 @@ const sidebarTabButtonStyles = css`
   }
 
   &:not([data-active='true']):hover {
+    background-color: ${THEME.colors.darkGreen};
+    border-color: ${THEME.colors.darkGreen};
+    color: #fff;
+  }
+
+  &[data-active='true']:hover {
+    background-color: ${THEME.colors.darkGreen};
     border-color: ${THEME.colors.darkGreen};
     color: #fff;
   }
@@ -2334,15 +2371,22 @@ const sidebarTabButtonStyles = css`
 
 export const SectionTabButton = styled(HomeTabButton)`
   ${sidebarTabButtonStyles}
-  font-size: 0.575em;
-  padding: 0.3em 0.5em;
+  flex: 1 1 0;
+  min-width: 0;
+  font-size: 0.72em;
+  padding: 0.7em 0.9em;
   justify-content: center;
   text-align: center;
-  width: 100%;
-  min-height: 1.6em;
+  width: auto;
+  min-height: 2.2em;
   letter-spacing: 0.011em;
   line-height: 1.3;
   border-radius: ${THEME.radii.md};
+
+  @media (max-width: 1280px) {
+    font-size: 0.65em;
+    padding: 0.65em 0.75em;
+  }
 `;
 
 export const SectionTabsMobileWrapper = styled.div`
@@ -2685,19 +2729,26 @@ export const IntroSection = styled.div`
 export const WorksParallaxStage = styled.section`
   position: relative;
   isolation: isolate;
-  margin: clamp(1em, 2.8vw, 2em) 0 0;
+  margin: clamp(0.25em, 1vw, 0.75em) 0 0;
   background: ${THEME.colors.dark};
 `;
 
 export const WorksRevealCurtain = styled.div`
   position: relative;
   z-index: 2;
-  height: clamp(50vh, 58vw, 65vh);
-  background: ${THEME.colors.dark};
+  height: clamp(116vh, 128vw, 146vh);
+  background: transparent;
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    height: clamp(148vh, 148vw, 170vh);
+  }
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    display: none;
-    height: 0;
+    height: clamp(128vh, 148vw, 154vh);
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    height: clamp(276vh, 360vw, 336vh);
   }
 `;
 
@@ -2722,15 +2773,6 @@ export const WorksFixedIllustration = styled.div`
     filter: saturate(1.05) contrast(1.03);
   }
 
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.35) 55%, rgba(0, 0, 0, 0.5) 100%);
-    pointer-events: none;
-    z-index: 1;
-  }
-
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     height: clamp(78vh, 120vw, 96vh);
   }
@@ -2742,12 +2784,72 @@ export const WorksFixedIllustration = styled.div`
   }
 `;
 
+export const WorksCarouselFrame = styled(WorksFixedIllustration)`
+  background: transparent;
+  pointer-events: none;
+`;
+
+export const WorksCarouselViewport = styled.div`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: clamp(0.375em, 1vw, 0.7em) clamp(1.25em, 3.8vw, 3em);
+  z-index: 0;
+
+  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+    padding: clamp(0.325em, 1.2vw, 0.55em) clamp(1em, 3.8vw, 1.8em);
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    padding: clamp(0.25em, 1.4vw, 0.425em) clamp(0.75em, 3.6vw, 1.1em);
+  }
+`;
+
+export const WorksCarouselTrack = styled.div`
+  display: flex;
+  align-items: center;
+  gap: clamp(1.1em, 2.8vw, 2em);
+  width: max-content;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  padding-right: clamp(4em, 12vw, 10em);
+`;
+
+export const WorksCarouselItem = styled.div`
+  position: relative;
+  flex: 0 0 clamp(23rem, 58vw, 52rem);
+  aspect-ratio: 16 / 9;
+  border-radius: ${THEME.radii.md};
+  overflow: hidden;
+  border: 1.5px solid rgba(255, 255, 255, 0.82);
+  box-shadow: 0 34px 48px -30px rgb(0 0 0 / 82%);
+  background: ${THEME.colors.darkest};
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    flex-basis: clamp(20rem, 78vw, 36rem);
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    flex-basis: 84vw;
+  }
+`;
+
+export const WorksCarouselImage = styled.img`
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: top;
+`;
+
 export const WorksSectionContent = styled.div`
   position: relative;
   z-index: 2;
   background: ${THEME.colors.dark};
-  margin-top: -60vh;
-  padding-top: clamp(2em, 5vw, 3.5em);
+  margin-top: -44vh;
+  padding-top: clamp(1em, 2.5vw, 1.75em);
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     margin-top: -24vh;

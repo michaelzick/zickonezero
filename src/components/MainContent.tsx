@@ -26,7 +26,11 @@ import {
   FloatingClouds,
   WorksParallaxStage,
   WorksRevealCurtain,
-  WorksFixedIllustration,
+  WorksCarouselFrame,
+  WorksCarouselImage,
+  WorksCarouselItem,
+  WorksCarouselTrack,
+  WorksCarouselViewport,
   WorksSectionContent
 } from '../../styles';
 import { AnimatedSection } from '../../styles/projectShowcases';
@@ -38,6 +42,28 @@ const DESKTOP_NAV_OFFSET = 92; // Tighten the gap so section headers sit closer 
 const MOBILE_TABS_HEIGHT_PX = 11.3 * 16; // Keep in sync with mobile scroll target for Home tabs
 const DETECTION_BUFFER = 12;
 const CASE_STUDY_GROUPS = new Set(['demostoke', 'antisyphon-training']);
+const WORKS_CAROUSEL_IMAGES = [
+  {
+    src: '/img/demostoke/all-equipment-hybrid.webp',
+    alt: 'DemoStoke hybrid catalog and map view'
+  },
+  {
+    src: '/img/demostoke/admin-img-download.webp',
+    alt: 'DemoStoke admin media management screen'
+  },
+  {
+    src: '/img/demostoke/blog-with-drafts.webp',
+    alt: 'DemoStoke blog with drafts and published posts'
+  },
+  {
+    src: '/img/demostoke/events-calendar.webp',
+    alt: 'DemoStoke events calendar'
+  },
+  {
+    src: '/img/demostoke/gear-quiz.webp',
+    alt: 'DemoStoke gear quiz flow'
+  }
+];
 
 const MainContent = () => {
   const { worksDataReversed } = useAppSelector(selectData);
@@ -60,8 +86,11 @@ const MainContent = () => {
   const neonCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const introAnimatedRef = useRef<HTMLDivElement | null>(null);
   const [introVisible, setIntroVisible] = useState(false);
-  const [showWorksIllustration, setShowWorksIllustration] = useState(false);
   const [cloudsActive, setCloudsActive] = useState(false);
+  const worksStageRef = useRef<HTMLElement | null>(null);
+  const worksCarouselViewportRef = useRef<HTMLDivElement | null>(null);
+  const worksCarouselTrackRef = useRef<HTMLDivElement | null>(null);
+  const worksCarouselRafRef = useRef<number | null>(null);
 
   // For lightbox
   const [lightboxController, setLightboxController] = useState({
@@ -91,6 +120,12 @@ const MainContent = () => {
     if (scrollAnimationRef.current === null) return;
     cancelAnimationFrame(scrollAnimationRef.current);
     scrollAnimationRef.current = null;
+  }, []);
+
+  const cancelWorksCarouselSync = useCallback(() => {
+    if (worksCarouselRafRef.current === null) return;
+    cancelAnimationFrame(worksCarouselRafRef.current);
+    worksCarouselRafRef.current = null;
   }, []);
 
   const animateScrollTo = useCallback((targetY: number) => {
@@ -263,11 +298,43 @@ const MainContent = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Delay mounting the Works illustration to avoid alt-text flashing on hard refresh
-  useEffect(() => {
-    const rafId = requestAnimationFrame(() => setShowWorksIllustration(true));
-    return () => cancelAnimationFrame(rafId);
+  const syncWorksCarousel = useCallback(() => {
+    const stage = worksStageRef.current;
+    const viewport = worksCarouselViewportRef.current;
+    const track = worksCarouselTrackRef.current;
+    if (!stage || !viewport || !track) return;
+
+    const rect = stage.getBoundingClientRect();
+    const totalDistance = Math.max(stage.offsetHeight - window.innerHeight, 1);
+    const progress = Math.min(Math.max((-rect.top) / totalDistance, 0), 1);
+    const maxTranslate = Math.max(track.scrollWidth - viewport.clientWidth, 0);
+    const translateX = maxTranslate * progress * -1;
+    track.style.transform = `translate3d(${translateX}px, 0, 0)`;
   }, []);
+
+  const scheduleWorksCarouselSync = useCallback(() => {
+    if (worksCarouselRafRef.current !== null) return;
+    worksCarouselRafRef.current = requestAnimationFrame(() => {
+      worksCarouselRafRef.current = null;
+      syncWorksCarousel();
+    });
+  }, [syncWorksCarousel]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    scheduleWorksCarouselSync();
+  }, [scheduleWorksCarouselSync]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', scheduleWorksCarouselSync, { passive: true });
+    window.addEventListener('resize', scheduleWorksCarouselSync);
+
+    return () => {
+      window.removeEventListener('scroll', scheduleWorksCarouselSync);
+      window.removeEventListener('resize', scheduleWorksCarouselSync);
+      cancelWorksCarouselSync();
+    };
+  }, [cancelWorksCarouselSync, scheduleWorksCarouselSync]);
 
   // Neon trail effect on the intro image
   useEffect(() => {
@@ -525,16 +592,18 @@ const MainContent = () => {
           </IntroSection>
         </AnimatedSection>
 
-        <WorksParallaxStage>
-          {showWorksIllustration && (
-            <WorksFixedIllustration>
-              <img
-                src="/img/illustrated-mt-hood-selfie.webp"
-                alt="Illustrated self-portrait near Mt. Hood"
-                loading="lazy"
-              />
-            </WorksFixedIllustration>
-          )}
+        <WorksParallaxStage ref={worksStageRef}>
+          <WorksCarouselFrame aria-label='Demostoke screenshot scroller'>
+            <WorksCarouselViewport ref={worksCarouselViewportRef}>
+              <WorksCarouselTrack ref={worksCarouselTrackRef}>
+                {WORKS_CAROUSEL_IMAGES.map(({ src, alt }) => (
+                  <WorksCarouselItem key={src}>
+                    <WorksCarouselImage src={src} alt={alt} loading="lazy" />
+                  </WorksCarouselItem>
+                ))}
+              </WorksCarouselTrack>
+            </WorksCarouselViewport>
+          </WorksCarouselFrame>
 
           <WorksRevealCurtain aria-hidden="true" />
 

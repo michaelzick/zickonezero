@@ -27,6 +27,7 @@ type SidebarSectionTabsProps = {
   scrollOffsetAdjustment?: number;
   isFixed?: boolean;
   mobileTopAdjustment?: number;
+  desktopRevealAnchorId?: string;
 };
 
 type SectionTabsHookParams = SidebarSectionTabsProps & {
@@ -170,28 +171,77 @@ const useSectionTabs = ({
 
 const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
   const {
-    sections
+    sections,
+    desktopRevealAnchorId,
+    isActive
   } = props;
 
-  const { stickyTop, activeSection, handleTabClick } = useSectionTabs(props);
   const visibleSections = sections.filter(({ hidden }) => !hidden);
+  const [wrapperEl, setWrapperEl] = useState<HTMLDivElement | null>(null);
+  const wrapperSize = useSize(wrapperEl);
+  const desktopExtraOffset = (wrapperSize?.height ?? wrapperEl?.offsetHeight ?? 0) + 10;
+  const { stickyTop, activeSection, handleTabClick } = useSectionTabs({
+    ...props,
+    extraOffset: desktopExtraOffset
+  });
+  const [isVisible, setIsVisible] = useState(!desktopRevealAnchorId);
+
+  useEffect(() => {
+    if (!desktopRevealAnchorId) {
+      setIsVisible(true);
+      return;
+    }
+
+    if (!isActive) {
+      setIsVisible(false);
+      return;
+    }
+
+    const updateVisibility = () => {
+      const revealAnchorEl = document.getElementById(desktopRevealAnchorId);
+      if (!revealAnchorEl) {
+        setIsVisible(true);
+        return;
+      }
+
+      const revealThreshold = stickyTop + ((wrapperSize?.height ?? wrapperEl?.offsetHeight ?? 0) * 0.35);
+      setIsVisible(revealAnchorEl.getBoundingClientRect().top <= revealThreshold);
+    };
+
+    updateVisibility();
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    window.addEventListener('resize', updateVisibility);
+
+    return () => {
+      window.removeEventListener('scroll', updateVisibility);
+      window.removeEventListener('resize', updateVisibility);
+    };
+  }, [desktopRevealAnchorId, isActive, stickyTop, wrapperSize?.height, wrapperEl]);
 
   if (!visibleSections.length) {
     return null;
   }
 
+  const activeSectionConfig = sections.find(({ id }) => id === activeSection);
+  const resolvedActiveSection = activeSectionConfig && !activeSectionConfig.hidden
+    ? activeSection
+    : visibleSections[0]?.id ?? activeSection;
+
   return (
     <SectionTabsWrapper
+      ref={setWrapperEl}
       role='navigation'
-      aria-label='Page sections'
+      aria-label='Desktop page sections'
+      data-section-tabs-variant='desktop'
+      $isVisible={isVisible}
       style={{ '--sidebar-tabs-top': `${stickyTop}px` } as CSSProperties}
     >
       {visibleSections.map(({ id, label }) => (
         <SectionTabButton
           key={id}
           type='button'
-          $isActive={activeSection === id}
-          aria-current={activeSection === id ? 'true' : undefined}
+          $isActive={resolvedActiveSection === id}
+          aria-current={resolvedActiveSection === id ? 'true' : undefined}
           onClick={() => handleTabClick(id)}
         >
           {label}
@@ -223,7 +273,8 @@ export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
     <SectionTabsMobileWrapper
       ref={handleWrapperRef}
       role='navigation'
-      aria-label='Page sections'
+      aria-label='Mobile page sections'
+      data-section-tabs-variant='mobile'
       $isFixed={isFixed}
       style={{ '--mobile-tabs-top': `${stickyTop + mobileTopAdjustment}px` } as CSSProperties}
     >

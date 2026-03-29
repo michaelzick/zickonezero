@@ -37,6 +37,50 @@ export const PageInner = styled.div`
   }
 `;
 
+export const CaseStudyPageInner = styled(PageInner)`
+  .ds-logo,
+  .at-logo {
+    width: 6em;
+    height: auto;
+  }
+
+  section {
+    scroll-margin-top: 10em;
+
+    @media (max-width: ${THEME.breakpoints.largeTablet}) {
+      scroll-margin-top: 7.2em;
+    }
+
+    @media (max-width: ${THEME.breakpoints.smallTablet}) {
+      scroll-margin-top: 6.2em;
+    }
+
+    h3 {
+      color: ${THEME.colors.demostoke};
+    }
+  }
+
+  section.story-section {
+    margin-top: 2.5em;
+  }
+
+  section#introduction.story-section,
+  section#story-independent-surfboard-shaper-title.story-section,
+  section#story-weekend-warrior.story-section,
+  section#story-small-ski-shop.story-section {
+    margin-top: 0;
+  }
+`;
+
+export const CompactCaseStudyPageInner = styled(CaseStudyPageInner)`
+  gap: clamp(1.75em, 3.5vw, 3em);
+`;
+
+export const CaseStudyIntroOffset = styled.div`
+  width: 100%;
+  margin-top: clamp(1.75em, 3.5vw, 3em);
+`;
+
 export const HeroGrid = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
@@ -68,6 +112,26 @@ export const HeroImageFrame = styled.div`
   }
 `;
 
+export const HeroMediaFrame = styled(HeroImageFrame)`
+  border: 1.5px solid ${THEME.colors.grey};
+  background: ${THEME.colors.darkest};
+  transition: border-color 0.2s ease;
+
+  img,
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+`;
+
+export const CaseStudyHeroMediaFrame = styled(HeroMediaFrame)`
+  border: none;
+  border-radius: 0 ${THEME.radii.md} ${THEME.radii.md} 0;
+  background: transparent;
+`;
+
 export const HeroContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -75,6 +139,35 @@ export const HeroContent = styled.div`
   text-align: left;
   font-size: clamp(1em, 1.35vw, 1.05em);
   line-height: 1.7;
+`;
+
+export const IntroHeaderRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5em;
+  margin-top: clamp(0.75em, 2vw, 1.2em);
+  margin-bottom: clamp(0.8em, 2vw, 1.35em);
+
+  .page-header {
+    margin: 0;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75em;
+
+    .tab-header {
+      font-size: 1.05em;
+      text-align: left;
+      margin: 0;
+    }
+  }
+`;
+
+export const CompactIntroHeaderRow = styled(IntroHeaderRow)`
+  margin-bottom: clamp(0.4em, 1vw, 0.675em);
 `;
 
 export const Title = styled.h1`
@@ -98,6 +191,10 @@ export const HeroLabel = styled.div`
   font-weight: 700;
   font-size: 0.86em;
   color: ${THEME.colors.orange};
+`;
+
+export const CaseStudyHeroLabel = styled(HeroLabel)`
+  color: ${THEME.colors.demostoke};
 `;
 
 export const RoleList = styled.ul`
@@ -151,11 +248,37 @@ export const SectionsBlock = styled.div`
   flex-direction: column;
   gap: clamp(2.4em, 6vw, 3.8em);
   text-align: left;
+
+  > *:first-child > section.story-section,
+  > section.story-section:first-child {
+    margin-top: 0;
+  }
+`;
+
+export const SectionNavRevealAnchor = styled.div`
+  width: 100%;
+  height: 1px;
+  margin-top: clamp(0.9em, 2vw, 1.4em);
+`;
+
+export const CompactSectionNavRevealAnchor = styled(SectionNavRevealAnchor)`
+  margin-top: clamp(0.45em, 1vw, 0.7em);
+`;
+
+export const HiddenSectionAnchor = styled.div`
+  width: 100%;
+  height: 0;
+  margin: 0;
+  padding: 0;
 `;
 
 export const SectionTitle = styled(DemoStokeTldrTitle)`
   color: ${THEME.colors.orange};
   margin-bottom: 0.35em;
+`;
+
+export const CaseStudySectionTitle = styled(SectionTitle)`
+  color: ${THEME.colors.white};
 `;
 
 export const ShowcaseImage = styled(DemoStokeTldrImage)`
@@ -174,6 +297,26 @@ export const ShowcaseImage = styled(DemoStokeTldrImage)`
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     width: 100%;
     margin: 0;
+  }
+`;
+
+export const ShowcaseMediaButton = styled.button`
+  all: unset;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  border-radius: ${THEME.radii.md};
+
+  &:hover ${HeroMediaFrame},
+  &:hover ${CaseStudyHeroMediaFrame},
+  &:focus-visible ${HeroMediaFrame},
+  &:focus-visible ${CaseStudyHeroMediaFrame} {
+    border-color: ${THEME.colors.hotRed};
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${THEME.colors.hotYellow};
+    outline-offset: 4px;
   }
 `;
 

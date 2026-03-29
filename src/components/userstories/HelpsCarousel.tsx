@@ -14,6 +14,7 @@ import {
   DemoStokeMiniCardModalCopy,
   DemoStokeMiniCardModalClose,
 } from '../../../styles';
+import { DemoStokeSectionSubheading } from '../../../styles/demostoke';
 
 type HelpsItem = {
   title: string;
@@ -95,7 +96,7 @@ const HelpsCarousel = ({ items, title = 'How DemoStoke Helps' }: HelpsCarouselPr
   return (
     <div>
       <DemoStokeScrollHeader>
-        <h3 style={{ margin: 0 }}>{title}</h3>
+        <DemoStokeSectionSubheading>{title}</DemoStokeSectionSubheading>
         <DemoStokeScrollControls aria-label={`Scroll ${title} cards`}>
           <DemoStokeScrollButton
             type='button'
