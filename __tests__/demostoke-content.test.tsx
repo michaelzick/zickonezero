@@ -36,14 +36,21 @@ describe('DemoStokeContent', () => {
   it('renders the refactored case-study view and removes the old why section', () => {
     renderWithProviders(<DemoStokeContent />);
 
+    const methodsHeading = screen.getByRole('heading', { name: 'Methods / The UX Process' });
+    const whoHeading = screen.getByRole('heading', { name: 'The Who / User Personas' });
+    const theWhatImage = screen.getByAltText('DemoStoke global gear discovery collage');
+
     expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'UX Case Study' }));
     expect(screen.getByRole('tablist', { name: 'Page sections' })).toBeInTheDocument();
     expect(screen.getByLabelText('Desktop page sections')).toBeInTheDocument();
     expect(screen.getByLabelText('Mobile page sections')).toBeInTheDocument();
     expect(screen.getByLabelText('DemoStoke hero video')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'The Who / User Personas' })).toBeInTheDocument();
+    expect(whoHeading).toBeInTheDocument();
     expect(screen.getByLabelText('DemoStoke screenshot carousel')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Methods / The UX Process' })).toBeInTheDocument();
+    expect(methodsHeading).toBeInTheDocument();
+    expect(methodsHeading.compareDocumentPosition(whoHeading) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(theWhatImage).not.toHaveAttribute('role', 'button');
+    expect(theWhatImage).not.toHaveAttribute('tabindex');
     expect(screen.queryByText(/The Why \/ How It Started/i)).not.toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'The Why' })).not.toBeInTheDocument();
     expect(document.getElementById('section-the-why')).not.toBeInTheDocument();

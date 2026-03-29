@@ -59,6 +59,9 @@ import {
 } from './data';
 
 const OutcomeSection = styled(DemoStokeTldrSection)`
+  width: 100%;
+  padding: clamp(1.1em, 2.8vw, 1.8em) clamp(1.2em, 3vw, 2.1em);
+  border-radius: ${THEME.radii.md};
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.14), rgba(0, 113, 227, 0.22));
   border: 1px solid ${THEME.colors.blue};
   box-shadow: 0 26px 48px -32px rgb(0 0 0 / 75%), inset 0 1px 0 rgba(255, 255, 255, 0.06);

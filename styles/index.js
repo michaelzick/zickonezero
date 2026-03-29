@@ -1298,12 +1298,6 @@ export const DemoStokeTwoColumnCopy = styled.div`
 `;
 
 export const DemoStokeTldrSection = styled.div`
-  width: 100%;
-  padding: clamp(1.1em, 2.8vw, 1.8em) clamp(1.2em, 3vw, 2.1em);
-  border-radius: ${THEME.radii.md};
-  background: rgba(37, 99, 235, 0.08);
-  border: none;
-  box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
 `;
 
 export const DemoStokeTldrRow = styled.div`

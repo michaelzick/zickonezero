@@ -15,7 +15,7 @@ import { TopNavContent, FooterContent } from '.';
 import DemoStokeTabs from './DemoStokeTabs';
 import { SidebarSectionTabsMobile } from './SidebarSectionTabs';
 import useAnimatedSections from './demostoke/useAnimatedSections';
-import { CASE_STUDY_BOTTOM_SECTION_ID, CASE_STUDY_SECTIONS, HOW_IMAGES, STORY_HERO_IMAGES, STORY_SECTIONS, TLDR_ITEMS } from './demostoke/data';
+import { CASE_STUDY_BOTTOM_SECTION_ID, CASE_STUDY_SECTIONS, HOW_IMAGES, STORY_HERO_IMAGES, STORY_SECTIONS } from './demostoke/data';
 import CaseStudyContent from './demostoke/CaseStudyContent';
 import StoriesContent from './demostoke/StoriesContent';
 
@@ -33,7 +33,7 @@ const DemoStokeContent = () => {
   const [openPersonaId, setOpenPersonaId] = useState<string | null>(null);
   const { visibleSections, setAnimatedSectionRef } = useAnimatedSections(activeTab);
   const scrollRowRef = useRef<HTMLDivElement | null>(null);
-  const caseStudyImages = [...TLDR_ITEMS.map(({ image }) => image), ...HOW_IMAGES];
+  const caseStudyImages = HOW_IMAGES;
   const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {
     setTopTabsEl(node);
   }, []);

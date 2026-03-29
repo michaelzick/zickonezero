@@ -4,9 +4,9 @@ import { SidebarSectionConfig } from '../SidebarSectionTabs';
 export const CASE_STUDY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'hero-spacer', label: 'Intro Spacer', hidden: true },
   { id: 'section-the-what', label: 'The What' },
-  { id: 'section-the-who', label: 'The Who' },
   { id: 'section-the-how', label: 'The How' },
-  { id: 'section-methodology', label: 'Methods' }
+  { id: 'section-methodology', label: 'Methods' },
+  { id: 'section-the-who', label: 'The Who' }
 ] as const;
 
 export const CASE_STUDY_BOTTOM_SECTION_ID = CASE_STUDY_SECTIONS[CASE_STUDY_SECTIONS.length - 1]?.id;

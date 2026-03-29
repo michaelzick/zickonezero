@@ -1,5 +1,6 @@
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { type KeyboardEvent, type RefObject } from 'react';
+import styled from 'styled-components';
 import {
   DemoStokeAccordion,
   DemoStokeAccordionChevron,
@@ -79,6 +80,10 @@ const ROLE_BULLETS = [
 
 const INTRO_SUMMARY = 'DemoStoke is a unified marketplace that helps riders and shops discover, book, and manage demo and rental gear in one place.';
 
+const DemoStokeWhatImage = styled(DemoStokeTldrImage)`
+  border: none;
+`;
+
 const CaseStudyContent = ({
   setAnimatedSectionRef,
   visibleSections,
@@ -92,8 +97,6 @@ const CaseStudyContent = ({
   topTabsEl,
   isActive
 }: CaseStudyContentProps) => {
-  const lightboxOffset = TLDR_ITEMS.length;
-
   return (
     <div id="executive-content">
       <PageShell>
@@ -184,78 +187,17 @@ const CaseStudyContent = ({
                             <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
                             <DemoStokeTldrCopy>{description}</DemoStokeTldrCopy>
                           </div>
-                          <DemoStokeTldrImage
+                          <DemoStokeWhatImage
                             className="image-animate"
                             src={image.src}
                             alt={image.alt}
                             loading='lazy'
-                            role='button'
-                            tabIndex={0}
-                            onClick={() => openLightbox(index)}
-                            onKeyDown={(event: KeyboardEvent<HTMLImageElement>) => {
-                              if (event.key === 'Enter' || event.key === ' ') {
-                                event.preventDefault();
-                                openLightbox(index);
-                              }
-                            }}
                           />
                         </DemoStokeTldrRow>
                       </AnimatedSection>
                     ))}
                   </DemoStokeTldrList>
                 </DemoStokeTldrSection>
-              </section>
-            </AnimatedSection>
-
-            <AnimatedSection
-              ref={setAnimatedSectionRef('section-the-who')}
-              data-animate-id='section-the-who'
-              className={visibleSections['section-the-who'] ? 'visible' : undefined}
-            >
-              <section id='section-the-who' className='story-section'>
-                <CaseStudySectionTitle as="h2">The Who / User Personas</CaseStudySectionTitle>
-                <DemoStokeAccordion className="text-animate">
-                  {PERSONA_ITEMS.map(({ title, bullets }) => {
-                    const personaId = `persona-${title.toLowerCase().replace(/\s+/g, '-')}`;
-                    const isOpen = openPersonaId === personaId;
-                    return (
-                      <DemoStokeAccordionItem key={title} $isOpen={isOpen}>
-                        <DemoStokeAccordionHeader
-                          type='button'
-                          onClick={() => togglePersona(personaId)}
-                          aria-expanded={isOpen}
-                          aria-controls={`${personaId}-content`}
-                        >
-                          <DemoStokeAccordionTitle>{title}</DemoStokeAccordionTitle>
-                          <DemoStokeAccordionChevron aria-hidden='true' $isOpen={isOpen}>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              role="presentation"
-                              focusable="false"
-                            >
-                              <path d="m6 9 6 6 6-6" />
-                            </svg>
-                          </DemoStokeAccordionChevron>
-                        </DemoStokeAccordionHeader>
-                        <DemoStokeAccordionContent
-                          id={`${personaId}-content`}
-                          role='region'
-                          aria-label={`${title} details`}
-                          $isOpen={isOpen}
-                        >
-                          <DemoStokeAccordionCopy>
-                            <ul className='plain-lines'>
-                              {bullets.map((bullet) => (
-                                <li key={bullet}>{bullet}</li>
-                              ))}
-                            </ul>
-                          </DemoStokeAccordionCopy>
-                        </DemoStokeAccordionContent>
-                      </DemoStokeAccordionItem>
-                    );
-                  })}
-                </DemoStokeAccordion>
               </section>
             </AnimatedSection>
 
@@ -319,14 +261,14 @@ const CaseStudyContent = ({
                           {HOW_IMAGES.map(({ src, alt }, index) => (
                             <DemoStokeScrollItem
                               key={src}
-                              onClick={() => openLightbox(lightboxOffset + index)}
+                              onClick={() => openLightbox(index)}
                               role='button'
                               tabIndex={0}
                               aria-label={`Open image: ${alt}`}
                               onKeyDown={(e: KeyboardEvent<HTMLDivElement>) => {
                                 if (e.key === 'Enter' || e.key === ' ') {
                                   e.preventDefault();
-                                  openLightbox(lightboxOffset + index);
+                                  openLightbox(index);
                                 }
                               }}
                             >
@@ -368,6 +310,58 @@ const CaseStudyContent = ({
                 ))}
               </DemoStokeMethodList>
             </section>
+
+            <AnimatedSection
+              ref={setAnimatedSectionRef('section-the-who')}
+              data-animate-id='section-the-who'
+              className={visibleSections['section-the-who'] ? 'visible' : undefined}
+            >
+              <section id='section-the-who' className='story-section'>
+                <CaseStudySectionTitle as="h2">The Who / User Personas</CaseStudySectionTitle>
+                <DemoStokeAccordion className="text-animate">
+                  {PERSONA_ITEMS.map(({ title, bullets }) => {
+                    const personaId = `persona-${title.toLowerCase().replace(/\s+/g, '-')}`;
+                    const isOpen = openPersonaId === personaId;
+                    return (
+                      <DemoStokeAccordionItem key={title} $isOpen={isOpen}>
+                        <DemoStokeAccordionHeader
+                          type='button'
+                          onClick={() => togglePersona(personaId)}
+                          aria-expanded={isOpen}
+                          aria-controls={`${personaId}-content`}
+                        >
+                          <DemoStokeAccordionTitle>{title}</DemoStokeAccordionTitle>
+                          <DemoStokeAccordionChevron aria-hidden='true' $isOpen={isOpen}>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              role="presentation"
+                              focusable="false"
+                            >
+                              <path d="m6 9 6 6 6-6" />
+                            </svg>
+                          </DemoStokeAccordionChevron>
+                        </DemoStokeAccordionHeader>
+                        <DemoStokeAccordionContent
+                          id={`${personaId}-content`}
+                          role='region'
+                          aria-label={`${title} details`}
+                          $isOpen={isOpen}
+                        >
+                          <DemoStokeAccordionCopy>
+                            <ul className='plain-lines'>
+                              {bullets.map((bullet) => (
+                                <li key={bullet}>{bullet}</li>
+                              ))}
+                            </ul>
+                          </DemoStokeAccordionCopy>
+                        </DemoStokeAccordionContent>
+                      </DemoStokeAccordionItem>
+                    );
+                  })}
+                </DemoStokeAccordion>
+              </section>
+            </AnimatedSection>
           </SectionsBlock>
         </CaseStudyPageInner>
       </PageShell>
