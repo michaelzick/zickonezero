@@ -127,7 +127,9 @@ export const HeroMediaFrame = styled(HeroImageFrame)`
 `;
 
 export const CaseStudyHeroMediaFrame = styled(HeroMediaFrame)`
-  border-radius: ${THEME.radii.md};
+  border: none;
+  border-radius: 0 ${THEME.radii.md} ${THEME.radii.md} 0;
+  background: transparent;
 `;
 
 export const HeroContent = styled.div`
