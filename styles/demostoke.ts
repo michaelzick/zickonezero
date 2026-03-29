@@ -5,7 +5,6 @@ import {
 } from './index';
 
 export const DemoStokeWhatImage = styled(DemoStokeTldrImage)`
-  border: none;
 `;
 
 export const DemoStokeGalleryBlock = styled.div`

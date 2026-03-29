@@ -364,7 +364,7 @@ export const Image = styled.img`
 `;
 
 export const FullBorderImage = styled(Image)`
-  border: none;
+  border: 1.5px solid ${THEME.colors.grey};
   border-radius: ${THEME.radii.md};
   width: 100%;
   height: 100%;
@@ -1664,7 +1664,7 @@ export const DemoStokeScrollItem = styled.div`
   min-width: clamp(12.8em, 45vw, 15em);
   max-width: 18em;
   flex: 0 0 auto;
-  border: 1.5px solid ${THEME.colors.white};
+  border: 1.5px solid ${THEME.colors.grey};
   border-radius: ${THEME.radii.md};
   overflow: hidden;
   background: transparent;
@@ -1846,6 +1846,7 @@ export const DemoStokeStoryHero = styled.img`
   width: 100%;
   display: block;
   border-radius: ${THEME.radii.md};
+  border: 1.5px solid ${THEME.colors.grey};
   object-fit: cover;
   object-position: top;
   margin: 0;

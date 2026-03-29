@@ -113,8 +113,9 @@ export const HeroImageFrame = styled.div`
 `;
 
 export const HeroMediaFrame = styled(HeroImageFrame)`
-  border: 1.5px solid ${THEME.colors.white};
+  border: 1.5px solid ${THEME.colors.grey};
   background: ${THEME.colors.darkest};
+  transition: border-color 0.2s ease;
 
   img,
   video {
@@ -126,7 +127,6 @@ export const HeroMediaFrame = styled(HeroImageFrame)`
 `;
 
 export const CaseStudyHeroMediaFrame = styled(HeroMediaFrame)`
-  border: none;
   border-radius: ${THEME.radii.md};
 `;
 
@@ -304,6 +304,13 @@ export const ShowcaseMediaButton = styled.button`
   width: 100%;
   cursor: pointer;
   border-radius: ${THEME.radii.md};
+
+  &:hover ${HeroMediaFrame},
+  &:hover ${CaseStudyHeroMediaFrame},
+  &:focus-visible ${HeroMediaFrame},
+  &:focus-visible ${CaseStudyHeroMediaFrame} {
+    border-color: ${THEME.colors.hotRed};
+  }
 
   &:focus-visible {
     outline: 2px solid ${THEME.colors.hotYellow};

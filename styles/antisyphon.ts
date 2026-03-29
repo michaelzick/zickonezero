@@ -26,6 +26,25 @@ export const FlowText = styled.div`
   gap: 0.35em;
 `;
 
+export const AntisyphonShowcaseImage = styled(DemoStokeTldrImage)`
+  cursor: pointer;
+  box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
+  width: calc(100% + 1.5em);
+  max-width: none;
+  margin: -0.75em;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: ${THEME.colors.hotRed};
+  }
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    width: 100%;
+    margin: 0;
+  }
+`;
+
 export const FlowImageButton = styled.button`
   display: block;
   width: 100%;
