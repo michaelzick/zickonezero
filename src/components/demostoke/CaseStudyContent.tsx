@@ -33,6 +33,7 @@ import {
 import SidebarSectionTabs from '../SidebarSectionTabs';
 import {
   AnimatedSection,
+  CaseStudyHeroMediaFrame,
   CaseStudyIntroOffset,
   CaseStudyHeroLabel,
   CaseStudySectionTitle,
@@ -40,7 +41,6 @@ import {
   HeroContent,
   HeroGrid,
   HiddenSectionAnchor,
-  HeroMediaFrame,
   LinkRow,
   PageShell,
   RoleList,
@@ -111,7 +111,7 @@ const CaseStudyContent = ({
                 <HiddenSectionAnchor id='hero-spacer' aria-hidden='true' />
 
                 <HeroGrid>
-                  <HeroMediaFrame>
+                  <CaseStudyHeroMediaFrame>
                     <Video
                       autoPlay
                       loop
@@ -122,7 +122,7 @@ const CaseStudyContent = ({
                     >
                       <source src='/video/homepage-2025-11-23-02.mp4' type='video/mp4' />
                     </Video>
-                  </HeroMediaFrame>
+                  </CaseStudyHeroMediaFrame>
 
                   <HeroContent className='text-animate'>
                     <Title>DemoStoke UX Case Study</Title>

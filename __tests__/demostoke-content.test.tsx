@@ -80,7 +80,8 @@ describe('DemoStokeContent', () => {
     expect(screen.getByRole('heading', { name: 'The Independent Surfboard Shaper' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The Weekend Warrior' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The Small Ski & Bike Shop' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Open image: Independent surfboard shaper with demo boards' })).toBeInTheDocument();
+    expect(screen.getByAltText('Independent surfboard shaper with demo boards')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Open image: Independent surfboard shaper with demo boards' })).not.toBeInTheDocument();
     expect(screen.getAllByText('How DemoStoke Helps').length).toBeGreaterThan(0);
   });
 });

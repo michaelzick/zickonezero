@@ -125,6 +125,11 @@ export const HeroMediaFrame = styled(HeroImageFrame)`
   }
 `;
 
+export const CaseStudyHeroMediaFrame = styled(HeroMediaFrame)`
+  border: none;
+  border-radius: ${THEME.radii.md};
+`;
+
 export const HeroContent = styled.div`
   display: flex;
   flex-direction: column;

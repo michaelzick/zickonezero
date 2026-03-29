@@ -17,7 +17,6 @@ type StoriesContentProps = {
   topTabsEl: HTMLDivElement | null;
   sections: SidebarSectionConfig[];
   isActive: boolean;
-  openStoryLightbox: (index: number) => void;
 };
 
 const StoriesContent = ({
@@ -25,8 +24,7 @@ const StoriesContent = ({
   visibleSections,
   topTabsEl,
   sections,
-  isActive,
-  openStoryLightbox
+  isActive
 }: StoriesContentProps) => {
   return (
     <div id="stories-content">
@@ -66,7 +64,6 @@ const StoriesContent = ({
                 wrapWithBioBox={false}
                 setAnimatedSectionRef={setAnimatedSectionRef}
                 visibleSections={visibleSections}
-                openHeroLightbox={() => openStoryLightbox(0)}
               />
             </div>
 
@@ -75,7 +72,6 @@ const StoriesContent = ({
                 wrapWithBioBox={false}
                 setAnimatedSectionRef={setAnimatedSectionRef}
                 visibleSections={visibleSections}
-                openHeroLightbox={() => openStoryLightbox(1)}
               />
             </div>
 
@@ -84,7 +80,6 @@ const StoriesContent = ({
                 wrapWithBioBox={false}
                 setAnimatedSectionRef={setAnimatedSectionRef}
                 visibleSections={visibleSections}
-                openHeroLightbox={() => openStoryLightbox(2)}
               />
             </div>
           </SectionsBlock>

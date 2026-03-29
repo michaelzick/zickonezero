@@ -30,6 +30,7 @@ import {
 import SidebarSectionTabs from '../SidebarSectionTabs';
 import {
   AnimatedSection,
+  CaseStudyHeroMediaFrame,
   CaseStudyIntroOffset,
   CaseStudyHeroLabel,
   CaseStudySectionTitle,
@@ -37,7 +38,6 @@ import {
   HeroContent,
   HeroGrid,
   HiddenSectionAnchor,
-  HeroMediaFrame,
   LinkRow,
   PageShell,
   RoleList,
@@ -186,13 +186,13 @@ const CaseStudyContent = ({
                     aria-label='Open image: Antisyphon Training homepage with course cards'
                     onClick={() => openLightbox(0)}
                   >
-                    <HeroMediaFrame className='image-animate'>
+                    <CaseStudyHeroMediaFrame className='image-animate'>
                       <img
                         src='/img/antisyphon/home.webp'
                         alt='Antisyphon Training homepage with course cards'
                         loading='lazy'
                       />
-                    </HeroMediaFrame>
+                    </CaseStudyHeroMediaFrame>
                   </ShowcaseMediaButton>
 
                   <HeroContent className='text-animate'>

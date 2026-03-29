@@ -13,21 +13,19 @@ import {
   DemoStokeStoryHero,
   DemoStokeHeroAbstractLayout,
 } from '../../../styles';
-import { AnimatedSection, ShowcaseMediaButton } from '../../../styles/projectShowcases';
+import { AnimatedSection } from '../../../styles/projectShowcases';
 import HelpsCarousel from './HelpsCarousel';
 
 type StoryProps = {
   wrapWithBioBox?: boolean;
   setAnimatedSectionRef?: (id: string) => (el: HTMLDivElement | null) => void;
   visibleSections?: Record<string, boolean>;
-  openHeroLightbox?: () => void;
 };
 
 const IndieShaper = ({
   wrapWithBioBox = true,
   setAnimatedSectionRef,
-  visibleSections,
-  openHeroLightbox
+  visibleSections
 }: StoryProps) => {
   const DSLink = <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>DemoStoke</WhiteTransitionAnchor>;
 
@@ -110,18 +108,12 @@ const IndieShaper = ({
         <section id='story-independent-surfboard-shaper-title' className='story-section'>
           <DemoStokeTitle $noMobileTopPad>The Independent Surfboard Shaper</DemoStokeTitle>
           <DemoStokeHeroAbstractLayout>
-            <ShowcaseMediaButton
-              type='button'
+            <DemoStokeStoryHero
               className='image-animate'
-              onClick={openHeroLightbox}
-              aria-label='Open image: Independent surfboard shaper with demo boards'
-            >
-              <DemoStokeStoryHero
-                src='/img/demostoke/pop-art-shaper.webp'
-                alt='Independent surfboard shaper with demo boards'
-                loading='lazy'
-              />
-            </ShowcaseMediaButton>
+              src='/img/demostoke/pop-art-shaper.webp'
+              alt='Independent surfboard shaper with demo boards'
+              loading='lazy'
+            />
 
             <DemoStokeTldrSection className='text-animate' $borderless>
               <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
