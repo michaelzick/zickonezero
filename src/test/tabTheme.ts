@@ -29,6 +29,10 @@ export const clearTabThemeVariables = () => {
   });
 };
 
+type CSSRuleWithNestedRules = CSSRule & { cssRules: CSSRuleList };
+
+const hasNestedRules = (rule: CSSRule): rule is CSSRuleWithNestedRules => 'cssRules' in rule;
+
 const collectStyleRules = (ruleList: CSSRuleList): CSSStyleRule[] => {
   const styleRules: CSSStyleRule[] = [];
 
@@ -38,7 +42,7 @@ const collectStyleRules = (ruleList: CSSRuleList): CSSStyleRule[] => {
       return;
     }
 
-    if ('cssRules' in rule) {
+    if (hasNestedRules(rule)) {
       styleRules.push(...collectStyleRules(rule.cssRules));
     }
   });
@@ -74,5 +78,5 @@ export const getMatchingRuleValues = (element: HTMLElement, property: string) =>
     });
   });
 
-  return [...values];
+  return Array.from(values);
 };

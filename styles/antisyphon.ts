@@ -81,7 +81,7 @@ export const FlowImagesRow = styled.div<{ $topOffset?: boolean; }>`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: clamp(0.75em, 1.8vw, 1.2em);
-  margin-top: ${props => props.$topOffset ? '0.75em' : '0'};
+  margin-top: ${({ $topOffset }: { $topOffset?: boolean; }) => ($topOffset ? '0.75em' : '0')};
 `;
 
 export const FlowStorySection = styled.section`
