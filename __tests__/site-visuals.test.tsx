@@ -2,7 +2,9 @@ import AboutContent from '../src/components/AboutContent';
 import MainContent from '../src/components/MainContent';
 import worksData from '../pages/api/worksData.json';
 import { renderWithProviders } from '../src/test/renderWithProviders';
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { getMatchingRuleValues } from '../src/test/tabTheme';
 
 const HOME_PRELOADED_STATE = {
   data: {
@@ -108,11 +110,32 @@ describe('Home and About visuals', () => {
     });
   });
 
-  it('renders the About page as a full-bleed hero without the old inline photo', () => {
+  it('renders the About page as a full-bleed hero with a container-anchored CTA and modal copy', async () => {
+    const user = userEvent.setup();
     renderWithProviders(<AboutContent />);
 
-    expect(screen.getByLabelText('About page hero')).toBeInTheDocument();
-    expect(screen.getByText(/Michael is a results-oriented Product Leader/i)).toBeInTheDocument();
+    const aboutHero = screen.getByLabelText('About page hero');
+    const aboutCta = screen.getByRole('button', { name: 'About Michael' });
+
+    expect(aboutHero).toBeInTheDocument();
+    expect(aboutHero).toContainElement(aboutCta);
+    expect(screen.queryByText(/Michael is a results-oriented Product Leader/i)).not.toBeInTheDocument();
     expect(screen.queryByAltText('Mt. Hood Selfie')).not.toBeInTheDocument();
+    expect(getMatchingRuleValues(aboutCta, 'position')).toContain('absolute');
+    expect(getMatchingRuleValues(aboutCta, 'right').some((value) => value.includes('clamp('))).toBe(true);
+    expect(getMatchingRuleValues(aboutCta, 'bottom').some((value) => value.includes('clamp('))).toBe(true);
+
+    await user.click(aboutCta);
+
+    const aboutDialog = screen.getByRole('dialog', { name: 'About Michael' });
+    expect(aboutDialog).toBeInTheDocument();
+    expect(screen.getByText(/Michael is a results-oriented Product Leader/i)).toBeInTheDocument();
+    expect(within(aboutDialog).getByRole('link', { name: 'main gallery' })).toBeInTheDocument();
+    expect(within(aboutDialog).getByRole('link', { name: 'GitHub' })).toBeInTheDocument();
+    expect(within(aboutDialog).getByRole('link', { name: 'LinkedIn' })).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Close dialog' }));
+
+    expect(screen.queryByRole('dialog', { name: 'About Michael' })).not.toBeInTheDocument();
   });
 });

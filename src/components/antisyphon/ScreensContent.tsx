@@ -1,7 +1,6 @@
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import {
   DemoStokeTldrCopy,
-  DemoStokeTldrTitle,
   PitchDeckLink,
 } from '../../../styles';
 import SidebarSectionTabs, { SidebarSectionConfig } from '../SidebarSectionTabs';
@@ -184,7 +183,7 @@ const ScreensContent = ({
             </FlowMethodList>
 
             <section className='story-section'>
-              <DemoStokeTldrTitle>Context</DemoStokeTldrTitle>
+              <CaseStudySectionTitle as='h2'>Context</CaseStudySectionTitle>
               <DemoStokeTldrCopy>
                 These product views stay tied to the same live course, on-demand, checkout, and operations patterns documented in the
                 Antisyphon UX case study. The desktop shell now mirrors the showcase pages, but the underlying screen content and
