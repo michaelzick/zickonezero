@@ -30,17 +30,13 @@ const AboutHero = styled.section`
   align-items: flex-end;
   overflow: hidden;
   isolation: isolate;
-  background:
-    linear-gradient(115deg, rgba(2, 8, 23, 0.78) 0%, rgba(2, 8, 23, 0.38) 42%, rgba(2, 8, 23, 0.68) 100%),
-    url('/img/illustrated-mt-hood-selfie.webp') center center / cover no-repeat;
+  background: url('/img/illustrated-mt-hood-selfie.webp') center center / cover no-repeat;
 
   &::after {
     content: '';
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(90% 110% at 20% 20%, rgba(255, 0, 101, 0.18), rgba(255, 0, 101, 0)),
-      linear-gradient(180deg, rgba(2, 8, 23, 0.04) 0%, rgba(2, 8, 23, 0.5) 75%, rgba(2, 8, 23, 0.85) 100%);
+    background: rgba(2, 8, 23, 0.34);
     pointer-events: none;
     z-index: 0;
   }
