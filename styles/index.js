@@ -2330,25 +2330,21 @@ export const CaseStudyTopTabButton = styled(HomeTabButton)`
   -webkit-backdrop-filter: blur(10px);
 
   &[data-active='true'] {
-    background-color: var(--case-study-top-tab-active-bg);
-    border-color: var(--case-study-top-tab-active-border);
-    color: var(--case-study-top-tab-active-color);
+    background-color: ${THEME.colors.darkGreen};
+    border-color: ${THEME.colors.darkGreen};
+    color: #fff;
   }
 
   &:hover {
-    background-color: var(--case-study-top-tab-hover-bg);
-    border-color: var(--case-study-top-tab-hover-border);
-    color: var(--case-study-top-tab-hover-color);
+    background-color: ${THEME.colors.darkGreen};
+    border-color: ${THEME.colors.darkGreen};
+    color: #fff;
   }
 
   &[data-active='true']:hover {
-    background-color: var(--case-study-top-tab-active-bg);
-    border-color: var(--case-study-top-tab-active-border);
-    color: var(--case-study-top-tab-active-color);
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${THEME.colors.demostoke};
+    background-color: ${THEME.colors.darkGreen};
+    border-color: ${THEME.colors.darkGreen};
+    color: #fff;
   }
 `;
 
@@ -2360,21 +2356,21 @@ const sidebarTabButtonStyles = css`
   transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 
   &[data-active='true'] {
-    background-color: var(--section-tab-active-bg);
-    border-color: var(--section-tab-active-border);
-    color: var(--section-tab-active-color);
+    background-color: ${THEME.colors.darkGreen};
+    border-color: ${THEME.colors.darkGreen};
+    color: #fff;
   }
 
   &:not([data-active='true']):hover {
-    background-color: var(--section-tab-hover-bg);
-    border-color: var(--section-tab-hover-border);
-    color: var(--section-tab-hover-color);
+    background-color: ${THEME.colors.darkGreen};
+    border-color: ${THEME.colors.darkGreen};
+    color: #fff;
   }
 
   &[data-active='true']:hover {
-    background-color: var(--section-tab-active-bg);
-    border-color: var(--section-tab-active-border);
-    color: var(--section-tab-active-color);
+    background-color: ${THEME.colors.darkGreen};
+    border-color: ${THEME.colors.darkGreen};
+    color: #fff;
   }
 `;
 

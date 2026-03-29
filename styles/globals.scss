@@ -12,25 +12,12 @@
   --color-darkGreen: #0c4a6e;
   --color-contrast: #020817;
   --color-orange: #fb923c;
-  --color-hotGreen: #73ff00;
   --case-study-top-tab-bg: rgba(2, 8, 23, 0.78);
   --case-study-top-tab-border: rgba(255, 255, 255, 0.32);
   --case-study-top-tab-color: #ffffff;
-  --case-study-top-tab-active-bg: var(--color-demostoke);
-  --case-study-top-tab-active-border: var(--color-demostoke);
-  --case-study-top-tab-active-color: var(--color-contrast);
-  --case-study-top-tab-hover-bg: var(--color-darkGreen);
-  --case-study-top-tab-hover-border: var(--color-darkGreen);
-  --case-study-top-tab-hover-color: #ffffff;
   --section-tab-bg: transparent;
   --section-tab-border: var(--color-white);
   --section-tab-color: var(--color-white);
-  --section-tab-active-bg: var(--color-demostoke);
-  --section-tab-active-border: var(--color-demostoke);
-  --section-tab-active-color: var(--color-contrast);
-  --section-tab-hover-bg: var(--color-darkGreen);
-  --section-tab-hover-border: var(--color-darkGreen);
-  --section-tab-hover-color: #ffffff;
 }
 
 :root[data-theme='dark'] {
@@ -54,21 +41,9 @@
   --case-study-top-tab-bg: rgba(255, 255, 255, 0.72);
   --case-study-top-tab-border: rgba(15, 23, 42, 0.55);
   --case-study-top-tab-color: var(--color-contrast);
-  --case-study-top-tab-active-bg: var(--color-demostoke);
-  --case-study-top-tab-active-border: var(--color-demostoke);
-  --case-study-top-tab-active-color: #ffffff;
-  --case-study-top-tab-hover-bg: var(--color-darkGreen);
-  --case-study-top-tab-hover-border: var(--color-darkGreen);
-  --case-study-top-tab-hover-color: #ffffff;
   --section-tab-bg: rgba(255, 255, 255, 0.72);
   --section-tab-border: rgba(15, 23, 42, 0.55);
   --section-tab-color: var(--color-contrast);
-  --section-tab-active-bg: var(--color-demostoke);
-  --section-tab-active-border: var(--color-demostoke);
-  --section-tab-active-color: #ffffff;
-  --section-tab-hover-bg: var(--color-darkGreen);
-  --section-tab-hover-border: var(--color-darkGreen);
-  --section-tab-hover-color: #ffffff;
 }
 
 html,
