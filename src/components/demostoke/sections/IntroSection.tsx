@@ -43,7 +43,7 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
             playsInline
             poster='/img/homepage_light_2025-07-22.webp'
             aria-label='DemoStoke hero video'
-            style={{ borderRadius: '0 6px 6px 0' }}
+            style={{ borderRadius: '0 6px 6px 0', backgroundColor: '#000815' }}
           >
             <source src='/video/homepage-2025-11-23-02.mp4' type='video/mp4' />
           </Video>

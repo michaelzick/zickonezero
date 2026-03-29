@@ -129,7 +129,16 @@ export const HeroMediaFrame = styled(HeroImageFrame)`
 export const CaseStudyHeroMediaFrame = styled(HeroMediaFrame)`
   border: none;
   border-radius: 0 ${THEME.radii.md} ${THEME.radii.md} 0;
-  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${THEME.colors.darkest};
+
+  img,
+  video {
+    object-fit: contain;
+    object-position: center;
+  }
 `;
 
 export const HeroContent = styled.div`

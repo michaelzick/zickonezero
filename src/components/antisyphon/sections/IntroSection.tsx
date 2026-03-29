@@ -22,7 +22,7 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections, openLightbox }: 
       <HiddenSectionAnchor id='hero-spacer' aria-hidden='true' />
       <HeroGrid>
         <ShowcaseMediaButton type='button' aria-label='Open image: Antisyphon Training homepage with course cards' onClick={() => openLightbox(0)}>
-          <CaseStudyHeroMediaFrame className='image-animate'>
+          <CaseStudyHeroMediaFrame className='image-animate' style={{ backgroundColor: '#151515' }}>
             <img src='/img/antisyphon/home.webp' alt='Antisyphon Training homepage with course cards' loading='lazy' />
           </CaseStudyHeroMediaFrame>
         </ShowcaseMediaButton>
