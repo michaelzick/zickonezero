@@ -64,6 +64,12 @@ const OutcomeCopy = styled(DemoStokeTldrCopy)`
   font-weight: 500;
   letter-spacing: 0.01em;
   width: 100%;
+  color: ${THEME.colors.demostoke};
+
+  .plain-lines li,
+  .plain-lines li::marker {
+    color: ${THEME.colors.demostoke};
+  }
 `;
 
 const MethodImages = styled.div`
