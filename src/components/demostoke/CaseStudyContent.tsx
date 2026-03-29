@@ -125,7 +125,7 @@ const CaseStudyContent = ({
                   </CaseStudyHeroMediaFrame>
 
                   <HeroContent className='text-animate'>
-                    <Title>DemoStoke UX Case Study</Title>
+                    <Title>DemoStoke<br />UX Case Study</Title>
 
                     <div>
                       <CaseStudyHeroLabel>Description</CaseStudyHeroLabel>

@@ -36,11 +36,14 @@ describe('AntisyphonContent', () => {
   it('renders the showcase-style case study shell with desktop and mobile section navs', () => {
     renderWithProviders(<AntisyphonContent />);
 
+    const heroHeading = screen.getByRole('heading', { name: 'Antisyphon UX Case Study' });
+
     expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'UX Case Study' }));
     expect(screen.getByRole('tablist', { name: 'Page sections' })).toBeInTheDocument();
     expect(screen.getByLabelText('Desktop page sections')).toBeInTheDocument();
     expect(screen.getByLabelText('Mobile page sections')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Antisyphon UX Case Study' })).toBeInTheDocument();
+    expect(heroHeading).toBeInTheDocument();
+    expect(heroHeading.querySelector('br')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Open image: Antisyphon Training homepage with course cards' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The Outcome' })).toBeInTheDocument();
   });

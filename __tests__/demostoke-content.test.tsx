@@ -36,6 +36,7 @@ describe('DemoStokeContent', () => {
   it('renders the refactored case-study view and removes the old why section', () => {
     renderWithProviders(<DemoStokeContent />);
 
+    const heroHeading = screen.getByRole('heading', { name: 'DemoStoke UX Case Study' });
     const methodsHeading = screen.getByRole('heading', { name: 'Methods / The UX Process' });
     const whoHeading = screen.getByRole('heading', { name: 'The Who / User Personas' });
     const theWhatImage = screen.getByAltText('DemoStoke global gear discovery collage');
@@ -44,6 +45,8 @@ describe('DemoStokeContent', () => {
     expect(screen.getByRole('tablist', { name: 'Page sections' })).toBeInTheDocument();
     expect(screen.getByLabelText('Desktop page sections')).toBeInTheDocument();
     expect(screen.getByLabelText('Mobile page sections')).toBeInTheDocument();
+    expect(heroHeading).toBeInTheDocument();
+    expect(heroHeading.querySelector('br')).toBeInTheDocument();
     expect(screen.getByLabelText('DemoStoke hero video')).toBeInTheDocument();
     expect(whoHeading).toBeInTheDocument();
     expect(screen.getByLabelText('DemoStoke screenshot carousel')).toBeInTheDocument();
