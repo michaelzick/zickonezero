@@ -24,16 +24,13 @@ const useAnimatedSections = (resetKey?: unknown) => {
       animatedSectionRefs.current.forEach((node, id) => {
         if (!node) return;
         const rect = node.getBoundingClientRect();
-        const isInView = rect.top < window.innerHeight && rect.bottom > 0;
-        if (isInView) {
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
           setVisibleSections((prev) => (prev[id] ? prev : { ...prev, [id]: true }));
         }
       });
     };
 
     animatedSectionRefs.current.forEach((node) => node && observer.observe(node));
-
-    // Ensure above-the-fold sections fade in on initial load without requiring a scroll.
     requestAnimationFrame(revealSectionsInView);
 
     return () => observer.disconnect();
