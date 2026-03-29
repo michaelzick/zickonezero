@@ -9,7 +9,7 @@ type IntroSectionProps = {
   openLightbox: (index: number) => void;
 };
 
-const ROLE_BULLETS = ['Product strategy', 'UX design', 'WordPress and WooCommerce engineering'] as const;
+const ROLE_BULLETS = ['Product strategy', 'UX design', 'Front-end development'] as const;
 const INTRO_SUMMARY = 'Antisyphon Training is a cohesive marketplace experience for live, on-demand, and pay-what-you-can security education.';
 
 const IntroSection = ({ setAnimatedSectionRef, visibleSections, openLightbox }: IntroSectionProps) => (

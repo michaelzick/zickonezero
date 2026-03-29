@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 type AnimatedSectionsState = Record<string, boolean>;
-const INITIAL_REVEAL_BUFFER_PX = 200;
 
 const useAnimatedSections = (resetKey?: unknown) => {
   const [visibleSections, setVisibleSections] = useState<AnimatedSectionsState>({});
@@ -25,7 +24,7 @@ const useAnimatedSections = (resetKey?: unknown) => {
       animatedSectionRefs.current.forEach((node, id) => {
         if (!node) return;
         const rect = node.getBoundingClientRect();
-        if (rect.top < window.innerHeight + INITIAL_REVEAL_BUFFER_PX && rect.bottom > 0) {
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
           setVisibleSections((prev) => (prev[id] ? prev : { ...prev, [id]: true }));
         }
       });
