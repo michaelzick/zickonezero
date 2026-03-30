@@ -138,11 +138,10 @@
   {
     "thumb": "/img/squares/ds-logo-stripes-fuchsia-square.webp",
     "imgs": [],
-    "desc": "DemoStoke design system and component library",
-    "header": "DemoStoke Design System",
-    "group": "demostoke-design-system",
-    "link": "https://designsystem.demostoke.com/",
-    "linkOut": true
+    "desc": "Gear shop dashboard and embeddable booking widget",
+    "header": "DemoStoke Fleet Ops",
+    "group": "demostoke-fleet-ops",
+    "link": "/demostoke-fleet-ops"
   },
   {
     "thumb": "/img/squares/demostoke-logo-square.webp",

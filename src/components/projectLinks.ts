@@ -1,5 +1,11 @@
 export const PROJECT_LINKS = [
   {
+    href: '/demostoke-fleet-ops',
+    label: 'DemoStoke Fleet Ops',
+    icon: '/img/squares/ds-logo-stripes-fuchsia-square.webp',
+    iconAlt: 'DemoStoke Fleet Ops logo'
+  },
+  {
     href: '/find-your-flow-state',
     label: 'Find Your Flow State',
     icon: '/img/squares/fyfs-wave-square.webp',
