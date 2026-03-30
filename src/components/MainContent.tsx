@@ -48,12 +48,12 @@ const WORKS_CAROUSEL_IMAGES = [
     alt: 'DemoStoke hybrid catalog and map view'
   },
   {
-    src: '/img/demostoke/admin-img-download.webp',
-    alt: 'DemoStoke admin media management screen'
+    src: '/img/fleet-ops/ds-fleet-ops-widget-low.webp',
+    alt: 'DemoStoke Fleet Ops embeddable booking widget'
   },
   {
-    src: '/img/demostoke/blog-with-drafts.webp',
-    alt: 'DemoStoke blog with drafts and published posts'
+    src: '/img/antisyphon/course-catalog.webp',
+    alt: 'Antisyphon Training course catalog'
   },
   {
     src: '/img/demostoke/events-calendar.webp',
