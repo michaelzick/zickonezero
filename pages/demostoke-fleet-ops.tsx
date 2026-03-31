@@ -4,7 +4,7 @@ const DemoStokeFleetOpsPage = () => (
   <ProjectShowcase
     title='DemoStoke Fleet Ops'
     summary='A gear shop dashboard and embeddable booking widget with DemoStoke integration.'
-    heroImage={{ src: '/img/fleet-ops/ds-fleet-ops-dashboard.webp', alt: 'DemoStoke Fleet Ops dashboard' }}
+    heroImage={{ src: '/img/fleet-ops/ds-fleet-ops-gear-edit.webp', alt: 'DemoStoke Fleet Ops dashboard' }}
     roleBullets={[
       'Product strategy',
       'UX design',
