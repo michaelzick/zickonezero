@@ -60,7 +60,7 @@ const WORKS_CAROUSEL_IMAGES = [
     alt: 'DemoStoke events calendar'
   },
   {
-    src: '/img/demostoke/gear-quiz.webp',
+    src: '/img/demostoke/case-study/ds-gear-quiz.webp',
     alt: 'DemoStoke gear quiz flow'
   }
 ];
