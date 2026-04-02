@@ -34,7 +34,7 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
       <HeroGrid>
         <CaseStudyHeroMediaFrame className='image-animate'>
           <img
-            src='/img/demostoke/case-study/ds-hero-ski.webp'
+            src='/img/demostoke/case-study/ds-hero-surf.webp'
             alt='DemoStoke homepage hero showing a surfer riding through the wave'
             loading='eager'
           />
