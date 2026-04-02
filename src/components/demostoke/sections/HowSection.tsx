@@ -62,7 +62,7 @@ const HowSection = ({
           </section>
         </DemoStokeTwoUp>
         <DemoStokeWhyImageFrame className='image-animate'>
-          <FullBorderImage src='/img/demostoke/all-equipment-hybrid.webp' alt='DemoStoke Hybrid View' loading='lazy' />
+          <FullBorderImage src='/img/demostoke/case-study/ds-explore-map.webp' alt='DemoStoke Hybrid View' loading='lazy' />
         </DemoStokeWhyImageFrame>
       </DemoStokeTldrSection>
       <DemoStokeGalleryBlock>

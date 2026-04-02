@@ -47,7 +47,8 @@ describe('DemoStokeContent', () => {
     expect(screen.getByLabelText('Mobile page sections')).toBeInTheDocument();
     expect(heroHeading).toBeInTheDocument();
     expect(heroHeading.querySelector('br')).toBeInTheDocument();
-    expect(screen.getByLabelText('DemoStoke hero video')).toBeInTheDocument();
+    expect(screen.getByAltText('DemoStoke homepage hero showing a surfer riding through the wave')).toBeInTheDocument();
+    expect(screen.queryByLabelText('DemoStoke hero video')).not.toBeInTheDocument();
     expect(whoHeading).toBeInTheDocument();
     expect(screen.getByLabelText('DemoStoke screenshot carousel')).toBeInTheDocument();
     expect(methodsHeading).toBeInTheDocument();

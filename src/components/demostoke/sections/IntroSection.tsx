@@ -1,9 +1,6 @@
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 
 import {
-  Video
-} from '../../../../styles';
-import {
   AnimatedSection,
   CaseStudyHeroLabel,
   CaseStudyHeroMediaFrame,
@@ -35,18 +32,12 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
     <section id='introduction' className='story-section'>
       <HiddenSectionAnchor id='hero-spacer' aria-hidden='true' />
       <HeroGrid>
-        <CaseStudyHeroMediaFrame>
-          <Video
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster='/img/homepage_light_2025-07-22.webp'
-            aria-label='DemoStoke hero video'
-            style={{ borderRadius: '0 6px 6px 0', backgroundColor: '#000815' }}
-          >
-            <source src='/video/homepage-2025-11-23-02.mp4' type='video/mp4' />
-          </Video>
+        <CaseStudyHeroMediaFrame className='image-animate'>
+          <img
+            src='/img/demostoke/case-study/ds-hero-surf.webp'
+            alt='DemoStoke homepage hero showing a surfer riding through the wave'
+            loading='eager'
+          />
         </CaseStudyHeroMediaFrame>
         <HeroContent className='text-animate'>
           <Title>DemoStoke<br />UX Case Study</Title>

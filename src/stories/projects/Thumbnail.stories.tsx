@@ -61,7 +61,7 @@ Thumb.args = {
     "/img/citi.webp",
     "/img/etsy.webp",
     "/img/giftcard.webp",
-    "/img/demostoke/quiz.webp",
+    "/img/quiz.webp",
   ],
   desc: "World-renowned art marketplace",
   header: "Saatchi Art",
