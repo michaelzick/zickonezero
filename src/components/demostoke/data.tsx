@@ -42,7 +42,7 @@ export const TLDR_ITEMS: {
     title: 'What It Is',
     description: 'Riders and shops struggle with fragmented, offline demo and rental flows. I designed DemoStoke to be a unified marketplace to solve those issues. In validation sessions, 90% of shop owners said it would bring them more customers, and 100% of riders described it as "the thing that should already exist."',
     image: {
-      src: '/img/demostoke/globe.webp',
+      src: '/img/demostoke/case-study/ds-explore-hybrid.webp',
       alt: 'DemoStoke global gear discovery collage'
     }
   },
@@ -155,12 +155,12 @@ export const PERSONA_ITEMS = [
 ] as const;
 
 export const HOW_IMAGES = [
-  { src: '/img/demostoke/feat-events.webp', alt: 'Featured events section' },
-  { src: '/img/demostoke/feat-posts.webp', alt: 'Featured posts section' },
+  { src: '/img/demostoke/case-study/ds-blog.webp', alt: 'Blog home with drafts and published posts' },
+  { src: '/img/demostoke/case-study/ds-blog-post.webp', alt: 'Blog drafts management view' },
+  { src: '/img/demostoke/case-study/ds-shop-page.webp', alt: 'Admin dashboard' },
+  { src: '/img/demostoke/case-study/ds-gear-page.webp', alt: 'Featured posts section' },
   { src: '/img/demostoke/case-study/ds-calendar-cal.webp', alt: 'Events calendar' },
-  { src: '/img/demostoke/admin-img-download.webp', alt: 'Admin dashboard' },
-  { src: '/img/demostoke/gear-quiz.webp', alt: 'Gear quiz' },
-  { src: '/img/demostoke/blog-with-drafts.webp', alt: 'Blog home with drafts and published posts' },
-  { src: '/img/demostoke/blog-drafts.webp', alt: 'Blog drafts management view' },
-  { src: '/img/demostoke/blog-edit-post.webp', alt: 'Blog post editor' },
+  { src: '/img/demostoke/case-study/ds-calendar-list.webp', alt: 'Blog post editor' },
+  { src: '/img/demostoke/case-study/ds-gear-quiz.webp', alt: 'Gear quiz' },
+  { src: '/img/demostoke/case-study/ds-explore-list.webp', alt: 'Featured events section' }
 ] as const;
