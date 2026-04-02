@@ -2145,19 +2145,6 @@ export const TabWrapper = styled.div`
   }
 `;
 
-export const Video = styled.video`
-  width: 100%;
-  height: auto;
-  border-radius: ${THEME.radii.md};
-  display: block;
-`;
-
-export const VideoFrame = styled.div`
-  border: 1.5px solid ${THEME.colors.white};
-  border-radius: ${THEME.radii.md};
-  overflow: hidden;
-`;
-
 export const HotRedTitle = styled.h2`
   color: ${THEME.colors.hotRed};
 `;

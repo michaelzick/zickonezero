@@ -157,7 +157,7 @@ export const PERSONA_ITEMS = [
 export const HOW_IMAGES = [
   { src: '/img/demostoke/feat-events.webp', alt: 'Featured events section' },
   { src: '/img/demostoke/feat-posts.webp', alt: 'Featured posts section' },
-  { src: '/img/demostoke/events-calendar.webp', alt: 'Events calendar' },
+  { src: '/img/demostoke/case-study/ds-calendar-cal.webp', alt: 'Events calendar' },
   { src: '/img/demostoke/admin-img-download.webp', alt: 'Admin dashboard' },
   { src: '/img/demostoke/gear-quiz.webp', alt: 'Gear quiz' },
   { src: '/img/demostoke/blog-with-drafts.webp', alt: 'Blog home with drafts and published posts' },

@@ -44,7 +44,7 @@ const DETECTION_BUFFER = 12;
 const CASE_STUDY_GROUPS = new Set(['demostoke', 'antisyphon-training']);
 const WORKS_CAROUSEL_IMAGES = [
   {
-    src: '/img/demostoke/all-equipment-hybrid.webp',
+    src: '/img/demostoke/case-study/ds-explore-hybrid.webp',
     alt: 'DemoStoke hybrid catalog and map view'
   },
   {
@@ -56,7 +56,7 @@ const WORKS_CAROUSEL_IMAGES = [
     alt: 'Antisyphon Training course catalog'
   },
   {
-    src: '/img/demostoke/events-calendar.webp',
+    src: '/img/demostoke/case-study/ds-calendar-cal.webp',
     alt: 'DemoStoke events calendar'
   },
   {
