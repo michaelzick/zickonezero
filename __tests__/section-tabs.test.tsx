@@ -1,4 +1,4 @@
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { useCallback, useState } from 'react';
 
 import SidebarSectionTabs, { SidebarSectionTabsMobile, type SidebarSectionConfig } from '../src/components/SidebarSectionTabs';
@@ -17,6 +17,14 @@ const SECTION_CONFIG: SidebarSectionConfig[] = [
   { id: 'section-methodology', label: 'Methods' }
 ];
 
+const DEMOSTOKE_SECTION_CONFIG: SidebarSectionConfig[] = [
+  { id: 'hero-spacer', label: 'Intro Spacer', hidden: true },
+  { id: 'section-the-what', label: 'The What' },
+  { id: 'section-the-how', label: 'The How' },
+  { id: 'section-the-who', label: 'The Who' },
+  { id: 'section-methodology', label: 'Methods' }
+];
+
 const MOBILE_SECTION_CONFIG: SidebarSectionConfig[] = [
   { id: 'story-introduction', label: 'Intro', hidden: true },
   { id: 'story-independent-surfboard-shaper-title', label: 'Independent Shaper' },
@@ -29,6 +37,7 @@ const MOBILE_VISIBLE_SECTION_CONFIG: SidebarSectionConfig[] = [
 ];
 
 const originalGetBoundingClientRect = HTMLElement.prototype.getBoundingClientRect;
+const originalOffsetHeight = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetHeight');
 
 const createRect = (top: number, height: number) => ({
   x: 0,
@@ -55,6 +64,17 @@ const expectDarkGreenActiveTab = (button: HTMLElement) => {
 };
 
 beforeAll(() => {
+  Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
+    configurable: true,
+    get() {
+      if (this.getAttribute('data-section-tabs-variant')) {
+        return 44;
+      }
+
+      return Number(this.getAttribute('data-height') ?? 0);
+    },
+  });
+
   Object.defineProperty(HTMLElement.prototype, 'getBoundingClientRect', {
     configurable: true,
     value: function getBoundingClientRect() {
@@ -70,6 +90,12 @@ beforeEach(() => {
 });
 
 afterAll(() => {
+  if (originalOffsetHeight) {
+    Object.defineProperty(HTMLElement.prototype, 'offsetHeight', originalOffsetHeight);
+  } else {
+    delete (HTMLElement.prototype as { offsetHeight?: unknown }).offsetHeight;
+  }
+
   Object.defineProperty(HTMLElement.prototype, 'getBoundingClientRect', {
     configurable: true,
     value: originalGetBoundingClientRect,
@@ -160,6 +186,48 @@ const MobileVisibleHarness = () => {
   );
 };
 
+const DesktopDemoStokeClickHarness = () => {
+  const [topTabsEl, setTopTabsEl] = useState<HTMLDivElement | null>(null);
+
+  return (
+    <div>
+      <TopTabsAnchor onReady={setTopTabsEl} />
+      <div id='hero-spacer' data-top='0' data-height='1' />
+      <section id='section-the-what' data-top='120' />
+      <section id='section-the-how' data-top='340' />
+      <section id='section-the-who' data-top='560' />
+      <section id='section-methodology' data-top='820' />
+      <SidebarSectionTabs
+        sections={DEMOSTOKE_SECTION_CONFIG}
+        topTabsEl={topTabsEl}
+        isActive
+        scrollOffsetAdjustment={8}
+      />
+    </div>
+  );
+};
+
+const MobileDemoStokeClickHarness = () => {
+  const [topTabsEl, setTopTabsEl] = useState<HTMLDivElement | null>(null);
+
+  return (
+    <div>
+      <TopTabsAnchor onReady={setTopTabsEl} />
+      <div id='hero-spacer' data-top='0' data-height='1' />
+      <section id='section-the-what' data-top='120' />
+      <section id='section-the-how' data-top='340' />
+      <section id='section-the-who' data-top='560' />
+      <section id='section-methodology' data-top='820' />
+      <SidebarSectionTabsMobile
+        sections={DEMOSTOKE_SECTION_CONFIG}
+        topTabsEl={topTabsEl}
+        isActive
+        scrollOffsetAdjustment={8}
+      />
+    </div>
+  );
+};
+
 describe('SidebarSectionTabs', () => {
   it('renders a horizontal desktop bar that fades in after the reveal anchor is crossed', async () => {
     const { rerender } = render(
@@ -245,5 +313,29 @@ describe('SidebarSectionTabs', () => {
     });
 
     expectDarkGreenActiveTab(screen.getByRole('button', { name: 'Intro', hidden: true }));
+  });
+
+  it('scrolls the desktop DemoStoke tabs to the matching section anchors', async () => {
+    render(<DesktopDemoStokeClickHarness />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'The Who', hidden: true }));
+    expect(window.scrollTo).toHaveBeenCalledWith({ top: 370, behavior: 'smooth' });
+
+    (window.scrollTo as jest.Mock).mockClear();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Methods', hidden: true }));
+    expect(window.scrollTo).toHaveBeenCalledWith({ top: 630, behavior: 'smooth' });
+  });
+
+  it('scrolls the mobile DemoStoke tabs to the matching section anchors', async () => {
+    render(<MobileDemoStokeClickHarness />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'The Who', hidden: true }));
+    expect(window.scrollTo).toHaveBeenCalledWith({ top: 370, behavior: 'smooth' });
+
+    (window.scrollTo as jest.Mock).mockClear();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Methods', hidden: true }));
+    expect(window.scrollTo).toHaveBeenCalledWith({ top: 630, behavior: 'smooth' });
   });
 });

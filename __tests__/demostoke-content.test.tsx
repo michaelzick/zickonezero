@@ -24,6 +24,8 @@ const expectDarkGreenActiveTab = (tab: HTMLElement) => {
   expect(borderRules).not.toContain(DEMOSTOKE_TAB_DECLARATION);
 };
 
+const getTabLabels = (nav: HTMLElement) => Array.from(nav.querySelectorAll('button')).map((button) => button.textContent);
+
 describe('DemoStokeContent', () => {
   beforeEach(() => {
     applyTabThemeVariables();
@@ -52,7 +54,9 @@ describe('DemoStokeContent', () => {
     expect(whoHeading).toBeInTheDocument();
     expect(screen.getByLabelText('DemoStoke screenshot carousel')).toBeInTheDocument();
     expect(methodsHeading).toBeInTheDocument();
-    expect(methodsHeading.compareDocumentPosition(whoHeading) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(whoHeading.compareDocumentPosition(methodsHeading) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(getTabLabels(screen.getByLabelText('Desktop page sections'))).toEqual(['The What', 'The How', 'The Who', 'Methods']);
+    expect(getTabLabels(screen.getByLabelText('Mobile page sections'))).toEqual(['The What', 'The How', 'The Who', 'Methods']);
     expect(theWhatImage).not.toHaveAttribute('role', 'button');
     expect(theWhatImage).not.toHaveAttribute('tabindex');
     expect(screen.queryByText(/The Why \/ How It Started/i)).not.toBeInTheDocument();
