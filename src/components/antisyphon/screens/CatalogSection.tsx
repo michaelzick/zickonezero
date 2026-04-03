@@ -54,7 +54,6 @@ const CatalogSection = ({
             <FlowImagesRow
               key={`${block.id}-row-${rowIndex}`}
               className='image-animate'
-              $topOffset={rowIndex === 0}
             >
               {row.map(({ image, index }) => (
                 <FlowImageButton

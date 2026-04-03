@@ -15,7 +15,6 @@ import { SetAnimatedSectionRef, VisibleSections } from '../showcaseTypes';
 import {
   HowSection,
   IntroSection,
-  LinksSection,
   MethodsSection,
   OutcomeSection,
   WhatSection,
@@ -75,16 +74,6 @@ const CaseStudyContent = ({
             visibleSections={visibleSections}
             openLightbox={openLightbox}
           />
-          <OutcomeSection
-            setAnimatedSectionRef={setAnimatedSectionRef}
-            visibleSections={visibleSections}
-          />
-          <WhoSection
-            setAnimatedSectionRef={setAnimatedSectionRef}
-            visibleSections={visibleSections}
-            openPersonaId={openPersonaId}
-            togglePersona={togglePersona}
-          />
           <HowSection
             setAnimatedSectionRef={setAnimatedSectionRef}
             visibleSections={visibleSections}
@@ -94,12 +83,21 @@ const CaseStudyContent = ({
             scrollGalleryBy={scrollGalleryBy}
             openLightbox={openLightbox}
           />
+          <WhoSection
+            setAnimatedSectionRef={setAnimatedSectionRef}
+            visibleSections={visibleSections}
+            openPersonaId={openPersonaId}
+            togglePersona={togglePersona}
+          />
           <MethodsSection
             setAnimatedSectionRef={setAnimatedSectionRef}
             visibleSections={visibleSections}
             openMethodLightbox={openMethodLightbox}
           />
-          <LinksSection />
+          <OutcomeSection
+            setAnimatedSectionRef={setAnimatedSectionRef}
+            visibleSections={visibleSections}
+          />
         </SectionsBlock>
       </CaseStudyPageInner>
     </PageShell>

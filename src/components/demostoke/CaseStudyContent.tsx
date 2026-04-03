@@ -72,13 +72,13 @@ const CaseStudyContent = ({
             scrollGalleryBy={scrollGalleryBy}
             openLightbox={openLightbox}
           />
-          <MethodsSection setAnimatedSectionRef={setAnimatedSectionRef} visibleSections={visibleSections} />
           <PersonasSection
             setAnimatedSectionRef={setAnimatedSectionRef}
             visibleSections={visibleSections}
             openPersonaId={openPersonaId}
             togglePersona={togglePersona}
           />
+          <MethodsSection setAnimatedSectionRef={setAnimatedSectionRef} visibleSections={visibleSections} />
         </SectionsBlock>
       </CaseStudyPageInner>
     </PageShell>

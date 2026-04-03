@@ -24,6 +24,11 @@ const expectDarkGreenActiveTab = (tab: HTMLElement) => {
   expect(borderRules).not.toContain(DEMOSTOKE_TAB_DECLARATION);
 };
 
+const INTRO_ROW_TOP_MARGIN_DECLARATION = 'clamp(1.75em, 3.5vw, 3em)';
+const normalizeDeclaration = (value: string) => value.replace(/\s+/g, '');
+
+const getTabLabels = (nav: HTMLElement) => Array.from(nav.querySelectorAll('button')).map((button) => button.textContent);
+
 describe('DemoStokeContent', () => {
   beforeEach(() => {
     applyTabThemeVariables();
@@ -52,7 +57,9 @@ describe('DemoStokeContent', () => {
     expect(whoHeading).toBeInTheDocument();
     expect(screen.getByLabelText('DemoStoke screenshot carousel')).toBeInTheDocument();
     expect(methodsHeading).toBeInTheDocument();
-    expect(methodsHeading.compareDocumentPosition(whoHeading) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(whoHeading.compareDocumentPosition(methodsHeading) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(getTabLabels(screen.getByLabelText('Desktop page sections'))).toEqual(['The What', 'The How', 'The Who', 'Methods']);
+    expect(getTabLabels(screen.getByLabelText('Mobile page sections'))).toEqual(['The What', 'The How', 'The Who', 'Methods']);
     expect(theWhatImage).not.toHaveAttribute('role', 'button');
     expect(theWhatImage).not.toHaveAttribute('tabindex');
     expect(screen.queryByText(/The Why \/ How It Started/i)).not.toBeInTheDocument();
@@ -79,8 +86,17 @@ describe('DemoStokeContent', () => {
 
     await user.click(screen.getByRole('tab', { name: 'User Stories' }));
 
+    const introHeading = screen.getByRole('heading', { name: 'DemoStoke User Stories' });
+    const introRow = introHeading.closest('div')?.parentElement as HTMLElement | null;
+
     expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'User Stories' }));
     expect(screen.getByLabelText('Desktop page sections')).toBeInTheDocument();
+    expect(introHeading).toBeInTheDocument();
+    expect(introRow).not.toBeNull();
+    expect(getMatchingRuleValues(introRow as HTMLElement, 'margin-top').map(normalizeDeclaration)).toContain(
+      normalizeDeclaration(INTRO_ROW_TOP_MARGIN_DECLARATION)
+    );
+    expect(screen.getByRole('link', { name: 'DemoStoke.com' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The Independent Surfboard Shaper' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The Weekend Warrior' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The Small Ski & Bike Shop' })).toBeInTheDocument();

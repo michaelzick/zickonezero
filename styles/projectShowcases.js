@@ -176,6 +176,7 @@ export const IntroHeaderRow = styled.div`
 `;
 
 export const CompactIntroHeaderRow = styled(IntroHeaderRow)`
+  margin-top: clamp(1.75em, 3.5vw, 3em);
   margin-bottom: clamp(0.4em, 1vw, 0.675em);
 `;
 

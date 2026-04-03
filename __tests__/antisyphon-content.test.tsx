@@ -12,6 +12,8 @@ import {
   getMatchingRuleValues,
 } from '../src/test/tabTheme';
 
+const getTabLabels = (nav: HTMLElement) => Array.from(nav.querySelectorAll('button')).map((button) => button.textContent);
+
 const expectDarkGreenActiveTab = (tab: HTMLElement) => {
   const backgroundRules = getMatchingRuleValues(tab, 'background-color');
   const borderRules = getMatchingRuleValues(tab, 'border-color');
@@ -23,6 +25,9 @@ const expectDarkGreenActiveTab = (tab: HTMLElement) => {
   expect(backgroundRules).not.toContain(DEMOSTOKE_TAB_DECLARATION);
   expect(borderRules).not.toContain(DEMOSTOKE_TAB_DECLARATION);
 };
+
+const INTRO_ROW_TOP_MARGIN_DECLARATION = 'clamp(1.75em, 3.5vw, 3em)';
+const normalizeDeclaration = (value: string) => value.replace(/\s+/g, '');
 
 describe('AntisyphonContent', () => {
   beforeEach(() => {
@@ -37,15 +42,33 @@ describe('AntisyphonContent', () => {
     renderWithProviders(<AntisyphonContent />);
 
     const heroHeading = screen.getByRole('heading', { name: 'Antisyphon UX Case Study' });
+    const methodsHeading = screen.getByRole('heading', { name: 'Methods / The UX Process' });
+    const outcomeHeading = screen.getByRole('heading', { name: 'The Outcome' });
+    const desktopTabs = screen.getByLabelText('Desktop page sections');
+    const mobileTabs = screen.getByLabelText('Mobile page sections');
+    const methodsSection = document.getElementById('section-methodology');
+    const outcomeSection = document.getElementById('section-outcome');
+    const methodsSectionEl = methodsSection as HTMLElement;
+    const outcomeSectionEl = outcomeSection as HTMLElement;
 
     expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'UX Case Study' }));
     expect(screen.getByRole('tablist', { name: 'Page sections' })).toBeInTheDocument();
-    expect(screen.getByLabelText('Desktop page sections')).toBeInTheDocument();
-    expect(screen.getByLabelText('Mobile page sections')).toBeInTheDocument();
+    expect(desktopTabs).toBeInTheDocument();
+    expect(mobileTabs).toBeInTheDocument();
+    expect(getTabLabels(desktopTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods']);
+    expect(getTabLabels(mobileTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods']);
+    expect(screen.queryByRole('button', { name: 'Outcome' })).not.toBeInTheDocument();
+    expect(document.getElementById('section-links')).toBeNull();
     expect(heroHeading).toBeInTheDocument();
     expect(heroHeading.querySelector('br')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Open image: Antisyphon Training homepage with course cards' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'The Outcome' })).toBeInTheDocument();
+    expect(outcomeHeading).toBeInTheDocument();
+    expect(outcomeSection).not.toBeNull();
+    expect(methodsSection).not.toBeNull();
+    expect(outcomeSectionEl).toHaveClass('story-section');
+    expect(window.getComputedStyle(outcomeSectionEl).marginTop).toBe(window.getComputedStyle(methodsSectionEl).marginTop);
+    expect(window.getComputedStyle(outcomeSectionEl).marginBottom).toBe(window.getComputedStyle(methodsSectionEl).marginBottom);
+    expect(methodsHeading.compareDocumentPosition(outcomeHeading) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   it('switches to product screens and preserves the new desktop section bar', async () => {
@@ -54,10 +77,18 @@ describe('AntisyphonContent', () => {
 
     await user.click(screen.getByRole('tab', { name: 'Product Screens' }));
 
+    const introHeading = screen.getByRole('heading', { name: 'Antisyphon Product Screens' });
+    const introRow = introHeading.closest('div')?.parentElement as HTMLElement | null;
+
     expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'Product Screens' }));
     expect(screen.getByLabelText('Desktop page sections')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Antisyphon Product Screens' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Context', level: 2 })).toBeInTheDocument();
+    expect(introHeading).toBeInTheDocument();
+    expect(introRow).not.toBeNull();
+    expect(getMatchingRuleValues(introRow as HTMLElement, 'margin-top').map(normalizeDeclaration)).toContain(
+      normalizeDeclaration(INTRO_ROW_TOP_MARGIN_DECLARATION)
+    );
+    expect(screen.getByRole('link', { name: 'AntisyphonTraining.com' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Context', level: 2 })).not.toBeInTheDocument();
     expect(screen.getAllByRole('button', { name: 'Open image: Full course catalog with category filters and badges' }).length).toBeGreaterThan(0);
     expect(screen.getByRole('button', { name: 'Course Catalog' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Cart & Checkout' })).toBeInTheDocument();
