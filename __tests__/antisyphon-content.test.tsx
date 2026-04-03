@@ -12,6 +12,8 @@ import {
   getMatchingRuleValues,
 } from '../src/test/tabTheme';
 
+const getTabLabels = (nav: HTMLElement) => Array.from(nav.querySelectorAll('button')).map((button) => button.textContent);
+
 const expectDarkGreenActiveTab = (tab: HTMLElement) => {
   const backgroundRules = getMatchingRuleValues(tab, 'background-color');
   const borderRules = getMatchingRuleValues(tab, 'border-color');
@@ -37,15 +39,25 @@ describe('AntisyphonContent', () => {
     renderWithProviders(<AntisyphonContent />);
 
     const heroHeading = screen.getByRole('heading', { name: 'Antisyphon UX Case Study' });
+    const methodsHeading = screen.getByRole('heading', { name: 'Methods / The UX Process' });
+    const outcomeHeading = screen.getByRole('heading', { name: 'The Outcome' });
+    const linksHeading = screen.getByRole('heading', { name: 'Links', level: 2 });
+    const desktopTabs = screen.getByLabelText('Desktop page sections');
+    const mobileTabs = screen.getByLabelText('Mobile page sections');
 
     expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'UX Case Study' }));
     expect(screen.getByRole('tablist', { name: 'Page sections' })).toBeInTheDocument();
-    expect(screen.getByLabelText('Desktop page sections')).toBeInTheDocument();
-    expect(screen.getByLabelText('Mobile page sections')).toBeInTheDocument();
+    expect(desktopTabs).toBeInTheDocument();
+    expect(mobileTabs).toBeInTheDocument();
+    expect(getTabLabels(desktopTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods']);
+    expect(getTabLabels(mobileTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods']);
+    expect(screen.queryByRole('button', { name: 'Outcome' })).not.toBeInTheDocument();
     expect(heroHeading).toBeInTheDocument();
     expect(heroHeading.querySelector('br')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Open image: Antisyphon Training homepage with course cards' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'The Outcome' })).toBeInTheDocument();
+    expect(outcomeHeading).toBeInTheDocument();
+    expect(methodsHeading.compareDocumentPosition(outcomeHeading) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(outcomeHeading.compareDocumentPosition(linksHeading) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   it('switches to product screens and preserves the new desktop section bar', async () => {

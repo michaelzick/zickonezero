@@ -9,6 +9,7 @@ import { AnimatedSection, CaseStudySectionTitle } from '../../../../styles/proje
 import { MethodImageButton, MethodImageFrame, MethodImages } from '../../../../styles/antisyphon';
 import { METHOD_SECTIONS } from '../caseStudyData';
 import { SetAnimatedSectionRef, VisibleSections } from '../../showcaseTypes';
+import OutcomeSection from './OutcomeSection';
 
 type MethodsSectionProps = {
   setAnimatedSectionRef: SetAnimatedSectionRef;
@@ -63,6 +64,7 @@ const MethodsSection = ({ setAnimatedSectionRef, visibleSections, openMethodLigh
         </AnimatedSection>
       ))}
     </DemoStokeMethodList>
+    <OutcomeSection setAnimatedSectionRef={setAnimatedSectionRef} visibleSections={visibleSections} />
   </section>
 );
 

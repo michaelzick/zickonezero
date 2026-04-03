@@ -17,7 +17,6 @@ import {
   IntroSection,
   LinksSection,
   MethodsSection,
-  OutcomeSection,
   WhatSection,
   WhoSection
 } from './sections';
@@ -75,16 +74,6 @@ const CaseStudyContent = ({
             visibleSections={visibleSections}
             openLightbox={openLightbox}
           />
-          <OutcomeSection
-            setAnimatedSectionRef={setAnimatedSectionRef}
-            visibleSections={visibleSections}
-          />
-          <WhoSection
-            setAnimatedSectionRef={setAnimatedSectionRef}
-            visibleSections={visibleSections}
-            openPersonaId={openPersonaId}
-            togglePersona={togglePersona}
-          />
           <HowSection
             setAnimatedSectionRef={setAnimatedSectionRef}
             visibleSections={visibleSections}
@@ -93,6 +82,12 @@ const CaseStudyContent = ({
             canScrollRight={canScrollRight}
             scrollGalleryBy={scrollGalleryBy}
             openLightbox={openLightbox}
+          />
+          <WhoSection
+            setAnimatedSectionRef={setAnimatedSectionRef}
+            visibleSections={visibleSections}
+            openPersonaId={openPersonaId}
+            togglePersona={togglePersona}
           />
           <MethodsSection
             setAnimatedSectionRef={setAnimatedSectionRef}
