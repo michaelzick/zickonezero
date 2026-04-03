@@ -77,7 +77,7 @@ describe('AntisyphonContent', () => {
     expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'Product Screens' }));
     expect(screen.getByLabelText('Desktop page sections')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Antisyphon Product Screens' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Context', level: 2 })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Context', level: 2 })).not.toBeInTheDocument();
     expect(screen.getAllByRole('button', { name: 'Open image: Full course catalog with category filters and badges' }).length).toBeGreaterThan(0);
     expect(screen.getByRole('button', { name: 'Course Catalog' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Cart & Checkout' })).toBeInTheDocument();

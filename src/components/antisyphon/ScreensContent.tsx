@@ -1,6 +1,6 @@
 import SidebarSectionTabs, { type SidebarSectionConfig } from '../SidebarSectionTabs';
 import {
-  CaseStudyPageInner,
+  CompactCaseStudyPageInner,
   PageShell,
   SectionsBlock,
 } from '../../../styles/projectShowcases';
@@ -9,7 +9,6 @@ import { FLOW_BLOCKS } from './flowData';
 import { SetAnimatedSectionRef, VisibleSections } from '../showcaseTypes';
 import {
   CatalogSection,
-  ContextSection,
   FlowBlockSection,
   IntroSection
 } from './screens';
@@ -48,7 +47,7 @@ const ScreensContent = ({
 }: ScreensContentProps) => (
   <div id='screens-content'>
     <PageShell>
-      <CaseStudyPageInner className='demostoke-inner'>
+      <CompactCaseStudyPageInner className='demostoke-inner'>
         <IntroSection openFlowLightbox={openFlowLightbox} />
         <SidebarSectionTabs
           sections={sections}
@@ -67,7 +66,7 @@ const ScreensContent = ({
               openFlowLightbox={openFlowLightbox}
             />
           )}
-          <FlowMethodList className='story-section'>
+          <FlowMethodList>
             {remainingFlowBlocks.map((block) => (
               <FlowBlockSection
                 key={block.id}
@@ -79,9 +78,8 @@ const ScreensContent = ({
               />
             ))}
           </FlowMethodList>
-          <ContextSection />
         </SectionsBlock>
-      </CaseStudyPageInner>
+      </CompactCaseStudyPageInner>
     </PageShell>
   </div>
 );

@@ -3,8 +3,8 @@ import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { PitchDeckLink } from '../../../../styles';
 import {
   HeroMediaFrame,
-  IntroHeaderRow,
-  SectionNavRevealAnchor,
+  CompactIntroHeaderRow,
+  CompactSectionNavRevealAnchor,
   ShowcaseMediaButton
 } from '../../../../styles/projectShowcases';
 
@@ -14,7 +14,7 @@ type IntroSectionProps = {
 
 const IntroSection = ({ openFlowLightbox }: IntroSectionProps) => (
   <section id='screens-introduction'>
-    <IntroHeaderRow className='text-animate'>
+    <CompactIntroHeaderRow className='text-animate'>
       <img className='at-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
       <div>
         <h2 className='tab-header page-header'>Antisyphon Product Screens</h2>
@@ -22,7 +22,7 @@ const IntroSection = ({ openFlowLightbox }: IntroSectionProps) => (
           AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden='true' />
         </PitchDeckLink>
       </div>
-    </IntroHeaderRow>
+    </CompactIntroHeaderRow>
     <ShowcaseMediaButton
       type='button'
       className='image-animate'
@@ -37,7 +37,7 @@ const IntroSection = ({ openFlowLightbox }: IntroSectionProps) => (
         />
       </HeroMediaFrame>
     </ShowcaseMediaButton>
-    <SectionNavRevealAnchor id='antisyphon-screens-nav-anchor' aria-hidden='true' />
+    <CompactSectionNavRevealAnchor id='antisyphon-screens-nav-anchor' aria-hidden='true' />
   </section>
 );
 
