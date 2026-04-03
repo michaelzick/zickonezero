@@ -1,6 +1,7 @@
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 
 import { PitchDeckLink } from '../../../../styles';
+import { AntisyphonHeroImageWrap } from '../../../../styles/antisyphon';
 import {
   HeroMediaFrame,
   CompactIntroHeaderRow,
@@ -23,20 +24,22 @@ const IntroSection = ({ openFlowLightbox }: IntroSectionProps) => (
         </PitchDeckLink>
       </div>
     </CompactIntroHeaderRow>
-    <ShowcaseMediaButton
-      type='button'
-      className='image-animate'
-      aria-label='Open image: Full course catalog with category filters and badges'
-      onClick={() => openFlowLightbox(0)}
-    >
-      <HeroMediaFrame>
-        <img
-          src='/img/antisyphon/course-catalog.webp'
-          alt='Full course catalog with category filters and badges'
-          loading='lazy'
-        />
-      </HeroMediaFrame>
-    </ShowcaseMediaButton>
+    <AntisyphonHeroImageWrap>
+      <ShowcaseMediaButton
+        type='button'
+        className='image-animate'
+        aria-label='Open image: Full course catalog with category filters and badges'
+        onClick={() => openFlowLightbox(0)}
+      >
+        <HeroMediaFrame>
+          <img
+            src='/img/antisyphon/course-catalog.webp'
+            alt='Full course catalog with category filters and badges'
+            loading='lazy'
+          />
+        </HeroMediaFrame>
+      </ShowcaseMediaButton>
+    </AntisyphonHeroImageWrap>
     <CompactSectionNavRevealAnchor id='antisyphon-screens-nav-anchor' aria-hidden='true' />
   </section>
 );

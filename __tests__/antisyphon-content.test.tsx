@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import AntisyphonContent from '../src/components/AntisyphonContent';
@@ -27,6 +27,7 @@ const expectDarkGreenActiveTab = (tab: HTMLElement) => {
 };
 
 const INTRO_ROW_TOP_MARGIN_DECLARATION = 'clamp(1.75em, 3.5vw, 3em)';
+const HERO_IMAGE_WRAP_TOP_MARGIN_DECLARATION = 'clamp(1.2em, 3vw, 1.75em)';
 const normalizeDeclaration = (value: string) => value.replace(/\s+/g, '');
 
 describe('AntisyphonContent', () => {
@@ -79,13 +80,22 @@ describe('AntisyphonContent', () => {
 
     const introHeading = screen.getByRole('heading', { name: 'Antisyphon Product Screens' });
     const introRow = introHeading.closest('div')?.parentElement as HTMLElement | null;
+    const introSection = document.getElementById('screens-introduction');
+    const introImageWrap = within(introSection as HTMLElement).getByRole('button', {
+      name: 'Open image: Full course catalog with category filters and badges'
+    }).parentElement as HTMLElement | null;
 
     expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'Product Screens' }));
     expect(screen.getByLabelText('Desktop page sections')).toBeInTheDocument();
     expect(introHeading).toBeInTheDocument();
     expect(introRow).not.toBeNull();
+    expect(introSection).not.toBeNull();
+    expect(introImageWrap).not.toBeNull();
     expect(getMatchingRuleValues(introRow as HTMLElement, 'margin-top').map(normalizeDeclaration)).toContain(
       normalizeDeclaration(INTRO_ROW_TOP_MARGIN_DECLARATION)
+    );
+    expect(getMatchingRuleValues(introImageWrap as HTMLElement, 'margin-top').map(normalizeDeclaration)).toContain(
+      normalizeDeclaration(HERO_IMAGE_WRAP_TOP_MARGIN_DECLARATION)
     );
     expect(screen.getByRole('link', { name: 'AntisyphonTraining.com' })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Context', level: 2 })).not.toBeInTheDocument();
