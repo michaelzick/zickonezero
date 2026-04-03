@@ -207,6 +207,37 @@ const DesktopDemoStokeClickHarness = () => {
   );
 };
 
+const DesktopHiddenIntroVisibilityHarness = ({
+  revealTop,
+  firstVisibleTop,
+  secondVisibleTop,
+}: {
+  revealTop: number;
+  firstVisibleTop: number;
+  secondVisibleTop: number;
+}) => {
+  const [topTabsEl, setTopTabsEl] = useState<HTMLDivElement | null>(null);
+
+  return (
+    <div>
+      <TopTabsAnchor onReady={setTopTabsEl} />
+      <div id='hidden-intro-reveal-anchor' data-top={revealTop} data-height='1' />
+      <div id='hero-spacer' data-top='0' data-height='1' />
+      <section id='section-the-what' data-top={firstVisibleTop} />
+      <section id='section-the-how' data-top={secondVisibleTop} />
+      <section id='section-the-who' data-top='740' />
+      <section id='section-methodology' data-top='980' />
+      <SidebarSectionTabs
+        sections={DEMOSTOKE_SECTION_CONFIG}
+        topTabsEl={topTabsEl}
+        isActive
+        scrollOffsetAdjustment={8}
+        desktopRevealAnchorId='hidden-intro-reveal-anchor'
+      />
+    </div>
+  );
+};
+
 const MobileDemoStokeClickHarness = () => {
   const [topTabsEl, setTopTabsEl] = useState<HTMLDivElement | null>(null);
 
@@ -255,6 +286,22 @@ describe('SidebarSectionTabs', () => {
     act(() => {
       window.dispatchEvent(new Event('scroll'));
     });
+
+    await waitFor(() => {
+      expect(window.getComputedStyle(desktopNav).opacity).toBe('1');
+    });
+  });
+
+  it('keeps the desktop bar visible once the first visible section is within the detection buffer on hidden-intro pages', async () => {
+    render(
+      <DesktopHiddenIntroVisibilityHarness
+        revealTop={170}
+        firstVisibleTop={205}
+        secondVisibleTop={520}
+      />
+    );
+
+    const desktopNav = screen.getByLabelText('Desktop page sections');
 
     await waitFor(() => {
       expect(window.getComputedStyle(desktopNav).opacity).toBe('1');

@@ -26,6 +26,9 @@ const expectDarkGreenActiveTab = (tab: HTMLElement) => {
   expect(borderRules).not.toContain(DEMOSTOKE_TAB_DECLARATION);
 };
 
+const INTRO_ROW_TOP_MARGIN_DECLARATION = 'clamp(1.75em, 3.5vw, 3em)';
+const normalizeDeclaration = (value: string) => value.replace(/\s+/g, '');
+
 describe('AntisyphonContent', () => {
   beforeEach(() => {
     applyTabThemeVariables();
@@ -74,9 +77,17 @@ describe('AntisyphonContent', () => {
 
     await user.click(screen.getByRole('tab', { name: 'Product Screens' }));
 
+    const introHeading = screen.getByRole('heading', { name: 'Antisyphon Product Screens' });
+    const introRow = introHeading.closest('div')?.parentElement as HTMLElement | null;
+
     expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'Product Screens' }));
     expect(screen.getByLabelText('Desktop page sections')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Antisyphon Product Screens' })).toBeInTheDocument();
+    expect(introHeading).toBeInTheDocument();
+    expect(introRow).not.toBeNull();
+    expect(getMatchingRuleValues(introRow as HTMLElement, 'margin-top').map(normalizeDeclaration)).toContain(
+      normalizeDeclaration(INTRO_ROW_TOP_MARGIN_DECLARATION)
+    );
+    expect(screen.getByRole('link', { name: 'AntisyphonTraining.com' })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Context', level: 2 })).not.toBeInTheDocument();
     expect(screen.getAllByRole('button', { name: 'Open image: Full course catalog with category filters and badges' }).length).toBeGreaterThan(0);
     expect(screen.getByRole('button', { name: 'Course Catalog' })).toBeInTheDocument();

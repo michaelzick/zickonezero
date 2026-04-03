@@ -1,5 +1,4 @@
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
-import styled from 'styled-components';
 
 import { PitchDeckLink } from '../../../../styles';
 import {
@@ -9,17 +8,13 @@ import {
   ShowcaseMediaButton
 } from '../../../../styles/projectShowcases';
 
-const ScreensIntroHeaderRow = styled(CompactIntroHeaderRow)`
-  margin-top: clamp(1.75em, 3.5vw, 3em);
-`;
-
 type IntroSectionProps = {
   openFlowLightbox: (index: number) => void;
 };
 
 const IntroSection = ({ openFlowLightbox }: IntroSectionProps) => (
   <section id='screens-introduction'>
-    <ScreensIntroHeaderRow className='text-animate'>
+    <CompactIntroHeaderRow className='text-animate'>
       <img className='at-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
       <div>
         <h2 className='tab-header page-header'>Antisyphon Product Screens</h2>
@@ -27,7 +22,7 @@ const IntroSection = ({ openFlowLightbox }: IntroSectionProps) => (
           AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden='true' />
         </PitchDeckLink>
       </div>
-    </ScreensIntroHeaderRow>
+    </CompactIntroHeaderRow>
     <ShowcaseMediaButton
       type='button'
       className='image-animate'

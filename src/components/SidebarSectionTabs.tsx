@@ -36,6 +36,8 @@ type SectionTabsHookParams = SidebarSectionTabsProps & {
 
 type SectionTabsHookResult = {
   stickyTop: number;
+  totalOffset: number;
+  sectionReachedThreshold: number;
   activeSection: string;
   handleTabClick: (sectionId: string) => void;
 };
@@ -66,6 +68,10 @@ const useSectionTabs = ({
   const getTotalOffset = useCallback(() => {
     return getResolvedStickyTop() + extraOffset + scrollOffsetAdjustment;
   }, [getResolvedStickyTop, extraOffset, scrollOffsetAdjustment]);
+
+  const getSectionReachedThreshold = useCallback(() => {
+    return getTotalOffset() + DETECTION_BUFFER;
+  }, [getTotalOffset]);
 
   const updateStickyTop = useCallback(() => {
     setStickyTop(getResolvedStickyTop());
@@ -107,7 +113,7 @@ const useSectionTabs = ({
     }
 
     const updateActiveSection = () => {
-      const detectionOffset = getTotalOffset() + DETECTION_BUFFER;
+      const sectionReachedThreshold = getSectionReachedThreshold();
       let currentSection = sections[0]?.id ?? '';
 
       sections.forEach(({ id }) => {
@@ -117,7 +123,7 @@ const useSectionTabs = ({
         }
 
         const { top } = sectionEl.getBoundingClientRect();
-        if (top - detectionOffset <= 0) {
+        if (top - sectionReachedThreshold <= 0) {
           currentSection = id;
         }
       });
@@ -140,7 +146,7 @@ const useSectionTabs = ({
     return () => {
       window.removeEventListener('scroll', updateActiveSection);
     };
-  }, [isActive, sections, getTotalOffset, lockToBottomSectionId]);
+  }, [getSectionReachedThreshold, isActive, sections, lockToBottomSectionId]);
 
   const handleTabClick = useCallback((sectionId: string) => {
     const clickedAt = performance.now();
@@ -166,7 +172,13 @@ const useSectionTabs = ({
     }
   }, [scrollToSection]);
 
-  return { stickyTop, activeSection, handleTabClick };
+  return {
+    stickyTop,
+    totalOffset: stickyTop + extraOffset + scrollOffsetAdjustment,
+    sectionReachedThreshold: stickyTop + extraOffset + scrollOffsetAdjustment + DETECTION_BUFFER,
+    activeSection,
+    handleTabClick
+  };
 };
 
 const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
@@ -180,11 +192,13 @@ const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
   const [wrapperEl, setWrapperEl] = useState<HTMLDivElement | null>(null);
   const wrapperSize = useSize(wrapperEl);
   const desktopExtraOffset = (wrapperSize?.height ?? wrapperEl?.offsetHeight ?? 0) + 10;
-  const { stickyTop, activeSection, handleTabClick } = useSectionTabs({
+  const { stickyTop, totalOffset, sectionReachedThreshold, activeSection, handleTabClick } = useSectionTabs({
     ...props,
     extraOffset: desktopExtraOffset
   });
   const [isVisible, setIsVisible] = useState(!desktopRevealAnchorId);
+  const firstVisibleSectionId = visibleSections[0]?.id;
+  const hasLeadingHiddenSections = sections.findIndex(({ hidden }) => !hidden) > 0;
 
   useEffect(() => {
     if (!desktopRevealAnchorId) {
@@ -205,7 +219,19 @@ const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
       }
 
       const revealThreshold = stickyTop + ((wrapperSize?.height ?? wrapperEl?.offsetHeight ?? 0) * 0.35);
-      setIsVisible(revealAnchorEl.getBoundingClientRect().top <= revealThreshold);
+      const revealAnchorCrossed = revealAnchorEl.getBoundingClientRect().top <= revealThreshold;
+
+      if (revealAnchorCrossed || !hasLeadingHiddenSections || !firstVisibleSectionId) {
+        setIsVisible(revealAnchorCrossed);
+        return;
+      }
+
+      const firstVisibleSectionEl = document.getElementById(firstVisibleSectionId);
+      const firstVisibleSectionReachedThreshold = firstVisibleSectionEl
+        ? firstVisibleSectionEl.getBoundingClientRect().top <= sectionReachedThreshold
+        : false;
+
+      setIsVisible(firstVisibleSectionReachedThreshold);
     };
 
     updateVisibility();
@@ -216,7 +242,17 @@ const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
       window.removeEventListener('scroll', updateVisibility);
       window.removeEventListener('resize', updateVisibility);
     };
-  }, [desktopRevealAnchorId, isActive, stickyTop, wrapperSize?.height, wrapperEl]);
+  }, [
+    desktopRevealAnchorId,
+    firstVisibleSectionId,
+    hasLeadingHiddenSections,
+    isActive,
+    sectionReachedThreshold,
+    stickyTop,
+    totalOffset,
+    wrapperSize?.height,
+    wrapperEl
+  ]);
 
   if (!visibleSections.length) {
     return null;
