@@ -15,8 +15,8 @@ import { SetAnimatedSectionRef, VisibleSections } from '../showcaseTypes';
 import {
   HowSection,
   IntroSection,
-  LinksSection,
   MethodsSection,
+  OutcomeSection,
   WhatSection,
   WhoSection
 } from './sections';
@@ -94,7 +94,10 @@ const CaseStudyContent = ({
             visibleSections={visibleSections}
             openMethodLightbox={openMethodLightbox}
           />
-          <LinksSection />
+          <OutcomeSection
+            setAnimatedSectionRef={setAnimatedSectionRef}
+            visibleSections={visibleSections}
+          />
         </SectionsBlock>
       </CaseStudyPageInner>
     </PageShell>
