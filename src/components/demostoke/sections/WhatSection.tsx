@@ -5,7 +5,7 @@ import {
   DemoStokeTldrSection,
   DemoStokeTldrTitle,
 } from '../../../../styles';
-import { AnimatedSection } from '../../../../styles/projectShowcases';
+import { AnimatedSection, CaseStudySectionTitle } from '../../../../styles/projectShowcases';
 import { DemoStokeWhatImage } from '../../../../styles/demostoke';
 import { TLDR_ITEMS } from '../data';
 import { SetAnimatedSectionRef, VisibleSections } from '../../showcaseTypes';
@@ -22,6 +22,7 @@ const WhatSection = ({ setAnimatedSectionRef, visibleSections }: WhatSectionProp
     className={visibleSections['section-the-what'] ? 'visible' : undefined}
   >
     <section id='section-the-what' className='story-section'>
+      <CaseStudySectionTitle as='h2'>The What</CaseStudySectionTitle>
       <DemoStokeTldrSection>
         <DemoStokeTldrList>
           {TLDR_ITEMS.map(({ title, description, image }, index) => (

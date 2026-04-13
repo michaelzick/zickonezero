@@ -1,7 +1,7 @@
 import { type KeyboardEvent } from 'react';
 
 import { DemoStokeTldrCopy, DemoStokeTldrList, DemoStokeTldrRow, DemoStokeTldrSection, DemoStokeTldrTitle } from '../../../../styles';
-import { AnimatedSection } from '../../../../styles/projectShowcases';
+import { AnimatedSection, CaseStudySectionTitle } from '../../../../styles/projectShowcases';
 import { AntisyphonShowcaseImage } from '../../../../styles/antisyphon';
 import { TLDR_ITEMS } from '../caseStudyData';
 import { SetAnimatedSectionRef, VisibleSections } from '../../showcaseTypes';
@@ -19,6 +19,7 @@ const WhatSection = ({ setAnimatedSectionRef, visibleSections, openLightbox }: W
     className={visibleSections['section-the-what'] ? 'visible' : undefined}
   >
     <section id='section-the-what' className='story-section'>
+      <CaseStudySectionTitle as='h2'>The What</CaseStudySectionTitle>
       <DemoStokeTldrSection>
         <DemoStokeTldrList>
           {TLDR_ITEMS.map(({ title, description, image }, index) => (
