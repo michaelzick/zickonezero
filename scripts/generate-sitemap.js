@@ -85,4 +85,8 @@ function main() {
   console.log(`Sitemap generated with ${routes.length} routes at ${OUTPUT_PATH}`);
 }
 
-main();
+module.exports = { routeFromFile, buildXml, EXCLUDED_ROUTES, OUT_DIR };
+
+if (require.main === module) {
+  main();
+}

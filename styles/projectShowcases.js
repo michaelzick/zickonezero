@@ -25,15 +25,15 @@ export const PageInner = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: clamp(3.5em, 7vw, 6em);
+  gap: clamp(4em, 8vw, 7em);
   text-align: left;
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    gap: clamp(3.5em, 7vw, 6em);
+    gap: clamp(4em, 8vw, 7em);
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    gap: clamp(3.5em, 7vw, 6em);
+    gap: clamp(4em, 8vw, 7em);
   }
 `;
 
@@ -53,10 +53,6 @@ export const CaseStudyPageInner = styled(PageInner)`
 
     @media (max-width: ${THEME.breakpoints.smallTablet}) {
       scroll-margin-top: 6.2em;
-    }
-
-    h3 {
-      color: ${THEME.colors.demostoke};
     }
   }
 
@@ -113,7 +109,7 @@ export const HeroImageFrame = styled.div`
 `;
 
 export const HeroMediaFrame = styled(HeroImageFrame)`
-  border: 1.5px solid ${THEME.colors.grey};
+  border: 1px solid rgba(199, 197, 197, 0.3);
   background: ${THEME.colors.darkest};
   transition: border-color 0.2s ease;
 
@@ -144,7 +140,7 @@ export const CaseStudyHeroMediaFrame = styled(HeroMediaFrame)`
 export const HeroContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.7em;
+  gap: 0.9em;
   text-align: left;
   font-size: clamp(1em, 1.35vw, 1.05em);
   line-height: 1.7;
@@ -197,36 +193,36 @@ export const Summary = styled.p`
 export const HeroLabel = styled.div`
   display: block;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 700;
-  font-size: 0.86em;
-  color: ${THEME.colors.orange};
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  font-size: 0.78em;
+  color: ${THEME.colors.mutedLabel};
 `;
 
 export const CaseStudyHeroLabel = styled(HeroLabel)`
-  color: ${THEME.colors.demostoke};
+  color: ${THEME.colors.mutedLabel};
 `;
 
 export const RoleList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0.2em 0 0;
-  display: grid;
-  gap: 0.35em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15em 0.1em;
 
   li {
-    display: inline-flex;
-    align-items: flex-start;
-    gap: 0.5em;
+    display: inline;
     line-height: 1.5;
     color: ${THEME.colors.white};
 
-    &::before {
-      content: '•';
-      color: ${THEME.colors.white};
-      font-size: 1.2em;
-      line-height: 1;
-      transform: translateY(-0.05em);
+    &::after {
+      content: ',';
+      margin-right: 0.2em;
+    }
+
+    &:last-child::after {
+      display: none;
     }
   }
 `;
@@ -247,8 +243,8 @@ export const LinkRow = styled.div`
     transition: color 0.2s ease, border-color 0.2s ease;
 
     &:hover {
-      color: ${THEME.colors.hotRed};
-      border-color: ${THEME.colors.hotRed};
+      color: ${THEME.colors.orange};
+      border-color: ${THEME.colors.orange};
     }
   }
 `;
@@ -256,7 +252,7 @@ export const LinkRow = styled.div`
 export const SectionsBlock = styled.div`
   display: flex;
   flex-direction: column;
-  gap: clamp(2.4em, 6vw, 3.8em);
+  gap: clamp(3.2em, 8vw, 5.2em);
   text-align: left;
 
   > *:first-child > section.story-section,
@@ -288,25 +284,36 @@ export const SectionTitle = styled(DemoStokeTldrTitle)`
 `;
 
 export const CaseStudySectionTitle = styled(SectionTitle)`
-  color: ${THEME.colors.white};
+  color: ${THEME.colors.orange};
+`;
+
+export const ShowcaseImageButton = styled.button`
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  border-radius: ${THEME.radii.md};
+
+  &:focus-visible {
+    outline: 2px solid ${THEME.colors.hotYellow};
+    outline-offset: 4px;
+  }
 `;
 
 export const ShowcaseImage = styled(DemoStokeTldrImage)`
   ${(props) => props.$position && `object-position: ${props.$position};`}
-  cursor: pointer;
-  border: 1.5px solid ${THEME.colors.white};
-  box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
-  width: calc(100% + 1.5em);
-  max-width: none;
-  margin: -0.75em;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  border-radius: ${THEME.radii.md};
+  transition: box-shadow 0.18s ease;
 
-  &:hover {
-    border-color: ${THEME.colors.hotRed};
-  }
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    width: 100%;
-    margin: 0;
+  ${ShowcaseImageButton}:hover &,
+  ${ShowcaseImageButton}:focus-visible & {
+    box-shadow: 0 24px 48px -32px rgb(0 0 0 / 70%), 0 0 0 1px ${THEME.colors.orange};
   }
 `;
 
@@ -321,7 +328,7 @@ export const ShowcaseMediaButton = styled.button`
   &:hover ${CaseStudyHeroMediaFrame},
   &:focus-visible ${HeroMediaFrame},
   &:focus-visible ${CaseStudyHeroMediaFrame} {
-    border-color: ${THEME.colors.hotRed};
+    border-color: ${THEME.colors.orange};
   }
 
   &:focus-visible {

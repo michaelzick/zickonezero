@@ -43,12 +43,15 @@ describe('AntisyphonContent', () => {
     renderWithProviders(<AntisyphonContent />);
 
     const heroHeading = screen.getByRole('heading', { name: 'Antisyphon UX Case Study' });
+    const whatHeading = screen.getByRole('heading', { name: 'The What' });
     const methodsHeading = screen.getByRole('heading', { name: 'Methods / The UX Process' });
     const outcomeHeading = screen.getByRole('heading', { name: 'The Outcome' });
     const desktopTabs = screen.getByLabelText('Desktop page sections');
     const mobileTabs = screen.getByLabelText('Mobile page sections');
+    const whatSection = document.getElementById('section-the-what');
     const methodsSection = document.getElementById('section-methodology');
     const outcomeSection = document.getElementById('section-outcome');
+    const whatSectionEl = whatSection as HTMLElement;
     const methodsSectionEl = methodsSection as HTMLElement;
     const outcomeSectionEl = outcomeSection as HTMLElement;
 
@@ -61,8 +64,11 @@ describe('AntisyphonContent', () => {
     expect(screen.queryByRole('button', { name: 'Outcome' })).not.toBeInTheDocument();
     expect(document.getElementById('section-links')).toBeNull();
     expect(heroHeading).toBeInTheDocument();
+    expect(whatHeading).toBeInTheDocument();
     expect(heroHeading.querySelector('br')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Open image: Antisyphon Training homepage with course cards' })).toBeInTheDocument();
+    expect(whatSection).not.toBeNull();
+    expect(whatSectionEl).toContainElement(whatHeading);
     expect(outcomeHeading).toBeInTheDocument();
     expect(outcomeSection).not.toBeNull();
     expect(methodsSection).not.toBeNull();

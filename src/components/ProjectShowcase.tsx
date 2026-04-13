@@ -3,7 +3,6 @@ import {
   useEffect,
   useRef,
   useState,
-  type KeyboardEvent as ReactKeyboardEvent
 } from 'react';
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 
@@ -27,6 +26,7 @@ import {
   LinkRow,
   SectionsBlock,
   SectionTitle,
+  ShowcaseImageButton,
   ShowcaseImage,
   AnimatedSection
 } from '../../styles/projectShowcases';
@@ -167,22 +167,19 @@ const ProjectShowcase = ({
                           <SectionTitle as="h3">{sectionTitle}</SectionTitle>
                           <DemoStokeTldrCopy>{body}</DemoStokeTldrCopy>
                         </div>
-                        <ShowcaseImage
+                        <ShowcaseImageButton
+                          type='button'
                           className="image-animate"
-                          src={image.src}
-                          alt={image.alt}
-                          loading='lazy'
-                          $position={image.position}
-                          role='button'
-                          tabIndex={0}
+                          aria-label={`Open image: ${image.alt}`}
                           onClick={() => setLightboxState(prev => ({ toggler: !prev.toggler, slide: index + 1 }))}
-                          onKeyDown={(event: ReactKeyboardEvent<HTMLImageElement>) => {
-                            if (event.key === 'Enter' || event.key === ' ') {
-                              event.preventDefault();
-                              setLightboxState(prev => ({ toggler: !prev.toggler, slide: index + 1 }));
-                            }
-                          }}
-                        />
+                        >
+                          <ShowcaseImage
+                            src={image.src}
+                            alt={image.alt}
+                            loading='lazy'
+                            $position={image.position}
+                          />
+                        </ShowcaseImageButton>
                       </DemoStokeMethodRow>
                     </DemoStokeMethodCard>
                   </AnimatedSection>

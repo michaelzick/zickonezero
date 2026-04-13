@@ -12,5 +12,6 @@ export const DemoStokeGalleryBlock = styled.div`
 `;
 
 export const DemoStokeSectionSubheading = styled.h3`
+  color: var(--color-orange);
   margin: 0;
 `;

@@ -18,6 +18,7 @@ export const THEME = {
     darkGreen: 'var(--color-darkGreen)',
     contrast: 'var(--color-contrast)',
     orange: 'var(--color-orange)',
+    mutedLabel: 'var(--color-mutedLabel)',
   },
   radii: {
     md: '6px',

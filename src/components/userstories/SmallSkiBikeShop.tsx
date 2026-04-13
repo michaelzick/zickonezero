@@ -13,8 +13,9 @@ import {
   DemoStokeStoryHero,
   DemoStokeHeroAbstractLayout,
 } from '../../../styles';
-import { AnimatedSection } from '../../../styles/projectShowcases';
+import { AnimatedSection, CaseStudySectionTitle } from '../../../styles/projectShowcases';
 import HelpsCarousel from './HelpsCarousel';
+import { DemoStokeSectionSubheading } from '../../../styles/demostoke';
 
 type StoryProps = {
   wrapWithBioBox?: boolean;
@@ -106,7 +107,7 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true, setAnimatedSectionRef, visibl
     <div>
       <AnimatedSection {...getAnimateProps('story-small-ski-shop')}>
         <section id='story-small-ski-shop' className='story-section'>
-          <DemoStokeTitle $noMobileTopPad>The Small Ski &amp; Bike Shop</DemoStokeTitle>
+          <CaseStudySectionTitle as='h2'>The Small Ski &amp; Bike Shop</CaseStudySectionTitle>
           <DemoStokeHeroAbstractLayout>
             <DemoStokeStoryHero
               className='image-animate'
@@ -127,7 +128,7 @@ const SmallSkiBikeShop = ({ wrapWithBioBox = true, setAnimatedSectionRef, visibl
 
       <AnimatedSection {...getAnimateProps('story-small-ski-shop-pain')}>
         <section className='story-section'>
-          <h3>Current Pain Points</h3>
+          <DemoStokeSectionSubheading>Current Pain Points</DemoStokeSectionSubheading>
           {renderTable(painPoints)}
         </section>
       </AnimatedSection>

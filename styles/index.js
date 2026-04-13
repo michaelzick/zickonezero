@@ -360,11 +360,11 @@ export const GridContainer = styled.div`
 export const Image = styled.img`
   width: 100%;
   border-radius: ${THEME.radii.md};
-  border: 1.5px solid ${THEME.colors.white};
+  border: none;
 `;
 
 export const FullBorderImage = styled(Image)`
-  border: 1.5px solid ${THEME.colors.grey};
+  border: 1px solid rgba(199, 197, 197, 0.2);
   border-radius: ${THEME.radii.md};
   width: 100%;
   height: 100%;
@@ -1027,9 +1027,9 @@ export const SectionTabsWrapper = styled.div`
   width: min(calc(100% - 2.4em), 62em);
   padding: 0.45em;
   border-radius: ${THEME.radii.md};
-  border: 1.5px solid rgba(255, 255, 255, 0.28);
-  background: rgba(var(--color-dark-rgb), 0.82);
-  box-shadow: 0 10px 28px -18px rgb(0 0 0 / 65%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(var(--color-dark-rgb), 0.88);
+  box-shadow: 0 8px 22px -16px rgb(0 0 0 / 45%);
   backdrop-filter: blur(10px);
   opacity: ${props => props.$isVisible ? 1 : 0};
   pointer-events: ${props => props.$isVisible ? 'auto' : 'none'};
@@ -1381,9 +1381,9 @@ export const DemoStokeTldrImage = styled.img`
   height: auto;
   max-width: 100%;
   border-radius: ${THEME.radii.md};
-  border: 1.5px solid ${THEME.colors.grey};
+  border: none;
   object-fit: contain;
-  box-shadow: 0 30px 38px -30px rgb(0 0 0 / 75%);
+  box-shadow: 0 24px 38px -30px rgb(0 0 0 / 55%);
   display: block;
 `;
 
@@ -1400,7 +1400,7 @@ export const DemoStokeTldrList = styled.div`
 export const DemoStokeMethodList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: clamp(3.5em, 7vw, 6em);
+  gap: clamp(4em, 8vw, 6.5em);
 
   h3 {
     font-size: clamp(1.15em, 2.8vw, 1.75em);
@@ -1433,15 +1433,14 @@ export const DemoStokeAccordion = styled.div`
 `;
 
 export const DemoStokeAccordionItem = styled.div`
-  border: 1px solid ${THEME.colors.white};
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: ${THEME.radii.md};
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.005));
   box-shadow: ${props => props.$isOpen ? '0 14px 28px -16px rgb(0 0 0 / 70%)' : 'none'};
-  transition: border-color 0.2s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.3s ease;
 
   &:hover {
-    border-color: ${THEME.colors.hotRed};
-    transform: translateY(-1px);
+    border-color: rgba(255, 255, 255, 0.5);
   }
 `;
 
@@ -1664,17 +1663,16 @@ export const DemoStokeScrollItem = styled.div`
   min-width: clamp(12.8em, 45vw, 15em);
   max-width: 18em;
   flex: 0 0 auto;
-  border: 1.5px solid ${THEME.colors.grey};
+  border: 1px solid rgba(199, 197, 197, 0.2);
   border-radius: ${THEME.radii.md};
   overflow: hidden;
   background: transparent;
   cursor: pointer;
   scroll-snap-align: start;
-  transition: transform 0.25s ease, border-color 0.25s ease;
+  transition: border-color 0.25s ease;
 
   &:hover {
-    transform: translateY(-2px);
-    border-color: ${THEME.colors.hotRed};
+    border-color: ${THEME.colors.orange};
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
@@ -2398,9 +2396,9 @@ export const SectionTabsMobileInner = styled.div`
   gap: 0.45em;
   padding: 0.4em;
   border-radius: ${THEME.radii.md};
-  border: 2px solid rgba(255, 255, 255, 0.35);
-  background: rgba(var(--color-dark-rgb), 0.78);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(var(--color-dark-rgb), 0.88);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(6px);
   flex-wrap: nowrap;
   justify-content: space-between;
