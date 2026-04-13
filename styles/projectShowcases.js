@@ -287,19 +287,33 @@ export const CaseStudySectionTitle = styled(SectionTitle)`
   color: ${THEME.colors.orange};
 `;
 
+export const ShowcaseImageButton = styled.button`
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  border-radius: ${THEME.radii.md};
+
+  &:focus-visible {
+    outline: 2px solid ${THEME.colors.hotYellow};
+    outline-offset: 4px;
+  }
+`;
+
 export const ShowcaseImage = styled(DemoStokeTldrImage)`
   ${(props) => props.$position && `object-position: ${props.$position};`}
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 18px 38px -30px rgb(0 0 0 / 50%);
   width: 100%;
   max-width: 100%;
   margin: 0;
   border-radius: ${THEME.radii.md};
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.18s ease;
 
-  &:hover {
-    box-shadow: 0 22px 44px -28px rgb(0 0 0 / 65%);
+  ${ShowcaseImageButton}:hover &,
+  ${ShowcaseImageButton}:focus-visible & {
+    box-shadow: 0 24px 48px -32px rgb(0 0 0 / 70%), 0 0 0 1px ${THEME.colors.orange};
   }
 `;
 
