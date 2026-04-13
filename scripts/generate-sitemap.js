@@ -1,68 +1,84 @@
 const fs = require('fs');
 const path = require('path');
 
-const BASE_URL = process.env.SITE_URL || 'https://www.zickonezero.com';
-const PAGES_DIR = path.join(__dirname, '..', 'pages');
-const OUTPUT_PATH = path.join(__dirname, '..', 'public', 'sitemap.xml');
+const BASE_URL = (process.env.SITE_URL || 'https://www.zickonezero.com').replace(/\/$/, '');
+const OUT_DIR = path.join(__dirname, '..', 'out');
+const OUTPUT_PATH = path.join(OUT_DIR, 'sitemap.xml');
 
-const IGNORE_FILES = new Set([
-  '_app',
-  '_document',
-  '_error',
-  '404',
-  '500',
-]);
+const EXCLUDED_ROUTES = new Set(['/404', '/500', '/sitemap']);
 
-const isPageFile = (file) => /\.(js|jsx|ts|tsx)$/.test(file);
+const isHtmlFile = (file) => file.endsWith('.html');
 
-function walkPages(dir) {
+function walkHtmlFiles(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
-  const routes = [];
+  const files = [];
 
   for (const entry of entries) {
     const entryPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (entry.name === 'api') continue;
-      routes.push(...walkPages(entryPath));
-    } else if (entry.isFile() && isPageFile(entry.name)) {
-      const name = entry.name.replace(/\.(js|jsx|ts|tsx)$/, '');
-      if (IGNORE_FILES.has(name) || name.startsWith('[')) continue;
-
-      const relPath = path.relative(PAGES_DIR, entryPath);
-      const segments = relPath.split(path.sep);
-      segments[segments.length - 1] = name;
-      let route = '/' + segments.join('/').replace(/index$/, '');
-      if (route.endsWith('/') && route !== '/') {
-        route = route.slice(0, -1);
-      }
-
-      routes.push(route || '/');
+      files.push(...walkHtmlFiles(entryPath));
+    } else if (entry.isFile() && isHtmlFile(entry.name)) {
+      files.push(entryPath);
     }
   }
 
-  return routes;
+  return files;
 }
 
 function dedupe(list) {
   return Array.from(new Set(list));
 }
 
-function buildXml(urls) {
-  const lastmod = new Date().toISOString().split('T')[0];
-  const urlsXml = urls
-    .map(
-      (url) => `<url><loc>${BASE_URL}${url}</loc><lastmod>${lastmod}</lastmod></url>`
-    )
-    .join('');
+function routeFromFile(filePath) {
+  const relativePath = path.relative(OUT_DIR, filePath).split(path.sep).join('/');
 
-  return `<?xml version="1.0" encoding="UTF-8"?>` +
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` +
-    urlsXml +
-    `</urlset>`;
+  if (relativePath === 'index.html') {
+    return '/';
+  }
+
+  if (relativePath.endsWith('/index.html')) {
+    return `/${relativePath.slice(0, -'/index.html'.length)}`;
+  }
+
+  if (relativePath.endsWith('.html')) {
+    return `/${relativePath.slice(0, -'.html'.length)}`;
+  }
+
+  return null;
+}
+
+function buildXml(urls) {
+  const lastmod = new Date().toISOString().slice(0, 10);
+  const lines = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  ];
+
+  for (const url of urls) {
+    lines.push('  <url>');
+    lines.push(`    <loc>${BASE_URL}${url}</loc>`);
+    lines.push(`    <lastmod>${lastmod}</lastmod>`);
+    lines.push('  </url>');
+  }
+
+  lines.push('</urlset>');
+
+  return `${lines.join('\n')}\n`;
 }
 
 function main() {
-  const routes = dedupe(walkPages(PAGES_DIR)).sort();
+  if (!fs.existsSync(OUT_DIR)) {
+    console.error(
+      `Expected export output at ${OUT_DIR}. Run "npm run build" before generating the sitemap.`
+    );
+    process.exit(1);
+  }
+
+  const routes = dedupe(
+    walkHtmlFiles(OUT_DIR)
+      .map(routeFromFile)
+      .filter((route) => route && !EXCLUDED_ROUTES.has(route))
+  ).sort();
   const xml = buildXml(routes);
   fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
   fs.writeFileSync(OUTPUT_PATH, xml, 'utf8');
