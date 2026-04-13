@@ -28,20 +28,16 @@ export const FlowText = styled.div`
 
 export const AntisyphonShowcaseImage = styled(DemoStokeTldrImage)`
   cursor: pointer;
-  box-shadow: 0 18px 38px -30px rgb(0 0 0 / 70%);
-  width: calc(100% + 1.5em);
-  max-width: none;
-  margin: -0.75em;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 18px 38px -30px rgb(0 0 0 / 50%);
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  border-radius: ${THEME.radii.md};
+  transition: box-shadow 0.18s ease;
 
   &:hover,
   &:focus-visible {
-    border-color: ${THEME.colors.hotRed};
-  }
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    width: 100%;
-    margin: 0;
+    box-shadow: 0 22px 44px -28px rgb(0 0 0 / 65%);
   }
 `;
 
@@ -72,8 +68,8 @@ export const FlowImage = styled(DemoStokeTldrImage)`
 
   ${FlowImageButton}:hover &,
   ${FlowImageButton}:focus-visible & {
-    border-color: ${THEME.colors.hotRed};
-    box-shadow: 0 24px 48px -32px rgb(0 0 0 / 70%), 0 0 0 1px ${THEME.colors.hotRed};
+    border-color: ${THEME.colors.orange};
+    box-shadow: 0 24px 48px -32px rgb(0 0 0 / 70%), 0 0 0 1px ${THEME.colors.orange};
   }
 `;
 
@@ -129,9 +125,9 @@ export const MethodImageFrame = styled.div`
   width: 100%;
   aspect-ratio: 4 / 3;
   border-radius: ${THEME.radii.md};
-  border: 1.5px solid ${THEME.colors.grey};
+  border: 1px solid rgba(199, 197, 197, 0.25);
   overflow: hidden;
-  box-shadow: 0 30px 38px -30px rgb(0 0 0 / 75%);
+  box-shadow: 0 24px 38px -30px rgb(0 0 0 / 55%);
   background: ${THEME.colors.darkest};
   transition: border-color 0.18s ease, box-shadow 0.18s ease;
 
@@ -144,8 +140,8 @@ export const MethodImageFrame = styled.div`
 
   ${MethodImageButton}:hover &,
   ${MethodImageButton}:focus-visible & {
-    border-color: ${THEME.colors.hotRed};
-    box-shadow: 0 24px 48px -32px rgb(0 0 0 / 70%), 0 0 0 1px ${THEME.colors.hotRed};
+    border-color: ${THEME.colors.orange};
+    box-shadow: 0 24px 48px -32px rgb(0 0 0 / 70%), 0 0 0 1px ${THEME.colors.orange};
   }
 `;
 
