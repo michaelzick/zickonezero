@@ -13,8 +13,9 @@ import {
   DemoStokeStoryHero,
   DemoStokeHeroAbstractLayout,
 } from '../../../styles';
-import { AnimatedSection } from '../../../styles/projectShowcases';
+import { AnimatedSection, CaseStudySectionTitle } from '../../../styles/projectShowcases';
 import HelpsCarousel from './HelpsCarousel';
+import { DemoStokeSectionSubheading } from '../../../styles/demostoke';
 
 type StoryProps = {
   wrapWithBioBox?: boolean;
@@ -106,7 +107,7 @@ const WeekendWarrior = ({ wrapWithBioBox = true, setAnimatedSectionRef, visibleS
     <div>
       <AnimatedSection {...getAnimateProps('story-weekend-warrior')}>
         <section id='story-weekend-warrior' className='story-section'>
-          <DemoStokeTitle $noMobileTopPad>The Weekend Warrior</DemoStokeTitle>
+          <CaseStudySectionTitle as='h2'>The Weekend Warrior</CaseStudySectionTitle>
           <DemoStokeHeroAbstractLayout>
             <DemoStokeStoryHero
               className='image-animate'
@@ -127,7 +128,7 @@ const WeekendWarrior = ({ wrapWithBioBox = true, setAnimatedSectionRef, visibleS
 
       <AnimatedSection {...getAnimateProps('story-weekend-warrior-pain')}>
         <section className='story-section'>
-          <h3>Current Pain Points</h3>
+          <DemoStokeSectionSubheading>Current Pain Points</DemoStokeSectionSubheading>
           {renderTable(painPoints)}
         </section>
       </AnimatedSection>

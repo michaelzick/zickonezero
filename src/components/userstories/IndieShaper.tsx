@@ -13,8 +13,9 @@ import {
   DemoStokeStoryHero,
   DemoStokeHeroAbstractLayout,
 } from '../../../styles';
-import { AnimatedSection } from '../../../styles/projectShowcases';
+import { AnimatedSection, CaseStudySectionTitle } from '../../../styles/projectShowcases';
 import HelpsCarousel from './HelpsCarousel';
+import { DemoStokeSectionSubheading } from '../../../styles/demostoke';
 
 type StoryProps = {
   wrapWithBioBox?: boolean;
@@ -106,7 +107,7 @@ const IndieShaper = ({
     <div>
       <AnimatedSection {...getAnimateProps('story-independent-surfboard-shaper-title')}>
         <section id='story-independent-surfboard-shaper-title' className='story-section'>
-          <DemoStokeTitle $noMobileTopPad>The Independent Surfboard Shaper</DemoStokeTitle>
+          <CaseStudySectionTitle as='h2'>The Independent Surfboard Shaper</CaseStudySectionTitle>
           <DemoStokeHeroAbstractLayout>
             <DemoStokeStoryHero
               className='image-animate'
@@ -127,7 +128,7 @@ const IndieShaper = ({
 
       <AnimatedSection {...getAnimateProps('story-independent-surfboard-shaper-pain')}>
         <section className='story-section'>
-          <h3>Current Pain Points</h3>
+          <DemoStokeSectionSubheading>Current Pain Points</DemoStokeSectionSubheading>
           {renderTable(painPoints)}
         </section>
       </AnimatedSection>
