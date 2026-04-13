@@ -18,7 +18,7 @@ export const TLDR_ITEMS: {
   image: { src: string; alt: string; };
 }[] = [
   {
-    title: 'What It Is',
+    title: 'Product Summary',
     description: 'I helped reimagine Antisyphon Training from a static marketing site and fragmented LMS touchpoints into a cohesive marketplace for live, on-demand, and pay-what-you-can security education. The redesign improved enrollment, reduced support load, and gave learners, instructors, and operations teams a more coherent end-to-end experience.',
     image: { src: '/img/antisyphon/home.webp', alt: 'Antisyphon Training homepage hero' }
   },
