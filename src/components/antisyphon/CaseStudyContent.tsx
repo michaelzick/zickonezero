@@ -72,7 +72,6 @@ const CaseStudyContent = ({
           <WhatSection
             setAnimatedSectionRef={setAnimatedSectionRef}
             visibleSections={visibleSections}
-            openLightbox={openLightbox}
           />
           <HowSection
             setAnimatedSectionRef={setAnimatedSectionRef}

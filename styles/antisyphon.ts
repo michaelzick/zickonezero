@@ -4,7 +4,7 @@ import {
   DemoStokeMethodCard,
   DemoStokeMethodList,
   DemoStokeTldrCopy,
-  DemoStokeTldrImage
+  DemoStokeTldrImage,
 } from './index';
 import { THEME } from './theme';
 
@@ -24,21 +24,6 @@ export const FlowText = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   gap: 0.35em;
-`;
-
-export const AntisyphonShowcaseImage = styled(DemoStokeTldrImage)`
-  cursor: pointer;
-  box-shadow: 0 18px 38px -30px rgb(0 0 0 / 50%);
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  border-radius: ${THEME.radii.md};
-  transition: box-shadow 0.18s ease;
-
-  &:hover,
-  &:focus-visible {
-    box-shadow: 0 22px 44px -28px rgb(0 0 0 / 65%);
-  }
 `;
 
 export const FlowImageButton = styled.button`

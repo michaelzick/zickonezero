@@ -1,18 +1,21 @@
-import { type KeyboardEvent } from 'react';
-
-import { DemoStokeTldrCopy, DemoStokeTldrList, DemoStokeTldrRow, DemoStokeTldrSection, DemoStokeTldrTitle } from '../../../../styles';
+import {
+  DemoStokeTldrCopy,
+  DemoStokeTldrList,
+  DemoStokeTldrRow,
+  DemoStokeTldrSection,
+  DemoStokeTldrTitle,
+} from '../../../../styles';
 import { AnimatedSection, CaseStudySectionTitle } from '../../../../styles/projectShowcases';
-import { AntisyphonShowcaseImage } from '../../../../styles/antisyphon';
+import { DemoStokeWhatImage } from '../../../../styles/demostoke';
 import { TLDR_ITEMS } from '../caseStudyData';
 import { SetAnimatedSectionRef, VisibleSections } from '../../showcaseTypes';
 
 type WhatSectionProps = {
   setAnimatedSectionRef: SetAnimatedSectionRef;
   visibleSections: VisibleSections;
-  openLightbox: (index: number) => void;
 };
 
-const WhatSection = ({ setAnimatedSectionRef, visibleSections, openLightbox }: WhatSectionProps) => (
+const WhatSection = ({ setAnimatedSectionRef, visibleSections }: WhatSectionProps) => (
   <AnimatedSection
     ref={setAnimatedSectionRef('section-the-what')}
     data-animate-id='section-the-what'
@@ -34,21 +37,7 @@ const WhatSection = ({ setAnimatedSectionRef, visibleSections, openLightbox }: W
                   <DemoStokeTldrTitle>{title}</DemoStokeTldrTitle>
                   <DemoStokeTldrCopy>{description}</DemoStokeTldrCopy>
                 </div>
-                <AntisyphonShowcaseImage
-                  className='image-animate'
-                  src={image.src}
-                  alt={image.alt}
-                  loading='lazy'
-                  role='button'
-                  tabIndex={0}
-                  onClick={() => openLightbox(index)}
-                  onKeyDown={(event: KeyboardEvent<HTMLImageElement>) => {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                      event.preventDefault();
-                      openLightbox(index);
-                    }
-                  }}
-                />
+                <DemoStokeWhatImage className='image-animate' src={image.src} alt={image.alt} loading='lazy' />
               </DemoStokeTldrRow>
             </AnimatedSection>
           ))}
