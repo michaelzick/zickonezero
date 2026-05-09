@@ -31,6 +31,8 @@ import {
   AnimatedSection
 } from '../../styles/projectShowcases';
 import { TopNavContent, FooterContent } from '.';
+import TrackedCtaLink from './TrackedCtaLink';
+import { trackEvent } from '../lib/analytics';
 import {
   useAppSelector,
   useAppDispatch
@@ -143,9 +145,17 @@ const ProjectShowcase = ({
                   <LinkRow>
                     <HeroLabel>Project Link</HeroLabel>
                     <div>
-                      <a href={projectLink.href} target='_blank' rel='noopener noreferrer'>
+                      <TrackedCtaLink
+                        href={projectLink.href}
+                        label={projectLink.label || 'View Project'}
+                        location='project_showcase_hero'
+                        section={title}
+                        eventName='external_project_click'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
                         {projectLink.label || 'View Project'} <OpenInNewWindowIcon aria-hidden="true" />
-                      </a>
+                      </TrackedCtaLink>
                     </div>
                   </LinkRow>
                 </HeroContent>
@@ -171,7 +181,17 @@ const ProjectShowcase = ({
                           type='button'
                           className="image-animate"
                           aria-label={`Open image: ${image.alt}`}
-                          onClick={() => setLightboxState(prev => ({ toggler: !prev.toggler, slide: index + 1 }))}
+                          onClick={() => {
+                            trackEvent('lightbox_open', {
+                              location: 'project_showcase',
+                              project_title: title,
+                              section_title: sectionTitle,
+                              image_alt: image.alt,
+                              image_index: index,
+                              page_path: window.location.pathname,
+                            });
+                            setLightboxState(prev => ({ toggler: !prev.toggler, slide: index + 1 }));
+                          }}
                         >
                           <ShowcaseImage
                             src={image.src}

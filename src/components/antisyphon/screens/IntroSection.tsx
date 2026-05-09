@@ -2,6 +2,7 @@ import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 
 import { PitchDeckLink } from '../../../../styles';
 import { AntisyphonHeroImageWrap } from '../../../../styles/antisyphon';
+import { trackEvent, trackLinkClick } from '../../../lib/analytics';
 import {
   HeroMediaFrame,
   CompactIntroHeaderRow,
@@ -19,7 +20,25 @@ const IntroSection = ({ openFlowLightbox }: IntroSectionProps) => (
       <img className='at-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
       <div>
         <h2 className='tab-header page-header'>Antisyphon Product Screens</h2>
-        <PitchDeckLink href='https://www.antisyphontraining.com/' target='_blank' rel='noopener noreferrer'>
+        <PitchDeckLink
+          href='https://www.antisyphontraining.com/'
+          target='_blank'
+          rel='noopener noreferrer'
+          onClick={() => {
+            trackLinkClick({
+              location: 'product_screens_intro',
+              label: 'AntisyphonTraining.com',
+              href: 'https://www.antisyphontraining.com/',
+              section: 'Antisyphon Product Screens',
+            });
+            trackEvent('external_project_click', {
+              location: 'product_screens_intro',
+              label: 'AntisyphonTraining.com',
+              href: 'https://www.antisyphontraining.com/',
+              page_path: window.location.pathname,
+            });
+          }}
+        >
           AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden='true' />
         </PitchDeckLink>
       </div>

@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { MouseEvent, useState } from 'react';
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 
@@ -11,6 +10,8 @@ import {
 import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
 import { CONTACT_LINKS } from './contactLinks';
 import { PROJECT_LINKS } from './projectLinks';
+import { trackEvent } from '../lib/analytics';
+import TrackedLink from './TrackedLink';
 import {
   LinkBoxMobile,
   CaseStudiesAccordionButton,
@@ -29,18 +30,29 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
   const [isContactOpen, setIsContactOpen] = useState(false);
 
   const handleCloseMenu = () => dispatch(showMobileMenu(false));
+  const trackAccordionOpen = (label: string, expanded: boolean) => {
+    if (expanded) return;
+    trackEvent('nav_dropdown_open', {
+      location: 'mobile_nav',
+      label,
+      page_path: window.location.pathname,
+    });
+  };
 
   return (
     <LinkBoxMobile
       $isAnimating={isAnimating}
       onClick={(event: MouseEvent<HTMLUListElement>) => event.stopPropagation()}>
       <li onClick={handleCloseMenu}>
-        <Link href='/about'>About</Link>
+        <TrackedLink href='/about' label='About' location='mobile_nav' section='primary' variant='mobile'>
+          About
+        </TrackedLink>
       </li>
       <li className='case-studies-accordion'>
         <CaseStudiesAccordionButton
           type='button'
           onClick={() => {
+            trackAccordionOpen('Case Studies', isCaseStudiesOpen);
             setIsCaseStudiesOpen((prevState) => !prevState);
             setIsProjectsOpen(false);
             setIsContactOpen(false);
@@ -56,10 +68,10 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
         <CaseStudiesAccordionList $isOpen={isCaseStudiesOpen}>
           {CASE_STUDIES_LINKS.map(({ href, label, icon, iconAlt }) => (
             <li key={href} onClick={handleCloseMenu}>
-              <Link href={href}>
+              <TrackedLink href={href} label={label} location='mobile_nav' section='case_studies_accordion' variant='mobile'>
                 {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
                 {label}
-              </Link>
+              </TrackedLink>
             </li>
           ))}
         </CaseStudiesAccordionList>
@@ -68,6 +80,7 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
         <CaseStudiesAccordionButton
           type='button'
           onClick={() => {
+            trackAccordionOpen('UX Design', isProjectsOpen);
             setIsProjectsOpen((prevState) => !prevState);
             setIsCaseStudiesOpen(false);
             setIsContactOpen(false);
@@ -83,10 +96,10 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
         <CaseStudiesAccordionList $isOpen={isProjectsOpen}>
           {PROJECT_LINKS.map(({ href, label, icon, iconAlt }) => (
             <li key={href} onClick={handleCloseMenu}>
-              <Link href={href}>
+              <TrackedLink href={href} label={label} location='mobile_nav' section='ux_design_accordion' variant='mobile'>
                 {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
                 {label}
-              </Link>
+              </TrackedLink>
             </li>
           ))}
         </CaseStudiesAccordionList>
@@ -95,6 +108,7 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
         <CaseStudiesAccordionButton
           type='button'
           onClick={() => {
+            trackAccordionOpen('Links', isContactOpen);
             setIsContactOpen((prevState) => !prevState);
             setIsCaseStudiesOpen(false);
             setIsProjectsOpen(false);
@@ -110,9 +124,18 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
         <CaseStudiesAccordionList $isOpen={isContactOpen}>
           {CONTACT_LINKS.map(({ href, label }) => (
             <li key={href} onClick={handleCloseMenu}>
-              <a className='external-link' href={href} target='_blank' rel='noopener noreferrer'>
+              <TrackedLink
+                className='external-link'
+                href={href}
+                label={label}
+                location='mobile_nav'
+                section='links_accordion'
+                variant='mobile'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
                 {label} <OpenInNewWindowIcon aria-hidden='true' />
-              </a>
+              </TrackedLink>
             </li>
           ))}
         </CaseStudiesAccordionList>

@@ -2,6 +2,7 @@ import SidebarSectionTabs, { SidebarSectionConfig } from '../SidebarSectionTabs'
 import * as UserStories from '../userstories';
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { PitchDeckLink } from '../../../styles';
+import { trackEvent, trackLinkClick } from '../../lib/analytics';
 import {
   AnimatedSection,
   CompactCaseStudyPageInner,
@@ -40,7 +41,25 @@ const StoriesContent = ({
                 <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
                 <div>
                   <h2 className='tab-header page-header'>DemoStoke User Stories</h2>
-                  <PitchDeckLink href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>
+                  <PitchDeckLink
+                    href="https://www.demostoke.com/"
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    onClick={() => {
+                      trackLinkClick({
+                        location: 'user_stories_intro',
+                        label: 'DemoStoke.com',
+                        href: 'https://www.demostoke.com/',
+                        section: 'DemoStoke User Stories',
+                      });
+                      trackEvent('external_project_click', {
+                        location: 'user_stories_intro',
+                        label: 'DemoStoke.com',
+                        href: 'https://www.demostoke.com/',
+                        page_path: window.location.pathname,
+                      });
+                    }}
+                  >
                     DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
                   </PitchDeckLink>
                 </div>

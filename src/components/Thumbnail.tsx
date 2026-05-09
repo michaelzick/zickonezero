@@ -1,9 +1,10 @@
-import Link from 'next/link';
 import { ReactElement, useEffect, useRef } from 'react';
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 
 import { WorksData } from '../types';
 import { Thumb } from '../../styles';
+import { trackEvent } from '../lib/analytics';
+import TrackedLink from './TrackedLink';
 
 type AdditionalThumbProps = {
   index: number,
@@ -191,30 +192,63 @@ const Thumbnail = (props: WorksData & AdditionalThumbProps): ReactElement => {
     };
   }, []);
 
+  const handleThumbClick = () => {
+    trackEvent('project_card_click', {
+      location: 'project_grid',
+      project_group: group,
+      project_title: header,
+      card_index: index,
+      link_url: link || `/${group}`,
+      link_external: Boolean(linkOut),
+      page_path: window.location.pathname,
+    });
+    onThumbClick(index, linkOut);
+  };
+
   return (
-    <Thumb onClick={() => onThumbClick(index)}>
+    <Thumb onClick={handleThumbClick}>
       {imgs && link ?
-        <Link href={link || `/${group}`}
-          target={linkOut ? '_blank' : '_self'} rel={linkOut ? 'noopener noreferrer' : undefined}>
+        <TrackedLink
+          href={link || `/${group}`}
+          label={header}
+          location='project_grid'
+          section='thumbnail_image'
+          target={linkOut ? '_blank' : '_self'}
+          rel={linkOut ? 'noopener noreferrer' : undefined}
+        >
           <div className='thumb-media' ref={containerRef}>
             <img src={thumb} width='240' height='240' alt={group} className='thumb' />
             <canvas ref={canvasRef} className='neon-trail-thumb' aria-hidden='true' />
             <div ref={cursorDotRef} className='cursor-dot thumb-dot' aria-hidden='true' />
           </div>
-        </Link> :
+        </TrackedLink> :
         <div className='thumb-media' ref={containerRef}>
           <img src={thumb} width='240' height='240' alt={group} className='thumb' />
           <canvas ref={canvasRef} className='neon-trail-thumb' aria-hidden='true' />
           <div ref={cursorDotRef} className='cursor-dot thumb-dot' aria-hidden='true' />
         </div>}
 
-      <h3>{link ? <Link href={link || `/${group}`} target={linkOut ? '_blank' : '_self'} rel={linkOut ? 'noopener noreferrer' : undefined}>
-        {header}</Link> : header}
+      <h3>{link ? <TrackedLink
+        href={link || `/${group}`}
+        label={header}
+        location='project_grid'
+        section='thumbnail_title'
+        target={linkOut ? '_blank' : '_self'}
+        rel={linkOut ? 'noopener noreferrer' : undefined}
+      >
+        {header}</TrackedLink> : header}
       </h3>
 
       <p>
-        {link ? <Link href={link || `/${group}`} target={linkOut ? '_blank' : '_self'} rel={linkOut ? 'noopener noreferrer' : undefined}>
-          {desc}</Link> : desc}
+        {link ? <TrackedLink
+          href={link || `/${group}`}
+          label={header}
+          location='project_grid'
+          section='thumbnail_description'
+          target={linkOut ? '_blank' : '_self'}
+          rel={linkOut ? 'noopener noreferrer' : undefined}
+        >
+          {desc}</TrackedLink> : desc}
         {linkOut ? (
           <span className='external-link-icon' aria-hidden='true'>
             <OpenInNewWindowIcon />

@@ -9,8 +9,6 @@ import {
   getMobileMenuState
 } from '../showMobileMenuSlice';
 
-import Link from 'next/link';
-
 import {
   DemoStokeMiniCardModal,
   DemoStokeMiniCardModalClose,
@@ -22,6 +20,8 @@ import {
 import { AnimatedSection } from '../../styles/projectShowcases';
 import { THEME } from '../../styles/theme';
 import { TopNavContent, FooterContent } from '../components';
+import { trackEvent } from '../lib/analytics';
+import TrackedLink from './TrackedLink';
 
 const AboutHero = styled.section`
   position: relative;
@@ -136,10 +136,22 @@ const AboutContent = () => {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 
   const openAboutModal = useCallback(() => {
+    trackEvent('modal_open', {
+      location: 'about_hero',
+      label: 'About Michael',
+      modal: 'about_michael',
+      page_path: window.location.pathname,
+    });
     setIsAboutModalOpen(true);
   }, []);
 
   const closeAboutModal = useCallback(() => {
+    trackEvent('modal_close', {
+      location: 'about_modal',
+      label: 'About Michael',
+      modal: 'about_michael',
+      page_path: window.location.pathname,
+    });
     setIsAboutModalOpen(false);
   }, []);
 
@@ -225,10 +237,12 @@ const AboutContent = () => {
                   From concept to launch, Michael thrives on solving complex problems with elegant, user-centered solutions.
                 </p>
                 <p>
-                  Samples of his work can be found in the <Link href='/'>main gallery</Link>, with code examples on{' '}
-                  <a href='https://github.com/michaelzick' target='_blank' rel='noopener noreferrer'>GitHub</a>, and a
-                  full list of qualifications on <a href='https://linkedin.com/in/michaelzick'
-                    target='_blank' rel='noopener noreferrer'>LinkedIn</a>.
+                  Samples of his work can be found in the <TrackedLink href='/' label='main gallery' location='about_modal' section='body'>main gallery</TrackedLink>, with code examples on{' '}
+                  <TrackedLink href='https://github.com/michaelzick' label='GitHub' location='about_modal' section='body'
+                    target='_blank' rel='noopener noreferrer'>GitHub</TrackedLink>, and a
+                  full list of qualifications on <TrackedLink href='https://linkedin.com/in/michaelzick'
+                    label='LinkedIn' location='about_modal' section='body'
+                    target='_blank' rel='noopener noreferrer'>LinkedIn</TrackedLink>.
                 </p>
               </AboutModalCopy>
             </AboutModal>

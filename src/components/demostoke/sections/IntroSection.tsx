@@ -1,4 +1,5 @@
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
+import { trackEvent, trackLinkClick } from '../../../lib/analytics';
 
 import {
   AnimatedSection,
@@ -56,7 +57,25 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
           <LinkRow>
             <CaseStudyHeroLabel>Project Link</CaseStudyHeroLabel>
             <div>
-              <a href='https://www.demostoke.com/' target='_blank' rel='noopener noreferrer'>
+              <a
+                href='https://www.demostoke.com/'
+                target='_blank'
+                rel='noopener noreferrer'
+                onClick={() => {
+                  trackLinkClick({
+                    location: 'case_study_hero',
+                    label: 'DemoStoke.com',
+                    href: 'https://www.demostoke.com/',
+                    section: 'DemoStoke UX Case Study',
+                  });
+                  trackEvent('external_project_click', {
+                    location: 'case_study_hero',
+                    label: 'DemoStoke.com',
+                    href: 'https://www.demostoke.com/',
+                    page_path: window.location.pathname,
+                  });
+                }}
+              >
                 DemoStoke.com <OpenInNewWindowIcon aria-hidden='true' />
               </a>
             </div>

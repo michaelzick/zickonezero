@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import {
   useAppSelector,
   useAppDispatch
@@ -12,6 +10,8 @@ import {
 import { Title, Nav, MenuIcon, ThemeSwitcherWrapper } from '../../styles';
 import { LinkBoxContent, AnimatedMobileMenu, ThemeSwitcher } from '.';
 import { MouseEvent, ReactElement } from 'react';
+import { trackEvent } from '../lib/analytics';
+import TrackedLink from './TrackedLink';
 
 const NavContent = (): ReactElement => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
@@ -29,10 +29,10 @@ const NavContent = (): ReactElement => {
         isMobileMenuShown={isMobileMenuShown}>
         <Title isMobileMenuShown={isMobileMenuShown}
           onClick={() => dispatch(showMobileMenu(false))}>
-          <Link href='/'>
+          <TrackedLink href='/' label='ZICKONEZERO Creative' location='top_nav' section='brand'>
             <span className='brand-line brand-first'>ZICKONEZERO</span>
             <span className='brand-line brand-second'>Creative</span>
-          </Link>
+          </TrackedLink>
         </Title>
         <ThemeSwitcher />
       </ThemeSwitcherWrapper>
@@ -41,6 +41,11 @@ const NavContent = (): ReactElement => {
 
       <MenuIcon onClick={(event: MouseEvent<HTMLDivElement>) => {
         event.stopPropagation();
+        trackEvent('mobile_menu_toggle', {
+          location: 'top_nav',
+          expanded: !isMobileMenuShown,
+          page_path: window.location.pathname,
+        });
         dispatch(showMobileMenu(!isMobileMenuShown));
       }}
         className={isMobileMenuShown ? 'change' : undefined}>

@@ -15,6 +15,7 @@ import {
   DemoStokeMiniCardModalClose,
 } from '../../../styles';
 import { DemoStokeSectionSubheading } from '../../../styles/demostoke';
+import { trackEvent } from '../../lib/analytics';
 
 type HelpsItem = {
   title: string;
@@ -60,17 +61,39 @@ const HelpsCarousel = ({ items, title = 'How DemoStoke Helps' }: HelpsCarouselPr
     const el = rowRef.current;
     if (!el) return;
 
+    trackEvent('gallery_scroll', {
+      location: 'user_story_cards',
+      label: title,
+      direction: direction < 0 ? 'left' : 'right',
+      page_path: window.location.pathname,
+    });
     const scrollAmount = Math.max(el.clientWidth * 0.8, 220) * direction;
     el.scrollBy({ left: scrollAmount, behavior: 'smooth' });
   };
 
   const openModal = useCallback((index: number) => {
+    const item = items[index];
+    trackEvent('modal_open', {
+      location: 'user_story_cards',
+      modal: 'how_demostoke_helps',
+      label: item?.title,
+      card_index: index,
+      page_path: window.location.pathname,
+    });
     setActiveIndex(index);
-  }, []);
+  }, [items]);
 
   const closeModal = useCallback(() => {
+    const item = activeIndex !== null ? items[activeIndex] : null;
+    trackEvent('modal_close', {
+      location: 'user_story_cards',
+      modal: 'how_demostoke_helps',
+      label: item?.title,
+      card_index: activeIndex,
+      page_path: window.location.pathname,
+    });
     setActiveIndex(null);
-  }, []);
+  }, [activeIndex, items]);
 
   const handleModalClick = useCallback((event: ReactMouseEvent<HTMLDivElement>) => {
     event.stopPropagation();

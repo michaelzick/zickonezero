@@ -34,6 +34,7 @@ import {
   WorksSectionContent
 } from '../../styles';
 import { AnimatedSection } from '../../styles/projectShowcases';
+import { trackEvent } from '../lib/analytics';
 
 type HomeSectionKey = 'case-studies' | 'ux' | 'ui';
 type ActiveSection = HomeSectionKey | null;
@@ -203,6 +204,16 @@ const MainContent = () => {
     const durationMs = animateScrollTo(offsetPosition);
     startManualScroll(durationMs);
   }, [animateScrollTo, startManualScroll]);
+
+  const handleHomeSectionClick = useCallback((section: HomeSectionKey, label: string, location: string) => {
+    trackEvent(label === 'See Case Studies' ? 'cta_click' : 'section_tab_click', {
+      location,
+      label,
+      section,
+      page_path: window.location.pathname,
+    });
+    scrollToHomeSection(section);
+  }, [scrollToHomeSection]);
 
   useEffect(() => {
     return () => {
@@ -521,7 +532,7 @@ const MainContent = () => {
             aria-controls='case-studies'
             tabIndex={activeSection === 'case-studies' ? 0 : -1}
             $isActive={activeSection === 'case-studies'}
-            onClick={() => scrollToHomeSection('case-studies')}
+            onClick={() => handleHomeSectionClick('case-studies', 'Case Studies', 'home_tabs')}
           >
             Case Studies
           </HomeTabButton>
@@ -532,7 +543,7 @@ const MainContent = () => {
             aria-controls='ux-design'
             tabIndex={activeSection === 'ux' ? 0 : -1}
             $isActive={activeSection === 'ux'}
-            onClick={() => scrollToHomeSection('ux')}
+            onClick={() => handleHomeSectionClick('ux', 'UX Design', 'home_tabs')}
           >
             UX Design
           </HomeTabButton>
@@ -543,7 +554,7 @@ const MainContent = () => {
             aria-controls='web-development'
             tabIndex={activeSection === 'ui' ? 0 : -1}
             $isActive={activeSection === 'ui'}
-            onClick={() => scrollToHomeSection('ui')}
+            onClick={() => handleHomeSectionClick('ui', 'Web Dev', 'home_tabs')}
           >
             Web Dev
           </HomeTabButton>
@@ -583,7 +594,7 @@ const MainContent = () => {
                 <button
                   type="button"
                   className="case-studies-cta"
-                  onClick={() => scrollToHomeSection('case-studies')}
+                  onClick={() => handleHomeSectionClick('case-studies', 'See Case Studies', 'home_intro')}
                 >
                   See Case Studies
                 </button>
