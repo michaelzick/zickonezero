@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import FsLightbox from 'fslightbox-react';
 
 import {
@@ -32,6 +32,7 @@ import {
 import useAnimatedSections from '../hooks/useAnimatedSections';
 import useHorizontalGallery from '../hooks/useHorizontalGallery';
 import useLightboxController from '../hooks/useLightboxController';
+import { trackEvent } from '../lib/analytics';
 
 type SectionKey = 'case-study' | 'flows';
 
@@ -46,9 +47,9 @@ const AntisyphonContent = () => {
   const { lightboxController: methodLightboxController, openLightbox: openMethodLightbox } = useLightboxController();
   const { lightboxController: flowLightboxController, openLightbox: openFlowLightbox } = useLightboxController();
   const { rowRef, canScrollLeft, canScrollRight, scrollGalleryBy } = useHorizontalGallery(activeTab);
-  const methodImages = METHOD_SECTIONS.flatMap(({ images }) => images);
-  const flowImages = FLOW_BLOCKS.flatMap(({ images }) => images);
-  const caseStudyImages = [...TLDR_ITEMS.map(({ image }) => image), ...HOW_IMAGES];
+  const methodImages = useMemo(() => METHOD_SECTIONS.flatMap(({ images }) => images), []);
+  const flowImages = useMemo(() => FLOW_BLOCKS.flatMap(({ images }) => images), []);
+  const caseStudyImages = useMemo(() => [...TLDR_ITEMS.map(({ image }) => image), ...HOW_IMAGES], []);
 
   const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {
     setTopTabsEl(node);
@@ -71,8 +72,62 @@ const AntisyphonContent = () => {
   }, [activeTab]);
 
   const togglePersona = useCallback((id: string) => {
-    setOpenPersonaId(current => current === id ? null : id);
+    setOpenPersonaId(current => {
+      const isClosing = current === id;
+      trackEvent(isClosing ? 'modal_close' : 'modal_open', {
+        location: 'antisyphon_personas',
+        modal: 'persona',
+        persona_id: id,
+        page_path: window.location.pathname,
+      });
+      return isClosing ? null : id;
+    });
   }, []);
+
+  const handleGalleryScroll = useCallback((direction: number) => {
+    trackEvent('gallery_scroll', {
+      location: 'antisyphon_case_study_gallery',
+      direction: direction < 0 ? 'left' : 'right',
+      page_path: window.location.pathname,
+    });
+    scrollGalleryBy(direction);
+  }, [scrollGalleryBy]);
+
+  const handleOpenCaseStudyLightbox = useCallback((index: number) => {
+    const image = caseStudyImages[index];
+    trackEvent('lightbox_open', {
+      location: 'antisyphon_case_study',
+      image_index: index,
+      image_alt: image?.alt,
+      image_url: image?.src,
+      page_path: window.location.pathname,
+    });
+    openLightbox(index);
+  }, [caseStudyImages, openLightbox]);
+
+  const handleOpenMethodLightbox = useCallback((index: number) => {
+    const image = methodImages[index];
+    trackEvent('lightbox_open', {
+      location: 'antisyphon_methods',
+      image_index: index,
+      image_alt: image?.alt,
+      image_url: image?.src,
+      page_path: window.location.pathname,
+    });
+    openMethodLightbox(index);
+  }, [methodImages, openMethodLightbox]);
+
+  const handleOpenFlowLightbox = useCallback((index: number) => {
+    const image = flowImages[index];
+    trackEvent('lightbox_open', {
+      location: 'antisyphon_product_screens',
+      image_index: index,
+      image_alt: image?.alt,
+      image_url: image?.src,
+      page_path: window.location.pathname,
+    });
+    openFlowLightbox(index);
+  }, [flowImages, openFlowLightbox]);
 
   return (
     <>
@@ -105,9 +160,9 @@ const AntisyphonContent = () => {
             scrollRowRef={rowRef}
             canScrollLeft={canScrollLeft}
             canScrollRight={canScrollRight}
-            scrollGalleryBy={scrollGalleryBy}
-            openLightbox={openLightbox}
-            openMethodLightbox={openMethodLightbox}
+            scrollGalleryBy={handleGalleryScroll}
+            openLightbox={handleOpenCaseStudyLightbox}
+            openMethodLightbox={handleOpenMethodLightbox}
             openPersonaId={openPersonaId}
             togglePersona={togglePersona}
             topTabsEl={topTabsEl}
@@ -122,7 +177,7 @@ const AntisyphonContent = () => {
             topTabsEl={topTabsEl}
             sections={FLOW_SECTIONS}
             isActive={!isCaseStudyView}
-            openFlowLightbox={openFlowLightbox}
+            openFlowLightbox={handleOpenFlowLightbox}
           />
         )}
       </Wrapper>

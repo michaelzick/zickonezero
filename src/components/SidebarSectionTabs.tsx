@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, type CSSProperties } from 'react';
 import { useSize } from '@radix-ui/react-use-size';
+import { trackEvent } from '../lib/analytics';
 
 import {
   SectionTabsWrapper,
@@ -278,7 +279,16 @@ const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
           type='button'
           $isActive={resolvedActiveSection === id}
           aria-current={resolvedActiveSection === id ? 'true' : undefined}
-          onClick={() => handleTabClick(id)}
+          onClick={() => {
+            trackEvent('section_tab_click', {
+              location: 'sidebar_section_tabs',
+              variant: 'desktop',
+              section: id,
+              label,
+              page_path: window.location.pathname,
+            });
+            handleTabClick(id);
+          }}
         >
           {label}
         </SectionTabButton>
@@ -321,7 +331,16 @@ export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
             type='button'
             $isActive={activeSection === id}
             aria-current={activeSection === id ? 'true' : undefined}
-            onClick={() => handleTabClick(id)}
+            onClick={() => {
+              trackEvent('section_tab_click', {
+                location: 'sidebar_section_tabs',
+                variant: 'mobile',
+                section: id,
+                label,
+                page_path: window.location.pathname,
+              });
+              handleTabClick(id);
+            }}
           >
             {label}
           </SectionTabsMobileButton>

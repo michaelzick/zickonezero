@@ -16,6 +16,7 @@ import {
 import { AnimatedSection, CaseStudySectionTitle } from '../../../styles/projectShowcases';
 import HelpsCarousel from './HelpsCarousel';
 import { DemoStokeSectionSubheading } from '../../../styles/demostoke';
+import { trackLinkClick } from '../../lib/analytics';
 
 type StoryProps = {
   wrapWithBioBox?: boolean;
@@ -24,7 +25,21 @@ type StoryProps = {
 };
 
 const WeekendWarrior = ({ wrapWithBioBox = true, setAnimatedSectionRef, visibleSections }: StoryProps) => {
-  const DSLink = <WhiteTransitionAnchor href="https://www.demostoke.com/" target='_blank' rel='noopener noreferrer'>DemoStoke</WhiteTransitionAnchor>;
+  const DSLink = (
+    <WhiteTransitionAnchor
+      href="https://www.demostoke.com/"
+      target='_blank'
+      rel='noopener noreferrer'
+      onClick={() => trackLinkClick({
+        location: 'user_story_body',
+        label: 'DemoStoke',
+        href: 'https://www.demostoke.com/',
+        section: 'Weekend Warrior',
+      })}
+    >
+      DemoStoke
+    </WhiteTransitionAnchor>
+  );
 
   const renderTable = (
     items: { title: string; description: ReactNode; }[],

@@ -20,6 +20,10 @@ jest.mock('fslightbox-react', () => function MockFsLightbox(props: {
 });
 
 describe('ProjectShowcase', () => {
+  beforeEach(() => {
+    delete (window as Window & { amplitude?: unknown }).amplitude;
+  });
+
   it('renders section screenshots as real lightbox buttons', () => {
     renderWithProviders(
       <ProjectShowcase
@@ -93,5 +97,38 @@ describe('ProjectShowcase', () => {
 
     expect(lightbox).toHaveAttribute('data-slide', '2');
     expect(lightbox).toHaveAttribute('data-toggler', 'true');
+  });
+
+  it('tracks showcase lightbox opens', async () => {
+    const user = userEvent.setup();
+    const track = jest.fn();
+    (window as Window & { amplitude?: { track: jest.Mock } }).amplitude = { track };
+
+    renderWithProviders(
+      <ProjectShowcase
+        title='Test Showcase'
+        summary='A focused test fixture.'
+        heroImage={{ src: '/img/projects/fyfs/fyfs-wave.webp', alt: 'Hero image' }}
+        roleBullets={['UX design']}
+        projectLink={{ href: 'https://example.com', label: 'example.com' }}
+        sections={[
+          {
+            title: 'First section',
+            body: <>First section body</>,
+            image: { src: '/img/projects/fyfs/fyfs-home.webp', alt: 'First mock screenshot' }
+          }
+        ]}
+      />
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Open image: First mock screenshot' }));
+
+    expect(track).toHaveBeenCalledWith('lightbox_open', expect.objectContaining({
+      location: 'project_showcase',
+      project_title: 'Test Showcase',
+      section_title: 'First section',
+      image_alt: 'First mock screenshot',
+      image_index: 0,
+    }));
   });
 });

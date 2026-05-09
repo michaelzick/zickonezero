@@ -1,9 +1,9 @@
-import Link from 'next/link';
 import { ReactElement } from 'react';
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
 import { PROJECT_LINKS } from './projectLinks';
 import { CONTACT_LINKS } from './contactLinks';
+import TrackedLink from './TrackedLink';
 
 import {
   Footer,
@@ -22,7 +22,9 @@ const FooterContent = (): ReactElement => (
         <FooterColumnLinks>
           {CASE_STUDIES_LINKS.map(({ href, label }) => (
             <li key={href}>
-              <Link href={href}>{label}</Link>
+              <TrackedLink href={href} label={label} location='footer' section='case_studies'>
+                {label}
+              </TrackedLink>
             </li>
           ))}
         </FooterColumnLinks>
@@ -33,7 +35,9 @@ const FooterContent = (): ReactElement => (
         <FooterColumnLinks>
           {PROJECT_LINKS.map(({ href, label }) => (
             <li key={href}>
-              <Link href={href}>{label}</Link>
+              <TrackedLink href={href} label={label} location='footer' section='ux_design'>
+                {label}
+              </TrackedLink>
             </li>
           ))}
         </FooterColumnLinks>
@@ -44,9 +48,16 @@ const FooterContent = (): ReactElement => (
         <FooterColumnLinks>
           {CONTACT_LINKS.map(({ href, label }) => (
             <li key={href}>
-              <a href={href} target="_blank" rel="noopener noreferrer">
+              <TrackedLink
+                href={href}
+                label={label}
+                location='footer'
+                section='links'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
                 {label} <OpenInNewWindowIcon aria-hidden="true" />
-              </a>
+              </TrackedLink>
             </li>
           ))}
         </FooterColumnLinks>

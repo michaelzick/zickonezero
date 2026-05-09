@@ -20,6 +20,7 @@ import StoriesContent from './demostoke/StoriesContent';
 import useAnimatedSections from '../hooks/useAnimatedSections';
 import useHorizontalGallery from '../hooks/useHorizontalGallery';
 import useLightboxController from '../hooks/useLightboxController';
+import { trackEvent } from '../lib/analytics';
 
 type SectionKey = 'case-study' | 'stories';
 
@@ -55,8 +56,38 @@ const DemoStokeContent = () => {
   }, [activeTab]);
 
   const togglePersona = useCallback((id: string) => {
-    setOpenPersonaId(current => current === id ? null : id);
+    setOpenPersonaId(current => {
+      const isClosing = current === id;
+      trackEvent(isClosing ? 'modal_close' : 'modal_open', {
+        location: 'demostoke_personas',
+        modal: 'persona',
+        persona_id: id,
+        page_path: window.location.pathname,
+      });
+      return isClosing ? null : id;
+    });
   }, []);
+
+  const handleGalleryScroll = useCallback((direction: number) => {
+    trackEvent('gallery_scroll', {
+      location: 'demostoke_case_study_gallery',
+      direction: direction < 0 ? 'left' : 'right',
+      page_path: window.location.pathname,
+    });
+    scrollGalleryBy(direction);
+  }, [scrollGalleryBy]);
+
+  const handleOpenLightbox = useCallback((index: number) => {
+    const image = caseStudyImages[index];
+    trackEvent('lightbox_open', {
+      location: 'demostoke_case_study',
+      image_index: index,
+      image_alt: image?.alt,
+      image_url: image?.src,
+      page_path: window.location.pathname,
+    });
+    openLightbox(index);
+  }, [caseStudyImages, openLightbox]);
 
   return (
     <>
@@ -87,8 +118,8 @@ const DemoStokeContent = () => {
             scrollRowRef={rowRef}
             canScrollLeft={canScrollLeft}
             canScrollRight={canScrollRight}
-            scrollGalleryBy={scrollGalleryBy}
-            openLightbox={openLightbox}
+            scrollGalleryBy={handleGalleryScroll}
+            openLightbox={handleOpenLightbox}
             openPersonaId={openPersonaId}
             togglePersona={togglePersona}
             topTabsEl={topTabsEl}

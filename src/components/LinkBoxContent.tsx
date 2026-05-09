@@ -1,9 +1,10 @@
-import Link from 'next/link';
 import { useEffect, useRef, useState, type FocusEvent } from 'react';
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
 import { CONTACT_LINKS } from './contactLinks';
 import { PROJECT_LINKS } from './projectLinks';
+import { trackEvent } from '../lib/analytics';
+import TrackedLink from './TrackedLink';
 import {
   LinkBox,
   CaseStudiesDesktopWrapper,
@@ -30,6 +31,13 @@ const LinkBoxContent = () => {
 
   const openCaseStudies = () => {
     clearHoverTimeout();
+    if (!isCaseStudiesOpen) {
+      trackEvent('nav_dropdown_open', {
+        location: 'top_nav',
+        label: 'Case Studies',
+        page_path: window.location.pathname,
+      });
+    }
     setIsCaseStudiesOpen(true);
     setIsProjectsOpen(false);
     setIsContactOpen(false);
@@ -37,6 +45,13 @@ const LinkBoxContent = () => {
 
   const openProjects = () => {
     clearHoverTimeout();
+    if (!isProjectsOpen) {
+      trackEvent('nav_dropdown_open', {
+        location: 'top_nav',
+        label: 'UX Design',
+        page_path: window.location.pathname,
+      });
+    }
     setIsProjectsOpen(true);
     setIsCaseStudiesOpen(false);
     setIsContactOpen(false);
@@ -44,6 +59,13 @@ const LinkBoxContent = () => {
 
   const openContact = () => {
     clearHoverTimeout();
+    if (!isContactOpen) {
+      trackEvent('nav_dropdown_open', {
+        location: 'top_nav',
+        label: 'Links',
+        page_path: window.location.pathname,
+      });
+    }
     setIsContactOpen(true);
     setIsCaseStudiesOpen(false);
     setIsProjectsOpen(false);
@@ -93,7 +115,9 @@ const LinkBoxContent = () => {
 
   return (
     <LinkBox>
-      <Link href='/about'>About</Link>
+      <TrackedLink href='/about' label='About' location='top_nav' section='primary'>
+        About
+      </TrackedLink>
       <CaseStudiesDesktopWrapper
         ref={caseStudiesRef}
         onMouseEnter={openCaseStudies}
@@ -126,10 +150,17 @@ const LinkBoxContent = () => {
           aria-hidden={!isCaseStudiesOpen}>
           {CASE_STUDIES_LINKS.map(({ href, label, icon, iconAlt }) => (
             <li key={href} onClick={handleLinkClick}>
-              <Link href={href} tabIndex={isCaseStudiesOpen ? 0 : -1}>
+              <TrackedLink
+                href={href}
+                label={label}
+                location='top_nav'
+                section='case_studies_dropdown'
+                variant='desktop'
+                tabIndex={isCaseStudiesOpen ? 0 : -1}
+              >
                 {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
                 {label}
-              </Link>
+              </TrackedLink>
             </li>
           ))}
           </CaseStudiesDropdown>
@@ -166,10 +197,17 @@ const LinkBoxContent = () => {
           aria-hidden={!isProjectsOpen}>
           {PROJECT_LINKS.map(({ href, label, icon, iconAlt }) => (
             <li key={href} onClick={handleLinkClick}>
-              <Link href={href} tabIndex={isProjectsOpen ? 0 : -1}>
+              <TrackedLink
+                href={href}
+                label={label}
+                location='top_nav'
+                section='ux_design_dropdown'
+                variant='desktop'
+                tabIndex={isProjectsOpen ? 0 : -1}
+              >
                 {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
                 {label}
-              </Link>
+              </TrackedLink>
             </li>
           ))}
           </CaseStudiesDropdown>
@@ -206,9 +244,18 @@ const LinkBoxContent = () => {
           aria-hidden={!isContactOpen}>
           {CONTACT_LINKS.map(({ href, label }) => (
             <li key={href} onClick={handleLinkClick}>
-              <a href={href} target='_blank' rel='noopener noreferrer' tabIndex={isContactOpen ? 0 : -1}>
+              <TrackedLink
+                href={href}
+                label={label}
+                location='top_nav'
+                section='links_dropdown'
+                variant='desktop'
+                target='_blank'
+                rel='noopener noreferrer'
+                tabIndex={isContactOpen ? 0 : -1}
+              >
                 {label} <OpenInNewWindowIcon aria-hidden='true' />
-              </a>
+              </TrackedLink>
             </li>
           ))}
         </CaseStudiesDropdown>

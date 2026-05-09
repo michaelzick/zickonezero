@@ -1,4 +1,5 @@
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
+import { trackEvent, trackLinkClick } from '../../../lib/analytics';
 
 import { AnimatedSection, CaseStudyHeroLabel, CaseStudyHeroMediaFrame, HeroContent, HeroGrid, HiddenSectionAnchor, LinkRow, RoleList, SectionNavRevealAnchor, Summary, Title, ShowcaseMediaButton } from '../../../../styles/projectShowcases';
 import { SetAnimatedSectionRef, VisibleSections } from '../../showcaseTypes';
@@ -43,7 +44,25 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections, openLightbox }: 
           <LinkRow>
             <CaseStudyHeroLabel>Project Link</CaseStudyHeroLabel>
             <div>
-              <a href='https://www.antisyphontraining.com/' target='_blank' rel='noopener noreferrer'>
+              <a
+                href='https://www.antisyphontraining.com/'
+                target='_blank'
+                rel='noopener noreferrer'
+                onClick={() => {
+                  trackLinkClick({
+                    location: 'case_study_hero',
+                    label: 'AntisyphonTraining.com',
+                    href: 'https://www.antisyphontraining.com/',
+                    section: 'Antisyphon UX Case Study',
+                  });
+                  trackEvent('external_project_click', {
+                    location: 'case_study_hero',
+                    label: 'AntisyphonTraining.com',
+                    href: 'https://www.antisyphontraining.com/',
+                    page_path: window.location.pathname,
+                  });
+                }}
+              >
                 AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden='true' />
               </a>
             </div>

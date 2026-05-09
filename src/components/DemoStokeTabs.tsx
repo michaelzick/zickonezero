@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import { CaseStudyTopTabButton, DemoStokeTabsBar } from '../../styles';
+import { trackEvent } from '../lib/analytics';
 
 type TabConfig = {
   key: string;
@@ -29,7 +30,15 @@ const DemoStokeTabs = forwardRef<HTMLDivElement, DemoStokeTabsProps>(({
           tabIndex={activeTab === tab.key ? 0 : -1}
           data-active={activeTab === tab.key ? 'true' : 'false'}
           $isActive={activeTab === tab.key}
-          onClick={() => onTabClick(tab.key)}
+          onClick={() => {
+            trackEvent('case_study_tab_click', {
+              location: 'case_study_top_tabs',
+              tab_key: tab.key,
+              label: tab.label,
+              page_path: window.location.pathname,
+            });
+            onTabClick(tab.key);
+          }}
         >
           {tab.label}
         </CaseStudyTopTabButton>
