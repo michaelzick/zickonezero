@@ -1,0 +1,152 @@
+# ZICKONEZERO - Agent Orientation (Codex / AGENTS.md)
+
+This document is the canonical project brief for AI coding agents. Read it at the start of every session instead of re-exploring the repo. Keep it current: see [Maintaining this file](#maintaining-this-file).
+
+Sibling files [CLAUDE.md](CLAUDE.md) (Claude Code) and [GEMINI.md](GEMINI.md) (Gemini CLI) mirror this content for other harnesses. Update all three together when code structure changes.
+
+---
+
+## 1. Project overview
+
+**ZICKONEZERO** is a statically exported portfolio and case-study site for Michael Zick / ZICKONEZERO Creative. It presents project work, case studies, product/service pages, and analytics-instrumented navigation/CTA flows.
+
+Primary flows:
+- Home portfolio: animated intro, tabbed work sections, thumbnail grid, and lightbox gallery.
+- Case studies: reusable project showcase layouts for DemoStoke, Antisyphon Training, and related work.
+- Product/service pages: DemoStoke, DemoStoke Fleet Ops, Find Your Flow State, Who's In Charge, coaching, and about pages.
+- Static publishing: `next build` exports the site with `output: 'export'` and regenerates `public/sitemap.xml`.
+
+## 2. Tech stack
+
+- **Framework:** Next.js 15 Pages Router with React 19 and TypeScript.
+- **Rendering:** Static export via `next.config.js` (`output: 'export'`, `trailingSlash: true`, unoptimized images).
+- **State:** Redux Toolkit with typed hooks in `src/hooks.ts`.
+- **Styling:** styled-components 5, SCSS globals, and shared theme constants in `styles/theme.ts`.
+- **UI libraries:** Radix UI icons/select/tabs, `fslightbox-react`.
+- **Analytics:** Google Tag Manager plus Amplitude-style event helpers in `src/lib/analytics.ts`.
+- **Tooling:** npm, Node 24.x, Jest + React Testing Library, Storybook 8, ESLint, TypeScript.
+
+## 3. Repository layout
+
+```
+zickonezero/
++-- pages/               # Next Pages Router pages
++-- src/
+|   +-- components/      # Site navigation, homepage, case-study, analytics, and shared components
+|   +-- data/            # Static JSON content used by portfolio pages
+|   +-- components/*/    # Feature-specific case-study/user-story components
+|   +-- hooks/           # Browser interaction hooks
+|   +-- lib/             # Analytics helpers
+|   +-- stories/         # Storybook examples and component stories
+|   +-- test/            # Test render utilities
+|   +-- *.Slice.ts       # Redux Toolkit slices
++-- styles/              # styled-components exports, page-specific style modules, globals
++-- public/              # Static images, favicon assets, generated sitemap
++-- scripts/             # Build-time utilities such as sitemap generation
++-- __tests__/           # Jest and React Testing Library tests
++-- skills/              # Repo-local coding and agent-brief maintenance skills
++-- .storybook/          # Storybook configuration
++-- .github/workflows/   # CI and security automation
++-- next.config.js
++-- tsconfig.json
++-- package.json
+```
+
+## 4. Application structure
+
+### 4.1 Next app
+
+- **Root wrapper:** `pages/_app.tsx` imports global SCSS, wraps pages with Redux and `AppThemeProvider`, installs GTM/site analytics, and renders shared `<Head>` metadata.
+- **Document:** `pages/_document.tsx` handles server document structure for styled-components.
+- **Home page:** `pages/index.tsx` loads work data with `getStaticProps`, stores it in Redux, and renders `MainContent`.
+- **Content pages:** top-level files in `pages/` render about, case-study, coaching, DemoStoke, Antisyphon, and product pages.
+- **Static export:** `next.config.js` keeps the app static-host friendly. Static data helpers live under `src/` instead of `pages/api` so the exported site does not expose accidental API routes.
+
+### 4.2 State, content, and UI
+
+- **Redux store:** `src/store.ts` combines `worksDataSlice` and `showMobileMenuSlice`.
+- **Typed hooks:** `src/hooks.ts` exports `useAppDispatch` and `useAppSelector`.
+- **Homepage:** `src/components/MainContent.tsx` coordinates tabs, scroll animation, lightbox state, mobile menu state, analytics events, and work-grid rendering.
+- **Project showcases:** `src/components/ProjectShowcase.tsx` provides the reusable case-study shell with hero, section cards, lightbox, and tracking.
+- **Case-study modules:** `src/components/demostoke/`, `src/components/antisyphon/`, and `src/components/userstories/` hold page-specific content and section data.
+- **Static data:** `src/data/worksData.json` feeds the homepage portfolio grid through `src/lib/getWorksData.ts`.
+- **Design tokens/styles:** `styles/index.js`, `styles/projectShowcases.js`, `styles/*.ts`, and `styles/globals.scss` define shared styled-components and page themes.
+
+### 4.3 Build utilities
+
+- `scripts/generate-sitemap.js` scans top-level page files, skips reserved/API-like pages, and writes `public/sitemap.xml`.
+- `SITE_URL` controls sitemap host generation; default is `https://www.zickonezero.com`.
+- Storybook config lives in `.storybook/` and uses `@storybook/nextjs`.
+
+## 5. Commands
+
+Root scripts:
+
+```bash
+npm run agent-briefs:sync   # regenerate CLAUDE.md and GEMINI.md from AGENTS.md
+npm run agent-briefs:check  # fail if CLAUDE.md or GEMINI.md drift from AGENTS.md
+npm run dev                 # Next dev server
+npm run lint                # ESLint CLI across JS/TS source
+npm run typecheck           # TypeScript no-emit check
+npm test                    # Jest test suite, run in band
+npm run build               # regenerate sitemap and build/export the static site
+npm run check               # agent brief sync check + lint + typecheck + test + build
+npm run storybook           # Storybook on port 6006
+npm run build-storybook     # static Storybook build
+npm run sitemap             # regenerate public/sitemap.xml only
+```
+
+CI runs `npm ci`, `agent-briefs:check`, lint, typecheck, tests, and production build on Node 24.x.
+
+Security automation runs Gitleaks, dependency review, CodeQL, and a production dependency audit at critical severity. Stable Next releases may still report high/moderate advisories in npm audit until patched stable versions are available; those should remain visible but non-blocking unless the project intentionally moves to a patched stable release.
+
+## 6. Conventions
+
+- **Runtime:** use Node 24.x and npm. Keep `package-lock.json` authoritative.
+- **Pages:** add route files under `pages/`; top-level page filenames become routes and are picked up by the sitemap generator unless reserved or skipped.
+- **Components:** use PascalCase component exports; keep route/page composition thin and move reusable behavior into `src/components`, `src/hooks`, or feature folders.
+- **Styling:** prefer existing styled-components and theme constants before adding new style primitives. Keep SCSS global changes broad and intentional.
+- **Images:** static images live under `public/img/`; use accurate alt text for inspectable product and portfolio imagery.
+- **Analytics:** use `trackEvent`, `trackLinkClick`, and existing tracked link components for navigational and CTA events.
+- **Effects:** clean up timers, animation frames, observers, and browser listeners. Respect reduced-motion checks where animation is significant.
+- **Tests:** co-locate broad behavior tests in `__tests__/`; use React Testing Library for user-visible behavior and Jest for build utilities.
+- **Validation:** do not mark work done while lint, typecheck, tests, or build fail. Do not run browser UI tests unless the user explicitly asks for them.
+- **Coding standards:** use `skills/coding-standards/SKILL.md` before implementation, refactors, UI state handling, error handling, performance-sensitive changes, tests, and reviews.
+- **Agent briefs:** when meaningful project facts change, update `AGENTS.md`, run `npm run agent-briefs:sync`, and keep `CLAUDE.md` / `GEMINI.md` in lockstep.
+
+## 7. Key files map
+
+| Path | What lives here |
+|---|---|
+| [pages/_app.tsx](pages/_app.tsx) | App providers, analytics scripts, global metadata |
+| [pages/index.tsx](pages/index.tsx) | Home page data loading and `MainContent` entry |
+| [src/components/MainContent.tsx](src/components/MainContent.tsx) | Homepage animation, section tabs, gallery/lightbox |
+| [src/components/ProjectShowcase.tsx](src/components/ProjectShowcase.tsx) | Reusable case-study layout |
+| [src/components/TrackedLink.tsx](src/components/TrackedLink.tsx) | Analytics-aware links |
+| [src/components/SiteAnalyticsScripts.tsx](src/components/SiteAnalyticsScripts.tsx) | Site analytics bootstrap |
+| [src/lib/analytics.ts](src/lib/analytics.ts) | Analytics event helpers |
+| [src/lib/getWorksData.ts](src/lib/getWorksData.ts) | Static work data loader |
+| [src/data/worksData.json](src/data/worksData.json) | Portfolio grid content |
+| [src/store.ts](src/store.ts) | Redux store setup |
+| [styles/index.js](styles/index.js) | Shared styled-components exports |
+| [styles/theme.ts](styles/theme.ts) | Theme constants and tokens |
+| [scripts/generate-sitemap.js](scripts/generate-sitemap.js) | Sitemap generation |
+| [.github/workflows/ci.yml](.github/workflows/ci.yml) | Automated CI checks |
+| [.github/workflows/security.yml](.github/workflows/security.yml) | Security scanning |
+| [skills/coding-standards/SKILL.md](skills/coding-standards/SKILL.md) | Production coding standards |
+| [skills/sync-agent-briefs/SKILL.md](skills/sync-agent-briefs/SKILL.md) | Agent brief sync workflow |
+
+---
+
+## Maintaining this file
+
+**Whenever you change the codebase in a way this document describes, update it in the same change.** Examples that require an update:
+
+- Adding, removing, renaming, or re-homing top-level directories, route groups, feature folders, or build scripts.
+- Changing root `package.json` scripts, CI/security workflows, lint/typecheck/test/build policy, or Node/npm assumptions.
+- Changing static export behavior, sitemap behavior, Storybook setup, analytics setup, or environment variables.
+- Changing a file listed in [Key files map](#7-key-files-map), or adding something that belongs in it.
+
+Treat `AGENTS.md` as the canonical source for the mirrored harness briefs. After updating it, run `npm run agent-briefs:sync` and `npm run agent-briefs:check` so [CLAUDE.md](CLAUDE.md) and [GEMINI.md](GEMINI.md) stay aligned.
+
+Do **not** use this file for ephemeral notes, debugging logs, or session history. It is a durable project map, not a journal.

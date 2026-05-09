@@ -1,0 +1,60 @@
+name: Security Checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+  pull-requests: write
+
+jobs:
+  secrets:
+    name: Secret Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  dependencies:
+    name: Dependency Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+      - run: npm audit --omit=dev --audit-level=critical
+
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/dependency-review-action@v4
+
+  codeql:
+    name: CodeQL Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: github/codeql-action/init@v4
+        with:
+          languages: javascript-typescript
+
+      - uses: github/codeql-action/autobuild@v4
+
+      - uses: github/codeql-action/analyze@v4
