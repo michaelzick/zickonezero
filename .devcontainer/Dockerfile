@@ -1,6 +1,6 @@
-# [Choice] Node.js version (use -bullseye variants on local arm64/Apple Silicon): 18, 16, 14, 18-bullseye, 16-bullseye, 14-bullseye, 18-buster, 16-buster, 14-buster
-ARG VARIANT=16-bullseye
-FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-${VARIANT}
+# [Choice] Node.js version: 24-bookworm, 22-bookworm, 20-bookworm
+ARG VARIANT=24-bookworm
+FROM mcr.microsoft.com/devcontainers/typescript-node:1-${VARIANT}
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \

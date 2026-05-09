@@ -1,6 +1,6 @@
 import AboutContent from '../src/components/AboutContent';
 import MainContent from '../src/components/MainContent';
-import worksData from '../pages/api/worksData.json';
+import worksData from '../src/data/worksData.json';
 import { renderWithProviders } from '../src/test/renderWithProviders';
 import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';

@@ -7,7 +7,7 @@ import {
   setPageData
 } from '../src/worksDataSlice';
 
-import getWorksData from './api/getWorksData';
+import getWorksData from '../src/lib/getWorksData';
 
 import { MainContent } from '../src/components';
 

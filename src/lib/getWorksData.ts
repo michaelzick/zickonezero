@@ -1,4 +1,4 @@
-import worksData from './worksData.json';
+import worksData from '../data/worksData.json';
 
 const getWorksData = async () => {
   try {
