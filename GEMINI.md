@@ -12,7 +12,7 @@ Sibling files [CLAUDE.md](CLAUDE.md) (Claude Code) and [AGENTS.md](AGENTS.md) (C
 
 Primary flows:
 - Home portfolio: animated intro, tabbed work sections, thumbnail grid, and lightbox gallery.
-- Case studies: reusable project showcase layouts for DemoStoke, Antisyphon Training, and related work.
+- Case studies: reusable project showcase layouts for DemoStoke, Antisyphon Training, Nice Guy University, and related work.
 - Product/service pages: DemoStoke, DemoStoke Fleet Ops, Find Your Flow State, Who's In Charge, coaching, and about pages.
 - Static publishing: `next build` exports the site with `output: 'export'` and regenerates `public/sitemap.xml`.
 
@@ -59,7 +59,7 @@ zickonezero/
 - **Root wrapper:** `pages/_app.tsx` imports global SCSS, wraps pages with Redux and `AppThemeProvider`, installs GTM/site analytics, and renders shared `<Head>` metadata.
 - **Document:** `pages/_document.tsx` handles server document structure for styled-components.
 - **Home page:** `pages/index.tsx` loads work data with `getStaticProps`, stores it in Redux, and renders `MainContent`.
-- **Content pages:** top-level files in `pages/` render about, case-study, coaching, DemoStoke, Antisyphon, and product pages.
+- **Content pages:** top-level files in `pages/` render about, case-study, coaching, DemoStoke, Antisyphon, Nice Guy University, and product pages.
 - **Static export:** `next.config.js` keeps the app static-host friendly. Static data helpers live under `src/` instead of `pages/api` so the exported site does not expose accidental API routes.
 
 ### 4.2 State, content, and UI
@@ -68,7 +68,7 @@ zickonezero/
 - **Typed hooks:** `src/hooks.ts` exports `useAppDispatch` and `useAppSelector`.
 - **Homepage:** `src/components/MainContent.tsx` coordinates tabs, scroll animation, lightbox state, mobile menu state, analytics events, and work-grid rendering.
 - **Project showcases:** `src/components/ProjectShowcase.tsx` provides the reusable case-study shell with hero, section cards, lightbox, and tracking.
-- **Case-study modules:** `src/components/demostoke/`, `src/components/antisyphon/`, and `src/components/userstories/` hold page-specific content and section data.
+- **Case-study modules:** `src/components/demostoke/`, `src/components/antisyphon/`, `src/components/niceguyuniversity/`, and `src/components/userstories/` hold page-specific content and section data.
 - **Static data:** `src/data/worksData.json` feeds the homepage portfolio grid through `src/lib/getWorksData.ts`.
 - **Design tokens/styles:** `styles/index.js`, `styles/projectShowcases.js`, `styles/*.ts`, and `styles/globals.scss` define shared styled-components and page themes.
 
@@ -120,8 +120,11 @@ Security automation runs Gitleaks, dependency review, CodeQL, and a production d
 |---|---|
 | [pages/_app.tsx](pages/_app.tsx) | App providers, analytics scripts, global metadata |
 | [pages/index.tsx](pages/index.tsx) | Home page data loading and `MainContent` entry |
+| [pages/nice-guy-university.tsx](pages/nice-guy-university.tsx) | Nice Guy University case-study route |
 | [src/components/MainContent.tsx](src/components/MainContent.tsx) | Homepage animation, section tabs, gallery/lightbox |
+| [src/components/NiceGuyUniversityContent.tsx](src/components/NiceGuyUniversityContent.tsx) | Nice Guy University tabbed case-study shell |
 | [src/components/ProjectShowcase.tsx](src/components/ProjectShowcase.tsx) | Reusable case-study layout |
+| [src/components/niceguyuniversity/](src/components/niceguyuniversity/) | Nice Guy University case-study and product-screen section data |
 | [src/components/TrackedLink.tsx](src/components/TrackedLink.tsx) | Analytics-aware links |
 | [src/components/SiteAnalyticsScripts.tsx](src/components/SiteAnalyticsScripts.tsx) | Site analytics bootstrap |
 | [src/lib/analytics.ts](src/lib/analytics.ts) | Analytics event helpers |

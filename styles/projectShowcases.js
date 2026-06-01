@@ -39,7 +39,8 @@ export const PageInner = styled.div`
 
 export const CaseStudyPageInner = styled(PageInner)`
   .ds-logo,
-  .at-logo {
+  .at-logo,
+  .ngu-logo {
     width: 6em;
     height: auto;
   }

@@ -150,5 +150,13 @@
     "header": "CASE STUDY: DemoStoke",
     "group": "demostoke",
     "link": "/demostoke"
+  },
+  {
+    "thumb": "/img/squares/ngu-logo-square.webp",
+    "imgs": [],
+    "desc": "Recovery course and coaching platform for men",
+    "header": "CASE STUDY: Nice Guy University",
+    "group": "nice-guy-university",
+    "link": "/nice-guy-university"
   }
 ]
