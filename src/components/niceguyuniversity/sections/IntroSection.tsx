@@ -31,7 +31,7 @@ const ROLE_BULLETS = [
   'Content architecture',
   'Analytics planning'
 ] as const;
-const INTRO_SUMMARY = 'Nice Guy University is my own product: a platform that turns the Nice Guy recovery coaching I do one-on-one into self-paced courses men can start tonight.';
+const INTRO_SUMMARY = 'Nice Guy University is a platform that turns the Nice Guy recovery coaching I do one-on-one into self-paced courses men can start tonight.';
 const PROJECT_URL = 'https://www.niceguyuniversity.com/';
 
 const IntroSection = ({ setAnimatedSectionRef, visibleSections, openLightbox }: IntroSectionProps) => (
