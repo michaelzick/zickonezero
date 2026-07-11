@@ -42,7 +42,7 @@ type ActiveSection = HomeSectionKey | null;
 const DESKTOP_NAV_OFFSET = 92; // Tighten the gap so section headers sit closer to the tabs
 const MOBILE_TABS_HEIGHT_PX = 11.3 * 16; // Keep in sync with mobile scroll target for Home tabs
 const DETECTION_BUFFER = 12;
-const CASE_STUDY_GROUPS = new Set(['demostoke', 'antisyphon-training']);
+const CASE_STUDY_GROUPS = new Set(['demostoke', 'antisyphon-training', 'nice-guy-university']);
 const WORKS_CAROUSEL_IMAGES = [
   {
     src: '/img/demostoke/case-study/ds-explore-hybrid.webp',
@@ -55,6 +55,10 @@ const WORKS_CAROUSEL_IMAGES = [
   {
     src: '/img/antisyphon/course-catalog.webp',
     alt: 'Antisyphon Training course catalog'
+  },
+  {
+    src: '/img/nice-guy-university/ngu-courses.webp',
+    alt: 'Nice Guy University course catalog'
   },
   {
     src: '/img/demostoke/case-study/ds-calendar-cal.webp',

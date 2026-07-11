@@ -821,7 +821,8 @@ export const BioBox = styled.div`
       max-width: 62em;
 
       .ds-logo,
-      .at-logo {
+      .at-logo,
+      .ngu-logo {
         width: 6em;
       }
 

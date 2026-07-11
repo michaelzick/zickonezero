@@ -11,6 +11,7 @@ import Thumbnail from './Thumbnail';
 import GridContent from './GridContent';
 import DemoStokeContent from './DemoStokeContent';
 import AntisyphonContent from './AntisyphonContent';
+import NiceGuyUniversityContent from './NiceGuyUniversityContent';
 import ThemeSwitcher from './ThemeSwitcher';
 import AnimatedMobileMenu from './AnimatedMobileMenu';
 
@@ -28,6 +29,7 @@ export {
   GridContent,
   DemoStokeContent,
   AntisyphonContent,
+  NiceGuyUniversityContent,
   ThemeSwitcher,
   AnimatedMobileMenu
 };
