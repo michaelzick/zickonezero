@@ -45,8 +45,10 @@ const PAGES = [
   {
     name: 'ngu-home-featured-courses',
     url: 'https://www.niceguyuniversity.com/',
+    // 225 keeps the heading clear of the sticky nav while the Enroll Now
+    // buttons still fit fully inside the frame.
     scrollToText: 'Featured Courses',
-    scrollOffset: 260,
+    scrollOffset: 225,
   },
   {
     name: 'ngu-how-it-works-steps',

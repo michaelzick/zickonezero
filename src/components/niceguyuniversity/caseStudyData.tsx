@@ -112,9 +112,9 @@ export const PERSONA_ITEMS = [
   {
     title: 'Admin and Content Ops',
     bullets: [
-      'One person runs courses, orders, coupons, reviews, and email from a single dashboard, and that person is me.',
-      'Launching a course has to be a content task, not an engineering project.',
-      'Reporting has to answer operator questions: what do students finish, where do they stall, what converts.'
+      'Manages courses, reviews, enrollments, and purchases from a single admin dashboard.',
+      'Views analytics in the same place: completion rates, chapter progress, engagement, and enrollment trends.',
+      'Builds and manages comprehensive email campaigns through the dashboard, keeping marketing next to the student data it runs on.'
     ]
   }
 ] as const;
