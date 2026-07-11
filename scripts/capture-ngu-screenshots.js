@@ -46,7 +46,7 @@ const PAGES = [
     name: 'ngu-home-featured-courses',
     url: 'https://www.niceguyuniversity.com/',
     scrollToText: 'Featured Courses',
-    scrollOffset: 140,
+    scrollOffset: 260,
   },
   {
     name: 'ngu-how-it-works-steps',

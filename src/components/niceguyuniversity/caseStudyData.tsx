@@ -19,7 +19,7 @@ export const TLDR_ITEMS: {
 }[] = [
   {
     title: 'Product Summary',
-    description: 'Nice Guy University is the product version of my coaching practice. Men who struggle with people-pleasing, weak boundaries, and approval addiction work through self-paced courses — video lessons, audio, journal prompts, and assignments — without waiting for a session with me. I designed it, wrote it, and built it.',
+    description: 'Nice Guy University is the product version of my coaching practice. Men who struggle with people-pleasing, weak boundaries, and approval addiction work through self-paced courses built from video lessons, audio, journal prompts, and assignments. They start without waiting for a session with me. I designed it, wrote it, and built it.',
     image: { src: '/img/nice-guy-university/ngu-home-featured-courses.webp', alt: 'Nice Guy University featured courses on the homepage with pricing and enroll buttons' }
   },
   {
@@ -49,7 +49,7 @@ export const METHOD_SECTIONS: MethodSection[] = [
   {
     title: 'Discovery and Positioning',
     bullets: [
-      'Wrote the positioning from years of coaching calls, in the words men actually use — shame, resentment, "why do I keep doing this" — instead of therapy-speak.',
+      'Wrote the positioning from years of coaching calls, in the words men actually use, like shame, resentment, and "why do I keep doing this," rather than therapy-speak.',
       'Boiled the curriculum down to a three-step framework every course teaches toward: confront shame, drop the victim story, build boundaries.',
       'Set a voice that could be blunt on the homepage and careful inside the lessons, because the work needs both.'
     ],
@@ -60,14 +60,14 @@ export const METHOD_SECTIONS: MethodSection[] = [
     bullets: [
       'Structured the site around the four questions every visitor shows up with: what is this, which course fits me, who is teaching, and what do I get.',
       'Modeled courses with categories, levels, pricing, lesson counts, and topics so the catalog can grow without a redesign.',
-      'Left room for more coaches from day one — the IA treats me as the first instructor, not the only one.'
+      'Left room for more coaches from day one; the IA treats me as the first instructor, not the only one.'
     ],
     images: [{ src: '/img/nice-guy-university/ngu-how-it-works-steps.webp', alt: 'Nice Guy University how it works process steps: browse coaches, pick a course, do the work' }]
   },
   {
     title: 'UI System and Product Implementation',
     bullets: [
-      'Built a high-contrast interface with oversized type and direct calls to action — the visual version of the coaching voice.',
+      'Built a high-contrast interface with oversized type and direct calls to action. It is the visual version of the coaching voice.',
       'Shipped the catalog, course detail, curriculum, cart, checkout, and auth flows in React on Supabase.',
       'Kept the honest details in: every course page carries a plain-language "not a substitute for therapy" disclosure.'
     ],
@@ -77,7 +77,7 @@ export const METHOD_SECTIONS: MethodSection[] = [
     title: 'Analytics and Operations',
     bullets: [
       'Built an admin dashboard with real reporting: course completion, chapter progress, video and audio engagement, and enrollment trends.',
-      'Run the whole business from the same place — orders, coupons, reviews, and email marketing — without touching code.',
+      'Run the whole business from the same place, from orders and coupons to reviews and email marketing, without touching code.',
       'Instrumented the funnel from first visit through enrollment so I can see where men hesitate and fix it.'
     ],
     images: [{ src: '/img/nice-guy-university/ngu-admin-analytics.webp', alt: 'Nice Guy University admin analytics dashboard showing course completion by status' }]
@@ -88,7 +88,7 @@ export const PERSONA_ITEMS = [
   {
     title: 'Students Starting Recovery',
     bullets: [
-      'Usually lands here after a breaking point — a relationship ending or one resentment too many — not from casual browsing.',
+      'Usually lands here after a breaking point, like a relationship ending or one resentment too many, not from casual browsing.',
       'Skeptical of self-help and allergic to anything that sounds like a pep talk.',
       'Needs to know which course matches the pattern that is actually costing him, and what it will ask of him.'
     ]
@@ -98,7 +98,7 @@ export const PERSONA_ITEMS = [
     bullets: [
       'Today that is me; the platform is built to carry more voices without rebuilding anything.',
       'Need profile pages strong enough to earn a purchase from a stranger on the internet.',
-      'Need a repeatable course structure — chapters, lessons, topics, reviews — instead of hand-built pages.'
+      'Need a repeatable structure of chapters, lessons, topics, and reviews instead of hand-built pages.'
     ]
   },
   {
@@ -112,7 +112,7 @@ export const PERSONA_ITEMS = [
   {
     title: 'Admin and Content Ops',
     bullets: [
-      'One person — me — runs courses, orders, coupons, reviews, and email from a single dashboard.',
+      'One person runs courses, orders, coupons, reviews, and email from a single dashboard, and that person is me.',
       'Launching a course has to be a content task, not an engineering project.',
       'Reporting has to answer operator questions: what do students finish, where do they stall, what converts.'
     ]

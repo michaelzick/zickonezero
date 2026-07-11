@@ -33,9 +33,9 @@ export const SCREEN_BLOCKS: ScreenBlock[] = [
     title: 'Platform Overview',
     copy: (
       <>
-        The homepage makes the promise in five words — stop being nice, start being you — and backs it with the framework
-        every course teaches toward. The how-it-works page lays out the actual process: browse coaches, pick a course, do
-        the work.
+        The homepage makes the promise in five words, &quot;stop being nice, start being you,&quot; and backs it with the
+        framework every course teaches toward. The how-it-works page lays out the actual process: browse coaches, pick a
+        course, do the work.
       </>
     ),
     images: [
@@ -64,7 +64,7 @@ export const SCREEN_BLOCKS: ScreenBlock[] = [
     copy: (
       <>
         One page answers everything a buyer needs: what the course covers, the full lesson list with durations, level, time
-        commitment, and price — plus a plain-language note that these courses are not a substitute for therapy.
+        commitment, and price. It also carries a plain-language note that these courses are not a substitute for therapy.
       </>
     ),
     images: [
@@ -77,8 +77,8 @@ export const SCREEN_BLOCKS: ScreenBlock[] = [
     title: 'Support Ecosystem',
     copy: (
       <>
-        Coach pages put a real person behind the courses — bio, approach, and a direct way to book. The structure already
-        supports more coaches as the roster grows.
+        Coach pages put a real person behind the courses, with a bio, an approach, and a direct way to book. The structure
+        already supports more coaches as the roster grows.
       </>
     ),
     images: [
