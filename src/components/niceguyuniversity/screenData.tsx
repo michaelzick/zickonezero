@@ -70,7 +70,6 @@ export const SCREEN_BLOCKS: ScreenBlock[] = [
       </>
     ),
     images: [
-      { src: '/img/nice-guy-university/ngu-resources.webp', alt: 'Nice Guy University recovery resources screen' },
       { src: '/img/nice-guy-university/ngu-coach-profile.webp', alt: 'Nice Guy University Michael Zick coach profile screen' }
     ]
   }

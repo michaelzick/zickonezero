@@ -124,6 +124,5 @@ export const HOW_IMAGES = [
   { src: '/img/nice-guy-university/ngu-courses.webp', alt: 'Nice Guy University course catalog with filters and course cards' },
   { src: '/img/nice-guy-university/ngu-course-detail.webp', alt: 'Nice Guy University course detail page with curriculum and checkout call to action' },
   { src: '/img/nice-guy-university/ngu-how-it-works.webp', alt: 'Nice Guy University how it works page explaining the recovery platform' },
-  { src: '/img/nice-guy-university/ngu-resources.webp', alt: 'Nice Guy University resources page for recovery guides' },
   { src: '/img/nice-guy-university/ngu-coach-profile.webp', alt: 'Nice Guy University coach profile for Michael Zick' },
 ] as const;

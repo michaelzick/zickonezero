@@ -79,7 +79,6 @@ describe('NiceGuyUniversityContent', () => {
     expect(screen.getByRole('heading', { name: 'Course Discovery' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Course Details' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Support Ecosystem' })).toBeInTheDocument();
-    expect(screen.getByAltText('Nice Guy University recovery resources screen')).toBeInTheDocument();
     expect(screen.getByAltText('Nice Guy University Michael Zick coach profile screen')).toBeInTheDocument();
   });
 });
