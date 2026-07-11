@@ -19,9 +19,9 @@ const OutcomeSection = ({ setAnimatedSectionRef, visibleSections }: OutcomeSecti
       <DemoStokeTldrSection className='text-animate'>
         <OutcomeCopy>
           <ul className='plain-lines'>
-            <li>A public platform that turns coaching language into structured course discovery.</li>
-            <li>A scalable foundation for courses, coaches, resources, reviews, orders, and admin workflows.</li>
-            <li>A brand experience that stays blunt, practical, and grounded in behavior change.</li>
+            <li>A live product at niceguyuniversity.com selling real courses, not a concept deck.</li>
+            <li>A coaching practice that scales past my calendar — men can start the work without booking a session.</li>
+            <li>A back office that lets one person run the entire business, from analytics to email.</li>
           </ul>
         </OutcomeCopy>
       </DemoStokeTldrSection>

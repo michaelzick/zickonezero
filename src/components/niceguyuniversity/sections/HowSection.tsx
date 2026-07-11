@@ -50,20 +50,21 @@ const HowSection = ({
           <section>
             <h3>Discovery and Conversion</h3>
             <p>
-              The course catalog and detail pages keep the next step clear. Users can browse by pattern, compare levels and
-              topics, understand the curriculum, and move toward checkout without losing the direct tone of the brand.
+              The catalog reads like a menu of patterns, not a library. Search, categories, levels, and pricing narrow the
+              options down to the right starting point, and a free intro course gives skeptical visitors a way in with
+              nothing at stake.
             </p>
           </section>
           <section>
-            <h3>Trust, Tone, and Coaching Support</h3>
+            <h3>Trust, Tone, and Support</h3>
             <p>
-              Coach pages, recovery resources, and how-it-works education make the platform feel guided instead of transactional.
-              The copy stays plainspoken because the product is about behavior change, not motivational decoration.
+              Course pages show the full curriculum, the time commitment, and a plain warning that courses are not therapy.
+              Coach pages put a face behind the material. The tone holds from homepage to lesson: direct, specific, no hype.
             </p>
           </section>
         </DemoStokeTwoUp>
         <AntisyphonHeroImageWrap className='image-animate'>
-          <DemoStokeTldrImage src='/img/nice-guy-university/ngu-course-detail.webp' alt='Nice Guy University course detail layout' loading='lazy' />
+          <DemoStokeTldrImage src='/img/nice-guy-university/ngu-course-curriculum.webp' alt='Nice Guy University course curriculum with lesson list and durations' loading='lazy' />
         </AntisyphonHeroImageWrap>
       </DemoStokeTldrSection>
       <AnimatedSection

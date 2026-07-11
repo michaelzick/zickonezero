@@ -16,6 +16,7 @@ import {
   Title
 } from '../../../../styles/projectShowcases';
 import { SetAnimatedSectionRef, VisibleSections } from '../../showcaseTypes';
+import { HERO_LIGHTBOX_INDEX } from '../caseStudyData';
 
 type IntroSectionProps = {
   setAnimatedSectionRef: SetAnimatedSectionRef;
@@ -30,7 +31,7 @@ const ROLE_BULLETS = [
   'Content architecture',
   'Analytics planning'
 ] as const;
-const INTRO_SUMMARY = 'Nice Guy University is a course and coaching platform for men working through approval addiction, weak boundaries, shame, and people-pleasing patterns.';
+const INTRO_SUMMARY = 'Nice Guy University is my own product: a platform that turns the Nice Guy recovery coaching I do one-on-one into self-paced courses men can start tonight.';
 const PROJECT_URL = 'https://www.niceguyuniversity.com/';
 
 const IntroSection = ({ setAnimatedSectionRef, visibleSections, openLightbox }: IntroSectionProps) => (
@@ -42,7 +43,7 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections, openLightbox }: 
     <section id='introduction' className='story-section'>
       <HiddenSectionAnchor id='hero-spacer' aria-hidden='true' />
       <HeroGrid>
-        <ShowcaseMediaButton type='button' aria-label='Open image: Nice Guy University homepage with hero and calls to action' onClick={() => openLightbox(0)}>
+        <ShowcaseMediaButton type='button' aria-label='Open image: Nice Guy University homepage with hero and calls to action' onClick={() => openLightbox(HERO_LIGHTBOX_INDEX)}>
           <CaseStudyHeroMediaFrame className='image-animate' style={{ backgroundColor: '#111111' }}>
             <img src='/img/nice-guy-university/ngu-home.webp' alt='Nice Guy University homepage with hero and calls to action' loading='lazy' />
           </CaseStudyHeroMediaFrame>

@@ -32,6 +32,41 @@ const PAGES = [
   { name: 'ngu-course-detail', url: 'https://www.niceguyuniversity.com/course/introduction-to-nice-guy-recovery' },
   { name: 'ngu-how-it-works', url: 'https://www.niceguyuniversity.com/how-it-works' },
   { name: 'ngu-coach-profile', url: 'https://www.niceguyuniversity.com/coaches/michael-zick' },
+  // Scrolled sections. scrollOffset is the gap left above the anchor text so
+  // headings clear the sticky nav; settleMs waits out scroll-triggered
+  // animations such as the framework step-number count-up.
+  {
+    name: 'ngu-home-framework',
+    url: 'https://www.niceguyuniversity.com/',
+    scrollToText: 'Three steps to rock-solid authenticity',
+    scrollOffset: 250,
+    settleMs: 3000,
+  },
+  {
+    name: 'ngu-home-featured-courses',
+    url: 'https://www.niceguyuniversity.com/',
+    scrollToText: 'Featured Courses',
+    scrollOffset: 140,
+  },
+  {
+    name: 'ngu-how-it-works-steps',
+    url: 'https://www.niceguyuniversity.com/how-it-works',
+    scrollToText: 'Three steps. No fluff.',
+    scrollOffset: 280,
+  },
+  {
+    name: 'ngu-course-overview',
+    url: 'https://www.niceguyuniversity.com/course/introduction-to-nice-guy-recovery',
+    scrollToText: 'About This Course',
+    scrollOffset: 320,
+  },
+  {
+    name: 'ngu-course-curriculum',
+    url: 'https://www.niceguyuniversity.com/course/introduction-to-nice-guy-recovery',
+    clickText: ['CURRICULUM', 'Getting Started'],
+    scrollToText: 'Course Curriculum',
+    scrollOffset: 280,
+  },
 ];
 
 const ADMIN_PAGES = [
@@ -66,7 +101,7 @@ async function freezeVideos(page, seconds) {
   }, seconds);
 }
 
-async function capture(page, { name, url, freezeVideoAt }, tmpDir) {
+async function capture(page, { name, url, freezeVideoAt, clickText, scrollToText, scrollOffset, settleMs }, tmpDir) {
   await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
   await dismissCouponModal(page);
   await page.mouse.move(0, 0);
@@ -74,6 +109,18 @@ async function capture(page, { name, url, freezeVideoAt }, tmpDir) {
   if (freezeVideoAt != null) {
     await freezeVideos(page, freezeVideoAt);
     await page.waitForTimeout(300);
+  }
+  for (const text of clickText ?? []) {
+    await page.getByText(text, { exact: false }).first().click();
+    await page.waitForTimeout(800);
+  }
+  if (scrollToText) {
+    await page.getByText(scrollToText, { exact: false }).first().evaluate((node, offset) => {
+      const rect = node.getBoundingClientRect();
+      window.scrollTo({ top: window.scrollY + rect.top - offset, behavior: 'instant' });
+    }, scrollOffset ?? 200);
+    await page.mouse.move(0, 0);
+    await page.waitForTimeout(settleMs ?? 1500);
   }
   const png = path.join(tmpDir, `${name}.png`);
   await page.screenshot({ path: png });

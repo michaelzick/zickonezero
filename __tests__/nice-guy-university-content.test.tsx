@@ -48,7 +48,7 @@ describe('NiceGuyUniversityContent', () => {
     expect(getTabLabels(mobileTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods']);
     expect(heroHeading).toBeInTheDocument();
     expect(heroHeading.querySelector('br')).toBeInTheDocument();
-    expect(screen.getAllByText(/course and coaching platform for men working through approval addiction/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/turns the Nice Guy recovery coaching I do one-on-one into self-paced courses/i).length).toBeGreaterThan(0);
     expect(screen.getByRole('link', { name: 'NiceGuyUniversity.com' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Open image: Nice Guy University homepage with hero and calls to action' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The What' })).toBeInTheDocument();
@@ -57,7 +57,7 @@ describe('NiceGuyUniversityContent', () => {
     expect(screen.getByRole('heading', { name: 'Methods / The UX Process' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The Outcome' })).toBeInTheDocument();
     expect(screen.getByLabelText('Nice Guy University screenshot carousel')).toBeInTheDocument();
-    expect(screen.getByAltText('Nice Guy University course catalog')).toBeInTheDocument();
+    expect(screen.getByAltText('Nice Guy University course catalog with search and filters')).toBeInTheDocument();
   });
 
   it('switches to the product screens tab with the public screenshot set', async () => {
@@ -71,14 +71,15 @@ describe('NiceGuyUniversityContent', () => {
 
     expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'Product Screens' }));
     expect(screen.getByRole('heading', { name: 'Nice Guy University Product Screens' })).toBeInTheDocument();
-    expect(getTabLabels(desktopTabs)).toEqual(['Overview', 'Course Discovery', 'Course Details', 'Support']);
-    expect(getTabLabels(mobileTabs)).toEqual(['Overview', 'Course Discovery', 'Course Details', 'Support']);
+    expect(getTabLabels(desktopTabs)).toEqual(['Overview', 'Course Discovery', 'Course Details', 'Support', 'Admin']);
+    expect(getTabLabels(mobileTabs)).toEqual(['Overview', 'Course Discovery', 'Course Details', 'Support', 'Admin']);
     expect(screen.getByRole('link', { name: 'NiceGuyUniversity.com' })).toBeInTheDocument();
     expect(screen.getAllByRole('button', { name: 'Open image: Nice Guy University homepage overview' }).length).toBeGreaterThan(0);
     expect(screen.getByRole('heading', { name: 'Platform Overview' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Course Discovery' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Course Details' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Support Ecosystem' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Admin and Analytics' })).toBeInTheDocument();
     expect(screen.getByAltText('Nice Guy University Michael Zick coach profile screen')).toBeInTheDocument();
   });
 });

@@ -21,10 +21,12 @@ type ScreensContentProps = {
   openScreenLightbox: (index: number) => void;
 };
 
+// Block images sit after the intro hero image in the lightbox sources, so
+// every offset starts at 1.
 const screenImageOffsets = SCREEN_BLOCKS.reduce<number[]>((offsets, _section, index) => {
-  const previous = offsets[index - 1] ?? 0;
+  const previous = offsets[index - 1] ?? 1;
   const priorCount = index > 0 ? SCREEN_BLOCKS[index - 1]?.images.length ?? 0 : 0;
-  offsets[index] = index === 0 ? 0 : previous + priorCount;
+  offsets[index] = index === 0 ? 1 : previous + priorCount;
   return offsets;
 }, []);
 

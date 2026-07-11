@@ -27,6 +27,7 @@ import {
 import {
   SCREEN_BLOCKS,
   SCREEN_BOTTOM_SECTION_ID,
+  SCREEN_HERO_IMAGE,
   SCREEN_SECTIONS
 } from './niceguyuniversity/screenData';
 import useAnimatedSections from '../hooks/useAnimatedSections';
@@ -48,7 +49,7 @@ const NiceGuyUniversityContent = () => {
   const { lightboxController: screenLightboxController, openLightbox: openScreenLightbox } = useLightboxController();
   const { rowRef, canScrollLeft, canScrollRight, scrollGalleryBy } = useHorizontalGallery(activeTab);
   const methodImages = useMemo(() => METHOD_SECTIONS.flatMap(({ images }) => images), []);
-  const screenImages = useMemo(() => SCREEN_BLOCKS.flatMap(({ images }) => images), []);
+  const screenImages = useMemo(() => [SCREEN_HERO_IMAGE, ...SCREEN_BLOCKS.flatMap(({ images }) => images)], []);
   const caseStudyImages = useMemo(() => [...TLDR_ITEMS.map(({ image }) => image), ...HOW_IMAGES], []);
 
   const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {

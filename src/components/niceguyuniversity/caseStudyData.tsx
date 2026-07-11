@@ -19,22 +19,22 @@ export const TLDR_ITEMS: {
 }[] = [
   {
     title: 'Product Summary',
-    description: 'Nice Guy University is a course and coaching platform for men working through approval addiction, weak boundaries, toxic shame, and people-pleasing patterns. The experience turns direct coaching frameworks into a self-paced learning path with enough structure to move users from insight into practice.',
-    image: { src: '/img/nice-guy-university/ngu-home.webp', alt: 'Nice Guy University homepage hero' }
+    description: 'Nice Guy University is the product version of my coaching practice. Men who struggle with people-pleasing, weak boundaries, and approval addiction work through self-paced courses — video lessons, audio, journal prompts, and assignments — without waiting for a session with me. I designed it, wrote it, and built it.',
+    image: { src: '/img/nice-guy-university/ngu-home-featured-courses.webp', alt: 'Nice Guy University featured courses on the homepage with pricing and enroll buttons' }
   },
   {
     title: 'The Challenge',
-    description: 'Package sensitive personal-development work into a product experience that feels direct, credible, and action-oriented without becoming cold, clinical, or fluffy.',
-    image: { src: '/img/nice-guy-university/ngu-courses.webp', alt: 'Nice Guy University course catalog' }
+    description: 'Men in this space have already read the books and watched the videos, and nothing changed. The product had to feel different from generic self-help: blunt where the industry is soft, structured where it is vague, and careful with material that is genuinely heavy.',
+    image: { src: '/img/nice-guy-university/ngu-courses.webp', alt: 'Nice Guy University course catalog with search and filters' }
   },
   {
     title: 'The Solution',
-    description: 'A public course marketplace with clear navigation, practical course detail pages, coach context, and supporting resources that keep the next step obvious.',
-    image: { src: '/img/nice-guy-university/ngu-course-detail.webp', alt: 'Nice Guy University course detail page' }
+    description: 'A course marketplace that keeps the next step obvious. Browse by the pattern that is costing you the most, see the full curriculum and time commitment before paying, and start with a free intro course if you are skeptical. Coach pages put a real person behind every course.',
+    image: { src: '/img/nice-guy-university/ngu-course-detail.webp', alt: 'Nice Guy University course detail page with enrollment sidebar' }
   },
   {
     title: 'My Roles',
-    description: 'Product strategy, UX/UI design, front-end engineering, content architecture, and analytics/integration planning.',
+    description: 'All of it. Positioning and copy, UX/UI design, the React front end, the Supabase backend, checkout and coupons, and the admin dashboard I use to run the business every day.',
     image: { src: '/img/nice-guy-university/ngu-how-it-works.webp', alt: 'Nice Guy University how it works page' }
   }
 ] as const;
@@ -49,38 +49,38 @@ export const METHOD_SECTIONS: MethodSection[] = [
   {
     title: 'Discovery and Positioning',
     bullets: [
-      'Clarified the promise around behavioral recovery rather than passive self-help content.',
-      'Mapped the public journey from pain point to course selection, coach trust, and enrollment.',
-      'Defined a tone that could be blunt and masculine without losing care or precision.'
+      'Wrote the positioning from years of coaching calls, in the words men actually use — shame, resentment, "why do I keep doing this" — instead of therapy-speak.',
+      'Boiled the curriculum down to a three-step framework every course teaches toward: confront shame, drop the victim story, build boundaries.',
+      'Set a voice that could be blunt on the homepage and careful inside the lessons, because the work needs both.'
     ],
-    images: [{ src: '/img/nice-guy-university/ngu-home.webp', alt: 'Nice Guy University homepage positioning' }]
+    images: [{ src: '/img/nice-guy-university/ngu-home-framework.webp', alt: 'Nice Guy University homepage framework section with three steps to rock-solid authenticity' }]
   },
   {
     title: 'Information Architecture and Content Model',
     bullets: [
-      'Organized the site around courses, coaches, how-it-works education, and recovery resources.',
-      'Designed course metadata for level, category, pricing, lessons, topics, instructor context, and outcomes.',
-      'Kept the public IA extensible for future coaches, resources, and authenticated learning flows.'
+      'Structured the site around the four questions every visitor shows up with: what is this, which course fits me, who is teaching, and what do I get.',
+      'Modeled courses with categories, levels, pricing, lesson counts, and topics so the catalog can grow without a redesign.',
+      'Left room for more coaches from day one — the IA treats me as the first instructor, not the only one.'
     ],
-    images: [{ src: '/img/nice-guy-university/ngu-courses.webp', alt: 'Nice Guy University course catalog filters' }]
+    images: [{ src: '/img/nice-guy-university/ngu-how-it-works-steps.webp', alt: 'Nice Guy University how it works process steps: browse coaches, pick a course, do the work' }]
   },
   {
     title: 'UI System and Product Implementation',
     bullets: [
-      'Built a high-contrast interface with bold type, direct calls to action, and scannable course cards.',
-      'Implemented course detail, coach profile, resource, cart, and auth-ready product surfaces.',
-      'Used responsive layouts so the experience still feels direct and readable on mobile.'
+      'Built a high-contrast interface with oversized type and direct calls to action — the visual version of the coaching voice.',
+      'Shipped the catalog, course detail, curriculum, cart, checkout, and auth flows in React on Supabase.',
+      'Kept the honest details in: every course page carries a plain-language "not a substitute for therapy" disclosure.'
     ],
-    images: [{ src: '/img/nice-guy-university/ngu-course-detail.webp', alt: 'Nice Guy University course detail implementation' }]
+    images: [{ src: '/img/nice-guy-university/ngu-course-overview.webp', alt: 'Nice Guy University course overview with learning outcomes and therapy disclaimer' }]
   },
   {
-    title: 'Analytics and Operations Planning',
+    title: 'Analytics and Operations',
     bullets: [
-      'Planned funnel events around route views, course browsing, cart actions, sign-in, sign-up, and enrollment.',
-      'Structured the platform for Supabase-backed course, coach, review, and admin operations.',
-      'Kept public content useful on its own while preparing the authenticated learning experience behind it.'
+      'Built an admin dashboard with real reporting: course completion, chapter progress, video and audio engagement, and enrollment trends.',
+      'Run the whole business from the same place — orders, coupons, reviews, and email marketing — without touching code.',
+      'Instrumented the funnel from first visit through enrollment so I can see where men hesitate and fix it.'
     ],
-    images: [{ src: '/img/nice-guy-university/ngu-coach-profile.webp', alt: 'Nice Guy University coach profile page' }]
+    images: [{ src: '/img/nice-guy-university/ngu-admin-analytics.webp', alt: 'Nice Guy University admin analytics dashboard showing course completion by status' }]
   }
 ];
 
@@ -88,33 +88,33 @@ export const PERSONA_ITEMS = [
   {
     title: 'Students Starting Recovery',
     bullets: [
-      'Need plain-language entry points for approval addiction, shame, boundaries, dating, and covert contracts.',
-      'Want to understand which course fits the pattern costing them the most right now.',
-      'Need the tone to feel direct enough to trust and safe enough to keep going.'
+      'Usually lands here after a breaking point — a relationship ending or one resentment too many — not from casual browsing.',
+      'Skeptical of self-help and allergic to anything that sounds like a pep talk.',
+      'Needs to know which course matches the pattern that is actually costing him, and what it will ask of him.'
     ]
   },
   {
     title: 'Coaches and Instructors',
     bullets: [
-      'Need a platform that can present distinct teaching voices without fragmenting the product promise.',
-      'Rely on profile pages, course cards, and resource content to build trust before enrollment.',
-      'Need course structures that support repeatable lessons, topics, reviews, and future cohorts.'
+      'Today that is me; the platform is built to carry more voices without rebuilding anything.',
+      'Need profile pages strong enough to earn a purchase from a stranger on the internet.',
+      'Need a repeatable course structure — chapters, lessons, topics, reviews — instead of hand-built pages.'
     ]
   },
   {
     title: 'Returning Learners',
     bullets: [
-      'Look for a clear path from one course into the next practical piece of work.',
-      'Need familiar navigation and account-ready surfaces that make progress easy to resume.',
-      'Benefit from resources that reinforce the same language used inside the courses.'
+      'Finished one course and want the next piece of work, not another sales funnel.',
+      'Expect progress to be saved and the path back in to be one click.',
+      'Trust the platform because the language inside the courses matches what got them to sign up.'
     ]
   },
   {
     title: 'Admin and Content Ops',
     bullets: [
-      'Need durable course, coach, coupon, order, review, and analytics structures.',
-      'Need public pages that can grow without redesigning the whole experience.',
-      'Need content workflows that keep course launches, pricing, and resource publishing manageable.'
+      'One person — me — runs courses, orders, coupons, reviews, and email from a single dashboard.',
+      'Launching a course has to be a content task, not an engineering project.',
+      'Reporting has to answer operator questions: what do students finish, where do they stall, what converts.'
     ]
   }
 ] as const;
@@ -123,6 +123,13 @@ export const HOW_IMAGES = [
   { src: '/img/nice-guy-university/ngu-home.webp', alt: 'Nice Guy University homepage with hero and primary calls to action' },
   { src: '/img/nice-guy-university/ngu-courses.webp', alt: 'Nice Guy University course catalog with filters and course cards' },
   { src: '/img/nice-guy-university/ngu-course-detail.webp', alt: 'Nice Guy University course detail page with curriculum and checkout call to action' },
+  { src: '/img/nice-guy-university/ngu-course-curriculum.webp', alt: 'Nice Guy University course curriculum with lesson list and durations' },
   { src: '/img/nice-guy-university/ngu-how-it-works.webp', alt: 'Nice Guy University how it works page explaining the recovery platform' },
+  { src: '/img/nice-guy-university/ngu-how-it-works-steps.webp', alt: 'Nice Guy University three-step process for starting recovery work' },
   { src: '/img/nice-guy-university/ngu-coach-profile.webp', alt: 'Nice Guy University coach profile for Michael Zick' },
+  { src: '/img/nice-guy-university/ngu-admin-analytics.webp', alt: 'Nice Guy University admin analytics dashboard' },
 ] as const;
+
+// The case-study hero opens the lightbox at ngu-home, which sits at the head
+// of HOW_IMAGES, directly after the TLDR images.
+export const HERO_LIGHTBOX_INDEX = TLDR_ITEMS.length;

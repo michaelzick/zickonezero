@@ -9,6 +9,7 @@ import {
   HeroMediaFrame,
   ShowcaseMediaButton
 } from '../../../../styles/projectShowcases';
+import { SCREEN_HERO_IMAGE } from '../screenData';
 
 type IntroSectionProps = {
   openScreenLightbox: (index: number) => void;
@@ -49,13 +50,13 @@ const IntroSection = ({ openScreenLightbox }: IntroSectionProps) => (
       <ShowcaseMediaButton
         type='button'
         className='image-animate'
-        aria-label='Open image: Nice Guy University homepage overview'
+        aria-label={`Open image: ${SCREEN_HERO_IMAGE.alt}`}
         onClick={() => openScreenLightbox(0)}
       >
         <HeroMediaFrame>
           <img
-            src='/img/nice-guy-university/ngu-home.webp'
-            alt='Nice Guy University homepage overview'
+            src={SCREEN_HERO_IMAGE.src}
+            alt={SCREEN_HERO_IMAGE.alt}
             loading='lazy'
           />
         </HeroMediaFrame>
