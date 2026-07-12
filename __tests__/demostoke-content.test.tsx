@@ -101,7 +101,7 @@ describe('DemoStokeContent', () => {
     expect(getMatchingRuleValues(introRow as HTMLElement, 'margin-top').map(normalizeDeclaration)).toContain(
       normalizeDeclaration(INTRO_ROW_TOP_MARGIN_DECLARATION)
     );
-    expect(screen.getByRole('link', { name: 'DemoStoke.com' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'www.demostoke.com' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The Independent Surfboard Shaper' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The Weekend Warrior' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The Small Ski & Bike Shop' })).toBeInTheDocument();

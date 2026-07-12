@@ -57,7 +57,6 @@ const CaseStudyContent = ({
           <IntroSection
             setAnimatedSectionRef={setAnimatedSectionRef}
             visibleSections={visibleSections}
-            openLightbox={openLightbox}
           />
         </CaseStudyIntroOffset>
         <SidebarSectionTabs

@@ -66,7 +66,8 @@ describe('AntisyphonContent', () => {
     expect(heroHeading).toBeInTheDocument();
     expect(whatHeading).toBeInTheDocument();
     expect(heroHeading.querySelector('br')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Open image: Antisyphon Training homepage with course cards' })).toBeInTheDocument();
+    expect(screen.getByAltText('Antisyphon Training homepage with course cards')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Open image: Antisyphon Training homepage with course cards' })).not.toBeInTheDocument();
     expect(whatSection).not.toBeNull();
     expect(whatSectionEl).toContainElement(whatHeading);
     expect(outcomeHeading).toBeInTheDocument();
@@ -103,7 +104,7 @@ describe('AntisyphonContent', () => {
     expect(getMatchingRuleValues(introImageWrap as HTMLElement, 'margin-top').map(normalizeDeclaration)).toContain(
       normalizeDeclaration(HERO_IMAGE_WRAP_TOP_MARGIN_DECLARATION)
     );
-    expect(screen.getByRole('link', { name: 'AntisyphonTraining.com' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'www.antisyphontraining.com' })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Context', level: 2 })).not.toBeInTheDocument();
     expect(screen.getAllByRole('button', { name: 'Open image: Full course catalog with category filters and badges' }).length).toBeGreaterThan(0);
     expect(screen.getByRole('button', { name: 'Course Catalog' })).toBeInTheDocument();

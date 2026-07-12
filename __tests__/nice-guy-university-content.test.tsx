@@ -49,8 +49,9 @@ describe('NiceGuyUniversityContent', () => {
     expect(heroHeading).toBeInTheDocument();
     expect(heroHeading.querySelector('br')).toBeInTheDocument();
     expect(screen.getAllByText(/turns the Nice Guy recovery coaching I do one-on-one into self-paced courses/i).length).toBeGreaterThan(0);
-    expect(screen.getByRole('link', { name: 'NiceGuyUniversity.com' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Open image: Nice Guy University homepage with hero and calls to action' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'www.niceguyuniversity.com' })).toBeInTheDocument();
+    expect(screen.getByAltText('Nice Guy University homepage with hero and calls to action')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Open image: Nice Guy University homepage with hero and calls to action' })).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The What' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The How / Course Platform Experience' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The Who / Audiences and Stakeholders' })).toBeInTheDocument();
@@ -73,7 +74,7 @@ describe('NiceGuyUniversityContent', () => {
     expect(screen.getByRole('heading', { name: 'Nice Guy University Product Screens' })).toBeInTheDocument();
     expect(getTabLabels(desktopTabs)).toEqual(['Overview', 'Course Discovery', 'Course Details', 'Support', 'Admin']);
     expect(getTabLabels(mobileTabs)).toEqual(['Overview', 'Course Discovery', 'Course Details', 'Support', 'Admin']);
-    expect(screen.getByRole('link', { name: 'NiceGuyUniversity.com' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'www.niceguyuniversity.com' })).toBeInTheDocument();
     expect(screen.getAllByRole('button', { name: 'Open image: Nice Guy University homepage overview' }).length).toBeGreaterThan(0);
     expect(screen.getByRole('heading', { name: 'Platform Overview' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Course Discovery' })).toBeInTheDocument();

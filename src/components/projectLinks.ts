@@ -26,7 +26,7 @@ export const PROJECT_LINKS = [
   {
     href: '/michael-zick-coaching',
     label: 'Michael Zick Coaching',
-    icon: '/img/squares/mz-rac-logo.webp',
+    icon: '/img/squares/mz-ngrc-logo.webp',
     iconAlt: 'Michael Zick Coaching logo'
   }
 ] as const;

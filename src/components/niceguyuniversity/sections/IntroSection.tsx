@@ -11,17 +11,14 @@ import {
   LinkRow,
   RoleList,
   SectionNavRevealAnchor,
-  ShowcaseMediaButton,
   Summary,
   Title
 } from '../../../../styles/projectShowcases';
 import { SetAnimatedSectionRef, VisibleSections } from '../../showcaseTypes';
-import { HERO_LIGHTBOX_INDEX } from '../caseStudyData';
 
 type IntroSectionProps = {
   setAnimatedSectionRef: SetAnimatedSectionRef;
   visibleSections: VisibleSections;
-  openLightbox: (index: number) => void;
 };
 
 const ROLE_BULLETS = [
@@ -34,7 +31,7 @@ const ROLE_BULLETS = [
 const INTRO_SUMMARY = 'Nice Guy University is a platform that turns the Nice Guy recovery coaching I do one-on-one into self-paced courses men can start tonight.';
 const PROJECT_URL = 'https://www.niceguyuniversity.com/';
 
-const IntroSection = ({ setAnimatedSectionRef, visibleSections, openLightbox }: IntroSectionProps) => (
+const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionProps) => (
   <AnimatedSection
     ref={setAnimatedSectionRef('section-intro')}
     data-animate-id='section-intro'
@@ -43,11 +40,9 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections, openLightbox }: 
     <section id='introduction' className='story-section'>
       <HiddenSectionAnchor id='hero-spacer' aria-hidden='true' />
       <HeroGrid>
-        <ShowcaseMediaButton type='button' aria-label='Open image: Nice Guy University homepage with hero and calls to action' onClick={() => openLightbox(HERO_LIGHTBOX_INDEX)}>
-          <CaseStudyHeroMediaFrame className='image-animate' style={{ backgroundColor: '#111111' }}>
-            <img src='/img/nice-guy-university/ngu-home.webp' alt='Nice Guy University homepage with hero and calls to action' loading='lazy' />
-          </CaseStudyHeroMediaFrame>
-        </ShowcaseMediaButton>
+        <CaseStudyHeroMediaFrame className='image-animate' style={{ backgroundColor: '#111111' }}>
+          <img src='/img/nice-guy-university/ngu-home.webp' alt='Nice Guy University homepage with hero and calls to action' loading='lazy' />
+        </CaseStudyHeroMediaFrame>
         <HeroContent className='text-animate'>
           <Title>Nice Guy University<br />UX Case Study</Title>
           <div>
@@ -72,19 +67,19 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections, openLightbox }: 
                 onClick={() => {
                   trackLinkClick({
                     location: 'case_study_hero',
-                    label: 'NiceGuyUniversity.com',
+                    label: 'www.niceguyuniversity.com',
                     href: PROJECT_URL,
                     section: 'Nice Guy University UX Case Study',
                   });
                   trackEvent('external_project_click', {
                     location: 'nice_guy_university_case_study',
-                    label: 'NiceGuyUniversity.com',
+                    label: 'www.niceguyuniversity.com',
                     href: PROJECT_URL,
                     page_path: window.location.pathname,
                   });
                 }}
               >
-                NiceGuyUniversity.com <OpenInNewWindowIcon aria-hidden='true' />
+                www.niceguyuniversity.com <OpenInNewWindowIcon aria-hidden='true' />
               </a>
             </div>
           </LinkRow>

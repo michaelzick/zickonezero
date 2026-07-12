@@ -4,8 +4,8 @@ import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
 
 const PATH = '/michael-zick-coaching/';
 const TITLE = 'Michael Zick Coaching';
-const SUMMARY = 'A coaching hub that pairs clarity of services with a confident, energetic visual system.';
-const HERO_IMAGE = { src: '/img/squares/mz-rac-logo.webp', alt: 'Michael Zick Coaching logo' };
+const SUMMARY = 'A coaching hub that pairs clarity of services with a grounded, wilderness-inspired visual system.';
+const HERO_IMAGE = { src: '/img/squares/mz-ngrc-logo.webp', alt: 'Michael Zick Nice Guy Recovery Coach logo' };
 
 const MichaelZickCoachingPage = () => (
   <>
@@ -38,21 +38,22 @@ const MichaelZickCoachingPage = () => (
         title: 'Clarity, flow, and conversion',
         body: (
           <>
-            Using water as inspiration, I designed a vibrant, approachable brand identity that reflects my coaching style.
-            The site layout guides visitors through clear offers and benefits, while keeping the scheduling button in easy reach.
+            Drawing on rugged wilderness imagery, I designed a grounded, masculine brand identity that reflects my Nice Guy
+            recovery coaching practice. The site layout guides visitors through clear offers and benefits, while keeping the
+            strategy-call button in easy reach.
           </>
         ),
-        image: { src: '/img/projects/michael-zick-coaching/mz-home-rac.webp', alt: 'Coaching homepage with clear offers and CTA' }
+        image: { src: '/img/projects/michael-zick-coaching/mz-home-ngrc.webp', alt: 'Coaching homepage with clear offers and CTA' }
       },
       {
         title: 'Presenting benefits and building momentum',
         body: (
           <>
-            Prospects see the features and benefits of the coaching program up front, presenting a high-level view of what to expect.
-            Tabs on the right keep them oriented while the prominent CTA turns momentum into bookings.
+            Prospects see the outcomes of the coaching program up front — a numbered protocol that shows exactly what to expect.
+            Tabs on the right keep them oriented while client proof builds momentum toward booking.
           </>
         ),
-        image: { src: '/img/projects/michael-zick-coaching/mz-program-rac.webp', alt: 'Process overview with navigation and booking CTA' }
+        image: { src: '/img/projects/michael-zick-coaching/mz-protocol-ngrc.webp', alt: 'Program outcomes with tab navigation and client quote' }
       },
       {
         title: 'Past wins build trust',
@@ -62,7 +63,7 @@ const MichaelZickCoachingPage = () => (
             trust before the booking step. Social proof lifts conversion with strong images and engaging stories.
           </>
         ),
-        image: { src: '/img/projects/michael-zick-coaching/mzc-testimonial.webp', alt: 'Testimonials and social proof layout' }
+        image: { src: '/img/projects/michael-zick-coaching/mz-testimonial-ngrc.webp', alt: 'Testimonials and social proof layout' }
       },
       {
         title: 'Responsiveness without compromise',
@@ -73,7 +74,7 @@ const MichaelZickCoachingPage = () => (
           </>
         ),
         image: {
-          src: '/img/projects/michael-zick-coaching/mz-mobile-rac.webp',
+          src: '/img/projects/michael-zick-coaching/mz-mobile-ngrc.webp',
           alt: 'Mobile experience for booking and offers',
           position: 'top'
         }

@@ -32,7 +32,7 @@ const DemoStokeFleetOpsPage = () => (
       'UX design',
       'Full-stack development'
     ]}
-    projectLink={{ href: 'https://widget.demostoke.com/', label: 'widget.demostoke.com' }}
+    projectLink={{ href: 'https://fleet.demostoke.com/', label: 'fleet.demostoke.com' }}
     sections={[
       {
         title: 'Fleet command center',

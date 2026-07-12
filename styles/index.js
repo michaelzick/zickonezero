@@ -1802,7 +1802,7 @@ export const DemoStokeMiniCard = styled.button`
   &:hover {
     transform: translateY(-2px);
     box-shadow: none;
-    border-color: ${THEME.colors.hotRed};
+    border-color: ${THEME.colors.orange};
   }
 
   &:focus-visible {
