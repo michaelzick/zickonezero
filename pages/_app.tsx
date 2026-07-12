@@ -5,7 +5,6 @@ import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { store } from '../src/store';
 
-import { HeadContent } from '../src/components';
 import PageAnalytics from '../src/components/PageAnalytics';
 import SiteAnalyticsScripts from '../src/components/SiteAnalyticsScripts';
 import { AppThemeProvider } from '../src/theme/ThemeContext';
@@ -36,9 +35,7 @@ function MyApp({
           <PageAnalytics />
 
           <Head>
-            <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-            <title>ZICKONEZERO Creative</title>
-            <HeadContent />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
           </Head>
 
           <Component {...pageProps} />

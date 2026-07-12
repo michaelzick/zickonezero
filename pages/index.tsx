@@ -11,6 +11,8 @@ import {
 import getWorksData from '../src/lib/getWorksData';
 
 import { MainContent } from '../src/components';
+import Seo from '../src/components/Seo';
+import { personJsonLd, webSiteJsonLd } from '../src/lib/seo';
 
 import type { WorksDataType } from '../src/types';
 
@@ -26,7 +28,10 @@ const Home: NextPage<WorksDataType> = (props) => {
   }, [dispatch, worksDataReversed]);
 
   return (
-    <MainContent worksDataReversed={worksDataReversed} />
+    <>
+      <Seo path='/' jsonLd={[webSiteJsonLd(), personJsonLd()]} />
+      <MainContent worksDataReversed={worksDataReversed} />
+    </>
   );
 };
 

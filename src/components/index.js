@@ -1,5 +1,4 @@
 import LinkBoxContent from './LinkBoxContent';
-import HeadContent from './HeadContent';
 import MainContent from './MainContent';
 import FooterContent from './FooterContent';
 import AnimatedHeadline from './AnimatedHeadline';
@@ -17,7 +16,6 @@ import AnimatedMobileMenu from './AnimatedMobileMenu';
 
 export {
   LinkBoxContent,
-  HeadContent,
   MainContent,
   AnimatedHeadline,
   FooterContent,

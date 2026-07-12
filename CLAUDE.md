@@ -56,9 +56,10 @@ zickonezero/
 
 ### 4.1 Next app
 
-- **Root wrapper:** `pages/_app.tsx` imports global SCSS, wraps pages with Redux and `AppThemeProvider`, installs GTM/site analytics, and renders shared `<Head>` metadata.
+- **Root wrapper:** `pages/_app.tsx` imports global SCSS, wraps pages with Redux and `AppThemeProvider`, installs GTM/site analytics, and renders only the shared viewport plus icon/manifest/theme-color links in `<Head>`.
+- **Per-page SEO:** every page renders its own `<Seo>` (`src/components/Seo.tsx`) for the title, canonical (trailing-slash, absolute), description, Open Graph/Twitter tags, and JSON-LD. Metadata copy lives inline per page; `ProjectShowcase` pages single-source `title`/`summary`/`heroImage` into local consts shared by `<Seo>` and `<ProjectShowcase>`. There is no global head/meta component.
 - **Document:** `pages/_document.tsx` handles server document structure for styled-components.
-- **Home page:** `pages/index.tsx` loads work data with `getStaticProps`, stores it in Redux, and renders `MainContent`.
+- **Home page:** `pages/index.tsx` loads work data with `getStaticProps`, syncs it into Redux via `useEffect`, and passes it to `MainContent` as a prop.
 - **Content pages:** top-level files in `pages/` render about, case-study, coaching, DemoStoke, Antisyphon, Nice Guy University, and product pages.
 - **Static export:** `next.config.js` keeps the app static-host friendly. Static data helpers live under `src/` instead of `pages/api` so the exported site does not expose accidental API routes.
 
@@ -127,8 +128,11 @@ Security automation runs Gitleaks, dependency review, CodeQL, and a production d
 | [src/components/ProjectShowcase.tsx](src/components/ProjectShowcase.tsx) | Reusable case-study layout |
 | [src/components/niceguyuniversity/](src/components/niceguyuniversity/) | Nice Guy University case-study and product-screen section data |
 | [src/components/TrackedLink.tsx](src/components/TrackedLink.tsx) | Analytics-aware links |
+| [src/components/Seo.tsx](src/components/Seo.tsx) | Per-page title, canonical, OG/Twitter, and JSON-LD head tags |
 | [src/components/SiteAnalyticsScripts.tsx](src/components/SiteAnalyticsScripts.tsx) | Site analytics bootstrap |
 | [src/lib/analytics.ts](src/lib/analytics.ts) | Analytics event helpers |
+| [src/lib/seo.ts](src/lib/seo.ts) | SEO defaults, `absoluteUrl`, and JSON-LD builders |
+| [src/lib/siteConfig.js](src/lib/siteConfig.js) | Canonical `SITE_URL`/`SITE_NAME` shared by the app and the sitemap script |
 | [src/lib/getWorksData.ts](src/lib/getWorksData.ts) | Static work data loader |
 | [src/data/worksData.json](src/data/worksData.json) | Portfolio grid content |
 | [src/store.ts](src/store.ts) | Redux store setup |

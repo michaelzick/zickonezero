@@ -1,11 +1,33 @@
 import ProjectShowcase from '../src/components/ProjectShowcase';
+import Seo from '../src/components/Seo';
+import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
+
+const PATH = '/demostoke-fleet-ops/';
+const TITLE = 'DemoStoke Fleet Ops';
+const SUMMARY = 'A gear shop dashboard and embeddable booking widget with DemoStoke integration.';
+const HERO_IMAGE = { src: '/img/fleet-ops/ds-fleet-ops-gear-edit.webp', alt: 'DemoStoke Fleet Ops dashboard' };
 
 const DemoStokeFleetOpsPage = () => (
-  <ProjectShowcase
-    title='DemoStoke Fleet Ops'
-    summary='A gear shop dashboard and embeddable booking widget with DemoStoke integration.'
-    heroImage={{ src: '/img/fleet-ops/ds-fleet-ops-gear-edit.webp', alt: 'DemoStoke Fleet Ops dashboard' }}
-    roleBullets={[
+  <>
+    <Seo
+      title={TITLE}
+      description={SUMMARY}
+      path={PATH}
+      type='article'
+      ogImage={HERO_IMAGE.src}
+      jsonLd={[
+        creativeWorkJsonLd({ name: TITLE, description: SUMMARY, path: PATH, image: HERO_IMAGE.src }),
+        breadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: TITLE, path: PATH },
+        ]),
+      ]}
+    />
+    <ProjectShowcase
+      title={TITLE}
+      summary={SUMMARY}
+      heroImage={HERO_IMAGE}
+      roleBullets={[
       'Product strategy',
       'UX design',
       'Full-stack development'
@@ -94,7 +116,8 @@ const DemoStokeFleetOpsPage = () => (
         image: { src: '/img/fleet-ops/ds-fleet-ops-big-mountain.webp', alt: 'DemoStoke Fleet Ops gear shop with embedded widget' }
       }
     ]}
-  />
+    />
+  </>
 );
 
 export default DemoStokeFleetOpsPage;

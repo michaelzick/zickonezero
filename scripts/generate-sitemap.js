@@ -1,7 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const BASE_URL = (process.env.SITE_URL || 'https://www.zickonezero.com').replace(/\/$/, '');
+const { SITE_URL } = require('../src/lib/siteConfig');
+
+const BASE_URL = SITE_URL;
 const PAGES_DIR = path.join(__dirname, '..', 'pages');
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 const OUTPUT_PATH = path.join(PUBLIC_DIR, 'sitemap.xml');
