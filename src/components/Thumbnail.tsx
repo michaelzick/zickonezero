@@ -217,13 +217,13 @@ const Thumbnail = (props: WorksData & AdditionalThumbProps): ReactElement => {
           rel={linkOut ? 'noopener noreferrer' : undefined}
         >
           <div className='thumb-media' ref={containerRef}>
-            <img src={thumb} width='240' height='240' alt={group} className='thumb' />
+            <img src={thumb} width='240' height='240' alt={header} className='thumb' />
             <canvas ref={canvasRef} className='neon-trail-thumb' aria-hidden='true' />
             <div ref={cursorDotRef} className='cursor-dot thumb-dot' aria-hidden='true' />
           </div>
         </TrackedLink> :
         <div className='thumb-media' ref={containerRef}>
-          <img src={thumb} width='240' height='240' alt={group} className='thumb' />
+          <img src={thumb} width='240' height='240' alt={header} className='thumb' />
           <canvas ref={canvasRef} className='neon-trail-thumb' aria-hidden='true' />
           <div ref={cursorDotRef} className='cursor-dot thumb-dot' aria-hidden='true' />
         </div>}

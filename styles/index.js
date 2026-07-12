@@ -8,6 +8,20 @@ const phraseCycle = keyframes`
   31%, 100% { transform: translateY(100%); opacity: 0; }
 `;
 
+// Accessible heading that is hidden from sighted users but exposed to
+// assistive tech and search crawlers (used for image-only hero sections).
+export const VisuallyHidden = styled.h1`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+`;
+
 export const Container = styled.div`
   background-size: cover;
   text-align: center;
@@ -467,7 +481,9 @@ export const Thumb = styled.div`
   }
 `;
 
-export const Title = styled.h1`
+// Site brand/logo in the top nav. Rendered as a <p> (not an <h1>) so each
+// page's own content heading is the single, page-descriptive <h1>.
+export const Title = styled.p`
   margin: 0;
   font-size: 2.1em;
   font-family: system-ui;
@@ -2530,7 +2546,7 @@ export const IntroSection = styled.div`
     justify-content: flex-end;
     gap: clamp(0.7em, 2vw, 1.35em);
 
-    h2 {
+    h1 {
       color: ${THEME.colors.white};
       font-family: Roboto, sans-serif;
       font-size: clamp(3.4em, 6vw, 4.8em);
@@ -2654,7 +2670,7 @@ export const IntroSection = styled.div`
       justify-content: flex-start;
       align-self: stretch;
 
-      h2 {
+      h1 {
         font-size: 3.1em;
         text-align: left;
       }
@@ -2690,7 +2706,7 @@ export const IntroSection = styled.div`
     gap: 2em;
 
     .intro-text {
-      h2 {
+      h1 {
         font-size: 2.6em;
       }
 

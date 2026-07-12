@@ -15,6 +15,7 @@ import {
   DemoStokeMiniCardModalCopy,
   DemoStokeMiniCardModalOverlay,
   DemoStokeMiniCardModalTitle,
+  VisuallyHidden,
   Wrapper
 } from '../../styles';
 import { AnimatedSection } from '../../styles/projectShowcases';
@@ -204,6 +205,7 @@ const AboutContent = () => {
           className={isVisible ? 'visible' : undefined}
         >
           <AboutHero aria-label='About page hero'>
+            <VisuallyHidden>About Michael Zick</VisuallyHidden>
             <AboutFixedCta type='button' onClick={openAboutModal}>
               About Michael
             </AboutFixedCta>

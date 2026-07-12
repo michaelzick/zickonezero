@@ -536,13 +536,10 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
           </FloatingClouds>
         </FloatingCloudsViewport>
 
-        <HomeTabsBar role='tablist' aria-label='Homepage sections'>
+        <HomeTabsBar as='nav' aria-label='Homepage sections'>
           <HomeTabButton
             type="button"
-            aria-selected={activeSection === 'case-studies'}
-            role='tab'
-            aria-controls='case-studies'
-            tabIndex={activeSection === 'case-studies' ? 0 : -1}
+            aria-current={activeSection === 'case-studies' ? 'true' : undefined}
             $isActive={activeSection === 'case-studies'}
             onClick={() => handleHomeSectionClick('case-studies', 'Case Studies', 'home_tabs')}
           >
@@ -550,10 +547,7 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
           </HomeTabButton>
           <HomeTabButton
             type="button"
-            aria-selected={activeSection === 'ux'}
-            role='tab'
-            aria-controls='ux-design'
-            tabIndex={activeSection === 'ux' ? 0 : -1}
+            aria-current={activeSection === 'ux' ? 'true' : undefined}
             $isActive={activeSection === 'ux'}
             onClick={() => handleHomeSectionClick('ux', 'UX Design', 'home_tabs')}
           >
@@ -561,10 +555,7 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
           </HomeTabButton>
           <HomeTabButton
             type="button"
-            aria-selected={activeSection === 'ui'}
-            role='tab'
-            aria-controls='web-development'
-            tabIndex={activeSection === 'ui' ? 0 : -1}
+            aria-current={activeSection === 'ui' ? 'true' : undefined}
             $isActive={activeSection === 'ui'}
             onClick={() => handleHomeSectionClick('ui', 'Web Dev', 'home_tabs')}
           >
@@ -588,7 +579,7 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
               <img
                 className="image-animate"
                 src="/img/lifeguard-tower-transparent.webp"
-                alt="Florescent lifeguard tower"
+                alt="Fluorescent lifeguard tower"
                 loading="lazy"
               />
               <canvas ref={neonCanvasRef} className="neon-trail" aria-hidden="true" />
@@ -599,9 +590,9 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
               style={{ transform: `translateY(${parallaxOffset.text}px)` }}
             >
               <div className="text-animate">
-                <h2>
+                <h1>
                   Michael Zick is <span className="hotword">ZICKONEZERO Creative</span>.
-                </h2>
+                </h1>
                 <p className="intro-rotator-headline">Product / UX / Dev</p>
                 <button
                   type="button"
