@@ -41,7 +41,7 @@ zickonezero/
 |   +-- test/            # Test render utilities
 |   +-- *.Slice.ts       # Redux Toolkit slices
 +-- styles/              # styled-components exports, page-specific style modules, globals
-+-- public/              # Static images, favicon assets, generated sitemap
++-- public/              # Static images, favicon assets, generated sitemap/robots, and host config (_headers, _redirects)
 +-- scripts/             # Build-time utilities such as sitemap generation
 +-- __tests__/           # Jest and React Testing Library tests
 +-- skills/              # Repo-local coding and agent-brief maintenance skills
@@ -100,7 +100,9 @@ npm run sitemap             # regenerate public/sitemap.xml only
 
 CI runs `npm ci`, `agent-briefs:check`, lint, typecheck, tests, and production build on Node 24.x.
 
-Security automation runs Gitleaks, dependency review, CodeQL, and a production dependency audit at critical severity. Stable Next releases may still report high/moderate advisories in npm audit until patched stable versions are available; those should remain visible but non-blocking unless the project intentionally moves to a patched stable release.
+Security automation runs Gitleaks, dependency review, CodeQL, and a production dependency audit at high severity (`npm audit --omit=dev --audit-level=high`). Stable Next releases may still report moderate advisories (e.g. Next's bundled postcss) in npm audit until patched stable versions are available; those remain visible but non-blocking at the high threshold unless the project intentionally moves to a patched stable release.
+
+Static-host security headers and redirects live in `public/_headers` and `public/_redirects` (Netlify/Cloudflare Pages format). The CSP allows the inline GTM/theme/Amplitude bootstraps and styled-components inline styles that the static export requires. Environment variables: `NEXT_PUBLIC_SITE_URL` / `SITE_URL` set the canonical origin (see `src/lib/siteConfig.js`); `NEXT_PUBLIC_AMPLITUDE_API_KEY` overrides the public browser analytics key.
 
 ## 6. Conventions
 
