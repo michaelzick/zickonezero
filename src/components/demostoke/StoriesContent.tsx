@@ -48,19 +48,19 @@ const StoriesContent = ({
                     onClick={() => {
                       trackLinkClick({
                         location: 'user_stories_intro',
-                        label: 'DemoStoke.com',
+                        label: 'www.demostoke.com',
                         href: 'https://www.demostoke.com/',
                         section: 'DemoStoke User Stories',
                       });
                       trackEvent('external_project_click', {
                         location: 'user_stories_intro',
-                        label: 'DemoStoke.com',
+                        label: 'www.demostoke.com',
                         href: 'https://www.demostoke.com/',
                         page_path: window.location.pathname,
                       });
                     }}
                   >
-                    DemoStoke.com <OpenInNewWindowIcon aria-hidden="true" />
+                    www.demostoke.com <OpenInNewWindowIcon aria-hidden="true" />
                   </PitchDeckLink>
                 </div>
               </CompactIntroHeaderRow>

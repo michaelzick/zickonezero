@@ -72,19 +72,19 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections, openLightbox }: 
                 onClick={() => {
                   trackLinkClick({
                     location: 'case_study_hero',
-                    label: 'NiceGuyUniversity.com',
+                    label: 'www.niceguyuniversity.com',
                     href: PROJECT_URL,
                     section: 'Nice Guy University UX Case Study',
                   });
                   trackEvent('external_project_click', {
                     location: 'nice_guy_university_case_study',
-                    label: 'NiceGuyUniversity.com',
+                    label: 'www.niceguyuniversity.com',
                     href: PROJECT_URL,
                     page_path: window.location.pathname,
                   });
                 }}
               >
-                NiceGuyUniversity.com <OpenInNewWindowIcon aria-hidden='true' />
+                www.niceguyuniversity.com <OpenInNewWindowIcon aria-hidden='true' />
               </a>
             </div>
           </LinkRow>

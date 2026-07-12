@@ -51,19 +51,19 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections, openLightbox }: 
                 onClick={() => {
                   trackLinkClick({
                     location: 'case_study_hero',
-                    label: 'AntisyphonTraining.com',
+                    label: 'www.antisyphontraining.com',
                     href: 'https://www.antisyphontraining.com/',
                     section: 'Antisyphon UX Case Study',
                   });
                   trackEvent('external_project_click', {
                     location: 'case_study_hero',
-                    label: 'AntisyphonTraining.com',
+                    label: 'www.antisyphontraining.com',
                     href: 'https://www.antisyphontraining.com/',
                     page_path: window.location.pathname,
                   });
                 }}
               >
-                AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden='true' />
+                www.antisyphontraining.com <OpenInNewWindowIcon aria-hidden='true' />
               </a>
             </div>
           </LinkRow>

@@ -103,7 +103,7 @@ describe('AntisyphonContent', () => {
     expect(getMatchingRuleValues(introImageWrap as HTMLElement, 'margin-top').map(normalizeDeclaration)).toContain(
       normalizeDeclaration(HERO_IMAGE_WRAP_TOP_MARGIN_DECLARATION)
     );
-    expect(screen.getByRole('link', { name: 'AntisyphonTraining.com' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'www.antisyphontraining.com' })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Context', level: 2 })).not.toBeInTheDocument();
     expect(screen.getAllByRole('button', { name: 'Open image: Full course catalog with category filters and badges' }).length).toBeGreaterThan(0);
     expect(screen.getByRole('button', { name: 'Course Catalog' })).toBeInTheDocument();

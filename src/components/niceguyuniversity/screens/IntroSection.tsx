@@ -30,19 +30,19 @@ const IntroSection = ({ openScreenLightbox }: IntroSectionProps) => (
           onClick={() => {
             trackLinkClick({
               location: 'product_screens_intro',
-              label: 'NiceGuyUniversity.com',
+              label: 'www.niceguyuniversity.com',
               href: PROJECT_URL,
               section: 'Nice Guy University Product Screens',
             });
             trackEvent('external_project_click', {
               location: 'nice_guy_university_product_screens',
-              label: 'NiceGuyUniversity.com',
+              label: 'www.niceguyuniversity.com',
               href: PROJECT_URL,
               page_path: window.location.pathname,
             });
           }}
         >
-          NiceGuyUniversity.com <OpenInNewWindowIcon aria-hidden='true' />
+          www.niceguyuniversity.com <OpenInNewWindowIcon aria-hidden='true' />
         </PitchDeckLink>
       </div>
     </CompactIntroHeaderRow>

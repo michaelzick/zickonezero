@@ -27,19 +27,19 @@ const IntroSection = ({ openFlowLightbox }: IntroSectionProps) => (
           onClick={() => {
             trackLinkClick({
               location: 'product_screens_intro',
-              label: 'AntisyphonTraining.com',
+              label: 'www.antisyphontraining.com',
               href: 'https://www.antisyphontraining.com/',
               section: 'Antisyphon Product Screens',
             });
             trackEvent('external_project_click', {
               location: 'product_screens_intro',
-              label: 'AntisyphonTraining.com',
+              label: 'www.antisyphontraining.com',
               href: 'https://www.antisyphontraining.com/',
               page_path: window.location.pathname,
             });
           }}
         >
-          AntisyphonTraining.com <OpenInNewWindowIcon aria-hidden='true' />
+          www.antisyphontraining.com <OpenInNewWindowIcon aria-hidden='true' />
         </PitchDeckLink>
       </div>
     </CompactIntroHeaderRow>
