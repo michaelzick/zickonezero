@@ -66,7 +66,8 @@ describe('AntisyphonContent', () => {
     expect(heroHeading).toBeInTheDocument();
     expect(whatHeading).toBeInTheDocument();
     expect(heroHeading.querySelector('br')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Open image: Antisyphon Training homepage with course cards' })).toBeInTheDocument();
+    expect(screen.getByAltText('Antisyphon Training homepage with course cards')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Open image: Antisyphon Training homepage with course cards' })).not.toBeInTheDocument();
     expect(whatSection).not.toBeNull();
     expect(whatSectionEl).toContainElement(whatHeading);
     expect(outcomeHeading).toBeInTheDocument();

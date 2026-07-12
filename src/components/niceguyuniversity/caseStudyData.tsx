@@ -129,7 +129,3 @@ export const HOW_IMAGES = [
   { src: '/img/nice-guy-university/ngu-coach-profile.webp', alt: 'Nice Guy University coach profile for Michael Zick' },
   { src: '/img/nice-guy-university/ngu-admin-analytics.webp', alt: 'Nice Guy University admin analytics dashboard' },
 ] as const;
-
-// The case-study hero opens the lightbox at ngu-home, which sits at the head
-// of HOW_IMAGES, directly after the TLDR images.
-export const HERO_LIGHTBOX_INDEX = TLDR_ITEMS.length;

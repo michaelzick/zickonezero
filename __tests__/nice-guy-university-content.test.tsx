@@ -50,7 +50,8 @@ describe('NiceGuyUniversityContent', () => {
     expect(heroHeading.querySelector('br')).toBeInTheDocument();
     expect(screen.getAllByText(/turns the Nice Guy recovery coaching I do one-on-one into self-paced courses/i).length).toBeGreaterThan(0);
     expect(screen.getByRole('link', { name: 'www.niceguyuniversity.com' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Open image: Nice Guy University homepage with hero and calls to action' })).toBeInTheDocument();
+    expect(screen.getByAltText('Nice Guy University homepage with hero and calls to action')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Open image: Nice Guy University homepage with hero and calls to action' })).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The What' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The How / Course Platform Experience' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The Who / Audiences and Stakeholders' })).toBeInTheDocument();
