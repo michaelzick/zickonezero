@@ -19,7 +19,7 @@
     "typecheck": "tsc --noEmit",
     "check": "npm run agent-briefs:check && npm run lint && npm run typecheck && npm test && npm run build",
     "storybook": "storybook dev -p 6006",
-    "chromatic": "npx chromatic --project-token=8d72ce9e2021",
+    "chromatic": "npx chromatic",
     "sitemap": "node scripts/generate-sitemap.js"
   },
   "dependencies": {

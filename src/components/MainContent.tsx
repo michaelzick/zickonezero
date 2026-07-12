@@ -35,9 +35,14 @@ import {
 } from '../../styles';
 import { AnimatedSection } from '../../styles/projectShowcases';
 import { trackEvent } from '../lib/analytics';
+import type { WorksData } from '../types';
 
 type HomeSectionKey = 'case-studies' | 'ux' | 'ui';
 type ActiveSection = HomeSectionKey | null;
+
+type MainContentProps = {
+  worksDataReversed?: Array<WorksData>;
+};
 
 const DESKTOP_NAV_OFFSET = 92; // Tighten the gap so section headers sit closer to the tabs
 const MOBILE_TABS_HEIGHT_PX = 11.3 * 16; // Keep in sync with mobile scroll target for Home tabs
@@ -70,8 +75,11 @@ const WORKS_CAROUSEL_IMAGES = [
   }
 ];
 
-const MainContent = () => {
-  const { worksDataReversed } = useAppSelector(selectData);
+const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentProps = {}) => {
+  const { worksDataReversed: worksDataReversedStore } = useAppSelector(selectData);
+  // Prefer the prop (populated during static generation) and fall back to the
+  // store so `<MainContent />` still renders when driven by a preloaded store.
+  const worksDataReversed = worksDataReversedProp ?? worksDataReversedStore;
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
   const caseStudiesSectionRef = useRef<HTMLHeadingElement | null>(null);
@@ -528,13 +536,10 @@ const MainContent = () => {
           </FloatingClouds>
         </FloatingCloudsViewport>
 
-        <HomeTabsBar role='tablist' aria-label='Homepage sections'>
+        <HomeTabsBar as='nav' aria-label='Homepage sections'>
           <HomeTabButton
             type="button"
-            aria-selected={activeSection === 'case-studies'}
-            role='tab'
-            aria-controls='case-studies'
-            tabIndex={activeSection === 'case-studies' ? 0 : -1}
+            aria-current={activeSection === 'case-studies' ? 'true' : undefined}
             $isActive={activeSection === 'case-studies'}
             onClick={() => handleHomeSectionClick('case-studies', 'Case Studies', 'home_tabs')}
           >
@@ -542,10 +547,7 @@ const MainContent = () => {
           </HomeTabButton>
           <HomeTabButton
             type="button"
-            aria-selected={activeSection === 'ux'}
-            role='tab'
-            aria-controls='ux-design'
-            tabIndex={activeSection === 'ux' ? 0 : -1}
+            aria-current={activeSection === 'ux' ? 'true' : undefined}
             $isActive={activeSection === 'ux'}
             onClick={() => handleHomeSectionClick('ux', 'UX Design', 'home_tabs')}
           >
@@ -553,10 +555,7 @@ const MainContent = () => {
           </HomeTabButton>
           <HomeTabButton
             type="button"
-            aria-selected={activeSection === 'ui'}
-            role='tab'
-            aria-controls='web-development'
-            tabIndex={activeSection === 'ui' ? 0 : -1}
+            aria-current={activeSection === 'ui' ? 'true' : undefined}
             $isActive={activeSection === 'ui'}
             onClick={() => handleHomeSectionClick('ui', 'Web Dev', 'home_tabs')}
           >
@@ -580,7 +579,7 @@ const MainContent = () => {
               <img
                 className="image-animate"
                 src="/img/lifeguard-tower-transparent.webp"
-                alt="Florescent lifeguard tower"
+                alt="Fluorescent lifeguard tower"
                 loading="lazy"
               />
               <canvas ref={neonCanvasRef} className="neon-trail" aria-hidden="true" />
@@ -591,9 +590,9 @@ const MainContent = () => {
               style={{ transform: `translateY(${parallaxOffset.text}px)` }}
             >
               <div className="text-animate">
-                <h2>
+                <h1>
                   Michael Zick is <span className="hotword">ZICKONEZERO Creative</span>.
-                </h2>
+                </h1>
                 <p className="intro-rotator-headline">Product / UX / Dev</p>
                 <button
                   type="button"

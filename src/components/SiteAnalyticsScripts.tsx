@@ -1,6 +1,8 @@
 import Script from 'next/script';
 
-const AMPLITUDE_API_KEY = 'd795dbfcd00a9b445dc1dcdc3a19672a';
+// Browser-side Amplitude key (public by design). Overridable via env; the
+// literal fallback keeps local/CI builds working without extra configuration.
+const AMPLITUDE_API_KEY = process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY || 'd795dbfcd00a9b445dc1dcdc3a19672a';
 
 const SiteAnalyticsScripts = () => (
   <>

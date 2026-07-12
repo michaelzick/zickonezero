@@ -7,8 +7,14 @@ const PageAnalytics = () => {
   const router = useRouter();
 
   useEffect(() => {
+    let rafId: number | undefined;
+
     const trackCurrentPage = (url?: string) => {
-      window.requestAnimationFrame(() => {
+      if (rafId !== undefined) {
+        window.cancelAnimationFrame(rafId);
+      }
+      rafId = window.requestAnimationFrame(() => {
+        rafId = undefined;
         trackPageView(url);
       });
     };
@@ -17,6 +23,9 @@ const PageAnalytics = () => {
     router.events.on('routeChangeComplete', trackCurrentPage);
 
     return () => {
+      if (rafId !== undefined) {
+        window.cancelAnimationFrame(rafId);
+      }
       router.events.off('routeChangeComplete', trackCurrentPage);
     };
   }, [router.events]);

@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import { useEffect } from 'react';
 
 import {
   useAppDispatch,
@@ -10,16 +11,27 @@ import {
 import getWorksData from '../src/lib/getWorksData';
 
 import { MainContent } from '../src/components';
+import Seo from '../src/components/Seo';
+import { personJsonLd, webSiteJsonLd } from '../src/lib/seo';
 
 import type { WorksDataType } from '../src/types';
 
 const Home: NextPage<WorksDataType> = (props) => {
   const { worksDataReversed } = props;
   const dispatch = useAppDispatch();
-  dispatch(setPageData(worksDataReversed));
+
+  // Keep the Redux store in sync for any store consumers on the client. The
+  // pre-rendered grid HTML comes from the `worksDataReversed` prop below, so the
+  // static export never depends on this effect having run.
+  useEffect(() => {
+    dispatch(setPageData(worksDataReversed));
+  }, [dispatch, worksDataReversed]);
 
   return (
-    <MainContent />
+    <>
+      <Seo path='/' jsonLd={[webSiteJsonLd(), personJsonLd()]} />
+      <MainContent worksDataReversed={worksDataReversed} />
+    </>
   );
 };
 

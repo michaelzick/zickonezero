@@ -1,11 +1,33 @@
 import ProjectShowcase from '../src/components/ProjectShowcase';
+import Seo from '../src/components/Seo';
+import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
+
+const PATH = '/michael-zick-coaching/';
+const TITLE = 'Michael Zick Coaching';
+const SUMMARY = 'A coaching hub that pairs clarity of services with a confident, energetic visual system.';
+const HERO_IMAGE = { src: '/img/squares/mz-rac-logo.webp', alt: 'Michael Zick Coaching logo' };
 
 const MichaelZickCoachingPage = () => (
-  <ProjectShowcase
-    title='Michael Zick Coaching'
-    summary='A coaching hub that pairs clarity of services with a confident, energetic visual system.'
-    heroImage={{ src: '/img/squares/mz-rac-logo.webp', alt: 'Michael Zick Coaching logo' }}
-    roleBullets={[
+  <>
+    <Seo
+      title={TITLE}
+      description={SUMMARY}
+      path={PATH}
+      type='article'
+      ogImage={HERO_IMAGE.src}
+      jsonLd={[
+        creativeWorkJsonLd({ name: TITLE, description: SUMMARY, path: PATH, image: HERO_IMAGE.src }),
+        breadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: TITLE, path: PATH },
+        ]),
+      ]}
+    />
+    <ProjectShowcase
+      title={TITLE}
+      summary={SUMMARY}
+      heroImage={HERO_IMAGE}
+      roleBullets={[
       'Branding, text, and design',
       'UX and product strategy',
       'Technical implementation',
@@ -57,7 +79,8 @@ const MichaelZickCoachingPage = () => (
         }
       }
     ]}
-  />
+    />
+  </>
 );
 
 export default MichaelZickCoachingPage;

@@ -174,7 +174,7 @@ const ProjectShowcase = ({
                     <DemoStokeMethodCard>
                       <DemoStokeMethodRow $reverse={index % 2 === 1}>
                         <div className="text-animate">
-                          <SectionTitle as="h3">{sectionTitle}</SectionTitle>
+                          <SectionTitle as="h2">{sectionTitle}</SectionTitle>
                           <DemoStokeTldrCopy>{body}</DemoStokeTldrCopy>
                         </div>
                         <ShowcaseImageButton

@@ -41,7 +41,7 @@ zickonezero/
 |   +-- test/            # Test render utilities
 |   +-- *.Slice.ts       # Redux Toolkit slices
 +-- styles/              # styled-components exports, page-specific style modules, globals
-+-- public/              # Static images, favicon assets, generated sitemap
++-- public/              # Static images, favicon assets, generated sitemap/robots, and host config (_headers, _redirects)
 +-- scripts/             # Build-time utilities such as sitemap generation
 +-- __tests__/           # Jest and React Testing Library tests
 +-- skills/              # Repo-local coding and agent-brief maintenance skills
@@ -56,9 +56,10 @@ zickonezero/
 
 ### 4.1 Next app
 
-- **Root wrapper:** `pages/_app.tsx` imports global SCSS, wraps pages with Redux and `AppThemeProvider`, installs GTM/site analytics, and renders shared `<Head>` metadata.
+- **Root wrapper:** `pages/_app.tsx` imports global SCSS, wraps pages with Redux and `AppThemeProvider`, installs GTM/site analytics, and renders only the shared viewport plus icon/manifest/theme-color links in `<Head>`.
+- **Per-page SEO:** every page renders its own `<Seo>` (`src/components/Seo.tsx`) for the title, canonical (trailing-slash, absolute), description, Open Graph/Twitter tags, and JSON-LD. Metadata copy lives inline per page; `ProjectShowcase` pages single-source `title`/`summary`/`heroImage` into local consts shared by `<Seo>` and `<ProjectShowcase>`. There is no global head/meta component.
 - **Document:** `pages/_document.tsx` handles server document structure for styled-components.
-- **Home page:** `pages/index.tsx` loads work data with `getStaticProps`, stores it in Redux, and renders `MainContent`.
+- **Home page:** `pages/index.tsx` loads work data with `getStaticProps`, syncs it into Redux via `useEffect`, and passes it to `MainContent` as a prop.
 - **Content pages:** top-level files in `pages/` render about, case-study, coaching, DemoStoke, Antisyphon, Nice Guy University, and product pages.
 - **Static export:** `next.config.js` keeps the app static-host friendly. Static data helpers live under `src/` instead of `pages/api` so the exported site does not expose accidental API routes.
 
@@ -74,9 +75,9 @@ zickonezero/
 
 ### 4.3 Build utilities
 
-- `scripts/generate-sitemap.js` scans top-level page files, skips reserved/API-like pages, and writes `public/sitemap.xml`.
+- `scripts/generate-sitemap.js` scans top-level page files, skips reserved/API-like pages, and writes both `public/sitemap.xml` and `public/robots.txt` (which allows all crawlers and points at the absolute sitemap URL). Both generated files are git-ignored and rebuilt by `prebuild`.
 - `scripts/capture-ngu-screenshots.js` recaptures the Nice Guy University case-study screenshots from the live site as 2x-desktop WebP images (requires Playwright and cwebp, which are not project dependencies).
-- `SITE_URL` controls sitemap host generation; default is `https://www.zickonezero.com`.
+- Sitemap/robots host generation comes from `src/lib/siteConfig.js` (`NEXT_PUBLIC_SITE_URL` / `SITE_URL`, default `https://www.zickonezero.com`).
 - Storybook config lives in `.storybook/` and uses `@storybook/nextjs`.
 
 ## 5. Commands
@@ -99,7 +100,9 @@ npm run sitemap             # regenerate public/sitemap.xml only
 
 CI runs `npm ci`, `agent-briefs:check`, lint, typecheck, tests, and production build on Node 24.x.
 
-Security automation runs Gitleaks, dependency review, CodeQL, and a production dependency audit at critical severity. Stable Next releases may still report high/moderate advisories in npm audit until patched stable versions are available; those should remain visible but non-blocking unless the project intentionally moves to a patched stable release.
+Security automation runs Gitleaks, dependency review, CodeQL, and a production dependency audit at high severity (`npm audit --omit=dev --audit-level=high`). Stable Next releases may still report moderate advisories (e.g. Next's bundled postcss) in npm audit until patched stable versions are available; those remain visible but non-blocking at the high threshold unless the project intentionally moves to a patched stable release.
+
+Static-host security headers and redirects live in `public/_headers` and `public/_redirects` (Netlify/Cloudflare Pages format). The CSP allows the inline GTM/theme/Amplitude bootstraps and styled-components inline styles that the static export requires. Environment variables: `NEXT_PUBLIC_SITE_URL` / `SITE_URL` set the canonical origin (see `src/lib/siteConfig.js`); `NEXT_PUBLIC_AMPLITUDE_API_KEY` overrides the public browser analytics key.
 
 ## 6. Conventions
 
@@ -127,8 +130,11 @@ Security automation runs Gitleaks, dependency review, CodeQL, and a production d
 | [src/components/ProjectShowcase.tsx](src/components/ProjectShowcase.tsx) | Reusable case-study layout |
 | [src/components/niceguyuniversity/](src/components/niceguyuniversity/) | Nice Guy University case-study and product-screen section data |
 | [src/components/TrackedLink.tsx](src/components/TrackedLink.tsx) | Analytics-aware links |
+| [src/components/Seo.tsx](src/components/Seo.tsx) | Per-page title, canonical, OG/Twitter, and JSON-LD head tags |
 | [src/components/SiteAnalyticsScripts.tsx](src/components/SiteAnalyticsScripts.tsx) | Site analytics bootstrap |
 | [src/lib/analytics.ts](src/lib/analytics.ts) | Analytics event helpers |
+| [src/lib/seo.ts](src/lib/seo.ts) | SEO defaults, `absoluteUrl`, and JSON-LD builders |
+| [src/lib/siteConfig.js](src/lib/siteConfig.js) | Canonical `SITE_URL`/`SITE_NAME` shared by the app and the sitemap script |
 | [src/lib/getWorksData.ts](src/lib/getWorksData.ts) | Static work data loader |
 | [src/data/worksData.json](src/data/worksData.json) | Portfolio grid content |
 | [src/store.ts](src/store.ts) | Redux store setup |

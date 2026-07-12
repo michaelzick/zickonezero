@@ -1,11 +1,33 @@
 import ProjectShowcase from '../src/components/ProjectShowcase';
+import Seo from '../src/components/Seo';
+import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
+
+const PATH = '/find-your-flow-state/';
+const TITLE = 'Find Your Flow State';
+const SUMMARY = 'A free AI-powered career personality assessment quiz.';
+const HERO_IMAGE = { src: '/img/projects/fyfs/fyfs-wave.webp', alt: 'Find Your Flow State logo' };
 
 const FindYourFlowStatePage = () => (
-  <ProjectShowcase
-    title='Find Your Flow State'
-    summary='A free AI-powered career personality assessment quiz.'
-    heroImage={{ src: '/img/projects/fyfs/fyfs-wave.webp', alt: 'Find Your Flow State logo' }}
-    roleBullets={[
+  <>
+    <Seo
+      title={TITLE}
+      description={SUMMARY}
+      path={PATH}
+      type='article'
+      ogImage={HERO_IMAGE.src}
+      jsonLd={[
+        creativeWorkJsonLd({ name: TITLE, description: SUMMARY, path: PATH, image: HERO_IMAGE.src }),
+        breadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: TITLE, path: PATH },
+        ]),
+      ]}
+    />
+    <ProjectShowcase
+      title={TITLE}
+      summary={SUMMARY}
+      heroImage={HERO_IMAGE}
+      roleBullets={[
       'Product strategy',
       'Quiz questions',
       'UX design'
@@ -52,7 +74,8 @@ const FindYourFlowStatePage = () => (
         image: { src: '/img/projects/fyfs/fyfs-results.webp', alt: 'Quiz results page with recommendations' }
       }
     ]}
-  />
+    />
+  </>
 );
 
 export default FindYourFlowStatePage;

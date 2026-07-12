@@ -5,7 +5,6 @@ import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { store } from '../src/store';
 
-import { HeadContent } from '../src/components';
 import PageAnalytics from '../src/components/PageAnalytics';
 import SiteAnalyticsScripts from '../src/components/SiteAnalyticsScripts';
 import { AppThemeProvider } from '../src/theme/ThemeContext';
@@ -36,9 +35,13 @@ function MyApp({
           <PageAnalytics />
 
           <Head>
-            <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-            <title>ZICKONEZERO Creative</title>
-            <HeadContent />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="icon" href="/img/favicon/favicon.ico" sizes="any" />
+            <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png" />
+            <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png" />
+            <link rel="apple-touch-icon" href="/img/favicon/apple-touch-icon.png" />
+            <link rel="manifest" href="/img/favicon/site.webmanifest" />
+            <meta name="theme-color" content="#020817" />
           </Head>
 
           <Component {...pageProps} />

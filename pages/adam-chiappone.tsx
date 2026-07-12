@@ -1,11 +1,33 @@
 import ProjectShowcase from '../src/components/ProjectShowcase';
+import Seo from '../src/components/Seo';
+import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
+
+const PATH = '/adam-chiappone/';
+const TITLE = 'Adam Chiappone';
+const SUMMARY = 'A welcoming therapy site that translates Adam’s in-person warmth into a digital experience.';
+const HERO_IMAGE = { src: '/img/projects/adam-chiappone/ac-home-cropped.webp', alt: 'Adam Chiappone homepage hero' };
 
 const AdamChiapponePage = () => (
-  <ProjectShowcase
-    title='Adam Chiappone'
-    summary='A welcoming therapy site that translates Adam’s in-person warmth into a digital experience.'
-    heroImage={{ src: '/img/projects/adam-chiappone/ac-home-cropped.webp', alt: 'Adam Chiappone homepage hero' }}
-    roleBullets={[
+  <>
+    <Seo
+      title={TITLE}
+      description={SUMMARY}
+      path={PATH}
+      type='article'
+      ogImage={HERO_IMAGE.src}
+      jsonLd={[
+        creativeWorkJsonLd({ name: TITLE, description: SUMMARY, path: PATH, image: HERO_IMAGE.src }),
+        breadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: TITLE, path: PATH },
+        ]),
+      ]}
+    />
+    <ProjectShowcase
+      title={TITLE}
+      summary={SUMMARY}
+      heroImage={HERO_IMAGE}
+      roleBullets={[
       'Branding, imagery, and copywriting',
       'UX, layout, and technical direction',
       'SEO and analytics',
@@ -53,7 +75,8 @@ const AdamChiapponePage = () => (
         image: { src: '/img/projects/adam-chiappone/ac-event.webp', alt: 'Events and engagement section near footer' }
       }
     ]}
-  />
+    />
+  </>
 );
 
 export default AdamChiapponePage;

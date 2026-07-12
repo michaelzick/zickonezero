@@ -1,11 +1,33 @@
 import ProjectShowcase from '../src/components/ProjectShowcase';
+import Seo from '../src/components/Seo';
+import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
+
+const PATH = '/whos-in-charge/';
+const TITLE = 'Who’s In Charge?';
+const SUMMARY = 'An Internal Family Systems journaling app with tarot-style imagery.';
+const HERO_IMAGE = { src: '/img/squares/king-512.webp', alt: 'Who’s In Charge? crown logo' };
 
 const WhosInChargePage = () => (
-  <ProjectShowcase
-    title='Who’s In Charge?'
-    summary='An Internal Family Systems journaling app with tarot-style imagery.'
-    heroImage={{ src: '/img/squares/king-512.webp', alt: 'Who’s In Charge? crown logo' }}
-    roleBullets={[
+  <>
+    <Seo
+      title={TITLE}
+      description={SUMMARY}
+      path={PATH}
+      type='article'
+      ogImage={HERO_IMAGE.src}
+      jsonLd={[
+        creativeWorkJsonLd({ name: TITLE, description: SUMMARY, path: PATH, image: HERO_IMAGE.src }),
+        breadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: TITLE, path: PATH },
+        ]),
+      ]}
+    />
+    <ProjectShowcase
+      title={TITLE}
+      summary={SUMMARY}
+      heroImage={HERO_IMAGE}
+      roleBullets={[
       'UX architecture',
       'Visual design',
       'Images and text',
@@ -53,7 +75,8 @@ const WhosInChargePage = () => (
         image: { src: '/img/projects/wic/wic-export.webp', alt: 'Export modal with sharing options' }
       }
     ]}
-  />
+    />
+  </>
 );
 
 export default WhosInChargePage;

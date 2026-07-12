@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, type CSSProperties } from 'react';
+import { useState, useEffect, useCallback, useRef, type CSSProperties } from 'react';
 import { useSize } from '@radix-ui/react-use-size';
 import { trackEvent } from '../lib/analytics';
 
@@ -55,6 +55,27 @@ const useSectionTabs = ({
   const [stickyTop, setStickyTop] = useState(fallbackStickyTop);
   const [activeSection, setActiveSection] = useState(sections[0]?.id ?? '');
   const topTabsSize = useSize(topTabsEl);
+  const isUnmountedRef = useRef(false);
+  const loadTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const loadListenerRef = useRef<(() => void) | null>(null);
+
+  // Cancel the deferred re-scroll work (window `load`, image `load`, and the
+  // 450ms fallback) so it never fires after this hook's owner unmounts.
+  useEffect(() => {
+    isUnmountedRef.current = false;
+
+    return () => {
+      isUnmountedRef.current = true;
+      if (loadTimeoutRef.current) {
+        clearTimeout(loadTimeoutRef.current);
+        loadTimeoutRef.current = null;
+      }
+      if (loadListenerRef.current) {
+        window.removeEventListener('load', loadListenerRef.current);
+        loadListenerRef.current = null;
+      }
+    };
+  }, []);
 
   const getResolvedStickyTop = useCallback(() => {
     if (!topTabsEl) {
@@ -154,11 +175,16 @@ const useSectionTabs = ({
     scrollToSection(sectionId, 'smooth');
 
     const rerunAfterLoad = () => {
+      if (isUnmountedRef.current) return;
       if (performance.now() - clickedAt > 1200) return;
-      requestAnimationFrame(() => scrollToSection(sectionId, 'smooth'));
+      requestAnimationFrame(() => {
+        if (isUnmountedRef.current) return;
+        scrollToSection(sectionId, 'smooth');
+      });
     };
 
     if (document.readyState !== 'complete') {
+      loadListenerRef.current = rerunAfterLoad;
       window.addEventListener('load', rerunAfterLoad, { once: true });
     }
 
@@ -169,7 +195,10 @@ const useSectionTabs = ({
     if (pendingImages.length) {
       pendingImages.forEach((img) => img.addEventListener('load', rerunAfterLoad, { once: true }));
       // Fallback in case images load via lazy observers shortly after scroll starts.
-      setTimeout(rerunAfterLoad, 450);
+      if (loadTimeoutRef.current) {
+        clearTimeout(loadTimeoutRef.current);
+      }
+      loadTimeoutRef.current = setTimeout(rerunAfterLoad, 450);
     }
   }, [scrollToSection]);
 
