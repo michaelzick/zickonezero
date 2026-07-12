@@ -13,11 +13,17 @@
  * on the coaching brand.
  *
  * Requirements (not project dependencies):
- *   - npm i -g playwright (or npx) + `npx playwright install chromium`
+ *   - npm i -g playwright + `npx playwright install chromium`
  *   - cwebp on PATH (brew install webp)
  *
  * Usage:
  *   node scripts/capture-michael-zick-coaching-screenshots.js
+ *
+ * If the script fails with "Cannot find module 'playwright'", either install
+ * it globally (see above) or point NODE_PATH at any node_modules that has it,
+ * e.g. an npx cache entry:
+ *   NODE_PATH=~/.npm/_npx/<hash>/node_modules node scripts/capture-michael-zick-coaching-screenshots.js
+ * (find one with: find ~/.npm/_npx -maxdepth 3 -name playwright -type d)
  */
 const { chromium } = require('playwright');
 const { execFileSync } = require('child_process');
