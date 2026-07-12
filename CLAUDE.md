@@ -75,9 +75,9 @@ zickonezero/
 
 ### 4.3 Build utilities
 
-- `scripts/generate-sitemap.js` scans top-level page files, skips reserved/API-like pages, and writes `public/sitemap.xml`.
+- `scripts/generate-sitemap.js` scans top-level page files, skips reserved/API-like pages, and writes both `public/sitemap.xml` and `public/robots.txt` (which allows all crawlers and points at the absolute sitemap URL). Both generated files are git-ignored and rebuilt by `prebuild`.
 - `scripts/capture-ngu-screenshots.js` recaptures the Nice Guy University case-study screenshots from the live site as 2x-desktop WebP images (requires Playwright and cwebp, which are not project dependencies).
-- `SITE_URL` controls sitemap host generation; default is `https://www.zickonezero.com`.
+- Sitemap/robots host generation comes from `src/lib/siteConfig.js` (`NEXT_PUBLIC_SITE_URL` / `SITE_URL`, default `https://www.zickonezero.com`).
 - Storybook config lives in `.storybook/` and uses `@storybook/nextjs`.
 
 ## 5. Commands

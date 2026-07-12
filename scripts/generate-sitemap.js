@@ -7,6 +7,7 @@ const BASE_URL = SITE_URL;
 const PAGES_DIR = path.join(__dirname, '..', 'pages');
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 const OUTPUT_PATH = path.join(PUBLIC_DIR, 'sitemap.xml');
+const ROBOTS_PATH = path.join(PUBLIC_DIR, 'robots.txt');
 
 // Next.js reserved filenames and directories to skip
 const SKIPPED_NAMES = new Set(['_app', '_document', '_error', '404', '500']);
@@ -55,6 +56,17 @@ function buildXml(urls) {
   return `${lines.join('\n')}\n`;
 }
 
+function buildRobots() {
+  const lines = [
+    'User-agent: *',
+    'Allow: /',
+    '',
+    `Sitemap: ${BASE_URL}/sitemap.xml`,
+  ];
+
+  return `${lines.join('\n')}\n`;
+}
+
 function main() {
   if (!fs.existsSync(PAGES_DIR)) {
     console.error(`Expected pages directory at ${PAGES_DIR}.`);
@@ -70,9 +82,12 @@ function main() {
   fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
   fs.writeFileSync(OUTPUT_PATH, xml, 'utf8');
   console.log(`Sitemap generated with ${routes.length} routes at ${OUTPUT_PATH}`);
+
+  fs.writeFileSync(ROBOTS_PATH, buildRobots(), 'utf8');
+  console.log(`robots.txt generated at ${ROBOTS_PATH}`);
 }
 
-module.exports = { routeFromPageFile, getPageFiles, buildXml, PAGES_DIR };
+module.exports = { routeFromPageFile, getPageFiles, buildXml, buildRobots, PAGES_DIR };
 
 if (require.main === module) {
   main();

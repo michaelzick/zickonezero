@@ -1,5 +1,5 @@
 const path = require('path');
-const { routeFromPageFile, getPageFiles, buildXml, PAGES_DIR } = require('../scripts/generate-sitemap');
+const { routeFromPageFile, getPageFiles, buildXml, buildRobots, PAGES_DIR } = require('../scripts/generate-sitemap');
 
 describe('generate-sitemap', () => {
   describe('routeFromPageFile', () => {
@@ -70,6 +70,26 @@ describe('generate-sitemap', () => {
       const xml = buildXml(['/', '/about/', '/demostoke/']);
       const urlCount = (xml.match(/<url>/g) || []).length;
       expect(urlCount).toBe(3);
+    });
+
+    it('does not include the removed /case-studies/ route', () => {
+      const routes = getPageFiles(PAGES_DIR).map(routeFromPageFile).filter(Boolean);
+      expect(routes).not.toContain('/case-studies/');
+
+      const xml = buildXml(routes);
+      expect(xml).not.toContain('/case-studies/');
+    });
+  });
+
+  describe('buildRobots', () => {
+    it('allows all crawlers', () => {
+      const robots = buildRobots();
+      expect(robots).toContain('User-agent: *');
+      expect(robots).toContain('Allow: /');
+    });
+
+    it('points at the absolute sitemap URL', () => {
+      expect(buildRobots()).toContain('Sitemap: https://www.zickonezero.com/sitemap.xml');
     });
   });
 });
