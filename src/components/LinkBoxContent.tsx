@@ -87,6 +87,14 @@ const LinkBoxContent = () => {
     closeAll();
   };
 
+  // Clear any pending hover-close timeout when the component unmounts.
+  useEffect(() => () => {
+    if (hoverCloseTimeout.current) {
+      clearTimeout(hoverCloseTimeout.current);
+      hoverCloseTimeout.current = null;
+    }
+  }, []);
+
   useEffect(() => {
     if (!isCaseStudiesOpen && !isProjectsOpen && !isContactOpen) {
       return undefined;

@@ -35,9 +35,14 @@ import {
 } from '../../styles';
 import { AnimatedSection } from '../../styles/projectShowcases';
 import { trackEvent } from '../lib/analytics';
+import type { WorksData } from '../types';
 
 type HomeSectionKey = 'case-studies' | 'ux' | 'ui';
 type ActiveSection = HomeSectionKey | null;
+
+type MainContentProps = {
+  worksDataReversed?: Array<WorksData>;
+};
 
 const DESKTOP_NAV_OFFSET = 92; // Tighten the gap so section headers sit closer to the tabs
 const MOBILE_TABS_HEIGHT_PX = 11.3 * 16; // Keep in sync with mobile scroll target for Home tabs
@@ -70,8 +75,11 @@ const WORKS_CAROUSEL_IMAGES = [
   }
 ];
 
-const MainContent = () => {
-  const { worksDataReversed } = useAppSelector(selectData);
+const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentProps = {}) => {
+  const { worksDataReversed: worksDataReversedStore } = useAppSelector(selectData);
+  // Prefer the prop (populated during static generation) and fall back to the
+  // store so `<MainContent />` still renders when driven by a preloaded store.
+  const worksDataReversed = worksDataReversedProp ?? worksDataReversedStore;
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
   const caseStudiesSectionRef = useRef<HTMLHeadingElement | null>(null);

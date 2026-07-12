@@ -31,9 +31,12 @@ const useAnimatedSections = (resetKey?: unknown) => {
     };
 
     animatedSectionRefs.current.forEach((node) => node && observer.observe(node));
-    requestAnimationFrame(revealSectionsInView);
+    const rafId = requestAnimationFrame(revealSectionsInView);
 
-    return () => observer.disconnect();
+    return () => {
+      cancelAnimationFrame(rafId);
+      observer.disconnect();
+    };
   }, [resetKey]);
 
   return { visibleSections, setAnimatedSectionRef };
