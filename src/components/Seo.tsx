@@ -35,7 +35,7 @@ const Seo = ({
   jsonLd,
   noIndex = false,
 }: SeoProps) => {
-  const pageTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} — ${SITE_TAGLINE}`;
+  const pageTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} | ${SITE_TAGLINE}`;
   const metaDescription = description ?? DEFAULT_DESCRIPTION;
   const canonical = absoluteUrl(path);
   const image = absoluteUrl(ogImage);

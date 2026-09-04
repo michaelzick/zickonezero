@@ -26,10 +26,9 @@ describe('Seo', () => {
     expect(document.title).toBe('About Michael Zick | ZICKONEZERO Creative');
   });
 
-  it('uses a bare brand title on the home page when no title is provided', () => {
+  it('uses the brand and tagline as the home page title when no title is provided', () => {
     render(<Seo path='/' />);
-    expect(document.title).toContain('ZICKONEZERO Creative');
-    expect(document.title).not.toContain('|');
+    expect(document.title).toBe('ZICKONEZERO Creative | Product, UX & Development');
   });
 
   it('exposes an absolute og:image URL by default', () => {
