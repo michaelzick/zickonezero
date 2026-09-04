@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react';
+import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 
 import { Wrapper } from '../../styles';
 import {
@@ -125,10 +126,14 @@ const ContactContent = () => {
                   <p>
                     You can also find me on{' '}
                     <TrackedLink href='https://linkedin.com/in/michaelzick' label='LinkedIn' location='contact_page'
-                      section='intro' target='_blank' rel='noopener noreferrer'>LinkedIn</TrackedLink>{' '}
+                      section='intro' target='_blank' rel='noopener noreferrer'>
+                      LinkedIn <OpenInNewWindowIcon aria-hidden='true' />
+                    </TrackedLink>{' '}
                     and{' '}
                     <TrackedLink href='https://github.com/michaelzick' label='GitHub' location='contact_page'
-                      section='intro' target='_blank' rel='noopener noreferrer'>GitHub</TrackedLink>.
+                      section='intro' target='_blank' rel='noopener noreferrer'>
+                      GitHub <OpenInNewWindowIcon aria-hidden='true' />
+                    </TrackedLink>.
                   </p>
                 </ContactIntro>
 

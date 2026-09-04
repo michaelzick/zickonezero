@@ -26,6 +26,9 @@ export const ContactIntro = styled.div`
   }
 
   a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2em;
     color: ${THEME.colors.white};
     font-weight: 600;
     text-decoration: none;
@@ -35,6 +38,12 @@ export const ContactIntro = styled.div`
     &:hover {
       color: ${THEME.colors.orange};
       border-color: ${THEME.colors.orange};
+    }
+
+    svg {
+      width: 0.85em;
+      height: 0.85em;
+      flex-shrink: 0;
     }
   }
 `;
