@@ -41,9 +41,9 @@ const RiptydePage = () => (
           title: 'One number, no excuses',
           body: (
             <>
-              Surf forecasts bury the answer under swell charts and jargon. Riptyde opens on a single
-              RAD-O-METER™ score for your home break, with the ten-day outlook, wind, and next tide right
-              underneath so the go/no-go call takes seconds.
+              Surf forecasts bury the answer under swell charts and jargon, so I built Riptyde around a
+              single RAD-O-METER™ score for every break. The ten-day outlook, wind, and next tide sit
+              right underneath, and the go/no-go call takes seconds.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-home.webp', alt: 'Riptyde home screen with RAD-O-METER™ score and ten-day outlook' }
@@ -52,8 +52,9 @@ const RiptydePage = () => (
           title: 'Show the work behind the score',
           body: (
             <>
-              Tapping the score opens the RAD breakdown: wave height, period, wind, and swell direction each
-              get a rating, a plain-language note, and their share of the total. No black box, no guesswork.
+              A single number is only useful if people trust it, so I designed the RAD breakdown to show the
+              math. Wave height, period, wind, and swell direction each get a rating, a plain-language note,
+              and their share of the total. No black box, no guesswork.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-rad-page.webp', alt: 'RAD breakdown detail screen explaining each forecast factor' }
@@ -62,9 +63,9 @@ const RiptydePage = () => (
           title: 'Scope the lineup',
           body: (
             <>
-              The Lineup ranks every spot by score, with quick filters for favorites, custom spots, and break
-              type. Each card shows distance and a color-coded rating, so picking where to paddle out takes a
-              glance.
+              The Lineup ranks every spot by score. I added quick filters for favorites, custom spots, and
+              break type, and gave each card a distance and a color-coded rating, so picking where to paddle
+              out takes a glance.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-spots.webp', alt: 'The Lineup spot list sorted by RAD-O-METER™ score' }
@@ -73,8 +74,8 @@ const RiptydePage = () => (
           title: 'Beach cams, one tap away',
           body: (
             <>
-              Public beach cams sit beside the forecast so surfers can check conditions with their own
-              eyes. Each cam refreshes on demand and links straight to the source feed.
+              Forecasts are still forecasts, so I put public beach cams beside the score for a look at the
+              real thing. Each cam refreshes on demand and links straight to the source feed.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-cams.webp', alt: 'Beach Cams screen with live stills and refresh controls' }
@@ -83,9 +84,8 @@ const RiptydePage = () => (
           title: 'Every break on the map',
           body: (
             <>
-              The map pins every surf spot on the West Coast, from British Columbia down to San Diego.
-              Surfers can see how nearby breaks sit relative to each other and jump straight to the closest
-              one.
+              I mapped every surf spot on the West Coast, from British Columbia down to San Diego, so surfers
+              can see how nearby breaks sit relative to each other and jump straight to the closest one.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-map.webp', alt: 'Map of West Coast surf spots, zoomed to the pins along the Los Angeles coastline' }
@@ -94,8 +94,9 @@ const RiptydePage = () => (
           title: 'Rewind ten days',
           body: (
             <>
-              Throwback mode replays the last ten days of scores and conditions. Surfers can compare what
-              they rode with what the forecast said and get a feel for how the score plays out in the water.
+              I added Throwback mode to replay the last ten days of scores and conditions. Surfers can compare
+              what they rode with what the forecast said and get a feel for how the score plays out in the
+              water.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-throwback.webp', alt: 'Throwback mode showing a ten-day history of scores' }
@@ -104,8 +105,9 @@ const RiptydePage = () => (
           title: 'Charts, tide, and AI summaries',
           body: (
             <>
-              Below the score, hourly surf-quality charts, wind and tide cards, a board recommendation, and an
-              AI summary are there for surfers who want the details, without crowding the top of the screen.
+              For surfers who want the details, I tucked hourly surf-quality charts, wind and tide cards, a
+              board recommendation, and an AI summary below the score, where they don’t crowd the first
+              screen.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-home-bottom.webp', alt: 'Surf quality chart, wind, tide, board, and AI summary cards' }
@@ -114,8 +116,8 @@ const RiptydePage = () => (
           title: 'Sessions, streaks, and crew',
           body: (
             <>
-              Profile tracks sessions, waves, hours, and best scores. Crew lets friends share sessions and
-              secret spots, and streaks keep the habit going.
+              I built the Profile to track sessions, waves, hours, and best scores, and Crew so friends can
+              share sessions and secret spots. Streaks keep the habit going.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-profile.webp', alt: 'Profile screen with session stats, streak, and crew' }
