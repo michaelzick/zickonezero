@@ -52,12 +52,12 @@ const RiptydePage = () => (
           title: 'Show the work behind the score',
           body: (
             <>
-              Tapping the score opens the Rad Breakdown: wave height, period, wind, and swell direction each
+              Tapping the score opens the RAD Breakdown: wave height, period, wind, and swell direction each
               get a rating, a plain-language note, and their contribution to the total. Surfers can trust the
               number because they can see how it was built.
             </>
           ),
-          image: { src: '/img/projects/riptyde/riptyde-rad-page.webp', alt: 'Rad Breakdown detail screen explaining each forecast factor' }
+          image: { src: '/img/projects/riptyde/riptyde-rad-page.webp', alt: 'RAD Breakdown detail screen explaining each forecast factor' }
         },
         {
           title: 'Scope the lineup',
