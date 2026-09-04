@@ -95,7 +95,7 @@ const RiptydePage = () => (
           body: (
             <>
               Throwback mode replays the last ten days of scores and conditions. Surfers can compare what
-              they rode to what the forecast said, which builds intuition about their home break.
+              they rode to what the forecast says, which builds intuition about the conditions.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-throwback.webp', alt: 'Throwback mode showing a ten-day history of scores' }
