@@ -10,7 +10,7 @@
   --color-demostoke: #00dff7;
   --color-hotYellow: #d3ff00;
   --color-hotRed: #fe0065;
-  --color-darkGreen: #0c4a6e;
+  --color-accent: var(--color-hotRed);
   --color-contrast: #020817;
   --color-orange: #fb923c;
   --color-mutedLabel: rgba(251, 146, 60, 0.72);
@@ -38,7 +38,7 @@
   --color-demostoke: #0284c7;
   --color-hotYellow: #d3ff00;
   --color-hotRed: #db2777;
-  --color-darkGreen: #0c4a6e;
+  --color-accent: var(--color-hotRed);
   --color-contrast: #0f172a;
   --color-orange: #fb923c;
   --color-mutedLabel: rgba(251, 146, 60, 0.72);

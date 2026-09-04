@@ -45,7 +45,7 @@ const NotFoundSection = styled.section`
     transition: background-color 0.2s ease, color 0.2s ease;
 
     &:hover {
-      background-color: ${THEME.colors.darkGreen};
+      background-color: ${THEME.colors.accent};
       color: #fff;
     }
   }

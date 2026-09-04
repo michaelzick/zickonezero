@@ -16,7 +16,7 @@ export const THEME = {
     demostoke: 'var(--color-demostoke)',
     hotYellow: 'var(--color-hotYellow)',
     hotRed: 'var(--color-hotRed)',
-    darkGreen: 'var(--color-darkGreen)',
+    accent: 'var(--color-accent)',
     contrast: 'var(--color-contrast)',
     orange: 'var(--color-orange)',
     mutedLabel: 'var(--color-mutedLabel)',

@@ -158,8 +158,8 @@ export const ContactSubmit = styled.button`
   transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 
   &:hover:not(:disabled) {
-    background-color: ${THEME.colors.darkGreen};
-    border-color: ${THEME.colors.darkGreen};
+    background-color: ${THEME.colors.accent};
+    border-color: ${THEME.colors.accent};
     color: #fff;
     transform: translateY(-1px);
   }
