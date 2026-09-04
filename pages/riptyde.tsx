@@ -4,7 +4,7 @@ import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
 
 const PATH = '/riptyde/';
 const TITLE = 'Riptyde';
-const SUMMARY = 'A neo-brutalist iOS surf forecast app that boils West Coast conditions down to one RAD-O-METER™ score.';
+const SUMMARY = 'A neon-brutalist iOS surf forecast app that renders complex conditions down to one RAD-O-METER™ score.';
 const HERO_IMAGE = { src: '/img/projects/riptyde/riptyde-hero.webp', alt: 'Riptyde home screen header for Malibu First Point' };
 
 const RiptydePage = () => (
@@ -32,7 +32,7 @@ const RiptydePage = () => (
       imageOrientation='portrait'
       roleBullets={[
         'Product strategy',
-        'UX/UI design',
+        'UX design',
         'iOS development',
       ]}
       projectLink={{ href: 'https://apps.apple.com/us/app/riptyde/id6793336480', label: 'App Store' }}
@@ -116,7 +116,7 @@ const RiptydePage = () => (
           body: (
             <>
               Profile tracks logged sessions, waves, hours, and best scores, and a Crew feature lets friends
-              share sessions and secret spots. Streaks keep the habit going between swells.
+              share sessions and secret spots. Streaks keep the habit going.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-profile.webp', alt: 'Profile screen with session stats, streak, and crew' }
