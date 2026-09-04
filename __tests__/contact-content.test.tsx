@@ -5,6 +5,7 @@ import ContactContent from '../src/components/ContactContent';
 import FooterContent from '../src/components/FooterContent';
 import LinkBoxContent from '../src/components/LinkBoxContent';
 import LinkBoxMobileContent from '../src/components/LinkBoxMobileContent';
+import { DEFAULT_CONTACT_ENDPOINT } from '../src/lib/contactForm';
 import { renderWithProviders } from '../src/test/renderWithProviders';
 
 type TestWindow = Window & { amplitude?: { track: jest.Mock } };
@@ -57,7 +58,7 @@ describe('ContactContent', () => {
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
-    expect(url).toBe('/api/contact');
+    expect(url).toBe(DEFAULT_CONTACT_ENDPOINT);
     expect(init.method).toBe('POST');
     expect(JSON.parse(String(init.body))).toEqual({
       name: 'Jane Doe',
@@ -102,7 +103,7 @@ describe('ContactContent', () => {
 });
 
 describe('Contact navigation links', () => {
-  it('renders an internal Contact link in the desktop nav and footer', () => {
+  it('renders one internal Contact link in the desktop nav and one in the footer', () => {
     renderWithProviders(
       <>
         <LinkBoxContent />
@@ -111,7 +112,7 @@ describe('Contact navigation links', () => {
     );
 
     const contactLinks = screen.getAllByRole('link', { name: 'Contact' });
-    expect(contactLinks.length).toBeGreaterThanOrEqual(2);
+    expect(contactLinks).toHaveLength(2);
     contactLinks.forEach((link) => {
       expect(link).toHaveAttribute('href', '/contact');
       expect(link).not.toHaveAttribute('target', '_blank');
@@ -121,7 +122,7 @@ describe('Contact navigation links', () => {
     expect(github).toHaveAttribute('target', '_blank');
   });
 
-  it('renders Contact as a primary link and in the Links accordion of the mobile nav', async () => {
+  it('renders Contact only as a primary link in the mobile nav', async () => {
     const user = userEvent.setup();
     renderWithProviders(<LinkBoxMobileContent isAnimating={false} />);
 
@@ -129,11 +130,7 @@ describe('Contact navigation links', () => {
 
     await user.click(screen.getByRole('button', { name: 'Links' }));
 
-    const contactLinks = screen.getAllByRole('link', { name: 'Contact' });
-    expect(contactLinks).toHaveLength(2);
-    contactLinks.forEach((link) => {
-      expect(link).toHaveAttribute('href', '/contact');
-      expect(link).not.toHaveAttribute('target');
-    });
+    expect(screen.getAllByRole('link', { name: 'Contact' })).toHaveLength(1);
+    expect(screen.getByRole('link', { name: /GitHub/ })).toHaveAttribute('target', '_blank');
   });
 });

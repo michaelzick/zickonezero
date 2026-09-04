@@ -2,8 +2,10 @@ import { WorkerMailer } from 'worker-mailer';
 
 import {
   buildContactEmail,
+  consumeRateLimit,
   resolveAllowedOrigin,
   validateContactSubmission,
+  type RateLimitEntry,
 } from './contact';
 
 export type Env = {
@@ -18,6 +20,11 @@ const BREVO_SMTP_HOST = 'smtp-relay.brevo.com';
 const BREVO_SMTP_PORT = 587;
 const SMTP_TIMEOUT_MS = 15_000;
 const MAX_BODY_BYTES = 16_384;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 5;
+
+// Per-isolate, best-effort; see consumeRateLimit for the caveats.
+const rateLimitStore = new Map<string, RateLimitEntry>();
 
 const corsHeaders = (origin: string | null): HeadersInit => ({
   ...(origin ? { 'Access-Control-Allow-Origin': origin, Vary: 'Origin' } : {}),
@@ -59,14 +66,25 @@ export default {
       return json({ success: false, error: 'Origin not allowed.' }, 403, origin);
     }
 
-    const contentLength = Number(request.headers.get('Content-Length') ?? 0);
-    if (contentLength > MAX_BODY_BYTES) {
+    const clientIp = request.headers.get('CF-Connecting-IP') ?? 'unknown';
+    const rateLimit = consumeRateLimit(rateLimitStore, clientIp, {
+      windowMs: RATE_LIMIT_WINDOW_MS,
+      maxRequests: RATE_LIMIT_MAX_REQUESTS,
+    });
+    if (!rateLimit.allowed) {
+      const response = json({ success: false, error: 'Too many messages. Please try again in an hour.', requestId }, 429, origin);
+      response.headers.set('Retry-After', String(rateLimit.retryAfterSeconds));
+      return response;
+    }
+
+    const rawBody = await request.text();
+    if (rawBody.length > MAX_BODY_BYTES) {
       return json({ success: false, error: 'Request body too large.' }, 413, origin);
     }
 
     let body: unknown;
     try {
-      body = await request.json();
+      body = JSON.parse(rawBody);
     } catch {
       return json({ success: false, error: 'Request body must be valid JSON.' }, 400, origin);
     }
@@ -89,8 +107,9 @@ export default {
     const { submission } = validation;
     const email = buildContactEmail(submission);
 
+    let mailer: WorkerMailer | null = null;
     try {
-      const mailer = await WorkerMailer.connect({
+      mailer = await WorkerMailer.connect({
         host: BREVO_SMTP_HOST,
         port: BREVO_SMTP_PORT,
         secure: false,
@@ -117,6 +136,9 @@ export default {
     } catch (error) {
       console.error('Contact email failed', { requestId, error: error instanceof Error ? error.message : String(error) });
       return json({ success: false, error: 'Failed to send message. Please try again later.', requestId }, 502, origin);
+    } finally {
+      // Send QUIT so Brevo does not hold the connection open until it times out.
+      await mailer?.close().catch(() => undefined);
     }
   },
 } satisfies ExportedHandler<Env>;

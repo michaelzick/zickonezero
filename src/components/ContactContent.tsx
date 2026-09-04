@@ -24,6 +24,7 @@ import { TopNavContent, FooterContent } from '.';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { trackEvent } from '../lib/analytics';
 import {
+  CONTACT_FIELD_LIMITS,
   EMPTY_CONTACT_FORM,
   getContactValidationError,
   submitContactForm,
@@ -90,7 +91,14 @@ const ContactContent = () => {
       setStatus({ kind: 'error', message: result.message });
     } catch (error) {
       if (error instanceof DOMException && error.name === 'AbortError') return;
-      throw error;
+      // submitContactForm handles the expected failures; anything else is a defect,
+      // but the visitor still needs a way out.
+      console.error('Unexpected contact form failure', error);
+      trackEvent('contact_form_submit_failed', {
+        failure_reason: 'unknown',
+        page_path: window.location.pathname,
+      });
+      setStatus({ kind: 'error', message: 'Something went wrong sending your message. Please try again in a moment.' });
     }
   };
 
@@ -139,6 +147,7 @@ const ContactContent = () => {
                         type='text'
                         autoComplete='name'
                         placeholder='Your name'
+                        maxLength={CONTACT_FIELD_LIMITS.name}
                         value={values.name}
                         onChange={handleChange}
                         disabled={isSubmitting}
@@ -154,6 +163,7 @@ const ContactContent = () => {
                         type='email'
                         autoComplete='email'
                         placeholder='you@example.com'
+                        maxLength={CONTACT_FIELD_LIMITS.email}
                         value={values.email}
                         onChange={handleChange}
                         disabled={isSubmitting}
@@ -167,6 +177,7 @@ const ContactContent = () => {
                         id='contact-message'
                         name='message'
                         placeholder='What are you working on?'
+                        maxLength={CONTACT_FIELD_LIMITS.message}
                         value={values.message}
                         onChange={handleChange}
                         disabled={isSubmitting}

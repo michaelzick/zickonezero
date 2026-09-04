@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type FocusEvent } from 'react';
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
-import { CONTACT_LINKS } from './contactLinks';
+import { EXTERNAL_LINKS } from './contactLinks';
 import { PROJECT_LINKS } from './projectLinks';
 import { trackEvent } from '../lib/analytics';
 import TrackedLink from './TrackedLink';
@@ -253,7 +253,7 @@ const LinkBoxContent = () => {
           onMouseLeave={scheduleCloseAll}
           $isOpen={isContactOpen}
           aria-hidden={!isContactOpen}>
-          {CONTACT_LINKS.map(({ href, label, external }) => (
+          {EXTERNAL_LINKS.map(({ href, label }) => (
             <li key={href} onClick={handleLinkClick}>
               <TrackedLink
                 href={href}
@@ -261,11 +261,11 @@ const LinkBoxContent = () => {
                 location='top_nav'
                 section='links_dropdown'
                 variant='desktop'
-                target={external ? '_blank' : undefined}
-                rel={external ? 'noopener noreferrer' : undefined}
+                target='_blank'
+                rel='noopener noreferrer'
                 tabIndex={isContactOpen ? 0 : -1}
               >
-                {label}{external ? <> <OpenInNewWindowIcon aria-hidden='true' /></> : null}
+                {label} <OpenInNewWindowIcon aria-hidden='true' />
               </TrackedLink>
             </li>
           ))}

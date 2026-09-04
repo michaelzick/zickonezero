@@ -14,7 +14,7 @@ Primary flows:
 - Home portfolio: animated intro, tabbed work sections, thumbnail grid, and lightbox gallery.
 - Case studies: reusable project showcase layouts for DemoStoke, Antisyphon Training, Nice Guy University, and related work.
 - Product/service pages: DemoStoke, DemoStoke Fleet Ops, Find Your Flow State, Who's In Charge, Riptyde, coaching, and about pages.
-- Contact: `/contact` posts to a same-origin `/api/contact` endpoint served by the Cloudflare Worker in `workers/contact/`, which relays through Brevo SMTP.
+- Contact: `/contact` posts to the Cloudflare Worker in `workers/contact/` (deployed at `https://zickonezero-contact.zickonezero.workers.dev/api/contact`), which relays through Brevo SMTP.
 - Static publishing: `next build` exports the site with `output: 'export'` and regenerates `public/sitemap.xml`.
 
 ## 2. Tech stack
@@ -63,7 +63,7 @@ zickonezero/
 - **Document:** `pages/_document.tsx` handles server document structure for styled-components.
 - **Home page:** `pages/index.tsx` loads work data with `getStaticProps`, syncs it into Redux via `useEffect`, and passes it to `MainContent` as a prop.
 - **Content pages:** top-level files in `pages/` render about, contact, case-study, coaching, DemoStoke, Antisyphon, Nice Guy University, and product pages.
-- **Contact page:** `pages/contact.tsx` renders `src/components/ContactContent.tsx`, which posts JSON to `NEXT_PUBLIC_CONTACT_ENDPOINT` (default `/api/contact`) via `src/lib/contactForm.ts`, tracks `contact_form_submit_*` events, and includes a honeypot `website` field.
+- **Contact page:** `pages/contact.tsx` renders `src/components/ContactContent.tsx`, which posts JSON to `NEXT_PUBLIC_CONTACT_ENDPOINT` (default `DEFAULT_CONTACT_ENDPOINT`, the deployed workers.dev URL) via `src/lib/contactForm.ts`, tracks `contact_form_submit_*` events, and includes a honeypot `website` field.
 - **Static export:** `next.config.js` keeps the app static-host friendly. Static data helpers live under `src/` instead of `pages/api` so the exported site does not expose accidental API routes.
 
 ### 4.2 State, content, and UI
@@ -86,8 +86,8 @@ zickonezero/
 
 ### 4.4 Contact worker
 
-- **Hosting context:** the exported site is served from DigitalOcean App Platform (static) and proxied by Cloudflare, so there is no server runtime in this repo. `workers/contact/` is a standalone Cloudflare Worker package (own `package.json`, `wrangler.jsonc`, `tsconfig.json`) bound to the routes `www.zickonezero.com/api/contact` and `zickonezero.com/api/contact` in the ZICKONEZERO Cloudflare account.
-- **Behavior:** `workers/contact/src/index.ts` validates the JSON body with the pure helpers in `workers/contact/src/contact.ts` (shared with `__tests__/contact-worker.test.ts`), enforces an `Origin` allowlist (`ALLOWED_ORIGINS` var), silently accepts honeypot hits, and sends via `worker-mailer` over Brevo SMTP (`smtp-relay.brevo.com:587`, STARTTLS).
+- **Hosting context:** the exported site is served from DigitalOcean App Platform (static) and proxied by Cloudflare, so there is no server runtime in this repo. `workers/contact/` is a standalone Cloudflare Worker package (own `package.json`, `wrangler.jsonc`, `tsconfig.json`) deployed to the ZICKONEZERO Cloudflare account at `https://zickonezero-contact.zickonezero.workers.dev`. The `zickonezero.com` zone is not in that account, so the site calls the Worker cross-origin (its origins are allowlisted via `ALLOWED_ORIGINS` and named in the CSP `connect-src` in `public/_headers`); a same-origin `/api/contact` zone route only becomes possible if the zone moves into the account.
+- **Behavior:** `workers/contact/src/index.ts` validates the JSON body with the pure helpers in `workers/contact/src/contact.ts` (shared with `__tests__/contact-worker.test.ts`), enforces an `Origin` allowlist (`ALLOWED_ORIGINS` var), applies a best-effort per-isolate rate limit (5 per IP per hour, `429` + `Retry-After`), silently accepts honeypot hits, and sends via `worker-mailer` over Brevo SMTP (`smtp-relay.brevo.com:587`, STARTTLS).
 - **Secrets:** `BREVO_USER`, `BREVO_SMTP_PASSWORD`, `BREVO_FROM` (`mzick@zickonezero.com`), and `BREVO_TO` are Worker secrets (`npx wrangler secret put`), matching the variable names used by michaelzick.com. Local dev reads them from the git-ignored `workers/contact/.dev.vars` (see `.dev.vars.example`).
 - **Commands:** `npm run dev` / `npm run deploy` / `npm run typecheck` inside `workers/contact/`. The root `tsconfig.json` excludes the Worker entry file because it depends on `@cloudflare/workers-types`.
 
@@ -113,7 +113,7 @@ CI runs `npm ci`, `agent-briefs:check`, lint, typecheck, a `workers/contact` ins
 
 Security automation runs Gitleaks, dependency review, CodeQL, and a production dependency audit at high severity (`npm audit --omit=dev --audit-level=high`). Stable Next releases may still report moderate advisories (e.g. Next's bundled postcss) in npm audit until patched stable versions are available; those remain visible but non-blocking at the high threshold unless the project intentionally moves to a patched stable release.
 
-Static-host security headers and redirects live in `public/_headers` and `public/_redirects` (Netlify/Cloudflare Pages format). The CSP allows the inline GTM/theme/Amplitude bootstraps and styled-components inline styles that the static export requires. Environment variables: `NEXT_PUBLIC_SITE_URL` / `SITE_URL` set the canonical origin (see `src/lib/siteConfig.js`); `NEXT_PUBLIC_AMPLITUDE_API_KEY` overrides the public browser analytics key; `NEXT_PUBLIC_CONTACT_ENDPOINT` overrides the contact form endpoint (default `/api/contact`, set it to `http://localhost:8787/api/contact` in `.env.local` when running the Worker locally).
+Static-host security headers and redirects live in `public/_headers` and `public/_redirects` (Netlify/Cloudflare Pages format). The CSP allows the inline GTM/theme/Amplitude bootstraps and styled-components inline styles that the static export requires. Environment variables: `NEXT_PUBLIC_SITE_URL` / `SITE_URL` set the canonical origin (see `src/lib/siteConfig.js`); `NEXT_PUBLIC_AMPLITUDE_API_KEY` overrides the public browser analytics key; `NEXT_PUBLIC_CONTACT_ENDPOINT` overrides the contact form endpoint (default is the deployed workers.dev URL; set it to `http://localhost:8787/api/contact` in `.env.local` when running the Worker locally).
 
 ## 6. Conventions
 
@@ -142,7 +142,7 @@ Static-host security headers and redirects live in `public/_headers` and `public
 | [pages/contact.tsx](pages/contact.tsx) | Contact page route |
 | [src/components/ContactContent.tsx](src/components/ContactContent.tsx) | Contact form UI and submission states |
 | [src/lib/contactForm.ts](src/lib/contactForm.ts) | Contact form client validation and endpoint call |
-| [workers/contact/src/index.ts](workers/contact/src/index.ts) | Cloudflare Worker handling `/api/contact` via Brevo SMTP |
+| [workers/contact/src/index.ts](workers/contact/src/index.ts) | Cloudflare Worker (workers.dev) handling contact submissions via Brevo SMTP |
 | [workers/contact/src/contact.ts](workers/contact/src/contact.ts) | Pure contact validation and email builder |
 | [src/components/niceguyuniversity/](src/components/niceguyuniversity/) | Nice Guy University case-study and product-screen section data |
 | [src/components/TrackedLink.tsx](src/components/TrackedLink.tsx) | Analytics-aware links |

@@ -1,8 +1,10 @@
 import {
   CONTACT_LIMITS,
   buildContactEmail,
+  consumeRateLimit,
   resolveAllowedOrigin,
   validateContactSubmission,
+  type RateLimitEntry,
 } from '../workers/contact/src/contact';
 
 const VALID_BODY = {
@@ -72,5 +74,27 @@ describe('resolveAllowedOrigin', () => {
   it('returns null for missing or unknown origins', () => {
     expect(resolveAllowedOrigin(null, allowed)).toBeNull();
     expect(resolveAllowedOrigin('https://evil.example', allowed)).toBeNull();
+  });
+});
+
+describe('consumeRateLimit', () => {
+  const options = { windowMs: 60_000, maxRequests: 2 };
+
+  it('allows requests up to the limit inside a window and then rejects with a retry hint', () => {
+    const store = new Map<string, RateLimitEntry>();
+
+    expect(consumeRateLimit(store, 'ip', { ...options, now: 0 })).toEqual({ allowed: true, remaining: 1, retryAfterSeconds: 0 });
+    expect(consumeRateLimit(store, 'ip', { ...options, now: 1_000 })).toEqual({ allowed: true, remaining: 0, retryAfterSeconds: 0 });
+    expect(consumeRateLimit(store, 'ip', { ...options, now: 30_000 })).toEqual({ allowed: false, remaining: 0, retryAfterSeconds: 30 });
+  });
+
+  it('resets once the window has elapsed and keeps keys independent', () => {
+    const store = new Map<string, RateLimitEntry>();
+
+    consumeRateLimit(store, 'a', { ...options, now: 0 });
+    consumeRateLimit(store, 'a', { ...options, now: 0 });
+    expect(consumeRateLimit(store, 'b', { ...options, now: 0 }).allowed).toBe(true);
+    expect(consumeRateLimit(store, 'a', { ...options, now: 59_999 }).allowed).toBe(false);
+    expect(consumeRateLimit(store, 'a', { ...options, now: 60_000 })).toEqual({ allowed: true, remaining: 1, retryAfterSeconds: 0 });
   });
 });

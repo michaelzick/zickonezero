@@ -8,7 +8,7 @@ import {
   useAppDispatch,
 } from '../hooks';
 import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
-import { CONTACT_LINKS } from './contactLinks';
+import { EXTERNAL_LINKS } from './contactLinks';
 import { PROJECT_LINKS } from './projectLinks';
 import { trackEvent } from '../lib/analytics';
 import TrackedLink from './TrackedLink';
@@ -127,19 +127,19 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
           </CaseStudiesChevron>
         </CaseStudiesAccordionButton>
         <CaseStudiesAccordionList $isOpen={isContactOpen}>
-          {CONTACT_LINKS.map(({ href, label, external }) => (
+          {EXTERNAL_LINKS.map(({ href, label }) => (
             <li key={href} onClick={handleCloseMenu}>
               <TrackedLink
-                className={external ? 'external-link' : undefined}
+                className='external-link'
                 href={href}
                 label={label}
                 location='mobile_nav'
                 section='links_accordion'
                 variant='mobile'
-                target={external ? '_blank' : undefined}
-                rel={external ? 'noopener noreferrer' : undefined}
+                target='_blank'
+                rel='noopener noreferrer'
               >
-                {label}{external ? <> <OpenInNewWindowIcon aria-hidden='true' /></> : null}
+                {label} <OpenInNewWindowIcon aria-hidden='true' />
               </TrackedLink>
             </li>
           ))}

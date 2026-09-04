@@ -105,3 +105,40 @@ export function resolveAllowedOrigin(requestOrigin: string | null, allowedOrigin
     .filter(Boolean);
   return allowed.includes(requestOrigin) ? requestOrigin : null;
 }
+
+export type RateLimitEntry = { count: number; windowStart: number };
+
+export type RateLimitResult = { allowed: boolean; remaining: number; retryAfterSeconds: number };
+
+// Fixed-window counter kept in isolate memory. It is best-effort (each isolate
+// has its own map and it resets on eviction), which is enough to blunt a
+// runaway client without adding a KV dependency.
+const RATE_LIMIT_PRUNE_THRESHOLD = 1000;
+
+export function consumeRateLimit(
+  store: Map<string, RateLimitEntry>,
+  key: string,
+  { windowMs, maxRequests, now = Date.now() }: { windowMs: number; maxRequests: number; now?: number },
+): RateLimitResult {
+  // Keep the map bounded: drop every expired window once it grows large.
+  if (store.size >= RATE_LIMIT_PRUNE_THRESHOLD) {
+    for (const [storedKey, entry] of store) {
+      if (now - entry.windowStart >= windowMs) store.delete(storedKey);
+    }
+  }
+
+  const existing = store.get(key);
+
+  if (!existing || now - existing.windowStart >= windowMs) {
+    store.set(key, { count: 1, windowStart: now });
+    return { allowed: true, remaining: maxRequests - 1, retryAfterSeconds: 0 };
+  }
+
+  if (existing.count >= maxRequests) {
+    const retryAfterSeconds = Math.max(1, Math.ceil((existing.windowStart + windowMs - now) / 1000));
+    return { allowed: false, remaining: 0, retryAfterSeconds };
+  }
+
+  existing.count += 1;
+  return { allowed: true, remaining: maxRequests - existing.count, retryAfterSeconds: 0 };
+}

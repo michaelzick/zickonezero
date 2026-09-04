@@ -6,13 +6,13 @@
   // worker-mailer needs the Node compat layer for its SMTP client.
   "compatibility_flags": ["nodejs_compat"],
   "account_id": "0c4a1637a60ec527675c7e248b73e39d",
-  "workers_dev": false,
-  // Same-origin endpoint served through the Cloudflare proxy that already fronts
-  // the DigitalOcean static site, so the browser never leaves zickonezero.com.
-  "routes": [
-    { "pattern": "www.zickonezero.com/api/contact", "zone_name": "zickonezero.com" },
-    { "pattern": "zickonezero.com/api/contact", "zone_name": "zickonezero.com" }
-  ],
+  // The zickonezero.com zone is not in the ZICKONEZERO Cloudflare account, so the
+  // Worker is served from its workers.dev hostname and the site calls it
+  // cross-origin (CORS is handled in src/index.ts). If the zone is ever moved
+  // into this account, add zone routes for www.zickonezero.com/api/contact and
+  // drop NEXT_PUBLIC_CONTACT_ENDPOINT so the form goes same-origin.
+  "workers_dev": true,
+  "preview_urls": false,
   "observability": { "enabled": true },
   "vars": {
     "ALLOWED_ORIGINS": "https://www.zickonezero.com,https://zickonezero.com"

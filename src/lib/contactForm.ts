@@ -1,7 +1,20 @@
 // Client-side contact form helpers. Server-side validation lives in the
 // Cloudflare Worker under workers/contact; this only gives fast feedback.
 
-export const CONTACT_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || '/api/contact';
+// The zickonezero.com zone lives outside the Cloudflare account that hosts the
+// Worker, so production calls the workers.dev hostname cross-origin (the Worker
+// allowlists the site origins). Override with NEXT_PUBLIC_CONTACT_ENDPOINT, e.g.
+// http://localhost:8787/api/contact when running `wrangler dev` locally.
+export const DEFAULT_CONTACT_ENDPOINT = 'https://zickonezero-contact.zickonezero.workers.dev/api/contact';
+export const CONTACT_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || DEFAULT_CONTACT_ENDPOINT;
+
+// Mirrors CONTACT_LIMITS in workers/contact/src/contact.ts so the browser stops
+// input at the same point the Worker would reject it.
+export const CONTACT_FIELD_LIMITS = {
+  name: 120,
+  email: 254,
+  message: 4000,
+} as const;
 
 export type ContactFormValues = {
   name: string;
@@ -23,6 +36,7 @@ export type ContactSubmitResult =
 
 export type ContactFailureReason =
   | 'validation_failed'
+  | 'rate_limited'
   | 'service_unavailable'
   | 'email_delivery_failed'
   | 'network_error'
@@ -39,6 +53,7 @@ export function getContactValidationError(values: ContactFormValues): string | n
 
 const reasonForStatus = (status: number): ContactFailureReason => {
   if (status === 400 || status === 413) return 'validation_failed';
+  if (status === 429) return 'rate_limited';
   if (status === 500 || status === 503) return 'service_unavailable';
   if (status === 502) return 'email_delivery_failed';
   return 'unknown';
