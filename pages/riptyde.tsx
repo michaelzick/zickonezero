@@ -83,12 +83,12 @@ const RiptydePage = () => (
           title: 'Every break on the map',
           body: (
             <>
-              The map view pins every surf spot along the coast, from Santa Monica down to Palos Verdes, so
-              surfers can see how the breaks sit relative to each other, spot the point breaks and beach
+              The map view pins every surf spot on the West Coast, from British Columbia down to San Diego,
+              so surfers can see how the breaks sit relative to each other, spot the point breaks and beach
               breaks nearby, and jump straight to the one closest to them.
             </>
           ),
-          image: { src: '/img/projects/riptyde/riptyde-map.webp', alt: 'Map of surf spots pinned along the Los Angeles coastline from Santa Monica to Palos Verdes' }
+          image: { src: '/img/projects/riptyde/riptyde-map.webp', alt: 'Map of West Coast surf spots, zoomed to the pins along the Los Angeles coastline' }
         },
         {
           title: 'Rewind ten days',
