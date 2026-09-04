@@ -495,6 +495,7 @@ export const Title = styled.p`
   a {
     display: inline-flex;
     align-items: baseline;
+    font-weight: 700;
     text-decoration: none;
     color: ${THEME.colors.white};
     transition: color 0.3s;
@@ -2294,13 +2295,13 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   word-wrap: break-word;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-  background-color: ${props => props.$isActive ? THEME.colors.darkGreen : THEME.colors.hotYellow};
+  background-color: ${props => props.$isActive ? THEME.colors.accent : THEME.colors.hotYellow};
   color: ${props => props.$isActive ? '#fff' : THEME.colors.contrast};
   box-shadow: ${props => props.$isActive ? 'none' : '0 8px 18px -10px rgb(0 0 0 / 50%)'};
 
   &:hover {
-    background-color: ${THEME.colors.darkGreen};
-    border-color: ${THEME.colors.darkGreen};
+    background-color: ${THEME.colors.accent};
+    border-color: ${THEME.colors.accent};
     color: #fff;
   }
 
@@ -2327,20 +2328,20 @@ export const CaseStudyTopTabButton = styled(HomeTabButton)`
   -webkit-backdrop-filter: blur(10px);
 
   &[data-active='true'] {
-    background-color: ${THEME.colors.darkGreen};
-    border-color: ${THEME.colors.darkGreen};
+    background-color: ${THEME.colors.accent};
+    border-color: ${THEME.colors.accent};
     color: #fff;
   }
 
   &:hover {
-    background-color: ${THEME.colors.darkGreen};
-    border-color: ${THEME.colors.darkGreen};
+    background-color: ${THEME.colors.accent};
+    border-color: ${THEME.colors.accent};
     color: #fff;
   }
 
   &[data-active='true']:hover {
-    background-color: ${THEME.colors.darkGreen};
-    border-color: ${THEME.colors.darkGreen};
+    background-color: ${THEME.colors.accent};
+    border-color: ${THEME.colors.accent};
     color: #fff;
   }
 `;
@@ -2353,20 +2354,20 @@ const sidebarTabButtonStyles = css`
   transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 
   &[data-active='true'] {
-    background-color: ${THEME.colors.darkGreen};
-    border-color: ${THEME.colors.darkGreen};
+    background-color: ${THEME.colors.accent};
+    border-color: ${THEME.colors.accent};
     color: #fff;
   }
 
   &:not([data-active='true']):hover {
-    background-color: ${THEME.colors.darkGreen};
-    border-color: ${THEME.colors.darkGreen};
+    background-color: ${THEME.colors.accent};
+    border-color: ${THEME.colors.accent};
     color: #fff;
   }
 
   &[data-active='true']:hover {
-    background-color: ${THEME.colors.darkGreen};
-    border-color: ${THEME.colors.darkGreen};
+    background-color: ${THEME.colors.accent};
+    border-color: ${THEME.colors.accent};
     color: #fff;
   }
 `;
@@ -2606,8 +2607,8 @@ export const IntroSection = styled.div`
       transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 
       &:hover {
-        background-color: ${THEME.colors.darkGreen};
-        border-color: ${THEME.colors.darkGreen};
+        background-color: ${THEME.colors.accent};
+        border-color: ${THEME.colors.accent};
         color: #fff;
       }
 

@@ -298,6 +298,11 @@ export const ShowcaseImageButton = styled.button`
   text-align: left;
   border-radius: ${THEME.radii.md};
 
+  ${(props) => props.$portrait && `
+    display: flex;
+    justify-content: center;
+  `}
+
   &:focus-visible {
     outline: 2px solid ${THEME.colors.hotYellow};
     outline-offset: 4px;
@@ -311,6 +316,18 @@ export const ShowcaseImage = styled(DemoStokeTldrImage)`
   margin: 0;
   border-radius: ${THEME.radii.md};
   transition: box-shadow 0.18s ease;
+
+  /* Phone screenshots (≈9:19.5) keep their aspect ratio and are capped by
+     height so a single section never dwarfs its copy. */
+  ${(props) => props.$portrait && `
+    width: auto;
+    max-width: min(100%, 22rem);
+    max-height: min(80vh, 44rem);
+    aspect-ratio: 1284 / 2778;
+    object-fit: contain;
+    border-radius: 1.4em;
+    border: 1px solid rgba(199, 197, 197, 0.35);
+  `}
 
   ${ShowcaseImageButton}:hover &,
   ${ShowcaseImageButton}:focus-visible & {

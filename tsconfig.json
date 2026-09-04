@@ -28,6 +28,8 @@
     "pages/_document.js"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "workers/contact/node_modules",
+    "workers/contact/src/index.ts"
   ]
 }

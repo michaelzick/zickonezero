@@ -1,5 +1,5 @@
 const TAB_THEME_VARIABLES = {
-  '--color-darkGreen': '#0c4a6e',
+  '--color-accent': '#fe0065',
   '--color-demostoke': '#00dff7',
   '--case-study-top-tab-bg': 'rgba(2, 8, 23, 0.78)',
   '--case-study-top-tab-border': 'rgba(255, 255, 255, 0.32)',
@@ -9,7 +9,7 @@ const TAB_THEME_VARIABLES = {
   '--section-tab-color': '#ffffff',
 } as const;
 
-export const ACTIVE_TAB_DECLARATION = 'var(--color-darkGreen)';
+export const ACTIVE_TAB_DECLARATION = 'var(--color-accent)';
 export const ACTIVE_TAB_TEXT_DECLARATION = '#fff';
 export const DEMOSTOKE_TAB_DECLARATION = 'var(--color-demostoke)';
 

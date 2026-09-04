@@ -31,6 +31,9 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Contact worker install and typecheck
+        run: npm ci --prefix workers/contact && npm run typecheck --prefix workers/contact
+
       - name: Test
         run: npm test
 

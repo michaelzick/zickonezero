@@ -4,15 +4,35 @@
     {
       "name": "Next.js dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 3000,
       "autoPort": true
     },
     {
       "name": "Storybook",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "storybook"],
+      "runtimeArgs": [
+        "run",
+        "storybook"
+      ],
       "port": 6006
+    },
+    {
+      "name": "Contact worker",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "workers/contact",
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "8787"
+      ],
+      "port": 8787
     }
   ]
 }

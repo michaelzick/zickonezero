@@ -144,6 +144,14 @@
     "link": "/demostoke-fleet-ops"
   },
   {
+    "thumb": "/img/squares/riptyde-icon-square.webp",
+    "imgs": [],
+    "desc": "iOS surf forecast app with beach cams, session tracking, and AI",
+    "header": "Riptyde",
+    "group": "riptyde",
+    "link": "/riptyde"
+  },
+  {
     "thumb": "/img/squares/demostoke-logo-square.webp",
     "imgs": [],
     "desc": "Action sports gear rental system and lifestyle blog",

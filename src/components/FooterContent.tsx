@@ -46,17 +46,17 @@ const FooterContent = (): ReactElement => (
       <FooterColumn>
         <FooterColumnTitle>Links</FooterColumnTitle>
         <FooterColumnLinks>
-          {CONTACT_LINKS.map(({ href, label }) => (
+          {CONTACT_LINKS.map(({ href, label, external }) => (
             <li key={href}>
               <TrackedLink
                 href={href}
                 label={label}
                 location='footer'
                 section='links'
-                target='_blank'
-                rel='noopener noreferrer'
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
               >
-                {label} <OpenInNewWindowIcon aria-hidden="true" />
+                {label}{external ? <> <OpenInNewWindowIcon aria-hidden="true" /></> : null}
               </TrackedLink>
             </li>
           ))}
@@ -65,8 +65,8 @@ const FooterContent = (): ReactElement => (
     </FooterInner>
 
     <FooterBottom>
-      <span>Site designed and built by Michael Zick using React, Next.js, and Redux Toolkit.</span>
-      <span>© 2025 ZICKONEZERO Creative</span>
+      <span>Site designed and built by Michael Zick.</span>
+      <span>© 2026 ZICKONEZERO Creative</span>
     </FooterBottom>
   </Footer>
 );

@@ -352,7 +352,7 @@ describe('SidebarSectionTabs', () => {
     expect(screen.getByRole('button', { name: 'Weekend Warrior', hidden: true })).toBeInTheDocument();
   });
 
-  it('styles the active mobile section tab with darkGreen instead of the Demostoke color', async () => {
+  it('styles the active mobile section tab with the accent color instead of the Demostoke color', async () => {
     render(<MobileVisibleHarness />);
 
     await waitFor(() => {
