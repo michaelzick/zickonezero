@@ -54,7 +54,7 @@ const RiptydePage = () => (
             <>
               A single number is only useful if people trust it, so I designed the RAD breakdown to show the
               math. Wave height, period, wind, and swell direction each get a rating, a plain-language note,
-              and their share of the total. No black box, no guesswork.
+              and their share of the total, so the score never feels like a black box.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-rad-page.webp', alt: 'RAD breakdown detail screen explaining each forecast factor' }
@@ -64,8 +64,8 @@ const RiptydePage = () => (
           body: (
             <>
               The Lineup ranks every spot by score. I added quick filters for favorites, custom spots, and
-              break type, and gave each card a distance and a color-coded rating, so picking where to paddle
-              out takes a glance.
+              break type, and put distance and a color-coded rating on every card, so surfers can pick where
+              to paddle out at a glance.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-spots.webp', alt: 'The Lineup spot list sorted by RAD-O-METER™ score' }
@@ -84,8 +84,8 @@ const RiptydePage = () => (
           title: 'Every break on the map',
           body: (
             <>
-              I mapped every surf spot on the West Coast, from British Columbia down to San Diego, so surfers
-              can see how nearby breaks sit relative to each other and jump straight to the closest one.
+              I mapped surf spots along the entire West Coast, from British Columbia down to San Diego, so
+              surfers can see what’s around them and jump straight to the closest break.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-map.webp', alt: 'Map of West Coast surf spots, zoomed to the pins along the Los Angeles coastline' }
@@ -116,8 +116,8 @@ const RiptydePage = () => (
           title: 'Sessions, streaks, and crew',
           body: (
             <>
-              I built the Profile to track sessions, waves, hours, and best scores, and Crew so friends can
-              share sessions and secret spots. Streaks keep the habit going.
+              I built the Profile to track sessions, waves, hours, and best scores, then added Crew so friends
+              can share sessions and secret spots. Streaks keep the habit going.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-profile.webp', alt: 'Profile screen with session stats, streak, and crew' }
