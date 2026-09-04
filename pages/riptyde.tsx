@@ -4,7 +4,7 @@ import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
 
 const PATH = '/riptyde/';
 const TITLE = 'Riptyde';
-const SUMMARY = 'A neo-brutalist iOS surf forecast app that boils West Coast conditions down to one Rad-o-meter score.';
+const SUMMARY = 'A neo-brutalist iOS surf forecast app that boils West Coast conditions down to one RAD-O-METER score.';
 const HERO_IMAGE = { src: '/img/projects/riptyde/riptyde-hero.webp', alt: 'Riptyde home screen header for Malibu First Point' };
 
 const RiptydePage = () => (
@@ -42,11 +42,11 @@ const RiptydePage = () => (
           body: (
             <>
               Surf forecasts bury the answer under swell charts and jargon. Riptyde opens on a single
-              Rad-o-meter™ score for your home break, with the ten-day outlook, wind, and next tide right
+              RAD-O-METER™ score for your home break, with the ten-day outlook, wind, and next tide right
               underneath so the go/no-go call takes seconds.
             </>
           ),
-          image: { src: '/img/projects/riptyde/riptyde-home.webp', alt: 'Riptyde home screen with Rad-o-meter score and ten-day outlook' }
+          image: { src: '/img/projects/riptyde/riptyde-home.webp', alt: 'Riptyde home screen with RAD-O-METER score and ten-day outlook' }
         },
         {
           title: 'Show the work behind the score',
@@ -67,7 +67,7 @@ const RiptydePage = () => (
               type. Distance from the map and a color-coded rating make it easy to pick where to paddle out.
             </>
           ),
-          image: { src: '/img/projects/riptyde/riptyde-spots.webp', alt: 'The Lineup spot list sorted by Rad-o-meter score' }
+          image: { src: '/img/projects/riptyde/riptyde-spots.webp', alt: 'The Lineup spot list sorted by RAD-O-METER score' }
         },
         {
           title: 'Beach cams, one tap away',
