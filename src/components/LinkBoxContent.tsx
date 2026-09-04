@@ -126,6 +126,9 @@ const LinkBoxContent = () => {
       <TrackedLink href='/about' label='About' location='top_nav' section='primary'>
         About
       </TrackedLink>
+      <TrackedLink href='/contact' label='Contact' location='top_nav' section='primary'>
+        Contact
+      </TrackedLink>
       <CaseStudiesDesktopWrapper
         ref={caseStudiesRef}
         onMouseEnter={openCaseStudies}
@@ -250,7 +253,7 @@ const LinkBoxContent = () => {
           onMouseLeave={scheduleCloseAll}
           $isOpen={isContactOpen}
           aria-hidden={!isContactOpen}>
-          {CONTACT_LINKS.map(({ href, label }) => (
+          {CONTACT_LINKS.map(({ href, label, external }) => (
             <li key={href} onClick={handleLinkClick}>
               <TrackedLink
                 href={href}
@@ -258,11 +261,11 @@ const LinkBoxContent = () => {
                 location='top_nav'
                 section='links_dropdown'
                 variant='desktop'
-                target='_blank'
-                rel='noopener noreferrer'
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
                 tabIndex={isContactOpen ? 0 : -1}
               >
-                {label} <OpenInNewWindowIcon aria-hidden='true' />
+                {label}{external ? <> <OpenInNewWindowIcon aria-hidden='true' /></> : null}
               </TrackedLink>
             </li>
           ))}

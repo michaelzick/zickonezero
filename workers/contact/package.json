@@ -1,0 +1,19 @@
+{
+  "name": "zickonezero-contact-worker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cloudflare Worker that relays zickonezero.com contact form submissions through Brevo SMTP.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "worker-mailer": "^1.2.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260903.1",
+    "typescript": "^5.9.2",
+    "wrangler": "^4.103.0"
+  }
+}

@@ -13,7 +13,8 @@ Sibling files [CLAUDE.md](CLAUDE.md) (Claude Code) and [GEMINI.md](GEMINI.md) (G
 Primary flows:
 - Home portfolio: animated intro, tabbed work sections, thumbnail grid, and lightbox gallery.
 - Case studies: reusable project showcase layouts for DemoStoke, Antisyphon Training, Nice Guy University, and related work.
-- Product/service pages: DemoStoke, DemoStoke Fleet Ops, Find Your Flow State, Who's In Charge, coaching, and about pages.
+- Product/service pages: DemoStoke, DemoStoke Fleet Ops, Find Your Flow State, Who's In Charge, Riptyde, coaching, and about pages.
+- Contact: `/contact` posts to a same-origin `/api/contact` endpoint served by the Cloudflare Worker in `workers/contact/`, which relays through Brevo SMTP.
 - Static publishing: `next build` exports the site with `output: 'export'` and regenerates `public/sitemap.xml`.
 
 ## 2. Tech stack
@@ -43,6 +44,7 @@ zickonezero/
 +-- styles/              # styled-components exports, page-specific style modules, globals
 +-- public/              # Static images, favicon assets, generated sitemap/robots, and host config (_headers, _redirects)
 +-- scripts/             # Build-time utilities such as sitemap generation
++-- workers/contact/     # Cloudflare Worker (own package) that emails contact-form submissions via Brevo SMTP
 +-- __tests__/           # Jest and React Testing Library tests
 +-- skills/              # Repo-local coding and agent-brief maintenance skills
 +-- .storybook/          # Storybook configuration
@@ -60,7 +62,8 @@ zickonezero/
 - **Per-page SEO:** every page renders its own `<Seo>` (`src/components/Seo.tsx`) for the title, canonical (trailing-slash, absolute), description, Open Graph/Twitter tags, and JSON-LD. Metadata copy lives inline per page; `ProjectShowcase` pages single-source `title`/`summary`/`heroImage` into local consts shared by `<Seo>` and `<ProjectShowcase>`. There is no global head/meta component.
 - **Document:** `pages/_document.tsx` handles server document structure for styled-components.
 - **Home page:** `pages/index.tsx` loads work data with `getStaticProps`, syncs it into Redux via `useEffect`, and passes it to `MainContent` as a prop.
-- **Content pages:** top-level files in `pages/` render about, case-study, coaching, DemoStoke, Antisyphon, Nice Guy University, and product pages.
+- **Content pages:** top-level files in `pages/` render about, contact, case-study, coaching, DemoStoke, Antisyphon, Nice Guy University, and product pages.
+- **Contact page:** `pages/contact.tsx` renders `src/components/ContactContent.tsx`, which posts JSON to `NEXT_PUBLIC_CONTACT_ENDPOINT` (default `/api/contact`) via `src/lib/contactForm.ts`, tracks `contact_form_submit_*` events, and includes a honeypot `website` field.
 - **Static export:** `next.config.js` keeps the app static-host friendly. Static data helpers live under `src/` instead of `pages/api` so the exported site does not expose accidental API routes.
 
 ### 4.2 State, content, and UI
@@ -68,7 +71,7 @@ zickonezero/
 - **Redux store:** `src/store.ts` combines `worksDataSlice` and `showMobileMenuSlice`.
 - **Typed hooks:** `src/hooks.ts` exports `useAppDispatch` and `useAppSelector`.
 - **Homepage:** `src/components/MainContent.tsx` coordinates tabs, scroll animation, lightbox state, mobile menu state, analytics events, and work-grid rendering.
-- **Project showcases:** `src/components/ProjectShowcase.tsx` provides the reusable case-study shell with hero, section cards, lightbox, and tracking.
+- **Project showcases:** `src/components/ProjectShowcase.tsx` provides the reusable case-study shell with hero, section cards, lightbox, and tracking. Pass `imageOrientation='portrait'` for phone-screenshot showcases (e.g. Riptyde) so section images are height-capped and centered instead of filling the column.
 - **Case-study modules:** `src/components/demostoke/`, `src/components/antisyphon/`, `src/components/niceguyuniversity/`, and `src/components/userstories/` hold page-specific content and section data.
 - **Static data:** `src/data/worksData.json` feeds the homepage portfolio grid through `src/lib/getWorksData.ts`.
 - **Design tokens/styles:** `styles/index.js`, `styles/projectShowcases.js`, `styles/*.ts`, and `styles/globals.scss` define shared styled-components and page themes.
@@ -80,6 +83,13 @@ zickonezero/
 - `scripts/capture-michael-zick-coaching-screenshots.js` recaptures the Michael Zick Coaching case-study screenshots from the live michaelzick.com as 2x desktop and mobile WebP images, suppressing the coupon modal and promo banner (same Playwright/cwebp requirements).
 - Sitemap/robots host generation comes from `src/lib/siteConfig.js` (`NEXT_PUBLIC_SITE_URL` / `SITE_URL`, default `https://www.zickonezero.com`).
 - Storybook config lives in `.storybook/` and uses `@storybook/nextjs`.
+
+### 4.4 Contact worker
+
+- **Hosting context:** the exported site is served from DigitalOcean App Platform (static) and proxied by Cloudflare, so there is no server runtime in this repo. `workers/contact/` is a standalone Cloudflare Worker package (own `package.json`, `wrangler.jsonc`, `tsconfig.json`) bound to the routes `www.zickonezero.com/api/contact` and `zickonezero.com/api/contact` in the ZICKONEZERO Cloudflare account.
+- **Behavior:** `workers/contact/src/index.ts` validates the JSON body with the pure helpers in `workers/contact/src/contact.ts` (shared with `__tests__/contact-worker.test.ts`), enforces an `Origin` allowlist (`ALLOWED_ORIGINS` var), silently accepts honeypot hits, and sends via `worker-mailer` over Brevo SMTP (`smtp-relay.brevo.com:587`, STARTTLS).
+- **Secrets:** `BREVO_USER`, `BREVO_SMTP_PASSWORD`, `BREVO_FROM` (`mzick@zickonezero.com`), and `BREVO_TO` are Worker secrets (`npx wrangler secret put`), matching the variable names used by michaelzick.com. Local dev reads them from the git-ignored `workers/contact/.dev.vars` (see `.dev.vars.example`).
+- **Commands:** `npm run dev` / `npm run deploy` / `npm run typecheck` inside `workers/contact/`. The root `tsconfig.json` excludes the Worker entry file because it depends on `@cloudflare/workers-types`.
 
 ## 5. Commands
 
@@ -99,11 +109,11 @@ npm run build-storybook     # static Storybook build
 npm run sitemap             # regenerate public/sitemap.xml only
 ```
 
-CI runs `npm ci`, `agent-briefs:check`, lint, typecheck, tests, and production build on Node 24.x.
+CI runs `npm ci`, `agent-briefs:check`, lint, typecheck, a `workers/contact` install + typecheck, tests, and production build on Node 24.x.
 
 Security automation runs Gitleaks, dependency review, CodeQL, and a production dependency audit at high severity (`npm audit --omit=dev --audit-level=high`). Stable Next releases may still report moderate advisories (e.g. Next's bundled postcss) in npm audit until patched stable versions are available; those remain visible but non-blocking at the high threshold unless the project intentionally moves to a patched stable release.
 
-Static-host security headers and redirects live in `public/_headers` and `public/_redirects` (Netlify/Cloudflare Pages format). The CSP allows the inline GTM/theme/Amplitude bootstraps and styled-components inline styles that the static export requires. Environment variables: `NEXT_PUBLIC_SITE_URL` / `SITE_URL` set the canonical origin (see `src/lib/siteConfig.js`); `NEXT_PUBLIC_AMPLITUDE_API_KEY` overrides the public browser analytics key.
+Static-host security headers and redirects live in `public/_headers` and `public/_redirects` (Netlify/Cloudflare Pages format). The CSP allows the inline GTM/theme/Amplitude bootstraps and styled-components inline styles that the static export requires. Environment variables: `NEXT_PUBLIC_SITE_URL` / `SITE_URL` set the canonical origin (see `src/lib/siteConfig.js`); `NEXT_PUBLIC_AMPLITUDE_API_KEY` overrides the public browser analytics key; `NEXT_PUBLIC_CONTACT_ENDPOINT` overrides the contact form endpoint (default `/api/contact`, set it to `http://localhost:8787/api/contact` in `.env.local` when running the Worker locally).
 
 ## 6. Conventions
 
@@ -128,7 +138,12 @@ Static-host security headers and redirects live in `public/_headers` and `public
 | [pages/nice-guy-university.tsx](pages/nice-guy-university.tsx) | Nice Guy University case-study route |
 | [src/components/MainContent.tsx](src/components/MainContent.tsx) | Homepage animation, section tabs, gallery/lightbox |
 | [src/components/NiceGuyUniversityContent.tsx](src/components/NiceGuyUniversityContent.tsx) | Nice Guy University tabbed case-study shell |
-| [src/components/ProjectShowcase.tsx](src/components/ProjectShowcase.tsx) | Reusable case-study layout |
+| [src/components/ProjectShowcase.tsx](src/components/ProjectShowcase.tsx) | Reusable case-study layout (landscape or portrait screenshots) |
+| [pages/contact.tsx](pages/contact.tsx) | Contact page route |
+| [src/components/ContactContent.tsx](src/components/ContactContent.tsx) | Contact form UI and submission states |
+| [src/lib/contactForm.ts](src/lib/contactForm.ts) | Contact form client validation and endpoint call |
+| [workers/contact/src/index.ts](workers/contact/src/index.ts) | Cloudflare Worker handling `/api/contact` via Brevo SMTP |
+| [workers/contact/src/contact.ts](workers/contact/src/contact.ts) | Pure contact validation and email builder |
 | [src/components/niceguyuniversity/](src/components/niceguyuniversity/) | Nice Guy University case-study and product-screen section data |
 | [src/components/TrackedLink.tsx](src/components/TrackedLink.tsx) | Analytics-aware links |
 | [src/components/Seo.tsx](src/components/Seo.tsx) | Per-page title, canonical, OG/Twitter, and JSON-LD head tags |

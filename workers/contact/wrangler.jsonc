@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "zickonezero-contact",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-01",
+  // worker-mailer needs the Node compat layer for its SMTP client.
+  "compatibility_flags": ["nodejs_compat"],
+  "account_id": "0c4a1637a60ec527675c7e248b73e39d",
+  "workers_dev": false,
+  // Same-origin endpoint served through the Cloudflare proxy that already fronts
+  // the DigitalOcean static site, so the browser never leaves zickonezero.com.
+  "routes": [
+    { "pattern": "www.zickonezero.com/api/contact", "zone_name": "zickonezero.com" },
+    { "pattern": "zickonezero.com/api/contact", "zone_name": "zickonezero.com" }
+  ],
+  "observability": { "enabled": true },
+  "vars": {
+    "ALLOWED_ORIGINS": "https://www.zickonezero.com,https://zickonezero.com"
+  }
+  // Secrets (set with `npx wrangler secret put <NAME>`):
+  //   BREVO_USER, BREVO_SMTP_PASSWORD, BREVO_FROM, BREVO_TO
+}

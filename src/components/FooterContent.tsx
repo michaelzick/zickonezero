@@ -46,17 +46,17 @@ const FooterContent = (): ReactElement => (
       <FooterColumn>
         <FooterColumnTitle>Links</FooterColumnTitle>
         <FooterColumnLinks>
-          {CONTACT_LINKS.map(({ href, label }) => (
+          {CONTACT_LINKS.map(({ href, label, external }) => (
             <li key={href}>
               <TrackedLink
                 href={href}
                 label={label}
                 location='footer'
                 section='links'
-                target='_blank'
-                rel='noopener noreferrer'
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
               >
-                {label} <OpenInNewWindowIcon aria-hidden="true" />
+                {label}{external ? <> <OpenInNewWindowIcon aria-hidden="true" /></> : null}
               </TrackedLink>
             </li>
           ))}

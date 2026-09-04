@@ -1,5 +1,11 @@
 export const PROJECT_LINKS = [
   {
+    href: '/riptyde',
+    label: 'Riptyde',
+    icon: '/img/squares/riptyde-icon-square.webp',
+    iconAlt: 'Riptyde app icon'
+  },
+  {
     href: '/demostoke-fleet-ops',
     label: 'DemoStoke Fleet Ops',
     icon: '/img/squares/ds-logo-stripes-fuchsia-square.webp',

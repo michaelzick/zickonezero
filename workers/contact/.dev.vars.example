@@ -1,0 +1,7 @@
+# Copy to .dev.vars for `npm run dev`. BREVO_USER / BREVO_SMTP_PASSWORD are the
+# same Brevo SMTP credentials used by michaelzick.com and riptyde.
+BREVO_USER=
+BREVO_SMTP_PASSWORD=
+BREVO_FROM=mzick@zickonezero.com
+BREVO_TO=mzick@zickonezero.com
+ALLOWED_ORIGINS=http://localhost:3000,https://www.zickonezero.com,https://zickonezero.com

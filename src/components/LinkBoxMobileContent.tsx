@@ -48,6 +48,11 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
           About
         </TrackedLink>
       </li>
+      <li onClick={handleCloseMenu}>
+        <TrackedLink href='/contact' label='Contact' location='mobile_nav' section='primary' variant='mobile'>
+          Contact
+        </TrackedLink>
+      </li>
       <li className='case-studies-accordion'>
         <CaseStudiesAccordionButton
           type='button'
@@ -122,19 +127,19 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
           </CaseStudiesChevron>
         </CaseStudiesAccordionButton>
         <CaseStudiesAccordionList $isOpen={isContactOpen}>
-          {CONTACT_LINKS.map(({ href, label }) => (
+          {CONTACT_LINKS.map(({ href, label, external }) => (
             <li key={href} onClick={handleCloseMenu}>
               <TrackedLink
-                className='external-link'
+                className={external ? 'external-link' : undefined}
                 href={href}
                 label={label}
                 location='mobile_nav'
                 section='links_accordion'
                 variant='mobile'
-                target='_blank'
-                rel='noopener noreferrer'
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
               >
-                {label} <OpenInNewWindowIcon aria-hidden='true' />
+                {label}{external ? <> <OpenInNewWindowIcon aria-hidden='true' /></> : null}
               </TrackedLink>
             </li>
           ))}

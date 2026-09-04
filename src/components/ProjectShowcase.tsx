@@ -49,6 +49,10 @@ type ShowcaseSection = {
   image: { src: string; alt: string; position?: string; };
 };
 
+// Portrait showcases (phone screenshots) are height-constrained and centered
+// instead of filling the column width like desktop screenshots.
+type ShowcaseImageOrientation = 'landscape' | 'portrait';
+
 type ProjectShowcaseProps = {
   title: string;
   summary?: string;
@@ -56,6 +60,7 @@ type ProjectShowcaseProps = {
   roleBullets: string[];
   projectLink: { href: string; label?: string; };
   sections: ShowcaseSection[];
+  imageOrientation?: ShowcaseImageOrientation;
 };
 
 const ProjectShowcase = ({
@@ -64,8 +69,10 @@ const ProjectShowcase = ({
   heroImage,
   roleBullets,
   projectLink,
-  sections
+  sections,
+  imageOrientation = 'landscape'
 }: ProjectShowcaseProps) => {
+  const isPortrait = imageOrientation === 'portrait';
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
   const [lightboxState, setLightboxState] = useState({ toggler: false, slide: 1 });
@@ -180,6 +187,7 @@ const ProjectShowcase = ({
                         <ShowcaseImageButton
                           type='button'
                           className="image-animate"
+                          $portrait={isPortrait}
                           aria-label={`Open image: ${image.alt}`}
                           onClick={() => {
                             trackEvent('lightbox_open', {
@@ -198,6 +206,7 @@ const ProjectShowcase = ({
                             alt={image.alt}
                             loading='lazy'
                             $position={image.position}
+                            $portrait={isPortrait}
                           />
                         </ShowcaseImageButton>
                       </DemoStokeMethodRow>
