@@ -48,6 +48,20 @@ export const ContactIntro = styled.div`
   }
 `;
 
+export const ContactProfileLinks = styled.ul`
+  list-style: none;
+  margin: 0.2em 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5em;
+
+  li {
+    margin: 0;
+  }
+`;
+
 export const ContactForm = styled.form`
   display: flex;
   flex-direction: column;

@@ -17,6 +17,7 @@ import {
   ContactGrid,
   ContactHoneypot,
   ContactIntro,
+  ContactProfileLinks,
   ContactStatus,
   ContactSubmit,
   ContactSuccess,
@@ -123,18 +124,20 @@ const ContactContent = () => {
                       within a couple of days.
                     </Summary>
                   </div>
-                  <p>
-                    You can also find me on{' '}
-                    <TrackedLink href='https://linkedin.com/in/michaelzick' label='LinkedIn' location='contact_page'
-                      section='intro' target='_blank' rel='noopener noreferrer'>
-                      LinkedIn <OpenInNewWindowIcon aria-hidden='true' />
-                    </TrackedLink>{' '}
-                    and{' '}
-                    <TrackedLink href='https://github.com/michaelzick' label='GitHub' location='contact_page'
-                      section='intro' target='_blank' rel='noopener noreferrer'>
-                      GitHub <OpenInNewWindowIcon aria-hidden='true' />
-                    </TrackedLink>.
-                  </p>
+                  <ContactProfileLinks>
+                    <li>
+                      <TrackedLink href='https://github.com/michaelzick' label='GitHub' location='contact_page'
+                        section='intro' target='_blank' rel='noopener noreferrer'>
+                        GitHub <OpenInNewWindowIcon aria-hidden='true' />
+                      </TrackedLink>
+                    </li>
+                    <li>
+                      <TrackedLink href='https://linkedin.com/in/michaelzick' label='LinkedIn' location='contact_page'
+                        section='intro' target='_blank' rel='noopener noreferrer'>
+                        LinkedIn <OpenInNewWindowIcon aria-hidden='true' />
+                      </TrackedLink>
+                    </li>
+                  </ContactProfileLinks>
                 </ContactIntro>
 
                 {status.kind === 'success' ? (
