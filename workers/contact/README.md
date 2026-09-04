@@ -1,9 +1,9 @@
 # zickonezero-contact Worker
 
 Cloudflare Worker that receives POSTs from the site's `/contact` form and relays
-them through Brevo SMTP (`smtp-relay.brevo.com:587`) using the same
-`BREVO_USER` / `BREVO_SMTP_PASSWORD` / `BREVO_FROM` / `BREVO_TO` variables the
-michaelzick.com contact route uses.
+them through Brevo SMTP (`smtp-relay.brevo.com:587`) using the
+`BREVO_USER` / `BREVO_SMTP_PASSWORD` / `BREVO_FROM` / `BREVO_TO` variables.
+Mail is sent from and delivered to `mzick@zickonezero.com`.
 
 The static site itself is hosted on DigitalOcean and proxied by Cloudflare, but
 the `zickonezero.com` zone is not in the ZICKONEZERO Cloudflare account that
