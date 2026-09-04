@@ -73,21 +73,22 @@ const RiptydePage = () => (
           title: 'Beach cams, one tap away',
           body: (
             <>
-              Live stills from public beach cams sit beside the forecast so a surfer can confirm conditions
+              Public beach cams sit beside the forecast so a surfer can confirm conditions
               with their own eyes. Each cam refreshes on demand and links straight to the source feed.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-cams.webp', alt: 'Beach Cams screen with live stills and refresh controls' }
         },
         {
-          title: 'Cams on the map',
+          title: 'Every break on the map',
           body: (
             <>
-              A West Coast cam map puts every feed in geographic context, so users can scan the coastline
-              from Santa Monica to Palos Verdes and jump to the nearest camera.
+              The map view pins every surf spot along the coast, from Santa Monica down to Palos Verdes, so
+              surfers can see how the breaks sit relative to each other, spot the point breaks and beach
+              breaks nearby, and jump straight to the one closest to them.
             </>
           ),
-          image: { src: '/img/projects/riptyde/riptyde-map.webp', alt: 'West Coast cam map with camera pins along the Los Angeles coastline' }
+          image: { src: '/img/projects/riptyde/riptyde-map.webp', alt: 'Map of surf spots pinned along the Los Angeles coastline from Santa Monica to Palos Verdes' }
         },
         {
           title: 'Rewind ten days',
