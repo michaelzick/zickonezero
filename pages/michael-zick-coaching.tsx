@@ -15,6 +15,7 @@ const MichaelZickCoachingPage = () => (
       path={PATH}
       type='article'
       ogImage={HERO_IMAGE.src}
+      ogImageAlt={HERO_IMAGE.alt}
       jsonLd={[
         creativeWorkJsonLd({ name: TITLE, description: SUMMARY, path: PATH, image: HERO_IMAGE.src }),
         breadcrumbJsonLd([

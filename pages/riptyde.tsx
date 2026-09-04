@@ -4,7 +4,7 @@ import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
 
 const PATH = '/riptyde/';
 const TITLE = 'Riptyde';
-const SUMMARY = 'A neon-brutalist iOS surf forecast app that turns complex conditions into one RAD-O-METER™ score.';
+const SUMMARY = 'A neon-brutalist iOS surf forecast app that turns complex West Coast conditions into one RAD-O-METER™ score.';
 const HERO_IMAGE = { src: '/img/projects/riptyde/riptyde-hero.webp', alt: 'Riptyde home screen header for Malibu First Point' };
 
 const RiptydePage = () => (
@@ -15,6 +15,7 @@ const RiptydePage = () => (
       path={PATH}
       type='article'
       ogImage={HERO_IMAGE.src}
+      ogImageAlt={HERO_IMAGE.alt}
       ogImageWidth={1284}
       ogImageHeight={722}
       jsonLd={[

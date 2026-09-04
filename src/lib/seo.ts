@@ -56,6 +56,19 @@ export const profilePageJsonLd = (): JsonLd => ({
   },
 });
 
+export const contactPageJsonLd = (): JsonLd => ({
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact',
+  url: absoluteUrl('/contact/'),
+  mainEntity: {
+    '@type': 'Person',
+    name: 'Michael Zick',
+    url: SITE_URL,
+    sameAs: SAME_AS,
+  },
+});
+
 export type CreativeWorkInput = {
   name: string;
   description: string;

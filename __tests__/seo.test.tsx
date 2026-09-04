@@ -8,7 +8,7 @@ jest.mock('next/head', () => ({
 }));
 
 import Seo from '../src/components/Seo';
-import { creativeWorkJsonLd } from '../src/lib/seo';
+import { contactPageJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
 
 const ORIGIN = 'https://www.zickonezero.com';
 
@@ -42,6 +42,32 @@ describe('Seo', () => {
     expect(
       document.querySelector('meta[property="og:image"]')?.getAttribute('content')
     ).toBe(`${ORIGIN}/img/demostoke/case-study/ds-hero-surf.webp`);
+  });
+
+  it('emits og:image:alt and twitter:image:alt when ogImageAlt is set', () => {
+    render(<Seo path='/riptyde/' ogImage='/img/projects/riptyde/riptyde-hero.webp' ogImageAlt='Riptyde home screen' />);
+    expect(document.querySelector('meta[property="og:image:alt"]')).toHaveAttribute('content', 'Riptyde home screen');
+    expect(document.querySelector('meta[name="twitter:image:alt"]')).toHaveAttribute('content', 'Riptyde home screen');
+  });
+
+  it('falls back to a brand alt for the default og:image', () => {
+    render(<Seo path='/' />);
+    expect(document.querySelector('meta[property="og:image:alt"]')?.getAttribute('content')).toMatch(/ZICKONEZERO/);
+  });
+
+  it('omits image alt tags when a custom image has no alt', () => {
+    render(<Seo path='/demostoke/' ogImage='/img/demostoke/case-study/ds-hero-surf.webp' />);
+    expect(document.querySelector('meta[property="og:image:alt"]')).toBeNull();
+    expect(document.querySelector('meta[name="twitter:image:alt"]')).toBeNull();
+  });
+
+  it('builds a ContactPage schema pointing at the contact route', () => {
+    const jsonLd = contactPageJsonLd();
+    expect(jsonLd['@type']).toBe('ContactPage');
+    expect(jsonLd.url).toBe(`${ORIGIN}/contact/`);
+    const mainEntity = jsonLd.mainEntity as { '@type': string; sameAs: string[] };
+    expect(mainEntity['@type']).toBe('Person');
+    expect(mainEntity.sameAs).toContain('https://github.com/michaelzick');
   });
 
   it('emits parseable JSON-LD with absolute URLs', () => {
