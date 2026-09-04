@@ -66,7 +66,7 @@ const FooterContent = (): ReactElement => (
 
     <FooterBottom>
       <span>Site designed and built by Michael Zick.</span>
-      <span>© 2025 ZICKONEZERO Creative</span>
+      <span>© 2026 ZICKONEZERO Creative</span>
     </FooterBottom>
   </Footer>
 );
