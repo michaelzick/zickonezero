@@ -120,8 +120,8 @@ const ContactContent = () => {
                   <div>
                     <HeroLabel>Let’s talk</HeroLabel>
                     <Summary>
-                      Have a product, UX, or engineering problem worth solving? Send a note and I’ll reply
-                      within a couple of days.
+                      Want to talk about a product, a UX challenge, or an engineering project? Send a note
+                      and I’ll get back to you within a couple of days.
                     </Summary>
                   </div>
                   <ContactProfileLinks>
