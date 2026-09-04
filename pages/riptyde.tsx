@@ -4,7 +4,7 @@ import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
 
 const PATH = '/riptyde/';
 const TITLE = 'Riptyde';
-const SUMMARY = 'A neon-brutalist iOS surf forecast app that renders complex conditions down to one RAD-O-METER™ score.';
+const SUMMARY = 'A neon-brutalist iOS surf forecast app that turns complex conditions into one RAD-O-METER™ score.';
 const HERO_IMAGE = { src: '/img/projects/riptyde/riptyde-hero.webp', alt: 'Riptyde home screen header for Malibu First Point' };
 
 const RiptydePage = () => (
@@ -53,8 +53,7 @@ const RiptydePage = () => (
           body: (
             <>
               Tapping the score opens the RAD breakdown: wave height, period, wind, and swell direction each
-              get a rating, a plain-language note, and their contribution to the total. Surfers can trust the
-              number because they can see how it was built.
+              get a rating, a plain-language note, and their share of the total. No black box, no guesswork.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-rad-page.webp', alt: 'RAD breakdown detail screen explaining each forecast factor' }
@@ -63,8 +62,9 @@ const RiptydePage = () => (
           title: 'Scope the lineup',
           body: (
             <>
-              The Lineup ranks every spot by score with quick filters for favorites, custom spots, and break
-              type. Distance from the map and a color-coded rating make it easy to pick where to paddle out.
+              The Lineup ranks every spot by score, with quick filters for favorites, custom spots, and break
+              type. Each card shows distance and a color-coded rating, so picking where to paddle out takes a
+              glance.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-spots.webp', alt: 'The Lineup spot list sorted by RAD-O-METER™ score' }
@@ -73,8 +73,8 @@ const RiptydePage = () => (
           title: 'Beach cams, one tap away',
           body: (
             <>
-              Public beach cams sit beside the forecast so a surfer can confirm conditions
-              with their own eyes. Each cam refreshes on demand and links straight to the source feed.
+              Public beach cams sit beside the forecast so surfers can check conditions with their own
+              eyes. Each cam refreshes on demand and links straight to the source feed.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-cams.webp', alt: 'Beach Cams screen with live stills and refresh controls' }
@@ -83,9 +83,9 @@ const RiptydePage = () => (
           title: 'Every break on the map',
           body: (
             <>
-              The map view pins every surf spot on the West Coast, from British Columbia down to San Diego,
-              so surfers can see how the breaks sit relative to each other, spot the point breaks and beach
-              breaks nearby, and jump straight to the one closest to them.
+              The map pins every surf spot on the West Coast, from British Columbia down to San Diego.
+              Surfers can see how nearby breaks sit relative to each other and jump straight to the closest
+              one.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-map.webp', alt: 'Map of West Coast surf spots, zoomed to the pins along the Los Angeles coastline' }
@@ -95,7 +95,7 @@ const RiptydePage = () => (
           body: (
             <>
               Throwback mode replays the last ten days of scores and conditions. Surfers can compare what
-              they rode to what the forecast says, which builds intuition about the conditions.
+              they rode with what the forecast said and get a feel for how the score plays out in the water.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-throwback.webp', alt: 'Throwback mode showing a ten-day history of scores' }
@@ -105,8 +105,7 @@ const RiptydePage = () => (
           body: (
             <>
               Below the score, hourly surf-quality charts, wind and tide cards, a board recommendation, and an
-              AI-generated summary give the detail-oriented surfer everything without cluttering the top of
-              the screen.
+              AI summary are there for surfers who want the details, without crowding the top of the screen.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-home-bottom.webp', alt: 'Surf quality chart, wind, tide, board, and AI summary cards' }
@@ -115,8 +114,8 @@ const RiptydePage = () => (
           title: 'Sessions, streaks, and crew',
           body: (
             <>
-              Profile tracks logged sessions, waves, hours, and best scores, and a Crew feature lets friends
-              share sessions and secret spots. Streaks keep the habit going.
+              Profile tracks sessions, waves, hours, and best scores. Crew lets friends share sessions and
+              secret spots, and streaks keep the habit going.
             </>
           ),
           image: { src: '/img/projects/riptyde/riptyde-profile.webp', alt: 'Profile screen with session stats, streak, and crew' }
