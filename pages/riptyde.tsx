@@ -4,7 +4,7 @@ import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
 
 const PATH = '/riptyde/';
 const TITLE = 'Riptyde';
-const SUMMARY = 'A neo-brutalist iOS surf forecast app that boils West Coast conditions down to one RAD-O-METER score.';
+const SUMMARY = 'A neo-brutalist iOS surf forecast app that boils West Coast conditions down to one RAD-O-METER™ score.';
 const HERO_IMAGE = { src: '/img/projects/riptyde/riptyde-hero.webp', alt: 'Riptyde home screen header for Malibu First Point' };
 
 const RiptydePage = () => (
@@ -38,7 +38,7 @@ const RiptydePage = () => (
       projectLink={{ href: 'https://apps.apple.com/us/app/riptyde/id6793336480', label: 'App Store' }}
       sections={[
         {
-          title: 'One number. No excuses.',
+          title: 'One number, no excuses',
           body: (
             <>
               Surf forecasts bury the answer under swell charts and jargon. Riptyde opens on a single
@@ -46,18 +46,18 @@ const RiptydePage = () => (
               underneath so the go/no-go call takes seconds.
             </>
           ),
-          image: { src: '/img/projects/riptyde/riptyde-home.webp', alt: 'Riptyde home screen with RAD-O-METER score and ten-day outlook' }
+          image: { src: '/img/projects/riptyde/riptyde-home.webp', alt: 'Riptyde home screen with RAD-O-METER™ score and ten-day outlook' }
         },
         {
           title: 'Show the work behind the score',
           body: (
             <>
-              Tapping the score opens the RAD Breakdown: wave height, period, wind, and swell direction each
+              Tapping the score opens the RAD breakdown: wave height, period, wind, and swell direction each
               get a rating, a plain-language note, and their contribution to the total. Surfers can trust the
               number because they can see how it was built.
             </>
           ),
-          image: { src: '/img/projects/riptyde/riptyde-rad-page.webp', alt: 'RAD Breakdown detail screen explaining each forecast factor' }
+          image: { src: '/img/projects/riptyde/riptyde-rad-page.webp', alt: 'RAD breakdown detail screen explaining each forecast factor' }
         },
         {
           title: 'Scope the lineup',
@@ -67,7 +67,7 @@ const RiptydePage = () => (
               type. Distance from the map and a color-coded rating make it easy to pick where to paddle out.
             </>
           ),
-          image: { src: '/img/projects/riptyde/riptyde-spots.webp', alt: 'The Lineup spot list sorted by RAD-O-METER score' }
+          image: { src: '/img/projects/riptyde/riptyde-spots.webp', alt: 'The Lineup spot list sorted by RAD-O-METER™ score' }
         },
         {
           title: 'Beach cams, one tap away',
