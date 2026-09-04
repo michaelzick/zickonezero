@@ -9,6 +9,7 @@ export const THEME = {
   colors: {
     dark: 'var(--color-dark)',
     darkest: 'var(--color-darkest)',
+    surface: 'var(--color-surface)',
     grey: 'var(--color-grey)',
     blue: 'var(--color-blue)',
     white: 'var(--color-white)',

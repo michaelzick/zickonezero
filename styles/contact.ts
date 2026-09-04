@@ -69,7 +69,7 @@ export const ContactForm = styled.form`
   padding: clamp(1.1em, 2.6vw, 1.8em);
   border: 1px solid rgba(199, 197, 197, 0.3);
   border-radius: ${THEME.radii.md};
-  background: ${THEME.colors.darkest};
+  background: ${THEME.colors.surface};
   box-shadow: 0 24px 38px -30px rgb(0 0 0 / 55%);
   font-family: Roboto, sans-serif;
 `;
