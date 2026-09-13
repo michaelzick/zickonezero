@@ -42,7 +42,7 @@ const TwelveStepMeetingsPage = () => (
               a map. Users can start browsing right away, without creating an account.
             </>
           ),
-          image: HERO_IMAGE,
+          image: { src: '/img/projects/12-step-meetings/12-step-meetings-al-anon.webp', alt: '12 Step Meetings directory filtered to Al-Anon, listing upcoming meetings near Santa Monica beside a map of nearby meetings' },
         },
         {
           title: 'Find a meeting that fits',

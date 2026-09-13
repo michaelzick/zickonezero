@@ -43,6 +43,13 @@ const SHOTS = [
     waitForMap: true,
   },
   {
+    // "One place to start" section: the hero view with the Al-Anon program
+    // chip selected.
+    name: '12-step-meetings-al-anon',
+    query: 'p=Al-Anon&loc=Santa+Monica&r=5&sort=upcoming',
+    waitForMap: true,
+  },
+  {
     // List view with program, day, and time filters active and the Format
     // checklist open.
     name: '12-step-meetings-filters',
