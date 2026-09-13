@@ -166,5 +166,21 @@
     "header": "CASE STUDY: Nice Guy University",
     "group": "nice-guy-university",
     "link": "/nice-guy-university"
+  },
+  {
+    "thumb": "/img/squares/12-step-meetings-icon-square.webp",
+    "imgs": [],
+    "desc": "Searchable recovery meeting directory with maps and filters",
+    "header": "12 Step Meetings",
+    "group": "12-step-meetings",
+    "link": "/12-step-meetings"
+  },
+  {
+    "thumb": "/img/squares/timefraim-icon-square.webp",
+    "imgs": [],
+    "desc": "Daily planner with tasks, calendar blocks, and focus timers",
+    "header": "TimeFraim",
+    "group": "timefraim",
+    "link": "/timefraim"
   }
 ]

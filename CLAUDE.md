@@ -13,7 +13,7 @@ Sibling files [AGENTS.md](AGENTS.md) (Codex) and [GEMINI.md](GEMINI.md) (Gemini 
 Primary flows:
 - Home portfolio: animated intro, tabbed work sections, thumbnail grid, and lightbox gallery.
 - Case studies: reusable project showcase layouts for DemoStoke, Antisyphon Training, Nice Guy University, and related work.
-- Product/service pages: DemoStoke, DemoStoke Fleet Ops, Find Your Flow State, Who's In Charge, Riptyde, coaching, and about pages.
+- Product/service pages: DemoStoke, DemoStoke Fleet Ops, Find Your Flow State, Who's In Charge, Riptyde, TimeFraim, 12 Step Meetings, coaching, and about pages.
 - Contact: `/contact` posts to the Cloudflare Worker in `workers/contact/` (deployed at `https://zickonezero-contact.zickonezero.workers.dev/api/contact`), which relays through Brevo SMTP.
 - Static publishing: `next build` exports the site with `output: 'export'` and regenerates `public/sitemap.xml`.
 
@@ -71,7 +71,8 @@ zickonezero/
 - **Redux store:** `src/store.ts` combines `worksDataSlice` and `showMobileMenuSlice`.
 - **Typed hooks:** `src/hooks.ts` exports `useAppDispatch` and `useAppSelector`.
 - **Homepage:** `src/components/MainContent.tsx` coordinates tabs, scroll animation, lightbox state, mobile menu state, analytics events, and work-grid rendering.
-- **Project showcases:** `src/components/ProjectShowcase.tsx` provides the reusable case-study shell with hero, section cards, lightbox, and tracking. Pass `imageOrientation='portrait'` for phone-screenshot showcases (e.g. Riptyde) so section images are height-capped and centered instead of filling the column.
+- **Project showcases:** `src/components/ProjectShowcase.tsx` provides the reusable case-study shell with hero, section cards, lightbox, and tracking. Pass `imageOrientation='portrait'` for phone-screenshot showcases (e.g. Riptyde) so section images are height-capped and centered instead of filling the column. The required `projectLink` supports optional `additionalProjectLinks`, displayed in order with matching tracking and wrapping; Riptyde links to both the App Store and riptyde.app.
+- **TimeFraim and 12 Step Meetings:** `/timefraim` and `/12-step-meetings` use the landscape showcase with four UX sections each. Their WebP images live in `public/img/projects/timefraim/` and `public/img/projects/12-step-meetings/`; TimeFraim captures use the app's actual components with sample planner data. Both projects have 512px icon squares and lead the homepage UX Design grid.
 - **Case-study modules:** `src/components/demostoke/`, `src/components/antisyphon/`, `src/components/niceguyuniversity/`, and `src/components/userstories/` hold page-specific content and section data.
 - **Static data:** `src/data/worksData.json` feeds the homepage portfolio grid through `src/lib/getWorksData.ts`.
 - **Design tokens/styles:** `styles/index.js`, `styles/projectShowcases.js`, `styles/*.ts`, and `styles/globals.scss` define shared styled-components and page themes.
@@ -136,6 +137,8 @@ Static-host security headers and redirects live in `public/_headers` and `public
 | [pages/_app.tsx](pages/_app.tsx) | App providers, analytics scripts, global metadata |
 | [pages/index.tsx](pages/index.tsx) | Home page data loading and `MainContent` entry |
 | [pages/nice-guy-university.tsx](pages/nice-guy-university.tsx) | Nice Guy University case-study route |
+| [pages/timefraim.tsx](pages/timefraim.tsx) | TimeFraim planner UX showcase |
+| [pages/12-step-meetings.tsx](pages/12-step-meetings.tsx) | Recovery meeting directory UX showcase |
 | [src/components/MainContent.tsx](src/components/MainContent.tsx) | Homepage animation, section tabs, gallery/lightbox |
 | [src/components/NiceGuyUniversityContent.tsx](src/components/NiceGuyUniversityContent.tsx) | Nice Guy University tabbed case-study shell |
 | [src/components/ProjectShowcase.tsx](src/components/ProjectShowcase.tsx) | Reusable case-study layout (landscape or portrait screenshots) |

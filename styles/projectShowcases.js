@@ -231,6 +231,12 @@ export const RoleList = styled.ul`
 export const LinkRow = styled.div`
   margin-top: 0.5em;
 
+  > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6em 1em;
+  }
+
   a {
     color: ${THEME.colors.white};
     text-decoration: none;
