@@ -1,17 +1,5 @@
 export const PROJECT_LINKS = [
   {
-    href: '/timefraim',
-    label: 'TimeFraim',
-    icon: '/img/squares/timefraim-icon-square.webp',
-    iconAlt: 'TimeFraim logo'
-  },
-  {
-    href: '/12-step-meetings',
-    label: '12 Step Meetings',
-    icon: '/img/squares/12-step-meetings-icon-square.webp',
-    iconAlt: '12 Step Meetings logo'
-  },
-  {
     href: '/riptyde',
     label: 'Riptyde',
     icon: '/img/squares/riptyde-icon-square.webp',
@@ -22,6 +10,18 @@ export const PROJECT_LINKS = [
     label: 'DemoStoke Fleet Ops',
     icon: '/img/squares/ds-logo-stripes-fuchsia-square.webp',
     iconAlt: 'DemoStoke Fleet Ops logo'
+  },
+  {
+    href: '/timefraim',
+    label: 'TimeFraim',
+    icon: '/img/squares/timefraim-icon-square.webp',
+    iconAlt: 'TimeFraim logo'
+  },
+  {
+    href: '/12-step-meetings',
+    label: '12 Step Meetings',
+    icon: '/img/squares/12-step-meetings-icon-square.webp',
+    iconAlt: '12 Step Meetings logo'
   },
   {
     href: '/find-your-flow-state',
