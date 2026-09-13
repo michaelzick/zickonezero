@@ -24,7 +24,7 @@ describe('ProjectShowcase', () => {
     delete (window as Window & { amplitude?: unknown }).amplitude;
   });
 
-  it('renders a single project link with the live-site default label', () => {
+  it('renders a single project link with the website default label', () => {
     renderWithProviders(
       <ProjectShowcase
         title='Single-link showcase'
@@ -37,7 +37,7 @@ describe('ProjectShowcase', () => {
 
     expect(screen.getByText('Project Link')).toBeInTheDocument();
     expect(screen.queryByText('Project Links')).not.toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'View live site' })).toHaveAttribute('href', 'https://example.com');
+    expect(screen.getByRole('link', { name: 'Website' })).toHaveAttribute('href', 'https://example.com');
   });
 
   it('renders additional project links in order and tracks each destination', async () => {
@@ -50,15 +50,15 @@ describe('ProjectShowcase', () => {
         title='Riptyde'
         heroImage={{ src: '/hero.webp', alt: 'Riptyde overview' }}
         roleBullets={['UX design']}
-        projectLink={{ href: 'https://apps.apple.com/us/app/riptyde/id6793336480' }}
-        additionalProjectLinks={[{ href: 'https://riptyde.app' }]}
+        projectLink={{ href: 'https://apps.apple.com/us/app/riptyde/id6793336480', label: 'App Store' }}
+        additionalProjectLinks={[{ href: 'https://riptyde.app', label: 'Web App' }]}
         sections={[]}
       />
     );
 
     expect(screen.getByText('Project Links')).toBeInTheDocument();
-    const links = screen.getAllByRole('link', { name: 'View live site' });
-    expect(links.map((link) => link.textContent?.trim())).toEqual(['View live site', 'View live site']);
+    const links = screen.getAllByRole('link', { name: /^(App Store|Web App)$/ });
+    expect(links.map((link) => link.textContent?.trim())).toEqual(['App Store', 'Web App']);
     expect(links[0]).toHaveAttribute('href', 'https://apps.apple.com/us/app/riptyde/id6793336480');
     expect(links[1]).toHaveAttribute('href', 'https://riptyde.app');
 

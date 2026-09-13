@@ -67,19 +67,19 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
                 onClick={() => {
                   trackLinkClick({
                     location: 'case_study_hero',
-                    label: 'View live site',
+                    label: 'Website',
                     href: PROJECT_URL,
                     section: 'Nice Guy University UX Case Study',
                   });
                   trackEvent('external_project_click', {
                     location: 'nice_guy_university_case_study',
-                    label: 'View live site',
+                    label: 'Website',
                     href: PROJECT_URL,
                     page_path: window.location.pathname,
                   });
                 }}
               >
-                View live site <OpenInNewWindowIcon aria-hidden='true' />
+                Website <OpenInNewWindowIcon aria-hidden='true' />
               </a>
             </div>
           </LinkRow>

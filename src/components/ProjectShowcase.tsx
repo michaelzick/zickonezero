@@ -161,14 +161,14 @@ const ProjectShowcase = ({
                         <TrackedCtaLink
                           key={link.href}
                           href={link.href}
-                          label={link.label || 'View live site'}
+                          label={link.label || 'Website'}
                           location='project_showcase_hero'
                           section={title}
                           eventName='external_project_click'
                           target='_blank'
                           rel='noopener noreferrer'
                         >
-                          {link.label || 'View live site'} <OpenInNewWindowIcon aria-hidden="true" />
+                          {link.label || 'Website'} <OpenInNewWindowIcon aria-hidden="true" />
                         </TrackedCtaLink>
                       ))}
                     </div>
