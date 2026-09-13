@@ -31,7 +31,7 @@ const MichaelZickCoachingPage = () => (
       roleBullets={[
       'Branding, text, and design',
       'UX and product strategy',
-      'Technical implementation',
+      'technical implementation',
     ]}
     projectLink={{ href: 'https://www.michaelzick.com/' }}
     sections={[
