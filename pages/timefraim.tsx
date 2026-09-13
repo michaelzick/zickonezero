@@ -45,15 +45,15 @@ const TimeFraimPage = () => (
           image: HERO_IMAGE,
         },
         {
-          title: 'Keep task details close',
+          title: 'Start from the calendar',
           body: (
             <>
-              I kept notes, time estimates, and priority in a detail panel beside the plan. Selecting
-              a task brings its context into view without opening another page, and quick duration
-              choices make it easier to turn a vague to-do into a realistic block of time.
+              A day rarely starts empty. I sync Google Calendar events onto the timeline before any
+              tasks are planned, so meetings already hold their place and the open hours are easy to
+              spot. Planning starts from the time that is actually free.
             </>
           ),
-          image: { src: '/img/projects/timefraim/timefraim-task-detail.webp', alt: 'Selected TimeFraim task with notes, duration choices, priority, and timer controls beside the timeline' },
+          image: { src: '/img/projects/timefraim/timefraim-calendar.webp', alt: 'TimeFraim planner in light mode with a day of Google Calendar events on the timeline and no tasks planned yet' },
         },
         {
           title: 'See work move forward',

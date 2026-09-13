@@ -7,7 +7,8 @@
 -- Scenario: Tuesday 2026-09-15 in America/Los_Angeles (PDT, UTC-7). All
 -- timestamps are UTC, so 09:00 PDT is written as 16:00+00. The capture script
 -- fixes the browser clock to 17:52:00Z (10:52 AM PDT), inside the running
--- 10:30-12:00 focus block.
+-- 10:30-12:00 focus block. Section 9 adds a second day, Wednesday 2026-09-16,
+-- that holds only Google Calendar events for the calendar-only shot.
 
 -- 1. The allowed user (ALLOWED_EMAIL in the app's .env) for the magic-link
 --    sign-in. GoTrue's schema exists at seed time because the CLI runs the
@@ -217,3 +218,38 @@ insert into public.audit_logs (id, actor_role, action, entity_type, entity_id, d
    '{"taskId":"a1000000-0000-4000-8000-000000000002","taskTitle":"Prototype the day planner timeline","source":"manual"}'::jsonb,
    '2026-09-15 17:31:05+00')
 on conflict (id) do nothing;
+
+-- 9. Wednesday 2026-09-16 holds only Google Calendar events. The capture
+--    script clears the seeded tasks (blocks and timers cascade) before shooting
+--    it and re-runs this file afterwards, so the planner shows a synced
+--    calendar with nothing planned yet.
+insert into public.calendar_events (
+  id, provider, external_event_id, title, start_at, end_at, is_app_managed,
+  background_color, foreground_color, source_calendar_id, source_calendar_name,
+  raw_payload, external_updated_at, created_at, updated_at
+) values
+  ('c3000000-0000-4000-8000-000000000004', 'google', 'seed-standup-2026-09-16',
+   'Design team standup', '2026-09-16 16:00:00+00', '2026-09-16 16:30:00+00', false,
+   '#039be5', '#ffffff', 'studio@zickonezero.com', 'Studio',
+   '{"seeded":true}'::jsonb, '2026-09-15 20:00:00+00', '2026-09-15 20:00:00+00', '2026-09-15 20:00:00+00'),
+  ('c3000000-0000-4000-8000-000000000005', 'google', 'seed-coffee-2026-09-16',
+   'Coffee with Priya', '2026-09-16 17:00:00+00', '2026-09-16 17:45:00+00', false,
+   '#33b679', '#ffffff', 'personal', 'Personal',
+   '{"seeded":true}'::jsonb, '2026-09-15 20:00:00+00', '2026-09-15 20:00:00+00', '2026-09-15 20:00:00+00'),
+  ('c3000000-0000-4000-8000-000000000006', 'google', 'seed-lunch-2026-09-16',
+   'Lunch', '2026-09-16 19:15:00+00', '2026-09-16 20:00:00+00', false,
+   '#33b679', '#ffffff', 'personal', 'Personal',
+   '{"seeded":true}'::jsonb, '2026-09-15 20:00:00+00', '2026-09-15 20:00:00+00', '2026-09-15 20:00:00+00'),
+  ('c3000000-0000-4000-8000-000000000007', 'google', 'seed-client-kickoff-2026-09-16',
+   'Client kickoff: Fleet Ops dashboard', '2026-09-16 20:30:00+00', '2026-09-16 21:30:00+00', false,
+   '#7986cb', '#ffffff', 'studio@zickonezero.com', 'Studio',
+   '{"seeded":true}'::jsonb, '2026-09-15 20:00:00+00', '2026-09-15 20:00:00+00', '2026-09-15 20:00:00+00'),
+  ('c3000000-0000-4000-8000-000000000008', 'google', 'seed-one-on-one-2026-09-16',
+   '1:1 with Sam', '2026-09-16 22:00:00+00', '2026-09-16 22:30:00+00', false,
+   '#f6bf26', '#1d1d1d', 'studio@zickonezero.com', 'Studio',
+   '{"seeded":true}'::jsonb, '2026-09-15 20:00:00+00', '2026-09-15 20:00:00+00', '2026-09-15 20:00:00+00'),
+  ('c3000000-0000-4000-8000-000000000009', 'google', 'seed-retro-2026-09-16',
+   'Weekly retro', '2026-09-16 22:45:00+00', '2026-09-16 23:30:00+00', false,
+   '#e67c73', '#ffffff', 'studio@zickonezero.com', 'Studio',
+   '{"seeded":true}'::jsonb, '2026-09-15 20:00:00+00', '2026-09-15 20:00:00+00', '2026-09-15 20:00:00+00')
+on conflict (provider, external_event_id) do nothing;
