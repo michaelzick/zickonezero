@@ -20,15 +20,21 @@
  *   - playwright + a matching chromium (`npx playwright install chromium`)
  *   - cwebp on PATH (brew install webp)
  *   - network access for the site and OpenStreetMap tiles
+ *   - the location-menu shot uses macOS screencapture with Screen Recording
+ *     access and a 2x display at least 1728x1087 logical pixels. Chromium's
+ *     native city suggestions are omitted by page.screenshot(). Its visible
+ *     window is positioned for the content-only capture rectangle below.
  *
  * Usage:
  *   NODE_PATH=<node_modules containing playwright> node scripts/capture-12-step-meetings-screenshots.js
+ *   Append a shot name (e.g. 12-step-meetings-filters) to recapture only that image.
  */
 const { chromium } = require('playwright');
 const { execFileSync } = require('child_process');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
+const sharp = require('sharp');
 
 const OUT_DIR = path.join(__dirname, '..', 'public', 'img', 'projects', '12-step-meetings');
 const BASE_URL = (process.env.TWELVE_STEP_MEETINGS_URL ?? 'https://www.12stepmeetings.org').replace(/\/$/, '');
@@ -50,11 +56,11 @@ const SHOTS = [
     waitForMap: true,
   },
   {
-    // List view with program, day, and time filters active and the Format
-    // checklist open.
+    // List view with program, day, and time filters active and the native
+    // city suggestions open before selecting a location.
     name: '12-step-meetings-filters',
-    query: 'view=list&p=AA,CoDA&d=2&t=evening&loc=Santa+Monica&r=10&sort=upcoming',
-    openDropdown: 'Format',
+    query: 'view=list&p=AA,CoDA&d=2&t=evening&sort=upcoming',
+    openLocation: 'Santa',
   },
   {
     // Full map around a ZIP search with clustered markers.
@@ -108,7 +114,24 @@ async function settle(page) {
   await page.waitForTimeout(600);
 }
 
-async function capture(page, { name, query, waitForMap, openDropdown: dropdown, openMeeting: meeting }, tmpDir) {
+async function captureLocationMenu(page, search, png) {
+  await page.bringToFront();
+  await page.addStyleTag({ content: 'input { caret-color: transparent !important; }' });
+  const location = page.getByRole('combobox', { name: 'City or zip code for proximity' });
+  await location.click();
+  await location.pressSequentially(search, { delay: 100 });
+  await location.evaluate((input) => input.showPicker());
+  await page.mouse.move(2, 2);
+  await page.waitForTimeout(1000);
+  // Calibrated for macOS Chromium: window top 33 + browser chrome 87.
+  // Keep focus on the input: blurring dismisses the native suggestion menu.
+  execFileSync('screencapture', ['-x', '-R0,120,1728,967', png], { stdio: 'pipe' });
+  // Convert the display's embedded color profile before cwebp strips metadata.
+  const normalized = await sharp(png).toColourspace('srgb').png().toBuffer();
+  fs.writeFileSync(png, normalized);
+}
+
+async function capture(page, { name, query, waitForMap, openDropdown: dropdown, openMeeting: meeting, openLocation: location }, tmpDir) {
   await page.goto(`${BASE_URL}/?${query}`, { waitUntil: 'networkidle', timeout: 60000 });
   await page.getByText('12 Step Meetings', { exact: false }).first().waitFor({ timeout: 30000 });
   await page.waitForTimeout(1500); // fonts and the results list
@@ -117,15 +140,23 @@ async function capture(page, { name, query, waitForMap, openDropdown: dropdown, 
   if (meeting) await openMeeting(page, meeting);
   await settle(page);
   const png = path.join(tmpDir, `${name}.png`);
-  await page.screenshot({ path: png, animations: 'disabled' });
+  if (location) await captureLocationMenu(page, location, png);
+  else await page.screenshot({ path: png, animations: 'disabled' });
   execFileSync('cwebp', ['-q', '85', png, '-o', path.join(OUT_DIR, `${name}.webp`)], { stdio: 'pipe' });
   console.log(`captured ${name}.webp`);
 }
 
 (async () => {
+  const requestedName = process.argv[2];
+  const shots = requestedName ? SHOTS.filter((shot) => shot.name === requestedName) : SHOTS;
+  if (shots.length === 0) throw new Error(`Unknown screenshot: ${requestedName}`);
+  const needsNativeMenu = shots.some((shot) => shot.openLocation);
+  if (needsNativeMenu && process.platform !== 'darwin') {
+    throw new Error('The native location-menu capture requires macOS screencapture.');
+  }
   fs.mkdirSync(OUT_DIR, { recursive: true });
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), '12-step-shots-'));
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ headless: !needsNativeMenu });
 
   try {
     const context = await browser.newContext({
@@ -136,9 +167,18 @@ async function capture(page, { name, query, waitForMap, openDropdown: dropdown, 
       reducedMotion: 'reduce',
     });
     const page = await context.newPage();
+    if (needsNativeMenu) {
+      const session = await context.newCDPSession(page);
+      const { windowId } = await session.send('Browser.getWindowForTarget');
+      // Extra window height prevents Chromium from scaling the emulated viewport.
+      await session.send('Browser.setWindowBounds', {
+        windowId, bounds: { left: 0, top: 33, width: 1728, height: 1080 },
+      });
+      await session.detach();
+    }
     await page.clock.install({ time: new Date(CLOCK_START) });
 
-    for (const shot of SHOTS) await capture(page, shot, tmpDir);
+    for (const shot of shots) await capture(page, shot, tmpDir);
 
     // The showcase copy names OA among the programs; flag it if the live data
     // no longer includes it so the copy can be updated.

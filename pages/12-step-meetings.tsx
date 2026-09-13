@@ -53,7 +53,7 @@ const TwelveStepMeetingsPage = () => (
               fit. The list and map update together, so each filter narrows both at once.
             </>
           ),
-          image: { src: '/img/projects/12-step-meetings/12-step-meetings-filters.webp', alt: '12 Step Meetings list filtered by program, day, and time with the format options open' },
+          image: { src: '/img/projects/12-step-meetings/12-step-meetings-filters.webp', alt: '12 Step Meetings list filtered by program, day, and time with city suggestions open for a Santa location search' },
         },
         {
           title: 'Explore what’s nearby',
