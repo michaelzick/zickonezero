@@ -31,7 +31,7 @@ const TimeFraimPage = () => (
       summary={SUMMARY}
       heroImage={HERO_IMAGE}
       roleBullets={['Product strategy', 'UX design', 'Frontend development']}
-      projectLink={{ href: 'https://timefraim.zickonezero.workers.dev/', label: 'Open TimeFraim' }}
+      projectLink={{ href: 'https://timefraim.zickonezero.workers.dev/' }}
       sections={[
         {
           title: 'Plan a day that fits',

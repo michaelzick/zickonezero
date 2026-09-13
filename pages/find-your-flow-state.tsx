@@ -33,7 +33,7 @@ const FindYourFlowStatePage = () => (
       'Quiz questions',
       'UX design'
     ]}
-    projectLink={{ href: 'https://findyourflowstate.michaelzick.com/', label: 'findyourflowstate.michaelzick.com' }}
+    projectLink={{ href: 'https://findyourflowstate.michaelzick.com/' }}
     sections={[
       {
         title: 'A quiz that feels like coaching',

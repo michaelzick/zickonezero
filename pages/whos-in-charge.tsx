@@ -33,7 +33,7 @@ const WhosInChargePage = () => (
       'Visual design',
       'Images and text',
     ]}
-    projectLink={{ href: 'https://whosincharge.michaelzick.com/', label: 'whosincharge.michaelzick.com' }}
+    projectLink={{ href: 'https://whosincharge.michaelzick.com/' }}
     sections={[
       {
         title: 'Visually rich and provocative',

@@ -33,7 +33,7 @@ const MichaelZickCoachingPage = () => (
       'UX and product strategy',
       'Technical implementation',
     ]}
-    projectLink={{ href: 'https://www.michaelzick.com/', label: 'www.michaelzick.com' }}
+    projectLink={{ href: 'https://www.michaelzick.com/' }}
     sections={[
       {
         title: 'Clarity, flow, and conversion',

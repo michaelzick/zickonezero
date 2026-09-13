@@ -33,7 +33,7 @@ const AdamChiapponePage = () => (
       'UX, layout, and technical direction',
       'SEO and analytics',
     ]}
-    projectLink={{ href: 'https://www.adamchiappone.com/', label: 'www.adamchiappone.com' }}
+    projectLink={{ href: 'https://www.adamchiappone.com/' }}
     sections={[
       {
         title: 'Safety and warmth from the first scroll',
