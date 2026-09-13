@@ -16,6 +16,9 @@ const Antisyphon = () => (
       path={PATH}
       type='article'
       ogImage={OG_IMAGE}
+      ogImageAlt='Antisyphon Training homepage with course cards'
+      ogImageWidth={3411}
+      ogImageHeight={1789}
       jsonLd={[
         creativeWorkJsonLd({ name: TITLE, description: DESCRIPTION, path: PATH, image: OG_IMAGE }),
         breadcrumbJsonLd([

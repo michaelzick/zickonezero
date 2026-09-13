@@ -16,6 +16,8 @@ const FindYourFlowStatePage = () => (
       type='article'
       ogImage={HERO_IMAGE.src}
       ogImageAlt={HERO_IMAGE.alt}
+      ogImageWidth={1536}
+      ogImageHeight={1024}
       jsonLd={[
         creativeWorkJsonLd({ name: TITLE, description: SUMMARY, path: PATH, image: HERO_IMAGE.src }),
         breadcrumbJsonLd([
@@ -30,10 +32,10 @@ const FindYourFlowStatePage = () => (
       heroImage={HERO_IMAGE}
       roleBullets={[
       'Product strategy',
-      'Quiz questions',
+      'quiz questions',
       'UX design'
     ]}
-    projectLink={{ href: 'https://findyourflowstate.michaelzick.com/', label: 'findyourflowstate.michaelzick.com' }}
+    projectLink={{ href: 'https://findyourflowstate.michaelzick.com/' }}
     sections={[
       {
         title: 'A quiz that feels like coaching',

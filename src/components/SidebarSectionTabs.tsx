@@ -284,7 +284,7 @@ const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
     wrapperEl
   ]);
 
-  if (!visibleSections.length) {
+  if (!isActive || !visibleSections.length) {
     return null;
   }
 

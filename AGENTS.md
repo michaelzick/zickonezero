@@ -13,7 +13,7 @@ Sibling files [CLAUDE.md](CLAUDE.md) (Claude Code) and [GEMINI.md](GEMINI.md) (G
 Primary flows:
 - Home portfolio: animated intro, tabbed work sections, thumbnail grid, and lightbox gallery.
 - Case studies: reusable project showcase layouts for DemoStoke, Antisyphon Training, Nice Guy University, and related work.
-- Product/service pages: DemoStoke, DemoStoke Fleet Ops, Find Your Flow State, Who's In Charge, Riptyde, coaching, and about pages.
+- Product/service pages: DemoStoke, DemoStoke Fleet Ops, Find Your Flow State, Who's In Charge, Riptyde, TimeFraim, 12 Step Meetings, coaching, and about pages.
 - Contact: `/contact` posts to the Cloudflare Worker in `workers/contact/` (deployed at `https://zickonezero-contact.zickonezero.workers.dev/api/contact`), which relays through Brevo SMTP.
 - Static publishing: `next build` exports the site with `output: 'export'` and regenerates `public/sitemap.xml`.
 
@@ -43,7 +43,7 @@ zickonezero/
 |   +-- *.Slice.ts       # Redux Toolkit slices
 +-- styles/              # styled-components exports, page-specific style modules, globals
 +-- public/              # Static images, favicon assets, generated sitemap/robots, and host config (_headers, _redirects)
-+-- scripts/             # Build-time utilities such as sitemap generation
++-- scripts/             # Build-time utilities (sitemap), screenshot capture scripts, and the TimeFraim screenshot sandbox
 +-- workers/contact/     # Cloudflare Worker (own package) that emails contact-form submissions via Brevo SMTP
 +-- __tests__/           # Jest and React Testing Library tests
 +-- skills/              # Repo-local coding and agent-brief maintenance skills
@@ -59,7 +59,7 @@ zickonezero/
 ### 4.1 Next app
 
 - **Root wrapper:** `pages/_app.tsx` imports global SCSS, wraps pages with Redux and `AppThemeProvider`, installs GTM/site analytics, and renders only the shared viewport plus icon/manifest/theme-color links in `<Head>`.
-- **Per-page SEO:** every page renders its own `<Seo>` (`src/components/Seo.tsx`) for the title, canonical (trailing-slash, absolute), description, Open Graph/Twitter tags, and JSON-LD. Metadata copy lives inline per page; `ProjectShowcase` pages single-source `title`/`summary`/`heroImage` into local consts shared by `<Seo>` and `<ProjectShowcase>`. There is no global head/meta component.
+- **Per-page SEO:** every page renders its own `<Seo>` (`src/components/Seo.tsx`) for the title, canonical (trailing-slash, absolute), description, Open Graph/Twitter tags, and JSON-LD. Metadata copy lives inline per page; `ProjectShowcase` pages single-source `title`/`summary`/`heroImage` into local consts shared by `<Seo>` and `<ProjectShowcase>`. There is no global head/meta component. All page social images declare their actual dimensions and descriptive alt text; the default brand image is 925x1196.
 - **Document:** `pages/_document.tsx` handles server document structure for styled-components.
 - **Home page:** `pages/index.tsx` loads work data with `getStaticProps`, syncs it into Redux via `useEffect`, and passes it to `MainContent` as a prop.
 - **Content pages:** top-level files in `pages/` render about, contact, case-study, coaching, DemoStoke, Antisyphon, Nice Guy University, and product pages.
@@ -71,16 +71,22 @@ zickonezero/
 - **Redux store:** `src/store.ts` combines `worksDataSlice` and `showMobileMenuSlice`.
 - **Typed hooks:** `src/hooks.ts` exports `useAppDispatch` and `useAppSelector`.
 - **Homepage:** `src/components/MainContent.tsx` coordinates tabs, scroll animation, lightbox state, mobile menu state, analytics events, and work-grid rendering.
-- **Project showcases:** `src/components/ProjectShowcase.tsx` provides the reusable case-study shell with hero, section cards, lightbox, and tracking. Pass `imageOrientation='portrait'` for phone-screenshot showcases (e.g. Riptyde) so section images are height-capped and centered instead of filling the column.
+- **Project showcases:** `src/components/ProjectShowcase.tsx` provides the reusable case-study shell with hero, section cards, lightbox, and tracking. Pass `imageOrientation='portrait'` for phone-screenshot showcases (e.g. Riptyde) so section images are height-capped and centered instead of filling the column. The required `projectLink` supports optional `additionalProjectLinks`, displayed in order with matching tracking and wrapping. UX and case-study hero project links use “Website”; Riptyde uses “App Store” for its App Store link and “Web App” for riptyde.app.
+- **TimeFraim and 12 Step Meetings:** `/timefraim` and `/12-step-meetings` use the landscape showcase with four UX sections each. Their WebP images live in `public/img/projects/timefraim/` and `public/img/projects/12-step-meetings/`; TimeFraim captures come from the isolated local sandbox in `scripts/timefraim-sandbox/` (seeded sample planner data, never real data) and 12 Step Meetings captures come from the live site. Both projects have 512px icon squares and follow Riptyde and DemoStoke Fleet Ops in the homepage UX Design grid (`src/data/worksData.json` is reversed at load time, so the last entries show first). The shared `src/components/projectLinks.ts` list drives the desktop navigation, mobile navigation, and footer UX Design links, ordered Riptyde, DemoStoke Fleet Ops, TimeFraim, 12 Step Meetings, then the remaining projects.
+- **Crawlable interactive content:** the About biography remains rendered inside a native `hidden` container while its modal is closed. DemoStoke, Antisyphon, and Nice Guy University render both tab panels in the static HTML, using `hidden` to show only the active panel and matching tab IDs/`aria-controls`/`aria-labelledby`. Inactive desktop section navigation is not rendered. Preserve this content-in-HTML behavior when editing tabs or the About modal.
 - **Case-study modules:** `src/components/demostoke/`, `src/components/antisyphon/`, `src/components/niceguyuniversity/`, and `src/components/userstories/` hold page-specific content and section data.
 - **Static data:** `src/data/worksData.json` feeds the homepage portfolio grid through `src/lib/getWorksData.ts`.
 - **Design tokens/styles:** `styles/index.js`, `styles/projectShowcases.js`, `styles/*.ts`, and `styles/globals.scss` define shared styled-components and page themes.
 
 ### 4.3 Build utilities
 
-- `scripts/generate-sitemap.js` scans top-level page files, skips reserved/API-like pages, and writes both `public/sitemap.xml` and `public/robots.txt` (which allows all crawlers and points at the absolute sitemap URL). Both generated files are git-ignored and rebuilt by `prebuild`.
+- `scripts/generate-sitemap.js` scans top-level page files, skips reserved/API-like pages, and writes both `public/sitemap.xml` and `public/robots.txt` (which allows all crawlers and points at the absolute sitemap URL). Both generated files are git-ignored and rebuilt by `prebuild`. The sitemap omits optional `lastmod` values until reliable per-page content dates are available; do not substitute the build date.
 - `scripts/capture-ngu-screenshots.js` recaptures the Nice Guy University case-study screenshots from the live site as 2x-desktop WebP images (requires Playwright and cwebp, which are not project dependencies).
 - `scripts/capture-michael-zick-coaching-screenshots.js` recaptures the Michael Zick Coaching case-study screenshots from the live michaelzick.com as 2x desktop and mobile WebP images, suppressing the coupon modal and promo banner (same Playwright/cwebp requirements).
+- `scripts/capture-timefraim-screenshots.js` recaptures the TimeFraim showcase screenshots from the local screenshot sandbox as 2x-desktop WebP images (three dark planner shots, the Board in light mode, and a light calendar-only planner day captured after clearing the seeded tasks through SQL), signing in with a Supabase magic link and fixing the browser clock to the seeded days; it restores the seed when it starts and finishes, so it can be re-run without restarting the sandbox. Run it with `node --env-file=<timefraim>/.env` after `scripts/timefraim-sandbox/start.sh` (same Playwright/cwebp requirements).
+- `scripts/timefraim-sandbox/start.sh`, `stop.sh`, and `seed.sql` run an isolated local Supabase project (`timefraim-shots`, started with `supabase start --workdir`) seeded with the sample planner days and start the sibling `timefraim` checkout's app against it on the app's usual ports; they never touch the real `supabase_db_timefraim` volume. Requires Docker, the Supabase CLI, corepack/pnpm, and the `timefraim` repo with its `.env`.
+- `scripts/capture-12-step-meetings-screenshots.js` recaptures the 12 Step Meetings showcase screenshots from the live 12stepmeetings.org as 2x-desktop WebP images, driving each view through query parameters with a ticking fake clock so the upcoming order and map tiles are stable (same Playwright/cwebp requirements). Pass a shot name to capture only that image. The “Find a meeting that fits” section opens with “Finding support should be easy and intuitive.” and describes program, day, time, and location filters. Its list image has program, day, and time filters active and the location menu open to city suggestions for “Santa”, before a location is selected. Capturing this native browser menu requires a visible Chromium window, macOS Screen Recording access, and a 2x display at least 1728x1087 logical pixels, using the calibrated content rectangle documented in the script.
+- `scripts/configure-static-hosting.js` reads a complete DigitalOcean AppSpec JSON from stdin and emits a corrected spec without deploying. It sets `error_document: 404.html` on the `zickonezero` static component, removes its homepage catch-all, adds host-scoped 301 redirects from `/case-studies` and `/case-studies/` to `https://www.zickonezero.com/demostoke/`, and canonicalizes the apex hostname to `www`. It preserves other components and host routes and refuses an unexpected component or ingress. See `README.md` for the deployment workflow.
 - Sitemap/robots host generation comes from `src/lib/siteConfig.js` (`NEXT_PUBLIC_SITE_URL` / `SITE_URL`, default `https://www.zickonezero.com`).
 - Storybook config lives in `.storybook/` and uses `@storybook/nextjs`.
 
@@ -113,7 +119,7 @@ CI runs `npm ci`, `agent-briefs:check`, lint, typecheck, a `workers/contact` ins
 
 Security automation runs Gitleaks, dependency review, CodeQL, and a production dependency audit at high severity (`npm audit --omit=dev --audit-level=high`). Stable Next releases may still report moderate advisories (e.g. Next's bundled postcss) in npm audit until patched stable versions are available; those remain visible but non-blocking at the high threshold unless the project intentionally moves to a patched stable release.
 
-Static-host security headers and redirects live in `public/_headers` and `public/_redirects` (Netlify/Cloudflare Pages format). The CSP allows the inline GTM/theme/Amplitude bootstraps and styled-components inline styles that the static export requires. Environment variables: `NEXT_PUBLIC_SITE_URL` / `SITE_URL` set the canonical origin (see `src/lib/siteConfig.js`); `NEXT_PUBLIC_AMPLITUDE_API_KEY` overrides the public browser analytics key; `NEXT_PUBLIC_CONTACT_ENDPOINT` overrides the contact form endpoint (default is the deployed workers.dev URL; set it to `http://localhost:8787/api/contact` in `.env.local` when running the Worker locally).
+The site is the `zickonezero` static component inside the shared DigitalOcean app `demostoke` (`8b602f38-1268-4375-bef4-46d9001db792`), deploying this repository’s `main` branch to `out/`. Production 404 handling and redirects belong in that app’s component/ingress configuration; `public/_headers` and `public/_redirects` are Netlify/Cloudflare Pages-format files and do not configure DigitalOcean ingress. Keep raw AppSpec exports outside the repository because they may contain secrets. Preserve every unrelated component/host rule and use `update_all_source_versions: false` for hosting-only API updates; older doctl serializers may drop ingress fields, so use the complete raw API spec. The CSP allows the inline GTM/theme/Amplitude bootstraps and styled-components inline styles that the static export requires. Environment variables: `NEXT_PUBLIC_SITE_URL` / `SITE_URL` set the canonical origin (see `src/lib/siteConfig.js`); `NEXT_PUBLIC_AMPLITUDE_API_KEY` overrides the public browser analytics key; `NEXT_PUBLIC_CONTACT_ENDPOINT` overrides the contact form endpoint (default is the deployed workers.dev URL; set it to `http://localhost:8787/api/contact` in `.env.local` when running the Worker locally).
 
 ## 6. Conventions
 
@@ -136,6 +142,8 @@ Static-host security headers and redirects live in `public/_headers` and `public
 | [pages/_app.tsx](pages/_app.tsx) | App providers, analytics scripts, global metadata |
 | [pages/index.tsx](pages/index.tsx) | Home page data loading and `MainContent` entry |
 | [pages/nice-guy-university.tsx](pages/nice-guy-university.tsx) | Nice Guy University case-study route |
+| [pages/timefraim.tsx](pages/timefraim.tsx) | TimeFraim planner UX showcase |
+| [pages/12-step-meetings.tsx](pages/12-step-meetings.tsx) | Recovery meeting directory UX showcase |
 | [src/components/MainContent.tsx](src/components/MainContent.tsx) | Homepage animation, section tabs, gallery/lightbox |
 | [src/components/NiceGuyUniversityContent.tsx](src/components/NiceGuyUniversityContent.tsx) | Nice Guy University tabbed case-study shell |
 | [src/components/ProjectShowcase.tsx](src/components/ProjectShowcase.tsx) | Reusable case-study layout (landscape or portrait screenshots) |
@@ -156,7 +164,9 @@ Static-host security headers and redirects live in `public/_headers` and `public
 | [src/store.ts](src/store.ts) | Redux store setup |
 | [styles/index.js](styles/index.js) | Shared styled-components exports |
 | [styles/theme.ts](styles/theme.ts) | Theme constants and tokens |
-| [scripts/generate-sitemap.js](scripts/generate-sitemap.js) | Sitemap generation |
+| [scripts/generate-sitemap.js](scripts/generate-sitemap.js) | Sitemap generation without synthetic modification dates |
+| [scripts/configure-static-hosting.js](scripts/configure-static-hosting.js) | Scoped DigitalOcean 404 and canonical redirect spec transform |
+| [README.md](README.md) | Local workflow, crawlability, and static-host deployment requirements |
 | [.github/workflows/ci.yml](.github/workflows/ci.yml) | Automated CI checks |
 | [.github/workflows/security.yml](.github/workflows/security.yml) | Security scanning |
 | [skills/coding-standards/SKILL.md](skills/coding-standards/SKILL.md) | Production coding standards |

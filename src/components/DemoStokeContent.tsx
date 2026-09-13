@@ -111,31 +111,27 @@ const DemoStokeContent = () => {
           scrollOffsetAdjustment={8}
         />
 
-        {activeTab === 'case-study' && (
-          <CaseStudyContent
-            setAnimatedSectionRef={setAnimatedSectionRef}
-            visibleSections={visibleSections}
-            scrollRowRef={rowRef}
-            canScrollLeft={canScrollLeft}
-            canScrollRight={canScrollRight}
-            scrollGalleryBy={handleGalleryScroll}
-            openLightbox={handleOpenLightbox}
-            openPersonaId={openPersonaId}
-            togglePersona={togglePersona}
-            topTabsEl={topTabsEl}
-            isActive={activeTab === 'case-study'}
-          />
-        )}
+        <CaseStudyContent
+          setAnimatedSectionRef={setAnimatedSectionRef}
+          visibleSections={visibleSections}
+          scrollRowRef={rowRef}
+          canScrollLeft={canScrollLeft}
+          canScrollRight={canScrollRight}
+          scrollGalleryBy={handleGalleryScroll}
+          openLightbox={handleOpenLightbox}
+          openPersonaId={openPersonaId}
+          togglePersona={togglePersona}
+          topTabsEl={topTabsEl}
+          isActive={activeTab === 'case-study'}
+        />
 
-        {activeTab === 'stories' && (
-          <StoriesContent
-            setAnimatedSectionRef={setAnimatedSectionRef}
-            visibleSections={visibleSections}
-            topTabsEl={topTabsEl}
-            sections={STORY_SECTIONS}
-            isActive={activeTab === 'stories'}
-          />
-        )}
+        <StoriesContent
+          setAnimatedSectionRef={setAnimatedSectionRef}
+          visibleSections={visibleSections}
+          topTabsEl={topTabsEl}
+          sections={STORY_SECTIONS}
+          isActive={activeTab === 'stories'}
+        />
       </Wrapper>
       <FsLightbox
         toggler={lightboxController.toggler}

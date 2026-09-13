@@ -16,6 +16,8 @@ const WhosInChargePage = () => (
       type='article'
       ogImage={HERO_IMAGE.src}
       ogImageAlt={HERO_IMAGE.alt}
+      ogImageWidth={512}
+      ogImageHeight={512}
       jsonLd={[
         creativeWorkJsonLd({ name: TITLE, description: SUMMARY, path: PATH, image: HERO_IMAGE.src }),
         breadcrumbJsonLd([
@@ -30,10 +32,10 @@ const WhosInChargePage = () => (
       heroImage={HERO_IMAGE}
       roleBullets={[
       'UX architecture',
-      'Visual design',
-      'Images and text',
+      'visual design',
+      'images and text',
     ]}
-    projectLink={{ href: 'https://whosincharge.michaelzick.com/', label: 'whosincharge.michaelzick.com' }}
+    projectLink={{ href: 'https://whosincharge.michaelzick.com/' }}
     sections={[
       {
         title: 'Visually rich and provocative',

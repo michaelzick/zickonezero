@@ -16,6 +16,8 @@ const DemoStokeFleetOpsPage = () => (
       type='article'
       ogImage={HERO_IMAGE.src}
       ogImageAlt={HERO_IMAGE.alt}
+      ogImageWidth={3456}
+      ogImageHeight={1944}
       jsonLd={[
         creativeWorkJsonLd({ name: TITLE, description: SUMMARY, path: PATH, image: HERO_IMAGE.src }),
         breadcrumbJsonLd([
@@ -31,9 +33,9 @@ const DemoStokeFleetOpsPage = () => (
       roleBullets={[
       'Product strategy',
       'UX design',
-      'Full-stack development'
+      'full-stack development'
     ]}
-    projectLink={{ href: 'https://fleet.demostoke.com/', label: 'fleet.demostoke.com' }}
+    projectLink={{ href: 'https://fleet.demostoke.com/' }}
     sections={[
       {
         title: 'Fleet command center',

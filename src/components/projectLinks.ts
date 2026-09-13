@@ -12,6 +12,18 @@ export const PROJECT_LINKS = [
     iconAlt: 'DemoStoke Fleet Ops logo'
   },
   {
+    href: '/timefraim',
+    label: 'TimeFraim',
+    icon: '/img/squares/timefraim-icon-square.webp',
+    iconAlt: 'TimeFraim logo'
+  },
+  {
+    href: '/12-step-meetings',
+    label: '12 Step Meetings',
+    icon: '/img/squares/12-step-meetings-icon-square.webp',
+    iconAlt: '12 Step Meetings logo'
+  },
+  {
     href: '/find-your-flow-state',
     label: 'Find Your Flow State',
     icon: '/img/squares/fyfs-wave-square.webp',

@@ -16,6 +16,8 @@ const AdamChiapponePage = () => (
       type='article'
       ogImage={HERO_IMAGE.src}
       ogImageAlt={HERO_IMAGE.alt}
+      ogImageWidth={3456}
+      ogImageHeight={1382}
       jsonLd={[
         creativeWorkJsonLd({ name: TITLE, description: SUMMARY, path: PATH, image: HERO_IMAGE.src }),
         breadcrumbJsonLd([
@@ -33,7 +35,7 @@ const AdamChiapponePage = () => (
       'UX, layout, and technical direction',
       'SEO and analytics',
     ]}
-    projectLink={{ href: 'https://www.adamchiappone.com/', label: 'www.adamchiappone.com' }}
+    projectLink={{ href: 'https://www.adamchiappone.com/' }}
     sections={[
       {
         title: 'Safety and warmth from the first scroll',

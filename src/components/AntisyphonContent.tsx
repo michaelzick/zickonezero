@@ -153,33 +153,29 @@ const AntisyphonContent = () => {
           scrollOffsetAdjustment={8}
         />
 
-        {isCaseStudyView && (
-          <CaseStudyContent
-            setAnimatedSectionRef={setAnimatedSectionRef}
-            visibleSections={visibleSections}
-            scrollRowRef={rowRef}
-            canScrollLeft={canScrollLeft}
-            canScrollRight={canScrollRight}
-            scrollGalleryBy={handleGalleryScroll}
-            openLightbox={handleOpenCaseStudyLightbox}
-            openMethodLightbox={handleOpenMethodLightbox}
-            openPersonaId={openPersonaId}
-            togglePersona={togglePersona}
-            topTabsEl={topTabsEl}
-            isActive={isCaseStudyView}
-          />
-        )}
+        <CaseStudyContent
+          setAnimatedSectionRef={setAnimatedSectionRef}
+          visibleSections={visibleSections}
+          scrollRowRef={rowRef}
+          canScrollLeft={canScrollLeft}
+          canScrollRight={canScrollRight}
+          scrollGalleryBy={handleGalleryScroll}
+          openLightbox={handleOpenCaseStudyLightbox}
+          openMethodLightbox={handleOpenMethodLightbox}
+          openPersonaId={openPersonaId}
+          togglePersona={togglePersona}
+          topTabsEl={topTabsEl}
+          isActive={isCaseStudyView}
+        />
 
-        {!isCaseStudyView && (
-          <ScreensContent
-            setAnimatedSectionRef={setAnimatedSectionRef}
-            visibleSections={visibleSections}
-            topTabsEl={topTabsEl}
-            sections={FLOW_SECTIONS}
-            isActive={!isCaseStudyView}
-            openFlowLightbox={handleOpenFlowLightbox}
-          />
-        )}
+        <ScreensContent
+          setAnimatedSectionRef={setAnimatedSectionRef}
+          visibleSections={visibleSections}
+          topTabsEl={topTabsEl}
+          sections={FLOW_SECTIONS}
+          isActive={!isCaseStudyView}
+          openFlowLightbox={handleOpenFlowLightbox}
+        />
       </Wrapper>
       <FsLightbox
         toggler={lightboxController.toggler}

@@ -37,6 +37,7 @@ const RiptydePage = () => (
         'iOS development',
       ]}
       projectLink={{ href: 'https://apps.apple.com/us/app/riptyde/id6793336480', label: 'App Store' }}
+      additionalProjectLinks={[{ href: 'https://riptyde.app', label: 'Web App' }]}
       sections={[
         {
           title: 'One number, no excuses',

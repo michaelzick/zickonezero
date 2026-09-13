@@ -61,9 +61,9 @@ describe('generate-sitemap', () => {
       expect(xml).toContain('<loc>https://www.zickonezero.com/demostoke/</loc>');
     });
 
-    it('includes lastmod dates in YYYY-MM-DD format', () => {
+    it('does not report a build date as a content modification date', () => {
       const xml = buildXml(['/']);
-      expect(xml).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
+      expect(xml).not.toContain('<lastmod>');
     });
 
     it('produces one <url> block per route', () => {

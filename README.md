@@ -1,34 +1,71 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ZICKONEZERO Creative
 
-## Getting Started
+Michael Zick’s portfolio and case-study site, built with Next.js Pages Router,
+React, TypeScript, and styled-components. Production is a static export.
 
-First, run the development server:
+## Local development
 
-```bash
+Use Node 24.x and npm:
+
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Run `npm run check` before shipping. It checks the agent briefs, lint, TypeScript,
+tests, and the production build. `npm run build` generates the sitemap and robots
+file, then exports the complete site into `out/`.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Search and sharing
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Every public page owns its title, description, canonical, social image metadata,
+and JSON-LD through `src/components/Seo.tsx`. Image dimensions must match the
+actual asset; provide descriptive alt text for custom social images.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+The About biography and secondary case-study panels are present in exported HTML.
+Native `hidden` containers preserve the modal/tab presentation. Keep the content
+rendered when changing those interactions, and maintain unique IDs and working
+tab-to-panel accessibility relationships.
 
-## Learn More
+The generated sitemap includes all public routes and omits `lastmod` until a
+reliable per-page content-date source exists. A build date is not a content date.
 
-To learn more about Next.js, take a look at the following resources:
+## DigitalOcean hosting
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The `zickonezero` static component is inside the shared `demostoke` App Platform
+app (`8b602f38-1268-4375-bef4-46d9001db792`). Its source is
+`michaelzick/zickonezero`, branch `main`, and its output directory is `out`.
+Local branch changes are not live until that code is deployed.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Production requires:
 
-## Deploy on Vercel
+- `error_document: 404.html` and no `catchall_document` on this component.
+- HTTP 301 redirects for `/case-studies` and `/case-studies/` on both site hosts
+  to `https://www.zickonezero.com/demostoke/`. App Platform accepts path-prefix
+  matching, so this also redirects descendants of that legacy path.
+- An apex-host redirect to `www.zickonezero.com`, preserving the requested path.
+- The existing component route for `www.zickonezero.com`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`public/_redirects` and `public/_headers` use Netlify/Cloudflare Pages syntax;
+DigitalOcean routing must be configured in the app spec instead.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+To prepare a scoped hosting update, retrieve the **complete raw AppSpec** from
+the DigitalOcean API and save it privately outside the repository. Older doctl
+versions can discard newer ingress fields when serializing specs. App specs may
+contain secrets, so do not commit them.
+
+```sh
+node scripts/configure-static-hosting.js < current-spec.json > updated-spec.json
+```
+
+This command only transforms JSON. Review the diff, validate with
+`POST /v2/apps/propose` using the existing `app_id`, then submit the complete
+updated `spec` to `PUT /v2/apps/{app_id}` with
+`update_all_source_versions: false` for a hosting-only update. Preserve unrelated
+components and routes, and keep the prior spec for rollback.
+
+After deployment, verify real HTTP responses: existing routes return their own
+HTML and canonical, missing routes/assets return 404, legacy paths return 301,
+social assets have an image content type, and `sitemap.xml` includes new pages.
+
+See [AGENTS.md](AGENTS.md) for the project map and the separate contact Worker.

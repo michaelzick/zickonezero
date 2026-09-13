@@ -53,12 +53,15 @@ type ShowcaseSection = {
 // instead of filling the column width like desktop screenshots.
 type ShowcaseImageOrientation = 'landscape' | 'portrait';
 
+type ShowcaseProjectLink = { href: string; label?: string; };
+
 type ProjectShowcaseProps = {
   title: string;
   summary?: string;
   heroImage: { src: string; alt: string; };
   roleBullets: string[];
-  projectLink: { href: string; label?: string; };
+  projectLink: ShowcaseProjectLink;
+  additionalProjectLinks?: ShowcaseProjectLink[];
   sections: ShowcaseSection[];
   imageOrientation?: ShowcaseImageOrientation;
 };
@@ -69,9 +72,11 @@ const ProjectShowcase = ({
   heroImage,
   roleBullets,
   projectLink,
+  additionalProjectLinks = [],
   sections,
   imageOrientation = 'landscape'
 }: ProjectShowcaseProps) => {
+  const projectLinks = [projectLink, ...additionalProjectLinks];
   const isPortrait = imageOrientation === 'portrait';
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
@@ -150,19 +155,22 @@ const ProjectShowcase = ({
                     </RoleList>
                   </div>
                   <LinkRow>
-                    <HeroLabel>Project Link</HeroLabel>
+                    <HeroLabel>{projectLinks.length > 1 ? 'Project Links' : 'Project Link'}</HeroLabel>
                     <div>
-                      <TrackedCtaLink
-                        href={projectLink.href}
-                        label={projectLink.label || 'View Project'}
-                        location='project_showcase_hero'
-                        section={title}
-                        eventName='external_project_click'
-                        target='_blank'
-                        rel='noopener noreferrer'
-                      >
-                        {projectLink.label || 'View Project'} <OpenInNewWindowIcon aria-hidden="true" />
-                      </TrackedCtaLink>
+                      {projectLinks.map((link) => (
+                        <TrackedCtaLink
+                          key={link.href}
+                          href={link.href}
+                          label={link.label || 'Website'}
+                          location='project_showcase_hero'
+                          section={title}
+                          eventName='external_project_click'
+                          target='_blank'
+                          rel='noopener noreferrer'
+                        >
+                          {link.label || 'Website'} <OpenInNewWindowIcon aria-hidden="true" />
+                        </TrackedCtaLink>
+                      ))}
                     </div>
                   </LinkRow>
                 </HeroContent>

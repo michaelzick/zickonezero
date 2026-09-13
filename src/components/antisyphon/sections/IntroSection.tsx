@@ -9,7 +9,7 @@ type IntroSectionProps = {
   visibleSections: VisibleSections;
 };
 
-const ROLE_BULLETS = ['Product strategy', 'UX design', 'Front-end development'] as const;
+const ROLE_BULLETS = ['Product strategy', 'UX design', 'front-end development'] as const;
 const INTRO_SUMMARY = 'Antisyphon Training is a cohesive marketplace experience for live, on-demand, and pay-what-you-can security education.';
 
 const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionProps) => (
@@ -48,19 +48,19 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
                 onClick={() => {
                   trackLinkClick({
                     location: 'case_study_hero',
-                    label: 'www.antisyphontraining.com',
+                    label: 'Website',
                     href: 'https://www.antisyphontraining.com/',
                     section: 'Antisyphon UX Case Study',
                   });
                   trackEvent('external_project_click', {
                     location: 'case_study_hero',
-                    label: 'www.antisyphontraining.com',
+                    label: 'Website',
                     href: 'https://www.antisyphontraining.com/',
                     page_path: window.location.pathname,
                   });
                 }}
               >
-                www.antisyphontraining.com <OpenInNewWindowIcon aria-hidden='true' />
+                Website <OpenInNewWindowIcon aria-hidden='true' />
               </a>
             </div>
           </LinkRow>

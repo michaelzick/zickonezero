@@ -136,22 +136,6 @@
     "link": "/antisyphon-training"
   },
   {
-    "thumb": "/img/squares/ds-logo-stripes-fuchsia-square.webp",
-    "imgs": [],
-    "desc": "Gear shop dashboard and embeddable booking widget",
-    "header": "DemoStoke Fleet Ops",
-    "group": "demostoke-fleet-ops",
-    "link": "/demostoke-fleet-ops"
-  },
-  {
-    "thumb": "/img/squares/riptyde-icon-square.webp",
-    "imgs": [],
-    "desc": "iOS surf forecast app with beach cams, session tracking, and AI",
-    "header": "Riptyde",
-    "group": "riptyde",
-    "link": "/riptyde"
-  },
-  {
     "thumb": "/img/squares/demostoke-logo-square.webp",
     "imgs": [],
     "desc": "Action sports gear rental system and lifestyle blog",
@@ -166,5 +150,37 @@
     "header": "CASE STUDY: Nice Guy University",
     "group": "nice-guy-university",
     "link": "/nice-guy-university"
+  },
+  {
+    "thumb": "/img/squares/12-step-meetings-icon-square.webp",
+    "imgs": [],
+    "desc": "Searchable recovery meeting directory with maps and filters",
+    "header": "12 Step Meetings",
+    "group": "12-step-meetings",
+    "link": "/12-step-meetings"
+  },
+  {
+    "thumb": "/img/squares/timefraim-icon-square.webp",
+    "imgs": [],
+    "desc": "Daily planner with tasks, calendar blocks, and focus timers",
+    "header": "TimeFraim",
+    "group": "timefraim",
+    "link": "/timefraim"
+  },
+  {
+    "thumb": "/img/squares/ds-logo-stripes-fuchsia-square.webp",
+    "imgs": [],
+    "desc": "Gear shop dashboard and embeddable booking widget",
+    "header": "DemoStoke Fleet Ops",
+    "group": "demostoke-fleet-ops",
+    "link": "/demostoke-fleet-ops"
+  },
+  {
+    "thumb": "/img/squares/riptyde-icon-square.webp",
+    "imgs": [],
+    "desc": "iOS surf forecast app with beach cams, session tracking, and AI",
+    "header": "Riptyde",
+    "group": "riptyde",
+    "link": "/riptyde"
   }
 ]

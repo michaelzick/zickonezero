@@ -1,5 +1,7 @@
 import { render } from '@testing-library/react';
 import type { ReactNode } from 'react';
+import path from 'path';
+import sharp from 'sharp';
 
 // Render next/head children inline so the emitted tags are queryable in jsdom.
 jest.mock('next/head', () => ({
@@ -8,11 +10,18 @@ jest.mock('next/head', () => ({
 }));
 
 import Seo from '../src/components/Seo';
-import { contactPageJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
+import { contactPageJsonLd, creativeWorkJsonLd, DEFAULT_OG_IMAGE } from '../src/lib/seo';
 
 const ORIGIN = 'https://www.zickonezero.com';
 
 describe('Seo', () => {
+  it('reports the actual default social image dimensions', async () => {
+    const { width, height } = await sharp(path.join(process.cwd(), 'public', DEFAULT_OG_IMAGE)).metadata();
+    render(<Seo path='/' />);
+    expect(document.querySelector('meta[property="og:image:width"]')).toHaveAttribute('content', String(width));
+    expect(document.querySelector('meta[property="og:image:height"]')).toHaveAttribute('content', String(height));
+  });
+
   it('renders a trailing-slash canonical rooted at the site origin', () => {
     render(<Seo title='About Michael Zick' path='/about/' />);
     expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute(

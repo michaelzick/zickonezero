@@ -206,13 +206,13 @@ const AboutContent = () => {
         >
           <AboutHero aria-label='About page hero'>
             <VisuallyHidden>About Michael Zick</VisuallyHidden>
-            <AboutFixedCta type='button' onClick={openAboutModal}>
+            <AboutFixedCta type='button' onClick={openAboutModal} aria-controls='about-bio' aria-expanded={isAboutModalOpen} aria-haspopup='dialog'>
               About Michael
             </AboutFixedCta>
           </AboutHero>
         </AnimatedSection>
 
-        {isAboutModalOpen && (
+        <div id='about-bio' hidden={!isAboutModalOpen}>
           <DemoStokeMiniCardModalOverlay onClick={closeAboutModal} role='presentation'>
             <AboutModal
               role='dialog'
@@ -249,7 +249,7 @@ const AboutContent = () => {
               </AboutModalCopy>
             </AboutModal>
           </DemoStokeMiniCardModalOverlay>
-        )}
+        </div>
       </Wrapper>
       <FooterContent />
     </>

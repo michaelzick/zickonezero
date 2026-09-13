@@ -16,6 +16,8 @@ const MichaelZickCoachingPage = () => (
       type='article'
       ogImage={HERO_IMAGE.src}
       ogImageAlt={HERO_IMAGE.alt}
+      ogImageWidth={1024}
+      ogImageHeight={1024}
       jsonLd={[
         creativeWorkJsonLd({ name: TITLE, description: SUMMARY, path: PATH, image: HERO_IMAGE.src }),
         breadcrumbJsonLd([
@@ -31,9 +33,9 @@ const MichaelZickCoachingPage = () => (
       roleBullets={[
       'Branding, text, and design',
       'UX and product strategy',
-      'Technical implementation',
+      'technical implementation',
     ]}
-    projectLink={{ href: 'https://www.michaelzick.com/', label: 'www.michaelzick.com' }}
+    projectLink={{ href: 'https://www.michaelzick.com/' }}
     sections={[
       {
         title: 'Clarity, flow, and conversion',

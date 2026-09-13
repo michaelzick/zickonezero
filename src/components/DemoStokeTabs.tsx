@@ -23,6 +23,7 @@ const DemoStokeTabs = forwardRef<HTMLDivElement, DemoStokeTabsProps>(({
       {tabs.map((tab) => (
         <CaseStudyTopTabButton
           key={tab.key}
+          id={`tab-${tab.key}`}
           type="button"
           aria-selected={activeTab === tab.key}
           role='tab'
