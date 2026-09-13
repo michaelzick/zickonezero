@@ -34,17 +34,6 @@ const TimeFraimPage = () => (
       projectLink={{ href: 'https://timefraim.zickonezero.workers.dev/' }}
       sections={[
         {
-          title: 'Plan a day that fits',
-          body: (
-            <>
-              A task list says what needs doing, but it doesn’t show where the time will come from.
-              I put the queue beside a visual timeline so users can drag tasks into the day, see
-              Google Calendar commitments, and leave breathing room between blocks.
-            </>
-          ),
-          image: HERO_IMAGE,
-        },
-        {
           title: 'Start from the calendar',
           body: (
             <>
@@ -54,6 +43,17 @@ const TimeFraimPage = () => (
             </>
           ),
           image: { src: '/img/projects/timefraim/timefraim-calendar.webp', alt: 'TimeFraim planner in light mode with a day of Google Calendar events on the timeline and no tasks planned yet' },
+        },
+        {
+          title: 'Keep task details close',
+          body: (
+            <>
+              I kept notes, time estimates, and priority in a detail panel beside the plan. Selecting
+              a task brings its context into view without opening another page, and quick duration
+              choices make it easier to turn a vague to-do into a realistic block of time.
+            </>
+          ),
+          image: { src: '/img/projects/timefraim/timefraim-task-detail.webp', alt: 'Selected TimeFraim task with notes, duration choices, priority, and timer controls beside the timeline' },
         },
         {
           title: 'See work move forward',

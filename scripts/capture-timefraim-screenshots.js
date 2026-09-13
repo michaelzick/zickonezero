@@ -55,6 +55,7 @@ const SEED_SQL = path.join(__dirname, 'timefraim-sandbox', 'seed.sql');
 const DATE = '2026-09-15';
 const FIXED_NOW = '2026-09-15T17:52:00.000Z'; // 10:52 AM PDT
 const RUNNING_TASK_ID = 'a1000000-0000-4000-8000-000000000002'; // Prototype the day planner timeline
+const DETAIL_TASK_ID = 'a1000000-0000-4000-8000-000000000006'; // Refine the meeting search flow
 const CALENDAR_DATE = '2026-09-16'; // holds only Google Calendar events
 const CALENDAR_NOW = '2026-09-16T15:50:00.000Z'; // 8:50 AM PDT, just before the standup
 const CALENDAR_EVENT_TITLE = 'Client kickoff';
@@ -231,9 +232,16 @@ async function newContext(browser, { colorScheme, storageState, now = FIXED_NOW 
     await setCardOpen(page, /Recent changes/, true);
     await frameTimeline(page, 8.25);
     await shoot(page, 'timefraim-planner', tmpDir);
+
+    // 3. Task detail: a queued task selected via its deep link.
+    await openPlanner(page, `date=${DATE}&task=${DETAIL_TASK_ID}`);
+    await setSectionOpen(page, 'task-inbox-panel', false);
+    await page.waitForTimeout(500); // the deep link re-selects after the clear
+    await frameTimeline(page, 8.25);
+    await shoot(page, 'timefraim-task-detail', tmpDir);
     await context.close();
 
-    // 3. Board in light mode, header included, no scroll.
+    // 4. Board in light mode, header included, no scroll.
     const light = await newContext(browser, { colorScheme: 'light', storageState });
     await light.page.goto(`${APP_URL}/board`, { waitUntil: 'networkidle', timeout: 60000 });
     await light.page.getByRole('heading', { name: 'Board' }).first().waitFor({ timeout: 30000 });
@@ -241,7 +249,7 @@ async function newContext(browser, { colorScheme, storageState, now = FIXED_NOW 
     await shoot(light.page, 'timefraim-board', tmpDir);
     await light.context.close();
 
-    // 4. Calendar-only day in light mode: with the seeded tasks cleared,
+    // 5. Calendar-only day in light mode: with the seeded tasks cleared,
     //    Wednesday shows nothing but synced Google Calendar events. One event
     //    is selected so the detail column shows its card, and the clock moves
     //    to that morning so the now-line renders.
