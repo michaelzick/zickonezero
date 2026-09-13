@@ -48,12 +48,12 @@ const TwelveStepMeetingsPage = () => (
           title: 'Find a meeting that fits',
           body: (
             <>
-              Finding support shouldn’t mean working through a long form. I made program, day, and
-              time filters quick to scan, then added format and accessibility options for a closer
+              Finding support shouldn’t mean working through a long form. I made program, day, time,
+              and location filters quick to scan, then added format and accessibility options for a closer
               fit. The list and map update together, so each filter narrows both at once.
             </>
           ),
-          image: { src: '/img/projects/12-step-meetings/12-step-meetings-filters.webp', alt: '12 Step Meetings list filtered by program, day, and time with city suggestions open for a Santa location search' },
+          image: { src: '/img/projects/12-step-meetings/12-step-meetings-filters.webp', alt: '12 Step Meetings list showing program, day, time, and location filters with the location menu open to city suggestions for Santa' },
         },
         {
           title: 'Explore what’s nearby',

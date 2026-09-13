@@ -56,8 +56,9 @@ const SHOTS = [
     waitForMap: true,
   },
   {
-    // List view with program, day, and time filters active and the native
-    // city suggestions open before selecting a location.
+    // "Find a meeting that fits": program, day, time, and location controls.
+    // Program, day, and time filters are active; the location menu shows
+    // native city suggestions before a location is selected.
     name: '12-step-meetings-filters',
     query: 'view=list&p=AA,CoDA&d=2&t=evening&sort=upcoming',
     openLocation: 'Santa',
