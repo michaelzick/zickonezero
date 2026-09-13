@@ -57,6 +57,7 @@ const SHOTS = [
   },
   {
     // "Find a meeting that fits": program, day, time, and location controls.
+    // Section introduction: "Finding support should be easy and intuitive."
     // Program, day, and time filters are active; the location menu shows
     // native city suggestions before a location is selected.
     name: '12-step-meetings-filters',

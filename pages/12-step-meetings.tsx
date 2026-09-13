@@ -48,7 +48,7 @@ const TwelveStepMeetingsPage = () => (
           title: 'Find a meeting that fits',
           body: (
             <>
-              Finding support shouldn’t mean working through a long form. I made program, day, time,
+              Finding support should be easy and intuitive. I made program, day, time,
               and location filters quick to scan, then added format and accessibility options for a closer
               fit. The list and map update together, so each filter narrows both at once.
             </>
