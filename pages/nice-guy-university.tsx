@@ -16,6 +16,9 @@ const NiceGuyUniversity = () => (
       path={PATH}
       type='article'
       ogImage={OG_IMAGE}
+      ogImageAlt='Nice Guy University homepage with hero and calls to action'
+      ogImageWidth={3456}
+      ogImageHeight={1934}
       jsonLd={[
         creativeWorkJsonLd({ name: TITLE, description: DESCRIPTION, path: PATH, image: OG_IMAGE }),
         breadcrumbJsonLd([

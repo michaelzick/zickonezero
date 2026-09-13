@@ -47,7 +47,7 @@ const CaseStudyContent = ({
   topTabsEl,
   isActive
 }: CaseStudyContentProps) => (
-  <div id='executive-content'>
+  <div id='case-study-content' role='tabpanel' aria-labelledby='tab-case-study' hidden={!isActive}>
     <PageShell>
       <CaseStudyPageInner className='demostoke-inner'>
         <CaseStudyIntroOffset>

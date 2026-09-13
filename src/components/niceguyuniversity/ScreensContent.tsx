@@ -43,7 +43,7 @@ const ScreensContent = ({
   isActive,
   openScreenLightbox
 }: ScreensContentProps) => (
-  <div id='screens-content'>
+  <div id='screens-content' role='tabpanel' aria-labelledby='tab-screens' hidden={!isActive}>
     <PageShell>
       <CompactCaseStudyPageInner className='demostoke-inner'>
         <IntroSection openScreenLightbox={openScreenLightbox} />

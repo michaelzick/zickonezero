@@ -16,6 +16,9 @@ const DemoStoke = () => (
       path={PATH}
       type='article'
       ogImage={OG_IMAGE}
+      ogImageAlt='DemoStoke homepage hero showing a surfer riding through a wave'
+      ogImageWidth={3456}
+      ogImageHeight={1944}
       jsonLd={[
         creativeWorkJsonLd({ name: TITLE, description: DESCRIPTION, path: PATH, image: OG_IMAGE }),
         breadcrumbJsonLd([

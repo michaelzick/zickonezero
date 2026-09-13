@@ -28,7 +28,7 @@ const StoriesContent = ({
   isActive
 }: StoriesContentProps) => {
   return (
-    <div id="stories-content">
+    <div id='stories-content' role='tabpanel' aria-labelledby='tab-stories' hidden={!isActive}>
       <PageShell>
         <CompactCaseStudyPageInner className='demostoke-inner'>
           <AnimatedSection

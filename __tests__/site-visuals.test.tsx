@@ -119,7 +119,10 @@ describe('Home and About visuals', () => {
 
     expect(aboutHero).toBeInTheDocument();
     expect(aboutHero).toContainElement(aboutCta);
-    expect(screen.queryByText(/Michael is a results-oriented Product Leader/i)).not.toBeInTheDocument();
+    const biography = screen.getByText(/Michael is a results-oriented Product Leader/i);
+    expect(biography).toBeInTheDocument();
+    expect(biography).not.toBeVisible();
+    expect(aboutCta).toHaveAttribute('aria-expanded', 'false');
     expect(screen.queryByAltText('Mt. Hood Selfie')).not.toBeInTheDocument();
     expect(getMatchingRuleValues(aboutCta, 'position')).toContain('absolute');
     expect(getMatchingRuleValues(aboutCta, 'right').some((value) => value.includes('clamp('))).toBe(true);
@@ -137,5 +140,7 @@ describe('Home and About visuals', () => {
     await user.click(screen.getByRole('button', { name: 'Close dialog' }));
 
     expect(screen.queryByRole('dialog', { name: 'About Michael' })).not.toBeInTheDocument();
+    expect(biography).toBeInTheDocument();
+    expect(biography).not.toBeVisible();
   });
 });

@@ -10,7 +10,8 @@ import {
 
 const SITE_TAGLINE = 'Product, UX & Development';
 // Intrinsic size and alt text of the default brand OG image, used when a page falls back to it.
-const DEFAULT_OG_IMAGE_SIZE = 1182;
+const DEFAULT_OG_IMAGE_WIDTH = 925;
+const DEFAULT_OG_IMAGE_HEIGHT = 1196;
 const DEFAULT_OG_IMAGE_ALT = 'ZICKONEZERO Creative lifeguard tower mark';
 
 export type SeoProps = {
@@ -43,8 +44,8 @@ const Seo = ({
   const canonical = absoluteUrl(path);
   const image = absoluteUrl(ogImage);
   const isDefaultImage = ogImage === DEFAULT_OG_IMAGE;
-  const resolvedWidth = ogImageWidth ?? (isDefaultImage ? DEFAULT_OG_IMAGE_SIZE : undefined);
-  const resolvedHeight = ogImageHeight ?? (isDefaultImage ? DEFAULT_OG_IMAGE_SIZE : undefined);
+  const resolvedWidth = ogImageWidth ?? (isDefaultImage ? DEFAULT_OG_IMAGE_WIDTH : undefined);
+  const resolvedHeight = ogImageHeight ?? (isDefaultImage ? DEFAULT_OG_IMAGE_HEIGHT : undefined);
   const resolvedImageAlt = ogImageAlt ?? (isDefaultImage ? DEFAULT_OG_IMAGE_ALT : undefined);
   const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 

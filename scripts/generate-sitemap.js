@@ -38,7 +38,8 @@ function routeFromPageFile(filePath) {
 }
 
 function buildXml(urls) {
-  const lastmod = new Date().toISOString().slice(0, 10);
+  // Omit optional lastmod until reliable per-page content dates are available.
+  // A rebuild alone does not mean every page's content changed.
   const lines = [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
@@ -47,7 +48,6 @@ function buildXml(urls) {
   for (const url of urls) {
     lines.push('  <url>');
     lines.push(`    <loc>${BASE_URL}${url}</loc>`);
-    lines.push(`    <lastmod>${lastmod}</lastmod>`);
     lines.push('  </url>');
   }
 

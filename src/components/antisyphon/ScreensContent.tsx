@@ -45,7 +45,7 @@ const ScreensContent = ({
   isActive,
   openFlowLightbox
 }: ScreensContentProps) => (
-  <div id='screens-content'>
+  <div id='flows-content' role='tabpanel' aria-labelledby='tab-flows' hidden={!isActive}>
     <PageShell>
       <CompactCaseStudyPageInner className='demostoke-inner'>
         <IntroSection openFlowLightbox={openFlowLightbox} />
