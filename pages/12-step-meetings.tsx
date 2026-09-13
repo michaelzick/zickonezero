@@ -5,7 +5,7 @@ import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
 const PATH = '/12-step-meetings/';
 const TITLE = '12 Step Meetings';
 const SUMMARY = 'A searchable directory of in-person recovery meetings across Los Angeles and Ventura counties.';
-const HERO_IMAGE = { src: '/img/projects/12-step-meetings/12-step-meetings-hybrid.webp', alt: '12 Step Meetings directory with distance-sorted results beside a map of meetings near Santa Monica' };
+const HERO_IMAGE = { src: '/img/projects/12-step-meetings/12-step-meetings-hybrid.webp', alt: '12 Step Meetings directory listing upcoming meetings near Santa Monica beside a map of nearby meetings' };
 
 const TwelveStepMeetingsPage = () => (
   <>
@@ -53,7 +53,7 @@ const TwelveStepMeetingsPage = () => (
               fit. The list and map update together, so every choice keeps the results in context.
             </>
           ),
-          image: { src: '/img/projects/12-step-meetings/12-step-meetings-filters.webp', alt: '12 Step Meetings filtered by program, day, and time with matching results' },
+          image: { src: '/img/projects/12-step-meetings/12-step-meetings-filters.webp', alt: '12 Step Meetings list filtered by program, day, and time with the format options open' },
         },
         {
           title: 'Explore what’s nearby',
@@ -64,7 +64,7 @@ const TwelveStepMeetingsPage = () => (
               move between a list, a map, and a combined view as they narrow down where to go.
             </>
           ),
-          image: { src: '/img/projects/12-step-meetings/12-step-meetings-map.webp', alt: 'Map of meetings near Santa Monica with a city search and clustered meeting markers' },
+          image: { src: '/img/projects/12-step-meetings/12-step-meetings-map.webp', alt: 'Map view of meetings near Pasadena with a ZIP search, radius filter, and clustered meeting markers' },
         },
         {
           title: 'Know before you go',

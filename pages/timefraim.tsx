@@ -5,7 +5,7 @@ import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
 const PATH = '/timefraim/';
 const TITLE = 'TimeFraim';
 const SUMMARY = 'A daily planner that brings tasks, calendar blocks, and timers into one view.';
-const HERO_IMAGE = { src: '/img/projects/timefraim/timefraim-planner.webp', alt: 'TimeFraim day planner with a task queue, scheduled work, and completed tasks' };
+const HERO_IMAGE = { src: '/img/projects/timefraim/timefraim-planner.webp', alt: 'TimeFraim day planner with a task queue beside a timeline of scheduled tasks and calendar events, plus completed tasks and recent activity' };
 
 const TimeFraimPage = () => (
   <>
@@ -64,7 +64,7 @@ const TimeFraimPage = () => (
               card. A link back to the planner connects the bigger picture to the day’s actual time.
             </>
           ),
-          image: { src: '/img/projects/timefraim/timefraim-board.webp', alt: 'TimeFraim kanban board with sample tasks in Inbox, Planned, Scheduled, and Done columns' },
+          image: { src: '/img/projects/timefraim/timefraim-board.webp', alt: 'TimeFraim kanban board in light mode with sample tasks in Inbox, Planned, Scheduled, and Done columns' },
         },
         {
           title: 'Stay with the task',
