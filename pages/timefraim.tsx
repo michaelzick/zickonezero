@@ -37,9 +37,9 @@ const TimeFraimPage = () => (
           title: 'Start from the calendar',
           body: (
             <>
-              A day rarely starts empty. I sync Google Calendar events onto the timeline before any
-              tasks are planned, so meetings already hold their place and the open hours are easy to
-              spot. Planning starts from the time that is actually free.
+              A day rarely starts empty. I put Google Calendar events on the timeline first, so
+              meetings already hold their place and the open hours are easy to spot. Planning starts
+              with the time that’s actually free.
             </>
           ),
           image: { src: '/img/projects/timefraim/timefraim-calendar.webp', alt: 'TimeFraim planner in light mode with a day of Google Calendar events on the timeline and no tasks planned yet' },
@@ -49,8 +49,8 @@ const TimeFraimPage = () => (
           body: (
             <>
               I kept notes, time estimates, and priority in a detail panel beside the plan. Selecting
-              a task brings its context into view without opening another page, and quick duration
-              choices make it easier to turn a vague to-do into a realistic block of time.
+              a task brings its details into view without leaving the page, and quick duration presets
+              make it easier to turn a vague to-do into a realistic block of time.
             </>
           ),
           image: { src: '/img/projects/timefraim/timefraim-task-detail.webp', alt: 'Selected TimeFraim task with notes, duration choices, priority, and timer controls beside the timeline' },
@@ -59,9 +59,9 @@ const TimeFraimPage = () => (
           title: 'See work move forward',
           body: (
             <>
-              Some days start with sorting work before scheduling it. I added a board that moves
+              Some days start with sorting work before scheduling it. I added a board for moving
               tasks from Inbox to Planned, Scheduled, and Done, with estimates and priority on each
-              card. A link back to the planner connects the bigger picture to the day’s actual time.
+              card. A link back to the planner keeps the big picture tied to the day’s actual hours.
             </>
           ),
           image: { src: '/img/projects/timefraim/timefraim-board.webp', alt: 'TimeFraim kanban board in light mode with sample tasks in Inbox, Planned, Scheduled, and Done columns' },
@@ -70,9 +70,9 @@ const TimeFraimPage = () => (
           title: 'Stay with the task',
           body: (
             <>
-              Switching to a separate timer can pull attention away from the work. I brought Toggl
-              controls into the planner and gave the running task a prominent elapsed-time panel.
-              Users can see what they’re working on, open its details, and stop the timer in one place.
+              Switching to a separate timer pulls attention away from the work. I brought Toggl
+              controls into the planner and gave the running task its own elapsed-time panel. Users
+              can see what they’re working on, open its details, and stop the timer in one place.
             </>
           ),
           image: { src: '/img/projects/timefraim/timefraim-timer.webp', alt: 'TimeFraim planner with an active focus timer for a scheduled design task' },

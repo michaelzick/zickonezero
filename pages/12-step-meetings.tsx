@@ -37,9 +37,9 @@ const TwelveStepMeetingsPage = () => (
           title: 'One place to start',
           body: (
             <>
-              Meeting information is scattered across separate program directories. I brought AA,
+              Meeting listings are scattered across separate program directories. I brought AA,
               Al-Anon, CoDA, NA, OA, and SLAA into one searchable view, with upcoming meetings beside
-              a map. Users can start browsing right away, without creating an account.
+              a map. Users can start browsing right away, no account needed.
             </>
           ),
           image: { src: '/img/projects/12-step-meetings/12-step-meetings-al-anon.webp', alt: '12 Step Meetings directory filtered to Al-Anon, listing upcoming meetings near Santa Monica beside a map of nearby meetings' },
@@ -50,7 +50,7 @@ const TwelveStepMeetingsPage = () => (
             <>
               Finding support shouldn’t mean working through a long form. I made program, day, and
               time filters quick to scan, then added format and accessibility options for a closer
-              fit. The list and map update together, so every choice keeps the results in context.
+              fit. The list and map update together, so each filter narrows both at once.
             </>
           ),
           image: { src: '/img/projects/12-step-meetings/12-step-meetings-filters.webp', alt: '12 Step Meetings list filtered by program, day, and time with the format options open' },
@@ -59,9 +59,9 @@ const TwelveStepMeetingsPage = () => (
           title: 'Explore what’s nearby',
           body: (
             <>
-              A useful meeting also needs to be within reach. I added city and ZIP searches with
+              A good meeting also has to be within reach. I added city and ZIP searches with
               distance sorting, and clustered map markers to keep busy areas readable. Users can
-              move between a list, a map, and a combined view as they narrow down where to go.
+              switch between a list, a map, and a combined view as they narrow down where to go.
             </>
           ),
           image: { src: '/img/projects/12-step-meetings/12-step-meetings-map.webp', alt: 'Map view of meetings near Pasadena with a ZIP search, radius filter, and clustered meeting markers' },
@@ -72,7 +72,7 @@ const TwelveStepMeetingsPage = () => (
             <>
               I put the practical details in a side panel: when the meeting happens, where to find
               it, and any format or accessibility notes. Directions, calendar options, and the source
-              listing sit together, so users can check the information and plan their next step.
+              listing sit together, so users can double-check the details and get on their way.
             </>
           ),
           image: { src: '/img/projects/12-step-meetings/12-step-meetings-detail.webp', alt: 'Meeting detail panel with schedule, location, format, accessibility, directions, and calendar options' },
