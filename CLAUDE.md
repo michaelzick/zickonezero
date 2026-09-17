@@ -129,6 +129,7 @@ The site is the `zickonezero` static component inside the shared DigitalOcean ap
 - **Styling:** prefer existing styled-components and theme constants before adding new style primitives. Keep SCSS global changes broad and intentional.
 - **Images:** static images live under `public/img/`; use accurate alt text for inspectable product and portfolio imagery.
 - **Analytics:** use `trackEvent`, `trackLinkClick`, and existing tracked link components for navigational and CTA events.
+- **Role copy:** product engineering encompasses frontend and full-stack development; pair it with UX design rather than redundant development roles. Use `Product Engineer` and `UX designer` for people, `product engineering` and `UX design` for disciplines, and `Product Engineering` for navigation and section headings.
 - **Effects:** clean up timers, animation frames, observers, and browser listeners. Respect reduced-motion checks where animation is significant.
 - **Tests:** co-locate broad behavior tests in `__tests__/`; use React Testing Library for user-visible behavior and Jest for build utilities.
 - **Validation:** do not mark work done while lint, typecheck, tests, or build fail. Do not run browser UI tests unless the user explicitly asks for them.

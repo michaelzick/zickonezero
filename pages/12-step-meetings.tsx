@@ -30,7 +30,7 @@ const TwelveStepMeetingsPage = () => (
       title={TITLE}
       summary={SUMMARY}
       heroImage={HERO_IMAGE}
-      roleBullets={['Product strategy', 'product engineering', 'frontend development']}
+      roleBullets={['Product strategy', 'product engineering', 'UX design']}
       projectLink={{ href: 'https://www.12stepmeetings.org/' }}
       sections={[
         {

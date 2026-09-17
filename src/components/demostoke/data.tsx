@@ -64,7 +64,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'My Roles',
-    description: 'I led DemoStoke end to end as founder, Product Engineer, and full-stack developer, shaping the product strategy, research, information architecture, user flows, and visual system. I also built the front end, auth and dashboard flows, database-backed features, and AI-assisted discovery tooling needed to turn the concept into a working web application.',
+    description: 'I led DemoStoke end to end as founder, Product Engineer, and UX designer, shaping the product strategy, research, information architecture, user flows, and visual system. I also built the front end, auth and dashboard flows, database-backed features, and AI-assisted discovery tooling needed to turn the concept into a working web application.',
     image: {
       src: '/img/demostoke/ds-design-system.webp',
       alt: 'DemoStoke design system components'

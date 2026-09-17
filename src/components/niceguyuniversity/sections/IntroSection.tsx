@@ -24,7 +24,6 @@ type IntroSectionProps = {
 const ROLE_BULLETS = [
   'Product strategy',
   'UX/UI design',
-  'front-end engineering',
   'content architecture',
   'analytics planning'
 ] as const;
