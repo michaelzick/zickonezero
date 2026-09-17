@@ -33,6 +33,7 @@ const RiptydePage = () => (
       imageOrientation='portrait'
       roleBullets={[
         'Product strategy',
+        'product engineering',
         'UX design',
         'iOS development',
       ]}

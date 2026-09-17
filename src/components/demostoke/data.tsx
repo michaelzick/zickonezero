@@ -64,7 +64,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'My Roles',
-    description: 'I led DemoStoke end to end as founder, UX designer, and full-stack developer, shaping the product strategy, research, information architecture, user flows, and visual system. I also built the front end, auth and dashboard flows, database-backed features, and AI-assisted discovery tooling needed to turn the concept into a working web application.',
+    description: 'I led DemoStoke end to end as founder, Product Engineer, and UX designer, shaping the product strategy, research, information architecture, user flows, and visual system. I also built the front end, auth and dashboard flows, database-backed features, and AI-assisted discovery tooling needed to turn the concept into a working web application.',
     image: {
       src: '/img/demostoke/ds-design-system.webp',
       alt: 'DemoStoke design system components'
@@ -123,7 +123,7 @@ export const PERSONA_ITEMS = [
   {
     title: 'Nomadic Renter',
     bullets: [
-      'Maya (31, Santa Cruz) is a van-lifer and remote UX designer who rides 1-3x/week.',
+      'Maya (31, Santa Cruz) is a van-lifer and remote Product Engineer who rides 1-3x/week.',
       'She doesn’t want to own a ton of gear and struggles to find quality rentals in new locations.',
       'She wants DemoStoke to offer verified local lenders, easy-to-find gear specs, and fair prices.'
     ]

@@ -1,5 +1,8 @@
 const path = require("path");
 
+// Keep Next's compiler and Storybook plugins on the same local Webpack instance.
+process.env.NEXT_PRIVATE_LOCAL_WEBPACK = "true";
+
 module.exports = {
   "stories": ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
 

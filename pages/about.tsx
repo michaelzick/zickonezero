@@ -6,7 +6,7 @@ const About = () => (
   <>
     <Seo
       title='About Michael Zick'
-      description='Michael Zick is a results-oriented Product Leader with a background in UX design, frontend development, DevOps, SEO, and e-commerce platforms.'
+      description='Michael Zick is a results-oriented Product Leader with a background in product engineering, UX design, DevOps, SEO, and e-commerce platforms.'
       path='/about/'
       type='profile'
       jsonLd={profilePageJsonLd()}

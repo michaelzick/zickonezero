@@ -33,7 +33,7 @@ const FindYourFlowStatePage = () => (
       roleBullets={[
       'Product strategy',
       'quiz questions',
-      'UX design'
+      'product engineering'
     ]}
     projectLink={{ href: 'https://findyourflowstate.michaelzick.com/' }}
     sections={[
