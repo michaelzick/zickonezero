@@ -1,5 +1,6 @@
 import AboutContent from '../src/components/AboutContent';
 import MainContent from '../src/components/MainContent';
+import LinkBoxContent from '../src/components/LinkBoxContent';
 import worksData from '../src/data/worksData.json';
 import { renderWithProviders } from '../src/test/renderWithProviders';
 import { screen, waitFor, within } from '@testing-library/react';
@@ -55,6 +56,22 @@ describe('Home and About visuals', () => {
     });
 
     expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'auto' });
+  });
+
+  it('keeps desktop navigation labels spaced, aligned, and on one line', () => {
+    renderWithProviders(<LinkBoxContent />);
+
+    const aboutLink = screen.getByRole('link', { name: 'About' });
+    const linkRow = aboutLink.parentElement!;
+    const projectMenu = screen.getByRole('button', { name: 'Product Engineering' });
+
+    expect(getMatchingRuleValues(linkRow, 'gap').map(value => value.replace(/\s/g, '')))
+      .toContain('clamp(1.5rem,2vw,2.5rem)');
+    expect(getMatchingRuleValues(linkRow, 'align-items')).toContain('center');
+    expect(getMatchingRuleValues(linkRow, 'white-space')).toContain('nowrap');
+    expect(getMatchingRuleValues(linkRow, 'flex-shrink')).toContain('0');
+    expect(getMatchingRuleValues(aboutLink, 'min-height')).toContain('44px');
+    expect(getMatchingRuleValues(projectMenu, 'min-height')).toContain('44px');
   });
 
   it('syncs the homepage carousel horizontally as vertical scroll progresses', async () => {

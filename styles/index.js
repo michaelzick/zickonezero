@@ -251,8 +251,9 @@ export const Wrapper = styled.div`
 
 export const Nav = styled.div`
   width: 100%;
-  padding: 1em 3em 1em 2.5em;
+  padding: 1em clamp(1em, 2.5vw, 2.5em);
   display: flex;
+  gap: 1.5em;
   border-bottom: 2px dotted ${THEME.colors.grey};
   justify-content: space-between;
   align-items: center;
@@ -282,7 +283,7 @@ export const Nav = styled.div`
     transition: color 0.3s;
   }
 
-  @media (max-width: ${THEME.breakpoints.mediumTablet}) {
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
     padding: 1em 1em;
   }
 
@@ -293,6 +294,7 @@ export const Nav = styled.div`
 
 export const MenuIcon = styled.div`
   display: none;
+  flex-shrink: 0;
   cursor: pointer;
 
   .bar1, .bar2, .bar3 {
@@ -313,7 +315,7 @@ export const MenuIcon = styled.div`
     }
   }
 
-  @media (max-width: ${THEME.breakpoints.mediumTablet}) {
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
     display: inline-block;
   }
 `;
@@ -534,14 +536,16 @@ export const Title = styled.p`
 
 export const LinkBox = styled.div`
   display: flex;
-  justify-content: space-between;
-  min-width: 29em;
+  align-items: center;
+  gap: clamp(1.5rem, 2vw, 2.5rem);
+  flex-shrink: 0;
+  white-space: nowrap;
 
-  a {
-    margin-top: 0.8em;
+  > a {
+    min-height: 44px;
   }
 
-  @media (max-width: ${THEME.breakpoints.mediumTablet}) {
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
     display: none;
   }
 `;
@@ -574,12 +578,11 @@ export const CaseStudiesDesktopWrapper = styled.div`
   position: relative;
   display: inline-flex;
   align-items: center;
-  margin-top: 0.8em;
   color: ${THEME.colors.white};
   font-family: Roboto, sans-serif;
   cursor: pointer;
 
-  @media (max-width: ${THEME.breakpoints.mediumTablet}) {
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
     display: none;
   }
 `;
@@ -588,6 +591,7 @@ export const CaseStudiesTrigger = styled.button`
   display: inline-flex;
   align-items: center;
   gap: 0.25em;
+  min-height: 44px;
   padding: 0;
   background: transparent;
   border: none;
@@ -662,7 +666,7 @@ export const CaseStudiesDropdown = styled.ul`
     }
   }
 
-  @media (max-width: ${THEME.breakpoints.mediumTablet}) {
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
     display: none;
   }
 `;
@@ -678,6 +682,8 @@ export const LinkBoxMobile = styled.ul`
   padding: 1.2em 1.5em;
   min-width: 15.5em;
   width: 15.5em;
+  max-height: calc(100dvh - 5em);
+  overflow-y: auto;
   background: ${THEME.colors.darkest};
   z-index: 400;
   border-radius: ${THEME.radii.md};

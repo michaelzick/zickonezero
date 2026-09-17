@@ -77,6 +77,7 @@ zickonezero/
 - **Case-study modules:** `src/components/demostoke/`, `src/components/antisyphon/`, `src/components/niceguyuniversity/`, and `src/components/userstories/` hold page-specific content and section data.
 - **Static data:** `src/data/worksData.json` feeds the homepage portfolio grid through `src/lib/getWorksData.ts`.
 - **Design tokens/styles:** `styles/index.js`, `styles/projectShowcases.js`, `styles/*.ts`, and `styles/globals.scss` define shared styled-components and page themes.
+- **Top navigation:** desktop links use explicit fluid gaps and vertically centered 44px controls. The full link row switches to the mobile menu at `THEME.breakpoints.largeTablet` (1137px), before the brand and longer Product Engineering label become crowded. Expanded mobile menus scroll within the viewport on shorter screens.
 
 ### 4.3 Build utilities
 
