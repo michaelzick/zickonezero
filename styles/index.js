@@ -282,11 +282,7 @@ export const Nav = styled.div`
     transition: color 0.3s;
   }
 
-  @media (max-width: 979px) {
-    padding: 1em 1em;
-  }
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+  @media (max-width: ${THEME.breakpoints.mediumTablet}) {
     padding: 1em 1em;
   }
 
@@ -317,7 +313,7 @@ export const MenuIcon = styled.div`
     }
   }
 
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+  @media (max-width: ${THEME.breakpoints.mediumTablet}) {
     display: inline-block;
   }
 `;
@@ -545,7 +541,7 @@ export const LinkBox = styled.div`
     margin-top: 0.8em;
   }
 
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+  @media (max-width: ${THEME.breakpoints.mediumTablet}) {
     display: none;
   }
 `;
@@ -583,7 +579,7 @@ export const CaseStudiesDesktopWrapper = styled.div`
   font-family: Roboto, sans-serif;
   cursor: pointer;
 
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+  @media (max-width: ${THEME.breakpoints.mediumTablet}) {
     display: none;
   }
 `;
@@ -666,7 +662,7 @@ export const CaseStudiesDropdown = styled.ul`
     }
   }
 
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
+  @media (max-width: ${THEME.breakpoints.mediumTablet}) {
     display: none;
   }
 `;

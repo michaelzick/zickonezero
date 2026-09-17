@@ -39,6 +39,8 @@ describe('Home and About visuals', () => {
     expect(screen.getByAltText('DemoStoke hybrid catalog and map view')).toBeInTheDocument();
     expect(screen.queryByAltText('Illustrated self-portrait near Mt. Hood')).not.toBeInTheDocument();
     expect(screen.getAllByRole('heading', { name: 'Case Studies' }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole('button', { name: 'Product Engineering' }).length).toBeGreaterThan(0);
+    expect(screen.getByRole('heading', { level: 2, name: 'Product Engineering' })).toBeInTheDocument();
   });
 
   it('resets the homepage scroll position on mount', () => {

@@ -549,9 +549,9 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
             type="button"
             aria-current={activeSection === 'ux' ? 'true' : undefined}
             $isActive={activeSection === 'ux'}
-            onClick={() => handleHomeSectionClick('ux', 'product engineering', 'home_tabs')}
+            onClick={() => handleHomeSectionClick('ux', 'Product Engineering', 'home_tabs')}
           >
-            product engineering
+            Product Engineering
           </HomeTabButton>
           <HomeTabButton
             type="button"
@@ -639,7 +639,7 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
 
             <div ref={uxContentRef}>
               <SectionHeader ref={uxSectionRef} id='ux-design'>
-                <WorkSectionHeader>product engineering</WorkSectionHeader>
+                <WorkSectionHeader>Product Engineering</WorkSectionHeader>
               </SectionHeader>
 
               <GridContent
