@@ -32,7 +32,7 @@ const DemoStokeFleetOpsPage = () => (
       heroImage={HERO_IMAGE}
       roleBullets={[
       'Product strategy',
-      'UX design',
+      'Product Engineering',
       'full-stack development'
     ]}
     projectLink={{ href: 'https://fleet.demostoke.com/' }}

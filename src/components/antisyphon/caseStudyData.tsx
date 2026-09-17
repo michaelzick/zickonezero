@@ -34,7 +34,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'My Roles',
-    description: 'Product strategy, UX design, and WordPress/WooCommerce engineering plus LMS/admin integrations.',
+    description: 'Product strategy, Product Engineering, and WordPress/WooCommerce engineering plus LMS/admin integrations.',
     image: { src: '/img/antisyphon/admin-course-edit.webp', alt: 'Admin course creation form inside WordPress' }
   }
 ] as const;

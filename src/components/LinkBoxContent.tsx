@@ -48,7 +48,7 @@ const LinkBoxContent = () => {
     if (!isProjectsOpen) {
       trackEvent('nav_dropdown_open', {
         location: 'top_nav',
-        label: 'UX Design',
+        label: 'Product Engineering',
         page_path: window.location.pathname,
       });
     }
@@ -194,7 +194,7 @@ const LinkBoxContent = () => {
           onClick={openProjects}
           aria-haspopup='true'
           aria-expanded={isProjectsOpen}>
-          UX Design
+          Product Engineering
           <CaseStudiesChevron $isOpen={isProjectsOpen} aria-hidden='true'>
             <svg viewBox="0 0 24 24" role="presentation" focusable="false">
               <path d="m6 9 6 6 6-6" />

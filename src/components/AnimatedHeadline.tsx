@@ -23,7 +23,7 @@ const AnimatedHeadline = ({ className }: AnimatedHeadlineProps) => {
     <AnimatedHeadlineWrapper
       className={className}
       role="text"
-      aria-label="I do: UX Design, Branding, Product Management, Development"
+      aria-label="I do: Product Engineering, Branding, Product Management, Development"
     >
       <AnimatedHeadlineStatic>
         I&nbsp;do:
