@@ -33,7 +33,7 @@ const RiptydePage = () => (
       imageOrientation='portrait'
       roleBullets={[
         'Product strategy',
-        'Product Engineering',
+        'product engineering',
         'iOS development',
       ]}
       projectLink={{ href: 'https://apps.apple.com/us/app/riptyde/id6793336480', label: 'App Store' }}

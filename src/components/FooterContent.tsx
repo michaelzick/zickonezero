@@ -31,7 +31,7 @@ const FooterContent = (): ReactElement => (
       </FooterColumn>
 
       <FooterColumn>
-        <FooterColumnTitle>Product Engineering</FooterColumnTitle>
+        <FooterColumnTitle>product engineering</FooterColumnTitle>
         <FooterColumnLinks>
           {PROJECT_LINKS.map(({ href, label }) => (
             <li key={href}>

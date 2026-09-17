@@ -228,7 +228,7 @@ const AboutContent = () => {
               <AboutModalTitle>About Michael</AboutModalTitle>
               <AboutModalCopy>
                 <p>
-                  Michael is a results-oriented Product Leader with a background in Product Engineering, frontend development,
+                  Michael is a results-oriented Product Leader with a background in product engineering, frontend development,
                   DevOps, SEO, and e-commerce platforms.
                 </p>
                 <p>

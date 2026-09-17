@@ -29,7 +29,7 @@ describe('ProjectShowcase', () => {
       <ProjectShowcase
         title='Single-link showcase'
         heroImage={{ src: '/hero.webp', alt: 'Project overview' }}
-        roleBullets={['Product Engineering']}
+        roleBullets={['product engineering']}
         projectLink={{ href: 'https://example.com' }}
         sections={[]}
       />
@@ -49,7 +49,7 @@ describe('ProjectShowcase', () => {
       <ProjectShowcase
         title='Riptyde'
         heroImage={{ src: '/hero.webp', alt: 'Riptyde overview' }}
-        roleBullets={['Product Engineering']}
+        roleBullets={['product engineering']}
         projectLink={{ href: 'https://apps.apple.com/us/app/riptyde/id6793336480', label: 'App Store' }}
         additionalProjectLinks={[{ href: 'https://riptyde.app', label: 'Web App' }]}
         sections={[]}
@@ -80,7 +80,7 @@ describe('ProjectShowcase', () => {
         title='Test Showcase'
         summary='A focused test fixture.'
         heroImage={{ src: '/img/projects/fyfs/fyfs-wave.webp', alt: 'Hero image' }}
-        roleBullets={['Product Engineering']}
+        roleBullets={['product engineering']}
         projectLink={{ href: 'https://example.com', label: 'example.com' }}
         sections={[
           {
@@ -120,7 +120,7 @@ describe('ProjectShowcase', () => {
         title='Test Showcase'
         summary='A focused test fixture.'
         heroImage={{ src: '/img/projects/fyfs/fyfs-wave.webp', alt: 'Hero image' }}
-        roleBullets={['Product Engineering']}
+        roleBullets={['product engineering']}
         projectLink={{ href: 'https://example.com', label: 'example.com' }}
         sections={[
           {
@@ -159,7 +159,7 @@ describe('ProjectShowcase', () => {
         title='Test Showcase'
         summary='A focused test fixture.'
         heroImage={{ src: '/img/projects/fyfs/fyfs-wave.webp', alt: 'Hero image' }}
-        roleBullets={['Product Engineering']}
+        roleBullets={['product engineering']}
         projectLink={{ href: 'https://example.com', label: 'example.com' }}
         sections={[
           {

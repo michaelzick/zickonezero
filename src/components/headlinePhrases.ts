@@ -1,5 +1,5 @@
 export const HEADLINE_PHRASES = [
-  'Product Engineering',
+  'product engineering',
   'Branding',
   'Product Management',
   'Development'
