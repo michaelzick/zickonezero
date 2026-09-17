@@ -34,6 +34,7 @@ const RiptydePage = () => (
       roleBullets={[
         'Product strategy',
         'product engineering',
+        'UX design',
         'iOS development',
       ]}
       projectLink={{ href: 'https://apps.apple.com/us/app/riptyde/id6793336480', label: 'App Store' }}
