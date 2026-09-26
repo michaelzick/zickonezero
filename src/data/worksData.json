@@ -182,5 +182,13 @@
     "header": "Riptyde",
     "group": "riptyde",
     "link": "/riptyde"
+  },
+  {
+    "thumb": "/img/squares/bars-of-sand-icon-square.webp",
+    "imgs": [],
+    "desc": "Interactive 3D surf lab for sandbars, waves, and sand movement",
+    "header": "Bars of Sand",
+    "group": "bars-of-sand",
+    "link": "/bars-of-sand"
   }
 ]
