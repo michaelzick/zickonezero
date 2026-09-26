@@ -61,7 +61,7 @@ const BarsOfSandPage = () => (
           title: 'Fine-tune the bar',
           body: (
             <>
-              Presets get people started, and the Fine-tune panel lets them go deeper. Bar height,
+              Presets get people started, and the Fine-Tune panel lets them go deeper. Bar height,
               position, width, and curvature each pair a slider with a numeric field and a short
               explanation. The Cross-section view slices through the water, so users can click any point
               and measure the bed below.
@@ -84,7 +84,7 @@ const BarsOfSandPage = () => (
           title: 'Explain the physics plainly',
           body: (
             <>
-              A simulation only helps if people understand it. The How it works guide pairs simple
+              A simulation only helps if people understand it. The How It Works guide pairs simple
               diagrams with plain-language notes on how wind, tide, and swell change the waves. It also
               spells out the model’s assumptions and limits, so nobody mistakes the lab for a surf
               forecast.
