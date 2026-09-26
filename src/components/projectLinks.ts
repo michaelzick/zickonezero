@@ -1,5 +1,11 @@
 export const PROJECT_LINKS = [
   {
+    href: '/bars-of-sand',
+    label: 'Bars of Sand',
+    icon: '/img/squares/bars-of-sand-icon-square.webp',
+    iconAlt: 'Bars of Sand logo'
+  },
+  {
     href: '/riptyde',
     label: 'Riptyde',
     icon: '/img/squares/riptyde-icon-square.webp',
