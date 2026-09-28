@@ -4,6 +4,7 @@ import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
 import { PROJECT_LINKS } from './projectLinks';
 import { CONTACT_LINKS } from './contactLinks';
 import TrackedLink from './TrackedLink';
+import BrandName from './BrandName';
 
 import {
   Footer,
@@ -66,7 +67,7 @@ const FooterContent = (): ReactElement => (
 
     <FooterBottom>
       <span>Site designed and built by Michael Zick.</span>
-      <span>© 2026 ZICKONEZERO Creative</span>
+      <span>© 2026 <BrandName /> Creative</span>
     </FooterBottom>
   </Footer>
 );

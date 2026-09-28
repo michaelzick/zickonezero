@@ -2572,10 +2572,6 @@ export const IntroSection = styled.div`
       }
     }
 
-    .hotword {
-      color: ${THEME.colors.hotRed};
-    }
-
     .intro-rotator-headline {
       border-top: 2px dotted ${THEME.colors.grey};
       padding-top: clamp(0.4em, 1.4vw, 0.7em);

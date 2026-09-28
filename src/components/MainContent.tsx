@@ -35,6 +35,7 @@ import {
 } from '../../styles';
 import { AnimatedSection } from '../../styles/projectShowcases';
 import { trackEvent } from '../lib/analytics';
+import BrandName from './BrandName';
 import type { WorksData } from '../types';
 
 type HomeSectionKey = 'case-studies' | 'ux' | 'ui';
@@ -591,7 +592,7 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
             >
               <div className="text-animate">
                 <h1>
-                  Michael Zick is <span className="hotword">ZICKONEZERO Creative</span>.
+                  Michael Zick is <BrandName /> Creative.
                 </h1>
                 <p className="intro-rotator-headline">Product / UX / Dev</p>
                 <button
