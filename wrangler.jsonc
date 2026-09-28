@@ -1,0 +1,21 @@
+{
+  "name": "zickonezero",
+  "account_id": "0c4a1637a60ec527675c7e248b73e39d",
+  "compatibility_date": "2026-09-28",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  },
+  "routes": [
+    {
+      "pattern": "zickonezero.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.zickonezero.com",
+      "custom_domain": true
+    }
+  ]
+}
