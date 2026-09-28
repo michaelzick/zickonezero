@@ -12,6 +12,7 @@ import { LinkBoxContent, AnimatedMobileMenu, ThemeSwitcher } from '.';
 import { MouseEvent, ReactElement } from 'react';
 import { trackEvent } from '../lib/analytics';
 import TrackedLink from './TrackedLink';
+import BrandName from './BrandName';
 
 const NavContent = (): ReactElement => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
@@ -30,7 +31,7 @@ const NavContent = (): ReactElement => {
         <Title isMobileMenuShown={isMobileMenuShown}
           onClick={() => dispatch(showMobileMenu(false))}>
           <TrackedLink href='/' label='ZICKONEZERO Creative' location='top_nav' section='brand'>
-            <span className='brand-line brand-first'>ZICKONEZERO</span>
+            <span className='brand-line brand-first'><BrandName /></span>
             <span className='brand-line brand-second'>Creative</span>
           </TrackedLink>
         </Title>

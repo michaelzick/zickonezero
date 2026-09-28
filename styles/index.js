@@ -498,8 +498,17 @@ export const Title = styled.p`
     color: ${THEME.colors.white};
     transition: color 0.3s;
 
+    .brand-one {
+      transition: color 0.3s;
+    }
+
+    // Swap the brand colors on hover so ONE stays distinct from the rest.
     &:hover {
       color: ${THEME.colors.hotRed};
+
+      .brand-one {
+        color: ${THEME.colors.white};
+      }
     }
 
     @media (max-width: ${THEME.breakpoints.largeTablet}) {
@@ -2570,10 +2579,6 @@ export const IntroSection = styled.div`
       &:last-child {
         margin-bottom: 0;
       }
-    }
-
-    .hotword {
-      color: ${THEME.colors.hotRed};
     }
 
     .intro-rotator-headline {
