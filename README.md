@@ -66,3 +66,17 @@ ingress fields. Hosting-only API updates require
 `update_all_source_versions: false` and preservation of unrelated components.
 
 See [AGENTS.md](AGENTS.md) for the project map and the separate contact Worker.
+
+### Branch previews
+
+Workers Builds builds every non-production branch with Node 24 and `npm run build`,
+then runs `npx wrangler@4.135.0 preview` (Wrangler 4.135.0 or later). The empty
+`previews` block in `wrangler.jsonc` enables isolated branch previews; static assets
+and routing settings remain at the top level. Each branch has a stable preview URL
+that updates on subsequent pushes. Production continues to deploy from `main`.
+
+For branches created before this configuration was added, merge current `main`
+before pushing to get a working preview build.
+
+The contact Worker keeps its production origin allowlist; contact-form email
+delivery is not enabled for arbitrary preview origins.
