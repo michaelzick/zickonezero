@@ -131,7 +131,7 @@ The site is Cloudflare Worker `zickonezero`, serving `out/` from this repository
 - **Styling:** prefer existing styled-components and theme constants before adding new style primitives. Keep SCSS global changes broad and intentional.
 - **Images:** static images live under `public/img/`; use accurate alt text for inspectable product and portfolio imagery.
 - **Analytics:** use `trackEvent`, `trackLinkClick`, and existing tracked link components for navigational and CTA events.
-- **Brand name:** render visible "ZICKONEZERO" through `src/components/BrandName.tsx` so ZICK and ZERO stay accent-colored with ONE in the plain text color; keep plain text in titles, metadata, and analytics labels.
+- **Brand name:** render visible "ZICKONEZERO" through `src/components/BrandName.tsx` so ONE stays accent-colored (ZICK**ONE**ZERO); keep plain text in titles, metadata, and analytics labels.
 - **Role copy:** product engineering encompasses frontend and full-stack development; pair it with UX design rather than redundant development roles. Use `Product Engineer` and `UX designer` for people, `product engineering` and `UX design` for disciplines, and `Product Engineering` for navigation and section headings.
 - **Effects:** clean up timers, animation frames, observers, and browser listeners. Respect reduced-motion checks where animation is significant.
 - **Tests:** co-locate broad behavior tests in `__tests__/`; use React Testing Library for user-visible behavior and Jest for build utilities.
@@ -159,7 +159,7 @@ The site is Cloudflare Worker `zickonezero`, serving `out/` from this repository
 | [workers/contact/src/contact.ts](workers/contact/src/contact.ts) | Pure contact validation and email builder |
 | [src/components/niceguyuniversity/](src/components/niceguyuniversity/) | Nice Guy University case-study and product-screen section data |
 | [src/components/TrackedLink.tsx](src/components/TrackedLink.tsx) | Analytics-aware links |
-| [src/components/BrandName.tsx](src/components/BrandName.tsx) | ZICKONEZERO wordmark with accent-colored ZICK and ZERO |
+| [src/components/BrandName.tsx](src/components/BrandName.tsx) | ZICKONEZERO wordmark with the accent-colored ONE |
 | [src/components/Seo.tsx](src/components/Seo.tsx) | Per-page title, canonical, OG/Twitter, and JSON-LD head tags |
 | [src/components/SiteAnalyticsScripts.tsx](src/components/SiteAnalyticsScripts.tsx) | Site analytics bootstrap |
 | [src/lib/analytics.ts](src/lib/analytics.ts) | Analytics event helpers |
