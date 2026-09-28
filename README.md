@@ -30,42 +30,53 @@ tab-to-panel accessibility relationships.
 The generated sitemap includes all public routes and omits `lastmod` until a
 reliable per-page content-date source exists. A build date is not a content date.
 
-## DigitalOcean hosting
+## Cloudflare hosting
 
-The `zickonezero` static component is inside the shared `demostoke` App Platform
-app (`8b602f38-1268-4375-bef4-46d9001db792`). Its source is
-`michaelzick/zickonezero`, branch `main`, and its output directory is `out`.
-Local branch changes are not live until that code is deployed.
+Cloudflare Worker `zickonezero` serves the static `out/` export on
+`www.zickonezero.com` and `zickonezero.com`. `wrangler.jsonc` declares the
+custom domains, trailing-slash handling, and real 404 responses. The zone's
+**Canonical apex to www** Redirect Rule sends HTTP and HTTPS apex requests to
+`https://www.zickonezero.com`, preserving paths and query strings.
 
-Production requires:
+`public/_redirects` preserves the legacy `/case-studies` redirect (including
+its descendants), and `public/_headers` configures the security headers.
+The contact form continues using the separate `zickonezero-contact` Worker.
 
-- `error_document: 404.html` and no `catchall_document` on this component.
-- HTTP 301 redirects for `/case-studies` and `/case-studies/` on both site hosts
-  to `https://www.zickonezero.com/demostoke/`. App Platform accepts path-prefix
-  matching, so this also redirects descendants of that legacy path.
-- An apex-host redirect to `www.zickonezero.com`, preserving the requested path.
-- The existing component route for `www.zickonezero.com`.
-
-`public/_redirects` and `public/_headers` use Netlify/Cloudflare Pages syntax;
-DigitalOcean routing must be configured in the app spec instead.
-
-To prepare a scoped hosting update, retrieve the **complete raw AppSpec** from
-the DigitalOcean API and save it privately outside the repository. Older doctl
-versions can discard newer ingress fields when serializing specs. App specs may
-contain secrets, so do not commit them.
+Workers Builds uses this GitHub repository's `main` branch with Node 24,
+`npm run build`, and `npx wrangler@4.133.0 deploy`. For a manual deployment:
 
 ```sh
-node scripts/configure-static-hosting.js < current-spec.json > updated-spec.json
+npm ci
+npm run build
+npx wrangler@4.133.0 deploy
 ```
-
-This command only transforms JSON. Review the diff, validate with
-`POST /v2/apps/propose` using the existing `app_id`, then submit the complete
-updated `spec` to `PUT /v2/apps/{app_id}` with
-`update_all_source_versions: false` for a hosting-only update. Preserve unrelated
-components and routes, and keep the prior spec for rollback.
 
 After deployment, verify real HTTP responses: existing routes return their own
 HTML and canonical, missing routes/assets return 404, legacy paths return 301,
 social assets have an image content type, and `sitemap.xml` includes new pages.
 
+### DigitalOcean rollback
+
+The former static component remains inside the shared DigitalOcean `demostoke`
+app (`8b602f38-1268-4375-bef4-46d9001db792`) until the owner archives it.
+`scripts/configure-static-hosting.js` remains available for rollback hosting
+configuration. Preserve complete raw AppSpec exports privately outside the
+repository; they can contain secrets and older doctl serializers can drop
+ingress fields. Hosting-only API updates require
+`update_all_source_versions: false` and preservation of unrelated components.
+
 See [AGENTS.md](AGENTS.md) for the project map and the separate contact Worker.
+
+### Branch previews
+
+Workers Builds builds every non-production branch with Node 24 and `npm run build`,
+then runs `npx wrangler@4.135.0 preview` (Wrangler 4.135.0 or later). The empty
+`previews` block in `wrangler.jsonc` enables isolated branch previews; static assets
+and routing settings remain at the top level. Each branch has a stable preview URL
+that updates on subsequent pushes. Production continues to deploy from `main`.
+
+For branches created before this configuration was added, merge current `main`
+before pushing to get a working preview build.
+
+The contact Worker keeps its production origin allowlist; contact-form email
+delivery is not enabled for arbitrary preview origins.
