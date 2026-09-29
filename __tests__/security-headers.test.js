@@ -6,14 +6,11 @@ const csp = headers.match(/Content-Security-Policy:\s*(.+)/)[1];
 const directive = (name) => csp.split(';').map((part) => part.trim()).find((part) => part.startsWith(`${name} `));
 
 describe('framing', () => {
-  it('lets only michaelzick.com show the site in a frame', () => {
-    expect(directive('frame-ancestors').split(/\s+/).slice(1)).toEqual([
-      'https://michaelzick.com',
-      'https://www.michaelzick.com',
-    ]);
+  it('sends no frame-ancestors, so any site can show the site in a frame', () => {
+    expect(directive('frame-ancestors')).toBeUndefined();
   });
 
-  it('sends no X-Frame-Options, which cannot name an allowed parent and would still block the frame', () => {
+  it('sends no X-Frame-Options, which would block the frame for every parent', () => {
     expect(headers).not.toMatch(/x-frame-options/i);
   });
 });
