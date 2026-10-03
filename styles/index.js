@@ -419,7 +419,7 @@ export const GridCarouselControls = styled.div`
 `;
 
 export const HomeWorkSection = styled.section`
-  margin: 0 clamp(0.75em, 3vw, 2.5em) clamp(1.25em, 3vw, 2.25em);
+  margin: 0 clamp(0.75em, 3vw, 2.5em) clamp(2.5em, 6vw, 4.5em);
   padding: 0 clamp(0.5em, 2vw, 1.5em) clamp(0.75em, 2vw, 1.5em);
   border: 1px solid ${props => `var(--home-section-${props.$tone}-border)`};
   border-radius: 14px;

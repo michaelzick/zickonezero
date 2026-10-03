@@ -147,6 +147,8 @@ describe('Home and About visuals', () => {
 
       expect(panel.querySelector(`#${headingId}`)).not.toBeNull();
       expect(getMatchingRuleValues(panel, 'background')).toContain(`var(--home-section-${tone}-bg)`);
+      expect(getMatchingRuleValues(panel, 'margin').map(value => value.replace(/\s/g, '')).join(' '))
+        .toContain('clamp(2.5em,6vw,4.5em)');
       expect(within(row).getAllByRole('heading', { level: 3 }).length).toBeGreaterThan(0);
 
       const controls = screen.getByLabelText(`${name} navigation`);
