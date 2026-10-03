@@ -129,6 +129,61 @@ describe('Home and About visuals', () => {
     });
   });
 
+  it('renders each homepage section as a tinted panel with a mobile project carousel', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<MainContent />, {
+      preloadedState: HOME_PRELOADED_STATE,
+    });
+
+    const sections = [
+      { name: 'Case Studies projects', tone: 'case', headingId: 'case-studies' },
+      { name: 'Product Engineering projects', tone: 'product', headingId: 'ux-design' },
+      { name: 'Web Development projects', tone: 'web', headingId: 'web-development' },
+    ];
+
+    for (const { name, tone, headingId } of sections) {
+      const row = screen.getByRole('region', { name });
+      const panel = row.closest('section')!;
+
+      expect(panel.querySelector(`#${headingId}`)).not.toBeNull();
+      expect(getMatchingRuleValues(panel, 'background')).toContain(`var(--home-section-${tone}-bg)`);
+      expect(within(row).getAllByRole('heading', { level: 3 }).length).toBeGreaterThan(0);
+
+      const controls = screen.getByLabelText(`${name} navigation`);
+      expect(within(controls).getByRole('button', { name: 'Scroll left', hidden: true })).toBeDisabled();
+      expect(within(controls).getByRole('button', { name: 'Scroll right', hidden: true })).toBeInTheDocument();
+    }
+
+    const webRow = screen.getByRole('region', { name: 'Web Development projects' });
+    Object.defineProperty(webRow, 'scrollWidth', { configurable: true, value: 1200 });
+    Object.defineProperty(webRow, 'clientWidth', { configurable: true, value: 360 });
+    webRow.dispatchEvent(new Event('scroll'));
+
+    const webControls = screen.getByLabelText('Web Development projects navigation');
+    const scrollRight = within(webControls).getByRole('button', { name: 'Scroll right', hidden: true });
+    await waitFor(() => expect(scrollRight).toBeEnabled());
+
+    const scrollBySpy = jest.spyOn(webRow, 'scrollBy');
+    await user.click(scrollRight);
+    expect(scrollBySpy).toHaveBeenCalledWith(expect.objectContaining({ behavior: 'smooth' }));
+  });
+
+  it('keeps the homepage tabs navigating to each section', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<MainContent />, {
+      preloadedState: HOME_PRELOADED_STATE,
+    });
+
+    const tabs = within(screen.getByLabelText('Homepage sections'));
+    const webTab = tabs.getByRole('button', { name: 'Web Dev', hidden: true });
+
+    (window.scrollTo as jest.Mock).mockClear();
+    await user.click(webTab);
+
+    expect(webTab).toHaveAttribute('aria-current', 'true');
+    expect(window.scrollTo).toHaveBeenCalled();
+  });
+
   it('renders the About page as a full-bleed hero with a container-anchored CTA and modal copy', async () => {
     const user = userEvent.setup();
     renderWithProviders(<AboutContent />);

@@ -367,6 +367,73 @@ export const GridContainer = styled.div`
       flex-direction: column;
     }
   }
+
+  ${props => props.$carousel && css`
+    @media (max-width: ${THEME.breakpoints.phone}) {
+      .grid {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 1em;
+        overflow-x: auto;
+        box-sizing: border-box;
+        padding: 0 1em 0.6em;
+        scroll-padding-inline: 1em;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+
+        &::-webkit-scrollbar {
+          height: 6px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: ${THEME.colors.grey};
+          border-radius: 999px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        > * {
+          flex: 0 0 auto;
+          margin: 0.75em 0 0.5em;
+          scroll-snap-align: start;
+        }
+      }
+    }
+  `}
+`;
+
+export const GridCarouselControls = styled.div`
+  display: none;
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.65em;
+    align-self: stretch;
+    padding: 0 1em;
+  }
+`;
+
+export const HomeWorkSection = styled.section`
+  margin: 0 clamp(0.75em, 3vw, 2.5em) clamp(1.25em, 3vw, 2.25em);
+  padding: 0 clamp(0.5em, 2vw, 1.5em) clamp(0.75em, 2vw, 1.5em);
+  border: 1px solid ${props => `var(--home-section-${props.$tone}-border)`};
+  border-radius: 14px;
+  background: ${props => `var(--home-section-${props.$tone}-bg)`};
+
+  > h2,
+  > div {
+    background: transparent;
+  }
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    margin-inline: 0.75em;
+    padding-inline: 0;
+  }
 `;
 
 export const Image = styled.img`
