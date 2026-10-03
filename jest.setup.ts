@@ -75,6 +75,11 @@ Object.defineProperty(window.HTMLElement.prototype, 'scrollBy', {
   value: jest.fn(),
 });
 
+Object.defineProperty(window.HTMLElement.prototype, 'scrollTo', {
+  writable: true,
+  value: jest.fn(),
+});
+
 Object.defineProperty(window.HTMLElement.prototype, 'scrollIntoView', {
   writable: true,
   value: jest.fn(),

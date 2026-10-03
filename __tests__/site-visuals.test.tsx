@@ -155,19 +155,64 @@ describe('Home and About visuals', () => {
       expect(within(controls).getByRole('button', { name: 'Scroll left', hidden: true })).toBeDisabled();
       expect(within(controls).getByRole('button', { name: 'Scroll right', hidden: true })).toBeInTheDocument();
     }
+  });
 
-    const webRow = screen.getByRole('region', { name: 'Web Development projects' });
-    Object.defineProperty(webRow, 'scrollWidth', { configurable: true, value: 1200 });
-    Object.defineProperty(webRow, 'clientWidth', { configurable: true, value: 360 });
-    webRow.dispatchEvent(new Event('scroll'));
+  it('steps homepage carousels item by item without cancelling in-flight smooth scrolls', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<MainContent />, {
+      preloadedState: HOME_PRELOADED_STATE,
+    });
 
-    const webControls = screen.getByLabelText('Web Development projects navigation');
-    const scrollRight = within(webControls).getByRole('button', { name: 'Scroll right', hidden: true });
-    await waitFor(() => expect(scrollRight).toBeEnabled());
+    const ITEM_PITCH = 256;
+    const CLIENT_WIDTH = 364;
+    const row = screen.getByRole('region', { name: 'Web Development projects' });
+    const items = Array.from(row.children);
+    const maxScroll = items.length * ITEM_PITCH + 16 - CLIENT_WIDTH;
+    let scrollLeft = 0;
+    const scrollLeftSetter = jest.fn((value: number) => {
+      scrollLeft = value;
+    });
 
-    const scrollBySpy = jest.spyOn(webRow, 'scrollBy');
-    await user.click(scrollRight);
-    expect(scrollBySpy).toHaveBeenCalledWith(expect.objectContaining({ behavior: 'smooth' }));
+    Object.defineProperty(row, 'scrollLeft', { configurable: true, get: () => scrollLeft, set: scrollLeftSetter });
+    Object.defineProperty(row, 'scrollWidth', { configurable: true, value: maxScroll + CLIENT_WIDTH });
+    Object.defineProperty(row, 'clientWidth', { configurable: true, value: CLIENT_WIDTH });
+    items.forEach((item, index) => {
+      jest.spyOn(item, 'getBoundingClientRect')
+        .mockImplementation(() => ({ left: index * ITEM_PITCH - scrollLeft } as DOMRect));
+    });
+
+    const controls = screen.getByLabelText('Web Development projects navigation');
+    const scrollLeftButton = within(controls).getByRole('button', { name: 'Scroll left', hidden: true });
+    const scrollRightButton = within(controls).getByRole('button', { name: 'Scroll right', hidden: true });
+    const scrollToSpy = jest.spyOn(row, 'scrollTo');
+    const scrollRowTo = (position: number) => {
+      scrollLeft = position;
+      row.dispatchEvent(new Event('scroll'));
+    };
+
+    // The first frame of a smooth scroll can move less than a pixel on 120Hz
+    // screens; the scroll handler must not reset it and cancel the animation.
+    scrollRowTo(0.5);
+    expect(scrollLeftSetter).not.toHaveBeenCalled();
+
+    scrollRowTo(0);
+    await waitFor(() => expect(scrollRightButton).toBeEnabled());
+    expect(scrollLeftButton).toBeDisabled();
+
+    await user.click(scrollRightButton);
+    expect(scrollToSpy).toHaveBeenLastCalledWith({ left: ITEM_PITCH, behavior: 'smooth' });
+
+    scrollRowTo(ITEM_PITCH * 2);
+    await waitFor(() => expect(scrollLeftButton).toBeEnabled());
+    await user.click(scrollLeftButton);
+    expect(scrollToSpy).toHaveBeenLastCalledWith({ left: ITEM_PITCH, behavior: 'smooth' });
+
+    scrollRowTo(maxScroll - 100);
+    await user.click(scrollRightButton);
+    expect(scrollToSpy).toHaveBeenLastCalledWith({ left: maxScroll, behavior: 'smooth' });
+
+    scrollRowTo(maxScroll);
+    await waitFor(() => expect(scrollRightButton).toBeDisabled());
   });
 
   it('keeps the homepage tabs navigating to each section', async () => {
