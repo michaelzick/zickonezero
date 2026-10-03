@@ -21,6 +21,7 @@ import {
   HomeTabsBar,
   HomeTabButton,
   HomeTabsSpacer,
+  HomeWorkSection,
   IntroSection,
   FloatingCloudsViewport,
   FloatingClouds,
@@ -86,8 +87,8 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
   const caseStudiesSectionRef = useRef<HTMLHeadingElement | null>(null);
   const uxSectionRef = useRef<HTMLHeadingElement | null>(null);
   const uiSectionRef = useRef<HTMLHeadingElement | null>(null);
-  const uxContentRef = useRef<HTMLDivElement | null>(null);
-  const uiContentRef = useRef<HTMLDivElement | null>(null);
+  const uxContentRef = useRef<HTMLElement | null>(null);
+  const uiContentRef = useRef<HTMLElement | null>(null);
   const [activeSection, setActiveSection] = useState<ActiveSection>(null);
   const isManualScrolling = useRef(false);
   const manualScrollTimeoutRef = useRef<number | null>(null);
@@ -623,7 +624,7 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
           <WorksRevealCurtain aria-hidden="true" />
 
           <WorksSectionContent>
-            <div>
+            <HomeWorkSection $tone='case'>
               <SectionHeader ref={caseStudiesSectionRef} id='case-studies'>
                 <WorkSectionHeader>Case Studies</WorkSectionHeader>
               </SectionHeader>
@@ -633,12 +634,11 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
                 onThumbClick={onThumbClick}
                 includeItem={({ group }) => CASE_STUDY_GROUPS.has(group)}
                 disableThumbClick
+                carouselLabel='Case Studies projects'
               />
-            </div>
+            </HomeWorkSection>
 
-            <br />
-
-            <div ref={uxContentRef}>
+            <HomeWorkSection $tone='product' ref={uxContentRef}>
               <SectionHeader ref={uxSectionRef} id='ux-design'>
                 <WorkSectionHeader>Product Engineering</WorkSectionHeader>
               </SectionHeader>
@@ -648,11 +648,11 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
                 onThumbClick={onThumbClick}
                 includeItem={(item) => Boolean(item.link) && !CASE_STUDY_GROUPS.has(item.group)}
                 disableThumbClick
+                carouselLabel='Product Engineering projects'
               />
-            </div>
+            </HomeWorkSection>
 
-            <br />
-            <div ref={uiContentRef}>
+            <HomeWorkSection $tone='web' ref={uiContentRef}>
               <SectionHeader ref={uiSectionRef} id='web-development'>
                 <WorkSectionHeader>Web Development</WorkSectionHeader>
               </SectionHeader>
@@ -661,8 +661,9 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
                 worksDataReversed={worksDataReversed}
                 onThumbClick={onThumbClick}
                 includeItem={(item) => !item.link}
+                carouselLabel='Web Development projects'
               />
-            </div>
+            </HomeWorkSection>
           </WorksSectionContent>
         </WorksParallaxStage>
 

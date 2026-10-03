@@ -129,6 +129,108 @@ describe('Home and About visuals', () => {
     });
   });
 
+  it('renders each homepage section as a tinted panel with a mobile project carousel', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<MainContent />, {
+      preloadedState: HOME_PRELOADED_STATE,
+    });
+
+    const sections = [
+      { name: 'Case Studies projects', tone: 'case', headingId: 'case-studies' },
+      { name: 'Product Engineering projects', tone: 'product', headingId: 'ux-design' },
+      { name: 'Web Development projects', tone: 'web', headingId: 'web-development' },
+    ];
+
+    for (const { name, tone, headingId } of sections) {
+      const row = screen.getByRole('region', { name });
+      const panel = row.closest('section')!;
+
+      expect(panel.querySelector(`#${headingId}`)).not.toBeNull();
+      expect(getMatchingRuleValues(panel, 'background')).toContain(`var(--home-section-${tone}-bg)`);
+      expect(getMatchingRuleValues(panel, 'margin').map(value => value.replace(/\s/g, '')).join(' '))
+        .toContain('clamp(2.5em,6vw,4.5em)');
+      expect(within(row).getAllByRole('heading', { level: 3 }).length).toBeGreaterThan(0);
+
+      const controls = screen.getByLabelText(`${name} navigation`);
+      expect(within(controls).getByRole('button', { name: 'Scroll left', hidden: true })).toBeDisabled();
+      expect(within(controls).getByRole('button', { name: 'Scroll right', hidden: true })).toBeInTheDocument();
+    }
+  });
+
+  it('steps homepage carousels item by item without cancelling in-flight smooth scrolls', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<MainContent />, {
+      preloadedState: HOME_PRELOADED_STATE,
+    });
+
+    const ITEM_PITCH = 256;
+    const CLIENT_WIDTH = 364;
+    const row = screen.getByRole('region', { name: 'Web Development projects' });
+    const items = Array.from(row.children);
+    const maxScroll = items.length * ITEM_PITCH + 16 - CLIENT_WIDTH;
+    let scrollLeft = 0;
+    const scrollLeftSetter = jest.fn((value: number) => {
+      scrollLeft = value;
+    });
+
+    Object.defineProperty(row, 'scrollLeft', { configurable: true, get: () => scrollLeft, set: scrollLeftSetter });
+    Object.defineProperty(row, 'scrollWidth', { configurable: true, value: maxScroll + CLIENT_WIDTH });
+    Object.defineProperty(row, 'clientWidth', { configurable: true, value: CLIENT_WIDTH });
+    items.forEach((item, index) => {
+      jest.spyOn(item, 'getBoundingClientRect')
+        .mockImplementation(() => ({ left: index * ITEM_PITCH - scrollLeft } as DOMRect));
+    });
+
+    const controls = screen.getByLabelText('Web Development projects navigation');
+    const scrollLeftButton = within(controls).getByRole('button', { name: 'Scroll left', hidden: true });
+    const scrollRightButton = within(controls).getByRole('button', { name: 'Scroll right', hidden: true });
+    const scrollToSpy = jest.spyOn(row, 'scrollTo');
+    const scrollRowTo = (position: number) => {
+      scrollLeft = position;
+      row.dispatchEvent(new Event('scroll'));
+    };
+
+    // The first frame of a smooth scroll can move less than a pixel on 120Hz
+    // screens; the scroll handler must not reset it and cancel the animation.
+    scrollRowTo(0.5);
+    expect(scrollLeftSetter).not.toHaveBeenCalled();
+
+    scrollRowTo(0);
+    await waitFor(() => expect(scrollRightButton).toBeEnabled());
+    expect(scrollLeftButton).toBeDisabled();
+
+    await user.click(scrollRightButton);
+    expect(scrollToSpy).toHaveBeenLastCalledWith({ left: ITEM_PITCH, behavior: 'smooth' });
+
+    scrollRowTo(ITEM_PITCH * 2);
+    await waitFor(() => expect(scrollLeftButton).toBeEnabled());
+    await user.click(scrollLeftButton);
+    expect(scrollToSpy).toHaveBeenLastCalledWith({ left: ITEM_PITCH, behavior: 'smooth' });
+
+    scrollRowTo(maxScroll - 100);
+    await user.click(scrollRightButton);
+    expect(scrollToSpy).toHaveBeenLastCalledWith({ left: maxScroll, behavior: 'smooth' });
+
+    scrollRowTo(maxScroll);
+    await waitFor(() => expect(scrollRightButton).toBeDisabled());
+  });
+
+  it('keeps the homepage tabs navigating to each section', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<MainContent />, {
+      preloadedState: HOME_PRELOADED_STATE,
+    });
+
+    const tabs = within(screen.getByLabelText('Homepage sections'));
+    const webTab = tabs.getByRole('button', { name: 'Web Dev', hidden: true });
+
+    (window.scrollTo as jest.Mock).mockClear();
+    await user.click(webTab);
+
+    expect(webTab).toHaveAttribute('aria-current', 'true');
+    expect(window.scrollTo).toHaveBeenCalled();
+  });
+
   it('renders the About page as a full-bleed hero with a container-anchored CTA and modal copy', async () => {
     const user = userEvent.setup();
     renderWithProviders(<AboutContent />);
