@@ -39,7 +39,9 @@ custom domains, trailing-slash handling, and real 404 responses. The zone's
 `https://www.zickonezero.com`, preserving paths and query strings.
 
 `public/_redirects` preserves the legacy `/case-studies` redirect (including
-its descendants), and `public/_headers` configures the security headers.
+its descendants), sends the removed `/michael-zick-coaching` route to
+`https://www.niceguyuniversity.com/`, and `public/_headers` configures the
+security headers.
 The contact form continues using the separate `zickonezero-contact` Worker.
 
 Workers Builds uses this GitHub repository's `main` branch with Node 24,
