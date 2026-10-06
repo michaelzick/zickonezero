@@ -11,7 +11,7 @@
  * styled-components.
  */
 
-/* Registered so the time-of-day time-lapse can crossfade the city colors. */
+/* Registered as typed colors, so a transition on any of them interpolates smoothly. */
 @property --sky-top {
   syntax: '<color>';
   inherits: true;
@@ -275,22 +275,14 @@
   --city-glow: rgba(255, 58, 92, 0.4);
 }
 
-/* Set for about two seconds by the time-of-day toggle. */
-:root.is-timelapse {
-  transition:
-    --sky-top 1.8s ease,
-    --sky-mid 1.8s ease,
-    --sky-low 1.8s ease,
-    --haze 1.8s ease,
-    --bldg-far 1.8s ease,
-    --bldg-mid 1.8s ease,
-    --bldg-near 1.8s ease,
-    --window-lit 1.8s ease,
-    --street 1.8s ease,
-    --sun 1.8s ease,
-    --color-dark 1.2s ease,
-    --color-white 1.2s ease,
-    --glass-bg 1.2s ease;
+/*
+ * The time-of-day crossfade (src/theme/ThemeContext.tsx): one composited fade
+ * between snapshots of the old and new city.
+ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.9s;
+  animation-timing-function: ease;
 }
 
 html {

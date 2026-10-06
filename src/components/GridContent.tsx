@@ -1,9 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import { GigCarouselControls, GigGrid } from '../../styles/district';
 import { Thumbnail } from '.';
 import useHorizontalGallery from '../hooks/useHorizontalGallery';
-import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
+import usePowerOn from '../hooks/usePowerOn';
 
 import { DistrictTone, WorksData, WorksDataType } from '../types';
 
@@ -20,41 +20,18 @@ type Props = WorksDataType & {
 };
 
 // Boot the cards once the grid's top is this far into the viewport.
-const BOOT_ROOT_MARGIN = '0px 0px -12% 0px';
+const BOOT_OBSERVER: IntersectionObserverInit = { rootMargin: '0px 0px -12% 0px' };
 
 const GridContent = (props: Props) => {
   const { worksDataReversed, onThumbClick, includeItem, disableThumbClick, carouselLabel, tone, status } = props;
   const handleThumbClick: (index: number) => void = disableThumbClick ? (() => undefined) : onThumbClick;
   const { rowRef, canScrollLeft, canScrollRight, scrollGalleryBy } = useHorizontalGallery();
   const gridRef = useRef<HTMLDivElement | null>(null);
-  const prefersReducedMotion = usePrefersReducedMotion();
   const isCarousel = Boolean(carouselLabel);
 
   // Keep the cards dark until the grid scrolls into view, then boot them in
   // one after another.
-  useEffect(() => {
-    const grid = gridRef.current;
-    if (!grid || prefersReducedMotion || typeof IntersectionObserver === 'undefined') {
-      return undefined;
-    }
-
-    grid.setAttribute('data-standby', '');
-    const observer = new IntersectionObserver((entries) => {
-      if (!entries.some((entry) => entry.isIntersecting)) {
-        return;
-      }
-
-      grid.removeAttribute('data-standby');
-      grid.setAttribute('data-booted', '');
-      observer.disconnect();
-    }, { rootMargin: BOOT_ROOT_MARGIN });
-    observer.observe(grid);
-
-    return () => {
-      observer.disconnect();
-      grid.removeAttribute('data-standby');
-    };
-  }, [prefersReducedMotion]);
+  usePowerOn(gridRef, { poweredAttribute: 'data-booted', observerOptions: BOOT_OBSERVER });
 
   // Keep each card's index into the full list, which the lightbox reads.
   const items = worksDataReversed

@@ -166,11 +166,11 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
             </button>
             <TrackedLink
               href='/contact'
-              label='Jack In'
+              label='Contact'
               location='home_intro'
-              className='hero-jack-in'
+              className='hero-contact'
             >
-              Jack In
+              Contact
             </TrackedLink>
           </div>
         </HudFrame>

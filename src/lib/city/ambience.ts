@@ -35,7 +35,7 @@ const LEVELS: Record<TimeOfDay, Levels> = {
 const MASTER_GAIN = 0.5;
 const FADE_IN_SECONDS = 1.8;
 const FADE_OUT_SECONDS = 0.6;
-// Night/day crossfades settle in about two seconds, with the visual time-lapse.
+// Night/day audio crossfades settle in about two seconds.
 const TIMELAPSE_TIME_CONSTANT = 0.6;
 
 const NOISE_SECONDS = 4;

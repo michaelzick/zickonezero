@@ -35,7 +35,7 @@ type Props = {
   onTravel: (section: HomeSectionKey, label: string) => void;
   /**
    * Scroll positions where the player reaches each stop: the start, each
-   * district, then the street level. Called again whenever the page resizes.
+   * district, then the end of the route. Called again whenever the page resizes.
    */
   measureStops: () => number[];
   /** The HUD tucks away while this element (the footer) is on screen. */
@@ -53,8 +53,6 @@ const METERS_PER_PIXEL = 0.25;
 const HERO_SHARE = 0.4;
 // Smoothed scroll speed, in pixels per frame, that turns the player around.
 const TURN_VELOCITY = 1.5;
-
-const ARRIVED_OBJECTIVE = 'Jack in to book a gig';
 
 const GLITCH_FRAMES: Keyframe[] = [
   { transform: 'none', filter: 'none' },
@@ -100,7 +98,8 @@ const poiShape = ({ x, y, kind }: (typeof MINIMAP_POIS)[number]) => {
  * district pins fast travel down the page, a player arrow that walks the
  * route as the visitor scrolls, a clock, and a quest tracker. Narrow or short
  * screens get the same buttons as a bottom bar (see styles/homeHud.ts). The
- * map and readouts are decoration; the pins are the nav.
+ * map, clock, and distance are decoration; the pins and the quest objective
+ * are the nav.
  */
 const HomeHud = ({ districts, active, onTravel, measureStops, parkRef }: Props) => {
   const rootRef = useRef<HTMLElement>(null);
@@ -217,11 +216,14 @@ const HomeHud = ({ districts, active, onTravel, measureStops, parkRef }: Props) 
   };
 
   const activeIndex = districts.findIndex(({ section }) => section === active);
-  const objective = arrived
-    ? ARRIVED_OBJECTIVE
-    : activeIndex >= 0
-      ? `Explore ${districts[activeIndex].title}`
-      : `Head to ${districts[0]?.title ?? 'the city'}`;
+  // Before the first district the quest heads there; inside one, it explores it.
+  const questDistrict = activeIndex >= 0 ? districts[activeIndex] : districts[0];
+  const objective = activeIndex >= 0 ? `Explore ${questDistrict.title}` : `Head to ${questDistrict?.title ?? 'the city'}`;
+  const handleObjectiveClick = () => {
+    if (questDistrict) {
+      travel(questDistrict);
+    }
+  };
 
   return (
     <HomeHudRoot
@@ -292,9 +294,11 @@ const HomeHud = ({ districts, active, onTravel, measureStops, parkRef }: Props) 
         </ul>
       </div>
 
-      <div className='hud-readouts' aria-hidden='true'>
-        <HudClock className='hud-clock' />
-        <QuestTracker objective={objective} distanceRef={distanceRef} />
+      <div className='hud-readouts'>
+        <div aria-hidden='true'>
+          <HudClock className='hud-clock' />
+        </div>
+        <QuestTracker objective={objective} onObjectiveClick={handleObjectiveClick} distanceRef={distanceRef} />
       </div>
     </HomeHudRoot>
   );

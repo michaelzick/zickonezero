@@ -130,17 +130,25 @@ describe('HUD toggles and readouts', () => {
   });
 
   describe('QuestTracker', () => {
-    it('repeats the page for sighted visitors only', () => {
+    it('makes the objective a button and keeps the readouts decorative', async () => {
+      const user = userEvent.setup();
       const distanceRef = createRef<HTMLSpanElement>();
+      const onObjectiveClick = jest.fn();
       const { container } = render(
-        <QuestTracker objective='Explore Product Engineering' distanceRef={distanceRef} />,
+        <QuestTracker
+          objective='Explore Product Engineering'
+          onObjectiveClick={onObjectiveClick}
+          distanceRef={distanceRef}
+        />,
       );
 
-      const quest = container.firstElementChild;
-      expect(quest).toHaveAttribute('aria-hidden', 'true');
-      expect(quest).toHaveTextContent('Current gig');
-      expect(quest).toHaveTextContent('Explore Product Engineering');
+      expect(container.querySelector('.quest-label')).toHaveAttribute('aria-hidden', 'true');
+      expect(container.querySelector('.quest-label')).toHaveTextContent('Current gig');
+      expect(container.querySelector('.quest-distance')).toHaveAttribute('aria-hidden', 'true');
       expect(distanceRef.current).toHaveTextContent('-.- km');
+
+      await user.click(screen.getByRole('button', { name: 'Explore Product Engineering' }));
+      expect(onObjectiveClick).toHaveBeenCalledTimes(1);
     });
   });
 

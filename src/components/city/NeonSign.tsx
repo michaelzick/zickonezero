@@ -1,7 +1,8 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import type { CSSProperties, ElementType, ReactNode } from 'react';
 
 import { NeonSignRoot } from '../../../styles/neon';
+import { isFirstCityLoad } from '../../lib/city/powerOn';
 
 export type NeonLine = {
   text: string;
@@ -48,15 +49,17 @@ const layoutLines = (lines: readonly NeonLine[], dying?: readonly [number, numbe
 };
 
 /**
- * Neon lettering that powers on letter by letter. The real text stays in the
- * DOM, so a heading keeps its exact accessible name: letters are inline spans
- * and words and lines are separated by real spaces.
+ * Neon lettering that powers on letter by letter on the first page load; on
+ * later pages it is already lit (see src/lib/city/powerOn.ts). The real text
+ * stays in the DOM, so a heading keeps its exact accessible name: letters are
+ * inline spans and words and lines are separated by real spaces.
  */
 const NeonSign = ({ lines, as = 'p', id, className, dying }: Props) => {
   const layout = layoutLines(lines, dying);
+  const [isLit] = useState(() => !isFirstCityLoad());
 
   return (
-    <NeonSignRoot as={as} id={id} className={className}>
+    <NeonSignRoot as={as} id={id} className={className} data-lit={isLit ? '' : undefined}>
       {lines.map((line, lineIndex) => {
         const words: ReactNode = layout[lineIndex].map((letters, wordIndex) => (
           <Fragment key={wordIndex}>

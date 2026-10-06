@@ -77,9 +77,9 @@ describe('Homepage city', () => {
       page_path: '/',
     });
 
-    const jackIn = screen.getAllByRole('link', { name: 'Jack In' });
-    expect(jackIn).toHaveLength(2);
-    jackIn.forEach((link) => expect(link).toHaveAttribute('href', '/contact'));
+    const hero = screen.getByRole('region', { name: 'I Dream in Features' });
+    expect(within(hero).getByRole('link', { name: 'Contact' })).toHaveAttribute('href', '/contact');
+    expect(screen.queryByRole('link', { name: 'Jack In' })).not.toBeInTheDocument();
   });
 
   it('keeps every Japanese sign decorative and marked as Japanese', () => {
@@ -93,8 +93,8 @@ describe('Homepage city', () => {
       }
     }
 
-    // The alley's blade signs, the district signs, and the vacancy sign.
-    expect(japanese.length).toBeGreaterThanOrEqual(7);
+    // The alley's blade signs and the district signs.
+    expect(japanese.length).toBeGreaterThanOrEqual(6);
     japanese.forEach((text) => {
       expect(text.parentElement?.closest('[lang="ja"]')).not.toBeNull();
       expect(text.parentElement?.closest('[aria-hidden="true"]')).not.toBeNull();
@@ -125,19 +125,18 @@ describe('Homepage city', () => {
     }));
   });
 
-  it('ends the route at the street level, which invites a gig', () => {
-    renderHome();
+  it('ends the route in open city instead of a street scene', () => {
+    const { container } = renderHome();
 
-    const street = screen.getByRole('region', { name: 'Now booking new gigs' });
-    expect(within(street).getByRole('heading', { level: 2, name: 'Now booking new gigs' })).toBeInTheDocument();
-    expect(within(street).getByRole('link', { name: 'Jack In' })).toHaveAttribute('href', '/contact');
+    expect(screen.queryByRole('region', { name: 'Now booking new gigs' })).not.toBeInTheDocument();
+    expect(container.querySelector('.walker, .car')).toBeNull();
   });
 
   it('labels each district for the minimap and keeps its decorations out of the reading order', () => {
     const { container } = renderHome();
 
     const hud = screen.getByRole('navigation', { name: 'Homepage sections' });
-    expect(within(hud).getAllByRole('button').map((pin) => pin.textContent))
+    expect(within(within(hud).getByRole('list')).getAllByRole('button').map((pin) => pin.textContent))
       .toEqual(['Case Studies', 'Product Engineering', 'Web Dev']);
 
     ['case-studies', 'ux-design', 'web-development'].forEach((id) => {

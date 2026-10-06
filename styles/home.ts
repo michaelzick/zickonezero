@@ -23,7 +23,7 @@ const arrowsMarch = keyframes`
   to { transform: translate3d(0, -160px, 0); }
 `;
 
-export const rainFall = keyframes`
+const rainFall = keyframes`
   from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(-58px, 420px, 0); }
 `;
@@ -51,7 +51,7 @@ const cueBob = keyframes`
 `;
 
 /** Foreground rain streaks, tiled and animated with rainFall. */
-export const RAIN_TILE = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cg stroke='%23cfefff' stroke-width='1.4' stroke-linecap='round' opacity='.75'%3E%3Cpath d='M30 10l-8 60M140 120l-10 74M260 40l-7 52M370 200l-9 66M80 260l-8 58M210 300l-10 70M330 350l-6 44M400 60l-8 54'/%3E%3C/g%3E%3C/svg%3E\")";
+const RAIN_TILE = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cg stroke='%23cfefff' stroke-width='1.4' stroke-linecap='round' opacity='.75'%3E%3Cpath d='M30 10l-8 60M140 120l-10 74M260 40l-7 52M370 200l-9 66M80 260l-8 58M210 300l-10 70M330 350l-6 44M400 60l-8 54'/%3E%3C/g%3E%3C/svg%3E\")";
 
 const ARROW_TILE = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 160'%3E%3Cpath d='M14 118 60 62l46 56' fill='none' stroke='%232ff3ff' stroke-width='14' stroke-linejoin='miter'/%3E%3C/svg%3E\")";
 
@@ -534,7 +534,7 @@ export const HeroRoot = styled.section`
     ${neonButton}
   }
 
-  .hero-jack-in {
+  .hero-contact {
     ${hudButton}
   }
 
@@ -630,7 +630,7 @@ export const HeroRoot = styled.section`
     }
 
     .hero-cta,
-    .hero-jack-in {
+    .hero-contact {
       min-height: 44px;
       padding: 0 1.05em;
       font-size: 0.92rem;
@@ -677,7 +677,7 @@ export const HeroRoot = styled.section`
     }
 
     .hero-cta,
-    .hero-jack-in {
+    .hero-contact {
       min-height: 44px;
       padding: 0 1em;
       font-size: 0.9rem;
@@ -704,4 +704,15 @@ export const HeroRoot = styled.section`
       display: none;
     }
   }
+`;
+
+/**
+ * The end of the homepage route (src/components/MainContent.tsx): an empty
+ * stretch with nothing over it, so the persistent city shows through clearly
+ * before the footer. The skyline sits in the bottom half of the viewport, so
+ * the stretch is most of a screen tall: the whole skyline is clear before the
+ * footer scrolls up over it.
+ */
+export const CityGap = styled.div`
+  height: max(18rem, 80vh);
 `;

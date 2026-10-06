@@ -87,6 +87,15 @@ export const NeonSignRoot = styled.p`
       calc(3s + var(--i, 0) * 0.11s);
   }
 
+  /* Already lit on later pages: no power-on, but the dying letter still buzzes. */
+  &[data-lit] .letter {
+    animation: none;
+  }
+
+  &[data-lit] .letter.is-dying {
+    animation: ${buzz} 9s linear calc(3s + var(--i, 0) * 0.11s) infinite;
+  }
+
   /* Glass tubes: a white-hot core inside a colored glow. */
   .sign-tube {
     font-size: 0.5em;

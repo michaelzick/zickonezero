@@ -22,7 +22,7 @@ const DISTRICTS: readonly HudDistrict[] = [
   { section: 'ui', label: 'Web Dev', title: 'Web Development', tone: 'web' },
 ];
 
-// The start, the three districts, and the street level, a thousand pixels apart.
+// The start, the three districts, and the end of the route, a thousand pixels apart.
 const STOPS = [0, 1000, 2000, 3000, 4000];
 
 type Rect = { x: number; y: number; width: number; height: number };
@@ -173,6 +173,7 @@ describe('HomeHud', () => {
       />,
     );
     const nav = screen.getByRole('navigation', { name: 'Homepage sections' });
+    const pins = () => within(within(nav).getByRole('list')).getAllByRole('button');
     const player = view.container.querySelector<HTMLElement>('.hud-player')!;
     const rerender = (nextActive: HudDistrict['section'] | null) => view.rerender(
       <HomeHud
@@ -184,7 +185,7 @@ describe('HomeHud', () => {
       />,
     );
 
-    return { ...view, nav, player, onTravel, rerender };
+    return { ...view, nav, pins, player, onTravel, rerender };
   };
 
   beforeEach(() => {
@@ -199,19 +200,42 @@ describe('HomeHud', () => {
   });
 
   it('is a nav of district pins over a decorative map', () => {
-    const { nav, container } = renderHud();
+    const { pins, container } = renderHud();
 
-    const pins = within(nav).getAllByRole('button');
-    expect(pins.map((pin) => pin.textContent)).toEqual(['Case Studies', 'Product Engineering', 'Web Dev']);
-    pins.forEach((pin) => expect(pin).not.toHaveAttribute('aria-current'));
+    const districtPins = pins();
+    expect(districtPins.map((pin) => pin.textContent)).toEqual(['Case Studies', 'Product Engineering', 'Web Dev']);
+    districtPins.forEach((pin) => expect(pin).not.toHaveAttribute('aria-current'));
 
     // Each pin sits on its district's stop.
-    expect(pins[0].style.getPropertyValue('--pin-x')).toBe(`${MINIMAP_ROUTE[MINIMAP_STOPS[1]].x}px`);
-    expect(pins[0].style.getPropertyValue('--pin-y')).toBe(`${MINIMAP_ROUTE[MINIMAP_STOPS[1]].y}px`);
+    expect(districtPins[0].style.getPropertyValue('--pin-x')).toBe(`${MINIMAP_ROUTE[MINIMAP_STOPS[1]].x}px`);
+    expect(districtPins[0].style.getPropertyValue('--pin-y')).toBe(`${MINIMAP_ROUTE[MINIMAP_STOPS[1]].y}px`);
 
     expect(container.querySelector('.hud-map-art')).toHaveAttribute('aria-hidden', 'true');
-    expect(container.querySelector('.hud-readouts')).toHaveAttribute('aria-hidden', 'true');
+    expect(container.querySelector('.hud-clock')?.closest('[aria-hidden="true"]')).not.toBeNull();
+    expect(container.querySelector('.quest-label')).toHaveAttribute('aria-hidden', 'true');
+    expect(container.querySelector('.quest-distance')).toHaveAttribute('aria-hidden', 'true');
     expect(container.querySelector('.hud-readouts')).toHaveTextContent('Head to Case Studies');
+  });
+
+  it('heads to Case Studies from the quest objective', async () => {
+    const user = userEvent.setup();
+    const animate = jest.fn();
+    HTMLElement.prototype.animate = animate;
+    const { nav, onTravel } = renderHud();
+
+    await user.click(within(nav).getByRole('button', { name: 'Head to Case Studies' }));
+
+    expect(onTravel).toHaveBeenCalledWith('case-studies', 'Case Studies');
+    expect(animate).toHaveBeenCalledTimes(1);
+  });
+
+  it('travels to the district the objective explores', async () => {
+    const user = userEvent.setup();
+    const { nav, onTravel } = renderHud({ active: 'ux' });
+
+    await user.click(within(nav).getByRole('button', { name: 'Explore Product Engineering' }));
+
+    expect(onTravel).toHaveBeenCalledWith('ux', 'Product Engineering');
   });
 
   it('fast travels from a pin', async () => {
@@ -241,9 +265,9 @@ describe('HomeHud', () => {
   });
 
   it('marks the current district and the ones already visited', async () => {
-    const { nav, container, rerender } = renderHud({ active: 'ux' });
+    const { pins, container, rerender } = renderHud({ active: 'ux' });
 
-    const [caseStudies, product, web] = within(nav).getAllByRole('button');
+    const [caseStudies, product, web] = pins();
     expect(product).toHaveAttribute('aria-current', 'true');
     expect(caseStudies).not.toHaveAttribute('aria-current');
     expect(caseStudies).toHaveAttribute('data-state', 'visited');
@@ -264,7 +288,7 @@ describe('HomeHud', () => {
   });
 
   it('walks the player and the distance readout with the scroll', async () => {
-    const { nav, player, container } = renderHud();
+    const { nav, pins, player, container } = renderHud();
 
     expect(player.style.transform).toBe('translate3d(36.0px, 136.0px, 0)');
     expect(nav.style.getPropertyValue('--hud-progress')).toBe('0.0000');
@@ -278,11 +302,10 @@ describe('HomeHud', () => {
     expect(container.querySelector('.quest-distance')).toHaveTextContent('0 m');
     expect(nav).not.toHaveAttribute('data-hero');
 
-    // At the street level every district counts as visited.
-    within(nav).getAllByRole('button').forEach((pin) => expect(pin).toHaveAttribute('data-state', 'visited'));
-    await waitFor(() => {
-      expect(container.querySelector('.quest-objective')).toHaveTextContent('Jack in to book a gig');
-    });
+    // At the end of the route every district counts as visited, and the
+    // objective still points into the city.
+    pins().forEach((pin) => expect(pin).toHaveAttribute('data-state', 'visited'));
+    expect(container.querySelector('.quest-objective')).toHaveTextContent('Head to Case Studies');
   });
 
   it('turns the player around when the visitor scrolls back up', async () => {
