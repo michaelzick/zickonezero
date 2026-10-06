@@ -383,7 +383,7 @@ export const NavDropdown = styled.ul`
   margin: 0;
   padding: 1em 1em 0.9em;
   list-style: none;
-  /* Opaque at night, so the fast rain never shows through an open menu. */
+  /* Opaque at night, so nothing animated shows through an open menu. */
   background-color: var(--menu-bg);
   background-image: linear-gradient(var(--scanline) 1px, transparent 1px);
   background-size: 100% 3px;
@@ -578,7 +578,7 @@ export const CityMapMenu = styled.ul`
   overflow-y: auto;
   overscroll-behavior: contain;
   counter-reset: map-item;
-  /* Opaque, so the fast rain never shows through the open map. */
+  /* Opaque, so nothing animated shows through the open map. */
   background-color: rgb(var(--color-dark-rgb));
   background-image:
     radial-gradient(ellipse 80% 40% at 90% 100%, rgba(47, 243, 255, 0.1), transparent 70%),

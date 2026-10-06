@@ -73,7 +73,7 @@ type HeroSceneProps = {
 };
 
 /**
- * The homepage hero: a rainy neon alley the visitor walks into as they
+ * The homepage hero: a neon alley the visitor walks into as they
  * scroll, under a hanging "I Dream in Features" sign. Everything but the
  * heading and the HUD panel is decorative and hidden from assistive
  * technology; the Japanese signs are scenery, marked lang="ja".
@@ -131,12 +131,6 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
 
         <div className='sign-spill' aria-hidden='true' />
         <div className='hero-haze' aria-hidden='true' />
-        <div className='near-rain' aria-hidden='true' />
-        <div className='steam' aria-hidden='true'>
-          <i />
-          <i />
-          <i />
-        </div>
         <div className='drone' aria-hidden='true'>
           <div className='drone-body' />
           <div className='drone-cone' />

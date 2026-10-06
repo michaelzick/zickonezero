@@ -45,7 +45,7 @@ tab. It runs the same test and uploads its screenshots as the
 ## Living city
 
 The site is a neon city. One persistent backdrop (sky, skyline, flying traffic,
-fog, and rain or dust) mounts once in `pages/_app.tsx` and pans to each page's
+fog, and dust by day) mounts once in `pages/_app.tsx` and pans to each page's
 spot in the city as visitors navigate. The homepage walks from the "I Dream in
 Features" alley past a holo billboard and three work districts to open city
 above the footer, with a minimap HUD for fast travel.

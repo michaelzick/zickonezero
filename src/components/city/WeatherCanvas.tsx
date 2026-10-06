@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion';
-import { createWeatherEngine, WeatherMode } from '../../lib/city/weather';
+import { createWeatherEngine } from '../../lib/city/weather';
 import { WeatherCanvasElement } from '../../../styles/city';
 
 type NavigatorWithConnection = Navigator & { connection?: { saveData?: boolean } };
@@ -18,14 +18,14 @@ type Props = {
   dimmed?: boolean;
 };
 
-const readMode = (): WeatherMode => (
-  document.documentElement.getAttribute('data-theme') === 'light' ? 'dust' : 'rain'
-);
+const isDay = () => document.documentElement.getAttribute('data-theme') === 'light';
 
 /**
- * Rain at night, sunlit dust by day, drawn on one fixed canvas between the
- * city and the page. Drops move with page scroll by depth and stretch into
- * streaks while scrolling. It pauses in hidden tabs, and draws a single still
+ * Sunlit dust by day, drawn on one fixed canvas between the city and the
+ * page; motes move with page scroll by depth. At night the canvas is hidden
+ * and draws nothing: full-screen rain on top of the homepage's heavy night
+ * layers made Chrome drop and redraw content (a flicker after scrolling to
+ * the bottom and back up). It pauses in hidden tabs, and draws a single still
  * frame under reduced motion or Save-Data.
  */
 const WeatherCanvas = ({ dimmed = false }: Props) => {
@@ -40,7 +40,7 @@ const WeatherCanvas = ({ dimmed = false }: Props) => {
     }
 
     const engine = createWeatherEngine(ctx);
-    engine.setMode(readMode(), true);
+    engine.setMode('dust', true);
 
     const saveData = Boolean((navigator as NavigatorWithConnection).connection?.saveData);
     const animate = !prefersReducedMotion && !saveData;
@@ -94,7 +94,7 @@ const WeatherCanvas = ({ dimmed = false }: Props) => {
     };
 
     const start = () => {
-      if (animate && frame === null && !document.hidden) {
+      if (animate && frame === null && !document.hidden && isDay()) {
         lastTime = 0;
         lastScrollY = window.scrollY;
         frame = window.requestAnimationFrame(tick);
@@ -119,15 +119,22 @@ const WeatherCanvas = ({ dimmed = false }: Props) => {
 
     const handleVisibility = () => (document.hidden ? stop() : start());
 
-    const themeObserver = new MutationObserver(() => {
-      engine.setMode(readMode(), !animate);
-      if (!animate) {
-        engine.draw();
+    // Shown and drawing by day only; hidden canvases hold no layer.
+    const applyTimeOfDay = () => {
+      if (!isDay()) {
+        stop();
+        canvas.hidden = true;
+        return;
       }
-    });
 
-    resize();
-    start();
+      canvas.hidden = false;
+      resize();
+      start();
+    };
+
+    const themeObserver = new MutationObserver(applyTimeOfDay);
+
+    applyTimeOfDay();
     window.addEventListener('resize', handleResize);
     document.addEventListener('visibilitychange', handleVisibility);
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });

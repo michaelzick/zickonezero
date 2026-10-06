@@ -23,17 +23,6 @@ const arrowsMarch = keyframes`
   to { transform: translate3d(0, -160px, 0); }
 `;
 
-const rainFall = keyframes`
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-58px, 420px, 0); }
-`;
-
-const steamRise = keyframes`
-  0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.6); }
-  20% { opacity: 1; }
-  100% { opacity: 0; transform: translate3d(-30px, -260px, 0) scale(2.2); }
-`;
-
 // Crosses in the first quarter of the loop, then waits off-screen.
 const dronePatrol = keyframes`
   0% { transform: translate3d(-20vw, 0, 0); }
@@ -49,9 +38,6 @@ const cueBob = keyframes`
   0%, 100% { transform: translate3d(0, 0, 0) rotate(45deg); }
   50% { transform: translate3d(0, 4px, 0) rotate(45deg); }
 `;
-
-/** Foreground rain streaks, tiled and animated with rainFall. */
-const RAIN_TILE = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cg stroke='%23cfefff' stroke-width='1.4' stroke-linecap='round' opacity='.75'%3E%3Cpath d='M30 10l-8 60M140 120l-10 74M260 40l-7 52M370 200l-9 66M80 260l-8 58M210 300l-10 70M330 350l-6 44M400 60l-8 54'/%3E%3C/g%3E%3C/svg%3E\")";
 
 const ARROW_TILE = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 160'%3E%3Cpath d='M14 118 60 62l46 56' fill='none' stroke='%232ff3ff' stroke-width='14' stroke-linejoin='miter'/%3E%3C/svg%3E\")";
 
@@ -96,8 +82,7 @@ export const HeroRoot = styled.section`
   .hero-sky,
   .hero-scene,
   .hero-haze,
-  .sign-spill,
-  .near-rain {
+  .sign-spill {
     position: absolute;
     inset: 0;
     pointer-events: none;
@@ -324,63 +309,6 @@ export const HeroRoot = styled.section`
     background: linear-gradient(to bottom, transparent 84%, rgba(var(--color-dark-rgb), 0.6) 100%);
   }
 
-  .near-rain {
-    overflow: hidden;
-    opacity: calc(0.55 * var(--night-only, 1));
-
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      top: -420px;
-      right: -10%;
-      bottom: 0;
-      left: -10%;
-      background: ${RAIN_TILE} 0 0 / 420px 420px repeat;
-      animation: ${rainFall} 0.7s linear infinite;
-    }
-
-    &::after {
-      background-size: 640px 640px;
-      opacity: 0.6;
-      filter: blur(1px);
-      animation-duration: 0.45s;
-    }
-  }
-
-  .steam {
-    position: absolute;
-    right: 14%;
-    bottom: 4%;
-    width: 220px;
-    height: 340px;
-    opacity: var(--night-only, 1);
-    pointer-events: none;
-
-    i {
-      position: absolute;
-      bottom: 0;
-      left: 30%;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(200, 235, 255, 0.12), transparent 70%);
-      filter: blur(10px);
-      opacity: 0;
-      animation: ${steamRise} 7s ease-out infinite;
-    }
-
-    i:nth-child(2) {
-      left: 10%;
-      animation-delay: -2.4s;
-    }
-
-    i:nth-child(3) {
-      left: 45%;
-      animation-delay: -4.8s;
-    }
-  }
-
   /* A patrol drone crosses every 38 seconds, sweeping a light cone. */
   .drone {
     position: absolute;
@@ -430,7 +358,6 @@ export const HeroRoot = styled.section`
     height: 240px;
     background: linear-gradient(to bottom, rgba(255, 79, 69, 0.35), transparent 80%);
     clip-path: polygon(46% 0, 54% 0, 100% 100%, 0 100%);
-    filter: blur(2px);
     opacity: calc(0.35 + 0.65 * var(--night-only, 1));
     transform-origin: 50% 0;
     animation: ${coneSweep} 2.6s ${THEME.easing.inOut} infinite alternate;
@@ -574,12 +501,6 @@ export const HeroRoot = styled.section`
     color: var(--color-grey);
   }
 
-  /* No rain or steam by day; skip their animations entirely. */
-  html[data-theme='light'] & .near-rain,
-  html[data-theme='light'] & .steam {
-    display: none;
-  }
-
   @media (max-width: ${THEME.breakpoints.phone}) {
     --alley-half: 44vw;
     --alley-persp: 760px;
@@ -699,8 +620,6 @@ export const HeroRoot = styled.section`
       position: relative;
     }
 
-    .near-rain,
-    .steam,
     .drone,
     .cursor-glow,
     .scroll-cue {
