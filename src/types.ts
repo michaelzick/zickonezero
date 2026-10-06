@@ -15,3 +15,6 @@ export type WorksDataType = {
 export type ShowMobileMenuType = {
   isMobileMenuShown: boolean;
 };
+
+/** A homepage district: case studies, product engineering, or web development. */
+export type DistrictTone = 'case' | 'product' | 'web';

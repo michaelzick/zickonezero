@@ -15,29 +15,15 @@ import FsLightbox from 'fslightbox-react';
 
 import { TopNavContent, GridContent, FooterContent } from '.';
 import {
-  SectionHeader,
   Wrapper,
-  WorkSectionHeader,
   HomeTabsBar,
   HomeTabButton,
-  HomeTabsSpacer,
-  HomeWorkSection,
-  IntroSection,
-  FloatingCloudsViewport,
-  FloatingClouds,
-  WorksParallaxStage,
-  WorksRevealCurtain,
-  WorksCarouselFrame,
-  WorksCarouselImage,
-  WorksCarouselItem,
-  WorksCarouselTrack,
-  WorksCarouselViewport,
-  WorksSectionContent
 } from '../../styles';
-import { AnimatedSection } from '../../styles/projectShowcases';
 import { trackEvent } from '../lib/analytics';
-import BrandName from './BrandName';
-import type { WorksData } from '../types';
+import District from './home/District';
+import HeroScene from './home/HeroScene';
+import HoloBillboard from './home/HoloBillboard';
+import type { DistrictTone, WorksData } from '../types';
 
 type HomeSectionKey = 'case-studies' | 'ux' | 'ui';
 type ActiveSection = HomeSectionKey | null;
@@ -50,31 +36,60 @@ const DESKTOP_NAV_OFFSET = 92; // Tighten the gap so section headers sit closer 
 const MOBILE_TABS_HEIGHT_PX = 11.3 * 16; // Keep in sync with mobile scroll target for Home tabs
 const DETECTION_BUFFER = 12;
 const CASE_STUDY_GROUPS = new Set(['demostoke', 'antisyphon-training', 'nice-guy-university']);
-const WORKS_CAROUSEL_IMAGES = [
+
+type HomeDistrict = {
+  section: HomeSectionKey;
+  tone: DistrictTone;
+  title: string;
+  headingId: string;
+  /** Decorative Japanese street name for the district's sign. */
+  japanese: string;
+  /** What the sign's readout counts. */
+  unit: string;
+  /** The status chip on each of the district's cards. */
+  status: string;
+  carouselLabel: string;
+  includeItem: (item: WorksData) => boolean;
+  /** Linked cards navigate; only gallery cards open the lightbox. */
+  disableThumbClick?: boolean;
+};
+
+const HOME_DISTRICTS: readonly HomeDistrict[] = [
   {
-    src: '/img/demostoke/case-study/ds-explore-hybrid.webp',
-    alt: 'DemoStoke hybrid catalog and map view'
+    section: 'case-studies',
+    tone: 'case',
+    title: 'Case Studies',
+    headingId: 'case-studies',
+    japanese: '事例研究',
+    unit: 'Case files',
+    status: 'Case file',
+    carouselLabel: 'Case Studies projects',
+    includeItem: ({ group }) => CASE_STUDY_GROUPS.has(group),
+    disableThumbClick: true,
   },
   {
-    src: '/img/fleet-ops/ds-fleet-ops-widget-low.webp',
-    alt: 'DemoStoke Fleet Ops embeddable booking widget'
+    section: 'ux',
+    tone: 'product',
+    title: 'Product Engineering',
+    headingId: 'ux-design',
+    japanese: '製品開発',
+    unit: 'Live products',
+    status: 'Live',
+    carouselLabel: 'Product Engineering projects',
+    includeItem: (item) => Boolean(item.link) && !CASE_STUDY_GROUPS.has(item.group),
+    disableThumbClick: true,
   },
   {
-    src: '/img/antisyphon/course-catalog.webp',
-    alt: 'Antisyphon Training course catalog'
+    section: 'ui',
+    tone: 'web',
+    title: 'Web Development',
+    headingId: 'web-development',
+    japanese: 'ウェブ開発',
+    unit: 'Archive gigs',
+    status: 'Archive',
+    carouselLabel: 'Web Development projects',
+    includeItem: (item) => !item.link,
   },
-  {
-    src: '/img/nice-guy-university/ngu-courses.webp',
-    alt: 'Nice Guy University course catalog'
-  },
-  {
-    src: '/img/demostoke/case-study/ds-calendar-cal.webp',
-    alt: 'DemoStoke events calendar'
-  },
-  {
-    src: '/img/demostoke/case-study/ds-gear-quiz.webp',
-    alt: 'DemoStoke gear quiz flow'
-  }
 ];
 
 const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentProps = {}) => {
@@ -84,28 +99,15 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
   const worksDataReversed = worksDataReversedProp ?? worksDataReversedStore;
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
-  const caseStudiesSectionRef = useRef<HTMLHeadingElement | null>(null);
-  const uxSectionRef = useRef<HTMLHeadingElement | null>(null);
-  const uiSectionRef = useRef<HTMLHeadingElement | null>(null);
-  const uxContentRef = useRef<HTMLElement | null>(null);
-  const uiContentRef = useRef<HTMLElement | null>(null);
+  const sectionRefs = useRef<Record<HomeSectionKey, HTMLElement | null>>({
+    'case-studies': null,
+    ux: null,
+    ui: null,
+  });
   const [activeSection, setActiveSection] = useState<ActiveSection>(null);
   const isManualScrolling = useRef(false);
   const manualScrollTimeoutRef = useRef<number | null>(null);
   const scrollAnimationRef = useRef<number | null>(null);
-
-  // Parallax refs and state
-  const introTextRef = useRef<HTMLDivElement | null>(null);
-  const introImageRef = useRef<HTMLDivElement | null>(null);
-  const [parallaxOffset, setParallaxOffset] = useState({ text: 0, image: -20 });
-  const neonCanvasRef = useRef<HTMLCanvasElement | null>(null);
-  const introAnimatedRef = useRef<HTMLDivElement | null>(null);
-  const [introVisible, setIntroVisible] = useState(false);
-  const [cloudsActive, setCloudsActive] = useState(false);
-  const worksStageRef = useRef<HTMLElement | null>(null);
-  const worksCarouselViewportRef = useRef<HTMLDivElement | null>(null);
-  const worksCarouselTrackRef = useRef<HTMLDivElement | null>(null);
-  const worksCarouselRafRef = useRef<number | null>(null);
 
   // For lightbox
   const [lightboxController, setLightboxController] = useState({
@@ -135,12 +137,6 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
     if (scrollAnimationRef.current === null) return;
     cancelAnimationFrame(scrollAnimationRef.current);
     scrollAnimationRef.current = null;
-  }, []);
-
-  const cancelWorksCarouselSync = useCallback(() => {
-    if (worksCarouselRafRef.current === null) return;
-    cancelAnimationFrame(worksCarouselRafRef.current);
-    worksCarouselRafRef.current = null;
   }, []);
 
   const animateScrollTo = useCallback((targetY: number) => {
@@ -201,11 +197,7 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
   }, [clearManualScrollTimeout]);
 
   const scrollToHomeSection = useCallback((section: HomeSectionKey) => {
-    const target = section === 'case-studies'
-      ? caseStudiesSectionRef.current
-      : section === 'ux'
-        ? uxSectionRef.current
-        : uiSectionRef.current;
+    const target = sectionRefs.current[section];
 
     if (!target) return;
 
@@ -229,6 +221,10 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
     scrollToHomeSection(section);
   }, [scrollToHomeSection]);
 
+  const handleSeeCaseStudies = useCallback(() => {
+    handleHomeSectionClick('case-studies', 'See Case Studies', 'home_intro');
+  }, [handleHomeSectionClick]);
+
   useEffect(() => {
     return () => {
       clearManualScrollTimeout();
@@ -249,9 +245,12 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
       }
 
       const detectionOffset = getDetectionOffset();
-      const caseStudiesTop = caseStudiesSectionRef.current?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
-      const uxTop = uxSectionRef.current?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
-      const uiTop = uiSectionRef.current?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
+      const getTop = (section: HomeSectionKey) => (
+        sectionRefs.current[section]?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY
+      );
+      const caseStudiesTop = getTop('case-studies');
+      const uxTop = getTop('ux');
+      const uiTop = getTop('ui');
 
       let nextActive: ActiveSection = null;
 
@@ -277,249 +276,7 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
   }, []);
 
   useEffect(() => {
-    setCloudsActive(true);
-  }, []);
-
-  // Parallax scroll effect
-  useEffect(() => {
-    // Only enable parallax on desktop devices
-    const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
-
-    if (!isDesktop) return;
-
-    const handleScroll = () => {
-      if (!introTextRef.current || !introImageRef.current) return;
-
-      const scrollY = window.scrollY;
-
-      // Simple parallax calculation based on scroll position
-      // Text starts near baseline and glides down slightly with scroll
-      const textOffset = scrollY * 0.1;
-      // Image lifts a touch for depth without losing the baseline alignment
-      const imageOffset = -20 + (scrollY * -0.035);
-
-      setParallaxOffset({ text: textOffset, image: imageOffset });
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Fade-in animation for intro hero
-  useEffect(() => {
-    const node = introAnimatedRef.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setIntroVisible(true);
-          observer.disconnect();
-        }
-      });
-    }, { threshold: 0.25 });
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  const syncWorksCarousel = useCallback(() => {
-    const stage = worksStageRef.current;
-    const viewport = worksCarouselViewportRef.current;
-    const track = worksCarouselTrackRef.current;
-    if (!stage || !viewport || !track) return;
-
-    const rect = stage.getBoundingClientRect();
-    const totalDistance = Math.max(stage.offsetHeight - window.innerHeight, 1);
-    const progress = Math.min(Math.max((-rect.top) / totalDistance, 0), 1);
-    const maxTranslate = Math.max(track.scrollWidth - viewport.clientWidth, 0);
-    const translateX = maxTranslate * progress * -1;
-    track.style.transform = `translate3d(${translateX}px, 0, 0)`;
-  }, []);
-
-  const scheduleWorksCarouselSync = useCallback(() => {
-    if (worksCarouselRafRef.current !== null) return;
-    worksCarouselRafRef.current = requestAnimationFrame(() => {
-      worksCarouselRafRef.current = null;
-      syncWorksCarousel();
-    });
-  }, [syncWorksCarousel]);
-
-  useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
-    scheduleWorksCarouselSync();
-  }, [scheduleWorksCarouselSync]);
-
-  useEffect(() => {
-    window.addEventListener('scroll', scheduleWorksCarouselSync, { passive: true });
-    window.addEventListener('resize', scheduleWorksCarouselSync);
-
-    return () => {
-      window.removeEventListener('scroll', scheduleWorksCarouselSync);
-      window.removeEventListener('resize', scheduleWorksCarouselSync);
-      cancelWorksCarouselSync();
-    };
-  }, [cancelWorksCarouselSync, scheduleWorksCarouselSync]);
-
-  // Neon trail effect on the intro image
-  useEffect(() => {
-    const canvas = neonCanvasRef.current;
-    const imageContainer = introImageRef.current;
-
-    if (!canvas || !imageContainer) return;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
-    if (prefersReducedMotion || !hasFinePointer) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const pickNeonHue = () => 120 + Math.random() * 220; // Bright fluorescent range
-
-    type Segment = {
-      x1: number;
-      y1: number;
-      x2: number;
-      y2: number;
-      life: number;
-      width: number;
-      hue: number;
-    };
-
-    let segments: Segment[] = [];
-    let rafId = 0;
-    let dpr = 1;
-    let isHovering = false;
-    let lastPos: { x: number; y: number; } | null = null;
-    let currentHue = pickNeonHue();
-
-    const setSize = () => {
-      const rect = imageContainer.getBoundingClientRect();
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      canvas.style.width = `${rect.width}px`;
-      canvas.style.height = `${rect.height}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-
-    setSize();
-
-    const imageEl = imageContainer.querySelector('img');
-    if (imageEl) {
-      if (imageEl.complete) {
-        setSize();
-      } else {
-        imageEl.addEventListener('load', setSize);
-      }
-    }
-
-    const draw = () => {
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
-      ctx.globalCompositeOperation = 'lighter';
-
-      segments = segments
-        .map((s) => ({
-          ...s,
-          life: s.life - 0.01
-        }))
-        .filter((s) => s.life > 0);
-
-      for (const s of segments) {
-        const alpha = Math.min(1, Math.max(s.life, 0) * 1.35);
-        const grad = ctx.createLinearGradient(s.x1, s.y1, s.x2, s.y2);
-        grad.addColorStop(0, `hsla(${s.hue}, 100%, 65%, ${alpha})`);
-        grad.addColorStop(1, `hsla(${s.hue}, 100%, 50%, 0)`);
-
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = s.width;
-        ctx.lineCap = 'round';
-        ctx.shadowColor = `hsla(${s.hue}, 100%, 65%, ${alpha * 0.9})`;
-        ctx.shadowBlur = 18;
-        ctx.beginPath();
-        ctx.moveTo(s.x1, s.y1);
-        ctx.lineTo(s.x2, s.y2);
-        ctx.stroke();
-      }
-
-      if (segments.length) {
-        rafId = requestAnimationFrame(draw);
-        return;
-      }
-
-      rafId = 0;
-      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
-    };
-
-    const addStreak = (event: MouseEvent) => {
-      const rect = imageContainer.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-      const maxSegments = 120;
-
-      if (!lastPos) {
-        lastPos = { x, y };
-        currentHue = pickNeonHue();
-        return;
-      }
-
-      const width = 11 + Math.random() * 3;
-      segments.push({
-        x1: lastPos.x,
-        y1: lastPos.y,
-        x2: x,
-        y2: y,
-        life: 1,
-        width,
-        hue: currentHue
-      });
-
-      lastPos = { x, y };
-
-      if (segments.length > maxSegments) {
-        segments = segments.slice(segments.length - maxSegments);
-      }
-
-      if (!rafId) {
-        rafId = requestAnimationFrame(draw);
-      }
-    };
-
-    const handleMouseEnter = () => {
-      isHovering = true;
-      if (!rafId && segments.length) {
-        rafId = requestAnimationFrame(draw);
-      }
-    };
-
-    const handleMouseLeave = () => {
-      isHovering = false;
-      lastPos = null;
-      // Let existing streaks finish fading out
-      if (!rafId && segments.length) {
-        rafId = requestAnimationFrame(draw);
-      }
-    };
-
-    const handleResize = () => setSize();
-
-    imageContainer.addEventListener('mouseenter', handleMouseEnter);
-    imageContainer.addEventListener('mouseleave', handleMouseLeave);
-    imageContainer.addEventListener('mousemove', addStreak);
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      if (imageEl) {
-        imageEl.removeEventListener('load', setSize);
-      }
-      imageContainer.removeEventListener('mouseenter', handleMouseEnter);
-      imageContainer.removeEventListener('mouseleave', handleMouseLeave);
-      imageContainer.removeEventListener('mousemove', addStreak);
-      window.removeEventListener('resize', handleResize);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
   }, []);
 
   return (
@@ -528,15 +285,8 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
 
       <Wrapper isHomePage isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
-        <FloatingCloudsViewport aria-hidden="true">
-          <FloatingClouds $isActive={cloudsActive}>
-            <img
-              src="/img/neon-clouds-cropped.webp"
-              alt=""
-              loading="lazy"
-            />
-          </FloatingClouds>
-        </FloatingCloudsViewport>
+        <HeroScene onSeeCaseStudies={handleSeeCaseStudies} />
+
 
         <HomeTabsBar as='nav' aria-label='Homepage sections'>
           <HomeTabButton
@@ -565,107 +315,33 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
           </HomeTabButton>
         </HomeTabsBar>
 
-        <HomeTabsSpacer aria-hidden='true' />
 
-        <AnimatedSection
-          ref={introAnimatedRef}
-          data-animate-id='home-intro'
-          className={introVisible ? 'visible' : undefined}
-        >
-          <IntroSection className="intro-section">
-            <div
-              className="intro-image"
-              ref={introImageRef}
-              style={{ transform: `translateY(${parallaxOffset.image - 20}px)` }}
-            >
-              <img
-                className="image-animate"
-                src="/img/lifeguard-tower-transparent.webp"
-                alt="Fluorescent lifeguard tower"
-                loading="lazy"
-              />
-              <canvas ref={neonCanvasRef} className="neon-trail" aria-hidden="true" />
-            </div>
-            <div
-              className="intro-text"
-              ref={introTextRef}
-              style={{ transform: `translateY(${parallaxOffset.text}px)` }}
-            >
-              <div className="text-animate">
-                <h1>
-                  Michael Zick is <BrandName /> Creative.
-                </h1>
-                <p className="intro-rotator-headline">Product / UX / Dev</p>
-                <button
-                  type="button"
-                  className="case-studies-cta"
-                  onClick={() => handleHomeSectionClick('case-studies', 'See Case Studies', 'home_intro')}
-                >
-                  See Case Studies
-                </button>
-              </div>
-            </div>
-          </IntroSection>
-        </AnimatedSection>
+        <HoloBillboard />
 
-        <WorksParallaxStage ref={worksStageRef}>
-          <WorksCarouselFrame aria-label='Demostoke screenshot scroller'>
-            <WorksCarouselViewport ref={worksCarouselViewportRef}>
-              <WorksCarouselTrack ref={worksCarouselTrackRef}>
-                {WORKS_CAROUSEL_IMAGES.map(({ src, alt }) => (
-                  <WorksCarouselItem key={src}>
-                    <WorksCarouselImage src={src} alt={alt} loading="lazy" />
-                  </WorksCarouselItem>
-                ))}
-              </WorksCarouselTrack>
-            </WorksCarouselViewport>
-          </WorksCarouselFrame>
-
-          <WorksRevealCurtain aria-hidden="true" />
-
-          <WorksSectionContent>
-            <HomeWorkSection $tone='case'>
-              <SectionHeader ref={caseStudiesSectionRef} id='case-studies'>
-                <WorkSectionHeader>Case Studies</WorkSectionHeader>
-              </SectionHeader>
-
-              <GridContent
-                worksDataReversed={worksDataReversed}
-                onThumbClick={onThumbClick}
-                includeItem={({ group }) => CASE_STUDY_GROUPS.has(group)}
-                disableThumbClick
-                carouselLabel='Case Studies projects'
-              />
-            </HomeWorkSection>
-
-            <HomeWorkSection $tone='product' ref={uxContentRef}>
-              <SectionHeader ref={uxSectionRef} id='ux-design'>
-                <WorkSectionHeader>Product Engineering</WorkSectionHeader>
-              </SectionHeader>
-
-              <GridContent
-                worksDataReversed={worksDataReversed}
-                onThumbClick={onThumbClick}
-                includeItem={(item) => Boolean(item.link) && !CASE_STUDY_GROUPS.has(item.group)}
-                disableThumbClick
-                carouselLabel='Product Engineering projects'
-              />
-            </HomeWorkSection>
-
-            <HomeWorkSection $tone='web' ref={uiContentRef}>
-              <SectionHeader ref={uiSectionRef} id='web-development'>
-                <WorkSectionHeader>Web Development</WorkSectionHeader>
-              </SectionHeader>
-
-              <GridContent
-                worksDataReversed={worksDataReversed}
-                onThumbClick={onThumbClick}
-                includeItem={(item) => !item.link}
-                carouselLabel='Web Development projects'
-              />
-            </HomeWorkSection>
-          </WorksSectionContent>
-        </WorksParallaxStage>
+        {HOME_DISTRICTS.map((district, districtIndex) => (
+          <District
+            key={district.section}
+            sectionRef={(node) => {
+              sectionRefs.current[district.section] = node;
+            }}
+            tone={district.tone}
+            number={districtIndex + 1}
+            title={district.title}
+            headingId={district.headingId}
+            japanese={district.japanese}
+            readout={{ count: worksDataReversed.filter(district.includeItem).length, unit: district.unit }}
+          >
+            <GridContent
+              worksDataReversed={worksDataReversed}
+              onThumbClick={onThumbClick}
+              includeItem={district.includeItem}
+              disableThumbClick={district.disableThumbClick}
+              carouselLabel={district.carouselLabel}
+              tone={district.tone}
+              status={district.status}
+            />
+          </District>
+        ))}
 
         {imgs && <FsLightbox
           toggler={lightboxController.toggler}

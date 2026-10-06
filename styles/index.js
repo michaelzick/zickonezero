@@ -220,7 +220,8 @@ export const AnimatedHeadlineSizer = styled.span`
 export const Wrapper = styled.div`
   ${props => {
     if (props.isAtPage && props.$isProjectPage) return 'padding-top: 7em;';
-    if (props.isHomePage) return 'padding-top: 7.7em;';
+    // The homepage hero runs full-bleed under the transparent nav.
+    if (props.isHomePage) return 'padding-top: 0;';
     return 'padding-top: 5em;';
   }}
   min-height: 84%;
@@ -232,14 +233,14 @@ export const Wrapper = styled.div`
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     ${props => {
       if (props.isAtPage && props.$isProjectPage) return 'padding-top: 6em;';
-      if (props.isHomePage) return 'padding-top: 6.9em;';
+      if (props.isHomePage) return 'padding-top: 0;';
       return 'padding-top: 5.2em;';
     }}
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     ${props => {
-      if (props.isHomePage) return 'padding-top: 9.6em;';
+      if (props.isHomePage) return 'padding-top: 0;';
       if (props.isAtPage && props.$isProjectPage) return 'padding-top: 7em;';
       if (props.isAtPage) return 'padding-top: 13.5em;';
       return 'padding-top: 8.7em;';

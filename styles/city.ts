@@ -9,6 +9,10 @@ import { THEME } from './theme';
  * styled-components sheet when it meets @supports, @container, @layer, or
  * @property. Registered properties live in globals.scss.
  *
+ * Theme and accent selectors start with html (html[data-theme='light'] &),
+ * never :root: styled-components 5 glues a selector that opens with a
+ * pseudo-class onto the component's own class, so it never matches.
+ *
  * Every layer is decorative, fixed, and pointer-transparent. Motion is limited
  * to transform and opacity so it stays on the compositor.
  */
@@ -354,12 +358,12 @@ export const AccentGlow = styled(Layer)`
     --glow-color: var(--neon-red);
   }
 
-  :root[data-accent='magenta'] &[data-tone='magenta'],
-  :root[data-accent='cyan'] &[data-tone='cyan'],
-  :root[data-accent='amber'] &[data-tone='amber'],
-  :root[data-accent='violet'] &[data-tone='violet'],
-  :root[data-accent='red'] &[data-tone='red'],
-  :root:not([data-accent]) &[data-tone='cyan'] {
+  html[data-accent='magenta'] &[data-tone='magenta'],
+  html[data-accent='cyan'] &[data-tone='cyan'],
+  html[data-accent='amber'] &[data-tone='amber'],
+  html[data-accent='violet'] &[data-tone='violet'],
+  html[data-accent='red'] &[data-tone='red'],
+  html:not([data-accent]) &[data-tone='cyan'] {
     opacity: var(--accent-glow, 0.4);
   }
 `;
