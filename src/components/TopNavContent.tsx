@@ -8,11 +8,12 @@ import {
 } from '../showMobileMenuSlice';
 
 import { Title, Nav, MenuIcon, ThemeSwitcherWrapper } from '../../styles';
-import { LinkBoxContent, AnimatedMobileMenu, ThemeSwitcher } from '.';
+import { LinkBoxContent, AnimatedMobileMenu } from '.';
 import { MouseEvent, ReactElement } from 'react';
 import { trackEvent } from '../lib/analytics';
 import TrackedLink from './TrackedLink';
 import BrandName from './BrandName';
+import TimeOfDayToggle from './hud/TimeOfDayToggle';
 
 const NavContent = (): ReactElement => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
@@ -35,7 +36,7 @@ const NavContent = (): ReactElement => {
             <span className='brand-line brand-second'>Creative</span>
           </TrackedLink>
         </Title>
-        <ThemeSwitcher />
+        <TimeOfDayToggle />
       </ThemeSwitcherWrapper>
 
       <LinkBoxContent />

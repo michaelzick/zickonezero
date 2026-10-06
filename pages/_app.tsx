@@ -8,6 +8,8 @@ import { store } from '../src/store';
 import PageAnalytics from '../src/components/PageAnalytics';
 import SiteAnalyticsScripts from '../src/components/SiteAnalyticsScripts';
 import { AppThemeProvider } from '../src/theme/ThemeContext';
+import FontVariables from '../src/theme/FontVariables';
+import ThemeColorMeta from '../src/theme/ThemeColorMeta';
 import { Container } from '../styles';
 
 function MyApp({
@@ -16,6 +18,8 @@ function MyApp({
   return (
     <Provider store={store}>
       <AppThemeProvider>
+        <FontVariables />
+        <ThemeColorMeta />
         <Container>
           {/* Google Tag Manager Script */}
           <Script
@@ -41,7 +45,6 @@ function MyApp({
             <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png" />
             <link rel="apple-touch-icon" href="/img/favicon/apple-touch-icon.png" />
             <link rel="manifest" href="/img/favicon/site.webmanifest" />
-            <meta name="theme-color" content="#020817" />
           </Head>
 
           <Component {...pageProps} />

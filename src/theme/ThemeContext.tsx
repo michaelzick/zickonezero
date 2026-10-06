@@ -1,35 +1,38 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, ReactNode } from 'react';
 
-export type ThemeOption = 'light' | 'dark' | 'system';
-export type ResolvedTheme = 'light' | 'dark';
+import { DEFAULT_THEME, THEME_STORAGE_KEY, resolveStoredTheme, type ThemeOption } from './themeConfig';
+
+export type { ThemeOption } from './themeConfig';
+export type ResolvedTheme = ThemeOption;
 
 interface ThemeContextValue {
   preference: ThemeOption;
   resolved: ResolvedTheme;
   setPreference: (value: ThemeOption) => void;
+  /** Flips night and day with the city time-lapse. */
+  toggle: () => void;
 }
 
-const STORAGE_KEY = 'zickonezero-theme';
+// Long enough for the slowest token transition in styles/globals.scss.
+const TIMELAPSE_MS = 2000;
+const TIMELAPSE_CLASS = 'is-timelapse';
+
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
-const isThemeOption = (value: unknown): value is ThemeOption =>
-  value === 'light' || value === 'dark' || value === 'system';
-
-const getStoredPreference = (): ThemeOption => {
-  if (typeof window === 'undefined') {
-    return 'system';
+const readStoredPreference = (): ThemeOption => {
+  try {
+    return resolveStoredTheme(window.localStorage.getItem(THEME_STORAGE_KEY));
+  } catch {
+    return DEFAULT_THEME;
   }
-
-  const stored = window.localStorage.getItem(STORAGE_KEY);
-  return isThemeOption(stored) ? stored : 'system';
 };
 
-const getSystemTheme = (): ResolvedTheme => {
-  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
-    return 'dark';
+const writeStoredPreference = (value: ThemeOption) => {
+  try {
+    window.localStorage.setItem(THEME_STORAGE_KEY, value);
+  } catch {
+    // Storage can be blocked (private mode); the choice still applies to this visit.
   }
-
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 };
 
 export const useThemePreference = (): ThemeContextValue => {
@@ -47,59 +50,53 @@ interface ThemeProviderProps {
 }
 
 export const AppThemeProvider = ({ children }: ThemeProviderProps) => {
-  const [preference, setPreferenceState] = useState<ThemeOption>('system');
-  const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(() => getSystemTheme());
-
-  const resolved = preference === 'system' ? systemTheme : preference;
+  // Render night on the server and during hydration; the stored choice is
+  // already on <html> from the bootstrap script, so no flash happens.
+  const [preference, setPreferenceState] = useState<ThemeOption>(DEFAULT_THEME);
+  const [hasReadStorage, setHasReadStorage] = useState(false);
+  const timelapseTimer = useRef<number | undefined>(undefined);
 
   useEffect(() => {
-    const stored = getStoredPreference();
-    setPreferenceState((current) => (stored !== current ? stored : current));
+    setPreferenceState(readStoredPreference());
+    setHasReadStorage(true);
   }, []);
 
   useEffect(() => {
-    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+    if (!hasReadStorage) {
       return;
     }
 
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (event: MediaQueryListEvent) => {
-      setSystemTheme(event.matches ? 'dark' : 'light');
-    };
+    document.documentElement.setAttribute('data-theme', preference);
+  }, [preference, hasReadStorage]);
 
-    setSystemTheme(media.matches ? 'dark' : 'light');
-
-    if (typeof media.addEventListener === 'function') {
-      media.addEventListener('change', handleChange);
-      return () => media.removeEventListener('change', handleChange);
-    }
-
-    media.addListener(handleChange);
-    return () => media.removeListener(handleChange);
+  useEffect(() => () => {
+    window.clearTimeout(timelapseTimer.current);
+    document.documentElement.classList.remove(TIMELAPSE_CLASS);
   }, []);
-
-  useEffect(() => {
-    if (typeof document === 'undefined') {
-      return;
-    }
-
-    const root = document.documentElement;
-    root.setAttribute('data-theme', resolved);
-  }, [resolved]);
 
   const setPreference = useCallback((value: ThemeOption) => {
     setPreferenceState(value);
-
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(STORAGE_KEY, value);
-    }
+    setHasReadStorage(true);
+    writeStoredPreference(value);
   }, []);
+
+  const toggle = useCallback(() => {
+    const root = document.documentElement;
+    root.classList.add(TIMELAPSE_CLASS);
+    window.clearTimeout(timelapseTimer.current);
+    timelapseTimer.current = window.setTimeout(() => {
+      root.classList.remove(TIMELAPSE_CLASS);
+    }, TIMELAPSE_MS);
+
+    setPreference(preference === 'dark' ? 'light' : 'dark');
+  }, [preference, setPreference]);
 
   const contextValue = useMemo<ThemeContextValue>(() => ({
     preference,
-    resolved,
+    resolved: preference,
     setPreference,
-  }), [preference, resolved, setPreference]);
+    toggle,
+  }), [preference, setPreference, toggle]);
 
   return (
     <ThemeContext.Provider value={contextValue}>
@@ -108,4 +105,4 @@ export const AppThemeProvider = ({ children }: ThemeProviderProps) => {
   );
 };
 
-export const THEME_OPTIONS: ThemeOption[] = ['system', 'light', 'dark'];
+export const THEME_OPTIONS: ThemeOption[] = ['dark', 'light'];

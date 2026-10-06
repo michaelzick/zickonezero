@@ -1,5 +1,4 @@
 import styled, { keyframes, css } from 'styled-components';
-import * as Select from '@radix-ui/react-select';
 import { THEME } from './theme';
 
 const phraseCycle = keyframes`
@@ -23,13 +22,13 @@ export const VisuallyHidden = styled.h1`
 `;
 
 export const Container = styled.div`
-  background-size: cover;
   text-align: center;
-  font-family: Roboto, sans-serif;
+  font-family: ${THEME.fonts.body};
   height: 100%;
   position: relative;
 
-  svg {
+  // Inline UI icons sit at text size; city art opts out with data-art.
+  svg:not([data-art]) {
     width: 1em;
     height: 1em;
     margin-left: 0.2em;
@@ -229,7 +228,6 @@ export const Wrapper = styled.div`
   ${props => props.isHomePage && `
     position: relative;
   `}
-  background-color: ${THEME.colors.dark};
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     ${props => {
@@ -259,7 +257,8 @@ export const Nav = styled.div`
   align-items: center;
   position: fixed;
   z-index: 400;
-  background-color: ${THEME.colors.dark};
+  background-color: var(--glass-bg-strong);
+  backdrop-filter: blur(12px) saturate(140%);
   transition: filter 0.3s;
 
   a {
@@ -353,7 +352,6 @@ export const GridContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding-bottom: 1em;
-  background-color: ${THEME.colors.dark};
 
   .grid {
     display: flex;
@@ -1144,7 +1142,7 @@ export const SectionHeader = styled.h2`
   text-align: center;
   font-family: Roboto, sans-serif;
   font-size: 2em;
-  background: ${THEME.colors.dark};
+  background: transparent;
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     padding: 1.1em 0 0.8em;
@@ -2257,81 +2255,6 @@ export const ThemeSwitcherWrapper = styled.div`
     align-items: flex-start;
     gap: 0.4em;
   }
-`;
-
-export const ThemeSwitcherTrigger = styled(Select.Trigger)`
-  all: unset;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  min-width: 0;
-  padding: 0.25em 1em 0.22em;
-  border-radius: ${THEME.radii.md};
-  border: 1px solid ${THEME.colors.grey};
-  color: ${THEME.colors.white};
-  background-color: transparent;
-  cursor: pointer;
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.6rem;
-  line-height: 1;
-  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
-
-  &:hover,
-  &[data-state='open'] {
-    border-color: ${THEME.colors.hotRed};
-    color: ${THEME.colors.hotRed};
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${THEME.colors.hotRed};
-    outline-offset: 2px;
-  }
-`;
-
-export const ThemeSwitcherValue = styled(Select.Value)`
-  flex: 0 1 auto;
-  display: inline-flex;
-  align-items: center;
-  line-height: 1;
-`;
-
-export const ThemeSwitcherContent = styled(Select.Content)`
-  overflow: hidden;
-  background-color: ${THEME.colors.darkest};
-  color: ${THEME.colors.white};
-  border-radius: ${THEME.radii.md};
-  border: 1px solid ${THEME.colors.grey};
-  box-shadow: 0 18px 45px rgba(5, 5, 15, 0.35);
-  z-index: 400;
-`;
-
-export const ThemeSwitcherViewport = styled(Select.Viewport)`
-  padding: 0.25em 0;
-`;
-
-export const ThemeSwitcherItem = styled(Select.Item)`
-  display: flex;
-  align-items: center;
-  gap: 0.75em;
-  padding: 0.45em 1.1em;
-  font-size: 1em;
-  cursor: pointer;
-  user-select: none;
-  color: ${THEME.colors.white};
-  transition: background-color 0.2s ease, color 0.2s ease;
-
-  &[data-highlighted] {
-    outline: none;
-    background-color: ${THEME.colors.hotRed};
-    color: ${THEME.colors.contrast};
-  }
-`;
-
-export const ThemeSwitcherIndicator = styled(Select.ItemIndicator)`
-  margin-left: auto;
-  display: inline-flex;
-  color: inherit;
 `;
 
 export const HomeTabsBar = styled.div`
