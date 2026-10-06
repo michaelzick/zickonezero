@@ -1,7 +1,8 @@
 /**
  * The city's soundscape, synthesized with Web Audio so nothing is downloaded:
- * rain hiss at night, a low murmur of voices and machines, a detuned traffic
- * drone, the odd buzzing neon tube, and cars passing in the distance.
+ * a low murmur of voices and machines, a detuned traffic drone, the odd
+ * buzzing neon tube, and cars passing in the distance. The night is dry,
+ * like the city drawn on screen.
  *
  * ./sound loads this module the first time a visitor turns sound on. It only
  * needs a BaseAudioContext, so it can also be rendered offline.
@@ -17,7 +18,6 @@ export type Ambience = {
 type TimeOfDay = 'night' | 'day';
 
 type Levels = {
-  rain: number;
   murmur: number;
   traffic: number;
   /** Peak gain of a neon-buzz swell. */
@@ -26,10 +26,10 @@ type Levels = {
   cars: number;
 };
 
-// Rain only falls at night; the day street is busier.
+// The day street is busier; the night is quieter, with the neon louder.
 const LEVELS: Record<TimeOfDay, Levels> = {
-  night: { rain: 0.32, murmur: 0.55, traffic: 0.18, buzz: 0.4, cars: 1.4 },
-  day: { rain: 0, murmur: 1, traffic: 0.25, buzz: 0.25, cars: 1.8 },
+  night: { murmur: 0.7, traffic: 0.18, buzz: 0.4, cars: 1.4 },
+  day: { murmur: 1, traffic: 0.25, buzz: 0.25, cars: 1.8 },
 };
 
 const MASTER_GAIN = 0.5;
@@ -121,22 +121,9 @@ export const createAmbience = (ctx: BaseAudioContext): Ambience => {
   const master = createGain(ctx, 0);
   master.connect(ctx.destination);
 
-  const rainNoise = createNoiseBuffer(ctx, 2, 'white');
+  // White noise for the passing cars' tyre hiss.
+  const tyreNoise = createNoiseBuffer(ctx, 2, 'white');
   const sources: AudioScheduledSourceNode[] = [];
-
-  // Rain: a bright stereo hiss that gusts on two slow, unrelated cycles.
-  const rainLevel = createGain(ctx, 0);
-  const gust = createGain(ctx, 0.7);
-  const rain = ctx.createBufferSource();
-  rain.buffer = rainNoise;
-  rain.loop = true;
-  rain
-    .connect(createFilter(ctx, 'highpass', 900))
-    .connect(createFilter(ctx, 'lowpass', 6500))
-    .connect(gust)
-    .connect(rainLevel)
-    .connect(master);
-  sources.push(rain, createLfo(ctx, 0.13, 0.18, gust.gain), createLfo(ctx, 0.047, 0.12, gust.gain));
 
   // Murmur: voices, vents, and engines blurred into a low rumble.
   const murmurLevel = createGain(ctx, 0);
@@ -185,7 +172,6 @@ export const createAmbience = (ctx: BaseAudioContext): Ambience => {
     const now = ctx.currentTime;
 
     ([
-      [rainLevel.gain, levels.rain],
       [murmurLevel.gain, levels.murmur],
       [trafficLevel.gain, levels.traffic],
     ] as const).forEach(([param, value]) => {
@@ -232,7 +218,7 @@ export const createAmbience = (ctx: BaseAudioContext): Ambience => {
     const fromLeft = Math.random() < 0.5;
 
     const source = ctx.createBufferSource();
-    source.buffer = rainNoise;
+    source.buffer = tyreNoise;
     source.loop = true;
 
     const band = createFilter(ctx, 'bandpass', 380, 1.6);
