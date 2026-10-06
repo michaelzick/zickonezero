@@ -48,9 +48,10 @@ export const NeonSignRoot = styled.p`
     inset: 0;
     z-index: -1;
     border: 1px solid rgba(150, 210, 230, 0.16);
+    /* Near-opaque, so the alley's pink blade sign never reads through the lettering. */
     background:
       linear-gradient(rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0)),
-      rgba(3, 6, 12, 0.55);
+      rgba(3, 6, 12, 0.92);
     clip-path: polygon(0 0, calc(100% - 0.22em) 0, 100% 0.22em, 100% 100%, 0.22em 100%, 0 calc(100% - 0.22em));
   }
 
