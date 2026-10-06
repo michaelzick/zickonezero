@@ -19,33 +19,19 @@ type Props = {
   as?: ElementType;
   id?: string;
   className?: string;
-  /**
-   * The letter that never quite settles, as [line, letter]. Letters count
-   * from 0 within the line and skip spaces.
-   */
-  dying?: readonly [number, number];
 };
 
-type Letter = { character: string; order: number; isDying: boolean };
+type Letter = { character: string; order: number };
 
 /** Splits each line into words of letters, numbered across the whole sign for the power-on stagger. */
-const layoutLines = (lines: readonly NeonLine[], dying?: readonly [number, number]): Letter[][][] => {
+const layoutLines = (lines: readonly NeonLine[]): Letter[][][] => {
   let order = 0;
 
-  return lines.map((line, lineIndex) => {
-    let letterIndex = 0;
-
-    return line.text.split(' ').map((word) => [...word].map((character) => {
-      const letter = {
-        character,
-        order,
-        isDying: dying?.[0] === lineIndex && dying[1] === letterIndex,
-      };
-      order += 1;
-      letterIndex += 1;
-      return letter;
-    }));
-  });
+  return lines.map((line) => line.text.split(' ').map((word) => [...word].map((character) => {
+    const letter = { character, order };
+    order += 1;
+    return letter;
+  })));
 };
 
 /**
@@ -54,8 +40,8 @@ const layoutLines = (lines: readonly NeonLine[], dying?: readonly [number, numbe
  * stays in the DOM, so a heading keeps its exact accessible name: letters are
  * inline spans and words and lines are separated by real spaces.
  */
-const NeonSign = ({ lines, as = 'p', id, className, dying }: Props) => {
-  const layout = layoutLines(lines, dying);
+const NeonSign = ({ lines, as = 'p', id, className }: Props) => {
+  const layout = layoutLines(lines);
   const [isLit] = useState(() => !isFirstCityLoad());
 
   return (
@@ -64,10 +50,10 @@ const NeonSign = ({ lines, as = 'p', id, className, dying }: Props) => {
         const words: ReactNode = layout[lineIndex].map((letters, wordIndex) => (
           <Fragment key={wordIndex}>
             {wordIndex > 0 && ' '}
-            {letters.map(({ character, order, isDying }) => (
+            {letters.map(({ character, order }) => (
               <span
                 key={order}
-                className={isDying ? 'letter is-dying' : 'letter'}
+                className='letter'
                 style={{ '--i': order } as CSSProperties}
               >
                 {character}

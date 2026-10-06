@@ -20,24 +20,12 @@ const refreshSweep = keyframes`
   to { transform: translate3d(0, 760%, 0); }
 `;
 
-// Two shallow dips in an eight-second loop.
-const screenFlicker = keyframes`
-  0%, 47%, 50%, 53%, 100% { opacity: 1; }
-  48% { opacity: 0.84; }
-  51% { opacity: 0.9; }
-`;
-
 // The screen opens from a bright line, like an old tube warming up.
 const powerOn = keyframes`
   0% { clip-path: inset(49.5% 0 49.5% 0); filter: brightness(2.6); }
   40% { clip-path: inset(49.5% 0 49.5% 0); filter: brightness(2.6); }
   75% { clip-path: inset(0 0 0 0); filter: brightness(1.5); }
   100% { clip-path: inset(0 0 0 0); filter: brightness(1); }
-`;
-
-const beaconBlink = keyframes`
-  0%, 55%, 100% { opacity: 1; }
-  65%, 90% { opacity: 0.25; }
 `;
 
 export const BillboardStage = styled.section`
@@ -96,7 +84,6 @@ export const BillboardStage = styled.section`
       0 0 calc(46px * var(--neon-glow-strength, 1)) rgba(47, 243, 255, 0.3),
       0 40px 90px -30px rgba(0, 0, 0, 0.9);
     transform: translate3d(-50%, -50%, 0);
-    animation: ${screenFlicker} 8s linear 2s infinite;
   }
 
   &[data-standby] .bb-screen > * {
@@ -104,9 +91,7 @@ export const BillboardStage = styled.section`
   }
 
   &[data-powered] .bb-screen {
-    animation:
-      ${powerOn} 0.9s ${THEME.easing.out} backwards,
-      ${screenFlicker} 8s linear 2s infinite;
+    animation: ${powerOn} 0.9s ${THEME.easing.out} backwards;
   }
 
   .bb-track {
@@ -199,7 +184,6 @@ export const BillboardStage = styled.section`
       border-radius: 50%;
       background: #ff3a5c;
       box-shadow: 0 0 8px #ff3a5c;
-      animation: ${beaconBlink} 1.6s steps(1) infinite;
     }
   }
 
@@ -303,7 +287,6 @@ export const BillboardStage = styled.section`
       border-radius: 50%;
       background: #ff3a5c;
       box-shadow: 0 0 10px #ff3a5c;
-      animation: ${beaconBlink} 2.4s steps(1) infinite;
     }
   }
 

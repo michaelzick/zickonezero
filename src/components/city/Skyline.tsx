@@ -47,16 +47,6 @@ const Skyline = ({ layer, windows }: Props) => {
       ))}
       <path className='windows windows-warm' d={layer.litWindows} strokeWidth={windows.height} strokeDasharray={dash} />
       <path className='windows windows-cool' d={layer.coolWindows} strokeWidth={windows.height} strokeDasharray={dash} />
-      {layer.flicker.map((spot, index) => (
-        <rect
-          key={`flicker-${index}`}
-          className='flicker-window'
-          x={spot.x}
-          y={spot.y}
-          width={spot.width}
-          height={spot.height}
-        />
-      ))}
       {layer.strips.map((strip, index) => (
         <g key={`strip-${index}`} className={`tone-${strip.tone}`}>
           <rect

@@ -195,14 +195,17 @@ export const HeroRoot = styled.section`
       linear-gradient(90deg, rgba(255, 43, 214, 0.22) 0 4%, transparent 9% 91%, rgba(47, 243, 255, 0.22) 96% 100%);
   }
 
+  /*
+   * Flat inside the street plane, from 6% to 66% of the way down the alley.
+   * A separate plane lifted a few pixels off the street z-fought with it.
+   */
   .arrows {
+    position: absolute;
     left: calc(50% - 60px);
-    top: calc(var(--alley-street) - var(--alley-depth) * 0.6);
+    bottom: 6%;
     width: 120px;
-    height: calc(var(--alley-depth) * 0.6);
+    height: 60%;
     overflow: hidden;
-    transform-origin: 50% 100%;
-    transform: translateZ(calc(var(--alley-near) - var(--alley-depth) * 0.06)) rotateX(90deg) translateZ(2px);
     -webkit-mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 85%, transparent);
     mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 85%, transparent);
   }

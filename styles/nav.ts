@@ -116,9 +116,26 @@ export const NavBar = styled.div`
     pointer-events: none;
   }
 
+  /*
+   * The scrolled glass lives on this layer behind the bar's contents, not on
+   * the bar itself: Chrome flickers the descendants of a backdrop-filter
+   * element, and the dropdowns and city map are the bar's descendants.
+   */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    transition: background-color 0.35s ease;
+  }
+
   &[data-scrolled='true'] {
-    background-color: var(--glass-bg-strong);
     border-bottom-color: var(--glass-border);
+  }
+
+  &[data-scrolled='true']::before {
+    background-color: var(--glass-bg-strong);
   }
 
   &[data-scrolled='true']::after {
@@ -131,7 +148,7 @@ export const NavBar = styled.div`
   }
 
   @media (min-width: 601px) {
-    &[data-scrolled='true'] {
+    &[data-scrolled='true']::before {
       -webkit-backdrop-filter: blur(14px) saturate(150%);
       backdrop-filter: blur(14px) saturate(150%);
     }
@@ -140,7 +157,7 @@ export const NavBar = styled.div`
   /* Phones skip the blur, so the bar needs denser glass to keep copy
      scrolling underneath from reading through. */
   @media (max-width: ${THEME.breakpoints.phone}) {
-    &[data-scrolled='true'] {
+    &[data-scrolled='true']::before {
       background-color: rgba(var(--color-dark-rgb), 0.97);
     }
   }
@@ -366,7 +383,8 @@ export const NavDropdown = styled.ul`
   margin: 0;
   padding: 1em 1em 0.9em;
   list-style: none;
-  background-color: var(--glass-bg-strong);
+  /* Opaque at night, so the fast rain never shows through an open menu. */
+  background-color: var(--menu-bg);
   background-image: linear-gradient(var(--scanline) 1px, transparent 1px);
   background-size: 100% 3px;
   border: 1px solid var(--glass-border);
@@ -560,7 +578,8 @@ export const CityMapMenu = styled.ul`
   overflow-y: auto;
   overscroll-behavior: contain;
   counter-reset: map-item;
-  background-color: rgba(var(--color-dark-rgb), 0.97);
+  /* Opaque, so the fast rain never shows through the open map. */
+  background-color: rgb(var(--color-dark-rgb));
   background-image:
     radial-gradient(ellipse 80% 40% at 90% 100%, rgba(47, 243, 255, 0.1), transparent 70%),
     linear-gradient(var(--scanline) 1px, transparent 1px),

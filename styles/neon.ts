@@ -6,9 +6,9 @@ import { THEME } from './theme';
  * Neon signage: the NeonSign lettering and the LED ticker
  * (src/components/city/). Only @media and keyframes here; see styles/city.ts.
  *
- * Motion safety (WCAG 2.3.1): a letter powers on with one strike and one
- * partial dip, and the dying letter dips twice every nine seconds. No dip
- * goes fully dark, and nothing flashes more than three times a second.
+ * Motion safety (WCAG 2.3.1): on the first page load a letter powers on
+ * with one strike and one partial dip, then stays steady. No dip goes fully
+ * dark, and nothing flashes more than three times a second.
  */
 
 const ignite = keyframes`
@@ -16,12 +16,6 @@ const ignite = keyframes`
   20% { opacity: 1; }
   32% { opacity: 0.35; }
   48%, 100% { opacity: 1; }
-`;
-
-const buzz = keyframes`
-  0%, 62%, 64%, 65%, 67%, 100% { opacity: 1; }
-  63% { opacity: 0.35; }
-  66% { opacity: 0.55; }
 `;
 
 const tickerScroll = keyframes`
@@ -78,22 +72,9 @@ export const NeonSignRoot = styled.p`
     animation-delay: calc(0.35s + var(--i, 0) * 0.11s);
   }
 
-  .letter.is-dying {
-    animation:
-      ${ignite} 0.5s ease-out both,
-      ${buzz} 9s linear infinite;
-    animation-delay:
-      calc(0.35s + var(--i, 0) * 0.11s),
-      calc(3s + var(--i, 0) * 0.11s);
-  }
-
-  /* Already lit on later pages: no power-on, but the dying letter still buzzes. */
+  /* Already lit on later pages: no power-on. */
   &[data-lit] .letter {
     animation: none;
-  }
-
-  &[data-lit] .letter.is-dying {
-    animation: ${buzz} 9s linear calc(3s + var(--i, 0) * 0.11s) infinite;
   }
 
   /* Glass tubes: a white-hot core inside a colored glow. */

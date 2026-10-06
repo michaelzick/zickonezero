@@ -65,9 +65,6 @@ const SIGN_LINES: readonly NeonLine[] = [
   { text: 'Features', variant: 'led' },
 ];
 
-// The E in DREAM is the tube that never quite settles.
-const DYING_LETTER = [0, 3] as const;
-
 // The panel has faded out by a third of the walk; past that it stops taking clicks.
 const PANEL_FADED_AT = 0.34;
 
@@ -97,9 +94,10 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
           <div className='alley'>
             <div className='plane street'>
               <div className='street-glow' />
-            </div>
-            <div className='plane arrows'>
-              <div className='arrows-track' />
+              {/* Painted on the street itself: a second plane just above it z-fights. */}
+              <div className='arrows'>
+                <div className='arrows-track' />
+              </div>
             </div>
             <div className='plane wall wall-left'>
               <AlleyWall facade={LEFT_WALL} />
@@ -150,7 +148,6 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
           id='home-hero-title'
           className='hero-sign'
           lines={SIGN_LINES}
-          dying={DYING_LETTER}
         />
 
         <HudFrame className='hero-panel'>

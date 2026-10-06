@@ -126,6 +126,8 @@
   /* HUD and glass surfaces */
   --glass-bg: rgba(6, 14, 26, 0.72);
   --glass-bg-strong: rgba(4, 10, 20, 0.9);
+  /* Open nav menus: opaque, so nothing animated reads through them. */
+  --menu-bg: #040a14;
   --glass-border: rgba(47, 243, 255, 0.28);
   --glass-highlight: rgba(255, 255, 255, 0.06);
   --hud-panel-bg: rgba(4, 18, 26, 0.78);
@@ -208,6 +210,7 @@
 
   --glass-bg: rgba(255, 250, 241, 0.8);
   --glass-bg-strong: rgba(255, 251, 244, 0.94);
+  --menu-bg: rgba(255, 251, 244, 0.94);
   --glass-border: rgba(29, 90, 99, 0.3);
   --glass-highlight: rgba(255, 255, 255, 0.5);
   --hud-panel-bg: rgba(14, 72, 80, 0.86);
