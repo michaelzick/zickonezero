@@ -135,6 +135,10 @@
   --scanline: rgba(47, 243, 255, 0.06);
   --focus-ring: #2ff3ff;
   --shadow-deep: rgba(0, 0, 0, 0.55);
+  /* Long-form inner-page panels and dialogs; dialogs keep light ink in both themes. */
+  --panel-bg: rgba(4, 10, 19, 0.82);
+  --modal-bg: rgba(3, 9, 18, 0.96);
+  --modal-scrim: rgba(1, 4, 10, 0.8);
 
   /* Semantic tokens (pre-redesign names) */
   --color-dark: #050a14;
@@ -166,8 +170,9 @@
   --home-section-web-bg: rgba(36, 22, 4, 0.58);
   --home-section-web-border: rgba(255, 176, 59, 0.36);
 
-  /* Dynamic accent; data-accent on <html> picks the color */
+  /* Dynamic accent; data-accent on <html> picks the color and its glow */
   --city-accent: var(--neon-cyan);
+  --city-glow: rgba(47, 243, 255, 0.4);
 }
 
 :root[data-theme='light'] {
@@ -212,6 +217,9 @@
   --scanline: rgba(29, 90, 99, 0.05);
   --focus-ring: #c8128a;
   --shadow-deep: rgba(60, 40, 20, 0.22);
+  --panel-bg: rgba(255, 251, 244, 0.88);
+  --modal-bg: rgba(10, 46, 52, 0.97);
+  --modal-scrim: rgba(24, 35, 41, 0.55);
 
   --color-dark: #efe7da;
   --color-dark-rgb: 239, 231, 218;
@@ -244,22 +252,27 @@
 
 :root[data-accent='magenta'] {
   --city-accent: var(--neon-magenta);
+  --city-glow: rgba(255, 43, 214, 0.4);
 }
 
 :root[data-accent='cyan'] {
   --city-accent: var(--neon-cyan);
+  --city-glow: rgba(47, 243, 255, 0.4);
 }
 
 :root[data-accent='amber'] {
   --city-accent: var(--neon-amber);
+  --city-glow: rgba(255, 176, 59, 0.4);
 }
 
 :root[data-accent='violet'] {
   --city-accent: var(--neon-violet);
+  --city-glow: rgba(163, 91, 255, 0.4);
 }
 
 :root[data-accent='red'] {
   --city-accent: var(--neon-red);
+  --city-glow: rgba(255, 58, 92, 0.4);
 }
 
 /* Set for about two seconds by the time-of-day toggle. */

@@ -41,6 +41,39 @@ export const scanSweep = keyframes`
   to { background-position: -60% 0; }
 `;
 
+/** Background layers for accent corner brackets, top left and bottom right. */
+export const cornerBrackets = (size: string, color = 'var(--hud-accent, var(--city-accent))') => `
+  linear-gradient(${color}, ${color}) left top / ${size} 2px no-repeat,
+  linear-gradient(${color}, ${color}) left top / 2px ${size} no-repeat,
+  linear-gradient(${color}, ${color}) right bottom / ${size} 2px no-repeat,
+  linear-gradient(${color}, ${color}) right bottom / 2px ${size} no-repeat
+`;
+
+/** A background layer of faint horizontal scanlines. */
+export const scanlines = 'repeating-linear-gradient(0deg, var(--scanline) 0 1px, transparent 1px 3px)';
+
+/**
+ * Turns a screenshot's wrapper into a HUD screen: corner brackets and
+ * scanlines on ::after that brighten on hover and keyboard focus. The
+ * wrapper needs position: relative and must hug the image.
+ */
+export const screenOverlay = css`
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: ${cornerBrackets('16px', 'var(--city-accent)')}, ${scanlines};
+    opacity: 0.65;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    opacity: 1;
+  }
+`;
+
 /** Square, icon-only HUD control with a 44px touch target. */
 export const HudIconButton = styled.button`
   position: relative;
@@ -64,12 +97,22 @@ export const HudIconButton = styled.button`
   }
 `;
 
+type HudFrameOptions = {
+  /**
+   * Frosted glass on wider screens. Long panels leave it off: blurring a
+   * large area over the animated city costs a repaint every frame.
+   */
+  blur?: boolean;
+};
+
 /**
  * Glass panel with notched corners, accent strokes along the notches, and
  * corner brackets. Set --hud-accent to recolor it (defaults to the city
- * accent) and --hud-notch to resize the notches.
+ * accent), --hud-notch to resize the notches, and --hud-frame-bg to change
+ * the glass. The panel paints on pseudo-elements, so it never clips its
+ * content or the focus rings inside it.
  */
-export const HudFrame = styled.div`
+export const hudFrame = ({ blur = true }: HudFrameOptions = {}) => css`
   --hud-notch: 14px;
   position: relative;
   isolation: isolate;
@@ -83,7 +126,9 @@ export const HudFrame = styled.div`
     background:
       ${notchStrokes('var(--hud-notch)', 'var(--hud-accent, var(--city-accent))')},
       linear-gradient(160deg, var(--glass-highlight), transparent 42%),
-      var(--glass-bg);
+      var(--hud-frame-bg, var(--glass-bg));
+    background-origin: border-box;
+    background-repeat: no-repeat;
     clip-path: ${notchPolygon('var(--hud-notch)')};
     pointer-events: none;
   }
@@ -92,20 +137,85 @@ export const HudFrame = styled.div`
     content: '';
     position: absolute;
     inset: 0;
-    background:
-      linear-gradient(var(--hud-accent, var(--city-accent)), var(--hud-accent, var(--city-accent))) left top / 18px 2px no-repeat,
-      linear-gradient(var(--hud-accent, var(--city-accent)), var(--hud-accent, var(--city-accent))) left top / 2px 18px no-repeat,
-      linear-gradient(var(--hud-accent, var(--city-accent)), var(--hud-accent, var(--city-accent))) right bottom / 18px 2px no-repeat,
-      linear-gradient(var(--hud-accent, var(--city-accent)), var(--hud-accent, var(--city-accent))) right bottom / 2px 18px no-repeat;
+    background: ${cornerBrackets('18px')};
     pointer-events: none;
   }
 
-  /* Phones get translucent glass; blur is costly on low-end GPUs. */
-  @media (min-width: 601px) {
-    &::before {
-      -webkit-backdrop-filter: blur(12px) saturate(140%);
-      backdrop-filter: blur(12px) saturate(140%);
+  ${blur && css`
+    /* Phones get translucent glass; blur is costly on low-end GPUs. */
+    @media (min-width: 601px) {
+      &::before {
+        -webkit-backdrop-filter: blur(12px) saturate(140%);
+        backdrop-filter: blur(12px) saturate(140%);
+      }
     }
+  `}
+`;
+
+export const HudFrame = styled.div`
+  ${hudFrame()}
+`;
+
+/**
+ * The panel behind long-form inner-page content: unblurred, more opaque
+ * glass so body copy stays readable over the city.
+ */
+export const storyPanel = css`
+  ${hudFrame({ blur: false })}
+  --hud-notch: 18px;
+  --hud-frame-bg: var(--panel-bg);
+  padding: clamp(1em, 2.4vw, 1.75em) clamp(0.85em, 2.4vw, 1.75em);
+`;
+
+/** Thin accent scrollbars for galleries and scrolling dialog copy. */
+export const hudScrollbar = css`
+  scrollbar-width: thin;
+  scrollbar-color: var(--city-accent) transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--city-accent);
+    border-radius: 0;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--glass-border);
+  }
+`;
+
+/** A small mono "//" readout prefix, left out of the accessible name. */
+export const hudSlashes = css`
+  content: '//';
+  content: '//' / '';
+  font-family: ${THEME.fonts.mono};
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--hud-accent, var(--city-accent));
+`;
+
+/** Small HUD subheadings: condensed uppercase type after an accent diamond. */
+export const hudSubheading = css`
+  margin: 0;
+  font-family: ${THEME.fonts.hud};
+  font-size: clamp(1.1em, 2vw, 1.35em);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 0.42em;
+    height: 0.42em;
+    margin-right: 0.55em;
+    vertical-align: 0.12em;
+    background: var(--hud-accent, var(--city-accent));
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
   }
 `;
 

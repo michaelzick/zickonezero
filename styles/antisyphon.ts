@@ -6,6 +6,7 @@ import {
   DemoStokeTldrCopy,
   DemoStokeTldrImage,
 } from './index';
+import { hudSubheading, screenOverlay, storyPanel } from './hud';
 import { THEME } from './theme';
 
 export const FlowMethodList = styled(DemoStokeMethodList)`
@@ -27,6 +28,7 @@ export const FlowText = styled.div`
 `;
 
 export const FlowImageButton = styled.button`
+  position: relative;
   display: block;
   width: 100%;
   padding: 0;
@@ -34,10 +36,10 @@ export const FlowImageButton = styled.button`
   background: transparent;
   cursor: pointer;
   text-align: left;
-  border-radius: ${THEME.radii.md};
+  ${screenOverlay}
 
   &:focus-visible {
-    outline: 2px solid ${THEME.colors.demostoke};
+    outline: 2px solid var(--focus-ring);
     outline-offset: 4px;
   }
 `;
@@ -48,13 +50,15 @@ export const FlowImage = styled(DemoStokeTldrImage)`
   aspect-ratio: 656 / 365;
   object-fit: cover;
   max-width: 100%;
-  border-radius: ${THEME.radii.md};
   transition: border-color 0.18s ease, box-shadow 0.18s ease;
 
   ${FlowImageButton}:hover &,
   ${FlowImageButton}:focus-visible & {
-    border-color: ${THEME.colors.orange};
-    box-shadow: 0 24px 48px -32px rgb(0 0 0 / 70%), 0 0 0 1px ${THEME.colors.orange};
+    border-color: var(--city-accent);
+    box-shadow:
+      0 24px 48px -32px var(--shadow-deep),
+      0 0 0 1px var(--city-accent),
+      0 0 24px -6px var(--city-glow);
   }
 `;
 
@@ -65,17 +69,22 @@ export const FlowImagesRow = styled.div<{ $topOffset?: boolean; }>`
   margin-top: ${({ $topOffset }: { $topOffset?: boolean; }) => ($topOffset ? '0.75em' : '0')};
 `;
 
+/* Product-screen sections share the case-study glass panels. */
 export const FlowStorySection = styled.section`
+  ${storyPanel}
   width: 100%;
 `;
 
+/* Outcome stats read as bright HUD readouts. */
 export const OutcomeCopy = styled(DemoStokeTldrCopy)`
-  font-size: clamp(1.1em, 2vw, 1.35em);
-  line-height: 1.85;
-  font-weight: 500;
-  letter-spacing: 0.01em;
+  font-family: ${THEME.fonts.hud};
+  font-size: clamp(1.2em, 2.2vw, 1.45em);
+  line-height: 1.6;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   width: 100%;
   color: ${THEME.colors.demostoke};
+  text-shadow: 0 0 calc(0.5em * var(--neon-glow-strength, 1)) var(--city-glow);
 
   .plain-lines li,
   .plain-lines li::marker {
@@ -90,6 +99,7 @@ export const MethodImages = styled.div`
 `;
 
 export const MethodImageButton = styled.button`
+  position: relative;
   display: block;
   width: 100%;
   padding: 0;
@@ -97,10 +107,10 @@ export const MethodImageButton = styled.button`
   background: transparent;
   cursor: pointer;
   text-align: left;
-  border-radius: ${THEME.radii.md};
+  ${screenOverlay}
 
   &:focus-visible {
-    outline: 2px solid ${THEME.colors.demostoke};
+    outline: 2px solid var(--focus-ring);
     outline-offset: 4px;
   }
 `;
@@ -109,10 +119,9 @@ export const MethodImageFrame = styled.div`
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 3;
-  border-radius: ${THEME.radii.md};
-  border: 1px solid rgba(199, 197, 197, 0.25);
+  border: 1px solid var(--glass-border);
   overflow: hidden;
-  box-shadow: 0 24px 38px -30px rgb(0 0 0 / 55%);
+  box-shadow: 0 24px 38px -30px var(--shadow-deep);
   background: ${THEME.colors.darkest};
   transition: border-color 0.18s ease, box-shadow 0.18s ease;
 
@@ -125,8 +134,11 @@ export const MethodImageFrame = styled.div`
 
   ${MethodImageButton}:hover &,
   ${MethodImageButton}:focus-visible & {
-    border-color: ${THEME.colors.orange};
-    box-shadow: 0 24px 48px -32px rgb(0 0 0 / 70%), 0 0 0 1px ${THEME.colors.orange};
+    border-color: var(--city-accent);
+    box-shadow:
+      0 24px 48px -32px var(--shadow-deep),
+      0 0 0 1px var(--city-accent),
+      0 0 24px -6px var(--city-glow);
   }
 `;
 
@@ -139,5 +151,5 @@ export const AntisyphonGalleryBlock = styled.div`
 `;
 
 export const AntisyphonSectionSubheading = styled.h3`
-  margin: 0;
+  ${hudSubheading}
 `;

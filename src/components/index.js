@@ -4,7 +4,6 @@ import FooterContent from './FooterContent';
 import TopNavContent from './TopNavContent';
 import LinkBoxMobileContent from './LinkBoxMobileContent';
 import AboutContent from './AboutContent';
-import ProductContent from './AntisyphonContent';
 import Thumbnail from './Thumbnail';
 import GridContent from './GridContent';
 import DemoStokeContent from './DemoStokeContent';
@@ -19,7 +18,6 @@ export {
   TopNavContent,
   LinkBoxMobileContent,
   AboutContent,
-  ProductContent,
   Thumbnail,
   GridContent,
   DemoStokeContent,

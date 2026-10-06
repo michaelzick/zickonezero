@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent as ReactMouseEvent } from 'react';
+import { createPortal } from 'react-dom';
+import styled from 'styled-components';
 import {
   DemoStokeScrollHeader,
   DemoStokeScrollControls,
@@ -15,7 +17,18 @@ import {
   DemoStokeMiniCardModalClose,
 } from '../../../styles';
 import { DemoStokeSectionSubheading } from '../../../styles/demostoke';
+import { THEME } from '../../../styles/theme';
 import { trackEvent } from '../../lib/analytics';
+
+// The dialog is portaled out of the page's glass panels, whose stacking
+// contexts would keep it under the fixed nav, so it restates the page scale.
+const HelpsModalOverlay = styled(DemoStokeMiniCardModalOverlay)`
+  font-size: 25px;
+
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    font-size: 18px;
+  }
+`;
 
 type HelpsItem = {
   title: string;
@@ -32,6 +45,8 @@ const HelpsCarousel = ({ items, title = 'How DemoStoke Helps' }: HelpsCarouselPr
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
 
   const updateScrollButtons = useCallback(() => {
     const el = rowRef.current;
@@ -80,6 +95,7 @@ const HelpsCarousel = ({ items, title = 'How DemoStoke Helps' }: HelpsCarouselPr
       card_index: index,
       page_path: window.location.pathname,
     });
+    openerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     setActiveIndex(index);
   }, [items]);
 
@@ -93,11 +109,17 @@ const HelpsCarousel = ({ items, title = 'How DemoStoke Helps' }: HelpsCarouselPr
       page_path: window.location.pathname,
     });
     setActiveIndex(null);
+    openerRef.current?.focus();
   }, [activeIndex, items]);
 
   const handleModalClick = useCallback((event: ReactMouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
   }, []);
+
+  // The dialog renders at the end of the body, so move focus into it.
+  useEffect(() => {
+    if (activeIndex !== null) closeButtonRef.current?.focus();
+  }, [activeIndex]);
 
   useEffect(() => {
     if (activeIndex === null) return undefined;
@@ -171,15 +193,15 @@ const HelpsCarousel = ({ items, title = 'How DemoStoke Helps' }: HelpsCarouselPr
         ))}
       </DemoStokeMiniCardRow>
 
-      {activeItem && (
-        <DemoStokeMiniCardModalOverlay onClick={closeModal} role='presentation'>
+      {activeItem && createPortal(
+        <HelpsModalOverlay onClick={closeModal} role='presentation'>
           <DemoStokeMiniCardModal
             role='dialog'
             aria-modal='true'
             aria-label={`How DemoStoke Helps: ${activeItem.title}`}
             onClick={handleModalClick}
           >
-            <DemoStokeMiniCardModalClose type='button' onClick={closeModal} aria-label='Close dialog'>
+            <DemoStokeMiniCardModalClose ref={closeButtonRef} type='button' onClick={closeModal} aria-label='Close dialog'>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <path d="m6 6 12 12M6 18 18 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -187,7 +209,8 @@ const HelpsCarousel = ({ items, title = 'How DemoStoke Helps' }: HelpsCarouselPr
             <DemoStokeMiniCardModalTitle>{activeItem.title}</DemoStokeMiniCardModalTitle>
             <DemoStokeMiniCardModalCopy>{activeItem.description}</DemoStokeMiniCardModalCopy>
           </DemoStokeMiniCardModal>
-        </DemoStokeMiniCardModalOverlay>
+        </HelpsModalOverlay>,
+        document.body
       )}
     </div>
   );

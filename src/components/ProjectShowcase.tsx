@@ -7,7 +7,6 @@ import {
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 
 import {
-  DemoStokeMethodCard,
   DemoStokeMethodList,
   DemoStokeMethodRow,
   DemoStokeTldrCopy,
@@ -28,6 +27,7 @@ import {
   SectionTitle,
   ShowcaseImageButton,
   ShowcaseImage,
+  ShowcaseSectionCard,
   AnimatedSection
 } from '../../styles/projectShowcases';
 import { TopNavContent, FooterContent } from '.';
@@ -186,7 +186,7 @@ const ProjectShowcase = ({
                     data-section-index={index}
                     className={visibleSections[index] ? 'visible' : undefined}
                   >
-                    <DemoStokeMethodCard>
+                    <ShowcaseSectionCard>
                       <DemoStokeMethodRow $reverse={index % 2 === 1}>
                         <div className="text-animate">
                           <SectionTitle as="h2">{sectionTitle}</SectionTitle>
@@ -218,7 +218,7 @@ const ProjectShowcase = ({
                           />
                         </ShowcaseImageButton>
                       </DemoStokeMethodRow>
-                    </DemoStokeMethodCard>
+                    </ShowcaseSectionCard>
                   </AnimatedSection>
                 ))}
               </DemoStokeMethodList>

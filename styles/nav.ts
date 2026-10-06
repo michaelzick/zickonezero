@@ -137,6 +137,14 @@ export const NavBar = styled.div`
     }
   }
 
+  /* Phones skip the blur, so the bar needs denser glass to keep copy
+     scrolling underneath from reading through. */
+  @media (max-width: ${THEME.breakpoints.phone}) {
+    &[data-scrolled='true'] {
+      background-color: rgba(var(--color-dark-rgb), 0.97);
+    }
+  }
+
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     padding: 1em;
   }

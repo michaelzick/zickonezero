@@ -1,5 +1,14 @@
 import styled, { css } from 'styled-components';
 import { THEME } from './theme';
+import {
+  hudFrame,
+  hudNotch,
+  hudScrollbar,
+  notchPolygon,
+  notchStrokes,
+  scanlines,
+  screenOverlay
+} from './hud';
 
 // Accessible heading that is hidden from sighted users but exposed to
 // assistive tech and search crawlers (used for image-only hero sections).
@@ -37,56 +46,16 @@ export const Container = styled.div`
   }
 `;
 
-export const FlexBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5em;
-
-  .page-header {
-    margin: 0;
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75em;
-
-    .ds-logo {
-      width: clamp(3.5rem, 28vw, 5.25rem);
-      height: auto;
-    }
-
-    .tab-header {
-      font-size: 1.05em;
-      text-align: left;
-      margin: 0;
-    }
-  }
-`;
-
 export const WhiteTransitionAnchor = styled.a`
-  transition: all 0.3s;
   color: ${THEME.colors.white};
+  text-decoration-color: var(--city-accent);
+  text-underline-offset: 0.18em;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
   ${props => props.large && 'font-size: 1.3em;'}
 
   &:hover {
-    color: ${THEME.colors.hotRed};
-  }
-`;
-
-export const DemoStokeExternalLink = styled(WhiteTransitionAnchor)`
-  display: inline-flex;
-  justify-self: start;
-  align-items: center;
-  gap: 0.35em;
-  line-height: 1.15;
-  width: max-content;
-
-  svg {
-    width: 1.05em;
-    height: 1.05em;
-    margin-left: 0;
+    color: var(--city-accent);
+    text-shadow: 0 0 calc(10px * var(--neon-glow-strength, 1)) var(--city-glow);
   }
 `;
 
@@ -95,8 +64,16 @@ export const PitchDeckLink = styled(WhiteTransitionAnchor)`
   align-items: center;
   gap: 0.2em;
   margin-top: 0.4em;
-  font-size: 0.95em;
   padding: 0.25em 0;
+  color: var(--city-accent);
+  font-family: ${THEME.fonts.mono};
+  font-size: 0.9em;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+
+  &:hover {
+    color: ${THEME.colors.white};
+  }
 
   &.pitch-link-mobile {
     display: none;
@@ -109,7 +86,7 @@ export const PitchDeckLink = styled(WhiteTransitionAnchor)`
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    font-size: 0.9em;
+    font-size: 0.85em;
     padding: 0.35em 0;
 
     &.pitch-link-desktop {
@@ -153,41 +130,9 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Button = styled.a`
-  cursor: pointer;
-  position: relative;
-  display: flex;
-  overflow: hidden;
-  height: 44px;
-  padding: 0 3em;
-  justify-content: center;
-  align-items: center;
-  grid-auto-columns: 1fr;
-  grid-template-columns: auto;
-  grid-template-rows: auto;
-  border-radius: ${THEME.radii.md};
-  background-color: ${props => props.bgColor || THEME.colors.grey};
-  transition: transform 150ms,box-shadow 150ms,-webkit-transform 150ms;
-  color: #fff;
-  font-size: 16px;
-  line-height: 1.4em;
-  font-weight: 500;
-  text-align: center;
-  letter-spacing: .5px;
-  &:hover {
-    box-shadow: 0 10px 20px -8px rgb(0 0 0 / 53%);
-  }
-`;
-
-export const Image = styled.img`
-  width: 100%;
-  border-radius: ${THEME.radii.md};
-  border: none;
-`;
-
-export const FullBorderImage = styled(Image)`
-  border: 1px solid rgba(199, 197, 197, 0.2);
-  border-radius: ${THEME.radii.md};
+export const FullBorderImage = styled.img`
+  border: 1px solid var(--glass-border);
+  border-radius: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -356,86 +301,6 @@ export const BioBox = styled.div`
     padding: 1em;
     ${props => props.noBottomPadding && 'padding-bottom: 0;'}
     ${props => props.someTopPadding && 'padding-top: 1em;'}
-  }
-`;
-
-export const DemoStokeContentGrid = styled.div`
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(4.8em, 5.5em);
-  gap: clamp(1.5em, 3vw, 2.8em);
-  align-items: flex-start;
-  width: 100%;
-  & > * {
-    min-width: 0;
-  }
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-`;
-
-export const AntisyphonColumnsWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 2.5em 4em;
-  width: 100%;
-  font-size: 25px;
-  text-align: left;
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    padding: 6em 1.5em;
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: 2em 1.5em;
-  }
-`;
-
-export const AntisyphonColumnsInner = styled.div`
-  width: 100%;
-  max-width: 62em;
-`;
-
-export const AntisyphonHeader = styled(FlexBox)`
-  .page-header {
-    color: ${THEME.colors.white};
-  }
-
-  .at-logo {
-    width: 6em;
-    height: auto;
-  }
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    margin-bottom: 1.5em;
-  }
-`;
-
-export const SectionTabsWrapper = styled.div`
-  position: fixed;
-  top: var(--sidebar-tabs-top, calc(5em + 4.4em));
-  left: 50%;
-  transform: translate(-50%, ${props => props.$isVisible ? '0' : '-10px'});
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45em;
-  width: min(calc(100% - 2.4em), 62em);
-  padding: 0.45em;
-  border-radius: ${THEME.radii.md};
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(var(--color-dark-rgb), 0.88);
-  box-shadow: 0 8px 22px -16px rgb(0 0 0 / 45%);
-  backdrop-filter: blur(10px);
-  opacity: ${props => props.$isVisible ? 1 : 0};
-  pointer-events: ${props => props.$isVisible ? 'auto' : 'none'};
-  transition: opacity 0.28s ease, transform 0.28s ease, border-color 0.25s ease;
-  z-index: 94;
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    display: none;
-    position: static;
   }
 `;
 
@@ -635,82 +500,19 @@ export const DemoStokeTitle = styled.h2`
   }
 `;
 
-export const DemoStokeList = styled.ul`
-  padding: ${props => props.$frameless ? '0' : '0.8em 1.8em'};
-  font-size: 0.9em;
-  font-weight: lighter;
-  list-style: none;
-  border: ${props => props.$frameless ? 'none' : `1px solid ${THEME.colors.grey}`};
-  border-radius: ${props => props.$frameless ? '0' : THEME.radii.md};
-  margin-bottom: 0;
-
-  li {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: flex-start;
-    column-gap: 0.55em;
-    ${props => props.spaced && 'padding: 0.7em 0;'}
-
-    p {
-      margin-bottom: 0;
-    }
-  }
-
-  li::before {
-    content: '⚡️';
-    display: inline-block;
-  }
-
-  li.monetization::before {
-    content: '💵';
-  }
-
-  li.complaint::before {
-    content: '⛔️';
-  }
-
-  li.next-step::before {
-    content: '👉🏻';
-  }
-
-  li.persona::before {
-    content: '👤';
-  }
-
-  li.learning::before {
-    content: '💡';
-  }
-
-  li.interview::before {
-    content: '📝';
-  }
-
-  li.prototype::before {
-    content: '🤙🏻';
-  }
-
-  li.crystal::before {
-    content: '🔮';
-  }
-
-  li.heart::before {
-    content: '💜';
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: ${props => props.$frameless ? '0' : '0.8em 1.8em'};
-  }
-`;
-
+/* Data readout tables: glass rows with an accent rail; the tinted variant
+   adds scanlines. */
 export const DemoStokeTwoColumnLayout = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.35em;
   padding: clamp(0.9em, 2vw, 1.45em) clamp(1.2em, 3vw, 2em);
-  border: ${props => props.$variant === 'tinted' ? 'none' : `1px solid ${THEME.colors.grey}`};
-  border-radius: ${THEME.radii.md};
-  background: ${props => props.$variant === 'tinted' ? 'rgba(37, 99, 235, 0.08)' : 'transparent'};
+  border: 1px solid var(--glass-border);
+  border-left: 2px solid var(--city-accent);
+  background: ${props => props.$variant === 'tinted'
+    ? `${scanlines}, rgba(var(--color-dark-rgb), 0.45)`
+    : 'rgba(var(--color-dark-rgb), 0.25)'};
 `;
 
 export const DemoStokeTwoColumnRow = styled.div`
@@ -722,7 +524,7 @@ export const DemoStokeTwoColumnRow = styled.div`
   padding: 0.45em 0;
 
   &:not(:last-child) {
-    border-bottom: ${props => props.$isBorderless ? 'none' : `1px solid ${THEME.colors.grey}`};
+    border-bottom: ${props => props.$isBorderless ? 'none' : '1px dashed var(--glass-border)'};
     padding-bottom: clamp(0.75em, 1.8vw, 1.1em);
   }
 
@@ -733,10 +535,12 @@ export const DemoStokeTwoColumnRow = styled.div`
 `;
 
 export const DemoStokeTwoColumnHeader = styled.div`
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: capitalize;
+  font-family: ${THEME.fonts.hud};
   font-size: clamp(1.05em, 2vw, 1.25em);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
 `;
 
 export const DemoStokeTwoColumnCopy = styled.div`
@@ -809,10 +613,12 @@ export const DemoStokeTldrRow = styled.div`
 
 export const DemoStokeTldrTitle = styled.h3`
   margin: 0 0 0.35em;
+  font-family: ${THEME.fonts.hud};
   font-size: clamp(1.55em, 3.5vw, 2.15em);
-  line-height: 1.1;
+  font-weight: 700;
+  line-height: 1.05;
   color: ${THEME.colors.white};
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
 `;
 
 export const DemoStokeTldrCopy = styled.div`
@@ -823,10 +629,12 @@ export const DemoStokeTldrCopy = styled.div`
   a {
     font-weight: 600;
     color: ${THEME.colors.white};
+    text-decoration-color: var(--city-accent);
+    text-underline-offset: 0.18em;
     transition: color 0.2s ease;
 
     &:hover {
-      color: ${THEME.colors.hotRed};
+      color: var(--city-accent);
     }
   }
 
@@ -842,6 +650,10 @@ export const DemoStokeTldrCopy = styled.div`
       margin: 0 0 0.5em;
     }
 
+    li::marker {
+      color: var(--city-accent);
+    }
+
     li:last-child {
       margin-bottom: 0;
     }
@@ -852,10 +664,10 @@ export const DemoStokeTldrImage = styled.img`
   width: 100%;
   height: auto;
   max-width: 100%;
-  border-radius: ${THEME.radii.md};
-  border: none;
+  border-radius: 2px;
+  border: 1px solid var(--glass-border);
   object-fit: contain;
-  box-shadow: 0 24px 38px -30px rgb(0 0 0 / 55%);
+  box-shadow: 0 24px 38px -30px var(--shadow-deep);
   display: block;
 `;
 
@@ -904,15 +716,22 @@ export const DemoStokeAccordion = styled.div`
   gap: 0.55em;
 `;
 
+/* Accordion items are notched glass plates; the edge lights up in the
+   accent when open or hovered. */
 export const DemoStokeAccordionItem = styled.div`
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: ${THEME.radii.md};
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.005));
-  box-shadow: ${props => props.$isOpen ? '0 14px 28px -16px rgb(0 0 0 / 70%)' : 'none'};
+  --item-notch: 10px;
+  --item-edge: ${props => props.$isOpen ? 'var(--city-accent)' : 'var(--glass-border)'};
+  border: 1px solid var(--item-edge);
+  background-color: rgba(var(--color-dark-rgb), 0.4);
+  background-image: ${notchStrokes('var(--item-notch)', 'var(--item-edge)')};
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  ${hudNotch('var(--item-notch)')}
+  box-shadow: ${props => props.$isOpen ? 'inset 0 0 28px -14px var(--city-glow)' : 'none'};
   transition: border-color 0.2s ease, box-shadow 0.3s ease;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.5);
+    --item-edge: var(--city-accent);
   }
 `;
 
@@ -927,12 +746,20 @@ export const DemoStokeAccordionHeader = styled.button`
   padding: 0.95em 1.05em;
   cursor: pointer;
   color: ${THEME.colors.white};
+
+  /* The item is clipped, so the ring sits inside it. */
+  &:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -5px;
+  }
 `;
 
 export const DemoStokeAccordionTitle = styled.span`
+  font-family: ${THEME.fonts.hud};
   font-size: clamp(1.1em, 2vw, 1.3em);
   font-weight: 700;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 `;
 
 export const DemoStokeAccordionChevron = styled.span`
@@ -943,7 +770,7 @@ export const DemoStokeAccordionChevron = styled.span`
   height: 2.1em;
   padding: 0;
   flex-shrink: 0;
-  color: ${props => props.$isOpen ? THEME.colors.hotRed : 'inherit'};
+  color: ${props => props.$isOpen ? 'var(--city-accent)' : 'inherit'};
   background: transparent;
   border: none;
   box-shadow: none;
@@ -1030,69 +857,10 @@ export const DemoStokeTwoUp = styled.div`
   }
 `;
 
-export const DemoStokeStoryCardGrid = styled(DemoStokeTwoUp)`
-  gap: clamp(1.2em, 3vw, 2.6em);
-  align-items: stretch;
-`;
-
-export const DemoStokeStoryCard = styled.section`
-  position: relative;
-  isolation: isolate;
-  padding: clamp(1.15em, 2.4vw, 1.65em);
-  border-radius: ${THEME.radii.md};
-  background:
-    radial-gradient(120% 140% at 12% 12%, rgba(0, 215, 255, 0.22), rgba(2, 8, 23, 0)),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(0, 113, 227, 0.12));
-  box-shadow: 0 18px 36px -28px rgb(0 0 0 / 85%), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  border: none;
-  overflow: hidden;
-  color: ${THEME.colors.white};
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(90% 90% at 85% 10%, rgba(255, 0, 101, 0.12), rgba(255, 0, 101, 0));
-    opacity: 0.9;
-    pointer-events: none;
-  }
-
-  h3 {
-    margin: 0 0 0.5em;
-    color: ${THEME.colors.demostoke};
-    letter-spacing: 0.01em;
-    font-weight: 700;
-  }
-
-  p {
-    margin: 0;
-    line-height: 1.65;
-    color: ${THEME.colors.white};
-    opacity: 0.94;
-  }
-`;
-
-export const DemoStokeBorderBox = styled.div`
-  width: 100%;
-  background: transparent;
-  padding: ${props => props.$noPadding ? '0' : '1.05em 1.6em'};
-  font-size: 0.95em;
-  line-height: 1.6;
-  border: 1px solid ${THEME.colors.grey};
-  border-radius: ${THEME.radii.md};
-  color: ${THEME.colors.white};
-  overflow: hidden;
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: ${props => props.$noPadding ? '0' : '0.9em 1.1em'};
-  }
-`;
-
 export const DemoStokeWhyImageFrame = styled.div`
   margin-top: clamp(1em, 2vw, 1.5em);
-  border-radius: ${THEME.radii.md};
   overflow: hidden;
-  box-shadow: 0 16px 38px -24px rgb(0 0 0 / 75%);
+  box-shadow: 0 16px 38px -24px var(--shadow-deep);
 
   img {
     display: block;
@@ -1109,22 +877,10 @@ export const DemoStokeScrollRow = styled.div`
   display: flex;
   gap: clamp(0.9em, 2vw, 1.35em);
   overflow-x: auto;
-  padding: 0.4em 0.2em 0.2em;
+  padding: 0.4em 0.2em 0.5em;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-
-  &::-webkit-scrollbar {
-    height: 8px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: ${THEME.colors.grey};
-    border-radius: 999px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
+  ${hudScrollbar}
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     padding-right: 0.25em;
@@ -1132,19 +888,27 @@ export const DemoStokeScrollRow = styled.div`
 `;
 
 export const DemoStokeScrollItem = styled.div`
+  position: relative;
   min-width: clamp(12.8em, 45vw, 15em);
   max-width: 18em;
   flex: 0 0 auto;
-  border: 1px solid rgba(199, 197, 197, 0.2);
-  border-radius: ${THEME.radii.md};
+  border: 1px solid var(--glass-border);
   overflow: hidden;
-  background: transparent;
+  background: ${THEME.colors.darkest};
   cursor: pointer;
   scroll-snap-align: start;
-  transition: border-color 0.25s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  ${screenOverlay}
 
   &:hover {
-    border-color: ${THEME.colors.orange};
+    border-color: var(--city-accent);
+    box-shadow: 0 0 14px -4px var(--city-glow);
+  }
+
+  /* The row scrolls and clips, so the ring sits inside the item. */
+  &:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -4px;
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
@@ -1179,23 +943,34 @@ export const DemoStokeScrollControls = styled.div`
   gap: 0.65em;
 `;
 
+/* Notched square HUD buttons with a 44px minimum target. */
 export const DemoStokeScrollButton = styled.button`
   all: unset;
+  --btn-notch: 7px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.8em;
-  height: 1.8em;
-  border-radius: 50%;
-  border: 1px solid ${THEME.colors.grey};
+  width: max(44px, 1.8em);
+  height: max(44px, 1.8em);
+  border: 1px solid var(--glass-border);
+  background-color: rgba(var(--color-dark-rgb), 0.6);
+  background-image: ${notchStrokes('var(--btn-notch)', 'var(--city-accent)')};
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  ${hudNotch('var(--btn-notch)')}
   color: ${THEME.colors.white};
-  background: ${THEME.colors.darkest};
   cursor: pointer;
   transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 
   &:hover:enabled {
     transform: translateY(-1px);
-    border-color: ${THEME.colors.white};
+    border-color: var(--city-accent);
+    color: var(--city-accent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -5px;
   }
 
   &:disabled {
@@ -1215,54 +990,53 @@ export const DemoStokeMiniCardRow = styled.div`
   display: flex;
   gap: clamp(0.9em, 2vw, 1.35em);
   overflow-x: auto;
-  padding: 0.35em 0.2em 0.3em;
+  padding: 0.35em 0.2em 0.5em;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-
-  &::-webkit-scrollbar {
-    height: 8px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: ${THEME.colors.grey};
-    border-radius: 999px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
+  ${hudScrollbar}
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     padding-right: 0.25em;
   }
 `;
 
+/* Notched glass cards; the clip keeps focus rings inside the card. */
 export const DemoStokeMiniCard = styled.button`
   all: unset;
+  --card-notch: 12px;
+  --card-edge: var(--glass-border);
   cursor: pointer;
   display: flex;
   flex-direction: column;
   min-width: clamp(13em, 48vw, 15.5em);
   max-width: 18em;
   padding: clamp(1em, 2.3vw, 1.4em);
-  border-radius: ${THEME.radii.md};
-  background: transparent;
-  border: 1.5px solid ${THEME.colors.white};
-  box-shadow: none;
+  border: 1px solid var(--card-edge);
+  background-color: rgba(var(--color-dark-rgb), 0.55);
+  background-image:
+    ${notchStrokes('var(--card-notch)', 'var(--card-edge)')},
+    linear-gradient(160deg, var(--glass-highlight), transparent 45%);
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  ${hudNotch('var(--card-notch)')}
   color: ${THEME.colors.white};
   scroll-snap-align: start;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.2s ease, border-color 0.25s ease;
   text-align: left;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover,
+  &:focus-visible {
+    --card-edge: var(--city-accent);
+    box-shadow: inset 0 0 30px -14px var(--city-glow);
+  }
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: none;
-    border-color: ${THEME.colors.orange};
   }
 
   &:focus-visible {
-    outline: 2px solid ${THEME.colors.demostoke};
-    outline-offset: 3px;
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -5px;
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
@@ -1272,11 +1046,13 @@ export const DemoStokeMiniCard = styled.button`
 `;
 
 export const DemoStokeMiniCardTitle = styled.div`
-  font-weight: 700;
-  color: ${THEME.colors.white};
-  letter-spacing: 0.01em;
   margin: 0 0 0.5em;
-  font-size: clamp(1.02em, 2vw, 1.2em);
+  color: ${THEME.colors.white};
+  font-family: ${THEME.fonts.hud};
+  font-size: clamp(1.05em, 2vw, 1.25em);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
 `;
 
 export const DemoStokeMiniCardPreview = styled.div`
@@ -1298,29 +1074,31 @@ export const DemoStokeMiniCardPreview = styled.div`
 export const DemoStokeMiniCardHint = styled.span`
   display: inline-flex;
   align-items: center;
-  gap: 0.3em;
-  color: ${THEME.colors.demostoke};
-  opacity: 1;
-  font-size: 0.86em;
-  letter-spacing: 0.02em;
+  gap: 0.4em;
   margin-top: auto;
   padding-top: clamp(0.6em, 1vw, 0.85em);
+  color: var(--city-accent);
+  font-family: ${THEME.fonts.mono};
+  font-size: 0.78em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 
   &::after {
     content: '↗';
-    font-size: 0.95em;
+    content: '↗' / '';
+    font-size: 1.1em;
   }
 `;
 
 export const DemoStokeStoryHero = styled.img`
   width: 100%;
   display: block;
-  border-radius: ${THEME.radii.md};
-  border: 1.5px solid ${THEME.colors.grey};
+  border-radius: 0;
+  border: 1px solid var(--glass-border);
   object-fit: cover;
   object-position: top;
   margin: 0;
-  box-shadow: 0 12px 28px -20px rgb(0 0 0 / 60%);
+  box-shadow: 0 12px 28px -20px var(--shadow-deep);
 `;
 
 export const DemoStokeHeroAbstractLayout = styled.div`
@@ -1352,58 +1130,57 @@ export const DemoStokeHeroAbstractLayout = styled.div`
   }
 `;
 
+/*
+ * Dialogs: a "shard reader" with a dark glass plate and light ink in both
+ * themes. Portal it to the body when it opens inside a glass panel, since
+ * the panel's stacking context would hold it under the fixed nav.
+ */
 export const DemoStokeMiniCardModalOverlay = styled.div`
   position: fixed;
   inset: 0;
-  background: rgb(2 8 23 / 0.82);
-  backdrop-filter: blur(4px);
+  z-index: 999;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: clamp(1em, 3vw, 2em);
-  z-index: 999;
+  background: var(--modal-scrim);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 `;
 
 export const DemoStokeMiniCardModal = styled.div`
-  position: relative;
+  ${hudFrame({ blur: false })}
+  --hud-notch: 20px;
+  --hud-frame-bg: ${scanlines}, var(--modal-bg);
+  /* The plate stays dark by day, so keep the night sheen and teal, and a
+     yellow focus ring that reads on it in both themes. */
+  --glass-highlight: rgba(255, 255, 255, 0.06);
+  --hud-teal: #5ef6e6;
+  --focus-ring: var(--hud-yellow);
   width: min(720px, 95vw);
   max-height: 88vh;
   overflow: hidden;
-  border-radius: ${THEME.radii.md};
-  background:
-    radial-gradient(140% 140% at 10% 0%, rgba(0, 215, 255, 0.16), rgba(2, 8, 23, 0)),
-    linear-gradient(150deg, rgba(3, 7, 18, 0.95), rgba(2, 132, 199, 0.14));
-  box-shadow: 0 18px 44px -26px rgb(0 0 0 / 80%), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(0, 215, 255, 0.2);
-  color: #f8fafc; /* lock light text regardless of theme */
   padding: clamp(1.2em, 2.5vw, 1.85em);
-
-  :root[data-theme='light'] & {
-    background:
-      radial-gradient(140% 140% at 10% 0%, rgba(0, 215, 255, 0.18), rgba(248, 250, 252, 0.02)),
-      linear-gradient(150deg, rgba(8, 47, 73, 0.9), rgba(12, 74, 110, 0.75));
-    color: #f8fafc; /* keep light text inside the modal in light theme */
-    border: 1px solid rgba(8, 47, 73, 0.5);
-    box-shadow: 0 18px 36px -24px rgb(15 23 42 / 45%);
-  }
+  color: var(--hud-ink);
+  filter: drop-shadow(0 24px 36px rgba(0, 0, 0, 0.5));
 `;
 
 export const DemoStokeMiniCardModalClose = styled.button`
   all: unset;
   position: absolute;
-  top: 0.3em;
-  right: 0.3em;
+  top: 0.55em;
+  right: 0.9em;
+  z-index: 1;
   width: 2em;
   height: 2em;
-  border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #f8fafc; /* keep icon visible in light mode */
-  background: rgba(0, 215, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  color: var(--hud-ink);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--hud-panel-border);
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 
   svg {
     width: 1em;
@@ -1413,30 +1190,41 @@ export const DemoStokeMiniCardModalClose = styled.button`
   }
 
   &:hover {
-    transform: translateY(-1px);
-    opacity: 0.9;
+    color: var(--hud-yellow);
+    border-color: var(--hud-yellow);
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 
   &:focus-visible {
-    outline: 2px solid ${THEME.colors.demostoke};
+    outline: 2px solid var(--focus-ring);
     outline-offset: 3px;
   }
 `;
 
 export const DemoStokeMiniCardModalTitle = styled.h4`
   margin: 0 0 0.65em;
+  padding-right: 2em;
+  color: var(--hud-ink);
+  font-family: ${THEME.fonts.hud};
   font-size: clamp(1.25em, 2.3vw, 1.5em);
-  color: #f8fafc; /* lock light text regardless of theme */
-  letter-spacing: 0.01em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+  text-transform: uppercase;
+  text-shadow: 0 0 0.5em var(--city-glow);
 `;
 
 export const DemoStokeMiniCardModalCopy = styled.div`
-  color: #f8fafc; /* force light text so it reads on dark modal */
+  color: var(--hud-ink);
   line-height: 1.7;
   font-size: 1em;
   max-height: calc(88vh - 4em);
   overflow-y: auto;
   padding-right: 0.4em;
+  ${hudScrollbar}
 
   p {
     margin: 0 0 0.8em;
@@ -1447,210 +1235,82 @@ export const DemoStokeMiniCardModalCopy = styled.div`
   }
 
   a {
-    color: #f8fafc;
+    color: var(--hud-ink);
     font-weight: 600;
     text-decoration: underline;
+    text-decoration-color: var(--hud-yellow);
+    text-underline-offset: 0.18em;
 
     &:hover {
-      color: ${THEME.colors.hotRed};
+      color: var(--hud-yellow);
     }
   }
 `;
 
-export const DemoStokeWhyGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: clamp(0.85em, 2vw, 1.45em);
-  margin-top: 0.6em;
-`;
-
-export const DemoStokeWhyCard = styled.div`
-  position: relative;
-  padding: clamp(1em, 2.4vw, 1.4em);
-  border-radius: ${THEME.radii.md};
-  background: rgba(37, 99, 235, 0.08);
-  box-shadow: 0 12px 28px -22px rgb(0 0 0 / 70%);
-  color: ${THEME.colors.white};
-  border: none;
-  overflow: hidden;
-`;
-
-export const DemoStokeWhyBadge = styled.span`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 1.8em;
-  height: 1.8em;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(15, 23, 42, 0.55);
-  color: ${THEME.colors.white};
-  font-weight: 700;
-  font-size: 0.95em;
-  letter-spacing: 0.01em;
-  margin-bottom: 0.55em;
-`;
-
-export const DemoStokeWhyTitle = styled.h4`
-  margin: 0 0 0.4em;
-  color: ${THEME.colors.white};
-  font-size: clamp(1.05em, 2.2vw, 1.25em);
-  letter-spacing: 0.01em;
-`;
-
-export const DemoStokeWhyCopy = styled.div`
-  color: ${THEME.colors.white};
-  line-height: 1.65;
-  opacity: 0.96;
-
-  p {
-    margin: 0 0 0.7em;
-  }
-
-  p:last-child {
-    margin-bottom: 0;
-  }
-`;
-
-export const TableWrapper = styled.div`
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border-radius: ${THEME.radii.md};
-  border: 1px solid ${THEME.colors.grey};
-
-  table {
-    min-width: 600px; /* Adjust based on your content */
-    border-collapse: collapse;
-    width: 100%;
-  }
-
-  th,
-  td {
-    padding: 0.75rem;
-    text-align: left;
-    white-space: nowrap;
-  }
-`;
-
-export const DemoStokeTable = styled.table`
-  width: 100%;
-  padding: 0.8em 1.8em;
-  font-size: 0.9em;
-  font-weight: lighter;
-`;
-
-export const DemoStokeText = styled.div`
-  width: 100%;
-  background: transparent;
-  padding: 0.8em 1.8em;
-  font-size: 0.9em;
-  font-weight: lighter;
-  border: 1px solid ${THEME.colors.grey};
-  border-radius: ${THEME.radii.md};
-`;
-
-// Tabs
-export const TabWrapper = styled.div`
-  /* reset */
-  button,
-  fieldset,
-  input {
-    all: unset;
-  }
-
-  .TabsRoot {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .TabsList {
-    flex-shrink: 0;
-    display: flex;
-    position: fixed;
-    width: 100%;
-    top: 5em;
-
-    @media (max-width: ${THEME.breakpoints.largeTablet}) {
-      top: 4.9em;
-    }
-
-    @media (max-width: ${THEME.breakpoints.phone}) {
-      top: 8.48em;
-    }
-  }
-
-  .TabsTrigger {
-    font-family: inherit;
-    padding: 0 20px;
-    height: 45px;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2em;
-    user-select: none;
-    background-color: #0c4a6e;
-    color: #ffffff;
-    cursor: pointer;
-    display: block;
-
-    div {
-      line-height: 48px;
-    }
-
-    @media (max-width: ${THEME.breakpoints.phone}) {
-      font-size: 1em;
-    }
-  }
-
-  .TabsTrigger[data-state="active"] {
-    background-color: #d3ff00;
-    color: #020817;
-  }
-
-  .TabsContent {
-    flex-grow: 1;
-    outline: none;
-  }
-`;
-
-export const HotRedTitle = styled.h2`
-  color: ${THEME.colors.hotRed};
-`;
-
+/*
+ * HUD tabs: notched plates with stroked notch diagonals. The plate itself is
+ * clipped, so focus rings sit inside it. Active tabs fill with the brand
+ * accent and white text; the case-study tab tests read those declarations
+ * from the [data-active='true'] rules, so keep them explicit.
+ */
 export const HudTabButton = styled.button.attrs(({ $isActive }) => ({
   'data-active': $isActive ? 'true' : 'false',
 }))`
   all: unset;
+  box-sizing: border-box;
+  --tab-notch: 9px;
+  --tab-edge: var(--glass-border);
+  position: relative;
   width: 100%;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.65em 1em;
-  border-radius: ${THEME.radii.md};
-  font-family: Roboto, sans-serif;
+  gap: 0.6em;
+  padding: 0.55em 1em;
+  border: 1px solid var(--tab-edge);
+  ${hudNotch('var(--tab-notch)')}
+  background-color: rgba(var(--color-dark-rgb), 0.55);
+  background-image: ${notchStrokes('var(--tab-notch)', 'var(--tab-edge)')};
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  color: ${THEME.colors.white};
+  font-family: ${THEME.fonts.hud};
   font-size: 1.05em;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.15;
   text-align: center;
+  text-transform: uppercase;
   white-space: normal;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-  background-color: ${props => props.$isActive ? THEME.colors.accent : THEME.colors.hotYellow};
-  color: ${props => props.$isActive ? '#fff' : THEME.colors.contrast};
-  box-shadow: ${props => props.$isActive ? 'none' : '0 8px 18px -10px rgb(0 0 0 / 50%)'};
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
 
-  &:hover {
+  &[data-active='true'] {
+    --tab-edge: ${THEME.colors.accent};
     background-color: ${THEME.colors.accent};
     border-color: ${THEME.colors.accent};
     color: #fff;
+    box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.16), inset 0 -2px 0 rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.45);
+  }
+
+  &:not([data-active='true']):hover {
+    --tab-edge: var(--city-accent);
+    background-color: rgba(var(--color-dark-rgb), 0.82);
+    color: var(--city-accent);
+    box-shadow: inset 0 0 18px -6px var(--city-glow);
   }
 
   &:focus-visible {
-    outline: 2px solid ${THEME.colors.hotYellow};
-    outline-offset: 3px;
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -5px;
+  }
+
+  &[data-active='true']:focus-visible {
+    outline-color: #fff;
   }
 
   &:active {
@@ -1659,59 +1319,117 @@ export const HudTabButton = styled.button.attrs(({ $isActive }) => ({
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     font-size: 0.79em;
+    letter-spacing: 0.08em;
   }
 `;
 
 export const CaseStudyTopTabButton = styled(HudTabButton)`
-  border: 1.5px solid var(--case-study-top-tab-border);
-  background: var(--case-study-top-tab-bg);
+  --tab-edge: var(--case-study-top-tab-border);
+  background-color: var(--case-study-top-tab-bg);
   color: var(--case-study-top-tab-color);
-  box-shadow: 0 10px 22px -14px rgb(0 0 0 / 55%);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+
+  /* A status diamond, lit on the active tab. */
+  &::before {
+    content: '';
+    flex-shrink: 0;
+    width: 0.5em;
+    height: 0.5em;
+    background: currentColor;
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+    opacity: 0.45;
+    transition: opacity 0.25s ease;
+  }
 
   &[data-active='true'] {
+    --tab-edge: ${THEME.colors.accent};
     background-color: ${THEME.colors.accent};
     border-color: ${THEME.colors.accent};
     color: #fff;
   }
 
-  &:hover {
-    background-color: ${THEME.colors.accent};
-    border-color: ${THEME.colors.accent};
-    color: #fff;
+  &[data-active='true']::before,
+  &:hover::before {
+    opacity: 1;
   }
+`;
 
-  &[data-active='true']:hover {
+const sidebarTabButtonStyles = css`
+  --tab-notch: 7px;
+  --tab-edge: var(--section-tab-border);
+  background-color: var(--section-tab-bg);
+  color: var(--section-tab-color);
+
+  &[data-active='true'] {
+    --tab-edge: ${THEME.colors.accent};
     background-color: ${THEME.colors.accent};
     border-color: ${THEME.colors.accent};
     color: #fff;
   }
 `;
 
-const sidebarTabButtonStyles = css`
-  background-color: var(--section-tab-bg);
-  border: 1.5px solid var(--section-tab-border);
-  color: var(--section-tab-color);
-  box-shadow: none;
-  transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
-
-  &[data-active='true'] {
-    background-color: ${THEME.colors.accent};
-    border-color: ${THEME.colors.accent};
-    color: #fff;
+/* The rails' glass plate and the reading-progress line along their foot. */
+const railPlate = (notch) => css`
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border: 1px solid var(--glass-border);
+    background:
+      ${notchStrokes(notch, 'var(--glass-border)')},
+      linear-gradient(180deg, var(--glass-highlight), transparent 65%),
+      rgba(var(--color-dark-rgb), 0.9);
+    clip-path: ${notchPolygon(notch)};
+    pointer-events: none;
   }
 
-  &:not([data-active='true']):hover {
-    background-color: ${THEME.colors.accent};
-    border-color: ${THEME.colors.accent};
-    color: #fff;
+  &::after {
+    content: '';
+    position: absolute;
+    right: 12px;
+    bottom: 3px;
+    left: 12px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--city-accent), var(--neon-cyan));
+    box-shadow: 0 0 8px var(--city-glow);
+    transform: scaleX(var(--page-progress, 0));
+    transform-origin: left center;
+    pointer-events: none;
   }
 
-  &[data-active='true']:hover {
-    background-color: ${THEME.colors.accent};
-    border-color: ${THEME.colors.accent};
-    color: #fff;
+  @media (min-width: 601px) {
+    &::before {
+      background:
+        ${notchStrokes(notch, 'var(--glass-border)')},
+        linear-gradient(180deg, var(--glass-highlight), transparent 65%),
+        rgba(var(--color-dark-rgb), 0.8);
+      -webkit-backdrop-filter: blur(10px) saturate(130%);
+      backdrop-filter: blur(10px) saturate(130%);
+    }
+  }
+`;
+
+export const SectionTabsWrapper = styled.div`
+  position: fixed;
+  top: var(--sidebar-tabs-top, calc(5em + 4.4em));
+  left: 50%;
+  transform: translate(-50%, ${props => props.$isVisible ? '0' : '-10px'});
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.4em;
+  width: min(calc(100% - 2.4em), 62em);
+  padding: 0.4em 0.4em 0.6em;
+  counter-reset: rail;
+  opacity: ${props => props.$isVisible ? 1 : 0};
+  pointer-events: ${props => props.$isVisible ? 'auto' : 'none'};
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  z-index: 94;
+  ${railPlate('12px')}
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    display: none;
+    position: static;
   }
 `;
 
@@ -1719,19 +1437,32 @@ export const SectionTabButton = styled(HudTabButton)`
   ${sidebarTabButtonStyles}
   flex: 1 1 0;
   min-width: 0;
-  font-size: 0.72em;
-  padding: 0.7em 0.9em;
-  justify-content: center;
-  text-align: center;
   width: auto;
-  min-height: 2.2em;
-  letter-spacing: 0.011em;
-  line-height: 1.3;
-  border-radius: ${THEME.radii.md};
+  padding: 0.5em 0.8em;
+  font-size: 0.72em;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  counter-increment: rail;
+
+  /* Segment numbers come from a counter so the button text stays the label. */
+  &::before {
+    content: counter(rail, decimal-leading-zero);
+    content: counter(rail, decimal-leading-zero) / '';
+    flex-shrink: 0;
+    font-family: ${THEME.fonts.mono};
+    font-size: 0.8em;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    opacity: 0.6;
+  }
+
+  &[data-active='true']::before {
+    opacity: 1;
+  }
 
   @media (max-width: 1280px) {
     font-size: 0.65em;
-    padding: 0.65em 0.75em;
+    padding: 0.5em 0.65em;
   }
 `;
 
@@ -1750,36 +1481,39 @@ export const SectionTabsMobileWrapper = styled.div`
 `;
 
 export const SectionTabsMobileInner = styled.div`
+  position: relative;
+  isolation: isolate;
   display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap: 0.35em;
   width: 100%;
   max-width: 46em;
   margin: 0 auto;
-  gap: 0.45em;
-  padding: 0.4em;
-  border-radius: ${THEME.radii.md};
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(var(--color-dark-rgb), 0.88);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(6px);
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  overflow: hidden;
+  padding: 0.35em 0.35em 0.55em;
+  ${railPlate('10px')}
 `;
 
 export const SectionTabsMobileButton = styled(HudTabButton)`
   ${sidebarTabButtonStyles}
   flex: 1 1 0;
   min-width: 0;
-  font-size: 0.92em;
-  padding: 0.6em 1.1em;
-  white-space: normal;
-  padding: 0.75em 0.55em;
+  width: auto;
+  padding: 0.55em 0.45em;
+  font-size: 0.95em;
+  letter-spacing: 0.08em;
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    font-size: 0.75em;
+    font-size: 0.8em;
+    letter-spacing: 0.05em;
   }
 `;
 
+/*
+ * The case-study tab bar docks under the nav as a glass HUD strip with an
+ * accent rule. Its top offsets match the nav heights, which the section
+ * rails and their scroll math read back.
+ */
 export const DemoStokeTabsBar = styled.div`
   position: fixed;
   top: 5em;
@@ -1789,7 +1523,40 @@ export const DemoStokeTabsBar = styled.div`
   gap: 0.6em;
   padding: 0.4em 1em 0.45em;
   z-index: 95;
-  background: transparent;
+  border-bottom: 1px solid var(--glass-border);
+  background: linear-gradient(180deg, rgba(var(--color-dark-rgb), 0.95), rgba(var(--color-dark-rgb), 0.86));
+  box-shadow: 0 14px 28px -24px var(--shadow-deep);
+
+  /* The nav ends a few pixels above this bar's offset; fill that seam so
+     scrolling copy never peeks through between the two glass layers. */
+  &::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    left: 0;
+    height: 3px;
+    background: rgba(var(--color-dark-rgb), 0.95);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--city-accent) 20%, var(--city-accent) 80%, transparent);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  @media (min-width: 601px) {
+    background: linear-gradient(180deg, rgba(var(--color-dark-rgb), 0.88), rgba(var(--color-dark-rgb), 0.74));
+    -webkit-backdrop-filter: blur(12px) saturate(130%);
+    backdrop-filter: blur(12px) saturate(130%);
+  }
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     top: 4.9em;
