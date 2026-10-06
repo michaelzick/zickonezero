@@ -9,10 +9,10 @@ import {
 } from '../lib/seo';
 
 const SITE_TAGLINE = 'Product, UX & Development';
-// Intrinsic size and alt text of the default brand OG image, used when a page falls back to it.
-const DEFAULT_OG_IMAGE_WIDTH = 925;
-const DEFAULT_OG_IMAGE_HEIGHT = 1196;
-const DEFAULT_OG_IMAGE_ALT = 'ZICKONEZERO Creative lifeguard tower mark';
+// Intrinsic size and alt text of the default share image (the night hero), used when a page falls back to it.
+const DEFAULT_OG_IMAGE_WIDTH = 1200;
+const DEFAULT_OG_IMAGE_HEIGHT = 630;
+const DEFAULT_OG_IMAGE_ALT = 'A neon "I Dream in Features" sign over a rainy night-city alley, with the ZICKONEZERO Creative wordmark';
 
 export type SeoProps = {
   title?: string;
