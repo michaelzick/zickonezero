@@ -23,7 +23,7 @@ const arrowsMarch = keyframes`
   to { transform: translate3d(0, -160px, 0); }
 `;
 
-const rainFall = keyframes`
+export const rainFall = keyframes`
   from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(-58px, 420px, 0); }
 `;
@@ -50,9 +50,8 @@ const cueBob = keyframes`
   50% { transform: translate3d(0, 4px, 0) rotate(45deg); }
 `;
 
-const CJK_FONTS = "'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Noto Sans CJK JP', 'Noto Sans JP', sans-serif";
-
-const RAIN_TILE = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cg stroke='%23cfefff' stroke-width='1.4' stroke-linecap='round' opacity='.75'%3E%3Cpath d='M30 10l-8 60M140 120l-10 74M260 40l-7 52M370 200l-9 66M80 260l-8 58M210 300l-10 70M330 350l-6 44M400 60l-8 54'/%3E%3C/g%3E%3C/svg%3E\")";
+/** Foreground rain streaks, tiled and animated with rainFall. */
+export const RAIN_TILE = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cg stroke='%23cfefff' stroke-width='1.4' stroke-linecap='round' opacity='.75'%3E%3Cpath d='M30 10l-8 60M140 120l-10 74M260 40l-7 52M370 200l-9 66M80 260l-8 58M210 300l-10 70M330 350l-6 44M400 60l-8 54'/%3E%3C/g%3E%3C/svg%3E\")";
 
 const ARROW_TILE = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 160'%3E%3Cpath d='M14 118 60 62l46 56' fill='none' stroke='%232ff3ff' stroke-width='14' stroke-linejoin='miter'/%3E%3C/svg%3E\")";
 
@@ -254,7 +253,7 @@ export const HeroRoot = styled.section`
     border: 3px solid var(--tone);
     background: rgba(4, 6, 12, 0.88);
     color: var(--tone);
-    font-family: ${CJK_FONTS};
+    font-family: ${THEME.fonts.cjk};
     font-weight: 900;
     line-height: 1;
     box-shadow: 0 0 calc(22px * var(--neon-glow-strength, 1)) var(--tone), inset 0 0 18px rgba(0, 0, 0, 0.6);
@@ -644,8 +643,13 @@ export const HeroRoot = styled.section`
     }
   }
 
-  /* Short landscape screens: the sign moves right of the panel. */
+  /* Short landscape screens: the sign moves right of the panel, where the
+     夢 blade sign would show through it. */
   @media (max-height: 520px) and (min-aspect-ratio: 4/3) {
+    .blade-dream {
+      display: none;
+    }
+
     .hero-sign {
       top: 80px;
       right: clamp(16px, 4vw, 64px);

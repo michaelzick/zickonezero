@@ -1,11 +1,5 @@
-import styled, { keyframes, css } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { THEME } from './theme';
-
-const phraseCycle = keyframes`
-  0%, 25% { transform: translateY(0); opacity: 1; }
-  30% { transform: translateY(-100%); opacity: 0; }
-  31%, 100% { transform: translateY(100%); opacity: 0; }
-`;
 
 // Accessible heading that is hidden from sighted users but exposed to
 // assistive tech and search crawlers (used for image-only hero sections).
@@ -128,95 +122,6 @@ export const PitchDeckLink = styled(WhiteTransitionAnchor)`
   }
 `;
 
-export const WorkSectionHeader = styled.span`
-  display: inline-block;
-  font-family: monospace;
-  font-size: 2em;
-  padding: 0 0.5em;
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    font-size: 1.3em;
-  }
-`;
-
-export const AnimatedHeadlineWrapper = styled.h1`
-  display: flex;
-  align-items: baseline;
-  flex-wrap: nowrap;
-  gap: 0.35em;
-  max-width: 100em;
-  width: 100%;
-  margin: 0 auto 1em;
-  padding: 0 0.5em;
-  color: ${THEME.colors.white};
-  font-family: Roboto, sans-serif;
-  font-size: 1.8em;
-  font-weight: 500;
-  line-height: 1.1;
-  text-align: left;
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    font-size: 1.5em;
-    margin: 0 auto 0.9em;
-    padding: 0 0.5em;
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    font-size: 1.2em;
-    gap: 0.25em;
-    margin: 0 auto 0.8em;
-    padding: 0 0.5em;
-  }
-`;
-
-export const AnimatedHeadlineStatic = styled.span`
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: baseline;
-`;
-
-export const AnimatedHeadlineDynamic = styled.span`
-  position: relative;
-  display: inline-flex;
-  align-items: baseline;
-  overflow: hidden;
-  min-height: 1.25em;
-  line-height: 1.25;
-  min-width: 0;
-`;
-
-export const AnimatedHeadlineTrack = styled.span`
-  position: absolute;
-  inset: 0;
-  display: block;
-`;
-
-export const AnimatedHeadlinePhrase = styled.span`
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: inline-flex;
-  align-items: center;
-  width: 100%;
-  min-height: 1.25em;
-  line-height: 1.25;
-  color: ${THEME.colors.hotRed};
-  transform: translateY(100%);
-  opacity: 0;
-  animation: ${phraseCycle} 12s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
-  animation-fill-mode: forwards;
-  will-change: transform, opacity;
-`;
-
-export const AnimatedHeadlineSizer = styled.span`
-  visibility: hidden;
-  pointer-events: none;
-  display: block;
-  width: 100%;
-  min-height: 1.25em;
-  white-space: normal;
-`;
-
 export const Wrapper = styled.div`
   ${props => {
     if (props.isAtPage && props.$isProjectPage) return 'padding-top: 7em;';
@@ -274,95 +179,6 @@ export const Button = styled.a`
   }
 `;
 
-export const GridContainer = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 1em;
-
-  .grid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    max-width: 100em;
-
-    @media (max-width: ${THEME.breakpoints.phone}) {
-      width: 100%;
-      flex-direction: column;
-    }
-  }
-
-  ${props => props.$carousel && css`
-    @media (max-width: ${THEME.breakpoints.phone}) {
-      .grid {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: flex-start;
-        justify-content: flex-start;
-        gap: 1em;
-        overflow-x: auto;
-        box-sizing: border-box;
-        padding: 0 1em 0.6em;
-        scroll-padding-inline: 1em;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-
-        &::-webkit-scrollbar {
-          height: 6px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          background: ${THEME.colors.grey};
-          border-radius: 999px;
-        }
-
-        &::-webkit-scrollbar-track {
-          background: transparent;
-        }
-
-        > * {
-          flex: 0 0 auto;
-          margin: 0.75em 0 0.5em;
-          scroll-snap-align: start;
-        }
-      }
-    }
-  `}
-`;
-
-export const GridCarouselControls = styled.div`
-  display: none;
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.65em;
-    align-self: stretch;
-    padding: 0 1em;
-  }
-`;
-
-export const HomeWorkSection = styled.section`
-  margin: 0 clamp(0.75em, 3vw, 2.5em) clamp(2.5em, 6vw, 4.5em);
-  padding: 0 clamp(0.5em, 2vw, 1.5em) clamp(0.75em, 2vw, 1.5em);
-  border: 1px solid ${props => `var(--home-section-${props.$tone}-border)`};
-  border-radius: 14px;
-  background: ${props => `var(--home-section-${props.$tone}-bg)`};
-
-  > h2,
-  > div {
-    background: transparent;
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    margin-inline: 0.75em;
-    padding-inline: 0;
-  }
-`;
-
 export const Image = styled.img`
   width: 100%;
   border-radius: ${THEME.radii.md};
@@ -376,101 +192,6 @@ export const FullBorderImage = styled(Image)`
   height: 100%;
   object-fit: cover;
   display: block;
-`;
-
-export const Thumb = styled.div`
-  text-align: center;
-  font-family: Roboto, sans-serif;
-  margin: 3em 2em 1.5em;
-  color: ${THEME.colors.white};
-
-  img {
-    transition: all 0.3s;
-    border-radius: ${THEME.radii.md};
-    cursor: pointer;
-  }
-
-  h3 {
-    transition: all 0.3s;
-    margin: 0.6em 0 0;
-  }
-
-  p {
-    transition: all 0.3s;
-    width: 240px;
-    text-align: center;
-    margin: 0 auto;
-    line-height: 1.4;
-
-    .external-link-icon {
-      display: inline-flex;
-      align-items: center;
-      vertical-align: middle;
-      position: relative;
-      top: -0.05em;
-
-      svg {
-        width: 0.95em;
-        height: 0.95em;
-      }
-    }
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-    display: inline;
-
-    &:hover {
-      color: inherit;
-    }
-  }
-
-  &:hover {
-    h3, p {
-      color: ${THEME.colors.hotRed};
-      cursor: pointer;
-    }
-  }
-
-  .thumb-media {
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-    border-radius: ${THEME.radii.md};
-  }
-
-  .neon-trail-thumb {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    mix-blend-mode: screen;
-    opacity: 0.9;
-    transition: opacity 0.2s ease-out;
-    border-radius: ${THEME.radii.md};
-  }
-
-  .thumb-media .cursor-dot {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    mix-blend-mode: screen;
-    opacity: 0;
-    transform: translate3d(-9999px, -9999px, 0);
-    transition: opacity 0.2s ease-out;
-  }
-
-  .thumb-dot {
-    width: 12px;
-    height: 12px;
-    box-shadow: 0 0 14px hsla(170, 100%, 65%, 0.8);
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    margin: 2em 0 1em;
-  }
 `;
 
 export const BioBox = styled.div`
@@ -718,32 +439,67 @@ export const SectionTabsWrapper = styled.div`
   }
 `;
 
-export const SectionHeader = styled.h2`
-  padding: 1.2em 0 0.6em;
-  margin: 0;
-  text-align: center;
-  font-family: Roboto, sans-serif;
-  font-size: 2em;
-  background: transparent;
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: 1.1em 0 0.8em;
-  }
-`;
-
+/*
+ * The footer is the city directory: a dark glass plate under a neon rule, a
+ * decorative directory heading, and one lit column per district (magenta
+ * case studies, cyan product engineering, amber links).
+ */
 export const Footer = styled.footer`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 2em;
-  padding: 2.5em 2em 2em;
   width: 100%;
-  border-top: 1px solid ${THEME.colors.white};
-  font-family: Roboto, sans-serif;
+  padding: 2.25em clamp(1.25em, 4vw, 3em) 2em;
+  border-top: 1px solid var(--glass-border);
+  background: linear-gradient(to bottom, rgba(var(--color-dark-rgb), 0.78), rgba(var(--color-dark-rgb), 0.95));
+  font-family: ${THEME.fonts.hud};
   text-align: left;
 
+  /* The neon rule along the top edge. */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-magenta), var(--neon-cyan) 50%, var(--neon-amber));
+    box-shadow: 0 0 calc(12px * var(--neon-glow-strength, 1)) rgba(47, 243, 255, 0.4);
+  }
+
+  .footer-directory {
+    display: flex;
+    align-items: center;
+    gap: 0.9em;
+    margin: 0;
+    color: var(--hud-ink-dim);
+    font-family: ${THEME.fonts.mono};
+    font-size: 0.78em;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+
+    span[lang] {
+      color: var(--neon-cyan);
+      font-family: ${THEME.fonts.cjk};
+      letter-spacing: 0.12em;
+    }
+
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--glass-border), transparent);
+    }
+  }
+
+  html[data-theme='light'] & .footer-directory {
+    color: var(--color-grey);
+  }
+
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    padding: 2em 1.5em;
     gap: 1.5em;
+    padding: 2em 1.5em;
   }
 `;
 
@@ -760,20 +516,37 @@ export const FooterInner = styled.div`
 `;
 
 export const FooterColumn = styled.div`
+  --footer-tone: var(--neon-cyan);
+  --footer-glow: rgba(47, 243, 255, 0.45);
   display: flex;
   flex-direction: column;
-  gap: 0.6em;
+  gap: 0.75em;
   align-items: flex-start;
+
+  &:nth-child(1) {
+    --footer-tone: var(--neon-magenta);
+    --footer-glow: rgba(255, 43, 214, 0.45);
+  }
+
+  &:nth-child(3) {
+    --footer-tone: var(--neon-amber);
+    --footer-glow: rgba(255, 176, 59, 0.45);
+  }
 `;
 
 export const FooterColumnTitle = styled.h3`
   margin: 0;
-  font-size: 0.9em;
+  padding-left: 0.65em;
+  border-left: 3px solid var(--footer-tone, var(--neon-cyan));
+  color: var(--footer-tone, var(--neon-cyan));
+  font-family: ${THEME.fonts.hud};
+  font-size: 0.95em;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: ${THEME.colors.orange};
+  letter-spacing: 0.16em;
+  line-height: 1.2;
   text-align: left;
+  text-shadow: 0 0 calc(10px * var(--neon-glow-strength, 1)) var(--footer-glow, transparent);
+  text-transform: uppercase;
 `;
 
 export const FooterColumnLinks = styled.ul`
@@ -792,14 +565,33 @@ export const FooterColumnLinks = styled.ul`
   a {
     display: inline-flex;
     align-items: center;
-    gap: 0.25em;
+    gap: 0.4em;
     color: ${THEME.colors.white};
+    font-size: 1.02em;
+    font-weight: 600;
+    letter-spacing: 0.03em;
     text-decoration: none;
-    font-size: 0.95em;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
 
-    &:hover {
-      color: ${THEME.colors.hotRed};
+    /* A route marker, left out of the link's name. */
+    &::before {
+      content: '▸';
+      content: '▸' / '';
+      color: var(--footer-tone, var(--neon-cyan));
+      opacity: 0.45;
+      transition: opacity 0.2s ease, transform 0.2s ${THEME.easing.out};
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: var(--footer-tone, var(--neon-cyan));
+      text-shadow: 0 0 calc(8px * var(--neon-glow-strength, 1)) var(--footer-glow, transparent);
+    }
+
+    &:hover::before,
+    &:focus-visible::before {
+      opacity: 1;
+      transform: translateX(2px);
     }
 
     svg {
@@ -815,10 +607,14 @@ export const FooterBottom = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5em;
-  font-size: 0.85em;
-  color: ${THEME.colors.grey};
-  padding-top: 1em;
   width: 100%;
+  padding-top: 1.1em;
+  border-top: 1px dashed var(--glass-border);
+  color: ${THEME.colors.grey};
+  font-family: ${THEME.fonts.mono};
+  font-size: 0.8em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     flex-direction: column;
@@ -1823,27 +1619,7 @@ export const HotRedTitle = styled.h2`
   color: ${THEME.colors.hotRed};
 `;
 
-export const HomeTabsBar = styled.div`
-  display: none;
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    position: fixed;
-    top: 4.9em;
-    left: 0;
-    right: 0;
-    display: flex;
-    gap: 0.6em;
-    padding: 0.4em 1em 0.45em;
-    z-index: 95;
-    background: transparent;
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    top: 8.48em;
-  }
-`;
-
-export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
+export const HudTabButton = styled.button.attrs(({ $isActive }) => ({
   'data-active': $isActive ? 'true' : 'false',
 }))`
   all: unset;
@@ -1886,7 +1662,7 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
   }
 `;
 
-export const CaseStudyTopTabButton = styled(HomeTabButton)`
+export const CaseStudyTopTabButton = styled(HudTabButton)`
   border: 1.5px solid var(--case-study-top-tab-border);
   background: var(--case-study-top-tab-bg);
   color: var(--case-study-top-tab-color);
@@ -1939,7 +1715,7 @@ const sidebarTabButtonStyles = css`
   }
 `;
 
-export const SectionTabButton = styled(HomeTabButton)`
+export const SectionTabButton = styled(HudTabButton)`
   ${sidebarTabButtonStyles}
   flex: 1 1 0;
   min-width: 0;
@@ -1990,7 +1766,7 @@ export const SectionTabsMobileInner = styled.div`
   overflow: hidden;
 `;
 
-export const SectionTabsMobileButton = styled(HomeTabButton)`
+export const SectionTabsMobileButton = styled(HudTabButton)`
   ${sidebarTabButtonStyles}
   flex: 1 1 0;
   min-width: 0;
@@ -2001,70 +1777,6 @@ export const SectionTabsMobileButton = styled(HomeTabButton)`
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     font-size: 0.75em;
-  }
-`;
-
-export const HomeTabsSpacer = styled.div`
-  display: none;
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    display: block;
-    height: 2.2em;
-  }
-`;
-
-export const FloatingCloudsViewport = styled.div`
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  pointer-events: none;
-  z-index: 0;
-`;
-
-const cloudDrift = keyframes`
-  0% { transform: translateX(60vw); }
-  100% { transform: translateX(-90vw); }
-`;
-
-const cloudDriftMobile = keyframes`
-  0% { transform: translateX(60vw); }
-  100% { transform: translateX(-140vw); }
-`;
-
-export const FloatingClouds = styled.div`
-  position: absolute;
-  top: clamp(2em, 9vw, 6.5em);
-  left: 50%;
-  width: clamp(12em, 45vw, 19em);
-  transform: translateX(60vw);
-  will-change: transform;
-  pointer-events: none;
-  z-index: 0;
-
-  ${props => props.$isActive && css`
-    animation: ${cloudDrift} 60s linear infinite;
-  `}
-
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-    box-shadow: none;
-  }
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    top: clamp(4.5em, 13vw, 7em);
-    width: clamp(12em, 55vw, 18em);
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    top: clamp(5.2em, 16vw, 7.5em);
-    width: clamp(12em, 70vw, 17em);
-    ${props => props.$isActive && css`
-      animation: ${cloudDriftMobile} 40s linear infinite;
-    `}
   }
 `;
 
@@ -2085,343 +1797,5 @@ export const DemoStokeTabsBar = styled.div`
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     top: 8.48em;
-  }
-`;
-
-export const IntroSection = styled.div`
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: clamp(2.6em, 6vw, 4.6em) clamp(1.6em, 5vw, 3.4em);
-  max-width: 100em;
-  margin: 0 auto;
-  gap: clamp(2.5em, 6vw, 5.25em);
-  overflow: hidden; /* Prevent parallax elements from creating horizontal scroll */
-  min-height: clamp(64vh, 80vh, 88vh);
-
-  .intro-text {
-    flex: 1;
-    max-width: 34em;
-    text-align: left;
-    will-change: transform; /* Optimize for transforms */
-    transition: transform 0.1s ease-out; /* Smooth parallax movement */
-    order: 2;
-    align-self: stretch;
-    padding-bottom: clamp(1.25em, 3.3vw, 3em);
-    padding-top: clamp(0.1em, 1.5vw, 1.1em);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: clamp(0.7em, 2vw, 1.35em);
-
-    h1 {
-      color: ${THEME.colors.white};
-      font-family: Roboto, sans-serif;
-      font-size: clamp(3.4em, 6vw, 4.8em);
-      font-weight: 600;
-      margin: 0;
-      line-height: 1.08;
-      text-align: left;
-    }
-
-    p {
-      color: ${THEME.colors.white};
-      font-family: Roboto, sans-serif;
-      font-size: 1.6em;
-      line-height: 1.5;
-      margin: 0 0 1em 0;
-      text-align: left;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    .intro-rotator-headline {
-      border-top: 2px dotted ${THEME.colors.grey};
-      padding-top: clamp(0.4em, 1.4vw, 0.7em);
-      margin: clamp(0.1em, 0.6vw, 0.25em) 0 0;
-      max-width: none;
-      width: 100%;
-      padding-left: 0;
-      padding-right: 0;
-      color: ${THEME.colors.white};
-      gap: 0.3em;
-      font-size: 2.8em;
-    }
-
-    .case-studies-cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      align-self: flex-start;
-      margin-top: clamp(0.7em, 1.6vw, 1em);
-      padding: 0.65em 1.2em;
-      border-radius: ${THEME.radii.md};
-      border: 2px solid ${THEME.colors.hotYellow};
-      background-color: ${THEME.colors.hotYellow};
-      color: ${THEME.colors.contrast};
-      font-family: Roboto, sans-serif;
-      font-size: 1.1em;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      cursor: pointer;
-      box-shadow: 0 8px 18px -10px rgb(0 0 0 / 45%);
-      transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-
-      &:hover {
-        background-color: ${THEME.colors.accent};
-        border-color: ${THEME.colors.accent};
-        color: #fff;
-      }
-
-      &:active {
-        transform: translateY(1px);
-      }
-
-      &:focus-visible {
-        outline: 2px solid ${THEME.colors.hotRed};
-        outline-offset: 4px;
-      }
-    }
-  }
-
-  .intro-image {
-    flex: 1;
-    max-width: 38em;
-    will-change: transform; /* Optimize for transforms */
-    transition: transform 0.1s ease-out; /* Smooth parallax movement */
-    position: relative;
-    order: 1;
-    align-self: flex-end;
-
-    img {
-      width: 100%;
-      height: auto;
-      border-radius: ${THEME.radii.md};
-      display: block;
-    }
-
-    .neon-trail {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      mix-blend-mode: screen;
-      opacity: 0.9; /* Keep visible so the streak can finish fading after hover ends */
-      transition: opacity 0.2s ease-out;
-      border-radius: ${THEME.radii.md};
-    }
-  }
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 2.5em;
-    padding: 2em 1.5em;
-    min-height: auto;
-
-    .intro-text {
-      max-width: none;
-      text-align: left;
-      transform: none !important; /* Disable parallax on tablets and mobile */
-      order: 2;
-      padding-bottom: 0;
-      padding-top: 0;
-      gap: 0.8em;
-      justify-content: flex-start;
-      align-self: stretch;
-
-      h1 {
-        font-size: 3.1em;
-        text-align: left;
-      }
-
-      p {
-        font-size: 1.4em;
-        text-align: left;
-        margin: 0 0 1em 0;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-
-      .intro-rotator-headline {
-        border-top: 2px dotted ${THEME.colors.grey};
-        padding-top: 0.55em;
-        margin-top: 0.25em;
-        font-size: clamp(1.8rem, 4vw, 2.5rem);
-      }
-    }
-
-    .intro-image {
-      max-width: 34em;
-      transform: none !important; /* Disable parallax on tablets and mobile */
-      order: 1;
-      align-self: center;
-    }
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: 1.5em 1em;
-    gap: 2em;
-
-    .intro-text {
-      h1 {
-        font-size: 2.6em;
-      }
-
-      p {
-        font-size: 1.2em;
-        margin: 0 0 1em 0;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-
-      .intro-rotator-headline {
-        font-size: clamp(1.6rem, 5vw, 2.2rem);
-        padding-top: 0.5em;
-        margin-top: 0.22em;
-      }
-    }
-  }
-`;
-
-export const WorksParallaxStage = styled.section`
-  position: relative;
-  isolation: isolate;
-  margin: clamp(0.25em, 1vw, 0.75em) 0 0;
-  background: ${THEME.colors.dark};
-`;
-
-export const WorksRevealCurtain = styled.div`
-  position: relative;
-  z-index: 2;
-  height: clamp(116vh, 128vw, 146vh);
-  background: transparent;
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    height: clamp(148vh, 148vw, 170vh);
-  }
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    height: clamp(128vh, 148vw, 154vh);
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    height: clamp(276vh, 360vw, 336vh);
-  }
-`;
-
-export const WorksFixedIllustration = styled.div`
-  position: sticky;
-  top: 4.9em;
-  height: 100vh;
-  width: 100%;
-  z-index: 1;
-  pointer-events: auto;
-  overflow: hidden;
-  transform: translateZ(0);
-
-  img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transform: scale(1.02);
-    filter: saturate(1.05) contrast(1.03);
-  }
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    height: clamp(78vh, 120vw, 96vh);
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    top: 8.5em;
-    height: auto;
-    min-height: 72vh;
-  }
-`;
-
-export const WorksCarouselFrame = styled(WorksFixedIllustration)`
-  background: transparent;
-  pointer-events: none;
-`;
-
-export const WorksCarouselViewport = styled.div`
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  padding: clamp(0.375em, 1vw, 0.7em) clamp(1.25em, 3.8vw, 3em);
-  z-index: 0;
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    padding: clamp(0.325em, 1.2vw, 0.55em) clamp(1em, 3.8vw, 1.8em);
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: clamp(0.25em, 1.4vw, 0.425em) clamp(0.75em, 3.6vw, 1.1em);
-  }
-`;
-
-export const WorksCarouselTrack = styled.div`
-  display: flex;
-  align-items: center;
-  gap: clamp(1.1em, 2.8vw, 2em);
-  width: max-content;
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-  padding-right: clamp(4em, 12vw, 10em);
-`;
-
-export const WorksCarouselItem = styled.div`
-  position: relative;
-  flex: 0 0 clamp(23rem, 58vw, 52rem);
-  aspect-ratio: 16 / 9;
-  border-radius: ${THEME.radii.md};
-  overflow: hidden;
-  border: 1.5px solid rgba(255, 255, 255, 0.82);
-  box-shadow: 0 34px 48px -30px rgb(0 0 0 / 82%);
-  background: ${THEME.colors.darkest};
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    flex-basis: clamp(20rem, 78vw, 36rem);
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    flex-basis: 84vw;
-  }
-`;
-
-export const WorksCarouselImage = styled.img`
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: top;
-`;
-
-export const WorksSectionContent = styled.div`
-  position: relative;
-  z-index: 2;
-  background: ${THEME.colors.dark};
-  margin-top: -44vh;
-  padding-top: clamp(1em, 2.5vw, 1.75em);
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    margin-top: -24vh;
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    margin-top: -12vh;
   }
 `;

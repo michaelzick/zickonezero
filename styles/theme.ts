@@ -48,6 +48,8 @@ export const THEME = {
     hud: "var(--font-hud, 'Arial Narrow', 'Helvetica Neue', sans-serif)",
     mono: "var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace)",
     body: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+    // System Japanese faces for the decorative signs; no CJK webfont download.
+    cjk: "'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Noto Sans CJK JP', 'Noto Sans JP', sans-serif",
   },
   // Stacking order, lowest first. The city layers sit below page content.
   z: {

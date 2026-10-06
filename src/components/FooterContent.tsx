@@ -17,6 +17,10 @@ import {
 
 const FooterContent = (): ReactElement => (
   <Footer>
+    <p className='footer-directory' aria-hidden='true'>
+      City directory <span lang='ja'>市街案内</span>
+    </p>
+
     <FooterInner>
       <FooterColumn>
         <FooterColumnTitle>Case Studies</FooterColumnTitle>

@@ -22,8 +22,6 @@ type ToneProps = { $tone?: DistrictTone };
 const toneColor = ({ $tone }: ToneProps) => ($tone ? TONES[$tone].color : 'var(--city-accent)');
 const toneGlow = ({ $tone }: ToneProps) => ($tone ? TONES[$tone].glow : 'rgba(47, 243, 255, 0.55)');
 
-const CJK_FONTS = "'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Noto Sans CJK JP', 'Noto Sans JP', sans-serif";
-
 const visuallyHidden = css`
   position: absolute;
   width: 1px;
@@ -121,7 +119,7 @@ export const DistrictSign = styled.header`
     span {
       margin-left: 0.9em;
       color: var(--color-grey);
-      font-family: ${CJK_FONTS};
+      font-family: ${THEME.fonts.cjk};
       letter-spacing: 0.24em;
     }
   }
