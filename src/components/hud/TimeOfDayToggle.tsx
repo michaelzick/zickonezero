@@ -8,7 +8,7 @@ type Props = {
   location?: string;
 };
 
-/** Switches the city between night (default) and day with a time-lapse. */
+/** Switches the city between night (default) and day with a crossfade. */
 const TimeOfDayToggle = ({ location = 'top_nav' }: Props): ReactElement => {
   const { resolved, toggle } = useThemePreference();
   const isNight = resolved === 'dark';

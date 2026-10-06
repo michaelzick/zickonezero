@@ -15,6 +15,7 @@ import FsLightbox from 'fslightbox-react';
 
 import { TopNavContent, GridContent, FooterContent } from '.';
 import { Wrapper } from '../../styles';
+import { CityGap } from '../../styles/home';
 import useActiveSection from '../hooks/useActiveSection';
 import { trackEvent } from '../lib/analytics';
 import { setCityAccent } from '../lib/city/accent';
@@ -24,7 +25,6 @@ import District from './home/District';
 import HeroScene from './home/HeroScene';
 import HoloBillboard from './home/HoloBillboard';
 import HomeHud from './home/HomeHud';
-import StreetLevel from './home/StreetLevel';
 import type { DistrictTone, HomeSectionKey, WorksData } from '../types';
 
 type MainContentProps = {
@@ -131,7 +131,6 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
     ux: null,
     ui: null,
   });
-  const streetRef = useRef<HTMLElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
   const [jumper] = useState(createScrollJumper);
   const [activeSection, setActiveSection] = useActiveSection(sectionRefs, SECTION_ORDER, {
@@ -185,7 +184,7 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
   }, [handleHomeSectionClick]);
 
   // Where the HUD's player reaches each stop: the start, each district (when
-  // its sign meets the nav), and the street level, or the page end if sooner.
+  // its sign meets the nav, or the page end if sooner), and the page end.
   const measureRouteStops = useCallback(() => {
     const offset = getNavOffset();
     const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
@@ -194,9 +193,10 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
     );
 
     const stops = [0];
-    [...SECTION_ORDER.map((section) => sectionRefs.current[section]), streetRef.current].forEach((node) => {
-      stops.push(Math.max(stops[stops.length - 1], stopAt(node)));
+    SECTION_ORDER.forEach((section) => {
+      stops.push(Math.max(stops[stops.length - 1], stopAt(sectionRefs.current[section])));
     });
+    stops.push(maxScroll);
     return stops;
   }, []);
 
@@ -254,7 +254,8 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
           </District>
         ))}
 
-        <StreetLevel sectionRef={streetRef} />
+        {/* Open air at the end of the route, where the city shows through. */}
+        <CityGap aria-hidden='true' />
 
         {imgs && <FsLightbox
           toggler={lightboxController.toggler}

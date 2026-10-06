@@ -11,7 +11,7 @@
  * styled-components.
  */
 
-/* Registered so the time-of-day time-lapse can crossfade the city colors. */
+/* Registered as typed colors, so a transition on any of them interpolates smoothly. */
 @property --sky-top {
   syntax: '<color>';
   inherits: true;
@@ -94,7 +94,7 @@
 :root[data-theme='dark'] {
   color-scheme: dark;
 
-  /* City: night alley in the rain */
+  /* City: night alley */
   --sky-top: #03050c;
   --sky-mid: #071827;
   --sky-low: #0c3540;
@@ -126,6 +126,8 @@
   /* HUD and glass surfaces */
   --glass-bg: rgba(6, 14, 26, 0.72);
   --glass-bg-strong: rgba(4, 10, 20, 0.9);
+  /* Open nav menus: opaque, so nothing animated reads through them. */
+  --menu-bg: #040a14;
   --glass-border: rgba(47, 243, 255, 0.28);
   --glass-highlight: rgba(255, 255, 255, 0.06);
   --hud-panel-bg: rgba(4, 18, 26, 0.78);
@@ -208,6 +210,7 @@
 
   --glass-bg: rgba(255, 250, 241, 0.8);
   --glass-bg-strong: rgba(255, 251, 244, 0.94);
+  --menu-bg: rgba(255, 251, 244, 0.94);
   --glass-border: rgba(29, 90, 99, 0.3);
   --glass-highlight: rgba(255, 255, 255, 0.5);
   --hud-panel-bg: rgba(14, 72, 80, 0.86);
@@ -275,22 +278,14 @@
   --city-glow: rgba(255, 58, 92, 0.4);
 }
 
-/* Set for about two seconds by the time-of-day toggle. */
-:root.is-timelapse {
-  transition:
-    --sky-top 1.8s ease,
-    --sky-mid 1.8s ease,
-    --sky-low 1.8s ease,
-    --haze 1.8s ease,
-    --bldg-far 1.8s ease,
-    --bldg-mid 1.8s ease,
-    --bldg-near 1.8s ease,
-    --window-lit 1.8s ease,
-    --street 1.8s ease,
-    --sun 1.8s ease,
-    --color-dark 1.2s ease,
-    --color-white 1.2s ease,
-    --glass-bg 1.2s ease;
+/*
+ * The time-of-day crossfade (src/theme/ThemeContext.tsx): one composited fade
+ * between snapshots of the old and new city.
+ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.9s;
+  animation-timing-function: ease;
 }
 
 html {

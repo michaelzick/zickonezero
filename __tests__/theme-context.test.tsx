@@ -1,4 +1,4 @@
-import { act, render, renderHook, screen } from '@testing-library/react';
+import { render, renderHook, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { PropsWithChildren } from 'react';
 
@@ -9,6 +9,7 @@ import {
   THEME_STORAGE_KEY,
   resolveStoredTheme,
 } from '../src/theme/themeConfig';
+import { REDUCED_MOTION_QUERY, mockMatchMedia, restoreMatchMedia } from '../src/test/matchMedia';
 
 const root = document.documentElement;
 
@@ -31,12 +32,12 @@ describe('time of day', () => {
   beforeEach(() => {
     window.localStorage.clear();
     root.removeAttribute('data-theme');
-    root.classList.remove('is-timelapse');
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
-    jest.useRealTimers();
+    restoreMatchMedia();
+    delete (document as Partial<Document>).startViewTransition;
   });
 
   describe('resolveStoredTheme', () => {
@@ -140,9 +141,8 @@ describe('time of day', () => {
       expect(root).toHaveAttribute('data-theme', 'dark');
     });
 
-    it('toggles to day with a time-lapse and remembers the choice', async () => {
-      jest.useFakeTimers();
-      const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    it('toggles to day and remembers the choice', async () => {
+      const user = userEvent.setup();
       render(<ThemeProbe />, { wrapper });
 
       await user.click(screen.getByRole('button', { name: 'Toggle' }));
@@ -150,17 +150,39 @@ describe('time of day', () => {
       expect(screen.getByTestId('resolved')).toHaveTextContent('light');
       expect(root).toHaveAttribute('data-theme', 'light');
       expect(window.localStorage.getItem(THEME_STORAGE_KEY)).toBe('light');
-      expect(root).toHaveClass('is-timelapse');
+    });
 
-      act(() => {
-        jest.advanceTimersByTime(1999);
+    it('crossfades with a view transition that applies the new theme inside it', async () => {
+      const seen: Array<string | null> = [];
+      const startViewTransition = jest.fn((update: () => void) => {
+        seen.push(root.getAttribute('data-theme'));
+        update();
+        seen.push(root.getAttribute('data-theme'));
+        return {} as ViewTransition;
       });
-      expect(root).toHaveClass('is-timelapse');
+      document.startViewTransition = startViewTransition as unknown as Document['startViewTransition'];
+      const user = userEvent.setup();
+      render(<ThemeProbe />, { wrapper });
 
-      act(() => {
-        jest.advanceTimersByTime(1);
-      });
-      expect(root).not.toHaveClass('is-timelapse');
+      await user.click(screen.getByRole('button', { name: 'Toggle' }));
+
+      expect(startViewTransition).toHaveBeenCalledTimes(1);
+      // The page is still night when the snapshot is taken, and day when the callback returns.
+      expect(seen).toEqual(['dark', 'light']);
+      expect(screen.getByTestId('resolved')).toHaveTextContent('light');
+    });
+
+    it('switches instantly under reduced motion', async () => {
+      mockMatchMedia(REDUCED_MOTION_QUERY);
+      const startViewTransition = jest.fn();
+      document.startViewTransition = startViewTransition as unknown as Document['startViewTransition'];
+      const user = userEvent.setup();
+      render(<ThemeProbe />, { wrapper });
+
+      await user.click(screen.getByRole('button', { name: 'Toggle' }));
+
+      expect(startViewTransition).not.toHaveBeenCalled();
+      expect(root).toHaveAttribute('data-theme', 'light');
     });
 
     it('toggles back to night and persists it', async () => {
@@ -196,18 +218,6 @@ describe('time of day', () => {
 
       expect(root).toHaveAttribute('data-theme', 'dark');
       expect(window.localStorage.getItem(THEME_STORAGE_KEY)).toBe('dark');
-      expect(root).not.toHaveClass('is-timelapse');
-    });
-
-    it('clears a running time-lapse when it unmounts', async () => {
-      const user = userEvent.setup();
-      const { unmount } = render(<ThemeProbe />, { wrapper });
-
-      await user.click(screen.getByRole('button', { name: 'Toggle' }));
-      expect(root).toHaveClass('is-timelapse');
-
-      unmount();
-      expect(root).not.toHaveClass('is-timelapse');
     });
   });
 

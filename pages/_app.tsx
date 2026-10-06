@@ -2,6 +2,7 @@ import '../styles/globals.scss';
 import type { AppProps } from 'next/app';
 import Script from 'next/script';
 import Head from 'next/head';
+import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { store } from '../src/store';
 
@@ -11,6 +12,7 @@ import WeatherCanvas from '../src/components/city/WeatherCanvas';
 import PageAnalytics from '../src/components/PageAnalytics';
 import SiteAnalyticsScripts from '../src/components/SiteAnalyticsScripts';
 import { CurrentPathContext } from '../src/hooks/useCurrentPath';
+import { markCityStarted } from '../src/lib/city/powerOn';
 import { isHomePath, normalizeRoutePath } from '../src/lib/city/routes';
 import { AppThemeProvider } from '../src/theme/ThemeContext';
 import FontVariables from '../src/theme/FontVariables';
@@ -20,6 +22,9 @@ import { Container } from '../styles';
 function MyApp({
   Component, pageProps, router,
 }: AppProps) {
+  // Power-on effects play on the first page only; later pages arrive lit.
+  useEffect(markCityStarted, []);
+
   return (
     <Provider store={store}>
       <AppThemeProvider>

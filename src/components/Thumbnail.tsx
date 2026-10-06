@@ -54,7 +54,7 @@ const Thumbnail = (props: WorksData & AdditionalThumbProps): ReactElement => {
     onThumbClick(index, linkOut);
   };
 
-  const image = <img src={thumb} width='240' height='240' alt={header} loading='lazy' decoding='async' />;
+  const image = <img src={thumb} width='240' height='240' alt={header} loading='lazy' decoding='sync' />;
 
   return (
     <GigCard

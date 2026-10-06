@@ -6,9 +6,9 @@ import { THEME } from './theme';
  * Neon signage: the NeonSign lettering and the LED ticker
  * (src/components/city/). Only @media and keyframes here; see styles/city.ts.
  *
- * Motion safety (WCAG 2.3.1): a letter powers on with one strike and one
- * partial dip, and the dying letter dips twice every nine seconds. No dip
- * goes fully dark, and nothing flashes more than three times a second.
+ * Motion safety (WCAG 2.3.1): on the first page load a letter powers on
+ * with one strike and one partial dip, then stays steady. No dip goes fully
+ * dark, and nothing flashes more than three times a second.
  */
 
 const ignite = keyframes`
@@ -16,12 +16,6 @@ const ignite = keyframes`
   20% { opacity: 1; }
   32% { opacity: 0.35; }
   48%, 100% { opacity: 1; }
-`;
-
-const buzz = keyframes`
-  0%, 62%, 64%, 65%, 67%, 100% { opacity: 1; }
-  63% { opacity: 0.35; }
-  66% { opacity: 0.55; }
 `;
 
 const tickerScroll = keyframes`
@@ -54,9 +48,10 @@ export const NeonSignRoot = styled.p`
     inset: 0;
     z-index: -1;
     border: 1px solid rgba(150, 210, 230, 0.16);
+    /* Near-opaque, so the alley's pink blade sign never reads through the lettering. */
     background:
       linear-gradient(rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0)),
-      rgba(3, 6, 12, 0.55);
+      rgba(3, 6, 12, 0.92);
     clip-path: polygon(0 0, calc(100% - 0.22em) 0, 100% 0.22em, 100% 100%, 0.22em 100%, 0 calc(100% - 0.22em));
   }
 
@@ -78,13 +73,9 @@ export const NeonSignRoot = styled.p`
     animation-delay: calc(0.35s + var(--i, 0) * 0.11s);
   }
 
-  .letter.is-dying {
-    animation:
-      ${ignite} 0.5s ease-out both,
-      ${buzz} 9s linear infinite;
-    animation-delay:
-      calc(0.35s + var(--i, 0) * 0.11s),
-      calc(3s + var(--i, 0) * 0.11s);
+  /* Already lit on later pages: no power-on. */
+  &[data-lit] .letter {
+    animation: none;
   }
 
   /* Glass tubes: a white-hot core inside a colored glow. */

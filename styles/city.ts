@@ -33,13 +33,6 @@ const carCross = keyframes`
   100% { transform: translate3d(110vw, 3px, 0); }
 `;
 
-// Rests lit, so reduced motion (one 1ms iteration) leaves beacons on.
-const beaconBlink = keyframes`
-  0%, 20% { opacity: 1; }
-  22%, 86% { opacity: 0.18; }
-  88%, 100% { opacity: 1; }
-`;
-
 const fullViewport = `
   position: fixed;
   top: 0;
@@ -182,18 +175,8 @@ export const SkylineDepth = styled.div`
     opacity: 0.5;
   }
 
-  .flicker-window {
-    fill: var(--bldg-mid);
-    opacity: 0;
-  }
-
-  .flicker-window.is-dim {
-    opacity: calc(0.65 * var(--night-only, 1));
-  }
-
   .beacon {
     fill: var(--neon-red);
-    animation: ${beaconBlink} 2.8s steps(1, end) infinite;
   }
 
   .tone-magenta {

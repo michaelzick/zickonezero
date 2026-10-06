@@ -48,10 +48,12 @@ describe('WeatherCanvas', () => {
     context = { setTransform: jest.fn() };
     setCanvasSize(1280, 720);
     Object.defineProperty(window, 'devicePixelRatio', { configurable: true, value: 1 });
-    document.documentElement.removeAttribute('data-theme');
+    // The canvas only draws by day; night is covered by its own test.
+    document.documentElement.setAttribute('data-theme', 'light');
   });
 
   afterEach(() => {
+    document.documentElement.removeAttribute('data-theme');
     jest.useRealTimers();
     jest.restoreAllMocks();
     restoreMatchMedia();
@@ -77,12 +79,14 @@ describe('WeatherCanvas', () => {
     expect(requestFrame).not.toHaveBeenCalled();
   });
 
-  it('rains at night, sized to the viewport, frame after frame', () => {
+  it('drifts dust by day, sized to the viewport, frame after frame', () => {
     useContext();
     const { container } = render(<WeatherCanvas dimmed />);
 
-    expect(container.querySelector('canvas')).toHaveAttribute('data-dimmed', 'true');
-    expect(engine.setMode).toHaveBeenCalledWith('rain', true);
+    const canvas = container.querySelector('canvas');
+    expect(canvas).toHaveAttribute('data-dimmed', 'true');
+    expect(canvas).not.toHaveAttribute('hidden');
+    expect(engine.setMode).toHaveBeenCalledWith('dust', true);
     // 1280 x 720 at one particle per 3,600 px².
     expect(engine.resize).toHaveBeenCalledWith(1280, 720, 256);
     expect(context.setTransform).toHaveBeenCalledWith(1, 0, 0, 1, 0, 0);
@@ -92,6 +96,19 @@ describe('WeatherCanvas', () => {
     expect(engine.step.mock.calls.length).toBeGreaterThanOrEqual(2);
     expect(engine.step).toHaveBeenCalledWith(0, { delta: 0, velocity: 0 });
     expect(engine.draw.mock.calls.length).toBe(engine.step.mock.calls.length);
+  });
+
+  it('hides and draws nothing at night', () => {
+    useContext();
+    document.documentElement.setAttribute('data-theme', 'dark');
+    const requestFrame = jest.spyOn(window, 'requestAnimationFrame');
+
+    const { container } = render(<WeatherCanvas />);
+    advanceFrames(4);
+
+    expect(container.querySelector('canvas')).toHaveAttribute('hidden');
+    expect(engine.draw).not.toHaveBeenCalled();
+    expect(requestFrame).not.toHaveBeenCalled();
   });
 
   it('caps the particle budget and pixel density on phones', () => {
@@ -141,16 +158,31 @@ describe('WeatherCanvas', () => {
     expect(engine.step).not.toHaveBeenCalled();
   });
 
-  it('turns rain to dust when day breaks', async () => {
+  it('starts at daybreak and stops at nightfall', async () => {
     useContext();
-    render(<WeatherCanvas />);
+    document.documentElement.setAttribute('data-theme', 'dark');
+    const { container } = render(<WeatherCanvas />);
+    const canvas = container.querySelector('canvas');
+    expect(canvas).toHaveAttribute('hidden');
 
     await act(async () => {
       document.documentElement.setAttribute('data-theme', 'light');
       await Promise.resolve();
     });
+    advanceFrames(4);
 
-    expect(engine.setMode).toHaveBeenLastCalledWith('dust', false);
+    expect(canvas).not.toHaveAttribute('hidden');
+    expect(engine.step).toHaveBeenCalled();
+
+    await act(async () => {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      await Promise.resolve();
+    });
+    const steps = engine.step.mock.calls.length;
+    advanceFrames(10);
+
+    expect(canvas).toHaveAttribute('hidden');
+    expect(engine.step).toHaveBeenCalledTimes(steps);
   });
 
   it('pauses while the tab is hidden', () => {

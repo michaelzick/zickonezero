@@ -23,7 +23,7 @@ const PARK_CELLS = new Set(['7:1', '6:4', '1:0', '7:3']);
 /**
  * The route, walked north as the page scrolls: the alley at the bottom, the
  * Case Studies, Product Engineering, and Web Development districts, then the
- * street level at the top.
+ * end of the city at the top.
  */
 export const MINIMAP_ROUTE: readonly MapPoint[] = [
   { x: 36, y: 136 },

@@ -1,7 +1,8 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import type { CSSProperties, ElementType, ReactNode } from 'react';
 
 import { NeonSignRoot } from '../../../styles/neon';
+import { isFirstCityLoad } from '../../lib/city/powerOn';
 
 export type NeonLine = {
   text: string;
@@ -18,53 +19,41 @@ type Props = {
   as?: ElementType;
   id?: string;
   className?: string;
-  /**
-   * The letter that never quite settles, as [line, letter]. Letters count
-   * from 0 within the line and skip spaces.
-   */
-  dying?: readonly [number, number];
 };
 
-type Letter = { character: string; order: number; isDying: boolean };
+type Letter = { character: string; order: number };
 
 /** Splits each line into words of letters, numbered across the whole sign for the power-on stagger. */
-const layoutLines = (lines: readonly NeonLine[], dying?: readonly [number, number]): Letter[][][] => {
+const layoutLines = (lines: readonly NeonLine[]): Letter[][][] => {
   let order = 0;
 
-  return lines.map((line, lineIndex) => {
-    let letterIndex = 0;
-
-    return line.text.split(' ').map((word) => [...word].map((character) => {
-      const letter = {
-        character,
-        order,
-        isDying: dying?.[0] === lineIndex && dying[1] === letterIndex,
-      };
-      order += 1;
-      letterIndex += 1;
-      return letter;
-    }));
-  });
+  return lines.map((line) => line.text.split(' ').map((word) => [...word].map((character) => {
+    const letter = { character, order };
+    order += 1;
+    return letter;
+  })));
 };
 
 /**
- * Neon lettering that powers on letter by letter. The real text stays in the
- * DOM, so a heading keeps its exact accessible name: letters are inline spans
- * and words and lines are separated by real spaces.
+ * Neon lettering that powers on letter by letter on the first page load; on
+ * later pages it is already lit (see src/lib/city/powerOn.ts). The real text
+ * stays in the DOM, so a heading keeps its exact accessible name: letters are
+ * inline spans and words and lines are separated by real spaces.
  */
-const NeonSign = ({ lines, as = 'p', id, className, dying }: Props) => {
-  const layout = layoutLines(lines, dying);
+const NeonSign = ({ lines, as = 'p', id, className }: Props) => {
+  const layout = layoutLines(lines);
+  const [isLit] = useState(() => !isFirstCityLoad());
 
   return (
-    <NeonSignRoot as={as} id={id} className={className}>
+    <NeonSignRoot as={as} id={id} className={className} data-lit={isLit ? '' : undefined}>
       {lines.map((line, lineIndex) => {
         const words: ReactNode = layout[lineIndex].map((letters, wordIndex) => (
           <Fragment key={wordIndex}>
             {wordIndex > 0 && ' '}
-            {letters.map(({ character, order, isDying }) => (
+            {letters.map(({ character, order }) => (
               <span
                 key={order}
-                className={isDying ? 'letter is-dying' : 'letter'}
+                className='letter'
                 style={{ '--i': order } as CSSProperties}
               >
                 {character}

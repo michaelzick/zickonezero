@@ -1,7 +1,6 @@
 import { CSSProperties, useEffect, useRef } from 'react';
 
 import usePageScrollVars from '../../hooks/usePageScrollVars';
-import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion';
 import { setCityAccent } from '../../lib/city/accent';
 import { getRouteMeta, isHomePath } from '../../lib/city/routes';
 import { generateSkyline } from '../../lib/city/skyline';
@@ -66,8 +65,6 @@ const MID_SKYLINE = generateSkyline({
 
 const ACCENT_TONES = ['cyan', 'magenta', 'amber', 'violet', 'red'] as const;
 
-const FLICKER_INTERVAL_MS = 1100;
-
 type Props = {
   /** The page route (router.pathname), which sets the camera and accent. */
   pathname: string;
@@ -81,8 +78,6 @@ type Props = {
  */
 const CityBackdrop = ({ pathname }: Props) => {
   const rootRef = useRef<HTMLDivElement>(null);
-  const midRef = useRef<HTMLDivElement>(null);
-  const prefersReducedMotion = usePrefersReducedMotion();
   const route = getRouteMeta(pathname);
   const isHome = isHomePath(pathname);
 
@@ -93,55 +88,6 @@ const CityBackdrop = ({ pathname }: Props) => {
   useEffect(() => {
     setCityAccent(getRouteMeta(pathname).accent);
   }, [pathname]);
-
-  // Apartment lights switch on and off, and the odd fluorescent tube buzzes.
-  // Purely visual, so it mutates classes instead of React state.
-  useEffect(() => {
-    const container = midRef.current;
-    if (prefersReducedMotion || !container) {
-      return undefined;
-    }
-
-    const windows = Array.from(container.querySelectorAll<SVGRectElement>('.flicker-window'));
-    if (windows.length === 0) {
-      return undefined;
-    }
-
-    const timeouts = new Set<number>();
-    const later = (callback: () => void, delay: number) => {
-      const id = window.setTimeout(() => {
-        timeouts.delete(id);
-        callback();
-      }, delay);
-      timeouts.add(id);
-    };
-
-    const flicker = () => {
-      if (document.hidden) {
-        return;
-      }
-
-      const target = windows[Math.floor(Math.random() * windows.length)];
-      if (Math.random() < 0.35) {
-        target.classList.toggle('is-dim');
-        return;
-      }
-
-      // Two partial dips, then back on: a buzz, never a strobe.
-      target.classList.add('is-dim');
-      later(() => target.classList.remove('is-dim'), 90);
-      later(() => target.classList.add('is-dim'), 170);
-      later(() => target.classList.remove('is-dim'), 260);
-    };
-
-    const interval = window.setInterval(flicker, FLICKER_INTERVAL_MS);
-
-    return () => {
-      window.clearInterval(interval);
-      timeouts.forEach((id) => window.clearTimeout(id));
-      timeouts.clear();
-    };
-  }, [prefersReducedMotion]);
 
   return (
     <CityBackdropRoot
@@ -163,7 +109,7 @@ const CityBackdrop = ({ pathname }: Props) => {
       </SkylineDepth>
       <FogBand />
       <FlyingTraffic />
-      <SkylineDepth data-depth='mid' ref={midRef}>
+      <SkylineDepth data-depth='mid'>
         <div className='parallax'>
           <Skyline layer={MID_SKYLINE} windows={MID_WINDOWS} />
         </div>

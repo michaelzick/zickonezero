@@ -65,9 +65,6 @@ const SIGN_LINES: readonly NeonLine[] = [
   { text: 'Features', variant: 'led' },
 ];
 
-// The E in DREAM is the tube that never quite settles.
-const DYING_LETTER = [0, 3] as const;
-
 // The panel has faded out by a third of the walk; past that it stops taking clicks.
 const PANEL_FADED_AT = 0.34;
 
@@ -76,7 +73,7 @@ type HeroSceneProps = {
 };
 
 /**
- * The homepage hero: a rainy neon alley the visitor walks into as they
+ * The homepage hero: a neon alley the visitor walks into as they
  * scroll, under a hanging "I Dream in Features" sign. Everything but the
  * heading and the HUD panel is decorative and hidden from assistive
  * technology; the Japanese signs are scenery, marked lang="ja".
@@ -97,9 +94,10 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
           <div className='alley'>
             <div className='plane street'>
               <div className='street-glow' />
-            </div>
-            <div className='plane arrows'>
-              <div className='arrows-track' />
+              {/* Painted on the street itself: a second plane just above it z-fights. */}
+              <div className='arrows'>
+                <div className='arrows-track' />
+              </div>
             </div>
             <div className='plane wall wall-left'>
               <AlleyWall facade={LEFT_WALL} />
@@ -133,12 +131,6 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
 
         <div className='sign-spill' aria-hidden='true' />
         <div className='hero-haze' aria-hidden='true' />
-        <div className='near-rain' aria-hidden='true' />
-        <div className='steam' aria-hidden='true'>
-          <i />
-          <i />
-          <i />
-        </div>
         <div className='drone' aria-hidden='true'>
           <div className='drone-body' />
           <div className='drone-cone' />
@@ -150,7 +142,6 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
           id='home-hero-title'
           className='hero-sign'
           lines={SIGN_LINES}
-          dying={DYING_LETTER}
         />
 
         <HudFrame className='hero-panel'>
@@ -166,11 +157,11 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
             </button>
             <TrackedLink
               href='/contact'
-              label='Jack In'
+              label='Contact'
               location='home_intro'
-              className='hero-jack-in'
+              className='hero-contact'
             >
-              Jack In
+              Contact
             </TrackedLink>
           </div>
         </HudFrame>

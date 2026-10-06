@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { useThemePreference } from '../../theme/ThemeContext';
 import ScrambleText from './ScrambleText';
 
 const pad = (value: number) => String(value).padStart(2, '0');
@@ -14,12 +13,12 @@ type Props = {
 /**
  * The visitor's local time on the 24-hour clock, ticking over on the minute.
  * It reads --:-- until mounted, so the static HTML matches every visitor, and
- * the digits scramble when the city switches between night and day.
+ * the digits decode when the minute changes (not on a theme switch, where it
+ * would flicker over the crossfade).
  * Decorative: render it inside an aria-hidden readout.
  */
 const HudClock = ({ className }: Props) => {
   const [time, setTime] = useState('--:--');
-  const { resolved } = useThemePreference();
 
   useEffect(() => {
     let timeout: number | undefined;
@@ -36,7 +35,7 @@ const HudClock = ({ className }: Props) => {
     return () => window.clearTimeout(timeout);
   }, []);
 
-  return <ScrambleText className={className} text={time} replayKey={resolved} />;
+  return <ScrambleText className={className} text={time} />;
 };
 
 export default HudClock;

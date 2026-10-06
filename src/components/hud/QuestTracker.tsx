@@ -5,6 +5,8 @@ import ScrambleText from './ScrambleText';
 type Props = {
   /** The current objective, such as "Explore Product Engineering". */
   objective: string;
+  /** Travels to the objective's district. */
+  onObjectiveClick: () => void;
   /** The distance readout, which the HUD rewrites as the page scrolls. */
   distanceRef: Ref<HTMLSpanElement>;
 };
@@ -12,16 +14,17 @@ type Props = {
 /**
  * The game-style quest tracker under the minimap: the current gig in red, its
  * objective in yellow (re-typed with a decode when it changes), and the
- * distance left to the street level. It repeats what the page already says,
- * so it is hidden from assistive technology.
+ * distance left to the end of the route. The objective is a button that fast
+ * travels to its district; its stable label hides the decode from assistive
+ * technology, and the label and distance are decoration.
  */
-const QuestTracker = ({ objective, distanceRef }: Props) => (
-  <div className='quest' aria-hidden='true'>
-    <p className='quest-label'>Current gig</p>
-    <p className='quest-objective'>
+const QuestTracker = ({ objective, onObjectiveClick, distanceRef }: Props) => (
+  <div className='quest'>
+    <p className='quest-label' aria-hidden='true'>Current gig</p>
+    <button type='button' className='quest-objective' aria-label={objective} onClick={onObjectiveClick}>
       <ScrambleText text={objective} />
-    </p>
-    <p className='quest-distance'>
+    </button>
+    <p className='quest-distance' aria-hidden='true'>
       <span ref={distanceRef}>-.- km</span>
     </p>
   </div>

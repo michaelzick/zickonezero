@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import type { CSSProperties } from 'react';
 
 import { BillboardStage } from '../../../styles/billboard';
+import usePowerOn from '../../hooks/usePowerOn';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion';
 import { generateFacade } from '../../lib/city/facade';
 import { subscribeToScroll } from '../../lib/city/scrollSignal';
@@ -12,29 +13,33 @@ type Slide = {
   alt: string;
 };
 
+// Homepage-sized copies (1920px wide, 2x the largest screen): the full-size
+// case-study captures decoded to 160 MB, enough for Chrome to evict them
+// (and the gig cards) while the visitor is at the bottom of the page, so they
+// flashed blank on the way back up.
 const SLIDES: readonly Slide[] = [
   {
-    src: '/img/demostoke/case-study/ds-explore-hybrid.webp',
+    src: '/img/home/billboard/ds-explore-hybrid.webp',
     alt: 'DemoStoke hybrid catalog and map view',
   },
   {
-    src: '/img/fleet-ops/ds-fleet-ops-widget-low.webp',
+    src: '/img/home/billboard/ds-fleet-ops-widget-low.webp',
     alt: 'DemoStoke Fleet Ops embeddable booking widget',
   },
   {
-    src: '/img/antisyphon/course-catalog.webp',
+    src: '/img/home/billboard/course-catalog.webp',
     alt: 'Antisyphon Training course catalog',
   },
   {
-    src: '/img/nice-guy-university/ngu-courses.webp',
+    src: '/img/home/billboard/ngu-courses.webp',
     alt: 'Nice Guy University course catalog',
   },
   {
-    src: '/img/demostoke/case-study/ds-calendar-cal.webp',
+    src: '/img/home/billboard/ds-calendar-cal.webp',
     alt: 'DemoStoke events calendar',
   },
   {
-    src: '/img/demostoke/case-study/ds-gear-quiz.webp',
+    src: '/img/home/billboard/ds-gear-quiz.webp',
     alt: 'DemoStoke gear quiz flow',
   },
 ];
@@ -61,7 +66,7 @@ const TOWER = generateFacade({
 });
 
 // The screen powers on once half the frame has scrolled into view.
-const POWER_ON_THRESHOLD = 0.5;
+const POWER_ON_OBSERVER: IntersectionObserverInit = { threshold: 0.5 };
 
 /**
  * A giant screen on a tower that pans through product screenshots as the
@@ -76,8 +81,9 @@ const HoloBillboard = () => {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Map the stage's scroll progress onto the track's overflow.
-  useEffect(() => {
+  // Map the stage's scroll progress onto the track's overflow, before paint
+  // so a page restored mid-scroll never shows the track jump.
+  useLayoutEffect(() => {
     const stage = stageRef.current;
     const viewport = viewportRef.current;
     const track = trackRef.current;
@@ -133,30 +139,7 @@ const HoloBillboard = () => {
   }, [prefersReducedMotion]);
 
   // Hold the screen dark until it scrolls into view, then power it on.
-  useEffect(() => {
-    const stage = stageRef.current;
-    const frame = frameRef.current;
-    if (!stage || !frame || prefersReducedMotion || typeof IntersectionObserver === 'undefined') {
-      return undefined;
-    }
-
-    stage.setAttribute('data-standby', '');
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) {
-        return;
-      }
-
-      stage.removeAttribute('data-standby');
-      stage.setAttribute('data-powered', '');
-      observer.disconnect();
-    }, { threshold: POWER_ON_THRESHOLD });
-    observer.observe(frame);
-
-    return () => {
-      observer.disconnect();
-      stage.removeAttribute('data-standby');
-    };
-  }, [prefersReducedMotion]);
+  usePowerOn(stageRef, { watch: frameRef, poweredAttribute: 'data-powered', observerOptions: POWER_ON_OBSERVER });
 
   return (
     <BillboardStage ref={stageRef} style={{ '--slide-count': SLIDES.length } as CSSProperties}>
@@ -165,7 +148,7 @@ const HoloBillboard = () => {
           <div className='bb-track' ref={trackRef}>
             {SLIDES.map(({ src, alt }) => (
               <div className='bb-slide' key={src}>
-                <img src={src} alt={alt} loading='lazy' decoding='async' />
+                <img src={src} alt={alt} loading='lazy' decoding='sync' />
               </div>
             ))}
           </div>

@@ -379,14 +379,30 @@ export const HomeHudRoot = styled.nav`
     }
   }
 
+  /* A button that fast travels to the objective's district. */
   .quest-objective {
-    margin-top: 2px;
+    display: inline-block;
+    margin: 2px 0 0;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px dashed transparent;
+    background: none;
     color: var(--hud-yellow);
     font-family: ${THEME.fonts.mono};
     font-size: 11.5px;
     letter-spacing: 0.04em;
     line-height: 1.3;
+    text-align: right;
+    text-shadow: inherit;
     text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.2s ease, text-shadow 0.2s ease;
+  }
+
+  .quest-objective:hover,
+  .quest-objective:focus-visible {
+    border-bottom-color: var(--hud-yellow);
+    text-shadow: 0 0 calc(8px * var(--neon-glow-strength, 1)) rgba(243, 230, 0, 0.6);
   }
 
   .quest-distance {
