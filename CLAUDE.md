@@ -25,7 +25,7 @@ Primary flows:
 - **Styling:** styled-components 5, SCSS globals, and shared theme constants in `styles/theme.ts`.
 - **UI libraries:** Radix UI icons/select/tabs, `fslightbox-react`.
 - **Analytics:** Google Tag Manager plus Amplitude-style event helpers in `src/lib/analytics.ts`.
-- **Tooling:** npm, Node 24.x, Jest + React Testing Library, Storybook 8, ESLint, TypeScript.
+- **Tooling:** npm, Node 24.x, Jest + React Testing Library, ESLint, TypeScript.
 
 ## 3. Repository layout
 
@@ -38,7 +38,6 @@ zickonezero/
 |   +-- components/*/    # Feature-specific case-study/user-story components
 |   +-- hooks/           # Browser interaction hooks
 |   +-- lib/             # Analytics helpers
-|   +-- stories/         # Storybook examples and component stories
 |   +-- test/            # Test render utilities
 |   +-- *.Slice.ts       # Redux Toolkit slices
 +-- styles/              # styled-components exports, page-specific style modules, globals
@@ -47,7 +46,6 @@ zickonezero/
 +-- workers/contact/     # Cloudflare Worker (own package) that emails contact-form submissions via Brevo SMTP
 +-- __tests__/           # Jest and React Testing Library tests
 +-- skills/              # Repo-local coding and agent-brief maintenance skills
-+-- .storybook/          # Storybook configuration
 +-- .github/workflows/   # CI and security automation
 +-- next.config.js
 +-- tsconfig.json
@@ -89,7 +87,6 @@ zickonezero/
 - `scripts/capture-12-step-meetings-screenshots.js` recaptures the 12 Step Meetings showcase screenshots from the live 12stepmeetings.org as 2x-desktop WebP images, driving each view through query parameters with a ticking fake clock so the upcoming order and map tiles are stable (same Playwright/cwebp requirements). Pass a shot name to capture only that image. The “Find a meeting that fits” section opens with “Finding support should be easy and intuitive.” and describes program, day, time, and location filters. Its list image has program, day, and time filters active and the location menu open to city suggestions for “Santa”, before a location is selected. Capturing this native browser menu requires a visible Chromium window, macOS Screen Recording access, and a 2x display at least 1728x1087 logical pixels, using the calibrated content rectangle documented in the script.
 - `scripts/configure-static-hosting.js` reads a complete DigitalOcean AppSpec JSON from stdin and emits a corrected spec without deploying. It sets `error_document: 404.html` on the `zickonezero` static component, removes its homepage catch-all, adds host-scoped 301 redirects from `/case-studies` and `/case-studies/` to `https://www.zickonezero.com/demostoke/`, and canonicalizes the apex hostname to `www`. It preserves other components and host routes and refuses an unexpected component or ingress. See `README.md` for the deployment workflow.
 - Sitemap/robots host generation comes from `src/lib/siteConfig.js` (`NEXT_PUBLIC_SITE_URL` / `SITE_URL`, default `https://www.zickonezero.com`).
-- Storybook config lives in `.storybook/` and uses `@storybook/nextjs`. Its config sets `NEXT_PRIVATE_LOCAL_WEBPACK=true` so Next's compiler and Storybook plugins share the explicit local Webpack dependency instead of mixing incompatible compiler hooks; this setting is scoped to Storybook. Generated `storybook-static/` output is excluded from ESLint.
 
 ### 4.4 Contact worker
 
@@ -111,14 +108,12 @@ npm run typecheck           # TypeScript no-emit check
 npm test                    # Jest test suite, run in band
 npm run build               # regenerate sitemap and build/export the static site
 npm run check               # agent brief sync check + lint + typecheck + test + build
-npm run storybook           # Storybook on port 6006
-npm run build-storybook     # static Storybook build
 npm run sitemap             # regenerate public/sitemap.xml only
 ```
 
 CI runs `npm ci`, `agent-briefs:check`, lint, typecheck, a `workers/contact` install + typecheck, tests, and production build on Node 24.x.
 
-Security automation runs Gitleaks, dependency review, CodeQL, and a production dependency audit at high severity (`npm audit --omit=dev --audit-level=high`). Next.js stays on the patched 15.5 release line with matching `eslint-config-next`; Sharp uses 0.35.4 or later. The root `package.json` overrides Next's pinned PostCSS with 8.5.28 for security fixes; retain that override until Next's own dependency is patched. Storybook 8 still has development-only audit findings that require a coordinated major upgrade; do not force incompatible transitive image-loader dependencies to silence them.
+Security automation runs Gitleaks, dependency review, CodeQL, and a production dependency audit at high severity (`npm audit --omit=dev --audit-level=high`). Next.js stays on the patched 15.5 release line with matching `eslint-config-next`; Sharp uses 0.35.4 or later. The root `package.json` overrides Next's pinned PostCSS with 8.5.28 for security fixes; retain that override until Next's own dependency is patched.
 
 The site is Cloudflare Worker `zickonezero`, serving `out/` from this repository's `main` branch through Workers Builds (Node 24, `npm run build`, `npx wrangler@4.133.0 deploy`). Non-production branches build with Node 24 and `npm run build`, then use `npx wrangler@4.135.0 preview` for a stable branch URL. The required empty `previews` block keeps previews isolated while reusing top-level static asset settings. Older branches must incorporate this configuration before preview builds can succeed. Root `wrangler.jsonc` configures custom domains `zickonezero.com` and `www.zickonezero.com`, static assets, trailing-slash handling, and `404-page` fallback. `public/_headers` and `public/_redirects` are applied by Cloudflare. `_redirects` 301s the removed `/michael-zick-coaching` route (bare, trailing-slash, and descendants) to `https://www.niceguyuniversity.com/`. Framing: the site sends neither `X-Frame-Options` nor CSP `frame-ancestors`, so any site can show it in a frame, as Nice Guy University can (the michaelzick.com landing page frames it in its Internet Search window). `__tests__/security-headers.test.js` guards this. The zone's **Canonical apex to www** Redirect Rule preserves path/query and uses HTTPS. The former DigitalOcean static component remains in shared app `demostoke` (`8b602f38-1268-4375-bef4-46d9001db792`) as an owner-managed rollback until archival; the migration does not archive that app. The legacy spec-transform script remains for rollback; keep raw specs outside the repo and use complete raw API specs with `update_all_source_versions: false` for hosting-only updates. The CSP allows the inline GTM/theme/Amplitude bootstraps and styled-components inline styles that the static export requires. Environment variables: `NEXT_PUBLIC_SITE_URL` / `SITE_URL` set the canonical origin (see `src/lib/siteConfig.js`); `NEXT_PUBLIC_AMPLITUDE_API_KEY` overrides the public browser analytics key; `NEXT_PUBLIC_CONTACT_ENDPOINT` overrides the contact form endpoint (default is the deployed workers.dev URL; set it to `http://localhost:8787/api/contact` in `.env.local` when running the Worker locally).
 
@@ -186,7 +181,7 @@ The site is Cloudflare Worker `zickonezero`, serving `out/` from this repository
 
 - Adding, removing, renaming, or re-homing top-level directories, route groups, feature folders, or build scripts.
 - Changing root `package.json` scripts, CI/security workflows, lint/typecheck/test/build policy, or Node/npm assumptions.
-- Changing static export behavior, sitemap behavior, Storybook setup, analytics setup, or environment variables.
+- Changing static export behavior, sitemap behavior, analytics setup, or environment variables.
 - Changing a file listed in [Key files map](#7-key-files-map), or adding something that belongs in it.
 
 Treat `AGENTS.md` as the canonical source for the mirrored harness briefs. After updating it, run `npm run agent-briefs:sync` and `npm run agent-briefs:check` so [CLAUDE.md](CLAUDE.md) and [GEMINI.md](GEMINI.md) stay aligned.

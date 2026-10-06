@@ -42,7 +42,7 @@ export const THEME = {
     hudInkDim: 'var(--hud-ink-dim)',
   },
   // next/font sets the --font-* variables in pages/_app.tsx; the fallbacks
-  // keep Storybook and tests readable without them.
+  // keep tests readable without them.
   fonts: {
     display: "var(--font-display, 'Arial Black', Impact, sans-serif)",
     hud: "var(--font-hud, 'Arial Narrow', 'Helvetica Neue', sans-serif)",
