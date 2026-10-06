@@ -235,6 +235,23 @@ async function runSmokeTest({ screenshotsDir }) {
   let browser;
   const shotPath = (name) => (screenshotsDir && name ? path.join(screenshotsDir, `${name}.png`) : null);
 
+  /**
+   * Decode the images in view before a screenshot. Screenshots fast-forward
+   * animations, which can reveal an image (a gig card booting up) before its
+   * async decode is done and capture an empty frame. Gives up after 5 s.
+   */
+  const decodeImagesInView = (tab) => tab.evaluate(() => Promise.race([
+    Promise.all(Array.from(document.images)
+      .filter((img) => {
+        const { top, bottom } = img.getBoundingClientRect();
+        return bottom > 0 && top < window.innerHeight;
+      })
+      .map((img) => img.decode().catch(() => {}))),
+    new Promise((resolve) => {
+      setTimeout(resolve, 5000);
+    }),
+  ]));
+
   const newContext = async (options) => {
     const context = await browser.newContext(options);
     await context.route('**/*', (route) => (
@@ -274,6 +291,7 @@ async function runSmokeTest({ screenshotsDir }) {
 
       const file = shotPath(shotName);
       if (file) {
+        await decodeImagesInView(tab);
         await tab.screenshot({ path: file, animations: 'disabled' });
       }
       await extraChecks?.(tab, fail);
@@ -305,7 +323,9 @@ async function runSmokeTest({ screenshotsDir }) {
         const top = document.getElementById('case-studies')?.getBoundingClientRect().top ?? 0;
         window.scrollTo({ top: window.scrollY + top, behavior: 'instant' });
       });
+      // Give the lazy thumbnails a moment to start loading after the jump.
       await tab.waitForTimeout(600);
+      await decodeImagesInView(tab);
       await tab.screenshot({ path: districts, animations: 'disabled' });
     }
   };
