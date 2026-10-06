@@ -68,7 +68,12 @@ export const NeonSignRoot = styled.p`
     display: block;
   }
 
+  /*
+   * Letters stay inline, so the sign's accessible name reads as words rather
+   * than spaced-out letters. Explicit because jsdom has no default display.
+   */
   .letter {
+    display: inline;
     animation: ${ignite} 0.5s ease-out both;
     animation-delay: calc(0.35s + var(--i, 0) * 0.11s);
   }

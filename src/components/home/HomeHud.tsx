@@ -66,7 +66,9 @@ const GLITCH_FRAMES: Keyframe[] = [
 
 export const formatDistance = (pixels: number): string => {
   const meters = Math.max(0, pixels) * METERS_PER_PIXEL;
-  return meters < 1000 ? `${Math.round(meters / 10) * 10} m` : `${(meters / 1000).toFixed(1)} km`;
+  // Round first, so 996 m reads 1.0 km rather than 1000 m.
+  const rounded = Math.round(meters / 10) * 10;
+  return rounded < 1000 ? `${rounded} m` : `${(meters / 1000).toFixed(1)} km`;
 };
 
 // Keyboard focus brings a tucked HUD back; a pin left focused by a click or
