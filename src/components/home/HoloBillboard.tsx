@@ -13,29 +13,33 @@ type Slide = {
   alt: string;
 };
 
+// Homepage-sized copies (1920px wide, 2x the largest screen): the full-size
+// case-study captures decoded to 160 MB, enough for Chrome to evict them
+// (and the gig cards) while the visitor is at the bottom of the page, so they
+// flashed blank on the way back up.
 const SLIDES: readonly Slide[] = [
   {
-    src: '/img/demostoke/case-study/ds-explore-hybrid.webp',
+    src: '/img/home/billboard/ds-explore-hybrid.webp',
     alt: 'DemoStoke hybrid catalog and map view',
   },
   {
-    src: '/img/fleet-ops/ds-fleet-ops-widget-low.webp',
+    src: '/img/home/billboard/ds-fleet-ops-widget-low.webp',
     alt: 'DemoStoke Fleet Ops embeddable booking widget',
   },
   {
-    src: '/img/antisyphon/course-catalog.webp',
+    src: '/img/home/billboard/course-catalog.webp',
     alt: 'Antisyphon Training course catalog',
   },
   {
-    src: '/img/nice-guy-university/ngu-courses.webp',
+    src: '/img/home/billboard/ngu-courses.webp',
     alt: 'Nice Guy University course catalog',
   },
   {
-    src: '/img/demostoke/case-study/ds-calendar-cal.webp',
+    src: '/img/home/billboard/ds-calendar-cal.webp',
     alt: 'DemoStoke events calendar',
   },
   {
-    src: '/img/demostoke/case-study/ds-gear-quiz.webp',
+    src: '/img/home/billboard/ds-gear-quiz.webp',
     alt: 'DemoStoke gear quiz flow',
   },
 ];
@@ -144,7 +148,7 @@ const HoloBillboard = () => {
           <div className='bb-track' ref={trackRef}>
             {SLIDES.map(({ src, alt }) => (
               <div className='bb-slide' key={src}>
-                <img src={src} alt={alt} loading='lazy' decoding='async' />
+                <img src={src} alt={alt} loading='lazy' decoding='sync' />
               </div>
             ))}
           </div>
