@@ -5,15 +5,18 @@ import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { store } from '../src/store';
 
+import CityBackdrop from '../src/components/city/CityBackdrop';
+import WeatherCanvas from '../src/components/city/WeatherCanvas';
 import PageAnalytics from '../src/components/PageAnalytics';
 import SiteAnalyticsScripts from '../src/components/SiteAnalyticsScripts';
+import { isHomePath } from '../src/lib/city/routes';
 import { AppThemeProvider } from '../src/theme/ThemeContext';
 import FontVariables from '../src/theme/FontVariables';
 import ThemeColorMeta from '../src/theme/ThemeColorMeta';
 import { Container } from '../styles';
 
 function MyApp({
-  Component, pageProps,
+  Component, pageProps, router,
 }: AppProps) {
   return (
     <Provider store={store}>
@@ -46,6 +49,10 @@ function MyApp({
             <link rel="apple-touch-icon" href="/img/favicon/apple-touch-icon.png" />
             <link rel="manifest" href="/img/favicon/site.webmanifest" />
           </Head>
+
+          {/* The persistent city: mounted once, alive across page changes. */}
+          <CityBackdrop pathname={router.pathname} />
+          <WeatherCanvas dimmed={!isHomePath(router.pathname)} />
 
           <Component {...pageProps} />
         </Container>

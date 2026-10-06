@@ -1,6 +1,7 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
+import { getRouteMeta } from '../src/lib/city/routes';
 import { THEME_BOOTSTRAP_SCRIPT } from '../src/theme/themeConfig';
 
 export default class MyDocument extends Document {
@@ -33,8 +34,11 @@ export default class MyDocument extends Document {
   }
 
   render() {
+    // Each exported page starts glowing in its own route color.
+    const { accent } = getRouteMeta(this.props.__NEXT_DATA__.page);
+
     return (
-      <Html lang="en">
+      <Html lang="en" data-accent={accent}>
         <Head />
         <body>
           {/* Google Tag Manager (noscript) */}

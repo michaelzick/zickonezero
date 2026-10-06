@@ -107,6 +107,10 @@
   --street: #04080e;
   --sun: #2ff3ff;
   --world-dim: 0.18;
+  --night-only: 1;
+  --day-only: 0;
+  --accent-glow: 0.42;
+  --car-body: #0b1420;
 
   /* Neon */
   --neon-cyan: #2ff3ff;
@@ -182,6 +186,10 @@
   --street: #77706a;
   --sun: #ffd36b;
   --world-dim: 0.1;
+  --night-only: 0;
+  --day-only: 1;
+  --accent-glow: 0.2;
+  --car-body: #22343a;
 
   --neon-cyan: #0b8f9c;
   --neon-magenta: #c8128a;
