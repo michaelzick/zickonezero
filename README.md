@@ -16,6 +16,54 @@ Run `npm run check` before shipping. It checks the agent briefs, lint, TypeScrip
 tests, and the production build. `npm run build` generates the sitemap and robots
 file, then exports the complete site into `out/`.
 
+## Tests
+
+`npm test` runs Jest in band and stops any run still going after 3 minutes, so a
+hung test fails fast instead of stalling; CI's test step has the same limit. Pass
+Jest arguments after `--`, for example `npm test -- __tests__/seo.test.tsx`.
+Watch mode (`npm test -- --watch`) has no limit.
+
+An optional browser smoke test loads the exported site in headless Chromium at
+desktop and phone sizes. It fails on page or console errors (including CSP
+violations), horizontal overflow, or a homepage scene that stops responding to
+scroll, theme, or reduced motion. It is not part of `npm test`, `npm run check`,
+or CI, and it stops itself after 3 minutes. Playwright is not a project
+dependency, so install it once, globally or for this checkout only:
+
+```sh
+npm i -g playwright            # or: npm install --no-save playwright
+npx playwright install chromium
+npm run build
+npm run test:browser
+```
+
+Add `-- --screenshots <dir>` to save a PNG for each check; pick a folder outside
+the repository. On GitHub, start the **Browser tests** workflow from the Actions
+tab. It runs the same test and uploads its screenshots as the
+`browser-screenshots` artifact.
+
+## Living city
+
+The site is a neon city. One persistent backdrop (sky, skyline, flying traffic,
+fog, and rain or dust) mounts once in `pages/_app.tsx` and pans to each page's
+spot in the city as visitors navigate. The homepage walks from the "I Dream in
+Features" alley past a holo billboard and three work districts to the street,
+with a minimap HUD for fast travel.
+
+- Night is the default. The nav's time-of-day toggle switches to day, and the
+  choice is remembered.
+- Sound stays off until a visitor turns it on. It is synthesized in the browser
+  with Web Audio, so there are no audio files, and the choice is remembered.
+- All art is original. The scenery is generated from seeded SVG, CSS, and canvas
+  code, and the fonts are self-hosted. Keep new signage and copy original too.
+- Everything that moves has a still state under reduced motion. To preview it,
+  turn on "Reduce motion" in your operating system's accessibility settings, or
+  open Chrome DevTools' **Rendering** panel and set **Emulate CSS media feature
+  prefers-reduced-motion** to `reduce`.
+
+See [AGENTS.md](AGENTS.md) for the module map and the CSS rules that keep the
+city testable in Jest.
+
 ## Search and sharing
 
 Every public page owns its title, description, canonical, social image metadata,

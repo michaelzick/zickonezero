@@ -1,0 +1,45 @@
+name: Browser tests
+
+# Optional: started by hand from the Actions tab ("Run workflow"), never on
+# pushes or pull requests. Runs the headless Chromium smoke test against the
+# static export and keeps its screenshots as an artifact for review.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # Playwright is not a project dependency; install it for this run only.
+      - name: Install Playwright and Chromium
+        run: npm install --no-save playwright@1.56.1 && npx playwright install --with-deps chromium
+
+      - name: Browser smoke test
+        run: npm run test:browser -- --screenshots "$RUNNER_TEMP/browser-screenshots"
+        timeout-minutes: 3
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: browser-screenshots
+          path: ${{ runner.temp }}/browser-screenshots/
+          if-no-files-found: ignore
