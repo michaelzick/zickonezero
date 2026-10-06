@@ -1,26 +1,25 @@
 import { useEffect, useRef, useState, type FocusEvent } from 'react';
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
-import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
-import { EXTERNAL_LINKS } from './contactLinks';
-import { PROJECT_LINKS } from './projectLinks';
+
+import useCurrentPath from '../hooks/useCurrentPath';
 import { trackEvent } from '../lib/analytics';
+import { NAV_MENUS, menuHoldsPath, type NavMenuConfig, type NavMenuKey } from './navMenus';
 import TrackedLink from './TrackedLink';
 import {
-  LinkBox,
-  CaseStudiesDesktopWrapper,
-  CaseStudiesTrigger,
-  CaseStudiesDropdown,
-  CaseStudiesChevron
-} from '../../styles';
+  NavLinkRow,
+  NavMenu,
+  NavMenuTrigger,
+  NavDropdown,
+  NavChevron
+} from '../../styles/nav';
+
+const HOVER_CLOSE_DELAY_MS = 120;
 
 const LinkBoxContent = () => {
-  const [isCaseStudiesOpen, setIsCaseStudiesOpen] = useState(false);
-  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
-  const [isContactOpen, setIsContactOpen] = useState(false);
-  const caseStudiesRef = useRef<HTMLDivElement | null>(null);
-  const projectsRef = useRef<HTMLDivElement | null>(null);
-  const contactRef = useRef<HTMLDivElement | null>(null);
+  const [openMenu, setOpenMenu] = useState<NavMenuKey | null>(null);
+  const menuRefs = useRef<Partial<Record<NavMenuKey, HTMLDivElement | null>>>({});
   const hoverCloseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const currentPath = useCurrentPath();
 
   const clearHoverTimeout = () => {
     if (hoverCloseTimeout.current) {
@@ -29,62 +28,26 @@ const LinkBoxContent = () => {
     }
   };
 
-  const openCaseStudies = () => {
+  const open = (menu: NavMenuConfig) => {
     clearHoverTimeout();
-    if (!isCaseStudiesOpen) {
+    if (openMenu !== menu.key) {
       trackEvent('nav_dropdown_open', {
         location: 'top_nav',
-        label: 'Case Studies',
+        label: menu.label,
         page_path: window.location.pathname,
       });
     }
-    setIsCaseStudiesOpen(true);
-    setIsProjectsOpen(false);
-    setIsContactOpen(false);
-  };
-
-  const openProjects = () => {
-    clearHoverTimeout();
-    if (!isProjectsOpen) {
-      trackEvent('nav_dropdown_open', {
-        location: 'top_nav',
-        label: 'Product Engineering',
-        page_path: window.location.pathname,
-      });
-    }
-    setIsProjectsOpen(true);
-    setIsCaseStudiesOpen(false);
-    setIsContactOpen(false);
-  };
-
-  const openContact = () => {
-    clearHoverTimeout();
-    if (!isContactOpen) {
-      trackEvent('nav_dropdown_open', {
-        location: 'top_nav',
-        label: 'Links',
-        page_path: window.location.pathname,
-      });
-    }
-    setIsContactOpen(true);
-    setIsCaseStudiesOpen(false);
-    setIsProjectsOpen(false);
+    setOpenMenu(menu.key);
   };
 
   const closeAll = () => {
     clearHoverTimeout();
-    setIsCaseStudiesOpen(false);
-    setIsProjectsOpen(false);
-    setIsContactOpen(false);
+    setOpenMenu(null);
   };
 
   const scheduleCloseAll = () => {
     clearHoverTimeout();
-    hoverCloseTimeout.current = setTimeout(closeAll, 120);
-  };
-
-  const handleLinkClick = () => {
-    closeAll();
+    hoverCloseTimeout.current = setTimeout(closeAll, HOVER_CLOSE_DELAY_MS);
   };
 
   // Clear any pending hover-close timeout when the component unmounts.
@@ -96,19 +59,15 @@ const LinkBoxContent = () => {
   }, []);
 
   useEffect(() => {
-    if (!isCaseStudiesOpen && !isProjectsOpen && !isContactOpen) {
+    if (!openMenu) {
       return undefined;
     }
 
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       const target = event.target as Node;
-      const clickedCase = caseStudiesRef.current?.contains(target);
-      const clickedProjects = projectsRef.current?.contains(target);
-      const clickedContact = contactRef.current?.contains(target);
-      if (!clickedCase && !clickedProjects && !clickedContact) {
-        setIsCaseStudiesOpen(false);
-        setIsProjectsOpen(false);
-        setIsContactOpen(false);
+      const clickedInside = Object.values(menuRefs.current).some((node) => node?.contains(target));
+      if (!clickedInside) {
+        setOpenMenu(null);
       }
     };
 
@@ -119,159 +78,104 @@ const LinkBoxContent = () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
     };
-  }, [isCaseStudiesOpen, isProjectsOpen, isContactOpen]);
+  }, [openMenu]);
 
   return (
-    <LinkBox>
-      <TrackedLink href='/about' label='About' location='top_nav' section='primary'>
+    <NavLinkRow>
+      <TrackedLink
+        href='/about'
+        label='About'
+        location='top_nav'
+        section='primary'
+        ariaCurrent={currentPath === '/about' ? 'page' : undefined}
+      >
         About
       </TrackedLink>
-      <TrackedLink href='/contact' label='Contact' location='top_nav' section='primary'>
+      <TrackedLink
+        href='/contact'
+        label='Contact'
+        location='top_nav'
+        section='primary'
+        ariaCurrent={currentPath === '/contact' ? 'page' : undefined}
+      >
         Contact
       </TrackedLink>
-      <CaseStudiesDesktopWrapper
-        ref={caseStudiesRef}
-        onMouseEnter={openCaseStudies}
-        onMouseLeave={scheduleCloseAll}
-        onFocus={openCaseStudies}
-        onBlur={(event: FocusEvent<HTMLDivElement>) => {
-          const current = caseStudiesRef.current;
-          const next = event.relatedTarget as Node | null;
-          if (!current) return;
-          if (next && current.contains(next)) return;
-          closeAll();
-        }}
-      >
-        <CaseStudiesTrigger
-          type='button'
-          onClick={openCaseStudies}
-          aria-haspopup='true'
-          aria-expanded={isCaseStudiesOpen}>
-          Case Studies
-          <CaseStudiesChevron $isOpen={isCaseStudiesOpen} aria-hidden='true'>
-            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-          </CaseStudiesChevron>
-        </CaseStudiesTrigger>
-        <CaseStudiesDropdown
-          onMouseEnter={openCaseStudies}
-          onMouseLeave={scheduleCloseAll}
-          $isOpen={isCaseStudiesOpen}
-          aria-hidden={!isCaseStudiesOpen}>
-          {CASE_STUDIES_LINKS.map(({ href, label, icon, iconAlt }) => (
-            <li key={href} onClick={handleLinkClick}>
-              <TrackedLink
-                href={href}
-                label={label}
-                location='top_nav'
-                section='case_studies_dropdown'
-                variant='desktop'
-                tabIndex={isCaseStudiesOpen ? 0 : -1}
-              >
-                {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
-                {label}
-              </TrackedLink>
-            </li>
-          ))}
-          </CaseStudiesDropdown>
-      </CaseStudiesDesktopWrapper>
-      <CaseStudiesDesktopWrapper
-        ref={projectsRef}
-        onMouseEnter={openProjects}
-        onMouseLeave={scheduleCloseAll}
-        onFocus={openProjects}
-        onBlur={(event: FocusEvent<HTMLDivElement>) => {
-          const current = projectsRef.current;
-          const next = event.relatedTarget as Node | null;
-          if (!current) return;
-          if (next && current.contains(next)) return;
-          closeAll();
-        }}
-      >
-        <CaseStudiesTrigger
-          type='button'
-          onClick={openProjects}
-          aria-haspopup='true'
-          aria-expanded={isProjectsOpen}>
-          Product Engineering
-          <CaseStudiesChevron $isOpen={isProjectsOpen} aria-hidden='true'>
-            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-          </CaseStudiesChevron>
-        </CaseStudiesTrigger>
-        <CaseStudiesDropdown
-          onMouseEnter={openProjects}
-          onMouseLeave={scheduleCloseAll}
-          $isOpen={isProjectsOpen}
-          aria-hidden={!isProjectsOpen}>
-          {PROJECT_LINKS.map(({ href, label, icon, iconAlt }) => (
-            <li key={href} onClick={handleLinkClick}>
-              <TrackedLink
-                href={href}
-                label={label}
-                location='top_nav'
-                section='ux_design_dropdown'
-                variant='desktop'
-                tabIndex={isProjectsOpen ? 0 : -1}
-              >
-                {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
-                {label}
-              </TrackedLink>
-            </li>
-          ))}
-          </CaseStudiesDropdown>
-      </CaseStudiesDesktopWrapper>
-      <CaseStudiesDesktopWrapper
-        ref={contactRef}
-        onMouseEnter={openContact}
-        onMouseLeave={scheduleCloseAll}
-        onFocus={openContact}
-        onBlur={(event: FocusEvent<HTMLDivElement>) => {
-          const current = contactRef.current;
-          const next = event.relatedTarget as Node | null;
-          if (!current) return;
-          if (next && current.contains(next)) return;
-          closeAll();
-        }}
-      >
-        <CaseStudiesTrigger
-          type='button'
-          onClick={openContact}
-          aria-haspopup='true'
-          aria-expanded={isContactOpen}>
-          Links
-          <CaseStudiesChevron $isOpen={isContactOpen} aria-hidden='true'>
-            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-          </CaseStudiesChevron>
-        </CaseStudiesTrigger>
-        <CaseStudiesDropdown
-          onMouseEnter={openContact}
-          onMouseLeave={scheduleCloseAll}
-          $isOpen={isContactOpen}
-          aria-hidden={!isContactOpen}>
-          {EXTERNAL_LINKS.map(({ href, label }) => (
-            <li key={href} onClick={handleLinkClick}>
-              <TrackedLink
-                href={href}
-                label={label}
-                location='top_nav'
-                section='links_dropdown'
-                variant='desktop'
-                target='_blank'
-                rel='noopener noreferrer'
-                tabIndex={isContactOpen ? 0 : -1}
-              >
-                {label} <OpenInNewWindowIcon aria-hidden='true' />
-              </TrackedLink>
-            </li>
-          ))}
-        </CaseStudiesDropdown>
-      </CaseStudiesDesktopWrapper>
-    </LinkBox>
+      {NAV_MENUS.map((menu) => {
+        const isOpen = openMenu === menu.key;
+
+        return (
+          <NavMenu
+            key={menu.key}
+            ref={(node: HTMLDivElement | null) => {
+              menuRefs.current[menu.key] = node;
+            }}
+            onMouseEnter={() => open(menu)}
+            onMouseLeave={scheduleCloseAll}
+            onFocus={() => open(menu)}
+            onBlur={(event: FocusEvent<HTMLDivElement>) => {
+              const current = menuRefs.current[menu.key];
+              const next = event.relatedTarget as Node | null;
+              if (!current) return;
+              if (next && current.contains(next)) return;
+              closeAll();
+            }}
+          >
+            <NavMenuTrigger
+              type='button'
+              onClick={() => open(menu)}
+              aria-haspopup='true'
+              aria-expanded={isOpen}
+              data-active={menuHoldsPath(menu, currentPath) ? 'true' : undefined}
+            >
+              {menu.label}
+              <NavChevron $isOpen={isOpen} aria-hidden='true'>
+                <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </NavChevron>
+            </NavMenuTrigger>
+            <NavDropdown
+              onMouseEnter={() => open(menu)}
+              onMouseLeave={scheduleCloseAll}
+              $isOpen={isOpen}
+              aria-hidden={!isOpen}
+            >
+              {menu.links.map(({ href, label, icon, iconAlt }) => (
+                <li key={href} onClick={closeAll}>
+                  {menu.external ? (
+                    <TrackedLink
+                      href={href}
+                      label={label}
+                      location='top_nav'
+                      section={menu.sections.desktop}
+                      variant='desktop'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      tabIndex={isOpen ? 0 : -1}
+                    >
+                      {label} <OpenInNewWindowIcon aria-hidden='true' />
+                    </TrackedLink>
+                  ) : (
+                    <TrackedLink
+                      href={href}
+                      label={label}
+                      location='top_nav'
+                      section={menu.sections.desktop}
+                      variant='desktop'
+                      tabIndex={isOpen ? 0 : -1}
+                      ariaCurrent={href === currentPath ? 'page' : undefined}
+                    >
+                      {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
+                      {label}
+                    </TrackedLink>
+                  )}
+                </li>
+              ))}
+            </NavDropdown>
+          </NavMenu>
+        );
+      })}
+    </NavLinkRow>
   );
 };
 

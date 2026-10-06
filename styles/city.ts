@@ -394,3 +394,137 @@ export const WeatherCanvasElement = styled.canvas`
     opacity: 0.6;
   }
 `;
+
+/*
+ * Fast travel: roll-up shutters drop over a client navigation and lift once
+ * the new page is in. The timings drive the component's state machine.
+ */
+export const FAST_TRAVEL_COVER_MS = 300;
+export const FAST_TRAVEL_REVEAL_MS = 540;
+const SLAT_COVER_MS = 200;
+const SLAT_REVEAL_MS = 400;
+const SLAT_STAGGER_MS = 20;
+const SLAT_REVEAL_STAGGER_MS = 28;
+
+const slatDrop = keyframes`
+  from { transform: translate3d(0, -100%, 0); }
+  to { transform: translate3d(0, 0, 0); }
+`;
+
+const slatLift = keyframes`
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, -100%, 0); }
+`;
+
+const readoutIn = keyframes`
+  from { opacity: 0; transform: translate3d(-50%, calc(-50% + 10px), 0); }
+  to { opacity: 1; transform: translate3d(-50%, -50%, 0); }
+`;
+
+const readoutOut = keyframes`
+  from { opacity: 1; }
+  to { opacity: 0; }
+`;
+
+const routeLoad = keyframes`
+  from { transform: scaleX(0); }
+  to { transform: scaleX(0.72); }
+`;
+
+export const FastTravelOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: ${THEME.z.fastTravel};
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  overflow: hidden;
+  pointer-events: none;
+
+  .slat {
+    position: relative;
+    margin-right: -1px;
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.05) 0 1px,
+        transparent 1px 7px,
+        rgba(0, 0, 0, 0.28) 7px 8px
+      ),
+      linear-gradient(to bottom, var(--bldg-near), var(--color-darkest));
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.45);
+    animation: ${slatDrop} ${SLAT_COVER_MS}ms ${THEME.easing.out} both;
+    animation-delay: calc(var(--slat, 0) * ${SLAT_STAGGER_MS}ms);
+    will-change: transform;
+  }
+
+  /* The leading edge: a neon strip in the destination's color. */
+  .slat::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: var(--travel-accent, var(--city-accent));
+    box-shadow: 0 0 calc(16px * var(--neon-glow-strength, 1)) 2px var(--travel-accent, var(--city-accent));
+  }
+
+  .readout {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    gap: 0.55em;
+    width: min(84vw, 26em);
+    padding: 1.1em 1.3em 1.2em;
+    border-left: 3px solid var(--travel-accent, var(--city-accent));
+    background:
+      linear-gradient(var(--scanline) 1px, transparent 1px) 0 0 / 100% 3px,
+      rgba(3, 8, 16, 0.82);
+    color: var(--hud-ink);
+    font-family: ${THEME.fonts.mono};
+    text-align: left;
+    text-transform: uppercase;
+    transform: translate3d(-50%, -50%, 0);
+    animation: ${readoutIn} 0.22s ${THEME.easing.out} 0.08s both;
+  }
+
+  .readout-label {
+    color: var(--travel-accent, var(--city-accent));
+    font-size: 0.78rem;
+    letter-spacing: 0.32em;
+  }
+
+  .readout-destination {
+    overflow: hidden;
+    font-family: ${THEME.fonts.display};
+    font-size: clamp(1.35rem, 4.4vw, 2.3rem);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    line-height: 1.15;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-shadow: 0 0 calc(18px * var(--neon-glow-strength, 1)) var(--travel-accent, var(--city-accent));
+  }
+
+  .readout-bar {
+    height: 2px;
+    background: var(--travel-accent, var(--city-accent));
+    transform-origin: 0 50%;
+    animation: ${routeLoad} ${FAST_TRAVEL_COVER_MS}ms ${THEME.easing.out} both;
+  }
+
+  &[data-phase='revealing'] .slat {
+    animation: ${slatLift} ${SLAT_REVEAL_MS}ms ${THEME.easing.inOut} both;
+    animation-delay: calc(var(--slat, 0) * ${SLAT_REVEAL_STAGGER_MS}ms);
+  }
+
+  &[data-phase='revealing'] .readout {
+    animation: ${readoutOut} 0.14s ease both;
+  }
+
+  &[data-phase='revealing'] .readout-bar {
+    transform: scaleX(1);
+    animation: none;
+  }
+`;

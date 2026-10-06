@@ -6,10 +6,12 @@ import { Provider } from 'react-redux';
 import { store } from '../src/store';
 
 import CityBackdrop from '../src/components/city/CityBackdrop';
+import FastTravelTransition from '../src/components/city/FastTravelTransition';
 import WeatherCanvas from '../src/components/city/WeatherCanvas';
 import PageAnalytics from '../src/components/PageAnalytics';
 import SiteAnalyticsScripts from '../src/components/SiteAnalyticsScripts';
-import { isHomePath } from '../src/lib/city/routes';
+import { CurrentPathContext } from '../src/hooks/useCurrentPath';
+import { isHomePath, normalizeRoutePath } from '../src/lib/city/routes';
 import { AppThemeProvider } from '../src/theme/ThemeContext';
 import FontVariables from '../src/theme/FontVariables';
 import ThemeColorMeta from '../src/theme/ThemeColorMeta';
@@ -54,7 +56,11 @@ function MyApp({
           <CityBackdrop pathname={router.pathname} />
           <WeatherCanvas dimmed={!isHomePath(router.pathname)} />
 
-          <Component {...pageProps} />
+          <CurrentPathContext.Provider value={normalizeRoutePath(router.pathname)}>
+            <Component {...pageProps} />
+          </CurrentPathContext.Provider>
+
+          <FastTravelTransition />
         </Container>
       </AppThemeProvider>
     </Provider>
