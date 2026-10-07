@@ -50,14 +50,17 @@ describe('Homepage city', () => {
     delete (window as TestWindow).amplitude;
   });
 
-  it('hangs the exact headline over the alley', () => {
+  it('makes Michael and the brand the single main heading in the introduction', () => {
     renderHome();
 
     const headline = screen.getByRole('heading', { level: 1 });
-    expect(headline).toHaveAccessibleName('I Dream in Features');
+    expect(headline).toHaveAccessibleName('Michael Zick is ZICKONEZERO');
     expect(headline).toHaveAttribute('id', 'home-hero-title');
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
     expect(headline.closest('section')).toHaveAttribute('aria-labelledby', 'home-hero-title');
+    expect(headline.closest('.hero-panel')).not.toBeNull();
+    expect(headline.querySelector('.brand-one')).toHaveTextContent('ONE');
+    expect(screen.queryByText('I Dream')).not.toBeInTheDocument();
   });
 
   it('introduces Michael with the brand and two ways in', async () => {
@@ -65,8 +68,9 @@ describe('Homepage city', () => {
     renderHome();
 
     expect(screen.getByText(/Michael Zick is/)).toHaveTextContent(
-      'Michael Zick is ZICKONEZERO Creative, turning ideas into shipped products.',
+      'Michael Zick is ZICKONEZERO',
     );
+    expect(screen.getByText('Turning ideas into shipped products.')).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'See Case Studies' }));
 
@@ -77,9 +81,18 @@ describe('Homepage city', () => {
       page_path: '/',
     });
 
-    const hero = screen.getByRole('region', { name: 'I Dream in Features' });
+    const hero = screen.getByRole('region', { name: 'Michael Zick is ZICKONEZERO' });
     expect(within(hero).getByRole('link', { name: 'Contact' })).toHaveAttribute('href', '/contact');
     expect(screen.queryByRole('link', { name: 'Jack In' })).not.toBeInTheDocument();
+  });
+
+  it('keeps the market sign and street litter outside the reading order', () => {
+    const { container } = renderHome();
+    expect(screen.getByText('Sector 10').closest('[aria-hidden="true"]')).not.toBeNull();
+    expect(screen.queryByRole('heading', { name: /Night Market/ })).not.toBeInTheDocument();
+    const scraps = container.querySelectorAll('.paper-scrap');
+    expect(scraps).toHaveLength(8);
+    scraps.forEach((scrap) => expect(scrap.closest('[aria-hidden="true"]')).not.toBeNull());
   });
 
   it('keeps every Japanese sign decorative and marked as Japanese', () => {

@@ -46,10 +46,14 @@ tab. It runs the same test and uploads its screenshots as the
 
 The site is a neon city. One persistent backdrop (sky, skyline, flying traffic,
 fog, and dust by day) mounts once in `pages/_app.tsx` and pans to each page's
-spot in the city as visitors navigate. The homepage walks from the "I Dream in
-Features" alley past a holo billboard and three work districts to open city
+spot in the city as visitors navigate. The homepage walks from a weathered futuristic alley past a holo billboard
+and three work districts to open city
 above the footer, with a minimap HUD for fast travel.
 
+- The alley opens on "Michael Zick is ZICKONEZERO" in a bottom-left introduction,
+  balanced by a top-right Night Market sign. Small paper scraps drift near the
+  worn street, pause offscreen or in hidden tabs, and stay still under reduced
+  motion or Save-Data.
 - Night is the default. The nav's time-of-day toggle switches to day, and the
   choice is remembered.
 - Sound stays off until a visitor turns it on. It is synthesized in the browser
