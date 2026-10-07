@@ -575,7 +575,7 @@ const AboutContent = () => {
                   <dt>Status</dt>
                   <dd><span className='status'>Open to connect</span></dd>
                   <dt className='dossier-row-optional'>Last seen</dt>
-                  <dd className='dossier-row-optional'>Mt. Hood, OR</dd>
+                  <dd className='dossier-row-optional'>El Porto, Manhattan Beach, CA</dd>
                 </dl>
               </div>
               <div className='feed'>Feed 04 // Live</div>
