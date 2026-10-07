@@ -11,10 +11,8 @@ const clampUnit = (value: number) => Math.min(Math.max(value, -1), 1);
 
 /**
  * Head-tracking parallax for a scene. While a mouse or trackpad moves over
- * the element, it writes an eased --px and --py (-1 to 1 from the center) and
- * the pointer position --mx and --my in pixels, and sets data-pointer while
- * the pointer is inside. Touch screens and reduced motion get none of it, so
- * the scene rests centered.
+ * the element, it writes eased --px and --py (-1 to 1 from the center).
+ * Touch screens and reduced motion get none of it, so the scene rests centered.
  */
 const usePointerParallax = (ref: RefObject<HTMLElement | null>): void => {
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -41,8 +39,6 @@ const usePointerParallax = (ref: RefObject<HTMLElement | null>): void => {
         const y = clientY - rect.top;
         target.x = clampUnit((x / Math.max(rect.width, 1)) * 2 - 1);
         target.y = clampUnit((y / Math.max(rect.height, 1)) * 2 - 1);
-        node.style.setProperty('--mx', `${Math.round(x)}px`);
-        node.style.setProperty('--my', `${Math.round(y)}px`);
       }
 
       current.x += (target.x - current.x) * EASE;
@@ -74,10 +70,7 @@ const usePointerParallax = (ref: RefObject<HTMLElement | null>): void => {
 
       clientX = event.clientX;
       clientY = event.clientY;
-      if (!inside) {
-        inside = true;
-        node.setAttribute('data-pointer', '');
-      }
+      inside = true;
       schedule();
     };
 
@@ -85,7 +78,6 @@ const usePointerParallax = (ref: RefObject<HTMLElement | null>): void => {
       inside = false;
       target.x = 0;
       target.y = 0;
-      node.removeAttribute('data-pointer');
       schedule();
     };
 
@@ -98,8 +90,7 @@ const usePointerParallax = (ref: RefObject<HTMLElement | null>): void => {
       if (frame !== null) {
         window.cancelAnimationFrame(frame);
       }
-      ['--px', '--py', '--mx', '--my'].forEach((property) => node.style.removeProperty(property));
-      node.removeAttribute('data-pointer');
+      ['--px', '--py'].forEach((property) => node.style.removeProperty(property));
     };
   }, [ref, prefersReducedMotion]);
 };

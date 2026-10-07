@@ -337,7 +337,7 @@ body {
 
 .brand-name .brand-one {
   color: var(--color-accent);
-  text-shadow: 0 0 calc(0.45em * var(--neon-glow-strength)) var(--neon-magenta);
+  text-shadow: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

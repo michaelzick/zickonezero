@@ -162,12 +162,14 @@ describe('HomeHud', () => {
     parkRef = createRef<HTMLElement>(),
   }: { active?: HudDistrict['section'] | null; parkRef?: RefObject<HTMLElement | null> } = {}) => {
     const onTravel = jest.fn();
+    const onReturnToSurface = jest.fn();
     const measureStops = () => STOPS;
     const view = renderWithProviders(
       <HomeHud
         districts={DISTRICTS}
         active={active}
         onTravel={onTravel}
+        onReturnToSurface={onReturnToSurface}
         measureStops={measureStops}
         parkRef={parkRef}
       />,
@@ -180,12 +182,13 @@ describe('HomeHud', () => {
         districts={DISTRICTS}
         active={nextActive}
         onTravel={onTravel}
+        onReturnToSurface={onReturnToSurface}
         measureStops={measureStops}
         parkRef={parkRef}
       />,
     );
 
-    return { ...view, nav, pins, player, onTravel, rerender };
+    return { ...view, nav, pins, player, onTravel, onReturnToSurface, rerender };
   };
 
   beforeEach(() => {
@@ -229,13 +232,33 @@ describe('HomeHud', () => {
     expect(animate).toHaveBeenCalledTimes(1);
   });
 
-  it('travels to the district the objective explores', async () => {
+  it('heads to Web Development after Product Engineering', async () => {
     const user = userEvent.setup();
     const { nav, onTravel } = renderHud({ active: 'ux' });
 
-    await user.click(within(nav).getByRole('button', { name: 'Explore Product Engineering' }));
+    await user.click(within(nav).getByRole('button', { name: 'Head to Web Development' }));
 
-    expect(onTravel).toHaveBeenCalledWith('ux', 'Product Engineering');
+    expect(onTravel).toHaveBeenCalledWith('ui', 'Web Dev');
+  });
+
+  it('advances the objective through the route and resets it when returning', async () => {
+    const user = userEvent.setup();
+    const { nav, rerender, onTravel, onReturnToSurface } = renderHud({ active: 'case-studies' });
+
+    await user.click(within(nav).getByRole('button', { name: 'Head to Product Engineering' }));
+    expect(onTravel).toHaveBeenLastCalledWith('ux', 'Product Engineering');
+
+    rerender('ux');
+    await user.click(within(nav).getByRole('button', { name: 'Head to Web Development' }));
+    expect(onTravel).toHaveBeenLastCalledWith('ui', 'Web Dev');
+
+    rerender('ui');
+    await user.click(within(nav).getByRole('button', { name: 'Return to surface' }));
+    expect(onReturnToSurface).toHaveBeenCalledTimes(1);
+    expect(onTravel).toHaveBeenCalledTimes(2);
+
+    rerender(null);
+    expect(within(nav).getByRole('button', { name: 'Head to Case Studies' })).toBeInTheDocument();
   });
 
   it('fast travels from a pin', async () => {
@@ -275,7 +298,7 @@ describe('HomeHud', () => {
     expect(container.querySelector('.map-district.tone-product')).toHaveAttribute('data-active', '');
 
     await waitFor(() => {
-      expect(container.querySelector('.quest-objective')).toHaveTextContent('Explore Product Engineering');
+      expect(container.querySelector('.quest-objective')).toHaveTextContent('Head to Web Development');
     });
 
     rerender('ui');
@@ -283,7 +306,7 @@ describe('HomeHud', () => {
     expect(web).toHaveAttribute('aria-current', 'true');
     expect(product).toHaveAttribute('data-state', 'visited');
     await waitFor(() => {
-      expect(container.querySelector('.quest-objective')).toHaveTextContent('Explore Web Development');
+      expect(container.querySelector('.quest-objective')).toHaveTextContent('Return to surface');
     });
   });
 

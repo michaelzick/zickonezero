@@ -183,6 +183,17 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
     handleHomeSectionClick(section, label, 'home_tabs');
   }, [handleHomeSectionClick]);
 
+  const handleReturnToSurface = useCallback(() => {
+    trackEvent('section_tab_click', {
+      location: 'home_tabs',
+      label: 'Return to surface',
+      section: 'hero',
+      page_path: window.location.pathname,
+    });
+    setActiveSection(null);
+    jumper.jumpTo(0);
+  }, [jumper, setActiveSection]);
+
   // Where the HUD's player reaches each stop: the start, each district (when
   // its sign meets the nav, or the page end if sooner), and the page end.
   const measureRouteStops = useCallback(() => {
@@ -219,6 +230,7 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
         districts={HUD_DISTRICTS}
         active={activeSection}
         onTravel={handleTravel}
+        onReturnToSurface={handleReturnToSurface}
         measureStops={measureRouteStops}
         parkRef={footerRef}
       />

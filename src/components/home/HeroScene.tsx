@@ -99,6 +99,10 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
         <div className='hero-scene' aria-hidden='true'>
           <div className='alley'>
             <AlleyTowers />
+            <div className='plane drone'>
+              <div className='drone-body' />
+              <div className='drone-cone' />
+            </div>
             <div className='plane street'>
               <div className='street-glow' />
               {/* Paint on the street leaf itself to avoid overlapping 3D planes. */}
@@ -154,11 +158,6 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
         </div>
 
         <div className='hero-haze' aria-hidden='true' />
-        <div className='drone' aria-hidden='true'>
-          <div className='drone-body' />
-          <div className='drone-cone' />
-        </div>
-        <div className='cursor-glow' aria-hidden='true' />
 
         <div className='market-sign' aria-hidden='true'>
           <span className='market-name'>
@@ -174,7 +173,8 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
             Product Engineer <span aria-hidden='true'>{'//'}</span> UX designer
           </p>
           <h1 id='home-hero-title' className='hero-title'>
-            Michael Zick is{' '}<BrandName />
+            Michael Zick is{' '}<BrandName />{' '}
+            <span className='hero-creative'>Creative</span>
           </h1>
           <p className='hero-pitch'>Turning ideas into shipped products.</p>
           <div className='hero-ctas'>

@@ -34,10 +34,12 @@ const marketTubeFault = keyframes`
   87%, 88% { opacity: 0.68; }
 `;
 
-// Crosses in the first quarter of the loop, then waits off-screen.
+// Recedes toward the distant towers, then waits out of view before returning.
 const dronePatrol = keyframes`
-  0% { transform: translate3d(-20vw, 0, 0); }
-  26%, 100% { transform: translate3d(120vw, -5vh, 0); }
+  0% { transform: translate3d(-10vw, 0, 160px); opacity: 0; }
+  4% { opacity: 1; }
+  36% { transform: translate3d(-2vw, 8vh, -2200px); opacity: 0.7; }
+  58%, 100% { transform: translate3d(0, 12vh, -5100px); opacity: 0; }
 `;
 
 const coneSweep = keyframes`
@@ -422,16 +424,16 @@ export const HeroRoot = styled.section`
     background: linear-gradient(to bottom, transparent 84%, rgba(var(--color-dark-rgb), 0.6) 100%);
   }
 
-  /* A patrol drone crosses every 38 seconds, sweeping a light cone. */
+  /* A flat leaf in the alley's perspective, flying away through the fog. */
   .drone {
-    position: absolute;
-    top: 24%;
-    left: 0;
+    top: 22%;
+    left: calc(50% - 60px);
     width: 120px;
     height: 260px;
     pointer-events: none;
-    transform: translate3d(-30vw, 0, 0);
-    animation: ${dronePatrol} 38s linear 6s infinite;
+    transform: translate3d(-10vw, 0, 160px);
+    opacity: 0;
+    animation: ${dronePatrol} 38s linear 3s infinite;
   }
 
   .drone-body {
@@ -474,25 +476,6 @@ export const HeroRoot = styled.section`
     opacity: calc(0.35 + 0.65 * var(--night-only, 1));
     transform-origin: 50% 0;
     animation: ${coneSweep} 2.6s ${THEME.easing.inOut} infinite alternate;
-  }
-
-  /* A soft neon glow that follows a mouse across the wet street. */
-  .cursor-glow {
-    position: absolute;
-    top: -260px;
-    left: -260px;
-    width: 520px;
-    height: 520px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(47, 243, 255, 0.14), rgba(255, 43, 214, 0.07) 42%, transparent 70%);
-    opacity: 0;
-    pointer-events: none;
-    transform: translate3d(var(--mx, 50vw), var(--my, 50vh), 0);
-    transition: opacity 0.6s ease;
-  }
-
-  .hero-stage[data-pointer] .cursor-glow {
-    opacity: var(--night-only, 1);
   }
 
   /* A wall-mounted plate passes overhead as the visitor walks into the alley. */
@@ -649,6 +632,15 @@ export const HeroRoot = styled.section`
 
     /* Keep ONE inline so the accessible brand name remains one word in jsdom. */
     .brand-one { display: inline; }
+  }
+
+  .hero-creative {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.5em;
+    letter-spacing: 0.16em;
+    line-height: 1.35;
+    text-transform: uppercase;
   }
 
   .hero-ctas {
@@ -833,7 +825,6 @@ export const HeroRoot = styled.section`
     }
 
     .drone,
-    .cursor-glow,
     .scroll-cue {
       display: none;
     }
