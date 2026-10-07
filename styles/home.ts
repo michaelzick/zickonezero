@@ -478,8 +478,14 @@ export const HeroRoot = styled.section`
     animation: ${coneSweep} 2.6s ${THEME.easing.inOut} infinite alternate;
   }
 
-  /* A wall-mounted plate passes overhead as the visitor walks into the alley. */
+  /*
+   * A wall-mounted plate passes overhead as the visitor walks into the alley.
+   * It is the link to the hidden Night Market (src/components/nightmarket/):
+   * hovering or focusing it brightens the tubes and steadies the flicker.
+   */
   .market-sign {
+    --market-lit: 1;
+    display: block;
     position: absolute;
     top: clamp(112px, 17vh, 170px);
     right: clamp(24px, 5vw, 80px);
@@ -490,11 +496,22 @@ export const HeroRoot = styled.section`
     background: radial-gradient(ellipse at 20% 0, #1e2729, #0b1316 75%);
     box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.25), inset 0 0 0 2px #080d10;
     color: #f4d4a1;
-    pointer-events: none;
+    text-decoration: none;
     transform:
       translate3d(calc(var(--px) * -18px), calc(var(--p) * -64vh + var(--py) * -8px), 0)
       rotate(3deg) scale(calc(1 + var(--p) * 0.3));
     transform-origin: 100% 0;
+
+    &:hover,
+    &:focus-visible {
+      --market-lit: 1.7;
+      border-color: #8b7a5a;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 6px;
+    }
 
     &::before {
       content: '';
@@ -531,8 +548,18 @@ export const HeroRoot = styled.section`
     -webkit-text-stroke: 1.2px #ffe6b2;
     text-shadow:
       0 0 3px #ffd28a,
-      0 0 calc(10px * var(--neon-glow-strength, 1)) #ffb03b,
-      0 0 calc(24px * var(--neon-glow-strength, 1)) rgba(255, 144, 36, 0.8);
+      0 0 calc(10px * var(--neon-glow-strength, 1) * var(--market-lit)) #ffb03b,
+      0 0 calc(24px * var(--neon-glow-strength, 1) * var(--market-lit)) rgba(255, 144, 36, 0.8);
+  }
+
+  .market-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
   .market-word { display: block; }
@@ -546,7 +573,18 @@ export const HeroRoot = styled.section`
   .market-flicker-late { animation-duration: 6.3s; animation-delay: -0.4s; }
 
   &[data-scene-motion='running'] .market-flicker { animation-play-state: running; }
-  &[data-scene-motion='still'] .market-flicker { animation: none; }
+  &[data-scene-motion='still'] .market-flicker,
+  .market-sign:hover .market-flicker,
+  .market-sign:focus-visible .market-flicker { animation: none; }
+
+  /* The market only opens after dark: by day its tubes are switched off. */
+  html[data-theme='light'] & .market-name {
+    color: #3a3833;
+    -webkit-text-stroke-color: #9c958a;
+    text-shadow: none;
+  }
+
+  html[data-theme='light'] & .market-flicker { animation: none; }
 
   .market-translation {
     display: block;

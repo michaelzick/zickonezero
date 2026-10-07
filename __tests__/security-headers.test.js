@@ -15,6 +15,15 @@ describe('framing', () => {
   });
 });
 
+describe('scripts', () => {
+  it("lets the Night Market's rack register its audio worklets from blob: URLs", () => {
+    const sources = directive('script-src').split(/\s+/);
+    expect(sources).toContain('blob:');
+    expect(sources).not.toContain('data:');
+    expect(sources).not.toContain('*');
+  });
+});
+
 describe('the rest of the security headers', () => {
   it('still denies plugins and restricts the base URI and form targets', () => {
     expect(directive('object-src')).toBe("object-src 'none'");

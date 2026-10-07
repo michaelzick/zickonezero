@@ -26,7 +26,9 @@ Watch mode (`npm test -- --watch`) has no limit.
 An optional browser smoke test loads the exported site in headless Chromium at
 desktop and phone sizes. It fails on page or console errors (including CSP
 violations), horizontal overflow, or a homepage scene that stops responding to
-scroll, theme, or reduced motion. It is not part of `npm test`, `npm run check`,
+scroll, theme, or reduced motion. It also follows the Night Market sign and
+plays the rack, and checks that the market is shut by day. It is not part of
+`npm test`, `npm run check`,
 or CI, and it stops itself after 3 minutes. Playwright is not a project
 dependency, so install it once, globally or for this checkout only:
 
@@ -62,6 +64,11 @@ above the footer, with a minimap HUD for fast travel.
   The drone recedes down the alley toward the towers. Mouse movement changes
   the camera parallax without a pointer glow, and ONE keeps its accent color
   without glowing throughout the site.
+- The Night Market sign is a link to `/night-market/`, a hidden after-hours
+  lane. Its synth stall holds a playable [Rackloose](#rackloose) rack that
+  opens on the Neon Skyline preset. The market only opens after dark: by day
+  the sign is unlit, the stall's shutter is down, and **Wait for dark** switches
+  the city to night. The page is left out of the sitemap and marked `noindex`.
 - The Current Gig objective points to the next district in route order, then
   offers "Return to surface" at Web Development to scroll back to the hero.
 - Night is the default. The nav's time-of-day toggle switches to day, and the
@@ -89,8 +96,26 @@ Native `hidden` containers preserve the modal/tab presentation. Keep the content
 rendered when changing those interactions, and maintain unique IDs and working
 tab-to-panel accessibility relationships.
 
-The generated sitemap includes all public routes and omits `lastmod` until a
-reliable per-page content-date source exists. A build date is not a content date.
+The generated sitemap includes all public routes except the hidden Night
+Market, and omits `lastmod` until a reliable per-page content-date source
+exists. A build date is not a content date.
+
+## Rackloose
+
+The Night Market's rack is [Rackloose](https://github.com/michaelzick/rackloose),
+installed from a pinned release archive committed in `vendor/rackloose/`, the
+same way Mike OS consumes it. There are no registry credentials or runtime
+downloads. To update it, copy `rackloose-<version>.tgz` and `release.json` from
+the GitHub release into `vendor/rackloose/`, check the archive's SHA-256 against
+the manifest, run `npm install ./vendor/rackloose/rackloose-<version>.tgz`, and
+commit the archive, manifest, `package.json`, and lockfile together. Remove the
+old archive in the same change.
+
+The rack loads only on `/night-market/`, in the browser. It autosaves patches in
+this origin's `localStorage` under `zickonezero.rackloose.patch.v1`. Its audio
+worklets register from `blob:` URLs, so the Content-Security-Policy's
+`script-src` allows `blob:` site-wide: the sign navigates on the client, so
+the homepage's policy is the one in force when the rack starts.
 
 ## Cloudflare hosting
 
@@ -103,7 +128,8 @@ custom domains, trailing-slash handling, and real 404 responses. The zone's
 `public/_redirects` preserves the legacy `/case-studies` redirect (including
 its descendants), sends the removed `/michael-zick-coaching` route to
 `https://www.niceguyuniversity.com/`, and `public/_headers` configures the
-security headers.
+security headers (see [Rackloose](#rackloose) for why `script-src` allows
+`blob:`).
 The contact form continues using the separate `zickonezero-contact` Worker.
 
 Workers Builds uses this GitHub repository's `main` branch with Node 24,

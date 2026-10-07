@@ -11,6 +11,9 @@ const ROBOTS_PATH = path.join(PUBLIC_DIR, 'robots.txt');
 
 // Next.js reserved filenames and directories to skip
 const SKIPPED_NAMES = new Set(['_app', '_document', '_error', '404', '500']);
+// Hidden pages: reachable from the site, but left for visitors to find. They
+// also set noindex.
+const HIDDEN_NAMES = new Set(['night-market']);
 const PAGE_EXTENSIONS = /\.(tsx|ts|js|jsx)$/;
 
 function getPageFiles(dir) {
@@ -30,7 +33,7 @@ function getPageFiles(dir) {
 function routeFromPageFile(filePath) {
   const basename = path.basename(filePath).replace(PAGE_EXTENSIONS, '');
 
-  if (SKIPPED_NAMES.has(basename)) return null;
+  if (SKIPPED_NAMES.has(basename) || HIDDEN_NAMES.has(basename)) return null;
   if (basename === 'index') return '/';
 
   // Add trailing slash to match next.config.js trailingSlash: true

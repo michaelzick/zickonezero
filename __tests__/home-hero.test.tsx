@@ -124,11 +124,19 @@ describe('Homepage city', () => {
     expect(within(hud).getByRole('button', { name: 'Head to Case Studies' })).toBeInTheDocument();
   });
 
-  it('keeps the market sign and street litter outside the reading order', () => {
+  it('makes the market sign a link to the Night Market and keeps street litter decorative', () => {
     const { container } = renderHome();
-    const translation = screen.getByText('НОЧНОЙ РЫНОК');
+    const market = screen.getByRole('link', { name: 'Night Market' });
+    expect(market).toHaveAttribute('href', '/night-market');
+    // The link follows the introduction's CTAs in tab order.
+    const hero = screen.getByRole('region', { name: 'Michael Zick is ZICKONEZERO Creative' });
+    const contact = within(hero).getByRole('link', { name: 'Contact' });
+    expect(contact.compareDocumentPosition(market) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+
+    const translation = within(market).getByText('НОЧНОЙ РЫНОК');
     expect(translation).toHaveAttribute('lang', 'ru');
     expect(translation.closest('[aria-hidden="true"]')).not.toBeNull();
+    expect(within(market).getByText('Open late').closest('[aria-hidden="true"]')).not.toBeNull();
     expect(screen.queryByText('Sector 10')).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: /Night Market/ })).not.toBeInTheDocument();
     const scraps = container.querySelectorAll('.paper-scrap');
