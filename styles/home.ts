@@ -25,6 +25,15 @@ const paperGust = keyframes`
   82%, 100% { transform: translate3d(0, 0, 0) rotate(-12deg); }
 `;
 
+// Brief, shallow faults every few seconds, confined to two letters. There is
+// at least a second of steady light between dips, even on the shorter loop.
+const marketTubeFault = keyframes`
+  0%, 18%, 21%, 53%, 56%, 86%, 89%, 100% { opacity: 1; }
+  19%, 20% { opacity: 0.62; }
+  54%, 55% { opacity: 0.75; }
+  87%, 88% { opacity: 0.68; }
+`;
+
 // Crosses in the first quarter of the loop, then waits off-screen.
 const dronePatrol = keyframes`
   0% { transform: translate3d(-20vw, 0, 0); }
@@ -65,6 +74,12 @@ export const HeroRoot = styled.section`
   --alley-paper: #938e7b;
   --alley-grime: rgba(2, 8, 12, 0.45);
   --alley-crack: rgba(120, 141, 142, 0.24);
+  --tower-face: #173039;
+  --tower-side: #0a1b24;
+  --tower-rim: #49717a;
+  --tower-unlit: #203e46;
+  --tower-warm: #c5af87;
+  --tower-cool: #78bdc5;
   position: relative;
   height: 220vh;
   color: var(--color-white);
@@ -86,6 +101,12 @@ export const HeroRoot = styled.section`
     --facade-wall-a: #7c7166;
     --facade-wall-b: #586b69;
     --facade-shutter: #666d68;
+    --tower-face: #667c79;
+    --tower-side: #435d5e;
+    --tower-rim: #8ca19a;
+    --tower-unlit: #425b5b;
+    --tower-warm: #d4c6a3;
+    --tower-cool: #adc8c4;
   }
 
   .hero-stage {
@@ -128,6 +149,34 @@ export const HeroRoot = styled.section`
     position: absolute;
     backface-visibility: hidden;
   }
+
+  /* display: contents keeps the towers as flat leaves of the existing 3D
+     world. A wrapper with opacity would flatten and break wall occlusion. */
+  .distant-towers { display: contents; }
+
+  .distant-tower {
+    --tower-clarity: clamp(0, (var(--p) - var(--tower-reveal)) * var(--tower-gain), 1);
+    bottom: calc(100% - var(--alley-street));
+    left: calc(50% + var(--tower-x) - var(--tower-width) * 0.5);
+    width: var(--tower-width);
+    height: var(--tower-height);
+    transform: translateZ(var(--tower-depth));
+    opacity: calc(0.035 + var(--tower-clarity) * 0.965);
+    /* The bases dissolve into ground fog without an animated blur layer. */
+    -webkit-mask-image: linear-gradient(to bottom, #000 0% 64%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0% 64%, transparent 100%);
+
+    svg { display: block; width: 100%; height: 100%; overflow: visible; }
+  }
+
+  .tower-body { fill: var(--tower-face); stroke: var(--tower-rim); stroke-width: 1.5; }
+  .tower-side { fill: var(--tower-side); }
+  .tower-ribs, .tower-crown { fill: none; stroke: var(--tower-rim); stroke-width: 2; }
+  .tower-windows { fill: none; stroke-width: 4; stroke-dasharray: 8 14; }
+  .tower-unlit { stroke: var(--tower-unlit); }
+  .tower-warm { stroke: var(--tower-warm); opacity: calc(0.15 + var(--tower-clarity) * 0.55); }
+  .tower-cool { stroke: var(--tower-cool); opacity: calc(0.15 + var(--tower-clarity) * 0.65); }
+  .tower-light { fill: none; stroke: var(--tower-cool); stroke-width: 2; opacity: calc(0.12 + var(--tower-clarity) * 0.5); }
 
   /* Walls: face-on strips turned a quarter so they recede down the alley. */
   .wall {
@@ -287,7 +336,6 @@ export const HeroRoot = styled.section`
 
   &:not([data-scene-motion='running']) .drone,
   &:not([data-scene-motion='running']) .drone-cone,
-  &:not([data-scene-motion='running']) .ticker-track,
   &:not([data-scene-motion='running']) .scroll-cue i {
     animation-play-state: paused;
   }
@@ -364,17 +412,6 @@ export const HeroRoot = styled.section`
     font-size: 46px;
     writing-mode: vertical-rl;
     transform: translateZ(-1500px);
-  }
-
-  /* The LED ticker spans the alley far ahead and comes into view on scroll. */
-  .banner {
-    top: 2%;
-    left: calc(50% - var(--alley-half));
-    width: calc(var(--alley-half) * 2);
-    height: 160px;
-    font-size: 92px;
-    transform: translateZ(-2200px);
-    opacity: clamp(0, (var(--p) - 0.06) * 6, 1);
   }
 
   .hero-haze {
@@ -465,12 +502,9 @@ export const HeroRoot = styled.section`
     right: clamp(24px, 5vw, 80px);
     z-index: 2;
     width: clamp(190px, 19vw, 280px);
-    padding: 18px 20px 14px;
+    padding: 22px 20px 14px;
     border: 5px solid var(--alley-metal-edge);
-    background:
-      linear-gradient(115deg, transparent 42%, rgba(170, 146, 91, 0.12) 43% 45%, transparent 46%),
-      repeating-linear-gradient(0deg, transparent 0 28px, rgba(255, 255, 255, 0.025) 28px 29px),
-      #10191c;
+    background: radial-gradient(ellipse at 20% 0, #1e2729, #0b1316 75%);
     box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.25), inset 0 0 0 2px #080d10;
     color: #f4d4a1;
     pointer-events: none;
@@ -488,38 +522,59 @@ export const HeroRoot = styled.section`
       height: 54px;
       border-top: 7px solid var(--alley-metal-edge);
       border-bottom: 7px solid var(--alley-metal-edge);
-      background: linear-gradient(135deg, transparent 47%, var(--alley-metal) 48% 54%, transparent 55%);
     }
 
     &::after {
       content: '';
       position: absolute;
       inset: 5px;
+      border: 1px solid rgba(47, 243, 255, 0.35);
+      box-shadow: inset 0 0 calc(8px * var(--neon-glow-strength, 1)) rgba(47, 243, 255, 0.15);
       background:
         radial-gradient(circle at 3px 3px, #89908b 0 2px, transparent 3px),
         radial-gradient(circle at calc(100% - 3px) calc(100% - 3px), #89908b 0 2px, transparent 3px);
     }
   }
 
-  .market-sector {
-    display: block;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #49504a;
-    font-family: ${THEME.fonts.mono};
-    font-size: 0.8rem;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-  }
-
   .market-name {
     display: block;
-    margin: 12px 0;
+    margin: 0 0 16px;
     font-family: ${THEME.fonts.display};
     font-size: clamp(1.5rem, 2.6vw, 2.4rem);
     font-weight: 900;
     line-height: 1.15;
     text-transform: uppercase;
-    text-shadow: 0 0 calc(8px * var(--neon-glow-strength, 1)) rgba(255, 176, 59, 0.5);
+    color: #21180f;
+    -webkit-text-stroke: 1.2px #ffe6b2;
+    text-shadow:
+      0 0 3px #ffd28a,
+      0 0 calc(10px * var(--neon-glow-strength, 1)) #ffb03b,
+      0 0 calc(24px * var(--neon-glow-strength, 1)) rgba(255, 144, 36, 0.8);
+  }
+
+  .market-word { display: block; }
+
+  .market-flicker {
+    display: inline-block;
+    animation: ${marketTubeFault} 4.8s linear -1.7s infinite;
+    animation-play-state: paused;
+  }
+
+  .market-flicker-late { animation-duration: 6.3s; animation-delay: -0.4s; }
+
+  &[data-scene-motion='running'] .market-flicker { animation-play-state: running; }
+  &[data-scene-motion='still'] .market-flicker { animation: none; }
+
+  .market-translation {
+    display: block;
+    margin: 0 0 12px;
+    color: #b8b3a4;
+    font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+    text-shadow: none;
   }
 
   .market-direction {
@@ -679,8 +734,8 @@ export const HeroRoot = styled.section`
       border-width: 3px;
     }
 
-    .market-sector { font-size: 0.6rem; padding-bottom: 6px; }
-    .market-name { font-size: 1.2rem; margin: 8px 0; }
+    .market-name { font-size: 1.2rem; margin: 4px 0 10px; -webkit-text-stroke-width: 0.8px; }
+    .market-translation { font-size: 0.55rem; margin-bottom: 6px; }
     .market-direction { font-size: 1.3rem; gap: 6px; span { font-size: 0.5rem; } }
     .scrap-desktop { display: none; .paper-scrap { animation: none; } }
     .refuse { width: 130px; height: 94px; top: calc(var(--alley-street) - 86px); }
@@ -729,13 +784,15 @@ export const HeroRoot = styled.section`
 
   /* Short landscape screens keep the two corner elements clear of the nav. */
   @media (max-height: 520px) and (min-aspect-ratio: 4/3) {
+    .distant-tower { height: calc(var(--tower-height) * 0.7); }
+
     .blade-dream {
       display: none;
     }
 
     .market-sign { top: 94px; width: 160px; padding: 10px 12px; }
-    .market-sector { font-size: 0.6rem; padding-bottom: 6px; }
-    .market-name { font-size: 1.25rem; margin: 6px 0; }
+    .market-name { font-size: 1.25rem; margin: 4px 0 10px; -webkit-text-stroke-width: 0.8px; }
+    .market-translation { font-size: 0.6rem; margin-bottom: 6px; }
     .market-direction { font-size: 1.1rem; span { font-size: 0.5rem; } }
 
     .hero-panel {
@@ -781,7 +838,8 @@ export const HeroRoot = styled.section`
       display: none;
     }
 
-    .paper-scrap { animation: none; }
+    .paper-scrap, .market-flicker { animation: none; }
+    .distant-tower { --tower-clarity: 0.65; }
   }
 `;
 

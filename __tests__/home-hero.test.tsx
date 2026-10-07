@@ -88,7 +88,10 @@ describe('Homepage city', () => {
 
   it('keeps the market sign and street litter outside the reading order', () => {
     const { container } = renderHome();
-    expect(screen.getByText('Sector 10').closest('[aria-hidden="true"]')).not.toBeNull();
+    const translation = screen.getByText('НОЧНОЙ РЫНОК');
+    expect(translation).toHaveAttribute('lang', 'ru');
+    expect(translation.closest('[aria-hidden="true"]')).not.toBeNull();
+    expect(screen.queryByText('Sector 10')).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: /Night Market/ })).not.toBeInTheDocument();
     const scraps = container.querySelectorAll('.paper-scrap');
     expect(scraps).toHaveLength(8);
@@ -111,6 +114,19 @@ describe('Homepage city', () => {
     japanese.forEach((text) => {
       expect(text.parentElement?.closest('[lang="ja"]')).not.toBeNull();
       expect(text.parentElement?.closest('[aria-hidden="true"]')).not.toBeNull();
+    });
+  });
+
+  it('replaces the overhead marquee with decorative distant towers', () => {
+    const { container } = renderHome();
+    const hero = screen.getByRole('region', { name: 'Michael Zick is ZICKONEZERO' });
+
+    expect(hero.querySelector('.banner, .ticker-track')).toBeNull();
+    const towers = container.querySelectorAll('.distant-tower');
+    expect(towers).toHaveLength(5);
+    towers.forEach((tower) => {
+      expect(tower.closest('[aria-hidden="true"]')).not.toBeNull();
+      expect(tower.querySelector('a, button, [tabindex]')).toBeNull();
     });
   });
 

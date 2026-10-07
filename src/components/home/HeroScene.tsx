@@ -10,10 +10,9 @@ import { generateFacade } from '../../lib/city/facade';
 import type { FacadeOptions } from '../../lib/city/facade';
 import BrandName from '../BrandName';
 import AlleyWall from '../city/AlleyWall';
-import LedTicker from '../city/LedTicker';
-import { HEADLINE_PHRASES } from '../headlinePhrases';
 import TrackedLink from '../TrackedLink';
 import { AlleyPaving, AlleyRefuse, AlleyWallWear } from './AlleyDetails';
+import AlleyTowers from './AlleyTowers';
 
 const WALL: Omit<FacadeOptions, 'seed'> = {
   length: 3200,
@@ -99,6 +98,7 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
 
         <div className='hero-scene' aria-hidden='true'>
           <div className='alley'>
+            <AlleyTowers />
             <div className='plane street'>
               <div className='street-glow' />
               {/* Paint on the street leaf itself to avoid overlapping 3D planes. */}
@@ -150,8 +150,6 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
             <div className='plane blade blade-open' lang='ja'>
               <span>営業中</span>
             </div>
-
-            <LedTicker className='plane banner' phrases={HEADLINE_PHRASES} />
           </div>
         </div>
 
@@ -163,8 +161,11 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
         <div className='cursor-glow' aria-hidden='true' />
 
         <div className='market-sign' aria-hidden='true'>
-          <span className='market-sector'>Sector 10</span>
-          <span className='market-name'>Night<br />Market</span>
+          <span className='market-name'>
+            <span className='market-word'>N<span className='market-flicker'>i</span>ght</span>{' '}
+            <span className='market-word'>Ma<span className='market-flicker market-flicker-late'>r</span>ket</span>
+          </span>
+          <span className='market-translation' lang='ru'>НОЧНОЙ РЫНОК</span>
           <span className='market-direction'>↙ <span>Street level</span></span>
         </div>
 
