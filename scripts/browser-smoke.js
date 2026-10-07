@@ -8,7 +8,10 @@
 // error, a console error from the site itself, horizontal overflow, or a
 // missing main heading. The homepage also has to start at night, keep a stored
 // day mode, move its hero on scroll, and hold the hero still under reduced
-// motion. The whole run stops after three minutes.
+// motion. Its Night Market sign has to lead to the market, whose rack opens on
+// Neon Skyline and plays under the homepage's Content-Security-Policy, and by
+// day the market's shutter has to be down. The whole run stops after three
+// minutes.
 //
 //   npm run test:browser [-- --screenshots <dir>]
 //
@@ -26,6 +29,7 @@ const TIME_LIMIT_MS = 3 * 60 * 1000;
 // Mirrors THEME_STORAGE_KEY in src/theme/themeConfig.ts.
 const THEME_STORAGE_KEY = 'zickonezero-theme';
 const HERO = 'section[aria-labelledby="home-hero-title"]';
+const RACK_PATCH = 'Neon Skyline';
 
 const PAGES = [
   { name: 'home', path: '/' },
@@ -33,6 +37,7 @@ const PAGES = [
   { name: 'contact', path: '/contact/' },
   { name: 'demostoke', path: '/demostoke/' },
   { name: 'riptyde', path: '/riptyde/' },
+  { name: 'night-market', path: '/night-market/' },
   { name: 'missing', path: '/no-such-page/', status: 404 },
 ];
 
@@ -330,20 +335,67 @@ async function runSmokeTest({ screenshotsDir }) {
     }
   };
 
+  /** At night the stall's rack powers up on the starter patch. */
+  const marketChecks = async (tab, fail) => {
+    const patchName = tab.getByRole('textbox', { name: 'Patch name' });
+    await patchName.waitFor({ state: 'visible', timeout: 15000 })
+      .catch(() => fail('the rack never powered up at night'));
+    const name = await patchName.inputValue().catch(() => null);
+    if (name !== null && name !== RACK_PATCH) {
+      fail(`expected the rack to open on ${RACK_PATCH}, got ${name}`);
+    }
+  };
+
+  /**
+   * The homepage sign leads to the market with a client-side navigation, so
+   * the homepage's CSP is the one in force when Play All registers the rack's
+   * blob: audio worklets.
+   */
+  const marketFromSignChecks = async (tab, fail) => {
+    await tab.evaluate(() => {
+      window.cspViolations = [];
+      document.addEventListener('securitypolicyviolation', (event) => {
+        window.cspViolations.push(`${event.violatedDirective} ${event.blockedURI}`);
+      });
+    });
+    await tab.getByRole('link', { name: 'Night Market' }).click();
+    await tab.waitForURL('**/night-market/', { timeout: 10000 });
+    await marketChecks(tab, fail);
+
+    await tab.getByRole('button', { name: 'Play all sequencers' }).click();
+    await tab.getByRole('button', { name: 'Pause all sequencers' }).waitFor({ timeout: 10000 })
+      .catch(() => fail('Play All did not start the rack'));
+    // Give the worklets and the first bars time to fail loudly if they will.
+    await tab.waitForTimeout(1500);
+    const violations = await tab.evaluate(() => window.cspViolations);
+    violations.forEach((violation) => fail(`CSP blocked ${violation}`));
+
+    const file = shotPath('desktop-night-market-playing');
+    if (file) {
+      await tab.screenshot({ path: file, animations: 'disabled' });
+    }
+    await tab.getByRole('button', { name: 'Pause all sequencers' }).click().catch(() => {});
+  };
+
   try {
     browser = await playwright.chromium.launch();
 
     for (const size of SIZES) {
       const context = await newContext(size.options);
       for (const page of PAGES) {
-        const extraChecks = page.name === 'home' ? homeChecks(size.name) : undefined;
-        await visit(context, size.name, page, extraChecks, `${size.name}-${page.name}`);
+        const checks = { home: homeChecks(size.name), 'night-market': marketChecks };
+        await visit(context, size.name, page, checks[page.name], `${size.name}-${page.name}`);
       }
       await context.close();
     }
 
     const desktop = SIZES[0].options;
     const home = PAGES[0];
+    const market = PAGES.find((page) => page.name === 'night-market');
+
+    const signContext = await newContext(desktop);
+    await visit(signContext, 'desktop, from the sign', home, marketFromSignChecks);
+    await signContext.close();
 
     const dayContext = await newContext(desktop);
     await dayContext.addInitScript((key) => window.localStorage.setItem(key, 'light'), THEME_STORAGE_KEY);
@@ -353,6 +405,14 @@ async function runSmokeTest({ screenshotsDir }) {
         fail(`expected the stored day mode (data-theme="light"), got ${theme}`);
       }
     }, 'desktop-home-day');
+    await visit(dayContext, 'desktop, day', market, async (tab, fail) => {
+      const wait = tab.getByRole('button', { name: 'Wait for dark' });
+      await wait.waitFor({ state: 'visible', timeout: 5000 })
+        .catch(() => fail('the market was not closed by day'));
+      if (await tab.locator('.stall-rack').count()) {
+        fail('the rack mounted by day');
+      }
+    }, 'desktop-night-market-day');
     await dayContext.close();
 
     const stillContext = await newContext({ ...desktop, reducedMotion: 'reduce' });

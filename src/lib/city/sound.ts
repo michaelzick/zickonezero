@@ -38,6 +38,8 @@ let ambience: Ambience | null = null;
 let ambienceRequest: Promise<Ambience | null> | null = null;
 let suspendTimer: ReturnType<typeof setTimeout> | undefined;
 let armed = false;
+// Another instrument (the Night Market's rack) has the floor; see holdAmbience.
+let held = false;
 
 const getAudioContextClass = (): AudioContextClass | undefined => (
   window.AudioContext ?? (window as Window & { webkitAudioContext?: AudioContextClass }).webkitAudioContext
@@ -78,7 +80,7 @@ const update = (changes: Partial<SoundState>) => {
 };
 
 const syncPlaying = () => {
-  update({ playing: readState().enabled && ambience !== null && context?.state === 'running' });
+  update({ playing: readState().enabled && !held && ambience !== null && context?.state === 'running' });
 };
 
 const clearSuspendTimer = () => {
@@ -117,7 +119,7 @@ function disarm() {
 function handleStateChange() {
   if (context?.state === 'running') {
     disarm();
-  } else if (readState().enabled && suspendTimer === undefined && !document.hidden) {
+  } else if (readState().enabled && suspendTimer === undefined && !document.hidden && !held) {
     // Interrupted (a call, another app taking audio): resume on the next gesture.
     arm();
   }
@@ -126,7 +128,7 @@ function handleStateChange() {
 
 // A hidden tab goes quiet and lets the audio thread sleep.
 function handleVisibilityChange() {
-  if (!context || !ambience || !readState().enabled) {
+  if (!context || !ambience || !readState().enabled || held) {
     return;
   }
 
@@ -176,7 +178,7 @@ const loadAmbience = (audio: AudioContext): Promise<Ambience | null> => {
 };
 
 function play() {
-  const audio = getContext();
+  const audio = held ? null : getContext();
   if (!audio) {
     return;
   }
@@ -243,5 +245,35 @@ export const setSoundEnabled = (enabled: boolean): void => {
     play();
   } else {
     mute();
+  }
+};
+
+/**
+ * Quiets the city while another instrument plays, such as the Night Market's
+ * rack, without changing the visitor's stored choice. Gestures stop resuming
+ * the ambience until releaseAmbience.
+ */
+export const holdAmbience = (): void => {
+  if (held) {
+    return;
+  }
+
+  held = true;
+  if (readState().enabled) {
+    mute();
+  }
+};
+
+/** Lets the city sound again after holdAmbience, if the visitor has it on. */
+export const releaseAmbience = (): void => {
+  if (!held) {
+    return;
+  }
+
+  held = false;
+  if (readState().enabled) {
+    // Resume now if the browser allows it, or on the next gesture.
+    arm();
+    play();
   }
 };

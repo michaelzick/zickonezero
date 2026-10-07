@@ -31,6 +31,7 @@
     "next": "^15.5.25",
     "next-redux-wrapper": "^8.0.0",
     "prop-types": "^15.8.1",
+    "rackloose": "file:vendor/rackloose/rackloose-1.9.1.tgz",
     "radix-ui": "^1.3.4",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",

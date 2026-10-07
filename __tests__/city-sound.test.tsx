@@ -211,6 +211,46 @@ describe('city sound store', () => {
     expect(sound.getSoundState().playing).toBe(true);
   });
 
+  it('holds the city quiet for another instrument without changing the choice', async () => {
+    sound = loadSound();
+    sound.setSoundEnabled(true);
+    await flushPromises();
+
+    jest.useFakeTimers();
+    sound.holdAmbience();
+
+    expect(mockAmbience.stop).toHaveBeenCalledTimes(1);
+    expect(sound.getSoundState()).toEqual({ supported: true, enabled: true, playing: false });
+    expect(window.localStorage.getItem(sound.SOUND_STORAGE_KEY)).toBe('on');
+    jest.advanceTimersByTime(600);
+    expect(contexts[0].suspend).toHaveBeenCalledTimes(1);
+
+    // Neither a gesture, a returning tab, nor the toggle wakes it while held.
+    document.body.dispatchEvent(new Event('pointerup', { bubbles: true }));
+    setHidden(false);
+    sound.setSoundEnabled(true);
+    await flushPromises();
+    expect(contexts[0].resume).toHaveBeenCalledTimes(1);
+    expect(mockAmbience.start).toHaveBeenCalledTimes(1);
+
+    sound.releaseAmbience();
+    await flushPromises();
+
+    expect(contexts[0].resume).toHaveBeenCalledTimes(2);
+    expect(mockAmbience.start).toHaveBeenCalledTimes(2);
+    expect(sound.getSoundState().playing).toBe(true);
+  });
+
+  it('leaves a muted city alone when held and released', () => {
+    sound = loadSound();
+
+    sound.holdAmbience();
+    sound.releaseAmbience();
+
+    expect(contexts).toHaveLength(0);
+    expect(sound.getSoundState()).toEqual({ supported: true, enabled: false, playing: false });
+  });
+
   it('keeps the choice for the visit when storage is blocked', () => {
     jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
       throw new Error('blocked');
