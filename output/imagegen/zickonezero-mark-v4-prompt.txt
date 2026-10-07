@@ -1,0 +1,14 @@
+Generated and edited with the built-in image_gen tool using zickonezero-mark-v1.png as the initial reference.
+
+Use case: precise-object-edit.
+Asset type: square ZICKONEZERO Z/1/0 logo revision.
+Input image: the attached first logo is the edit target. Preserve its identity and composition.
+Primary request: revise this exact first image so the cyan 0 is fully enclosed. The zero must have a continuous, unbroken chamfered cyan perimeter forming a closed loop around the interior, with no opening or slit anywhere in its outline. Close the upper-right gap and complete the missing left-side contour so the outer zero is unmistakably enclosed. Keep broad dark negative space inside the zero.
+Keep the bold angular cyan Z and the magenta vertical numeral 1 recognizable inside the enclosure. Preserve the original visual arrangement, square framing, stroke thickness, clipped corners, palette, overall scale, balanced margins, and flat near-black navy background. Make only the small geometric adjustments needed to close the zero and retain readable internal letters. The cyan Z must still read as Z and the magenta 1 must still read as 1.
+Style invariants: crisp flat vector-like graphic, electric cyan #2ff3ff, vivid magenta #ff2bd6, opaque near-black navy #03050c, restrained luminosity, clean edges.
+No other letters, no text, no added symbols, no scene, no mockup, no additional concepts, no texture, no heavy glow, no watermark. Deliver one finished 1:1 square image.
+
+Final correction prompt:
+Use case: precise-object-edit.
+Edit this exact image. The top of the zero is now closed, but the large opening in the LEFT edge remains. Make exactly one correction: add a solid vertical cyan segment along the far LEFT outer perimeter to connect the top-left cyan shape to the bottom-left cyan shape. The segment runs from about y=490 to y=870 with x spanning about 174 to 260 in this 1254x1254 image. It must align with the existing leftmost cyan edge and use the same cyan stroke weight and fill. This is the missing left side of the enclosed zero.
+The outer cyan shape must now be a continuous CLOSED chamfered rectangular ring on ALL FOUR SIDES. No open left gap. Keep the diagonal Z, the magenta 1, the closed top border, right border, bottom border, colors, square framing, background, and all other geometry unchanged. Keep the new left rail as narrow as the other perimeter stroke so the Z's interior diagonal remains clear. Do not redesign or add any other elements. Deliver one finished square logo.
