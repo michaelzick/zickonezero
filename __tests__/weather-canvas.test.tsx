@@ -185,6 +185,36 @@ describe('WeatherCanvas', () => {
     expect(engine.step).toHaveBeenCalledTimes(steps);
   });
 
+  it('snows night and day where asked, then hides again after dark', () => {
+    useContext();
+    document.documentElement.setAttribute('data-theme', 'dark');
+    const { container, rerender } = render(<WeatherCanvas snow />);
+    const canvas = container.querySelector('canvas');
+
+    expect(engine.setMode).toHaveBeenCalledWith('snow', true);
+    expect(canvas).not.toHaveAttribute('hidden');
+    advanceFrames(4);
+    expect(engine.step).toHaveBeenCalled();
+
+    rerender(<WeatherCanvas snow={false} />);
+    const steps = engine.step.mock.calls.length;
+    advanceFrames(10);
+
+    expect(canvas).toHaveAttribute('hidden');
+    expect(engine.step).toHaveBeenCalledTimes(steps);
+  });
+
+  it('crossfades from snow to dust when leaving by day', () => {
+    useContext();
+    document.documentElement.setAttribute('data-theme', 'light');
+    const { rerender } = render(<WeatherCanvas snow />);
+    advanceFrames(2);
+
+    rerender(<WeatherCanvas />);
+
+    expect(engine.setMode).toHaveBeenLastCalledWith('dust', false);
+  });
+
   it('pauses while the tab is hidden', () => {
     useContext();
     render(<WeatherCanvas />);

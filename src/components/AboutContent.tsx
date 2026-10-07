@@ -41,10 +41,16 @@ const viewfinder = (size: string, color: string) => `
   linear-gradient(${color}, ${color}) right center / 10px 2px no-repeat
 `;
 
-/* Each rain layer loops by exactly one tile height, so the wrap is seamless. */
-const rainFall = keyframes`
-  from { transform: translate3d(0, calc(var(--rain-tile) * -1), 0); }
-  to { transform: translate3d(0, 0, 0); }
+/*
+ * Each snow layer loops by exactly one tile height, so the wrap is seamless,
+ * and sways side to side on the way down.
+ */
+const snowFall = keyframes`
+  0% { transform: translate3d(0, calc(var(--snow-tile) * -1), 0); }
+  25% { transform: translate3d(var(--snow-sway), calc(var(--snow-tile) * -0.75), 0); }
+  50% { transform: translate3d(0, calc(var(--snow-tile) * -0.5), 0); }
+  75% { transform: translate3d(calc(var(--snow-sway) * -1), calc(var(--snow-tile) * -0.25), 0); }
+  100% { transform: translate3d(0, 0, 0); }
 `;
 
 /* One slow pass down the portrait, then a rest off-screen. */
@@ -128,7 +134,7 @@ const AboutHero = styled.section`
   }
 `;
 
-/* Decorative HUD over the portrait: rain, a viewfinder, a scanner, and readouts. */
+/* Decorative HUD over the portrait: snow, a viewfinder, a scanner, and readouts. */
 const AboutHeroHud = styled.div`
   position: absolute;
   inset: 0;
@@ -136,38 +142,41 @@ const AboutHeroHud = styled.div`
   overflow: hidden;
   pointer-events: none;
 
-  .rain {
+  .snow {
     position: absolute;
-    inset: -6% -14%;
-    transform: skewX(-9deg);
+    inset: -6% -10%;
+    transform: skewX(-4deg);
   }
 
-  .rain-layer {
+  .snow-layer {
     position: absolute;
-    top: calc(var(--rain-tile) * -1);
+    top: calc(var(--snow-tile) * -1);
     right: 0;
     bottom: 0;
     left: 0;
     will-change: transform;
-    animation: ${rainFall} var(--rain-speed) linear infinite;
+    animation: ${snowFall} var(--snow-speed) linear infinite;
   }
 
-  .rain-far {
-    --rain-tile: 180px;
-    --rain-speed: 0.62s;
+  .snow-far {
+    --snow-tile: 180px;
+    --snow-speed: 9s;
+    --snow-sway: 6px;
     background-image:
-      radial-gradient(1px 13px at 20% 30%, rgba(190, 236, 255, 0.42), transparent),
-      radial-gradient(1px 10px at 70% 78%, rgba(190, 236, 255, 0.34), transparent);
-    background-size: 61px 180px, 97px 180px;
+      radial-gradient(circle at 20% 30%, rgba(236, 248, 255, 0.7) 1.2px, transparent 2px),
+      radial-gradient(circle at 70% 78%, rgba(236, 248, 255, 0.55) 1px, transparent 1.8px),
+      radial-gradient(circle at 45% 55%, rgba(236, 248, 255, 0.5) 0.9px, transparent 1.6px);
+    background-size: 61px 180px, 97px 180px, 79px 180px;
   }
 
-  .rain-near {
-    --rain-tile: 300px;
-    --rain-speed: 0.44s;
+  .snow-near {
+    --snow-tile: 300px;
+    --snow-speed: 6s;
+    --snow-sway: 14px;
     background-image:
-      radial-gradient(1.2px 26px at 35% 20%, rgba(214, 246, 255, 0.55), transparent),
-      radial-gradient(1px 21px at 80% 62%, rgba(214, 246, 255, 0.45), transparent),
-      radial-gradient(1px 30px at 12% 86%, rgba(214, 246, 255, 0.5), transparent);
+      radial-gradient(circle at 35% 20%, rgba(255, 255, 255, 0.85) 2px, transparent 3px),
+      radial-gradient(circle at 80% 62%, rgba(255, 255, 255, 0.72) 1.6px, transparent 2.6px),
+      radial-gradient(circle at 12% 86%, rgba(255, 255, 255, 0.78) 2.4px, transparent 3.4px);
     background-size: 137px 300px, 211px 300px, 173px 300px;
   }
 
@@ -320,8 +329,9 @@ const AboutHeroHud = styled.div`
     animation: ${statusPulse} 1.2s steps(2, jump-none) infinite;
   }
 
-  html[data-theme='light'] & .rain {
-    display: none;
+  /* Day snow catches a soft shadow so it reads on the lighter vignette. */
+  html[data-theme='light'] & .snow {
+    filter: drop-shadow(0 0 1.5px rgba(24, 35, 41, 0.45));
   }
 
   html[data-theme='light'] & .scanner::before {
@@ -350,9 +360,13 @@ const AboutHeroHud = styled.div`
     }
   }
 
-  /* Static rain reads as scratches, so reduced motion keeps only the HUD. */
+  /* Still snow reads as a gentle flurry, so reduced motion keeps the flakes
+     and drops only the scanner. */
   @media (prefers-reduced-motion: reduce) {
-    .rain,
+    .snow-layer {
+      animation: none;
+    }
+
     .scanner {
       display: none;
     }
@@ -542,9 +556,9 @@ const AboutContent = () => {
           <AboutHero aria-label='About page hero'>
             <VisuallyHidden>About Michael Zick</VisuallyHidden>
             <AboutHeroHud aria-hidden='true'>
-              <div className='rain'>
-                <div className='rain-layer rain-far' />
-                <div className='rain-layer rain-near' />
+              <div className='snow'>
+                <div className='snow-layer snow-far' />
+                <div className='snow-layer snow-near' />
               </div>
               <div className='scanner' />
               <div className='viewfinder' />
@@ -559,9 +573,9 @@ const AboutContent = () => {
                   <dt>Class</dt>
                   <dd>Product Engineer + UX designer</dd>
                   <dt>Status</dt>
-                  <dd><span className='status'>Open for gigs</span></dd>
+                  <dd><span className='status'>Open to connect</span></dd>
                   <dt className='dossier-row-optional'>Last seen</dt>
-                  <dd className='dossier-row-optional'>Mt. Hood, OR</dd>
+                  <dd className='dossier-row-optional'>El Porto, Manhattan Beach, CA</dd>
                 </dl>
               </div>
               <div className='feed'>Feed 04 // Live</div>

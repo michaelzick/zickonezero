@@ -21,6 +21,7 @@ const createRecordingContext = () => {
     lineTo: record('lineTo'),
     stroke: record('stroke'),
     rect: record('rect'),
+    arc: record('arc'),
     fill: record('fill'),
   };
 
@@ -98,6 +99,42 @@ describe('weather engine', () => {
     engine.draw();
     expect(count('stroke')).toBe(0);
     expect(count('fill')).toBe(3);
+  });
+
+  it('draws snow as three batched fills of round flakes', () => {
+    const { engine, count } = createEngine();
+
+    engine.setMode('snow', true);
+    engine.draw();
+
+    expect(count('fill')).toBe(3);
+    expect(count('stroke')).toBe(0);
+    expect(count('arc')).toBe(Math.round(BUDGET * 0.45 * 0.6) + Math.round(BUDGET * 0.35 * 0.6) + Math.round(BUDGET * 0.2 * 0.6));
+  });
+
+  it('crossfades from rain to snow and keeps flakes in view', () => {
+    const { engine, count, calls, reset } = createEngine();
+
+    engine.setMode('snow');
+    engine.step(0.05, STILL);
+    reset();
+    engine.draw();
+    expect(count('stroke')).toBe(3);
+    expect(count('arc')).toBeGreaterThan(0);
+
+    for (let frame = 0; frame < 400; frame += 1) {
+      engine.step(1 / 60, STILL);
+    }
+    reset();
+    engine.draw();
+    expect(count('stroke')).toBe(0);
+    expect(count('fill')).toBe(3);
+    calls.filter(([name]) => name === 'arc').forEach(([, x, y]) => {
+      expect(x).toBeGreaterThanOrEqual(-4);
+      expect(x).toBeLessThanOrEqual(WIDTH + 4);
+      expect(y).toBeGreaterThanOrEqual(-4);
+      expect(y).toBeLessThanOrEqual(HEIGHT + 4);
+    });
   });
 
   it('caps a long frame so a slow tab never teleports the rain', () => {

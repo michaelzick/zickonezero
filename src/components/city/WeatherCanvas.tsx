@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion';
-import { createWeatherEngine } from '../../lib/city/weather';
+import { createWeatherEngine, WeatherMode } from '../../lib/city/weather';
 import { WeatherCanvasElement } from '../../../styles/city';
 
 type NavigatorWithConnection = Navigator & { connection?: { saveData?: boolean } };
@@ -16,21 +16,32 @@ const VELOCITY_SMOOTHING = 0.2;
 type Props = {
   /** Thins the weather behind long-form pages. */
   dimmed?: boolean;
+  /** Snows night and day instead of following the theme. */
+  snow?: boolean;
 };
 
 const isDay = () => document.documentElement.getAttribute('data-theme') === 'light';
 
 /**
- * Sunlit dust by day, drawn on one fixed canvas between the city and the
- * page; motes move with page scroll by depth. At night the canvas is hidden
- * and draws nothing: full-screen rain on top of the homepage's heavy night
- * layers made Chrome drop and redraw content (a flicker after scrolling to
- * the bottom and back up). It pauses in hidden tabs, and draws a single still
+ * Sunlit dust by day, or snow in both themes where asked (About), drawn on
+ * one fixed canvas between the city and the page; motes and flakes move with
+ * page scroll by depth. Otherwise the canvas is hidden at night and draws
+ * nothing: full-screen rain on top of the homepage's heavy night layers made
+ * Chrome drop and redraw content (a flicker after scrolling to the bottom and
+ * back up). It pauses in hidden tabs, and draws a single still
  * frame under reduced motion or Save-Data.
  */
-const WeatherCanvas = ({ dimmed = false }: Props) => {
+const WeatherCanvas = ({ dimmed = false, snow = false }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const snowRef = useRef(snow);
+  /** Re-applies the weather to the mounted canvas when the page changes. */
+  const applyRef = useRef<(() => void) | null>(null);
+
+  useEffect(() => {
+    snowRef.current = snow;
+    applyRef.current?.();
+  }, [snow]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -40,7 +51,8 @@ const WeatherCanvas = ({ dimmed = false }: Props) => {
     }
 
     const engine = createWeatherEngine(ctx);
-    engine.setMode('dust', true);
+    let mode: WeatherMode = snowRef.current ? 'snow' : 'dust';
+    engine.setMode(mode, true);
 
     const saveData = Boolean((navigator as NavigatorWithConnection).connection?.saveData);
     const animate = !prefersReducedMotion && !saveData;
@@ -94,7 +106,7 @@ const WeatherCanvas = ({ dimmed = false }: Props) => {
     };
 
     const start = () => {
-      if (animate && frame === null && !document.hidden && isDay()) {
+      if (animate && frame === null && !document.hidden && !canvas.hidden) {
         lastTime = 0;
         lastScrollY = window.scrollY;
         frame = window.requestAnimationFrame(tick);
@@ -119,9 +131,16 @@ const WeatherCanvas = ({ dimmed = false }: Props) => {
 
     const handleVisibility = () => (document.hidden ? stop() : start());
 
-    // Shown and drawing by day only; hidden canvases hold no layer.
-    const applyTimeOfDay = () => {
-      if (!isDay()) {
+    // Shown and drawing by day or while snowing; hidden canvases hold no layer.
+    const apply = () => {
+      const nextMode: WeatherMode = snowRef.current ? 'snow' : 'dust';
+      if (nextMode !== mode) {
+        mode = nextMode;
+        // Crossfade only while it keeps falling on screen.
+        engine.setMode(mode, !animate || canvas.hidden);
+      }
+
+      if (!snowRef.current && !isDay()) {
         stop();
         canvas.hidden = true;
         return;
@@ -131,16 +150,18 @@ const WeatherCanvas = ({ dimmed = false }: Props) => {
       resize();
       start();
     };
+    applyRef.current = apply;
 
-    const themeObserver = new MutationObserver(applyTimeOfDay);
+    const themeObserver = new MutationObserver(apply);
 
-    applyTimeOfDay();
+    apply();
     window.addEventListener('resize', handleResize);
     document.addEventListener('visibilitychange', handleVisibility);
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
     return () => {
       stop();
+      applyRef.current = null;
       if (resizeFrame !== null) {
         window.cancelAnimationFrame(resizeFrame);
       }

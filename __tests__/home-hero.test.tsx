@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import MainContent from '../src/components/MainContent';
 import worksData from '../src/data/worksData.json';
+import { REDUCED_MOTION_QUERY, mockMatchMedia, restoreMatchMedia } from '../src/test/matchMedia';
 import { renderWithProviders } from '../src/test/renderWithProviders';
 
 type LightboxProps = { toggler: boolean; sources: string[]; slide: number };
@@ -48,16 +49,21 @@ describe('Homepage city', () => {
 
   afterEach(() => {
     delete (window as TestWindow).amplitude;
+    jest.restoreAllMocks();
+    restoreMatchMedia();
   });
 
-  it('hangs the exact headline over the alley', () => {
+  it('makes Michael and the brand the single main heading in the introduction', () => {
     renderHome();
 
     const headline = screen.getByRole('heading', { level: 1 });
-    expect(headline).toHaveAccessibleName('I Dream in Features');
+    expect(headline).toHaveAccessibleName('Michael Zick is ZICKONEZERO Creative');
     expect(headline).toHaveAttribute('id', 'home-hero-title');
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
     expect(headline.closest('section')).toHaveAttribute('aria-labelledby', 'home-hero-title');
+    expect(headline.closest('.hero-panel')).not.toBeNull();
+    expect(headline.querySelector('.brand-one')).toHaveTextContent('ONE');
+    expect(screen.queryByText('I Dream')).not.toBeInTheDocument();
   });
 
   it('introduces Michael with the brand and two ways in', async () => {
@@ -65,8 +71,9 @@ describe('Homepage city', () => {
     renderHome();
 
     expect(screen.getByText(/Michael Zick is/)).toHaveTextContent(
-      'Michael Zick is ZICKONEZERO Creative, turning ideas into shipped products.',
+      'Michael Zick is ZICKONEZERO Creative',
     );
+    expect(screen.getByText('Turning ideas into shipped products.')).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'See Case Studies' }));
 
@@ -77,9 +84,56 @@ describe('Homepage city', () => {
       page_path: '/',
     });
 
-    const hero = screen.getByRole('region', { name: 'I Dream in Features' });
+    const hero = screen.getByRole('region', { name: 'Michael Zick is ZICKONEZERO Creative' });
     expect(within(hero).getByRole('link', { name: 'Contact' })).toHaveAttribute('href', '/contact');
     expect(screen.queryByRole('link', { name: 'Jack In' })).not.toBeInTheDocument();
+  });
+
+  it('follows the next-destination objectives and returns to the hero under reduced motion', async () => {
+    mockMatchMedia(REDUCED_MOTION_QUERY);
+    const user = userEvent.setup();
+    const scroll = jest.spyOn(window, 'scrollTo').mockImplementation((options: ScrollToOptions | number, y?: number) => {
+      window.scrollY = typeof options === 'number' ? y ?? 0 : options.top ?? 0;
+    });
+    renderHome();
+
+    // Give the real scroll spy and jumper distinct district positions.
+    ['case-studies', 'ux-design', 'web-development'].forEach((id, index) => {
+      const section = document.getElementById(id)!.closest('section')!;
+      const top = (index + 1) * 1000;
+      jest.spyOn(section, 'getBoundingClientRect').mockImplementation(() => ({
+        x: 0, y: top - window.scrollY, top: top - window.scrollY,
+        bottom: top + 500 - window.scrollY, left: 0, right: 1000, width: 1000, height: 500,
+        toJSON: () => ({}),
+      }));
+    });
+
+    const hud = screen.getByRole('navigation', { name: 'Homepage sections' });
+    await user.click(within(hud).getByRole('button', { name: 'Head to Case Studies' }));
+    await user.click(within(hud).getByRole('button', { name: 'Head to Product Engineering' }));
+    await user.click(within(hud).getByRole('button', { name: 'Head to Web Development' }));
+    expect(window.scrollY).toBeGreaterThan(2000);
+
+    await user.click(within(hud).getByRole('button', { name: 'Return to surface' }));
+
+    expect(scroll).toHaveBeenLastCalledWith({ top: 0, behavior: 'auto' });
+    expect(window.scrollY).toBe(0);
+    expect(track).toHaveBeenLastCalledWith('section_tab_click', expect.objectContaining({
+      location: 'home_tabs', label: 'Return to surface', section: 'hero',
+    }));
+    expect(within(hud).getByRole('button', { name: 'Head to Case Studies' })).toBeInTheDocument();
+  });
+
+  it('keeps the market sign and street litter outside the reading order', () => {
+    const { container } = renderHome();
+    const translation = screen.getByText('НОЧНОЙ РЫНОК');
+    expect(translation).toHaveAttribute('lang', 'ru');
+    expect(translation.closest('[aria-hidden="true"]')).not.toBeNull();
+    expect(screen.queryByText('Sector 10')).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /Night Market/ })).not.toBeInTheDocument();
+    const scraps = container.querySelectorAll('.paper-scrap');
+    expect(scraps).toHaveLength(8);
+    scraps.forEach((scrap) => expect(scrap.closest('[aria-hidden="true"]')).not.toBeNull());
   });
 
   it('keeps every Japanese sign decorative and marked as Japanese', () => {
@@ -98,6 +152,19 @@ describe('Homepage city', () => {
     japanese.forEach((text) => {
       expect(text.parentElement?.closest('[lang="ja"]')).not.toBeNull();
       expect(text.parentElement?.closest('[aria-hidden="true"]')).not.toBeNull();
+    });
+  });
+
+  it('replaces the overhead marquee with decorative distant towers', () => {
+    const { container } = renderHome();
+    const hero = screen.getByRole('region', { name: 'Michael Zick is ZICKONEZERO Creative' });
+
+    expect(hero.querySelector('.banner, .ticker-track')).toBeNull();
+    const towers = container.querySelectorAll('.distant-tower');
+    expect(towers).toHaveLength(5);
+    towers.forEach((tower) => {
+      expect(tower.closest('[aria-hidden="true"]')).not.toBeNull();
+      expect(tower.querySelector('a, button, [tabindex]')).toBeNull();
     });
   });
 

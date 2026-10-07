@@ -45,11 +45,25 @@ tab. It runs the same test and uploads its screenshots as the
 ## Living city
 
 The site is a neon city. One persistent backdrop (sky, skyline, flying traffic,
-fog, and dust by day) mounts once in `pages/_app.tsx` and pans to each page's
-spot in the city as visitors navigate. The homepage walks from the "I Dream in
-Features" alley past a holo billboard and three work districts to open city
+fog, dust by day, and snow on About) mounts once in `pages/_app.tsx` and pans to each page's
+spot in the city as visitors navigate. The homepage walks from a weathered futuristic alley past a holo billboard
+and three work districts to open city
 above the footer, with a minimap HUD for fast travel.
 
+- The alley opens on "Michael Zick is ZICKONEZERO Creative" in a bottom-left introduction,
+  balanced by a top-right tube-neon Night Market sign with a plain Russian
+  translation underneath. Two letters have brief, shallow flickers every few seconds; these
+  pause offscreen or in hidden tabs and stay lit under reduced motion or
+  Save-Data. Small paper scraps drift near the
+  worn street, pause offscreen or in hidden tabs, and stay still under reduced
+  motion or Save-Data. Five vertical towers emerge through fog as the camera
+  advances, reaching full contrast just before the hero leaves the viewport.
+  Their reveal reverses on the way back and stays visible under reduced motion.
+  The drone recedes down the alley toward the towers. Mouse movement changes
+  the camera parallax without a pointer glow, and ONE keeps its accent color
+  without glowing throughout the site.
+- The Current Gig objective points to the next district in route order, then
+  offers "Return to surface" at Web Development to scroll back to the hero.
 - Night is the default. The nav's time-of-day toggle switches to day, and the
   choice is remembered.
 - Sound stays off until a visitor turns it on. It is synthesized in the browser

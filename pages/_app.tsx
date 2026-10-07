@@ -59,7 +59,10 @@ function MyApp({
 
           {/* The persistent city: mounted once, alive across page changes. */}
           <CityBackdrop pathname={router.pathname} />
-          <WeatherCanvas dimmed={!isHomePath(router.pathname)} />
+          <WeatherCanvas
+            dimmed={!isHomePath(router.pathname)}
+            snow={normalizeRoutePath(router.pathname) === '/about'}
+          />
 
           <CurrentPathContext.Provider value={normalizeRoutePath(router.pathname)}>
             <Component {...pageProps} />

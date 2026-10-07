@@ -33,6 +33,8 @@ type Props = {
   districts: readonly HudDistrict[];
   active: HomeSectionKey | null;
   onTravel: (section: HomeSectionKey, label: string) => void;
+  /** The final objective returns to the top of the hero. */
+  onReturnToSurface: () => void;
   /**
    * Scroll positions where the player reaches each stop: the start, each
    * district, then the end of the route. Called again whenever the page resizes.
@@ -101,7 +103,7 @@ const poiShape = ({ x, y, kind }: (typeof MINIMAP_POIS)[number]) => {
  * map, clock, and distance are decoration; the pins and the quest objective
  * are the nav.
  */
-const HomeHud = ({ districts, active, onTravel, measureStops, parkRef }: Props) => {
+const HomeHud = ({ districts, active, onTravel, onReturnToSurface, measureStops, parkRef }: Props) => {
   const rootRef = useRef<HTMLElement>(null);
   const mapRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<HTMLSpanElement>(null);
@@ -216,12 +218,14 @@ const HomeHud = ({ districts, active, onTravel, measureStops, parkRef }: Props) 
   };
 
   const activeIndex = districts.findIndex(({ section }) => section === active);
-  // Before the first district the quest heads there; inside one, it explores it.
-  const questDistrict = activeIndex >= 0 ? districts[activeIndex] : districts[0];
-  const objective = activeIndex >= 0 ? `Explore ${questDistrict.title}` : `Head to ${questDistrict?.title ?? 'the city'}`;
+  // The objective always points to the next stop, then back to the surface.
+  const questDistrict = districts[activeIndex + 1];
+  const objective = questDistrict ? `Head to ${questDistrict.title}` : 'Return to surface';
   const handleObjectiveClick = () => {
     if (questDistrict) {
       travel(questDistrict);
+    } else {
+      onReturnToSurface();
     }
   };
 

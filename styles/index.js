@@ -1168,8 +1168,9 @@ export const DemoStokeMiniCardModal = styled.div`
 export const DemoStokeMiniCardModalClose = styled.button`
   all: unset;
   position: absolute;
-  top: 0.55em;
-  right: 0.9em;
+  /* Clear the plate's notched corner with room to breathe. */
+  top: 1em;
+  right: calc(var(--hud-notch, 20px) + 0.6em);
   z-index: 1;
   width: 2em;
   height: 2em;
