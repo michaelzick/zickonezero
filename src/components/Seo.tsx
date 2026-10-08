@@ -12,7 +12,7 @@ const SITE_TAGLINE = 'Product, UX & Development';
 // Intrinsic size and alt text of the default share image (the night hero), used when a page falls back to it.
 const DEFAULT_OG_IMAGE_WIDTH = 1200;
 const DEFAULT_OG_IMAGE_HEIGHT = 630;
-const DEFAULT_OG_IMAGE_ALT = 'Michael Zick is ZICKONEZERO Creative, beside a neon Bar Four sign with Russian lettering in a futuristic alley';
+const DEFAULT_OG_IMAGE_ALT = 'ZICKONEZERO Creative wordmark beside the logo: a cyan Z and magenta 1 enclosed in a chamfered cyan zero';
 
 export type SeoProps = {
   title?: string;

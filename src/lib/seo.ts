@@ -5,7 +5,7 @@ export type JsonLd = Record<string, unknown>;
 export const DEFAULT_DESCRIPTION =
   'Product Management, Engineering Management, product engineering, UX design, Git/DevOps, and Creative Direction.';
 
-export const DEFAULT_OG_IMAGE = '/img/og/i-dream-in-features.jpg';
+export const DEFAULT_OG_IMAGE = '/img/og/zickonezero-card.png';
 
 const SAME_AS = [
   'https://github.com/michaelzick',
