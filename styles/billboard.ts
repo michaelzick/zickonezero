@@ -40,6 +40,9 @@ export const BillboardStage = styled.section`
   --bb-drift: 8vw;
   --bb-bezel-color: #05080d;
   --bb-screen-bg: #02050a;
+  /* A dark wash over the tower, so the screenshots stand out against it. */
+  --bb-shade-rgb: 2, 4, 9;
+  --bb-shade: 0.62;
   position: relative;
   height: 320vh;
   color: var(--color-white);
@@ -48,6 +51,8 @@ export const BillboardStage = styled.section`
   html[data-theme='light'] & {
     --bb-bezel-color: #263034;
     --bb-screen-bg: #0b1418;
+    --bb-shade-rgb: 14, 18, 22;
+    --bb-shade: 0.5;
   }
 
   .bb-frame {
@@ -225,14 +230,15 @@ export const BillboardStage = styled.section`
       height: 100%;
     }
 
-    /* Haze over the facade so the screen reads first. */
+    /* Shade over the facade, darkest at the edges, so the screen reads first. */
     &::after {
       content: '';
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 60% 50% at 50% 52%, transparent 40%, rgba(var(--color-dark-rgb), 0.55)),
-        linear-gradient(to bottom, rgba(var(--color-dark-rgb), 0.35), transparent 40%);
+        radial-gradient(ellipse 60% 50% at 50% 52%, transparent 40%, rgba(var(--bb-shade-rgb), 0.6)),
+        linear-gradient(to bottom, rgba(var(--bb-shade-rgb), 0.4), transparent 40%),
+        rgba(var(--bb-shade-rgb), var(--bb-shade));
     }
   }
 

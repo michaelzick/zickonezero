@@ -27,8 +27,8 @@ describe('generate-sitemap', () => {
       expect(routeFromPageFile(path.join(PAGES_DIR, '500.tsx'))).toBeNull();
     });
 
-    it('leaves the hidden Night Market out', () => {
-      expect(routeFromPageFile(path.join(PAGES_DIR, 'night-market.tsx'))).toBeNull();
+    it('leaves the hidden Bar Four out', () => {
+      expect(routeFromPageFile(path.join(PAGES_DIR, 'bar-four.tsx'))).toBeNull();
     });
   });
 

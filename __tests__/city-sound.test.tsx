@@ -211,7 +211,7 @@ describe('city sound store', () => {
     expect(sound.getSoundState().playing).toBe(true);
   });
 
-  it('holds the city quiet for another instrument without changing the choice', async () => {
+  it('holds the city quiet in Bar Four without changing the choice', async () => {
     sound = loadSound();
     sound.setSoundEnabled(true);
     await flushPromises();
@@ -239,6 +239,21 @@ describe('city sound store', () => {
     expect(contexts[0].resume).toHaveBeenCalledTimes(2);
     expect(mockAmbience.start).toHaveBeenCalledTimes(2);
     expect(sound.getSoundState().playing).toBe(true);
+  });
+
+  it('stays quiet when Bar Four holds it again before the city has started', async () => {
+    sound = loadSound();
+    sound.setSoundEnabled(true);
+    await flushPromises();
+    sound.holdAmbience();
+
+    // Leaving and coming straight back (or React's strict-mode effect replay).
+    sound.releaseAmbience();
+    sound.holdAmbience();
+    await flushPromises();
+
+    expect(mockAmbience.start).toHaveBeenCalledTimes(1);
+    expect(sound.getSoundState().playing).toBe(false);
   });
 
   it('leaves a muted city alone when held and released', () => {

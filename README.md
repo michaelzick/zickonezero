@@ -26,8 +26,8 @@ Watch mode (`npm test -- --watch`) has no limit.
 An optional browser smoke test loads the exported site in headless Chromium at
 desktop and phone sizes. It fails on page or console errors (including CSP
 violations), horizontal overflow, or a homepage scene that stops responding to
-scroll, theme, or reduced motion. It also follows the Night Market sign and
-plays the rack, and checks that the market is shut by day. It is not part of
+scroll, theme, or reduced motion. It also follows the Bar Four sign and
+plays the rack, and checks that the club is shut by day. It is not part of
 `npm test`, `npm run check`,
 or CI, and it stops itself after 3 minutes. Playwright is not a project
 dependency, so install it once, globally or for this checkout only:
@@ -53,7 +53,7 @@ and three work districts to open city
 above the footer, with a minimap HUD for fast travel.
 
 - The alley opens on "Michael Zick is ZICKONEZERO Creative" in a bottom-left introduction,
-  balanced by a top-right tube-neon Night Market sign with a plain Russian
+  balanced by a top-right tube-neon BAR FOUR sign with a plain Russian
   translation underneath. Two letters have brief, shallow flickers every few seconds; these
   pause offscreen or in hidden tabs and stay lit under reduced motion or
   Save-Data. Small paper scraps drift near the
@@ -64,17 +64,24 @@ above the footer, with a minimap HUD for fast travel.
   The drone recedes down the alley toward the towers. Mouse movement changes
   the camera parallax without a pointer glow, and ONE keeps its accent color
   without glowing throughout the site.
-- The Night Market sign is a link to `/night-market/`, a hidden after-hours
-  lane. Its synth stall holds a playable [Rackloose](#rackloose) rack that
-  opens on the Neon Skyline preset. The market only opens after dark: by day
-  the sign is unlit, the stall's shutter is down, and **Wait for dark** switches
-  the city to night. The page is left out of the sitemap and marked `noindex`.
+- The BAR FOUR sign is a link to `/bar-four/`, a hidden basement listening
+  bar, record exchange, and club. The name comes from music: in a four-bar
+  phrase, bar four is the turnaround, where the fill drops. Patch cables hang
+  from the ceiling, records line the walls, and the booth holds the house
+  rack, a playable [Rackloose](#rackloose) that opens on the Neon Skyline
+  preset. The club only opens after dark: by day the sign is unlit, a
+  flight-case lid covers the rack, and **Wait for dark** switches the city to
+  night. The page is left out of the sitemap and marked `noindex`.
 - The Current Gig objective points to the next district in route order, then
   offers "Return to surface" at Web Development to scroll back to the hero.
 - Night is the default. The nav's time-of-day toggle switches to day, and the
   choice is remembered.
 - Sound stays off until a visitor turns it on. It is synthesized in the browser
   with Web Audio, so there are no audio files, and the choice is remembered.
+  Day brings passing traffic, the odd horn, and birdsong; night thins to a
+  couple of voices down the street, wind, crickets, and the occasional far-off
+  siren, helicopter, or train. Bar Four keeps the street outside, so none of it
+  plays in the club.
 - All art is original. The scenery is generated from seeded SVG, CSS, and canvas
   code, and the fonts are self-hosted. Keep new signage and copy original too.
 - Everything that moves has a still state under reduced motion. To preview it,
@@ -96,13 +103,13 @@ Native `hidden` containers preserve the modal/tab presentation. Keep the content
 rendered when changing those interactions, and maintain unique IDs and working
 tab-to-panel accessibility relationships.
 
-The generated sitemap includes all public routes except the hidden Night
-Market, and omits `lastmod` until a reliable per-page content-date source
+The generated sitemap includes all public routes except the hidden Bar Four,
+and omits `lastmod` until a reliable per-page content-date source
 exists. A build date is not a content date.
 
 ## Rackloose
 
-The Night Market's rack is [Rackloose](https://github.com/michaelzick/rackloose),
+Bar Four's house rack is [Rackloose](https://github.com/michaelzick/rackloose),
 installed from a pinned release archive committed in `vendor/rackloose/`, the
 same way Mike OS consumes it. There are no registry credentials or runtime
 downloads. To update it, copy `rackloose-<version>.tgz` and `release.json` from
@@ -111,7 +118,7 @@ the manifest, run `npm install ./vendor/rackloose/rackloose-<version>.tgz`, and
 commit the archive, manifest, `package.json`, and lockfile together. Remove the
 old archive in the same change.
 
-The rack loads only on `/night-market/`, in the browser. It autosaves patches in
+The rack loads only on `/bar-four/`, in the browser. It autosaves patches in
 this origin's `localStorage` under `zickonezero.rackloose.patch.v1`. Its audio
 worklets register from `blob:` URLs, so the Content-Security-Policy's
 `script-src` allows `blob:` site-wide: the sign navigates on the client, so

@@ -13,7 +13,7 @@ const ROBOTS_PATH = path.join(PUBLIC_DIR, 'robots.txt');
 const SKIPPED_NAMES = new Set(['_app', '_document', '_error', '404', '500']);
 // Hidden pages: reachable from the site, but left for visitors to find. They
 // also set noindex.
-const HIDDEN_NAMES = new Set(['night-market']);
+const HIDDEN_NAMES = new Set(['bar-four']);
 const PAGE_EXTENSIONS = /\.(tsx|ts|js|jsx)$/;
 
 function getPageFiles(dir) {

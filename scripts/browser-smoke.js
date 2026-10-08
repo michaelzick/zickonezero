@@ -8,9 +8,9 @@
 // error, a console error from the site itself, horizontal overflow, or a
 // missing main heading. The homepage also has to start at night, keep a stored
 // day mode, move its hero on scroll, and hold the hero still under reduced
-// motion. Its Night Market sign has to lead to the market, whose rack opens on
+// motion. Its Bar Four sign has to lead to the club, whose house rack opens on
 // Neon Skyline and plays under the homepage's Content-Security-Policy, and by
-// day the market's shutter has to be down. The whole run stops after three
+// day the flight-case lid has to be down over the rack. The whole run stops after three
 // minutes.
 //
 //   npm run test:browser [-- --screenshots <dir>]
@@ -37,7 +37,7 @@ const PAGES = [
   { name: 'contact', path: '/contact/' },
   { name: 'demostoke', path: '/demostoke/' },
   { name: 'riptyde', path: '/riptyde/' },
-  { name: 'night-market', path: '/night-market/' },
+  { name: 'bar-four', path: '/bar-four/' },
   { name: 'missing', path: '/no-such-page/', status: 404 },
 ];
 
@@ -335,8 +335,8 @@ async function runSmokeTest({ screenshotsDir }) {
     }
   };
 
-  /** At night the stall's rack powers up on the starter patch. */
-  const marketChecks = async (tab, fail) => {
+  /** At night the booth's rack powers up on the starter patch. */
+  const clubChecks = async (tab, fail) => {
     const patchName = tab.getByRole('textbox', { name: 'Patch name' });
     await patchName.waitFor({ state: 'visible', timeout: 15000 })
       .catch(() => fail('the rack never powered up at night'));
@@ -347,20 +347,20 @@ async function runSmokeTest({ screenshotsDir }) {
   };
 
   /**
-   * The homepage sign leads to the market with a client-side navigation, so
+   * The homepage sign leads to the club with a client-side navigation, so
    * the homepage's CSP is the one in force when Play All registers the rack's
    * blob: audio worklets.
    */
-  const marketFromSignChecks = async (tab, fail) => {
+  const clubFromSignChecks = async (tab, fail) => {
     await tab.evaluate(() => {
       window.cspViolations = [];
       document.addEventListener('securitypolicyviolation', (event) => {
         window.cspViolations.push(`${event.violatedDirective} ${event.blockedURI}`);
       });
     });
-    await tab.getByRole('link', { name: 'Night Market' }).click();
-    await tab.waitForURL('**/night-market/', { timeout: 10000 });
-    await marketChecks(tab, fail);
+    await tab.getByRole('link', { name: 'Bar Four' }).click();
+    await tab.waitForURL('**/bar-four/', { timeout: 10000 });
+    await clubChecks(tab, fail);
 
     await tab.getByRole('button', { name: 'Play all sequencers' }).click();
     await tab.getByRole('button', { name: 'Pause all sequencers' }).waitFor({ timeout: 10000 })
@@ -370,7 +370,7 @@ async function runSmokeTest({ screenshotsDir }) {
     const violations = await tab.evaluate(() => window.cspViolations);
     violations.forEach((violation) => fail(`CSP blocked ${violation}`));
 
-    const file = shotPath('desktop-night-market-playing');
+    const file = shotPath('desktop-bar-four-playing');
     if (file) {
       await tab.screenshot({ path: file, animations: 'disabled' });
     }
@@ -383,7 +383,7 @@ async function runSmokeTest({ screenshotsDir }) {
     for (const size of SIZES) {
       const context = await newContext(size.options);
       for (const page of PAGES) {
-        const checks = { home: homeChecks(size.name), 'night-market': marketChecks };
+        const checks = { home: homeChecks(size.name), 'bar-four': clubChecks };
         await visit(context, size.name, page, checks[page.name], `${size.name}-${page.name}`);
       }
       await context.close();
@@ -391,10 +391,10 @@ async function runSmokeTest({ screenshotsDir }) {
 
     const desktop = SIZES[0].options;
     const home = PAGES[0];
-    const market = PAGES.find((page) => page.name === 'night-market');
+    const club = PAGES.find((page) => page.name === 'bar-four');
 
     const signContext = await newContext(desktop);
-    await visit(signContext, 'desktop, from the sign', home, marketFromSignChecks);
+    await visit(signContext, 'desktop, from the sign', home, clubFromSignChecks);
     await signContext.close();
 
     const dayContext = await newContext(desktop);
@@ -405,14 +405,14 @@ async function runSmokeTest({ screenshotsDir }) {
         fail(`expected the stored day mode (data-theme="light"), got ${theme}`);
       }
     }, 'desktop-home-day');
-    await visit(dayContext, 'desktop, day', market, async (tab, fail) => {
+    await visit(dayContext, 'desktop, day', club, async (tab, fail) => {
       const wait = tab.getByRole('button', { name: 'Wait for dark' });
       await wait.waitFor({ state: 'visible', timeout: 5000 })
-        .catch(() => fail('the market was not closed by day'));
-      if (await tab.locator('.stall-rack').count()) {
+        .catch(() => fail('the club was not closed by day'));
+      if (await tab.locator('.booth-rack').count()) {
         fail('the rack mounted by day');
       }
-    }, 'desktop-night-market-day');
+    }, 'desktop-bar-four-day');
     await dayContext.close();
 
     const stillContext = await newContext({ ...desktop, reducedMotion: 'reduce' });

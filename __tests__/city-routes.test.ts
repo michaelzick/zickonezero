@@ -36,7 +36,7 @@ describe('city routes', () => {
     expect(getRouteMeta('/riptyde').accent).toBe('cyan');
     expect(getRouteMeta('/about').accent).toBe('violet');
     expect(getRouteMeta('/contact').accent).toBe('red');
-    expect(getRouteMeta('/night-market/')).toMatchObject({ label: 'Night Market', accent: 'amber' });
+    expect(getRouteMeta('/bar-four/')).toMatchObject({ label: 'Bar Four', accent: 'amber' });
   });
 
   it('normalizes trailing slashes, queries, and hashes', () => {

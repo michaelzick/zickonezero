@@ -1,8 +1,8 @@
 import { act, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import NightMarketContent from '../src/components/nightmarket/NightMarketContent';
-import RacklooseStall, { RACK_STORAGE_KEY } from '../src/components/nightmarket/RacklooseStall';
+import BarFourContent from '../src/components/barfour/BarFourContent';
+import RacklooseBooth, { RACK_STORAGE_KEY } from '../src/components/barfour/RacklooseBooth';
 import { holdAmbience, releaseAmbience } from '../src/lib/city/sound';
 import { renderWithProviders } from '../src/test/renderWithProviders';
 import { THEME_STORAGE_KEY } from '../src/theme/themeConfig';
@@ -10,7 +10,7 @@ import { THEME_STORAGE_KEY } from '../src/theme/themeConfig';
 type RackProps = { storageKey?: string; keysEnabled?: boolean; linkBrand?: boolean };
 
 // Rackloose is an ESM-only Web Audio instrument that Jest's CommonJS resolver
-// cannot load, so it is mocked virtually; the stall only needs its contract.
+// cannot load, so it is mocked virtually; the booth only needs its contract.
 const mockRack = jest.fn();
 
 jest.mock('rackloose', () => ({
@@ -36,7 +36,7 @@ type TestWindow = Window & { amplitude?: { track: jest.Mock } };
 
 const lastRackProps = (): RackProps => mockRack.mock.calls[mockRack.mock.calls.length - 1][0];
 
-describe('Night Market', () => {
+describe('Bar Four', () => {
   let track: jest.Mock;
 
   beforeEach(() => {
@@ -51,44 +51,75 @@ describe('Night Market', () => {
     delete (window as TestWindow).amplitude;
   });
 
-  describe('the lane', () => {
-    it('names the market and the stall, and keeps the scenery decorative', async () => {
-      renderWithProviders(<NightMarketContent />);
+  describe('the room', () => {
+    it('names the club and the booth, and keeps the scenery decorative', async () => {
+      const { container } = renderWithProviders(<BarFourContent />);
 
-      expect(screen.getByRole('heading', { level: 1, name: 'Night Market' })).toBeInTheDocument();
-      const stall = screen.getByRole('region', { name: 'Synth stall' });
-      expect(within(stall).getByText('Try before you buy')).toBeInTheDocument();
+      const title = screen.getByRole('heading', { level: 1, name: 'Bar Four' });
+      const booth = screen.getByRole('region', { name: 'The House Music' });
+      expect(within(booth).getByText('Open rack tonight')).toBeInTheDocument();
+      expect(within(booth).getByText(/^Rackloose is a modular studio/)).toHaveTextContent(/and program its sequencers\.$/);
+      expect(within(booth).getByText(/Open Presets to switch to another set/)).toBeInTheDocument();
 
-      const studio = within(stall).getByRole('link', { name: 'Open the full studio' });
+      const studio = within(booth).getByRole('link', { name: 'Open the full studio' });
       expect(studio).toHaveAttribute('href', 'https://rackloose.michaelzick.com/');
       expect(studio).toHaveAttribute('target', '_blank');
       expect(studio).toHaveAttribute('rel', 'noopener noreferrer');
-      expect(screen.getByRole('link', { name: 'Back to the alley' })).toHaveAttribute('href', '/');
+      expect(screen.getByRole('link', { name: 'Back up to the alley' })).toHaveAttribute('href', '/');
 
-      const caption = screen.getByText('НОЧНОЙ РЫНОК');
+      const caption = screen.getByText('БАР ЧЕТЫРЕ');
       expect(caption).toHaveAttribute('lang', 'ru');
       expect(caption).toHaveAttribute('aria-hidden', 'true');
+
+      // The records, cables, lights, and speakers are all scenery.
+      ['.record-wall', '.patch-rail', '.light', '.speaker', '.dance-floor'].forEach((selector) => {
+        const parts = container.querySelectorAll(selector);
+        expect(parts.length).toBeGreaterThan(0);
+        parts.forEach((part) => expect(part.closest('[aria-hidden="true"]')).not.toBeNull());
+      });
+      // No market stall, and no sign over the booth.
+      const club = title.closest('header')?.parentElement as HTMLElement;
+      expect(within(club).queryByText(/market|stall/i)).not.toBeInTheDocument();
+      expect(within(club).queryByText(/Synths/)).not.toBeInTheDocument();
 
       // Let the night rack finish loading so nothing updates after the test.
       await screen.findByTestId('rack');
     });
   });
 
+  describe('the street outside', () => {
+    it.each(['dark', 'light'])('keeps the city ambience quiet for the whole visit (%s)', async (theme) => {
+      window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+      const { unmount } = renderWithProviders(<BarFourContent />);
+
+      expect(holdAmbience).toHaveBeenCalledTimes(1);
+      expect(releaseAmbience).not.toHaveBeenCalled();
+
+      if (theme === 'dark') {
+        await screen.findByTestId('rack');
+      }
+      unmount();
+
+      expect(holdAmbience).toHaveBeenCalledTimes(1);
+      expect(releaseAmbience).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('opening hours', () => {
-    it('puts the rack on the counter at night', async () => {
-      renderWithProviders(<NightMarketContent />);
+    it('puts the rack in the booth at night', async () => {
+      renderWithProviders(<BarFourContent />);
 
       expect(await screen.findByTestId('rack')).toBeInTheDocument();
       expect(lastRackProps()).toMatchObject({ storageKey: RACK_STORAGE_KEY, linkBrand: false });
     });
 
-    it('keeps the shutter down by day and opens when the visitor waits for dark', async () => {
+    it('keeps the case closed by day and opens when the visitor waits for dark', async () => {
       const user = userEvent.setup();
       window.localStorage.setItem(THEME_STORAGE_KEY, 'light');
-      renderWithProviders(<NightMarketContent />);
+      renderWithProviders(<BarFourContent />);
 
       const wait = screen.getByRole('button', { name: 'Wait for dark' });
-      expect(screen.getByText('The market opens at dusk.', { exact: false })).toBeInTheDocument();
+      expect(screen.getByText('Doors open at dusk.', { exact: false })).toBeInTheDocument();
       expect(screen.queryByTestId('rack')).not.toBeInTheDocument();
       expect(mockRack).not.toHaveBeenCalled();
 
@@ -96,7 +127,7 @@ describe('Night Market', () => {
 
       expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
       expect(track).toHaveBeenCalledWith('theme_toggle', {
-        location: 'night_market',
+        location: 'bar_four',
         from: 'day',
         to: 'night',
         page_path: '/',
@@ -107,7 +138,7 @@ describe('Night Market', () => {
 
   describe('the rack', () => {
     it('opens a first visit on Neon Skyline', () => {
-      render(<RacklooseStall />);
+      render(<RacklooseBooth />);
 
       expect(JSON.parse(window.localStorage.getItem(RACK_STORAGE_KEY) ?? '{}')).toEqual({
         name: 'Neon Skyline',
@@ -119,7 +150,7 @@ describe('Night Market', () => {
     it("keeps a returning visitor's own patch", () => {
       window.localStorage.setItem(RACK_STORAGE_KEY, '{"name":"My jam"}');
 
-      render(<RacklooseStall />);
+      render(<RacklooseBooth />);
 
       expect(window.localStorage.getItem(RACK_STORAGE_KEY)).toBe('{"name":"My jam"}');
     });
@@ -129,43 +160,40 @@ describe('Night Market', () => {
         throw new Error('blocked');
       });
 
-      render(<RacklooseStall />);
+      render(<RacklooseBooth />);
 
       expect(screen.getByTestId('rack')).toBeInTheDocument();
       jest.restoreAllMocks();
     });
 
-    it('takes the keyboard only while the visitor is in the rack, and quiets the city once', async () => {
+    it('takes the keyboard only while the visitor is in the rack, and tracks the first reach once', async () => {
       const user = userEvent.setup();
-      const { unmount } = render(
+      render(
         <>
           <button type='button'>Nav link</button>
-          <RacklooseStall />
+          <RacklooseBooth />
         </>,
       );
       const rack = screen.getByTestId('rack');
 
       expect(rack).toHaveAttribute('data-keys', 'false');
-      expect(holdAmbience).not.toHaveBeenCalled();
 
       await user.click(within(rack).getByRole('button', { name: 'Play all sequencers' }));
       expect(rack).toHaveAttribute('data-keys', 'true');
-      expect(holdAmbience).toHaveBeenCalledTimes(1);
-      expect(track).toHaveBeenCalledWith('night_market_rack_engaged', { page_path: '/' });
+      expect(track).toHaveBeenCalledWith('bar_four_rack_engaged', { page_path: '/' });
 
       await user.click(screen.getByRole('button', { name: 'Nav link' }));
       expect(rack).toHaveAttribute('data-keys', 'false');
 
       await user.tab();
       expect(rack).toHaveAttribute('data-keys', 'true');
-      expect(holdAmbience).toHaveBeenCalledTimes(1);
 
       act(() => screen.getByRole('button', { name: 'Nav link' }).focus());
       expect(rack).toHaveAttribute('data-keys', 'false');
 
-      expect(releaseAmbience).not.toHaveBeenCalled();
-      unmount();
-      expect(releaseAmbience).toHaveBeenCalledTimes(1);
+      expect(track.mock.calls.filter(([name]) => name === 'bar_four_rack_engaged')).toHaveLength(1);
+      // The room, not the rack, keeps the city quiet.
+      expect(holdAmbience).not.toHaveBeenCalled();
     });
   });
 });

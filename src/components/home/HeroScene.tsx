@@ -80,9 +80,9 @@ type HeroSceneProps = {
 
 /**
  * The homepage hero: a neon alley the visitor walks into as they
- * scroll. The lower-left introduction is the real heading; the market sign
- * is a link to the hidden Night Market, and the worn utilities and windblown
- * scraps are decorative city scenery.
+ * scroll. The lower-left introduction is the real heading; the Bar Four sign
+ * is a link to the hidden club, and the worn utilities and windblown scraps
+ * are decorative city scenery.
  */
 const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
   const heroRef = useRef<HTMLElement | null>(null);
@@ -152,8 +152,8 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
             <div className='plane blade blade-dream' lang='ja'>
               <span>夢</span>
             </div>
-            <div className='plane blade blade-open' lang='ja'>
-              <span>営業中</span>
+            <div className='plane blade blade-open'>
+              <span>Open</span>
             </div>
           </div>
         </div>
@@ -190,18 +190,18 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
           flickering spans, so the link's name comes from the hidden label.
         */}
         <TrackedLink
-          href='/night-market'
-          label='Night Market'
-          location='home_hero_market'
-          className='market-sign'
+          href='/bar-four'
+          label='Bar Four'
+          location='home_hero_bar_four'
+          className='club-sign'
         >
-          <span className='market-label'>Night Market</span>
-          <span className='market-name' aria-hidden='true'>
-            <span className='market-word'>N<span className='market-flicker'>i</span>ght</span>{' '}
-            <span className='market-word'>Ma<span className='market-flicker market-flicker-late'>r</span>ket</span>
+          <span className='club-label'>Bar Four</span>
+          <span className='club-name' aria-hidden='true'>
+            <span className='club-word'>B<span className='club-flicker'>a</span>r</span>{' '}
+            <span className='club-word'>Fo<span className='club-flicker club-flicker-late'>u</span>r</span>
           </span>
-          <span className='market-translation' lang='ru' aria-hidden='true'>НОЧНОЙ РЫНОК</span>
-          <span className='market-direction' aria-hidden='true'>↘ <span>Open late</span></span>
+          <span className='club-translation' lang='ru' aria-hidden='true'>БАР ЧЕТЫРЕ</span>
+          <span className='club-direction' aria-hidden='true'>↘ <span>Downstairs</span></span>
         </TrackedLink>
 
         <div className='scroll-cue' aria-hidden='true'>
