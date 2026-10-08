@@ -261,14 +261,14 @@ describe('Homepage city', () => {
     expect(scene?.querySelector('a, button, [tabindex]')).toBeNull();
   });
 
-  it('gives the alley walls a few single windows whose lights can switch', () => {
+  it('gives the alley walls single windows whose lights can switch', () => {
     renderHome();
     const hero = screen.getByRole('region', { name: 'Michael Zick is ZICKONEZERO Creative' });
 
     const covers = hero.querySelectorAll('.flicker-window');
-    // Ten on each wall, every third starting dark.
-    expect(covers).toHaveLength(20);
-    expect(hero.querySelectorAll('.flicker-window.is-off')).toHaveLength(8);
+    // 24 on each wall, every third starting dark.
+    expect(covers).toHaveLength(48);
+    expect(hero.querySelectorAll('.flicker-window.is-off')).toHaveLength(16);
     covers.forEach((cover) => {
       expect(cover.closest('[aria-hidden="true"]')).not.toBeNull();
     });

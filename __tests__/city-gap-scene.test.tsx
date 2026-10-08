@@ -1,7 +1,12 @@
 import { render } from '@testing-library/react';
 
 import CityGapScene from '../src/components/home/CityGapScene';
-import { KOI_JOINTS, STREAMER_JOINTS } from '../src/lib/city/koi';
+import {
+  BANNER_JOINTS,
+  BANNER_WIDTH,
+  KOI_JOINTS,
+  KOI_WIDTH,
+} from '../src/lib/city/koi';
 import { REDUCED_MOTION_QUERY, mockMatchMedia, restoreMatchMedia } from '../src/test/matchMedia';
 
 const FOCUSABLE = 'a, button, input, select, textarea, [tabindex]';
@@ -17,13 +22,18 @@ describe('end-of-route city scene', () => {
     restoreMatchMedia();
   });
 
-  it('renders the night carp streamer and the day airship as decoration only', () => {
+  it('renders the night carp and the day airship scene as decoration only', () => {
     const { container } = render(<CityGapScene />);
     const scene = container.firstElementChild as HTMLElement;
 
     expect(scene).toHaveAttribute('aria-hidden', 'true');
     expect(scene.querySelector('.gap-night .koi')).toBeInTheDocument();
     expect(scene.querySelector('.gap-day .ship')).toBeInTheDocument();
+    expect(scene.querySelectorAll('.gap-day .cloud').length).toBeGreaterThanOrEqual(3);
+    expect(scene.querySelectorAll('.gap-day .bird').length).toBeGreaterThanOrEqual(5);
+    expect(scene.querySelector('.gap-day .roofs svg')).toBeInTheDocument();
+    expect(scene.querySelector('.gap-day .roofs .gondola')).toBeInTheDocument();
+    expect(scene.querySelectorAll('.gap-day .roofs .gondola-cable')).toHaveLength(2);
     expect(scene.querySelectorAll(FOCUSABLE)).toHaveLength(0);
     scene.querySelectorAll('svg').forEach((svg) => {
       expect(svg).toHaveAttribute('focusable', 'false');
@@ -38,6 +48,17 @@ describe('end-of-route city scene', () => {
     expect(crest).toHaveAttribute('lang', 'ja');
     expect(koi).toHaveTextContent('I dream of the feature');
 
+    // The banner reads ZICKONEZERO CREATIVE, its ONE in hot pink on the cyan field.
+    const lettering = [...koi.querySelectorAll('.koi-defs text')].filter((text) => !text.hasAttribute('lang'));
+    const banner = lettering.filter((text) => text.closest('#gap-koi-banner-art'));
+    expect(banner.map((text) => text.textContent).join('')).toBe('ZICKONEZEROCREATIVE');
+    const one = banner.find((text) => text.textContent === 'ONE');
+    expect(one).toHaveAttribute('fill', '#ff2bd6');
+    banner.filter((text) => text !== one).forEach((text) => {
+      expect(text).not.toHaveAttribute('fill', '#ff2bd6');
+    });
+    expect(koi.querySelector('#gap-koi-banner-art path[fill="#15fcfd"]')).not.toBeNull();
+
     // The airship keeps its emblem and marquee.
     expect(container.querySelector('.ship-emblem-glyph')).toHaveAttribute('lang', 'ja');
     expect(container.querySelector('.ship-ticker')).toHaveTextContent('I dream of the feature');
@@ -50,15 +71,15 @@ describe('end-of-route city scene', () => {
     });
   });
 
-  it('chains each streamer into links that each bend from the one before', () => {
+  it('chains the carp and the banner into links that each bend from the one before', () => {
     const { container } = render(<CityGapScene />);
 
-    [
-      ['.koi-fish', KOI_JOINTS],
-      ['.koi-streamer', STREAMER_JOINTS],
-    ].forEach(([selector, joints]) => {
+    ([
+      ['.koi-fish', KOI_JOINTS, KOI_WIDTH],
+      ['.koi-banner', BANNER_JOINTS, BANNER_WIDTH],
+    ] as const).forEach(([selector, joints, drawingWidth]) => {
       const links = [...container.querySelectorAll(`${selector} .koi-link`)];
-      expect(links).toHaveLength((joints as readonly number[]).length);
+      expect(links).toHaveLength(joints.length);
       links.slice(1).forEach((link, index) => {
         expect(link.parentElement).toBe(links[index]);
       });
@@ -68,22 +89,31 @@ describe('end-of-route city scene', () => {
         const [from, , width] = (link.querySelector(':scope > svg')?.getAttribute('viewBox') ?? '')
           .split(' ')
           .map(Number);
-        const list = joints as readonly number[];
-        expect(from).toBe(list[index]);
-        if (index < list.length - 1) {
-          expect(from + width).toBeGreaterThan(list[index + 1]);
+        expect(from).toBe(joints[index]);
+        if (index < joints.length - 1) {
+          expect(from + width).toBeGreaterThan(joints[index + 1]);
         } else {
-          expect(from + width).toBe(1000);
+          expect(from + width).toBe(drawingWidth);
         }
       });
     });
 
     // Every link shows a drawing defined once in the scene.
     const uses = container.querySelectorAll('use');
-    expect(uses).toHaveLength(KOI_JOINTS.length + STREAMER_JOINTS.length);
+    expect(uses).toHaveLength(KOI_JOINTS.length + BANNER_JOINTS.length);
     uses.forEach((use) => {
       const id = use.getAttribute('href')?.replace(/^#/, '') ?? '';
       expect(container.querySelector(`[id="${id}"]`)).not.toBeNull();
+    });
+  });
+
+  it("gives the carp's rooftop window lights that switch, every third starting dark", () => {
+    const { container } = render(<CityGapScene />);
+    const covers = [...container.querySelectorAll('.koi-roof .flicker-window')];
+
+    expect(covers.length).toBeGreaterThanOrEqual(12);
+    covers.forEach((cover, index) => {
+      expect(cover.classList.contains('is-off')).toBe(index % 3 === 0);
     });
   });
 

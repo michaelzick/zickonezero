@@ -18,6 +18,7 @@ const OPTIONS: SkylineOptions = {
   flickerCount: 14,
   windowWidth: 3,
   windowHeight: 4,
+  windowGap: 3,
   neonStrips: 7,
   billboards: 3,
   beacons: 2,
@@ -69,16 +70,39 @@ describe('generateSkyline', () => {
     });
   });
 
-  it('caps flickering windows and keeps them inside the layer', () => {
+  it('caps switching covers and keeps them inside the layer', () => {
     const layer = generateSkyline({ ...OPTIONS, flickerCount: 100 });
 
     expect(layer.flicker).toHaveLength(MAX_FLICKER_WINDOWS);
     layer.flicker.forEach((spot) => {
-      expect(spot.width).toBe(OPTIONS.windowWidth);
       expect(spot.height).toBe(OPTIONS.windowHeight);
       expect(spot.y).toBeGreaterThanOrEqual(0);
       expect(spot.y + spot.height).toBeLessThanOrEqual(OPTIONS.height);
     });
+  });
+
+  it('sizes each cover to a room of one to three whole windows', () => {
+    const pitch = OPTIONS.windowWidth + OPTIONS.windowGap;
+    const { flicker } = generateSkyline({ ...OPTIONS, extraFlicker: 14 });
+    const rooms = flicker.map(({ width }) => (width + OPTIONS.windowGap) / pitch);
+
+    rooms.forEach((windows) => {
+      expect(Number.isInteger(windows)).toBe(true);
+      expect(windows).toBeGreaterThanOrEqual(1);
+      expect(windows).toBeLessThanOrEqual(3);
+    });
+    expect(new Set(rooms).size).toBe(3);
+  });
+
+  it('adds extra covers without moving the city or the first covers', () => {
+    const { flicker, ...city } = generateSkyline(OPTIONS);
+    const { flicker: more, ...same } = generateSkyline({ ...OPTIONS, extraFlicker: 14 });
+
+    expect(same).toEqual(city);
+    expect(more).toHaveLength(OPTIONS.flickerCount + 14);
+    expect(more.slice(0, flicker.length)).toEqual(flicker);
+    expect(new Set(more.map(({ x, y }) => `${x},${y}`)).size).toBe(more.length);
+    expect(generateSkyline({ ...OPTIONS, extraFlicker: 14 }).flicker).toEqual(more);
   });
 
   it('places signs and beacons on visible buildings', () => {

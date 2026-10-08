@@ -1,24 +1,25 @@
 /**
  * Timing and selection for the city's window lights (src/hooks/useWindowLights.ts).
  *
- * A scene draws a cover over a few single lit windows (`.flicker-window`).
- * Every few seconds one cover is switched, so a light goes out or comes back
- * on; now and then a second window follows shortly after. One window changes
- * at a time with no buzz, so it reads as people switching lights, not as a
- * rendering glitch, and stays far inside WCAG 2.3.1's flash limits.
+ * A scene draws covers over some of its lit windows (`.flicker-window`), a
+ * single window or a room of two or three. About every two seconds one cover
+ * is switched, so a light goes out or comes back on; now and then a second
+ * follows shortly after. Each change is small and fades, with no buzz, so it
+ * reads as people switching lights, not as a rendering glitch, and stays far
+ * inside WCAG 2.3.1's flash limits.
  */
 
 /**
- * Delay between one light switching and the next, per scene. The skyline and
- * the hero alley each run their own, so on the homepage a light changes about
- * every two or three seconds somewhere on screen.
+ * Delay between one light switching and the next, per scene: about two
+ * seconds, jittered so the skyline, the hero alley, and the end scene never
+ * switch in step.
  */
-export const SWITCH_DELAY_MS = { min: 2400, max: 7200 } as const;
+export const SWITCH_DELAY_MS = { min: 1600, max: 2400 } as const;
 /** How often a second window follows, and how soon. */
 export const FOLLOW_CHANCE = 0.2;
 export const FOLLOW_DELAY_MS = { min: 350, max: 900 } as const;
 /** Windows switched this recently are left alone, so none blinks back. */
-export const RECENT_LIMIT = 4;
+export const RECENT_LIMIT = 6;
 
 /**
  * Every third cover starts drawn, so some windows begin dark and can come on.

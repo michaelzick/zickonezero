@@ -37,9 +37,10 @@ const FAR_SKYLINE = generateSkyline({
   coolShare: 0.25,
   // Safe to raise: this layer draws nothing else from the generator's random
   // stream after its flicker windows, so its skyline stays the same.
-  flickerCount: 10,
+  flickerCount: 20,
   windowWidth: FAR_WINDOWS.width,
   windowHeight: FAR_WINDOWS.height,
+  windowGap: FAR_WINDOWS.gap,
   neonStrips: 0,
   billboards: 0,
   beacons: 4,
@@ -59,10 +60,13 @@ const MID_SKYLINE = generateSkyline({
   litRowChance: 0.36,
   coolShare: 0.3,
   // Fixed: the strips and billboards are drawn after these from the same
-  // random stream, so changing the count would rearrange them.
+  // random stream, so changing the count would rearrange them. More come from
+  // their own stream instead.
   flickerCount: 14,
+  extraFlicker: 14,
   windowWidth: MID_WINDOWS.width,
   windowHeight: MID_WINDOWS.height,
+  windowGap: MID_WINDOWS.gap,
   neonStrips: 7,
   billboards: 3,
   beacons: 2,
@@ -77,7 +81,7 @@ type Props = {
 
 /**
  * The living city behind every page: sky, searchlights, two skyline depths
- * whose odd window light switches off and on at night, flying traffic,
+ * whose window lights switch off and on at night, flying traffic,
  * drifting fog, and the accent glow. It mounts once in
  * pages/_app.tsx and persists across navigation; each route pans the camera
  * to its own spot in the city.

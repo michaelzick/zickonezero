@@ -1,27 +1,34 @@
 /**
  * The night half of the end-of-route scene (CityGapScene): a giant carp
- * streamer and a five-color streamer flying from a mast on a rooftop, under a
- * spinning arrow wheel. The carp wears the airship's 夢 on its crest and "I
- * dream of the feature" on the sash along its side. Original art, drawn once
- * as static SVG. Each streamer is a chain of links, each a window onto its
- * drawing (src/lib/city/koi.ts), that bend at their joints, so the fabric
- * waves on the compositor and nothing is repainted (styles/cityGap.ts).
+ * streamer flying from a mast on a rooftop, under a cyan ZICKONEZERO CREATIVE
+ * banner and a spinning arrow wheel. The carp wears the airship's 夢 on its
+ * crest and "I dream of the feature" on the sash along its side. Original
+ * art, drawn once as static SVG. The carp and the banner are each a chain of
+ * links, each a window onto its drawing (src/lib/city/koi.ts), that bend at
+ * their joints, so the fabric waves on the compositor and nothing is
+ * repainted (styles/cityGap.ts). The rooftop's window lights switch off and
+ * on at night (useWindowLights in CityGapScene).
  */
 
 import type { CSSProperties } from 'react';
 
 import { THEME } from '../../../styles/theme';
 import {
+  BANNER_BOTTOM,
+  BANNER_HEIGHT,
+  BANNER_HOIST,
+  BANNER_JOINTS,
+  BANNER_LETTERING,
+  BANNER_SWINGS,
+  BANNER_TOP,
+  BANNER_WIDTH,
   KOI_HEIGHT,
   KOI_JOINTS,
   KOI_SWINGS,
   KOI_WIDTH,
   SASH_HALF,
-  STREAMER_COLORS,
-  STREAMER_HEIGHT,
-  STREAMER_JOINTS,
-  STREAMER_SWINGS,
-  STREAMER_WIDTH,
+  bannerField,
+  bannerHems,
   chainWindows,
   koiBack,
   koiBelly,
@@ -29,18 +36,18 @@ import {
   koiScales,
   koiSilhouette,
   koiTailFin,
-  streamerRibbon,
 } from '../../lib/city/koi';
 import type { ChainWindow } from '../../lib/city/koi';
+import { startsOff } from '../../lib/city/windowLights';
 
 const KOI_ART = 'gap-koi-art';
-const STREAMER_ART = 'gap-koi-streamer-art';
+const BANNER_ART = 'gap-koi-banner-art';
 
 const id = (name: string) => `gap-koi-${name}`;
 const ref = (name: string) => `url(#${id(name)})`;
 
 const KOI_WINDOWS = chainWindows(KOI_JOINTS, KOI_SWINGS, KOI_WIDTH, KOI_HEIGHT);
-const STREAMER_WINDOWS = chainWindows(STREAMER_JOINTS, STREAMER_SWINGS, STREAMER_WIDTH, STREAMER_HEIGHT);
+const BANNER_WINDOWS = chainWindows(BANNER_JOINTS, BANNER_SWINGS, BANNER_WIDTH, BANNER_HEIGHT);
 
 const SILHOUETTE = koiSilhouette();
 const TAIL_FIN = koiTailFin();
@@ -48,10 +55,16 @@ const BACK = koiBack();
 const BELLY = koiBelly();
 const RIM = koiRim();
 const SCALES = koiScales();
+const BANNER_FIELD = bannerField();
+const BANNER_HEMS = bannerHems();
 
 const OUTLINE = '#1b0611';
 const GOLD = '#ffcf6a';
 const FIN_STRIPE = '#4a1d9e';
+// The logo's cyan and hot pink (public/img/brand/zickonezero-mark-v4.png).
+const LOGO_CYAN = '#15fcfd';
+const HOT_PINK = '#ff2bd6';
+const BANNER_INK = '#0b0614';
 
 // The sash runs from under the crest to a swallowtail short of the tail.
 const SASH = `M230 ${150 - SASH_HALF}H836L818 150L836 ${150 + SASH_HALF}H230Z`;
@@ -63,12 +76,19 @@ const TAIL_STRIPES = 'M868 150L1000 22M868 150L990 76M868 150L966 120M868 150L96
 
 const WHEEL_SPOKES = Array.from({ length: 8 }, (_, index) => index * 45);
 
-// Rooftop windows under the parapet, two of them lit.
+// Rooftop windows under the parapet, in three floors of 17.
 const ROOF_WINDOWS = Array.from({ length: 3 * 17 }, (_, index) => ({
   x: 14 + (index % 17) * 34,
   y: 96 + Math.floor(index / 17) * 32,
 }));
-const LIT_WINDOWS = new Set([5, 22, 30, 41]);
+// Lit windows; most can switch off and on (useWindowLights). Fixed, so the
+// static HTML and the hydrated page light the same ones.
+const STEADY_WINDOWS = new Set([5, 30, 41, 46]);
+const SWITCHING_WINDOWS = [1, 3, 8, 9, 12, 15, 18, 22, 24, 27, 33, 36, 38, 43, 48, 50];
+const LIT_WINDOWS = new Set([...STEADY_WINDOWS, ...SWITCHING_WINDOWS]);
+const windowPath = (indexes: Iterable<number>) => [...indexes]
+  .map((index) => `M${ROOF_WINDOWS[index].x} ${ROOF_WINDOWS[index].y}h14v18h-14z`)
+  .join('');
 
 const KoiArt = () => (
   <g id={KOI_ART}>
@@ -133,21 +153,48 @@ const KoiArt = () => (
   </g>
 );
 
-const StreamerArt = () => (
-  <g id={STREAMER_ART}>
-    <path d='M0 75L14 29M0 75L14 121' fill='none' stroke='#9fb3c4' strokeWidth='2' strokeLinecap='round' />
+const BannerArt = () => (
+  <g id={BANNER_ART}>
+    {/* The halyard from the mast to the hoist's top and bottom. */}
+    <path
+      d={`M0 ${BANNER_HEIGHT / 2}L${BANNER_HOIST} ${BANNER_TOP + 4}M0 ${BANNER_HEIGHT / 2}L${BANNER_HOIST} ${BANNER_BOTTOM - 4}`}
+      fill='none'
+      stroke='#9fb3c4'
+      strokeWidth='2'
+      strokeLinecap='round'
+    />
+    <path d={BANNER_FIELD} fill={LOGO_CYAN} />
+    <path d={BANNER_HEMS} fill='none' stroke={HOT_PINK} strokeWidth='4' clipPath={ref('banner-clip')} />
     {/* Outlined like the carp, which also keeps the steps at the joints dark on dark. */}
-    {STREAMER_COLORS.map((color, index) => (
-      <path
-        key={color}
-        d={streamerRibbon(index)}
-        fill={color}
-        stroke={OUTLINE}
-        strokeWidth='2.5'
+    <path d={BANNER_FIELD} fill='none' stroke={OUTLINE} strokeWidth='3' strokeLinejoin='round' />
+    <rect
+      x={BANNER_HOIST - 8}
+      y={BANNER_TOP - 2}
+      width='18'
+      height={BANNER_BOTTOM - BANNER_TOP + 4}
+      rx='4'
+      fill='#12081f'
+      stroke={GOLD}
+      strokeWidth='2.5'
+    />
+    {BANNER_LETTERING.map(({ text, x, y, width, size, tone }) => (
+      <text
+        key={text}
+        x={x}
+        y={y}
+        textLength={width}
+        lengthAdjust='spacing'
+        fontSize={size}
+        fontWeight='900'
+        fill={tone === 'one' ? HOT_PINK : BANNER_INK}
+        stroke={tone === 'one' ? OUTLINE : undefined}
+        strokeWidth={tone === 'one' ? 3 : undefined}
         strokeLinejoin='round'
-      />
+        style={{ fontFamily: THEME.fonts.display, paintOrder: 'stroke' }}
+      >
+        {text}
+      </text>
     ))}
-    <ellipse cx='14' cy='75' rx='7' ry='46' fill='#12081f' stroke={GOLD} strokeWidth='4' />
   </g>
 );
 
@@ -199,12 +246,20 @@ const Rooftop = () => (
       <path className='koi-roof-rim' d='M0 74.5H600' />
       <path
         className='koi-roof-window'
-        d={ROOF_WINDOWS.filter((_, index) => !LIT_WINDOWS.has(index)).map(({ x, y }) => `M${x} ${y}h14v18h-14z`).join('')}
+        d={windowPath(ROOF_WINDOWS.map((_, index) => index).filter((index) => !LIT_WINDOWS.has(index)))}
       />
-      <path
-        className='koi-roof-window is-lit'
-        d={ROOF_WINDOWS.filter((_, index) => LIT_WINDOWS.has(index)).map(({ x, y }) => `M${x} ${y}h14v18h-14z`).join('')}
-      />
+      <path className='koi-roof-window is-lit' d={windowPath(LIT_WINDOWS)} />
+      {/* Covers that switch lights off: drawn, the window is dark. */}
+      {SWITCHING_WINDOWS.map((window, index) => (
+        <rect
+          key={window}
+          className={`koi-roof-window flicker-window${startsOff(index) ? ' is-off' : ''}`}
+          x={ROOF_WINDOWS[window].x}
+          y={ROOF_WINDOWS[window].y}
+          width='14'
+          height='18'
+        />
+      ))}
     </svg>
   </div>
 );
@@ -227,17 +282,20 @@ const KoiStreamer = () => (
         <clipPath id={id('pectoral-clip')}>
           <path d={PECTORAL_FIN} />
         </clipPath>
+        <clipPath id={id('banner-clip')}>
+          <path d={BANNER_FIELD} />
+        </clipPath>
         <linearGradient id={id('fin')} x1='0' y1='0' x2='1' y2='0'>
           <stop offset='0' stopColor='#7b3cff' />
           <stop offset='1' stopColor='#39f2ff' />
         </linearGradient>
-        <StreamerArt />
+        <BannerArt />
         <KoiArt />
       </defs>
     </svg>
 
-    <div className='koi-chain koi-streamer'>
-      <Chain art={STREAMER_ART} height={STREAMER_HEIGHT} windows={STREAMER_WINDOWS} swings={STREAMER_SWINGS} />
+    <div className='koi-chain koi-banner'>
+      <Chain art={BANNER_ART} height={BANNER_HEIGHT} windows={BANNER_WINDOWS} swings={BANNER_SWINGS} />
     </div>
     <div className='koi-chain koi-fish'>
       <Chain art={KOI_ART} height={KOI_HEIGHT} windows={KOI_WINDOWS} swings={KOI_SWINGS} />

@@ -1,15 +1,20 @@
 import {
+  BANNER_BOTTOM,
+  BANNER_HEIGHT,
+  BANNER_HOIST,
+  BANNER_JOINTS,
+  BANNER_LETTERING,
+  BANNER_SWINGS,
+  BANNER_TOP,
+  BANNER_WIDTH,
   JOINT_CLEARANCE,
   KOI_HEIGHT,
   KOI_JOINTS,
   KOI_SWINGS,
   KOI_WIDTH,
   NOTCH_OVERLAP,
-  STREAMER_COLORS,
-  STREAMER_HEIGHT,
-  STREAMER_JOINTS,
-  STREAMER_SWINGS,
-  STREAMER_WIDTH,
+  bannerField,
+  bannerHems,
   chainWindows,
   koiBack,
   koiBelly,
@@ -18,11 +23,13 @@ import {
   koiScales,
   koiSilhouette,
   koiTailFin,
-  streamerRibbon,
 } from '../src/lib/city/koi';
 
 // The largest --sag in styles/cityGap.ts, which adds to each link's swing.
 const MAX_SAG = 2;
+
+// Orbitron's capitals stand 0.72em tall.
+const CAP_HEIGHT = 0.72;
 
 // The points of an absolute path (M, L, H, V, C, A, Z), control points included.
 const coordinates = (path: string): [number, number][] => {
@@ -63,10 +70,10 @@ const coordinates = (path: string): [number, number][] => {
   return points;
 };
 
-describe('carp streamer geometry', () => {
+describe('carp streamer and banner geometry', () => {
   it.each([
     ['carp', KOI_JOINTS, KOI_SWINGS, KOI_WIDTH, KOI_HEIGHT],
-    ['five-color streamer', STREAMER_JOINTS, STREAMER_SWINGS, STREAMER_WIDTH, STREAMER_HEIGHT],
+    ['banner', BANNER_JOINTS, BANNER_SWINGS, BANNER_WIDTH, BANNER_HEIGHT],
   ])('gives each %s link a window that fills the wedge its next joint opens', (_, joints, swings, width, height) => {
     const windows = chainWindows(joints, swings, width, height);
 
@@ -101,9 +108,44 @@ describe('carp streamer geometry', () => {
     expect(Math.min(...finX)).toBeGreaterThan(KOI_JOINTS[KOI_JOINTS.length - 1] + NOTCH_OVERLAP);
   });
 
-  it('draws the carp and the ribbons inside their drawings, rounded for hydration', () => {
+  it('spells ZICKONEZERO CREATIVE across the banner with ONE set apart', () => {
+    expect(BANNER_LETTERING.map(({ text }) => text)).toEqual(['ZICK', 'ONE', 'ZERO', 'CREATIVE']);
+    expect(BANNER_LETTERING.filter(({ tone }) => tone === 'one').map(({ text }) => text)).toEqual(['ONE']);
+
+    // In reading order, each chunk inside the field and ahead of the fluttering tail links.
+    BANNER_LETTERING.forEach(({ x, width, y, size }, index) => {
+      expect(x).toBeGreaterThan(BANNER_HOIST);
+      expect(x + width).toBeLessThan(BANNER_JOINTS[2]);
+      expect(y - size * CAP_HEIGHT).toBeGreaterThan(BANNER_TOP);
+      expect(y).toBeLessThan(BANNER_BOTTOM);
+      if (index > 0) {
+        const before = BANNER_LETTERING[index - 1];
+        expect(x).toBeGreaterThanOrEqual(before.x + before.width);
+      }
+    });
+
+    // The wordmark's chunks meet, so it reads as one word.
+    const [zick, one, zero] = BANNER_LETTERING;
+    expect(one.x).toBe(zick.x + zick.width);
+    expect(zero.x).toBe(one.x + one.width);
+
+    // CREATIVE is smaller, centered on the wordmark's capitals.
+    const creative = BANNER_LETTERING[3];
+    expect(creative.size).toBeLessThan(zick.size);
+    expect(creative.y - (creative.size * CAP_HEIGHT) / 2).toBeCloseTo(zick.y - (zick.size * CAP_HEIGHT) / 2, 0);
+  });
+
+  it('keeps every banner joint clear of the lettering, so no letter kinks', () => {
+    BANNER_JOINTS.slice(1).forEach((joint) => {
+      BANNER_LETTERING.forEach(({ x, width }) => {
+        expect(joint <= x - JOINT_CLEARANCE || joint >= x + width + JOINT_CLEARANCE).toBe(true);
+      });
+    });
+  });
+
+  it('draws the carp and the banner inside their drawings, rounded for hydration', () => {
     const carp = [koiSilhouette(), koiTailFin(), koiBack(), koiBelly(), koiRim(), koiScales()];
-    const ribbons = STREAMER_COLORS.map((_, index) => streamerRibbon(index));
+    const banner = [bannerField(), bannerHems()];
 
     carp.forEach((path) => {
       expect(path).not.toBe('');
@@ -116,12 +158,13 @@ describe('carp streamer geometry', () => {
       });
     });
 
-    ribbons.forEach((path) => {
+    banner.forEach((path) => {
+      expect(path).not.toMatch(/\d\.\d{2,}/);
       coordinates(path).forEach(([x, y]) => {
         expect(x).toBeGreaterThanOrEqual(0);
-        expect(x).toBeLessThanOrEqual(STREAMER_WIDTH);
+        expect(x).toBeLessThanOrEqual(BANNER_WIDTH);
         expect(y).toBeGreaterThan(0);
-        expect(y).toBeLessThan(STREAMER_HEIGHT);
+        expect(y).toBeLessThan(BANNER_HEIGHT);
       });
     });
   });

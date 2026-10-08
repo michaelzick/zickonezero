@@ -60,7 +60,7 @@ describe('window lights', () => {
     expect(offStates(getByTestId('scene'))).toEqual([true, false, false, true, false, false]);
   });
 
-  it('switches one light at a time every few seconds at night', () => {
+  it('switches one light at a time about every two seconds at night', () => {
     const { getByTestId } = render(<Scene />);
     const scene = getByTestId('scene');
     const start = offStates(scene);

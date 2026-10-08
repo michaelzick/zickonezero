@@ -88,7 +88,7 @@ const SHOP_TONES: readonly NeonTone[] = ['amber', 'cyan', 'magenta', 'amber'];
 /** Hard caps so a misconfigured wall can never flood the DOM. */
 export const MAX_FACADE_SIGNS = 8;
 export const MAX_FACADE_UNITS = 40;
-export const MAX_FACADE_FLICKER = 12;
+export const MAX_FACADE_FLICKER = 24;
 
 // Flicker windows are picked from their own stream, so asking for them never
 // changes the rest of a seeded wall.

@@ -32,7 +32,7 @@ const WALL: Omit<FacadeOptions, 'seed'> = {
   maxUnits: 30,
   signs: 6,
   detailLength: 1700,
-  flickerCount: 10,
+  flickerCount: 24,
 };
 
 // Seeded, so the static HTML and the hydrated page draw the same alley.

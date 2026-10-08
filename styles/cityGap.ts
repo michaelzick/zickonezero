@@ -5,13 +5,15 @@ import { THEME } from './theme';
 /*
  * The end of the homepage route (src/components/home/CityGapScene.tsx): open
  * air before the footer with one giant piece in the foreground, a carp
- * streamer at night (KoiStreamer) and a sightseeing airship by day (Airship).
+ * streamer and the brand banner at night (KoiStreamer) and a sightseeing
+ * airship by day (Airship), among clouds and birds, over rooftops where a
+ * window washer works (DayClouds, DayBirds, DayRooftops).
  * Both are in the static HTML and the theme picks one, so the page never
  * flashes the wrong one.
  *
  * useSceneMotion writes data-scene-motion. Only transform animates, on its own
  * layers, and the art inside them is static, so it is rasterized once. The
- * streamers wave as chains of links: each rotates about its front joint, on
+ * carp and the banner wave as chains of links: each rotates about its front joint, on
  * the centerline, and nested links add up toward the tail. A link's static
  * bend is the rotate property and its swing is transform, so the still frame
  * keeps the fabric's droop. Only @media and keyframes here; see styles/city.ts.
@@ -51,6 +53,43 @@ const ticker = keyframes`
   to { transform: translate3d(-50%, 0, 0); }
 `;
 
+// Clouds drift with the wind, left to right, behind the airship.
+const cloudDrift = keyframes`
+  from { transform: translate3d(-40vw, 0, 0); }
+  to { transform: translate3d(110vw, 0, 0); }
+`;
+
+// Birds cross left to right at an even speed, rising a little and settling,
+// then wait off screen for the next pass.
+const BIRD_LOOP_SECONDS = 26;
+
+const fly = keyframes`
+  0% { transform: translate3d(-8vw, 0, 0); }
+  35% { transform: translate3d(51vw, -1.5vh, 0); }
+  70%, 100% { transform: translate3d(110vw, 0.5vh, 0); }
+`;
+
+// A few wing beats, then a glide.
+const flap = keyframes`
+  0%, 20%, 40%, 100% { transform: scaleY(1); }
+  10%, 30% { transform: scaleY(-0.55); }
+`;
+
+// The window washer's gondola works down the building and back, its cables
+// paying out with it: a cable is scaled to the gondola's drop plus the
+// height of its stirrups (14 of the rig's 256 units).
+const GONDOLA_SECONDS = 36;
+
+const gondolaRide = keyframes`
+  from { transform: translate3d(0, 6%, 0); }
+  to { transform: translate3d(0, 62%, 0); }
+`;
+
+const cableRide = keyframes`
+  from { transform: scaleY(0.115); }
+  to { transform: scaleY(0.675); }
+`;
+
 export const CityGapRoot = styled.div`
   --gap-h: max(28rem, 100vh);
   position: relative;
@@ -71,7 +110,7 @@ export const CityGapRoot = styled.div`
   }
 
   /*
-   * Night: the streamers fly to the right of a mast on a rooftop. Lengths are
+   * Night: the carp and the banner fly to the right of a mast on a rooftop. Lengths are
    * in units of the carp's 1000-unit drawing (--ku), so the rig scales as one.
    * --koi-y is the carp's mouth, low enough that the ball atop the mast (315
    * units up) clears the fixed nav.
@@ -83,8 +122,9 @@ export const CityGapRoot = styled.div`
     --koi-y: max(45%, calc(92px + 315 * var(--ku)));
     --droop: 5deg;
     --sag: 1deg;
-    --streamer-droop: 0deg;
-    --streamer-sag: 0deg;
+    --banner-scale: 0.78;
+    --banner-droop: 0deg;
+    --banner-sag: 0deg;
     --roof-w: 40%;
     position: absolute;
     inset: 0;
@@ -143,6 +183,21 @@ export const CityGapRoot = styled.div`
   .koi-roof-window { fill: #0c1824; }
   .koi-roof-window.is-lit { fill: var(--window-lit); opacity: 0.85; }
 
+  /*
+   * A cover over one lit window (useWindowLights): drawn, the light is out.
+   * Lights go out quickly and come back with a short warm-up, as in
+   * styles/city.ts.
+   */
+  .flicker-window {
+    opacity: 0;
+    transition: opacity 0.45s ease-in;
+  }
+
+  .flicker-window.is-off {
+    opacity: 1;
+    transition-duration: 0.18s;
+  }
+
   .koi-defs {
     position: absolute;
     width: 0;
@@ -165,12 +220,13 @@ export const CityGapRoot = styled.div`
     height: calc(300 * var(--u));
   }
 
-  .koi-streamer {
-    --u: calc(var(--ku) * 0.82);
-    --droop: var(--streamer-droop);
-    --sag: var(--streamer-sag);
-    --beat: 1.15s;
-    --lag: -0.16s;
+  /* The banner flies above the carp, a little stiffer, its lettering readable. */
+  .koi-banner {
+    --u: calc(var(--ku) * var(--banner-scale));
+    --droop: var(--banner-droop);
+    --sag: var(--banner-sag);
+    --beat: 1.3s;
+    --lag: -0.18s;
     top: calc(var(--koi-y) - 178 * var(--ku) - 75 * var(--u));
     height: calc(150 * var(--u));
   }
@@ -325,6 +381,102 @@ export const CityGapRoot = styled.div`
     }
   }
 
+  /* Flat clouds behind the airship, each at its own height and speed. */
+  .clouds,
+  .birds {
+    position: absolute;
+    inset: 0;
+  }
+
+  .cloud {
+    position: absolute;
+    top: var(--cloud-top);
+    left: 0;
+    width: var(--cloud-w);
+    min-width: 140px;
+    transform: translate3d(var(--cloud-still), 0, 0);
+    animation: ${cloudDrift} var(--cloud-duration) linear var(--cloud-delay) infinite;
+    will-change: transform;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  /* Gulls between the airship and the roofs; --bird-size is their wingspan at 1440px wide. */
+  .bird {
+    position: absolute;
+    top: var(--bird-top);
+    left: 0;
+    width: calc(var(--bird-size) * (0.45px + 0.0382vw));
+    transform: translate3d(var(--bird-still), 0, 0);
+    animation: ${fly} ${BIRD_LOOP_SECONDS}s linear var(--bird-delay) infinite;
+  }
+
+  .bird-flap {
+    display: block;
+    transform-origin: 50% 55%;
+    animation: ${flap} var(--bird-beat) ease-in-out infinite;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  /*
+   * The roofs: one drawing at a fixed aspect ratio, at least the viewport
+   * wide, along the bottom. The gondola is placed in the same box, so it
+   * stays on its building at every size.
+   */
+  .roofs {
+    --roofs-w: 100vw;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: var(--roofs-w);
+    margin-left: calc(var(--roofs-w) / -2);
+
+    > svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .gondola-rig {
+    position: absolute;
+  }
+
+  .gondola-cable {
+    position: absolute;
+    top: 0;
+    width: max(1px, 1.6%);
+    height: 100%;
+    margin-left: max(-0.5px, -0.8%);
+    background: #4b5a61;
+    transform: scaleY(0.395);
+    transform-origin: 50% 0;
+    animation: ${cableRide} ${GONDOLA_SECONDS}s ease-in-out ${-GONDOLA_SECONDS / 4}s infinite alternate;
+  }
+
+  .gondola {
+    position: absolute;
+    inset: 0;
+    transform: translate3d(0, 34%, 0);
+    animation: ${gondolaRide} ${GONDOLA_SECONDS}s ease-in-out ${-GONDOLA_SECONDS / 4}s infinite alternate;
+    will-change: transform;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
   /* Pusher propellers at the back of each pod, seen at a steep angle. */
   .ship-prop {
     position: absolute;
@@ -356,14 +508,18 @@ export const CityGapRoot = styled.div`
    * tall frame, and its tail stays above the HUD in the corner.
    */
   @media (orientation: portrait) {
+    .roofs {
+      --roofs-w: 200vw;
+    }
+
     .koi {
       --koi-len: min(100vw, 62vh);
       --mast-x: 8%;
       --koi-y: max(34%, calc(150px + 315 * var(--ku)));
       --droop: 26deg;
       --sag: 2deg;
-      --streamer-droop: 14deg;
-      --streamer-sag: 1deg;
+      --banner-droop: 14deg;
+      --banner-sag: 1deg;
       --roof-w: 64%;
     }
   }
@@ -377,6 +533,11 @@ export const CityGapRoot = styled.div`
     .koi {
       --koi-len: min(max(540px, 58vw), calc((100vh - 158px) * 1000 / 686));
       --koi-y: calc(86px + 315 * var(--ku));
+    }
+
+    /* The roofs sink a quarter of their height, below the airship. */
+    .roofs {
+      transform: translate3d(0, 25%, 0);
     }
   }
 
@@ -393,7 +554,12 @@ export const CityGapRoot = styled.div`
   &:not([data-scene-motion='running']) .ship,
   &:not([data-scene-motion='running']) .ship-bob,
   &:not([data-scene-motion='running']) .ship-ticker,
-  &:not([data-scene-motion='running']) .ship-prop i {
+  &:not([data-scene-motion='running']) .ship-prop i,
+  &:not([data-scene-motion='running']) .cloud,
+  &:not([data-scene-motion='running']) .bird,
+  &:not([data-scene-motion='running']) .bird-flap,
+  &:not([data-scene-motion='running']) .gondola,
+  &:not([data-scene-motion='running']) .gondola-cable {
     animation-play-state: paused;
   }
 
@@ -402,7 +568,12 @@ export const CityGapRoot = styled.div`
   &[data-scene-motion='still'] .ship,
   &[data-scene-motion='still'] .ship-bob,
   &[data-scene-motion='still'] .ship-ticker,
-  &[data-scene-motion='still'] .ship-prop i {
+  &[data-scene-motion='still'] .ship-prop i,
+  &[data-scene-motion='still'] .cloud,
+  &[data-scene-motion='still'] .bird,
+  &[data-scene-motion='still'] .bird-flap,
+  &[data-scene-motion='still'] .gondola,
+  &[data-scene-motion='still'] .gondola-cable {
     animation: none;
   }
 `;

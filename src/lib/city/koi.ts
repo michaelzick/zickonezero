@@ -1,15 +1,16 @@
 /**
- * Geometry for the carp streamer at the end of the homepage route
- * (src/components/home/KoiStreamer.tsx).
+ * Geometry for the carp streamer and the brand banner above it at the end of
+ * the homepage route (src/components/home/KoiStreamer.tsx).
  *
- * Each streamer is drawn once and shown through a chain of links. A link is a
+ * Each is drawn once and shown through a chain of links. A link is a
  * window onto one stretch of the drawing and bends at its front joint, on the
  * centerline. Its window runs past the next joint in a notch: a little on the
  * centerline, where the next link pivots, and out toward the edges as far as
  * that link's sharpest bend opens a wedge there. So the overlap fills the
  * wedge with the same fabric, and its edge stays under the next link. Nothing
  * that would show a break crosses a joint: the scales sit in columns between
- * them, and the fins start clear of them. Coordinates are rounded, so the
+ * them, the fins start clear of them, and the banner's joints fall in the
+ * spaces around its words. Coordinates are rounded, so the
  * static HTML and the hydrated page draw the same fish.
  */
 
@@ -57,19 +58,50 @@ export const KOI_JOINTS = [0, 280, 370, 460, 548, 632, 712, 785, 850] as const;
  */
 export const KOI_SWINGS = [2, 3, 3, 3, 3, 4, 4, 5, 7] as const;
 
-export const STREAMER_WIDTH = 1000;
-export const STREAMER_HEIGHT = 150;
-const STREAMER_MID = STREAMER_HEIGHT / 2;
+export const BANNER_WIDTH = 1026;
+export const BANNER_HEIGHT = 150;
+const BANNER_MID = BANNER_HEIGHT / 2;
 
-/** The five-color streamer's joints; its ribbons split apart at STREAMER_SPLIT. */
-export const STREAMER_JOINTS = [0, 180, 310, 420, 520, 610, 700, 790] as const;
-export const STREAMER_SPLIT = 560;
+/** The banner's field, from its hoist at the mast to the tips of its swallowtail. */
+export const BANNER_TOP = 14;
+export const BANNER_BOTTOM = 136;
+export const BANNER_HOIST = 20;
+const BANNER_NOTCH = 966;
 
-/** The streamer is lighter than the carp, so it flutters on shorter links. */
-export const STREAMER_SWINGS = [2, 2, 3, 3, 3, 3, 4, 4] as const;
+export type BannerChunk = {
+  text: string;
+  /** Where the chunk's advance starts and how long it is, in drawing units. */
+  x: number;
+  width: number;
+  /** The baseline that centers the chunk's capitals on the banner. */
+  y: number;
+  size: number;
+  tone: 'ink' | 'one';
+};
 
-/** Top to bottom, in the city's neon. */
-export const STREAMER_COLORS = ['#2ff3ff', '#ff2bd6', '#f4f1ff', '#a35bff', '#ffb03b'] as const;
+/**
+ * ZICKONEZERO CREATIVE in Orbitron 900, set like the hero heading: the
+ * wordmark at 64 units, -0.025em apart, in three chunks that meet so it reads
+ * as one word, and CREATIVE at 28 units, 0.3em apart, a word space after it.
+ * The widths are Orbitron's own advances, pinned with textLength so a
+ * fallback face fills the same boxes.
+ */
+export const BANNER_LETTERING: readonly BannerChunk[] = [
+  { text: 'ZICK', x: 58, width: 163.5, y: 98, size: 64, tone: 'ink' },
+  { text: 'ONE', x: 221.5, width: 150.5, y: 98, size: 64, tone: 'one' },
+  { text: 'ZERO', x: 372, width: 201, y: 98, size: 64, tone: 'ink' },
+  { text: 'CREATIVE', x: 609, width: 234.9, y: 85, size: 28, tone: 'ink' },
+];
+
+/**
+ * The banner's joints: the wordmark rides the head link whole, then one joint
+ * in the space before CREATIVE and shorter links down the tail, so no letter
+ * ever kinks. The last holds the swallowtail's two tips.
+ */
+export const BANNER_JOINTS = [0, 591, 866, 926, 976] as const;
+
+/** Stiff across the lettering, looser down the tail. */
+export const BANNER_SWINGS = [2, 2, 3, 4, 5] as const;
 
 // Half the carp's height along its length, from the mouth hoop to the root of
 // the tail fin.
@@ -229,18 +261,13 @@ export const koiScales = (): string => {
   return path;
 };
 
-/**
- * One ribbon of the five-color streamer, top (0) to bottom (4). The five run
- * together as a tube from the mouth hoop, then split and fan out, each ending
- * in a swallowtail.
- */
-export const streamerRibbon = (index: number): string => {
-  const band = 18;
-  const top = 30 + index * band;
-  const bottom = top + band;
-  const end = STREAMER_MID + (index - 2) * 25;
-  const endHalf = 6.5;
-  const split = STREAMER_SPLIT;
-  return `M14 ${top}H${split}C720 ${top} 860 ${end - endHalf} ${STREAMER_WIDTH} ${end - endHalf}`
-    + `L982 ${end}L${STREAMER_WIDTH} ${end + endHalf}C860 ${end + endHalf} 720 ${bottom} ${split} ${bottom}H14Z`;
+/** The banner's field: a long cloth with a swallowtail, notched back to BANNER_NOTCH. */
+export const bannerField = (): string =>
+  `M${BANNER_HOIST} ${BANNER_TOP}H${BANNER_WIDTH}L${BANNER_NOTCH} ${BANNER_MID}`
+  + `L${BANNER_WIDTH} ${BANNER_BOTTOM}H${BANNER_HOIST}Z`;
+
+/** The hot-pink hems just inside the top and bottom edges, for drawing inside the field. */
+export const bannerHems = (): string => {
+  const inset = 10;
+  return `M${BANNER_HOIST} ${BANNER_TOP + inset}H${BANNER_WIDTH}M${BANNER_HOIST} ${BANNER_BOTTOM - inset}H${BANNER_WIDTH}`;
 };
