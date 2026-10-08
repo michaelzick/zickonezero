@@ -379,13 +379,16 @@ export const HomeHudRoot = styled.nav`
     }
   }
 
-  /* A button that fast travels to the objective's district. */
+  /*
+   * A button that fast travels to the objective's district. It is underlined
+   * at rest so it reads as a link; the underline fades out under the pointer.
+   */
   .quest-objective {
     display: inline-block;
     margin: 2px 0 0;
     padding: 0;
     border: 0;
-    border-bottom: 1px dashed transparent;
+    border-bottom: 1px dashed var(--hud-yellow);
     background: none;
     color: var(--hud-yellow);
     font-family: ${THEME.fonts.mono};
@@ -396,12 +399,12 @@ export const HomeHudRoot = styled.nav`
     text-shadow: inherit;
     text-transform: uppercase;
     cursor: pointer;
-    transition: border-color 0.2s ease, text-shadow 0.2s ease;
+    transition: border-color 0.25s ease, text-shadow 0.2s ease;
   }
 
   .quest-objective:hover,
   .quest-objective:focus-visible {
-    border-bottom-color: var(--hud-yellow);
+    border-bottom-color: transparent;
     text-shadow: 0 0 calc(8px * var(--neon-glow-strength, 1)) rgba(243, 230, 0, 0.6);
   }
 

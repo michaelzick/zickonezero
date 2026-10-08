@@ -12,15 +12,15 @@ type Props = {
 };
 
 /**
- * The game-style quest tracker under the minimap: the current gig in red, its
- * objective in yellow (re-typed with a decode when it changes), and the
+ * The game-style quest tracker under the minimap: a red "Next destination"
+ * label, the objective in yellow (re-typed with a decode when it changes), and the
  * distance left to the end of the route. The objective is a button that fast
  * travels to the next stop; its stable label hides the decode from assistive
  * technology, and the label and distance are decoration.
  */
 const QuestTracker = ({ objective, onObjectiveClick, distanceRef }: Props) => (
   <div className='quest'>
-    <p className='quest-label' aria-hidden='true'>Current gig</p>
+    <p className='quest-label' aria-hidden='true'>Next destination</p>
     <button type='button' className='quest-objective' aria-label={objective} onClick={onObjectiveClick}>
       <ScrambleText text={objective} />
     </button>

@@ -15,12 +15,12 @@ import FsLightbox from 'fslightbox-react';
 
 import { TopNavContent, GridContent, FooterContent } from '.';
 import { Wrapper } from '../../styles';
-import { CityGap } from '../../styles/home';
 import useActiveSection from '../hooks/useActiveSection';
 import { trackEvent } from '../lib/analytics';
 import { setCityAccent } from '../lib/city/accent';
 import type { CityAccent } from '../lib/city/routes';
 import { createScrollJumper } from '../lib/city/scroll';
+import CityGapScene from './home/CityGapScene';
 import District from './home/District';
 import HeroScene from './home/HeroScene';
 import HoloBillboard from './home/HoloBillboard';
@@ -281,8 +281,8 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
           </District>
         ))}
 
-        {/* Open air at the end of the route, where the city shows through. */}
-        <CityGap aria-hidden='true' />
+        {/* Open air at the end of the route, with a hologram by night and an airship by day. */}
+        <CityGapScene />
 
         {imgs && <FsLightbox
           toggler={lightboxController.toggler}

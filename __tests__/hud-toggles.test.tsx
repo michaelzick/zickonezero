@@ -143,7 +143,7 @@ describe('HUD toggles and readouts', () => {
       );
 
       expect(container.querySelector('.quest-label')).toHaveAttribute('aria-hidden', 'true');
-      expect(container.querySelector('.quest-label')).toHaveTextContent('Current gig');
+      expect(container.querySelector('.quest-label')).toHaveTextContent('Next destination');
       expect(container.querySelector('.quest-distance')).toHaveAttribute('aria-hidden', 'true');
       expect(distanceRef.current).toHaveTextContent('-.- km');
 

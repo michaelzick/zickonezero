@@ -1,3 +1,4 @@
+import { startsOff } from '../../lib/city/windowLights';
 import type { SkylineLayer } from '../../lib/city/skyline';
 
 export type SkylineWindows = {
@@ -47,6 +48,17 @@ const Skyline = ({ layer, windows }: Props) => {
       ))}
       <path className='windows windows-warm' d={layer.litWindows} strokeWidth={windows.height} strokeDasharray={dash} />
       <path className='windows windows-cool' d={layer.coolWindows} strokeWidth={windows.height} strokeDasharray={dash} />
+      {/* Covers that switch single lights off; useWindowLights toggles them. */}
+      {layer.flicker.map((spot, index) => (
+        <rect
+          key={`flicker-${index}`}
+          className={`flicker-window${startsOff(index) ? ' is-off' : ''}`}
+          x={spot.x}
+          y={spot.y}
+          width={spot.width}
+          height={spot.height}
+        />
+      ))}
       {layer.strips.map((strip, index) => (
         <g key={`strip-${index}`} className={`tone-${strip.tone}`}>
           <rect

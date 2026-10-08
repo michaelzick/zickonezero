@@ -1,4 +1,5 @@
 import type { FacadeLayer } from '../../lib/city/facade';
+import { startsOff } from '../../lib/city/windowLights';
 
 type Props = {
   facade: FacadeLayer;
@@ -33,6 +34,16 @@ const AlleyWall = ({ facade, fit = 'none' }: Props) => {
       <path className='panes' d={facade.panes} {...windowRow} />
       <path className='lit' d={facade.lit} {...windowRow} />
       <path className='cool' d={facade.cool} {...windowRow} />
+      {/* Covers that switch single lights off: the wall, then its unlit pane. */}
+      {facade.flicker.map((spot, index) => (
+        <g
+          key={`flicker-${spot.x}-${spot.y}`}
+          className={`flicker-window${startsOff(index) ? ' is-off' : ''}`}
+        >
+          <rect className={`wall-${spot.wall}`} x={spot.x} y={spot.y} width={spot.width} height={spot.height} />
+          <rect className='flicker-pane' x={spot.x} y={spot.y} width={spot.width} height={spot.height} />
+        </g>
+      ))}
       <path className='pipes' d={facade.pipes} />
       <path className='units' d={facade.units} />
       <path className='grilles' d={facade.grilles} />

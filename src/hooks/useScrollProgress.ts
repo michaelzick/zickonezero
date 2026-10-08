@@ -6,17 +6,24 @@ import usePrefersReducedMotion from './usePrefersReducedMotion';
 type ScrollProgressOptions = {
   /** Sets data-scrolled-past on the element once progress reaches this value. */
   pastAt?: number;
+  /**
+   * 'through' (the default) runs over the element's height minus one
+   * viewport, for sticky scenes. 'enter' runs from the element's top reaching
+   * the bottom of the viewport to its top reaching the top, for a scene the
+   * visitor scrolls into.
+   */
+  track?: 'through' | 'enter';
 };
 
 /**
  * Writes --p (0 to 1) onto a scroll-driven scene: how far the visitor has
- * scrolled through the element, whose height minus one viewport is the track.
- * Geometry is measured on mount and on resize, never per frame, so a scroll
- * frame costs one style write. Reduced motion leaves --p unset (0 in CSS).
+ * scrolled along its track (see ScrollProgressOptions). Geometry is measured
+ * on mount and on resize, never per frame, so a scroll frame costs one style
+ * write. Reduced motion leaves --p unset, so CSS falls back to a still frame.
  */
 const useScrollProgress = (
   ref: RefObject<HTMLElement | null>,
-  { pastAt }: ScrollProgressOptions = {},
+  { pastAt, track = 'through' }: ScrollProgressOptions = {},
 ): void => {
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -31,8 +38,14 @@ const useScrollProgress = (
     let written = '';
 
     const measure = () => {
-      top = node.getBoundingClientRect().top + window.scrollY;
-      distance = Math.max(node.offsetHeight - window.innerHeight, 1);
+      const pageTop = node.getBoundingClientRect().top + window.scrollY;
+      if (track === 'enter') {
+        top = pageTop - window.innerHeight;
+        distance = Math.max(window.innerHeight, 1);
+      } else {
+        top = pageTop;
+        distance = Math.max(node.offsetHeight - window.innerHeight, 1);
+      }
     };
 
     const write = (y: number) => {
@@ -67,7 +80,7 @@ const useScrollProgress = (
       node.style.removeProperty('--p');
       node.removeAttribute('data-scrolled-past');
     };
-  }, [ref, pastAt, prefersReducedMotion]);
+  }, [ref, pastAt, track, prefersReducedMotion]);
 };
 
 export default useScrollProgress;

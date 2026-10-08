@@ -1,6 +1,7 @@
 import { CSSProperties, useEffect, useRef } from 'react';
 
 import usePageScrollVars from '../../hooks/usePageScrollVars';
+import useWindowLights from '../../hooks/useWindowLights';
 import { setCityAccent } from '../../lib/city/accent';
 import { getRouteMeta, isHomePath } from '../../lib/city/routes';
 import { generateSkyline } from '../../lib/city/skyline';
@@ -34,7 +35,9 @@ const FAR_SKYLINE = generateSkyline({
   floorHeight: 6,
   litRowChance: 0.3,
   coolShare: 0.25,
-  flickerCount: 0,
+  // Safe to raise: this layer draws nothing else from the generator's random
+  // stream after its flicker windows, so its skyline stays the same.
+  flickerCount: 10,
   windowWidth: FAR_WINDOWS.width,
   windowHeight: FAR_WINDOWS.height,
   neonStrips: 0,
@@ -55,6 +58,8 @@ const MID_SKYLINE = generateSkyline({
   floorHeight: 9,
   litRowChance: 0.36,
   coolShare: 0.3,
+  // Fixed: the strips and billboards are drawn after these from the same
+  // random stream, so changing the count would rearrange them.
   flickerCount: 14,
   windowWidth: MID_WINDOWS.width,
   windowHeight: MID_WINDOWS.height,
@@ -71,8 +76,9 @@ type Props = {
 };
 
 /**
- * The living city behind every page: sky, searchlights, two skyline depths,
- * flying traffic, drifting fog, and the accent glow. It mounts once in
+ * The living city behind every page: sky, searchlights, two skyline depths
+ * whose odd window light switches off and on at night, flying traffic,
+ * drifting fog, and the accent glow. It mounts once in
  * pages/_app.tsx and persists across navigation; each route pans the camera
  * to its own spot in the city.
  */
@@ -82,6 +88,7 @@ const CityBackdrop = ({ pathname }: Props) => {
   const isHome = isHomePath(pathname);
 
   usePageScrollVars(rootRef);
+  useWindowLights(rootRef);
 
   // Re-run on every route change: the homepage districts may have re-tinted
   // the city since the last navigation.

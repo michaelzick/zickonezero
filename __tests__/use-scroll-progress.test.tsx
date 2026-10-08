@@ -9,9 +9,9 @@ import { REDUCED_MOTION_QUERY, mockMatchMedia, restoreMatchMedia } from '../src/
 const SCENE_TOP = 100;
 const SCENE_HEIGHT = 2768;
 
-const Scene = ({ pastAt }: { pastAt?: number }) => {
+const Scene = ({ pastAt, track }: { pastAt?: number; track?: 'through' | 'enter' }) => {
   const ref = useRef<HTMLElement>(null);
-  useScrollProgress(ref, { pastAt });
+  useScrollProgress(ref, { pastAt, track });
   return <section ref={ref} data-testid='scene' />;
 };
 
@@ -60,6 +60,26 @@ describe('useScrollProgress', () => {
     await setScroll(0);
     expect(scene.style.getPropertyValue('--p')).toBe('0.0000');
     expect(scene).not.toHaveAttribute('data-scrolled-past');
+  });
+
+  it('tracks a scene scrolling into view from the bottom of the viewport to the top', async () => {
+    // The scene starts 1,000px down, so it enters at 232px and fills the view at 1,000px.
+    jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(() => ({
+      top: 1000 - window.scrollY,
+    } as DOMRect));
+    const { getByTestId } = render(<Scene track='enter' />);
+    const scene = getByTestId('scene');
+
+    expect(scene.style.getPropertyValue('--p')).toBe('0.0000');
+
+    await setScroll(616);
+    expect(scene.style.getPropertyValue('--p')).toBe('0.5000');
+
+    await setScroll(1000);
+    expect(scene.style.getPropertyValue('--p')).toBe('1.0000');
+
+    await setScroll(4000);
+    expect(scene.style.getPropertyValue('--p')).toBe('1.0000');
   });
 
   it('measures from where the scene sits when it mounts mid-page', async () => {
