@@ -56,8 +56,10 @@ describe('Bar Four', () => {
       const { container } = renderWithProviders(<BarFourContent />);
 
       const title = screen.getByRole('heading', { level: 1, name: 'Bar Four' });
-      const booth = screen.getByRole('region', { name: 'The house rack' });
+      const booth = screen.getByRole('region', { name: 'The House Music' });
       expect(within(booth).getByText('Open rack tonight')).toBeInTheDocument();
+      expect(within(booth).getByText(/^Rackloose is a modular studio/)).toHaveTextContent(/and program its sequencers\.$/);
+      expect(within(booth).getByText(/Open Presets to switch to another set/)).toBeInTheDocument();
 
       const studio = within(booth).getByRole('link', { name: 'Open the full studio' });
       expect(studio).toHaveAttribute('href', 'https://rackloose.michaelzick.com/');

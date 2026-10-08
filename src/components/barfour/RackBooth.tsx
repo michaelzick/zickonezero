@@ -56,23 +56,24 @@ const RackBooth = () => {
   };
 
   return (
-    <BoothRoot aria-labelledby='house-rack-title'>
+    <BoothRoot aria-labelledby='house-music-title'>
       <div className='booth-copy'>
         <p className='booth-tag'>Open rack tonight</p>
-        <h2 id='house-rack-title'>The house rack</h2>
+        <h2 id='house-music-title'>The House Music</h2>
         <p>
           Rackloose is a modular studio I built for the browser. Patch cables between synths, drum
-          machines, and effects, program its sequencers, and play it from your keyboard.
+          machines, and effects, and program its sequencers.
         </p>
         <p className='booth-open-note'>
-          It&apos;s warmed up on Neon Skyline. Press Play All, or click into the rack to play it
-          from your keyboard. Click anywhere else to give the keys back.
+          It&apos;s warmed up on Neon Skyline. Open Presets to switch to another set, from G-funk
+          and dub to Italo disco, or save your own. Press Play All, or click into the rack to play
+          it from your keyboard. Click anywhere else to give the keys back.
         </p>
         <TrackedLink
           href='https://rackloose.michaelzick.com/'
           label='Open the full studio'
           location='bar_four'
-          section='house_rack'
+          section='house_music'
           target='_blank'
           className='booth-link'
         >
