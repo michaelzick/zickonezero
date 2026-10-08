@@ -27,7 +27,12 @@ import TimeOfDayToggle from './hud/TimeOfDayToggle';
 /** Scroll distance before the bar turns from clear to glass. */
 const GLASS_THRESHOLD_PX = 12;
 
-const NavContent = (): ReactElement => {
+type NavContentProps = {
+  /** Runs before the brand link navigates; preventDefault keeps the visitor on the page. */
+  onBrandClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
+};
+
+const NavContent = ({ onBrandClick }: NavContentProps = {}): ReactElement => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
   const isScrolled = useScrolledPast(GLASS_THRESHOLD_PX);
@@ -65,7 +70,13 @@ const NavContent = (): ReactElement => {
       <NavBrandGroup>
         <NavBrand onClick={() => dispatch(showMobileMenu(false))}>
           <span className='signal' aria-hidden='true' />
-          <TrackedLink href='/' label='ZICKONEZERO Creative' location='top_nav' section='brand'>
+          <TrackedLink
+            href='/'
+            label='ZICKONEZERO Creative'
+            location='top_nav'
+            section='brand'
+            onClick={onBrandClick}
+          >
             <span className='brand-line brand-first'><BrandName /></span>
             <span className='brand-line brand-second'><span className='brand-tag'>Creative</span></span>
           </TrackedLink>

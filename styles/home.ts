@@ -405,14 +405,19 @@ export const HeroRoot = styled.section`
     transform: translateZ(-760px);
   }
 
+  /* English, so the letters stack upright down the blade. */
   .blade-open {
     --tone: var(--neon-amber);
     top: 48%;
     left: calc(50% - var(--alley-half));
     width: 70px;
     height: 200px;
-    font-size: 46px;
+    font-family: ${THEME.fonts.display};
+    font-size: 34px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     writing-mode: vertical-rl;
+    text-orientation: upright;
     transform: translateZ(-1500px);
   }
 
@@ -755,7 +760,7 @@ export const HeroRoot = styled.section`
     .blade-open {
       width: 54px;
       height: 150px;
-      font-size: 34px;
+      font-size: 26px;
     }
 
     .club-sign {

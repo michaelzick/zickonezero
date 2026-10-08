@@ -152,8 +152,8 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
             <div className='plane blade blade-dream' lang='ja'>
               <span>夢</span>
             </div>
-            <div className='plane blade blade-open' lang='ja'>
-              <span>営業中</span>
+            <div className='plane blade blade-open'>
+              <span>Open</span>
             </div>
           </div>
         </div>

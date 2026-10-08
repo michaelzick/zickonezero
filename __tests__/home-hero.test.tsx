@@ -1,4 +1,4 @@
-import { screen, within } from '@testing-library/react';
+import { act, createEvent, fireEvent, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import MainContent from '../src/components/MainContent';
@@ -122,6 +122,56 @@ describe('Homepage city', () => {
       location: 'home_tabs', label: 'Return to surface', section: 'hero',
     }));
     expect(within(hud).getByRole('button', { name: 'Head to Case Studies' })).toBeInTheDocument();
+  });
+
+  it('takes the brand link back to the top of the homepage, even mid-jump', async () => {
+    const user = userEvent.setup();
+    const scroll = jest.spyOn(window, 'scrollTo').mockImplementation((options: ScrollToOptions | number, y?: number) => {
+      window.scrollY = typeof options === 'number' ? y ?? 0 : options.top ?? 0;
+    });
+    // Animation frames run only when the test says so.
+    const frames = new Map<number, FrameRequestCallback>();
+    let nextFrame = 1;
+    jest.spyOn(window, 'requestAnimationFrame').mockImplementation((callback) => {
+      frames.set(nextFrame, callback);
+      return nextFrame++;
+    });
+    jest.spyOn(window, 'cancelAnimationFrame').mockImplementation((id) => {
+      frames.delete(id);
+    });
+    const runFrames = (at: number) => act(() => {
+      const pending = [...frames.values()];
+      frames.clear();
+      pending.forEach((callback) => callback(at));
+    });
+    renderHome();
+    const section = document.getElementById('web-development')!.closest('section')!;
+    jest.spyOn(section, 'getBoundingClientRect').mockImplementation(() => ({
+      x: 0, y: 4000 - window.scrollY, top: 4000 - window.scrollY,
+      bottom: 4500 - window.scrollY, left: 0, right: 1000, width: 1000, height: 500,
+      toJSON: () => ({}),
+    }));
+
+    const brand = within(document.getElementById('site-nav')!).getByRole('link', { name: /Creative/ });
+    expect(brand).toHaveAttribute('href', '/');
+    const hud = screen.getByRole('navigation', { name: 'Homepage sections' });
+    await user.click(within(hud).getByRole('button', { name: 'Web Dev' }));
+    runFrames(performance.now() + 600);
+    expect(window.scrollY).toBeGreaterThan(500);
+
+    const click = createEvent.click(brand, { button: 0 });
+    fireEvent(brand, click);
+
+    expect(click.defaultPrevented).toBe(true);
+    expect(scroll).toHaveBeenLastCalledWith({ top: 0, behavior: 'auto' });
+    expect(window.scrollY).toBe(0);
+    expect(track).toHaveBeenLastCalledWith('link_click', expect.objectContaining({
+      link_location: 'top_nav', link_text: 'ZICKONEZERO Creative',
+    }));
+
+    // The jump that was under way is over and cannot pull the page back down.
+    runFrames(performance.now() + 5000);
+    expect(window.scrollY).toBe(0);
   });
 
   it('makes the Bar Four sign a link to the club and keeps street litter decorative', () => {

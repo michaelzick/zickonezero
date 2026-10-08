@@ -9,7 +9,7 @@ import {
   showMobileMenu,
   getMobileMenuState
 } from '../showMobileMenuSlice';
-import { useState, useRef, useEffect, memo, useCallback } from 'react';
+import { useState, useRef, useEffect, memo, useCallback, type MouseEvent } from 'react';
 
 import FsLightbox from 'fslightbox-react';
 
@@ -194,6 +194,21 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
     jumper.jumpTo(0);
   }, [jumper, setActiveSection]);
 
+  // The brand already points home, so here it goes back to the top, like
+  // Return to surface but at once, instead of reloading the page under the
+  // visitor or losing to a fast-travel jump still under way. Modified clicks
+  // (a new tab) still navigate.
+  const handleBrandClick = useCallback((event: MouseEvent<HTMLAnchorElement>) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      return;
+    }
+
+    event.preventDefault();
+    jumper.cancel();
+    setActiveSection(null);
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, [jumper, setActiveSection]);
+
   // Where the HUD's player reaches each stop: the start, each district (when
   // its sign meets the nav, or the page end if sooner), and the page end.
   const measureRouteStops = useCallback(() => {
@@ -224,7 +239,7 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
 
   return (
     <>
-      <TopNavContent />
+      <TopNavContent onBrandClick={handleBrandClick} />
 
       <HomeHud
         districts={HUD_DISTRICTS}
