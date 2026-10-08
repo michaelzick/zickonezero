@@ -1,6 +1,7 @@
 /**
- * The homepage minimap: a top-down street grid, the route north through the
- * three districts, and where the player stands on it for a scroll position.
+ * The homepage minimap: a top-down street grid, the route south (down the map,
+ * the way the page scrolls) through the three districts, and where the player
+ * stands on it for a scroll position.
  *
  * Coordinates are the map's own CSS pixels (the map renders at 1:1), so the
  * HTML pins and player line up with the SVG streets. Everything is fixed or
@@ -14,29 +15,29 @@ export const MINIMAP_HEIGHT = 144;
 
 /** Street centerlines: avenues run north-south at these x, streets east-west at these y. */
 const AVENUES = [8, 36, 64, 92, 120, 148, 176, 204];
-const STREETS = [20, 56, 92, 128];
+const STREETS = [16, 52, 88, 124];
 const STREET_HALF_WIDTH = 3;
 
 /** Grid cells (avenue gap, street gap) drawn as parks instead of buildings. */
-const PARK_CELLS = new Set(['7:1', '6:4', '1:0', '7:3']);
+const PARK_CELLS = new Set(['7:3', '6:0', '1:4', '7:1']);
 
 /**
- * The route, walked north as the page scrolls: the alley at the bottom, the
- * Case Studies, Product Engineering, and Web Development districts, then the
- * end of the city at the top.
+ * The route, walked south as the page scrolls down: the alley at the top, the
+ * Case Studies, Product Engineering, and Web Development districts in that
+ * order, then the end of the city at the bottom.
  */
 export const MINIMAP_ROUTE: readonly MapPoint[] = [
-  { x: 36, y: 136 },
-  { x: 36, y: 108 },
-  { x: 36, y: 92 },
-  { x: 64, y: 92 },
-  { x: 64, y: 72 },
-  { x: 64, y: 56 },
-  { x: 36, y: 56 },
+  { x: 36, y: 8 },
   { x: 36, y: 36 },
-  { x: 36, y: 20 },
-  { x: 120, y: 20 },
-  { x: 120, y: 8 },
+  { x: 36, y: 52 },
+  { x: 64, y: 52 },
+  { x: 64, y: 72 },
+  { x: 64, y: 88 },
+  { x: 36, y: 88 },
+  { x: 36, y: 108 },
+  { x: 36, y: 124 },
+  { x: 120, y: 124 },
+  { x: 120, y: 136 },
 ];
 
 /** Route vertices of the stops: the start, the three districts, the end. */
@@ -44,17 +45,17 @@ export const MINIMAP_STOPS: readonly number[] = [0, 1, 4, 7, 10];
 
 /** The block beside each district's pin, which lights in the district's color. */
 export const MINIMAP_DISTRICT_BLOCKS: readonly string[] = [
-  'M39 95h22v30h-22z',
-  'M67 59h22v30h-22z',
-  'M39 23h22v30h-22z',
+  'M39 19h22v30h-22z',
+  'M67 55h22v30h-22z',
+  'M39 91h22v30h-22z',
 ];
 
 /** Side gigs dotted around the map: decoration. */
 export const MINIMAP_POIS: readonly (MapPoint & { kind: 'gig' | 'fixer' | 'shop' })[] = [
-  { x: 176, y: 110, kind: 'gig' },
-  { x: 160, y: 38, kind: 'fixer' },
+  { x: 176, y: 34, kind: 'gig' },
+  { x: 160, y: 106, kind: 'fixer' },
   { x: 198, y: 140, kind: 'shop' },
-  { x: 106, y: 128, kind: 'fixer' },
+  { x: 106, y: 16, kind: 'fixer' },
 ];
 
 const rectPath = (x: number, y: number, width: number, height: number) => (

@@ -75,9 +75,9 @@ above the footer, with a minimap HUD for fast travel.
 - The Next destination objective points to the next district in route order, then
   offers "Return to surface" at Web Development to scroll back to the hero.
 - The open city at the end of the route has one giant piece in the
-  foreground: at night a street hologram of a woman reaching toward the road
-  materializes as it scrolls into view, and by day a sightseeing airship glides
-  past with "I dream of the feature" on its LED band.
+  foreground: at night a carp streamer waves from a rooftop mast, with 夢 on
+  its crest and "I dream of the feature" along its side, and by day a
+  sightseeing airship drifts across the sky with the same line on its LED band.
 - At night a single window light on the skyline or the alley walls switches
   off or back on every few seconds, like people coming and going. It rests by
   day, in hidden tabs, and under reduced motion.
@@ -108,8 +108,8 @@ actual asset; provide descriptive alt text for custom social images.
 The default share card's "ZICKONEZERO / CREATIVE" matches the hero's heading.
 After changing the hero's type, regenerate it with
 `node scripts/render-share-card.js` (Playwright with Chromium must be
-resolvable, for example through `NODE_PATH`). It repaints only that text band,
-so the logo and name lines stay as they are. Social networks cache the image,
+resolvable, for example through `NODE_PATH`). It repaints only that text band
+and the cyan divider under it, so the logo and name lines stay as they are. Social networks cache the image,
 so re-scrape the page in their sharing debuggers after it changes.
 
 The About biography and secondary case-study panels are present in exported HTML.

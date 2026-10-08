@@ -192,16 +192,19 @@ export const HomeHudRoot = styled.nav`
     letter-spacing: 0.1em;
   }
 
-  /* The player: a cyan arrow the component walks along the route. */
+  /*
+   * The player: a cyan arrow the component walks down the route. Until it
+   * mounts, it waits at the start, facing south.
+   */
   .hud-player {
-    --heading: 0deg;
+    --heading: 180deg;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 2;
     width: 0;
     height: 0;
-    transform: translate3d(36px, 136px, 0);
+    transform: translate3d(36px, 8px, 0);
     pointer-events: none;
 
     &::before {

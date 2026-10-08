@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 /**
  * Redraw the wordmark on the default share card, public/img/og/zickonezero-card.png,
- * in the homepage hero card's type: "ZICKONEZERO" over "CREATIVE".
+ * in the homepage hero card's type: "ZICKONEZERO" over "CREATIVE", with the
+ * short divider under it in the logo's cyan.
  *
- * Only the wordmark band to the right of the logo changes. The script loads the
- * card, paints that band with the card's flat background, and sets the text
- * with the hero's rules scaled up, so the logo, divider, name, and disciplines
- * stay pixel-identical. Re-running it is safe: it repaints the same band.
+ * Only the wordmark band to the right of the logo and the divider change. The
+ * script loads the card, paints that band with the card's flat background,
+ * sets the text with the hero's rules scaled up, and repaints the divider, so
+ * the logo, name, and disciplines stay pixel-identical. Re-running it is safe:
+ * it repaints the same pixels.
  *
  * The rules mirror .hero-title, .brand-name, and .hero-creative in
  * styles/home.ts and .brand-one in styles/globals.scss (night colors), measured
@@ -37,6 +39,11 @@ const BACKGROUND = 'rgb(0, 2, 8)';
 // The band holding the wordmark: right of the logo (which ends at x 458) and
 // above the divider (which starts at y 355). The card is flat BACKGROUND here.
 const BAND = { left: 530, top: 180, width: WIDTH - 530, height: 170 };
+
+// The divider between the wordmark and the name, a crisp 120x3 rule, in the
+// cyan of the logo's Z and zero (public/img/brand/zickonezero-mark-v4.png).
+const DIVIDER = { left: 557, top: 355, width: 120, height: 3 };
+const LOGO_CYAN = '#15fcfd';
 
 // The hero title is 46.08px at 1440px wide. Scaled so the wordmark spans the
 // card's existing 560-1083px, it keeps the layout's balance.
@@ -73,6 +80,15 @@ const html = () => `<!doctype html>
     width: ${BAND.width}px;
     height: ${BAND.height}px;
     background: ${BACKGROUND};
+  }
+
+  .divider {
+    position: absolute;
+    left: ${DIVIDER.left}px;
+    top: ${DIVIDER.top}px;
+    width: ${DIVIDER.width}px;
+    height: ${DIVIDER.height}px;
+    background: ${LOGO_CYAN};
   }
 
   /* .hero-title */
@@ -114,6 +130,7 @@ const html = () => `<!doctype html>
 </head>
 <body>
   <div class="band"></div>
+  <div class="divider"></div>
   <h1 class="title"><span class="brand-name">ZICK<span class="brand-one">ONE</span>ZERO</span><span class="creative">Creative</span></h1>
 </body>
 </html>`;

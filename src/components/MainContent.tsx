@@ -281,7 +281,7 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
           </District>
         ))}
 
-        {/* Open air at the end of the route, with a hologram by night and an airship by day. */}
+        {/* Open air at the end of the route, with a carp streamer by night and an airship by day. */}
         <CityGapScene />
 
         {imgs && <FsLightbox

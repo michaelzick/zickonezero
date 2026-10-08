@@ -4,42 +4,38 @@ import { THEME } from './theme';
 
 /*
  * The end of the homepage route (src/components/home/CityGapScene.tsx): open
- * air before the footer with one giant piece in the foreground, a street
- * hologram at night (StreetHologram) and a sightseeing airship by day
- * (Airship). Both are in the static HTML and the theme picks one, so the page
- * never flashes the wrong one.
+ * air before the footer with one giant piece in the foreground, a carp
+ * streamer at night (KoiStreamer) and a sightseeing airship by day (Airship).
+ * Both are in the static HTML and the theme picks one, so the page never
+ * flashes the wrong one.
  *
- * useScrollProgress writes --p (0 to 1) as the stretch scrolls into view, and
- * useSceneMotion writes data-scene-motion. Only transform and opacity animate,
- * on their own layers: the art itself is static, so its glow and gradients are
- * rasterized once. Reduced motion leaves --p unset, so the fallbacks below are
- * the still frame. Only @media and keyframes here; see styles/city.ts.
+ * useSceneMotion writes data-scene-motion. Only transform animates, on its own
+ * layers, and the art inside them is static, so it is rasterized once. The
+ * streamers wave as chains of links: each rotates about its front joint, on
+ * the centerline, and nested links add up toward the tail. A link's static
+ * bend is the rotate property and its swing is transform, so the still frame
+ * keeps the fabric's droop. Only @media and keyframes here; see styles/city.ts.
  */
 
-const sway = keyframes`
-  from { transform: rotate(-0.6deg); }
-  to { transform: rotate(0.6deg); }
+// Each link swings this many degrees either way of its bend.
+const swing = (degrees: number) => keyframes`
+  from { transform: rotate(${-degrees}deg); }
+  to { transform: rotate(${degrees}deg); }
 `;
 
-// A soft band of light passes down through the projection.
-const sweep = keyframes`
-  from { transform: translate3d(0, -100%, 0); }
-  to { transform: translate3d(0, 840%, 0); }
+const swing2 = swing(2);
+const swing3 = swing(3);
+const swing4 = swing(4);
+const swing5 = swing(5);
+const swing7 = swing(7);
+
+// The airship crosses the whole sky, then comes round again off screen.
+const drift = keyframes`
+  from { transform: translate3d(100vw, 0, 0); }
+  to { transform: translate3d(-100%, 0, 0); }
 `;
 
-// Hidden most of the loop; a slice of the face jumps sideways twice for about
-// a fifth of a second. It never dims the figure.
-const glitch = keyframes`
-  0% { opacity: 0; transform: translate3d(0, 0, 0); }
-  90% { opacity: 1; transform: translate3d(-3%, 0, 0); }
-  91% { opacity: 1; transform: translate3d(2%, 0, 0); }
-  92% { opacity: 0; transform: translate3d(0, 0, 0); }
-`;
-
-const breathe = keyframes`
-  from { opacity: 0.75; }
-  to { opacity: 1; }
-`;
+const DRIFT_SECONDS = 64;
 
 const bob = keyframes`
   from { transform: translate3d(0, -1.5%, 0) rotate(-0.5deg); }
@@ -74,175 +70,185 @@ export const CityGapRoot = styled.div`
     display: block;
   }
 
-  /* Ambient motion runs only while the stretch is on screen. */
-  .holo-sway,
-  .holo-glitch,
-  .holo-sweep,
-  .holo-beam,
-  .holo-emitter,
-  .ship-bob,
-  .ship-ticker,
-  .ship-prop i {
-    animation-play-state: paused;
+  /*
+   * Night: the streamers fly to the right of a mast on a rooftop. Lengths are
+   * in units of the carp's 1000-unit drawing (--ku), so the rig scales as one.
+   * --koi-y is the carp's mouth, low enough that the ball atop the mast (315
+   * units up) clears the fixed nav.
+   */
+  .koi {
+    --koi-len: min(max(540px, 58vw), 1120px, 110vh);
+    --ku: calc(var(--koi-len) / 1000);
+    --mast-x: 16%;
+    --koi-y: max(45%, calc(92px + 315 * var(--ku)));
+    --droop: 5deg;
+    --sag: 1deg;
+    --streamer-droop: 0deg;
+    --streamer-sag: 0deg;
+    --roof-w: 40%;
+    position: absolute;
+    inset: 0;
   }
 
-  &[data-scene-motion='running'] .holo-sway,
-  &[data-scene-motion='running'] .holo-glitch,
-  &[data-scene-motion='running'] .holo-sweep,
-  &[data-scene-motion='running'] .holo-beam,
-  &[data-scene-motion='running'] .holo-emitter,
-  &[data-scene-motion='running'] .ship-bob,
-  &[data-scene-motion='running'] .ship-ticker,
-  &[data-scene-motion='running'] .ship-prop i {
-    animation-play-state: running;
+  .koi-mast {
+    position: absolute;
+    top: calc(var(--koi-y) - 300 * var(--ku));
+    bottom: 0;
+    left: calc(var(--mast-x) - 3.5 * var(--ku));
+    width: calc(7 * var(--ku));
+    min-width: 3px;
+    background: linear-gradient(90deg, #03070c, #16232f 40%, #5ff4ff 58%, #0c1822 76%, #03070c);
+
+    /* A steady red light under the carp. */
+    &::after {
+      content: '';
+      position: absolute;
+      top: calc(418 * var(--ku));
+      left: 50%;
+      width: max(5px, calc(12 * var(--ku)));
+      height: max(5px, calc(12 * var(--ku)));
+      border-radius: 50%;
+      background: #ff4f45;
+      box-shadow: 0 0 calc(14 * var(--ku)) 2px rgba(255, 79, 69, 0.6);
+      transform: translate(-50%, -50%);
+    }
   }
 
-  &[data-scene-motion='still'] .holo-sway,
-  &[data-scene-motion='still'] .holo-glitch,
-  &[data-scene-motion='still'] .holo-sweep,
-  &[data-scene-motion='still'] .holo-beam,
-  &[data-scene-motion='still'] .holo-emitter,
-  &[data-scene-motion='still'] .ship-bob,
-  &[data-scene-motion='still'] .ship-ticker,
-  &[data-scene-motion='still'] .ship-prop i {
-    animation: none;
+  .koi-ball {
+    position: absolute;
+    top: calc(var(--koi-y) - 315 * var(--ku));
+    left: calc(var(--mast-x) - 9 * var(--ku));
+    width: calc(18 * var(--ku));
+    height: calc(18 * var(--ku));
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff3c4, #ffcf6a 42%, #a26a14);
   }
 
-  &[data-scene-motion='still'] .holo-sweep {
-    display: none;
-  }
-
-  /* Night: the hologram stands on the street, a little left of center. */
-  .holo {
-    --holo-h: calc(var(--gap-h) * 0.9);
-    --holo-w: calc(var(--holo-h) * 0.4667);
+  /* The rooftop the mast stands on; its footing is 40% of the way across. */
+  .koi-roof {
     position: absolute;
     bottom: 0;
-    left: calc(42% - var(--holo-w) * 0.57);
-    width: var(--holo-w);
-    height: var(--holo-h);
-    /* It materializes and rises into place as the stretch scrolls in. */
-    opacity: calc(var(--p, 1) * 1.5 - 0.3);
-    transform: translate3d(0, calc((1 - var(--p, 1)) * 6%), 0);
-    will-change: transform, opacity;
+    left: calc(var(--mast-x) - var(--roof-w) * 0.4);
+    width: var(--roof-w);
+
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
   }
 
-  .holo-sway {
+  .koi-roof-art { fill: var(--bldg-near); }
+  .koi-roof-rim { fill: none; stroke: rgba(47, 243, 255, 0.45); stroke-width: 1.5; }
+  .koi-roof-window { fill: #0c1824; }
+  .koi-roof-window.is-lit { fill: var(--window-lit); opacity: 0.85; }
+
+  .koi-defs {
     position: absolute;
-    inset: 0;
-    transform-origin: 57% 98%;
-    animation: ${sway} 9s ease-in-out infinite alternate;
-    will-change: transform;
-  }
-
-  .holo-art,
-  .holo-glitch {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-  }
-
-  .holo-glitch {
-    clip-path: inset(8.5% 0 86% 0);
-    opacity: 0;
-    animation: ${glitch} 9.4s steps(1, end) infinite;
-    will-change: transform, opacity;
-  }
-
-  /* The sweep is clipped to the figure's box. */
-  .holo-sweep-track {
-    position: absolute;
-    inset: 0;
+    width: 0;
+    height: 0;
     overflow: hidden;
   }
 
-  .holo-sweep {
+  /* Each chain hangs from its mouth hoop at the mast. */
+  .koi-chain {
+    position: absolute;
+    left: var(--mast-x);
+    width: 0;
+  }
+
+  .koi-fish {
+    --u: var(--ku);
+    --beat: 1.9s;
+    --lag: -0.26s;
+    top: calc(var(--koi-y) - 150 * var(--u));
+    height: calc(300 * var(--u));
+  }
+
+  .koi-streamer {
+    --u: calc(var(--ku) * 0.82);
+    --droop: var(--streamer-droop);
+    --sag: var(--streamer-sag);
+    --beat: 1.15s;
+    --lag: -0.16s;
+    top: calc(var(--koi-y) - 178 * var(--ku) - 75 * var(--u));
+    height: calc(150 * var(--u));
+  }
+
+  /*
+   * A link, in drawing units: --x is how far its joint is from the last one,
+   * and --w is its window, which ends in a notch just past the next joint
+   * (--notch across). Each starts a beat later than the last, so the wave
+   * runs from the mouth to the tail.
+   */
+  .koi-link {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 11%;
-    /* Centered on the figure and faded at its sides, so it reads as a scan. */
-    background: radial-gradient(
-      ellipse 34% 50% at 57% 50%,
-      rgba(255, 210, 250, 0.18),
-      rgba(160, 240, 255, 0.08) 55%,
-      transparent
-    );
-    animation: ${sweep} 7s linear infinite;
+    left: calc(var(--x) * var(--u));
+    width: calc(var(--w) * var(--u));
+    height: 100%;
+    transform-origin: 0 50%;
+    rotate: var(--sag);
+    animation: ${swing3} var(--beat) ease-in-out calc(var(--i) * var(--lag)) infinite alternate;
     will-change: transform;
+
+    /*
+     * The notch. Its left side runs outside the box: a clipped edge across the
+     * fabric lets the colors under each fill show through as a hairline.
+     */
+    > svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      clip-path: polygon(-4px 0, 100% 0, var(--notch) 50%, 100% 100%, -4px 100%);
+    }
   }
 
-  .holo-beam {
+  /* The head carries the chain's droop and rides the slow gusts. */
+  .koi-link[data-swing='gust'] {
+    rotate: var(--droop);
+    animation: ${swing2} 4.6s ease-in-out infinite alternate;
+  }
+
+  .koi-link[data-swing='2'] { animation-name: ${swing2}; }
+  .koi-link[data-swing='4'] { animation-name: ${swing4}; }
+  .koi-link[data-swing='5'] { animation-name: ${swing5}; }
+  .koi-link[data-swing='7'] { animation-name: ${swing7}; }
+
+  /* The arrow wheel at the top, foreshortened, spinning in the wind. */
+  .koi-wheel {
     position: absolute;
-    left: 14%;
-    right: 0;
-    bottom: 0;
-    height: 52%;
-    background: linear-gradient(to top, rgba(79, 227, 255, 0.2), rgba(180, 108, 255, 0.05) 65%, transparent);
-    clip-path: polygon(48% 100%, 66% 100%, 100% 0, 0 0);
-    animation: ${breathe} 5s ease-in-out infinite alternate;
+    top: calc(var(--koi-y) - 296 * var(--ku));
+    left: calc(var(--mast-x) - 38 * var(--ku));
+    width: calc(76 * var(--ku));
+    height: calc(76 * var(--ku));
+    transform: scaleX(0.5);
   }
 
-  .holo-emitter {
+  .koi-wheel-spin {
     position: absolute;
-    bottom: 0;
-    left: 30%;
-    width: 54%;
-    height: 4%;
-    border-radius: 50%;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(190, 252, 255, 0.8),
-      rgba(47, 243, 255, 0.28) 45%,
-      transparent 70%
-    );
-    animation: ${breathe} 5s ease-in-out -2.5s infinite alternate;
+    inset: 0;
+    animation: ${spin} 2.4s linear infinite;
+    will-change: transform;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
   }
 
-  /* HUD copy in the projection, under the reaching hand and clear of the coat. */
-  .holo-caption {
-    position: absolute;
-    top: 50.5%;
-    right: 57%;
-    margin: 0;
-    padding-left: 10px;
-    border-left: 2px solid #ff5fdc;
-    color: #ffe0f8;
-    font-family: ${THEME.fonts.mono};
-    font-size: clamp(0.62rem, calc(var(--holo-h) * 0.0135), 0.85rem);
-    letter-spacing: 0.22em;
-    text-shadow: 0 0 10px rgba(255, 95, 220, 0.8);
-    text-transform: uppercase;
-    white-space: nowrap;
-    opacity: 0.85;
-  }
-
-  .holo-kana {
-    position: absolute;
-    top: 13%;
-    right: -26%;
-    margin: 0;
-    color: rgba(255, 120, 230, 0.78);
-    font-size: calc(var(--holo-h) * 0.05);
-    font-weight: 700;
-    letter-spacing: 0.24em;
-    text-shadow: 0 0 calc(14px * var(--neon-glow-strength, 1)) rgba(255, 43, 214, 0.7);
-    writing-mode: vertical-rl;
-  }
-
-  /* Day: the airship glides in nose first as the stretch scrolls into view. */
+  /* Day: the airship drifts across the sky on its own, then comes round again. */
   .ship {
     --ship-w: min(1100px, 80vw);
     position: absolute;
-    top: 16%;
-    left: 50%;
+    left: 0;
     width: var(--ship-w);
     height: calc(var(--ship-w) * 0.3167);
-    /* From the right edge to just left of center; the still frame is centered. */
-    transform: translate3d(calc(-50% + (0.8 - var(--p, 0.8)) * 30vw), 0, 0);
+    top: max(16%, 92px);
+    /* The still frame is centered; the first moving one is a little right of center. */
+    transform: translate3d(calc(50vw - 50%), 0, 0);
+    animation: ${drift} ${DRIFT_SECONDS}s linear ${-DRIFT_SECONDS * 0.45}s infinite;
     will-change: transform;
   }
 
@@ -345,25 +351,58 @@ export const CityGapRoot = styled.div`
     left: 79.5%;
   }
 
+  /*
+   * Phones and portrait tablets: the carp hangs lower, so it stays giant in a
+   * tall frame, and its tail stays above the HUD in the corner.
+   */
+  @media (orientation: portrait) {
+    .koi {
+      --koi-len: min(100vw, 62vh);
+      --mast-x: 8%;
+      --koi-y: max(34%, calc(150px + 315 * var(--ku)));
+      --droop: 26deg;
+      --sag: 2deg;
+      --streamer-droop: 14deg;
+      --streamer-sag: 1deg;
+      --roof-w: 64%;
+    }
+  }
+
+  /*
+   * Short landscape screens, such as phones on their side: the rig shrinks
+   * to fit between the fixed nav and the HUD's bottom bar. It stands 686
+   * units tall, from the ball atop the mast to the carp's lowest point.
+   */
+  @media (orientation: landscape) and (max-height: 560px) {
+    .koi {
+      --koi-len: min(max(540px, 58vw), calc((100vh - 158px) * 1000 / 686));
+      --koi-y: calc(86px + 315 * var(--ku));
+    }
+  }
+
   @media (max-width: ${THEME.breakpoints.phone}) {
-    .holo {
-      --holo-h: calc(var(--gap-h) * 0.84);
-      left: calc(50% - var(--holo-w) * 0.57);
-    }
-
-    .holo-caption {
-      width: 10em;
-      white-space: normal;
-    }
-
-    .holo-kana {
-      right: -12%;
-    }
-
     .ship {
       --ship-w: 92vw;
-      top: 22%;
-      transform: translate3d(calc(-50% + (0.85 - var(--p, 0.85)) * 28vw), 0, 0);
+      top: max(22%, 150px);
     }
+  }
+
+  /* Ambient motion runs only while the stretch is on screen. */
+  &:not([data-scene-motion='running']) .koi-link,
+  &:not([data-scene-motion='running']) .koi-wheel-spin,
+  &:not([data-scene-motion='running']) .ship,
+  &:not([data-scene-motion='running']) .ship-bob,
+  &:not([data-scene-motion='running']) .ship-ticker,
+  &:not([data-scene-motion='running']) .ship-prop i {
+    animation-play-state: paused;
+  }
+
+  &[data-scene-motion='still'] .koi-link,
+  &[data-scene-motion='still'] .koi-wheel-spin,
+  &[data-scene-motion='still'] .ship,
+  &[data-scene-motion='still'] .ship-bob,
+  &[data-scene-motion='still'] .ship-ticker,
+  &[data-scene-motion='still'] .ship-prop i {
+    animation: none;
   }
 `;
