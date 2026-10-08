@@ -87,6 +87,24 @@ describe('Bar Four', () => {
     });
   });
 
+  describe('the street outside', () => {
+    it.each(['dark', 'light'])('keeps the city ambience quiet for the whole visit (%s)', async (theme) => {
+      window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+      const { unmount } = renderWithProviders(<BarFourContent />);
+
+      expect(holdAmbience).toHaveBeenCalledTimes(1);
+      expect(releaseAmbience).not.toHaveBeenCalled();
+
+      if (theme === 'dark') {
+        await screen.findByTestId('rack');
+      }
+      unmount();
+
+      expect(holdAmbience).toHaveBeenCalledTimes(1);
+      expect(releaseAmbience).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('opening hours', () => {
     it('puts the rack in the booth at night', async () => {
       renderWithProviders(<BarFourContent />);
@@ -148,9 +166,9 @@ describe('Bar Four', () => {
       jest.restoreAllMocks();
     });
 
-    it('takes the keyboard only while the visitor is in the rack, and quiets the city once', async () => {
+    it('takes the keyboard only while the visitor is in the rack, and tracks the first reach once', async () => {
       const user = userEvent.setup();
-      const { unmount } = render(
+      render(
         <>
           <button type='button'>Nav link</button>
           <RacklooseBooth />
@@ -159,11 +177,9 @@ describe('Bar Four', () => {
       const rack = screen.getByTestId('rack');
 
       expect(rack).toHaveAttribute('data-keys', 'false');
-      expect(holdAmbience).not.toHaveBeenCalled();
 
       await user.click(within(rack).getByRole('button', { name: 'Play all sequencers' }));
       expect(rack).toHaveAttribute('data-keys', 'true');
-      expect(holdAmbience).toHaveBeenCalledTimes(1);
       expect(track).toHaveBeenCalledWith('bar_four_rack_engaged', { page_path: '/' });
 
       await user.click(screen.getByRole('button', { name: 'Nav link' }));
@@ -171,14 +187,13 @@ describe('Bar Four', () => {
 
       await user.tab();
       expect(rack).toHaveAttribute('data-keys', 'true');
-      expect(holdAmbience).toHaveBeenCalledTimes(1);
 
       act(() => screen.getByRole('button', { name: 'Nav link' }).focus());
       expect(rack).toHaveAttribute('data-keys', 'false');
 
-      expect(releaseAmbience).not.toHaveBeenCalled();
-      unmount();
-      expect(releaseAmbience).toHaveBeenCalledTimes(1);
+      expect(track.mock.calls.filter(([name]) => name === 'bar_four_rack_engaged')).toHaveLength(1);
+      // The room, not the rack, keeps the city quiet.
+      expect(holdAmbience).not.toHaveBeenCalled();
     });
   });
 });

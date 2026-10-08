@@ -3,7 +3,6 @@ import { RacklooseApp, preset, serializePatch } from 'rackloose';
 import 'rackloose/style.css';
 
 import { trackEvent } from '../../lib/analytics';
-import { holdAmbience, releaseAmbience } from '../../lib/city/sound';
 
 /** Origin-local namespace for the booth's autosave and My Presets. */
 export const RACK_STORAGE_KEY = 'zickonezero.rackloose.patch.v1';
@@ -32,8 +31,8 @@ const seedStarterPatch = () => {
  * Rackloose listens for note keys and Space on the whole window, so the
  * computer keyboard belongs to the rack only while focus, or the last press,
  * is inside it; the nav, toggles, and footer keep their keys. The first time
- * the visitor reaches for the rack, the city's ambient sound steps aside, and
- * it returns when they leave the club.
+ * the visitor reaches for the rack is tracked. The city's ambient sound is
+ * already quiet in here (see BarFourContent).
  */
 const RacklooseBooth = () => {
   const rackRef = useRef<HTMLDivElement>(null);
@@ -65,11 +64,8 @@ const RacklooseBooth = () => {
     }
 
     engaged.current = true;
-    holdAmbience();
     trackEvent('bar_four_rack_engaged', { page_path: window.location.pathname });
   }, [active]);
-
-  useEffect(() => () => releaseAmbience(), []);
 
   return (
     <div ref={rackRef} className='booth-rack' data-keys={active ? 'rack' : 'page'}>

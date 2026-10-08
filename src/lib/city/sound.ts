@@ -38,7 +38,7 @@ let ambience: Ambience | null = null;
 let ambienceRequest: Promise<Ambience | null> | null = null;
 let suspendTimer: ReturnType<typeof setTimeout> | undefined;
 let armed = false;
-// Another instrument (Bar Four's house rack) has the floor; see holdAmbience.
+// Bar Four keeps the street's sounds outside; see holdAmbience.
 let held = false;
 
 const getAudioContextClass = (): AudioContextClass | undefined => (
@@ -192,8 +192,9 @@ function play() {
   }
 
   loadAmbience(audio).then((loaded) => {
-    // The visitor may have muted again while the graph loaded.
-    if (loaded && readState().enabled) {
+    // The visitor may have muted again, or stepped into Bar Four, while the
+    // graph loaded.
+    if (loaded && readState().enabled && !held) {
       loaded.start();
     }
     syncPlaying();
@@ -249,9 +250,9 @@ export const setSoundEnabled = (enabled: boolean): void => {
 };
 
 /**
- * Quiets the city while another instrument plays, such as Bar Four's house
- * rack, without changing the visitor's stored choice. Gestures stop resuming
- * the ambience until releaseAmbience.
+ * Quiets the city where its street sounds don't belong, such as inside Bar
+ * Four with its house rack, without changing the visitor's stored choice.
+ * Gestures stop resuming the ambience until releaseAmbience.
  */
 export const holdAmbience = (): void => {
   if (held) {

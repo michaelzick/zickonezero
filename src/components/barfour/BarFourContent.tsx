@@ -1,10 +1,11 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { Wrapper } from '../../../styles';
 import { ClubRoot, ClubScene } from '../../../styles/barFour';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import useSceneMotion from '../../hooks/useSceneMotion';
 import { generateRecordWall, RECORD_TONES } from '../../lib/city/recordWall';
+import { holdAmbience, releaseAmbience } from '../../lib/city/sound';
 import { getMobileMenuState, showMobileMenu } from '../../showMobileMenuSlice';
 import FooterContent from '../FooterContent';
 import TopNavContent from '../TopNavContent';
@@ -68,7 +69,9 @@ const CABLE_ART = CABLES.map(({ from, to, sag, signal }) => ({
  * Bar Four, reached from the sign in the homepage alley: a basement listening
  * bar, record exchange, and club, wired like a modular rack, with the house
  * Rackloose rack open in the booth after dark. The room is decorative; the
- * heading, copy, links, and the rack are real.
+ * heading, copy, links, and the rack are real. The street's day and night
+ * sounds stay outside: the city ambience is held for the whole visit, by day
+ * or night, and comes back on the way out if the visitor has it on.
  */
 const BarFourContent = () => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
@@ -76,6 +79,11 @@ const BarFourContent = () => {
   const sceneRef = useRef<HTMLElement | null>(null);
   // The light beams sweep only while the room is on screen.
   useSceneMotion(sceneRef);
+
+  useEffect(() => {
+    holdAmbience();
+    return releaseAmbience;
+  }, []);
 
   return (
     <>

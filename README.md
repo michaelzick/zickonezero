@@ -78,6 +78,10 @@ above the footer, with a minimap HUD for fast travel.
   choice is remembered.
 - Sound stays off until a visitor turns it on. It is synthesized in the browser
   with Web Audio, so there are no audio files, and the choice is remembered.
+  Day brings passing traffic, the odd horn, and birdsong; night thins to a
+  couple of voices down the street, wind, crickets, and the occasional far-off
+  siren, helicopter, or train. Bar Four keeps the street outside, so none of it
+  plays in the club.
 - All art is original. The scenery is generated from seeded SVG, CSS, and canvas
   code, and the fonts are self-hosted. Keep new signage and copy original too.
 - Everything that moves has a still state under reduced motion. To preview it,
