@@ -2,10 +2,9 @@ import { render } from '@testing-library/react';
 
 import CityGapScene from '../src/components/home/CityGapScene';
 import {
-  BANNER_JOINTS,
-  BANNER_WIDTH,
   KOI_JOINTS,
   KOI_WIDTH,
+  LANTERN_COUNT,
 } from '../src/lib/city/koi';
 import { REDUCED_MOTION_QUERY, mockMatchMedia, restoreMatchMedia } from '../src/test/matchMedia';
 
@@ -28,6 +27,11 @@ describe('end-of-route city scene', () => {
 
     expect(scene).toHaveAttribute('aria-hidden', 'true');
     expect(scene.querySelector('.gap-night .koi')).toBeInTheDocument();
+    expect(scene.querySelectorAll('.gap-night .koi-lantern')).toHaveLength(LANTERN_COUNT);
+    expect(scene.querySelectorAll('.gap-night .koi-cord')).toHaveLength(2);
+    expect(scene.querySelector('.gap-night .koi-roof svg')).toBeInTheDocument();
+    expect(scene.querySelector('.gap-night .koi-midrise svg')).toBeInTheDocument();
+    expect(scene.querySelector('.gap-night .koi-tower svg')).toBeInTheDocument();
     expect(scene.querySelector('.gap-day .ship')).toBeInTheDocument();
     expect(scene.querySelectorAll('.gap-day .cloud').length).toBeGreaterThanOrEqual(3);
     expect(scene.querySelectorAll('.gap-day .drone .drone-parcel').length).toBeGreaterThanOrEqual(3);
@@ -40,6 +44,45 @@ describe('end-of-route city scene', () => {
     });
   });
 
+  it('hangs the lanterns on the string below the carp, behind it, with nothing written on them', () => {
+    const { container } = render(<CityGapScene />);
+    const koi = container.querySelector('.koi') as HTMLElement;
+    const lanterns = koi.querySelector('.koi-lanterns') as HTMLElement;
+    const fish = koi.querySelector('.koi-fish') as HTMLElement;
+
+    // Drawn before the carp, so the carp flies in front of the string.
+    expect(lanterns.compareDocumentPosition(fish) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(lanterns.textContent).toBe('');
+
+    const lit = [...lanterns.querySelectorAll('.koi-lantern')];
+    lit.forEach((lantern, index) => {
+      expect(lantern.querySelector('.koi-lantern-glow')).not.toBeNull();
+      expect(lantern.querySelector('use')).toHaveAttribute('href', '#gap-koi-lantern-art');
+      if (index > 0) {
+        const before = parseFloat((lit[index - 1] as HTMLElement).style.getPropertyValue('--lx'));
+        expect(parseFloat((lantern as HTMLElement).style.getPropertyValue('--lx'))).toBeGreaterThan(before);
+      }
+    });
+    expect(koi.querySelector('#gap-koi-lantern-art text')).toBeNull();
+  });
+
+  it('flies two police drones, one each way, behind the carp, with a red and a blue light each', () => {
+    const { container } = render(<CityGapScene />);
+    const night = container.querySelector('.gap-night') as HTMLElement;
+    const drones = [...night.querySelectorAll('.police-drone')];
+
+    expect(drones.map((drone) => drone.getAttribute('data-heading')).sort()).toEqual(['east', 'west']);
+    drones.forEach((drone) => {
+      expect(drone.querySelectorAll('.police-siren.is-red')).toHaveLength(1);
+      expect(drone.querySelectorAll('.police-siren.is-blue')).toHaveLength(1);
+      expect(drone.querySelector('.police-beam')).not.toBeNull();
+      expect(drone.textContent).toBe('');
+      // Behind the carp and its rig, which come later in the scene.
+      expect(drone.compareDocumentPosition(night.querySelector('.koi') as Element) & Node.DOCUMENT_POSITION_FOLLOWING)
+        .toBeTruthy();
+    });
+  });
+
   it('writes every word on the carp or the airship, with nothing floating', () => {
     const { container } = render(<CityGapScene />);
     const koi = container.querySelector('.koi') as HTMLElement;
@@ -48,16 +91,10 @@ describe('end-of-route city scene', () => {
     expect(crest).toHaveAttribute('lang', 'ja');
     expect(koi).toHaveTextContent('I dream of the feature');
 
-    // The banner reads ZICKONEZERO CREATIVE, its ONE in hot pink on the cyan field.
-    const lettering = [...koi.querySelectorAll('.koi-defs text')].filter((text) => !text.hasAttribute('lang'));
-    const banner = lettering.filter((text) => text.closest('#gap-koi-banner-art'));
-    expect(banner.map((text) => text.textContent).join('')).toBe('ZICKONEZEROCREATIVE');
-    const one = banner.find((text) => text.textContent === 'ONE');
-    expect(one).toHaveAttribute('fill', '#ff2bd6');
-    banner.filter((text) => text !== one).forEach((text) => {
-      expect(text).not.toHaveAttribute('fill', '#ff2bd6');
-    });
-    expect(koi.querySelector('#gap-koi-banner-art path[fill="#15fcfd"]')).not.toBeNull();
+    // The carp carries the only lettering at night; nothing says ZICKONEZERO CREATIVE.
+    const lettering = [...koi.querySelectorAll('text')].map((text) => text.textContent);
+    expect(lettering).toEqual(['I dream of the feature', '夢']);
+    expect(container.querySelector('.gap-night')).not.toHaveTextContent(/ZICKONEZERO|CREATIVE/i);
 
     // The airship keeps its emblem and marquee.
     expect(container.querySelector('.ship-emblem-glyph')).toHaveAttribute('lang', 'ja');
@@ -71,36 +108,32 @@ describe('end-of-route city scene', () => {
     });
   });
 
-  it('chains the carp and the banner into links that each bend from the one before', () => {
+  it('chains the carp into links that each bend from the one before, at the top of the mast', () => {
     const { container } = render(<CityGapScene />);
 
-    ([
-      ['.koi-fish', KOI_JOINTS, KOI_WIDTH],
-      ['.koi-banner', BANNER_JOINTS, BANNER_WIDTH],
-    ] as const).forEach(([selector, joints, drawingWidth]) => {
-      const links = [...container.querySelectorAll(`${selector} .koi-link`)];
-      expect(links).toHaveLength(joints.length);
-      links.slice(1).forEach((link, index) => {
-        expect(link.parentElement).toBe(links[index]);
-      });
-
-      // Each link's window starts at its joint and runs past the next one.
-      links.forEach((link, index) => {
-        const [from, , width] = (link.querySelector(':scope > svg')?.getAttribute('viewBox') ?? '')
-          .split(' ')
-          .map(Number);
-        expect(from).toBe(joints[index]);
-        if (index < joints.length - 1) {
-          expect(from + width).toBeGreaterThan(joints[index + 1]);
-        } else {
-          expect(from + width).toBe(drawingWidth);
-        }
-      });
+    expect(container.querySelectorAll('.koi-chain')).toHaveLength(1);
+    const links = [...container.querySelectorAll('.koi-fish .koi-link')];
+    expect(links).toHaveLength(KOI_JOINTS.length);
+    links.slice(1).forEach((link, index) => {
+      expect(link.parentElement).toBe(links[index]);
     });
 
-    // Every link shows a drawing defined once in the scene.
+    // Each link's window starts at its joint and runs past the next one.
+    links.forEach((link, index) => {
+      const [from, , width] = (link.querySelector(':scope > svg')?.getAttribute('viewBox') ?? '')
+        .split(' ')
+        .map(Number);
+      expect(from).toBe(KOI_JOINTS[index]);
+      if (index < KOI_JOINTS.length - 1) {
+        expect(from + width).toBeGreaterThan(KOI_JOINTS[index + 1]);
+      } else {
+        expect(from + width).toBe(KOI_WIDTH);
+      }
+    });
+
+    // Every link and lantern shows a drawing defined once in the scene.
     const uses = container.querySelectorAll('use');
-    expect(uses).toHaveLength(KOI_JOINTS.length + BANNER_JOINTS.length);
+    expect(uses).toHaveLength(KOI_JOINTS.length + LANTERN_COUNT);
     uses.forEach((use) => {
       const id = use.getAttribute('href')?.replace(/^#/, '') ?? '';
       expect(container.querySelector(`[id="${id}"]`)).not.toBeNull();

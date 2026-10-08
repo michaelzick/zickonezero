@@ -1,16 +1,15 @@
 /**
- * Geometry for the carp streamer and the brand banner above it at the end of
- * the homepage route (src/components/home/KoiStreamer.tsx).
+ * Geometry for the carp streamer at the end of the homepage route and the
+ * lantern string below it (src/components/home/KoiStreamer.tsx).
  *
- * Each is drawn once and shown through a chain of links. A link is a
+ * The carp is drawn once and shown through a chain of links. A link is a
  * window onto one stretch of the drawing and bends at its front joint, on the
  * centerline. Its window runs past the next joint in a notch: a little on the
  * centerline, where the next link pivots, and out toward the edges as far as
  * that link's sharpest bend opens a wedge there. So the overlap fills the
  * wedge with the same fabric, and its edge stays under the next link. Nothing
  * that would show a break crosses a joint: the scales sit in columns between
- * them, the fins start clear of them, and the banner's joints fall in the
- * spaces around its words. Coordinates are rounded, so the
+ * them, and the fins start clear of them. Coordinates are rounded, so the
  * static HTML and the hydrated page draw the same fish.
  */
 
@@ -57,51 +56,6 @@ export const KOI_JOINTS = [0, 280, 370, 460, 548, 632, 712, 785, 850] as const;
  * each link further back is looser.
  */
 export const KOI_SWINGS = [2, 3, 3, 3, 3, 4, 4, 5, 7] as const;
-
-export const BANNER_WIDTH = 1026;
-export const BANNER_HEIGHT = 150;
-const BANNER_MID = BANNER_HEIGHT / 2;
-
-/** The banner's field, from its hoist at the mast to the tips of its swallowtail. */
-export const BANNER_TOP = 14;
-export const BANNER_BOTTOM = 136;
-export const BANNER_HOIST = 20;
-const BANNER_NOTCH = 966;
-
-export type BannerChunk = {
-  text: string;
-  /** Where the chunk's advance starts and how long it is, in drawing units. */
-  x: number;
-  width: number;
-  /** The baseline that centers the chunk's capitals on the banner. */
-  y: number;
-  size: number;
-  tone: 'ink' | 'one';
-};
-
-/**
- * ZICKONEZERO CREATIVE in Orbitron 900, set like the hero heading: the
- * wordmark at 64 units, -0.025em apart, in three chunks that meet so it reads
- * as one word, and CREATIVE at 28 units, 0.3em apart, a word space after it.
- * The widths are Orbitron's own advances, pinned with textLength so a
- * fallback face fills the same boxes.
- */
-export const BANNER_LETTERING: readonly BannerChunk[] = [
-  { text: 'ZICK', x: 58, width: 163.5, y: 98, size: 64, tone: 'ink' },
-  { text: 'ONE', x: 221.5, width: 150.5, y: 98, size: 64, tone: 'one' },
-  { text: 'ZERO', x: 372, width: 201, y: 98, size: 64, tone: 'ink' },
-  { text: 'CREATIVE', x: 609, width: 234.9, y: 85, size: 28, tone: 'ink' },
-];
-
-/**
- * The banner's joints: the wordmark rides the head link whole, then one joint
- * in the space before CREATIVE and shorter links down the tail, so no letter
- * ever kinks. The last holds the swallowtail's two tips.
- */
-export const BANNER_JOINTS = [0, 591, 866, 926, 976] as const;
-
-/** Stiff across the lettering, looser down the tail. */
-export const BANNER_SWINGS = [2, 2, 3, 4, 5] as const;
 
 // Half the carp's height along its length, from the mouth hoop to the root of
 // the tail fin.
@@ -261,13 +215,61 @@ export const koiScales = (): string => {
   return path;
 };
 
-/** The banner's field: a long cloth with a swallowtail, notched back to BANNER_NOTCH. */
-export const bannerField = (): string =>
-  `M${BANNER_HOIST} ${BANNER_TOP}H${BANNER_WIDTH}L${BANNER_NOTCH} ${BANNER_MID}`
-  + `L${BANNER_WIDTH} ${BANNER_BOTTOM}H${BANNER_HOIST}Z`;
+/** Paper lanterns on the string below the carp. */
+export const LANTERN_COUNT = 9;
 
-/** The hot-pink hems just inside the top and bottom edges, for drawing inside the field. */
-export const bannerHems = (): string => {
-  const inset = 10;
-  return `M${BANNER_HOIST} ${BANNER_TOP + inset}H${BANNER_WIDTH}M${BANNER_HOIST} ${BANNER_BOTTOM - inset}H${BANNER_WIDTH}`;
+export type CordShape = {
+  /** How far the post end sits below the mast end, in carp units. */
+  fall: number;
+  /** How far the cord sags below the straight line between its ends, halfway. */
+  sag: number;
 };
+
+/**
+ * On wide screens the cord falls toward the tower, under the carp's own
+ * droop, so the tail clears it even at its lowest; on tall ones the carp
+ * hangs steeply and the cord runs level, well below it.
+ */
+export const LANTERN_CORDS = {
+  wide: { fall: 205, sag: 60 },
+  tall: { fall: 0, sag: 130 },
+} as const satisfies Record<string, CordShape>;
+
+/** How far below the mast end the cord hangs a fraction t of the way across, in carp units. */
+export const cordDrop = ({ fall, sag }: CordShape, t: number): number =>
+  fall * t + 4 * sag * t * (1 - t);
+
+/** How deep the cord's box is, in carp units: down to the cord's lowest point. */
+export const cordDepth = (shape: CordShape): number => {
+  const lowest = (shape.fall + 4 * shape.sag) / (8 * shape.sag);
+  return round(cordDrop(shape, Math.min(Math.max(lowest, 0), 1)));
+};
+
+/**
+ * The cord in a box 100 wide and as deep as the cord, one unit a carp unit
+ * deep: a quadratic curve from the mast end to the post end, so x runs
+ * evenly along it.
+ */
+export const lanternCord = (shape: CordShape): { viewBox: string; path: string } => ({
+  viewBox: `0 0 100 ${cordDepth(shape)}`,
+  path: `M0 0Q50 ${round(2 * shape.sag + shape.fall / 2)} 100 ${shape.fall}`,
+});
+
+export type LanternPoint = {
+  /** Across the cord's box, as a percentage. */
+  x: number;
+  /** Where the lantern hangs from the cord, in carp units below the mast end, on wide and tall screens. */
+  wide: number;
+  tall: number;
+};
+
+/** Where each lantern hangs, evenly spaced along the cord, clear of both ends. */
+export const lanternString = (count: number = LANTERN_COUNT): LanternPoint[] =>
+  Array.from({ length: count }, (_, index) => {
+    const t = (index + 1) / (count + 1);
+    return {
+      x: round(t * 100),
+      wide: round(cordDrop(LANTERN_CORDS.wide, t)),
+      tall: round(cordDrop(LANTERN_CORDS.tall, t)),
+    };
+  });

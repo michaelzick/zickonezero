@@ -75,12 +75,13 @@ above the footer, with a minimap HUD for fast travel.
 - The Next destination objective points to the next district in route order, then
   offers "Return to surface" at Web Development to scroll back to the hero.
 - The open city at the end of the route has one giant piece in the
-  foreground: at night a carp streamer waves from a rooftop mast under a cyan
-  ZICKONEZERO CREATIVE banner, with 夢 on its crest and "I dream of the
-  feature" along its side, and by day a sightseeing airship drifts across the
-  sky with the same line on its LED band, among clouds and delivery drones,
-  over a row of rooftops where a window washer's gondola works its way down a
-  building.
+  foreground: at night a carp streamer waves from the top of a rooftop mast,
+  with 夢 on its crest and "I dream of the feature" along its side, over a
+  string of paper lanterns slung to a tower across the street, while police
+  drones with flashing lights patrol behind it; by day a sightseeing airship
+  drifts across the sky with the same line on its LED band, among clouds and
+  delivery drones, over a row of rooftops where a window washer's gondola
+  works its way down a building.
 - Night is the default. The nav's time-of-day toggle switches to day, and the
   choice is remembered.
 - Sound stays off until a visitor turns it on. It is synthesized in the browser

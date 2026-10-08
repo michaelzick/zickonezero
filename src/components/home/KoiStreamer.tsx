@@ -1,33 +1,25 @@
 /**
  * The night half of the end-of-route scene (CityGapScene): a giant carp
- * streamer flying from a mast on a rooftop, under a cyan ZICKONEZERO CREATIVE
- * banner and a spinning arrow wheel. The carp wears the airship's 夢 on its
- * crest and "I dream of the feature" on the sash along its side. Original
- * art, drawn once as static SVG. The carp and the banner are each a chain of
- * links, each a window onto its drawing (src/lib/city/koi.ts), that bend at
- * their joints, so the fabric waves on the compositor and nothing is
- * repainted (styles/cityGap.ts).
+ * streamer flying from the top of a mast on a rooftop, just under a spinning
+ * arrow wheel, with a string of paper lanterns slung below it from the mast to
+ * a tower across the street (NightRooftops). The carp wears the airship's 夢
+ * on its crest and "I dream of the feature" on the sash along its side.
+ * Original art, drawn once as static SVG. The carp is a chain of links, each a
+ * window onto its drawing (src/lib/city/koi.ts), that bend at their joints,
+ * so the fabric waves on the compositor and nothing is repainted
+ * (styles/cityGap.ts). The lanterns glow steadily and sway from their hooks.
  */
 
 import type { CSSProperties } from 'react';
 
 import { THEME } from '../../../styles/theme';
 import {
-  BANNER_BOTTOM,
-  BANNER_HEIGHT,
-  BANNER_HOIST,
-  BANNER_JOINTS,
-  BANNER_LETTERING,
-  BANNER_SWINGS,
-  BANNER_TOP,
-  BANNER_WIDTH,
   KOI_HEIGHT,
   KOI_JOINTS,
   KOI_SWINGS,
   KOI_WIDTH,
+  LANTERN_CORDS,
   SASH_HALF,
-  bannerField,
-  bannerHems,
   chainWindows,
   koiBack,
   koiBelly,
@@ -35,17 +27,24 @@ import {
   koiScales,
   koiSilhouette,
   koiTailFin,
+  lanternCord,
+  lanternString,
 } from '../../lib/city/koi';
 import type { ChainWindow } from '../../lib/city/koi';
+import NightRooftops from './NightRooftops';
 
 const KOI_ART = 'gap-koi-art';
-const BANNER_ART = 'gap-koi-banner-art';
+const LANTERN_ART = 'gap-koi-lantern-art';
 
 const id = (name: string) => `gap-koi-${name}`;
 const ref = (name: string) => `url(#${id(name)})`;
 
 const KOI_WINDOWS = chainWindows(KOI_JOINTS, KOI_SWINGS, KOI_WIDTH, KOI_HEIGHT);
-const BANNER_WINDOWS = chainWindows(BANNER_JOINTS, BANNER_SWINGS, BANNER_WIDTH, BANNER_HEIGHT);
+const LANTERNS = lanternString();
+const CORDS = [
+  ['wide', lanternCord(LANTERN_CORDS.wide)],
+  ['tall', lanternCord(LANTERN_CORDS.tall)],
+] as const;
 
 const SILHOUETTE = koiSilhouette();
 const TAIL_FIN = koiTailFin();
@@ -53,16 +52,10 @@ const BACK = koiBack();
 const BELLY = koiBelly();
 const RIM = koiRim();
 const SCALES = koiScales();
-const BANNER_FIELD = bannerField();
-const BANNER_HEMS = bannerHems();
 
 const OUTLINE = '#1b0611';
 const GOLD = '#ffcf6a';
 const FIN_STRIPE = '#4a1d9e';
-// The logo's cyan and hot pink (public/img/brand/zickonezero-mark-v4.png).
-const LOGO_CYAN = '#15fcfd';
-const HOT_PINK = '#ff2bd6';
-const BANNER_INK = '#0b0614';
 
 // The sash runs from under the crest to a swallowtail short of the tail.
 const SASH = `M230 ${150 - SASH_HALF}H836L818 150L836 ${150 + SASH_HALF}H230Z`;
@@ -148,49 +141,64 @@ const KoiArt = () => (
   </g>
 );
 
-const BannerArt = () => (
-  <g id={BANNER_ART}>
-    {/* The halyard from the mast to the hoist's top and bottom. */}
+// A paper lantern, 40x64: a hook, caps, the ribbed paper in the lantern's
+// own color (currentColor), lit from inside, and a tassel.
+const LANTERN_PAPER = 'M13 11C4 15 1 23 1 29.5C1 36 4 44 13 48H27C36 44 39 36 39 29.5C39 23 36 15 27 11Z';
+
+const LanternArt = () => (
+  <g id={LANTERN_ART}>
+    <path d='M20 0V7' stroke='#9fb3c4' strokeWidth='1.5' />
+    <path d={LANTERN_PAPER} fill='currentColor' />
+    <path d={LANTERN_PAPER} fill={ref('lantern-light')} />
     <path
-      d={`M0 ${BANNER_HEIGHT / 2}L${BANNER_HOIST} ${BANNER_TOP + 4}M0 ${BANNER_HEIGHT / 2}L${BANNER_HOIST} ${BANNER_BOTTOM - 4}`}
+      d='M3 19Q20 23 37 19M1.5 26Q20 30 38.5 26M1.5 33Q20 37 38.5 33M3 40Q20 44 37 40M20 11V48M13 11C8 21 8 38 13 48M27 11C32 21 32 38 27 48'
       fill='none'
-      stroke='#9fb3c4'
-      strokeWidth='2'
-      strokeLinecap='round'
+      stroke='#5a140a'
+      strokeWidth='1'
+      opacity='0.35'
     />
-    <path d={BANNER_FIELD} fill={LOGO_CYAN} />
-    <path d={BANNER_HEMS} fill='none' stroke={HOT_PINK} strokeWidth='4' clipPath={ref('banner-clip')} />
-    {/* Outlined like the carp, which also keeps the steps at the joints dark on dark. */}
-    <path d={BANNER_FIELD} fill='none' stroke={OUTLINE} strokeWidth='3' strokeLinejoin='round' />
-    <rect
-      x={BANNER_HOIST - 8}
-      y={BANNER_TOP - 2}
-      width='18'
-      height={BANNER_BOTTOM - BANNER_TOP + 4}
-      rx='4'
-      fill='#12081f'
-      stroke={GOLD}
-      strokeWidth='2.5'
-    />
-    {BANNER_LETTERING.map(({ text, x, y, width, size, tone }) => (
-      <text
-        key={text}
-        x={x}
-        y={y}
-        textLength={width}
-        lengthAdjust='spacing'
-        fontSize={size}
-        fontWeight='900'
-        fill={tone === 'one' ? HOT_PINK : BANNER_INK}
-        stroke={tone === 'one' ? OUTLINE : undefined}
-        strokeWidth={tone === 'one' ? 3 : undefined}
-        strokeLinejoin='round'
-        style={{ fontFamily: THEME.fonts.display, paintOrder: 'stroke' }}
-      >
-        {text}
-      </text>
-    ))}
+    <rect x='11' y='6' width='18' height='6' rx='2' fill={OUTLINE} />
+    <rect x='11' y='47' width='18' height='6' rx='2' fill={OUTLINE} />
+    <path d='M20 53V56M17 56H23L24.5 64H15.5Z' fill={GOLD} stroke={GOLD} strokeWidth='1' strokeLinejoin='round' />
   </g>
+);
+
+/**
+ * The lantern string, slung from the mast to the tower across the street: to
+ * a bracket on its face on wide screens, or a post on its roof on tall ones.
+ * The cord fills its box, in the shape the screen shows (styles/cityGap.ts);
+ * each lantern hangs where it meets the cord.
+ */
+const Lanterns = () => (
+  <div className='koi-lanterns'>
+    {CORDS.map(([shape, { viewBox, path }]) => (
+      <svg
+        key={shape}
+        className='koi-cord'
+        data-shape={shape}
+        viewBox={viewBox}
+        preserveAspectRatio='none'
+        data-art
+        focusable='false'
+      >
+        <path d={path} vectorEffect='non-scaling-stroke' />
+      </svg>
+    ))}
+    <span className='koi-lantern-tie' />
+    {LANTERNS.map(({ x, wide, tall }, index) => (
+      <span
+        key={x}
+        className='koi-lantern'
+        data-tone={index % 3 === 1 ? 'amber' : 'vermilion'}
+        style={{ '--li': index, '--lx': `${x}%`, '--ly-wide': wide, '--ly-tall': tall } as CSSProperties}
+      >
+        <span className='koi-lantern-glow' />
+        <svg viewBox='0 0 40 64' data-art focusable='false'>
+          <use href={`#${LANTERN_ART}`} />
+        </svg>
+      </span>
+    ))}
+  </div>
 );
 
 type ChainProps = {
@@ -252,6 +260,7 @@ const KoiStreamer = () => (
   <div className='koi'>
     <span className='koi-mast' />
     <span className='koi-ball' />
+    <NightRooftops />
     <Rooftop />
 
     {/* The drawings the links show; zero-size rather than hidden, so their gradients still paint. */}
@@ -266,21 +275,26 @@ const KoiStreamer = () => (
         <clipPath id={id('pectoral-clip')}>
           <path d={PECTORAL_FIN} />
         </clipPath>
-        <clipPath id={id('banner-clip')}>
-          <path d={BANNER_FIELD} />
-        </clipPath>
         <linearGradient id={id('fin')} x1='0' y1='0' x2='1' y2='0'>
           <stop offset='0' stopColor='#7b3cff' />
           <stop offset='1' stopColor='#39f2ff' />
         </linearGradient>
-        <BannerArt />
+        <radialGradient id={id('lantern-light')} cx='0.5' cy='0.55' r='0.55'>
+          <stop offset='0' stopColor='#fff4d6' stopOpacity='0.95' />
+          <stop offset='0.45' stopColor='#ffc46b' stopOpacity='0.5' />
+          <stop offset='1' stopColor='#ffc46b' stopOpacity='0' />
+        </radialGradient>
+        <radialGradient id={id('beacon')}>
+          <stop offset='0' stopColor='#ff4f45' stopOpacity='0.7' />
+          <stop offset='1' stopColor='#ff4f45' stopOpacity='0' />
+        </radialGradient>
+        <LanternArt />
         <KoiArt />
       </defs>
     </svg>
 
-    <div className='koi-chain koi-banner'>
-      <Chain art={BANNER_ART} height={BANNER_HEIGHT} windows={BANNER_WINDOWS} swings={BANNER_SWINGS} />
-    </div>
+    {/* Behind the carp, so its tail flies over the string. */}
+    <Lanterns />
     <div className='koi-chain koi-fish'>
       <Chain art={KOI_ART} height={KOI_HEIGHT} windows={KOI_WINDOWS} swings={KOI_SWINGS} />
     </div>

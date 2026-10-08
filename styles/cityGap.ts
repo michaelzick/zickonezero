@@ -1,22 +1,26 @@
 import styled, { keyframes } from 'styled-components';
 
+import { LANTERN_CORDS, cordDepth } from '../src/lib/city/koi';
 import { THEME } from './theme';
 
 /*
  * The end of the homepage route (src/components/home/CityGapScene.tsx): open
- * air before the footer with one giant piece in the foreground, a carp
- * streamer and the brand banner at night (KoiStreamer) and a sightseeing
- * airship by day (Airship), among clouds and delivery drones, over rooftops
- * where a window washer works (DayClouds, DayDrones, DayRooftops).
- * Both are in the static HTML and the theme picks one, so the page never
- * flashes the wrong one.
+ * air before the footer with one giant piece in the foreground. At night a
+ * carp streamer flies from the top of a mast over a string of paper lanterns,
+ * between rooftops, while police drones patrol behind it (KoiStreamer,
+ * NightRooftops, PoliceDrones). By day a sightseeing airship (Airship) drifts
+ * among clouds and delivery drones, over rooftops where a window washer works
+ * (DayClouds, DayDrones, DayRooftops). Both are in the static HTML and the
+ * theme picks one, so the page never flashes the wrong one.
  *
  * useSceneMotion writes data-scene-motion. Only transform animates, on its own
- * layers, and the art inside them is static, so it is rasterized once. The
- * carp and the banner wave as chains of links: each rotates about its front joint, on
- * the centerline, and nested links add up toward the tail. A link's static
- * bend is the rotate property and its swing is transform, so the still frame
- * keeps the fabric's droop. Only @media and keyframes here; see styles/city.ts.
+ * layers, and the art inside them is static, so it is rasterized once; the
+ * police lights are the one exception, small glows whose opacity alone
+ * animates. The carp waves as a chain of links: each rotates about its front
+ * joint, on the centerline, and nested links add up toward the tail. A link's
+ * static bend is the rotate property and its swing is transform, so the still
+ * frame keeps the fabric's droop. Only @media and keyframes here; see
+ * styles/city.ts.
  */
 
 // Each link swings this many degrees either way of its bend.
@@ -78,6 +82,29 @@ const sway = keyframes`
   to { transform: rotate(4deg); }
 `;
 
+// Police drones cross at a steady speed, one each way, then wait off screen
+// while the other takes its turn: they share one loop, half a loop apart.
+const PATROL_SECONDS = 30;
+
+const patrolEast = keyframes`
+  0% { transform: translate3d(calc(-100% - 2vw), 0, 0); }
+  30%, 100% { transform: translate3d(102vw, 0, 0); }
+`;
+
+const patrolWest = keyframes`
+  0% { transform: translate3d(102vw, 0, 0); }
+  30%, 100% { transform: translate3d(calc(-100% - 2vw), 0, 0); }
+`;
+
+// Each light on the bar flashes once a cycle, the blue half a cycle after the
+// red: under two flashes a second in all, and never fully dark.
+const FLASH_SECONDS = 1.2;
+
+const flash = keyframes`
+  0%, 18% { opacity: 1; }
+  30%, 100% { opacity: 0.08; }
+`;
+
 // The window washer's gondola works down the building and back, its cables
 // paying out with it: a cable is scaled to the gondola's drop plus the
 // height of its stirrups (14 of the rig's 256 units).
@@ -113,29 +140,49 @@ export const CityGapRoot = styled.div`
   }
 
   /*
-   * Night: the carp and the banner fly to the right of a mast on a rooftop. Lengths are
-   * in units of the carp's 1000-unit drawing (--ku), so the rig scales as one.
-   * --koi-y is the carp's mouth, low enough that the ball atop the mast (315
-   * units up) clears the fixed nav.
+   * Night: the carp flies to the right of a mast on a rooftop. Lengths are in
+   * units of the carp's 1000-unit drawing (--ku), so the rig scales as one.
+   * --rig-top is the ball atop the mast, clear of the fixed nav, and --koi-y
+   * the carp's mouth, 200 units below it, so its hoop hangs just under the
+   * arrow wheel. The lantern cord is tied to the mast --cord-drop units below
+   * the mouth and runs --cord-w across to the tower, ending --cord-fall units
+   * lower (LANTERN_CORDS in src/lib/city/koi.ts). On wide screens it spans
+   * the carp's own units, so the tail clears it the same at every width, and
+   * ends on a bracket on the tower's face; the tower rises --tower-rise units
+   * above it. The mid-rise is laid out in the same units, and its roof stands
+   * at --mid-roof down the scene but never closer than --mid-below units
+   * under the cord, so the lanterns always clear its gear.
    */
   .koi {
     --koi-len: min(max(540px, 58vw), 1120px, 110vh);
     --ku: calc(var(--koi-len) / 1000);
     --mast-x: 16%;
-    --koi-y: max(45%, calc(92px + 315 * var(--ku)));
+    --rig-top: max(calc(45% - 315 * var(--ku)), 92px);
+    --koi-y: calc(var(--rig-top) + 200 * var(--ku));
     --droop: 5deg;
     --sag: 1deg;
-    --banner-scale: 0.78;
-    --banner-droop: 0deg;
-    --banner-sag: 0deg;
     --roof-w: 40%;
+    --cord-drop: 220;
+    --cord-fall: ${LANTERN_CORDS.wide.fall};
+    --cord-depth: ${cordDepth(LANTERN_CORDS.wide)};
+    --cord-y: calc(var(--koi-y) + var(--cord-drop) * var(--ku));
+    --cord-w: min(calc(1120 * var(--ku)), 65%);
+    --lantern-h: calc(64 * var(--ku));
+    --tie-w: calc(24 * var(--ku));
+    --mid-at: 360;
+    --mid-span: 535;
+    --mid-roof: 82%;
+    --mid-below: 305;
+    --tower-x: calc(var(--mast-x) + var(--cord-w) + var(--tie-w));
+    --tower-w: calc(360 * var(--ku));
+    --tower-rise: 150;
     position: absolute;
     inset: 0;
   }
 
   .koi-mast {
     position: absolute;
-    top: calc(var(--koi-y) - 300 * var(--ku));
+    top: calc(var(--rig-top) + 15 * var(--ku));
     bottom: 0;
     left: calc(var(--mast-x) - 3.5 * var(--ku));
     width: calc(7 * var(--ku));
@@ -146,7 +193,7 @@ export const CityGapRoot = styled.div`
     &::after {
       content: '';
       position: absolute;
-      top: calc(418 * var(--ku));
+      top: calc(303 * var(--ku));
       left: 50%;
       width: max(5px, calc(12 * var(--ku)));
       height: max(5px, calc(12 * var(--ku)));
@@ -159,7 +206,7 @@ export const CityGapRoot = styled.div`
 
   .koi-ball {
     position: absolute;
-    top: calc(var(--koi-y) - 315 * var(--ku));
+    top: var(--rig-top);
     left: calc(var(--mast-x) - 9 * var(--ku));
     width: calc(18 * var(--ku));
     height: calc(18 * var(--ku));
@@ -186,6 +233,135 @@ export const CityGapRoot = styled.div`
   .koi-roof-window { fill: #0c1824; }
   .koi-roof-window.is-lit { fill: var(--window-lit); opacity: 0.85; }
 
+  /*
+   * A mid-rise beside the carp's rooftop, behind it, under the lanterns. Its
+   * gear stands 56/500 of its width above the roof, and its drawing runs on
+   * below the bottom of the scene.
+   */
+  .koi-midrise {
+    --mid-w: calc(var(--mid-span) * var(--ku));
+    position: absolute;
+    top: max(var(--mid-roof), calc(var(--cord-y) + var(--mid-below) * var(--ku)));
+    bottom: 0;
+    left: calc(var(--mast-x) + var(--mid-at) * var(--ku));
+    width: var(--mid-w);
+    margin-top: calc(var(--mid-w) * -0.112);
+    overflow: hidden;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .koi-midrise-art { fill: #08111b; }
+
+  /*
+   * The tower across the street, its roof under the lanterns' post. Its gear
+   * stands a fifth of its width above the roof (margins are a share of the
+   * width), and its drawing runs on below the bottom of the scene.
+   */
+  .koi-tower {
+    position: absolute;
+    top: calc(var(--cord-y) + (var(--cord-fall) - var(--tower-rise)) * var(--ku));
+    bottom: 0;
+    left: var(--tower-x);
+    width: var(--tower-w);
+    margin-top: calc(var(--tower-w) * -0.2);
+    overflow: hidden;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .koi-tower-art { fill: var(--bldg-near); }
+  .koi-tower-ledge { fill: #0c1622; }
+  .koi-tower-rim { fill: none; stroke: rgba(255, 43, 214, 0.4); stroke-width: 1.5; }
+  .koi-tower-sign { fill: #0d0716; stroke: rgba(255, 43, 214, 0.45); stroke-width: 2.5; }
+
+  /*
+   * The lantern string. Its box runs from the mast to the post, as deep as
+   * the cord hangs; the cord in this screen's shape fills it, and each
+   * lantern hangs from the cord by its hook (--lx across, and --ly-wide or
+   * --ly-tall carp units down) and sways from there.
+   */
+  .koi-lanterns {
+    position: absolute;
+    top: var(--cord-y);
+    left: var(--mast-x);
+    width: var(--cord-w);
+    height: calc(var(--cord-depth) * var(--ku));
+  }
+
+  .koi-cord {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+
+    &[data-shape='tall'] {
+      display: none;
+    }
+
+    path {
+      fill: none;
+      stroke: rgba(159, 179, 196, 0.75);
+      stroke-width: 1.5;
+    }
+  }
+
+  /* Where the cord is tied: a bracket out of the tower's face. */
+  .koi-lantern-tie {
+    position: absolute;
+    top: calc(var(--cord-fall) * var(--ku));
+    left: 100%;
+    width: var(--tie-w);
+    height: max(2px, calc(5 * var(--ku)));
+    border-radius: 2px 0 0 2px;
+    background: linear-gradient(#2a3a48, #03070c);
+    transform: translateY(-50%);
+  }
+
+  .koi-lantern {
+    --ly: var(--ly-wide);
+    position: absolute;
+    top: calc(var(--ly) * var(--ku));
+    left: var(--lx);
+    width: calc(var(--lantern-h) * 0.625);
+    height: var(--lantern-h);
+    margin-left: calc(var(--lantern-h) * -0.3125);
+    color: #ec4a2c;
+    transform-origin: 50% 0;
+    animation: ${swing3} 3.4s ease-in-out calc(var(--li) * -0.55s) infinite alternate;
+    will-change: transform;
+
+    svg {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .koi-lantern[data-tone='amber'] { color: #f59a2a; }
+
+  /* A soft, steady glow around the paper. */
+  .koi-lantern-glow {
+    position: absolute;
+    top: 46%;
+    left: 50%;
+    width: 260%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(255, 138, 64, 0.34), rgba(255, 120, 50, 0.1) 55%, transparent);
+    transform: translate(-50%, -50%);
+  }
+
   .koi-defs {
     position: absolute;
     width: 0;
@@ -206,17 +382,6 @@ export const CityGapRoot = styled.div`
     --lag: -0.26s;
     top: calc(var(--koi-y) - 150 * var(--u));
     height: calc(300 * var(--u));
-  }
-
-  /* The banner flies above the carp, a little stiffer, its lettering readable. */
-  .koi-banner {
-    --u: calc(var(--ku) * var(--banner-scale));
-    --droop: var(--banner-droop);
-    --sag: var(--banner-sag);
-    --beat: 1.3s;
-    --lag: -0.18s;
-    top: calc(var(--koi-y) - 178 * var(--ku) - 75 * var(--u));
-    height: calc(150 * var(--u));
   }
 
   /*
@@ -262,7 +427,7 @@ export const CityGapRoot = styled.div`
   /* The arrow wheel at the top, foreshortened, spinning in the wind. */
   .koi-wheel {
     position: absolute;
-    top: calc(var(--koi-y) - 296 * var(--ku));
+    top: calc(var(--rig-top) + 19 * var(--ku));
     left: calc(var(--mast-x) - 38 * var(--ku));
     width: calc(76 * var(--ku));
     height: calc(76 * var(--ku));
@@ -280,6 +445,92 @@ export const CityGapRoot = styled.div`
       width: 100%;
       height: 100%;
     }
+  }
+
+  /*
+   * Night: police drones behind the carp, the far one high and westbound,
+   * the near one low and eastbound; --patrol-size is their width at 1440px
+   * wide. The still frame parks both in open sky with their lights steady.
+   */
+  .patrols {
+    --patrol-high: max(12%, 96px);
+    --patrol-low: 66%;
+    --patrol-still-high: 64vw;
+    --patrol-still-low: 30vw;
+    position: absolute;
+    inset: 0;
+  }
+
+  .police-drone {
+    position: absolute;
+    top: var(--patrol-low);
+    left: 0;
+    width: calc(var(--patrol-size) * (0.45px + 0.0382vw));
+    transform: translate3d(var(--patrol-still-low), 0, 0);
+    animation: ${patrolEast} ${PATROL_SECONDS}s linear var(--patrol-delay) infinite;
+    will-change: transform;
+  }
+
+  .police-drone[data-heading='west'] {
+    top: var(--patrol-high);
+    transform: translate3d(var(--patrol-still-high), 0, 0);
+    animation-name: ${patrolWest};
+  }
+
+  .police-hover {
+    display: block;
+    position: relative;
+    animation: ${hover} var(--patrol-bob) ease-in-out infinite alternate;
+  }
+
+  /* The westbound drone faces its way, light bar and all. */
+  .police-drone[data-heading='west'] .police-hover {
+    scale: -1 1;
+  }
+
+  /* Pitched forward into its flight. */
+  .police-body {
+    display: block;
+    position: relative;
+    rotate: 5deg;
+  }
+
+  .police-frame {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .police-beam {
+    position: absolute;
+    top: 62%;
+    left: 5%;
+    width: 90%;
+    height: 240%;
+    background: linear-gradient(rgba(214, 236, 255, 0.2), rgba(214, 236, 255, 0));
+    clip-path: polygon(44% 0, 56% 0, 100% 100%, 0 100%);
+  }
+
+  /* The flashing lights over the bar's two lenses, drawn at 53.5 and 66.5 of 120 across, 12.5 of 48 down. */
+  .police-siren {
+    position: absolute;
+    top: 26%;
+    left: 44.6%;
+    width: 46%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(255, 236, 236, 0.95), rgba(255, 46, 64, 0.85) 22%, rgba(255, 46, 64, 0.25) 52%, transparent);
+    opacity: 0.5;
+    transform: translate(-50%, -50%);
+    animation: ${flash} ${FLASH_SECONDS}s linear infinite;
+    will-change: opacity;
+  }
+
+  .police-siren.is-blue {
+    left: 55.4%;
+    background: radial-gradient(closest-side, rgba(236, 244, 255, 0.95), rgba(52, 110, 255, 0.85) 22%, rgba(52, 110, 255, 0.25) 52%, transparent);
+    animation-delay: ${-FLASH_SECONDS / 2}s;
   }
 
   /* Day: the airship drifts across the sky on its own, then comes round again. */
@@ -523,24 +774,66 @@ export const CityGapRoot = styled.div`
     .koi {
       --koi-len: min(100vw, 62vh);
       --mast-x: 8%;
-      --koi-y: max(34%, calc(150px + 315 * var(--ku)));
+      --rig-top: max(calc(34% - 315 * var(--ku)), 150px);
       --droop: 26deg;
       --sag: 2deg;
-      --banner-droop: 14deg;
-      --banner-sag: 1deg;
       --roof-w: 64%;
+      --cord-drop: 740;
+      --cord-fall: ${LANTERN_CORDS.tall.fall};
+      --cord-depth: ${cordDepth(LANTERN_CORDS.tall)};
+      --lantern-h: calc(86 * var(--ku));
+      --mid-at: 420;
+      --mid-span: 420;
+      --mid-roof: 92%;
+      --mid-below: 280;
+      /* The tower fills the right edge; the cord ends on a post a tenth of the way across its roof. */
+      --tower-w: 28%;
+      --cord-w: calc(100% - var(--mast-x) - var(--tower-w) * 0.9);
+      --tower-x: calc(var(--mast-x) + var(--cord-w) - var(--tower-w) * 0.1);
+      --tower-rise: -30;
+    }
+
+    .koi-lantern-tie {
+      width: max(2px, calc(5 * var(--ku)));
+      height: calc(30 * var(--ku));
+      border-radius: 0;
+      background: linear-gradient(90deg, #03070c, #2a3a48 50%, #03070c);
+      transform: translateX(-50%);
+    }
+
+    .koi-lantern {
+      --ly: var(--ly-tall);
+    }
+
+    .koi-cord[data-shape='wide'] {
+      display: none;
+    }
+
+    .koi-cord[data-shape='tall'] {
+      display: block;
+    }
+
+    .patrols {
+      --patrol-high: max(19%, 160px);
+      --patrol-low: 78%;
+      --patrol-still-high: 58vw;
+      --patrol-still-low: 22vw;
     }
   }
 
   /*
    * Short landscape screens, such as phones on their side: the rig shrinks
-   * to fit between the fixed nav and the HUD's bottom bar. It stands 686
-   * units tall, from the ball atop the mast to the carp's lowest point.
+   * to fit between the fixed nav and the HUD's bottom bar. It stands 700
+   * units tall, from the ball atop the mast to the lowest lantern.
    */
   @media (orientation: landscape) and (max-height: 560px) {
     .koi {
-      --koi-len: min(max(540px, 58vw), calc((100vh - 158px) * 1000 / 686));
-      --koi-y: calc(86px + 315 * var(--ku));
+      --koi-len: min(max(540px, 58vw), calc((100vh - 158px) * 1000 / 700));
+      --rig-top: 86px;
+    }
+
+    .patrols {
+      --patrol-high: 92px;
     }
 
     /* The roofs sink a quarter of their height, below the airship. */
@@ -559,6 +852,10 @@ export const CityGapRoot = styled.div`
   /* Ambient motion runs only while the stretch is on screen. */
   &:not([data-scene-motion='running']) .koi-link,
   &:not([data-scene-motion='running']) .koi-wheel-spin,
+  &:not([data-scene-motion='running']) .koi-lantern,
+  &:not([data-scene-motion='running']) .police-drone,
+  &:not([data-scene-motion='running']) .police-hover,
+  &:not([data-scene-motion='running']) .police-siren,
   &:not([data-scene-motion='running']) .ship,
   &:not([data-scene-motion='running']) .ship-bob,
   &:not([data-scene-motion='running']) .ship-ticker,
@@ -574,6 +871,10 @@ export const CityGapRoot = styled.div`
 
   &[data-scene-motion='still'] .koi-link,
   &[data-scene-motion='still'] .koi-wheel-spin,
+  &[data-scene-motion='still'] .koi-lantern,
+  &[data-scene-motion='still'] .police-drone,
+  &[data-scene-motion='still'] .police-hover,
+  &[data-scene-motion='still'] .police-siren,
   &[data-scene-motion='still'] .ship,
   &[data-scene-motion='still'] .ship-bob,
   &[data-scene-motion='still'] .ship-ticker,
