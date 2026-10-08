@@ -87,6 +87,14 @@ describe('minimap geometry', () => {
     });
   });
 
+  it('runs down the map the way the page scrolls, Case Studies first', () => {
+    const stopYs = MINIMAP_STOPS.map((vertex) => MINIMAP_ROUTE[vertex].y);
+
+    stopYs.slice(1).forEach((y, index) => {
+      expect(y).toBeGreaterThan(stopYs[index]);
+    });
+  });
+
   it('puts the player on each stop as the page reaches it', () => {
     STOPS.forEach((scroll, index) => {
       const fix = locateOnRoute(scroll, STOPS);
@@ -101,7 +109,8 @@ describe('minimap geometry', () => {
     const start = locateOnRoute(-300, STOPS);
     const end = locateOnRoute(99999, STOPS);
 
-    expect(start).toEqual({ ...MINIMAP_ROUTE[0], heading: 0, progress: 0 });
+    // The route leaves the start heading south, down the map.
+    expect(start).toEqual({ ...MINIMAP_ROUTE[0], heading: 180, progress: 0 });
     expect(end).toMatchObject(MINIMAP_ROUTE[MINIMAP_ROUTE.length - 1]);
     expect(end.progress).toBe(1);
   });
@@ -110,13 +119,13 @@ describe('minimap geometry', () => {
     // Halfway to Product Engineering, the route runs east along a street.
     const east = locateOnRoute(1500, STOPS);
     expect(east.x).toBeCloseTo(52);
-    expect(east.y).toBeCloseTo(92);
+    expect(east.y).toBeCloseTo(52);
     expect(east.heading).toBeCloseTo(90);
 
     // Halfway to Web Development, it runs back west.
     const west = locateOnRoute(2500, STOPS);
     expect(west.x).toBeCloseTo(48);
-    expect(west.y).toBeCloseTo(56);
+    expect(west.y).toBeCloseTo(88);
     expect(west.heading).toBeCloseTo(-90);
 
     let previous = 0;
@@ -209,9 +218,12 @@ describe('HomeHud', () => {
     expect(districtPins.map((pin) => pin.textContent)).toEqual(['Case Studies', 'Product Engineering', 'Web Dev']);
     districtPins.forEach((pin) => expect(pin).not.toHaveAttribute('aria-current'));
 
-    // Each pin sits on its district's stop.
+    // Each pin sits on its district's stop, top to bottom in route order.
     expect(districtPins[0].style.getPropertyValue('--pin-x')).toBe(`${MINIMAP_ROUTE[MINIMAP_STOPS[1]].x}px`);
     expect(districtPins[0].style.getPropertyValue('--pin-y')).toBe(`${MINIMAP_ROUTE[MINIMAP_STOPS[1]].y}px`);
+    const pinYs = districtPins.map((pin) => parseFloat(pin.style.getPropertyValue('--pin-y')));
+    expect(pinYs).toEqual([...pinYs].sort((a, b) => a - b));
+    expect(new Set(pinYs).size).toBe(pinYs.length);
 
     expect(container.querySelector('.hud-map-art')).toHaveAttribute('aria-hidden', 'true');
     expect(container.querySelector('.hud-clock')?.closest('[aria-hidden="true"]')).not.toBeNull();
@@ -313,14 +325,14 @@ describe('HomeHud', () => {
   it('walks the player and the distance readout with the scroll', async () => {
     const { nav, pins, player, container } = renderHud();
 
-    expect(player.style.transform).toBe('translate3d(36.0px, 136.0px, 0)');
+    expect(player.style.transform).toBe('translate3d(36.0px, 8.0px, 0)');
     expect(nav.style.getPropertyValue('--hud-progress')).toBe('0.0000');
     expect(container.querySelector('.quest-distance')).toHaveTextContent('1.0 km');
     expect(nav).toHaveAttribute('data-hero', '');
 
     await setScroll(4000);
 
-    expect(player.style.transform).toBe('translate3d(120.0px, 8.0px, 0)');
+    expect(player.style.transform).toBe('translate3d(120.0px, 136.0px, 0)');
     expect(nav.style.getPropertyValue('--hud-progress')).toBe('1.0000');
     expect(container.querySelector('.quest-distance')).toHaveTextContent('0 m');
     expect(nav).not.toHaveAttribute('data-hero');
@@ -331,16 +343,25 @@ describe('HomeHud', () => {
     expect(container.querySelector('.quest-objective')).toHaveTextContent('Head to Case Studies');
   });
 
+  it('faces down the route from the first frame, without spinning round', () => {
+    const { player } = renderHud();
+
+    expect(player.style.getPropertyValue('--heading')).toBe('180deg');
+  });
+
   it('turns the player around when the visitor scrolls back up', async () => {
     const { player } = renderHud();
+    // Facing, in whole degrees from north, whichever way the turns unwrapped.
+    const facing = () => ((parseFloat(player.style.getPropertyValue('--heading')) % 360) + 360) % 360;
+
     await setScroll(1000);
-    expect(player.style.getPropertyValue('--heading')).toBe('0deg');
+    expect(facing()).toBe(180);
 
     for (const y of [980, 960, 940]) {
       await setScroll(y);
     }
 
-    expect(Math.abs(parseFloat(player.style.getPropertyValue('--heading')))).toBe(180);
+    expect(facing()).toBe(0);
   });
 
   it('tucks away while the footer is on screen', () => {

@@ -3,7 +3,7 @@ import MainContent from '../src/components/MainContent';
 import LinkBoxContent from '../src/components/LinkBoxContent';
 import worksData from '../src/data/worksData.json';
 import { renderWithProviders } from '../src/test/renderWithProviders';
-import { screen, waitFor, within } from '@testing-library/react';
+import { fireEvent, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { getMatchingRuleValues } from '../src/test/tabTheme';
 
@@ -187,7 +187,7 @@ describe('Home and About visuals', () => {
     const scrollToSpy = jest.spyOn(row, 'scrollTo');
     const scrollRowTo = (position: number) => {
       scrollLeft = position;
-      row.dispatchEvent(new Event('scroll'));
+      fireEvent.scroll(row);
     };
 
     // The first frame of a smooth scroll can move less than a pixel on 120Hz

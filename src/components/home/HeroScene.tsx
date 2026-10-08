@@ -168,7 +168,7 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
             Michael Zick is{' '}<BrandName />{' '}
             <span className='hero-creative'>Creative</span>
           </h1>
-          <p className='hero-pitch'>Turning ideas into shipped products.</p>
+          <p className='hero-pitch'>I dream of the feature.</p>
           <div className='hero-ctas'>
             <button type='button' className='hero-cta' onClick={onSeeCaseStudies}>
               See Case Studies

@@ -55,6 +55,8 @@ const MID_SKYLINE = generateSkyline({
   floorHeight: 9,
   litRowChance: 0.36,
   coolShare: 0.3,
+  // Not drawn, but the strips and billboards are placed after these picks in
+  // the seeded stream, so changing the count would move them.
   flickerCount: 14,
   windowWidth: MID_WINDOWS.width,
   windowHeight: MID_WINDOWS.height,

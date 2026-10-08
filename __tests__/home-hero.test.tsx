@@ -73,7 +73,7 @@ describe('Homepage city', () => {
     expect(screen.getByText(/Michael Zick is/)).toHaveTextContent(
       'Michael Zick is ZICKONEZERO Creative',
     );
-    expect(screen.getByText('Turning ideas into shipped products.')).toBeInTheDocument();
+    expect(screen.getByText('I dream of the feature.')).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'See Case Studies' }));
 
@@ -250,11 +250,15 @@ describe('Homepage city', () => {
     }));
   });
 
-  it('ends the route in open city instead of a street scene', () => {
+  it('ends the route in open city with a decorative carp streamer and airship before the footer', () => {
     const { container } = renderHome();
 
     expect(screen.queryByRole('region', { name: 'Now booking new gigs' })).not.toBeInTheDocument();
     expect(container.querySelector('.walker, .car')).toBeNull();
+    const scene = container.querySelector('.koi')?.closest('[aria-hidden="true"]');
+    expect(scene).not.toBeNull();
+    expect(scene?.querySelector('.ship')).not.toBeNull();
+    expect(scene?.querySelector('a, button, [tabindex]')).toBeNull();
   });
 
   it('labels each district for the minimap and keeps its decorations out of the reading order', () => {

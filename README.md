@@ -72,8 +72,16 @@ above the footer, with a minimap HUD for fast travel.
   preset. The club only opens after dark: by day the sign is unlit, a
   flight-case lid covers the rack, and **Wait for dark** switches the city to
   night. The page is left out of the sitemap and marked `noindex`.
-- The Current Gig objective points to the next district in route order, then
+- The Next destination objective points to the next district in route order, then
   offers "Return to surface" at Web Development to scroll back to the hero.
+- The open city at the end of the route has one giant piece in the
+  foreground: at night a carp streamer waves from the top of a rooftop mast,
+  with 夢 on its crest and "I dream of the feature" along its side, over a
+  string of paper lanterns slung to a tower across the street, while police
+  drones with flashing lights patrol behind it; by day a sightseeing airship
+  drifts across the sky with the same line on its LED band, among clouds and
+  delivery drones, over a row of rooftops where a window washer's gondola
+  works its way down a building.
 - Night is the default. The nav's time-of-day toggle switches to day, and the
   choice is remembered.
 - Sound stays off until a visitor turns it on. It is synthesized in the browser
@@ -97,6 +105,13 @@ city testable in Jest.
 Every public page owns its title, description, canonical, social image metadata,
 and JSON-LD through `src/components/Seo.tsx`. Image dimensions must match the
 actual asset; provide descriptive alt text for custom social images.
+
+The default share card's "ZICKONEZERO / CREATIVE" matches the hero's heading.
+After changing the hero's type, regenerate it with
+`node scripts/render-share-card.js` (Playwright with Chromium must be
+resolvable, for example through `NODE_PATH`). It repaints only that text band
+and the cyan divider under it, so the logo and name lines stay as they are. Social networks cache the image,
+so re-scrape the page in their sharing debuggers after it changes.
 
 The About biography and secondary case-study panels are present in exported HTML.
 Native `hidden` containers preserve the modal/tab presentation. Keep the content

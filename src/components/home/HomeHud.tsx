@@ -122,8 +122,10 @@ const HomeHud = ({ districts, active, onTravel, onReturnToSurface, measureStops,
     }
 
     let stops = measureStops();
-    // Unwrapped, so each turn eases the short way round.
-    let heading = 0;
+    // Unwrapped, so each turn eases the short way round. It starts facing the
+    // way the route leaves the player's first spot, so the arrow does not
+    // spin round on load.
+    let heading = locateOnRoute(window.scrollY, stops).heading;
     let facingBack = false;
     let distanceText = '';
     let isOverHero: boolean | null = null;

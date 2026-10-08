@@ -878,14 +878,3 @@ export const HeroRoot = styled.section`
     .distant-tower { --tower-clarity: 0.65; }
   }
 `;
-
-/**
- * The end of the homepage route (src/components/MainContent.tsx): an empty
- * stretch with nothing over it, so the persistent city shows through clearly
- * before the footer. The skyline sits in the bottom half of the viewport, so
- * the stretch is most of a screen tall: the whole skyline is clear before the
- * footer scrolls up over it.
- */
-export const CityGap = styled.div`
-  height: max(18rem, 80vh);
-`;
