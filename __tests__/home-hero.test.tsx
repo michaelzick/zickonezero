@@ -124,21 +124,21 @@ describe('Homepage city', () => {
     expect(within(hud).getByRole('button', { name: 'Head to Case Studies' })).toBeInTheDocument();
   });
 
-  it('makes the market sign a link to the Night Market and keeps street litter decorative', () => {
+  it('makes the Bar Four sign a link to the club and keeps street litter decorative', () => {
     const { container } = renderHome();
-    const market = screen.getByRole('link', { name: 'Night Market' });
-    expect(market).toHaveAttribute('href', '/night-market');
+    const club = screen.getByRole('link', { name: 'Bar Four' });
+    expect(club).toHaveAttribute('href', '/bar-four');
     // The link follows the introduction's CTAs in tab order.
     const hero = screen.getByRole('region', { name: 'Michael Zick is ZICKONEZERO Creative' });
     const contact = within(hero).getByRole('link', { name: 'Contact' });
-    expect(contact.compareDocumentPosition(market) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(contact.compareDocumentPosition(club) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
 
-    const translation = within(market).getByText('НОЧНОЙ РЫНОК');
+    const translation = within(club).getByText('БАР ЧЕТЫРЕ');
     expect(translation).toHaveAttribute('lang', 'ru');
     expect(translation.closest('[aria-hidden="true"]')).not.toBeNull();
-    expect(within(market).getByText('Open late').closest('[aria-hidden="true"]')).not.toBeNull();
+    expect(within(club).getByText('Downstairs').closest('[aria-hidden="true"]')).not.toBeNull();
     expect(screen.queryByText('Sector 10')).not.toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: /Night Market/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /Bar Four/ })).not.toBeInTheDocument();
     const scraps = container.querySelectorAll('.paper-scrap');
     expect(scraps).toHaveLength(8);
     scraps.forEach((scrap) => expect(scrap.closest('[aria-hidden="true"]')).not.toBeNull());

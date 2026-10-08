@@ -38,7 +38,7 @@ let ambience: Ambience | null = null;
 let ambienceRequest: Promise<Ambience | null> | null = null;
 let suspendTimer: ReturnType<typeof setTimeout> | undefined;
 let armed = false;
-// Another instrument (the Night Market's rack) has the floor; see holdAmbience.
+// Another instrument (Bar Four's house rack) has the floor; see holdAmbience.
 let held = false;
 
 const getAudioContextClass = (): AudioContextClass | undefined => (
@@ -249,7 +249,7 @@ export const setSoundEnabled = (enabled: boolean): void => {
 };
 
 /**
- * Quiets the city while another instrument plays, such as the Night Market's
+ * Quiets the city while another instrument plays, such as Bar Four's house
  * rack, without changing the visitor's stored choice. Gestures stop resuming
  * the ambience until releaseAmbience.
  */

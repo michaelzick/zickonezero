@@ -39,8 +39,8 @@ export const CITY_ROUTES: readonly RouteMeta[] = [
   HOME,
   { path: '/about', label: 'About', accent: 'violet', camera: -0.38 },
   { path: '/contact', label: 'Contact', accent: 'red', camera: 0.24 },
-  // Down the alley from home, lit like the market sign's warm tubes.
-  { path: '/night-market', label: 'Night Market', accent: 'amber', camera: -0.12 },
+  // Downstairs off the alley from home, lit like its sign's warm tubes.
+  { path: '/bar-four', label: 'Bar Four', accent: 'amber', camera: -0.12 },
   NOT_FOUND,
   ...CASE_STUDY_ROUTES,
   ...PRODUCT_ROUTES,

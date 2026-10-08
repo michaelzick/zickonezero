@@ -27,7 +27,7 @@ const paperGust = keyframes`
 
 // Brief, shallow faults every few seconds, confined to two letters. There is
 // at least a second of steady light between dips, even on the shorter loop.
-const marketTubeFault = keyframes`
+const signTubeFault = keyframes`
   0%, 18%, 21%, 53%, 56%, 86%, 89%, 100% { opacity: 1; }
   19%, 20% { opacity: 0.62; }
   54%, 55% { opacity: 0.75; }
@@ -480,11 +480,12 @@ export const HeroRoot = styled.section`
 
   /*
    * A wall-mounted plate passes overhead as the visitor walks into the alley.
-   * It is the link to the hidden Night Market (src/components/nightmarket/):
-   * hovering or focusing it brightens the tubes and steadies the flicker.
+   * It is the link to Bar Four, the hidden club downstairs
+   * (src/components/barfour/): hovering or focusing it brightens the tubes
+   * and steadies the flicker.
    */
-  .market-sign {
-    --market-lit: 1;
+  .club-sign {
+    --club-lit: 1;
     display: block;
     position: absolute;
     top: clamp(112px, 17vh, 170px);
@@ -504,7 +505,7 @@ export const HeroRoot = styled.section`
 
     &:hover,
     &:focus-visible {
-      --market-lit: 1.7;
+      --club-lit: 1.7;
       border-color: #8b7a5a;
     }
 
@@ -536,23 +537,24 @@ export const HeroRoot = styled.section`
     }
   }
 
-  .market-name {
+  .club-name {
     display: block;
     margin: 0 0 16px;
     font-family: ${THEME.fonts.display};
-    font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+    font-size: clamp(1.75rem, 3vw, 2.8rem);
     font-weight: 900;
+    letter-spacing: 0.04em;
     line-height: 1.15;
     text-transform: uppercase;
     color: #21180f;
     -webkit-text-stroke: 1.2px #ffe6b2;
     text-shadow:
       0 0 3px #ffd28a,
-      0 0 calc(10px * var(--neon-glow-strength, 1) * var(--market-lit)) #ffb03b,
-      0 0 calc(24px * var(--neon-glow-strength, 1) * var(--market-lit)) rgba(255, 144, 36, 0.8);
+      0 0 calc(10px * var(--neon-glow-strength, 1) * var(--club-lit)) #ffb03b,
+      0 0 calc(24px * var(--neon-glow-strength, 1) * var(--club-lit)) rgba(255, 144, 36, 0.8);
   }
 
-  .market-label {
+  .club-label {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -562,31 +564,31 @@ export const HeroRoot = styled.section`
     white-space: nowrap;
   }
 
-  .market-word { display: block; }
+  .club-word { display: block; }
 
-  .market-flicker {
+  .club-flicker {
     display: inline-block;
-    animation: ${marketTubeFault} 4.8s linear -1.7s infinite;
+    animation: ${signTubeFault} 4.8s linear -1.7s infinite;
     animation-play-state: paused;
   }
 
-  .market-flicker-late { animation-duration: 6.3s; animation-delay: -0.4s; }
+  .club-flicker-late { animation-duration: 6.3s; animation-delay: -0.4s; }
 
-  &[data-scene-motion='running'] .market-flicker { animation-play-state: running; }
-  &[data-scene-motion='still'] .market-flicker,
-  .market-sign:hover .market-flicker,
-  .market-sign:focus-visible .market-flicker { animation: none; }
+  &[data-scene-motion='running'] .club-flicker { animation-play-state: running; }
+  &[data-scene-motion='still'] .club-flicker,
+  .club-sign:hover .club-flicker,
+  .club-sign:focus-visible .club-flicker { animation: none; }
 
-  /* The market only opens after dark: by day its tubes are switched off. */
-  html[data-theme='light'] & .market-name {
+  /* The club only opens after dark: by day its tubes are switched off. */
+  html[data-theme='light'] & .club-name {
     color: #3a3833;
     -webkit-text-stroke-color: #9c958a;
     text-shadow: none;
   }
 
-  html[data-theme='light'] & .market-flicker { animation: none; }
+  html[data-theme='light'] & .club-flicker { animation: none; }
 
-  .market-translation {
+  .club-translation {
     display: block;
     margin: 0 0 12px;
     color: #b8b3a4;
@@ -598,7 +600,7 @@ export const HeroRoot = styled.section`
     text-shadow: none;
   }
 
-  .market-direction {
+  .club-direction {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -756,7 +758,7 @@ export const HeroRoot = styled.section`
       font-size: 34px;
     }
 
-    .market-sign {
+    .club-sign {
       top: 158px;
       right: 24px;
       width: 150px;
@@ -764,9 +766,9 @@ export const HeroRoot = styled.section`
       border-width: 3px;
     }
 
-    .market-name { font-size: 1.2rem; margin: 4px 0 10px; -webkit-text-stroke-width: 0.8px; }
-    .market-translation { font-size: 0.55rem; margin-bottom: 6px; }
-    .market-direction { font-size: 1.3rem; gap: 6px; span { font-size: 0.5rem; } }
+    .club-name { font-size: 1.45rem; margin: 4px 0 10px; -webkit-text-stroke-width: 0.8px; }
+    .club-translation { font-size: 0.55rem; margin-bottom: 6px; }
+    .club-direction { font-size: 1.3rem; gap: 6px; span { font-size: 0.5rem; } }
     .scrap-desktop { display: none; .paper-scrap { animation: none; } }
     .refuse { width: 130px; height: 94px; top: calc(var(--alley-street) - 86px); }
     .refuse-right { left: calc(50% + var(--alley-half) - 140px); }
@@ -820,10 +822,10 @@ export const HeroRoot = styled.section`
       display: none;
     }
 
-    .market-sign { top: 94px; width: 160px; padding: 10px 12px; }
-    .market-name { font-size: 1.25rem; margin: 4px 0 10px; -webkit-text-stroke-width: 0.8px; }
-    .market-translation { font-size: 0.6rem; margin-bottom: 6px; }
-    .market-direction { font-size: 1.1rem; span { font-size: 0.5rem; } }
+    .club-sign { top: 94px; width: 160px; padding: 10px 12px; }
+    .club-name { font-size: 1.5rem; margin: 4px 0 10px; -webkit-text-stroke-width: 0.8px; }
+    .club-translation { font-size: 0.6rem; margin-bottom: 6px; }
+    .club-direction { font-size: 1.1rem; span { font-size: 0.5rem; } }
 
     .hero-panel {
       bottom: 16px;
@@ -867,7 +869,7 @@ export const HeroRoot = styled.section`
       display: none;
     }
 
-    .paper-scrap, .market-flicker { animation: none; }
+    .paper-scrap, .club-flicker { animation: none; }
     .distant-tower { --tower-clarity: 0.65; }
   }
 `;

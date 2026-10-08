@@ -16,7 +16,7 @@ describe('framing', () => {
 });
 
 describe('scripts', () => {
-  it("lets the Night Market's rack register its audio worklets from blob: URLs", () => {
+  it("lets Bar Four's house rack register its audio worklets from blob: URLs", () => {
     const sources = directive('script-src').split(/\s+/);
     expect(sources).toContain('blob:');
     expect(sources).not.toContain('data:');
