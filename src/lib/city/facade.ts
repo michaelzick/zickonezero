@@ -44,14 +44,10 @@ export type FacadeOptions = {
    * pixels wide on screen.
    */
   detailLength: number;
-  /** Single lit windows whose light can switch off (see useWindowLights). */
-  flickerCount?: number;
 };
 
 export type FacadeRect = { x: number; y: number; width: number; height: number };
 export type FacadeShopfront = FacadeRect & { tone: NeonTone };
-/** A lit window that can go dark; wall says which wall color is behind it. */
-export type FacadeWindow = FacadeRect & { wall: 'a' | 'b' };
 /** A flat neon sign; glyphs is a path of bars that reads as lettering from afar. */
 export type FacadeSign = FacadeShopfront & { glyphs: string };
 
@@ -79,7 +75,6 @@ export type FacadeLayer = {
   /** Lit doorways and shop windows. */
   shopfronts: FacadeShopfront[];
   signs: FacadeSign[];
-  flicker: FacadeWindow[];
 };
 
 const SIGN_TONES: readonly NeonTone[] = ['magenta', 'cyan', 'amber', 'violet', 'red', 'cyan'];
@@ -88,11 +83,6 @@ const SHOP_TONES: readonly NeonTone[] = ['amber', 'cyan', 'magenta', 'amber'];
 /** Hard caps so a misconfigured wall can never flood the DOM. */
 export const MAX_FACADE_SIGNS = 8;
 export const MAX_FACADE_UNITS = 40;
-export const MAX_FACADE_FLICKER = 24;
-
-// Flicker windows are picked from their own stream, so asking for them never
-// changes the rest of a seeded wall.
-const FLICKER_SEED_OFFSET = 9973;
 
 type Segment = { x: number; end: number; roof: number };
 
@@ -168,7 +158,6 @@ export const generateFacade = (options: FacadeOptions): FacadeLayer => {
   let unitCount = 0;
   const shopfronts: FacadeShopfront[] = [];
   const signs: FacadeSign[] = [];
-  const litSpots: FacadeWindow[] = [];
 
   segments.forEach((segment, index) => {
     const { x, end, roof } = segment;
@@ -199,19 +188,6 @@ export const generateFacade = (options: FacadeOptions): FacadeLayer => {
             cool += segmentPath;
           } else {
             lit += segmentPath;
-          }
-
-          for (let lamp = column; lamp < column + run; lamp += 1) {
-            const lampX = rowStart + lamp * pitch;
-            if (lampX + windowWidth <= detailLength) {
-              litSpots.push({
-                x: lampX,
-                y: centerY - dash,
-                width: windowWidth,
-                height: windowHeight,
-                wall: index % 2 === 0 ? 'a' : 'b',
-              });
-            }
           }
 
           column += run + 1;
@@ -307,18 +283,6 @@ export const generateFacade = (options: FacadeOptions): FacadeLayer => {
     }
   }
 
-  const flickerRandom = createRandom(options.seed + FLICKER_SEED_OFFSET);
-  const flickerTarget = Math.min(options.flickerCount ?? 0, MAX_FACADE_FLICKER, litSpots.length);
-  const flicker: FacadeWindow[] = [];
-  const taken = new Set<number>();
-  while (flicker.length < flickerTarget) {
-    const spot = flickerRandom.int(0, litSpots.length - 1);
-    if (!taken.has(spot)) {
-      taken.add(spot);
-      flicker.push(litSpots[spot]);
-    }
-  }
-
   return {
     length,
     height,
@@ -335,6 +299,5 @@ export const generateFacade = (options: FacadeOptions): FacadeLayer => {
     slats,
     shopfronts,
     signs,
-    flicker,
   };
 };

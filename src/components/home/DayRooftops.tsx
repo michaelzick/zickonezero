@@ -101,7 +101,7 @@ const Gondola = () => (
     <span className='gondola-cable' style={{ left: pct(30, RIG.width) }} />
     <span className='gondola-cable' style={{ left: pct(90, RIG.width) }} />
     <div className='gondola'>
-      <svg viewBox={`0 0 ${RIG.width} ${RIG.height}`} focusable='false'>
+      <svg data-art viewBox={`0 0 ${RIG.width} ${RIG.height}`} focusable='false'>
         {/* The washer: hard hat, overalls, and a squeegee on a pole against the glass. */}
         <path d='M68 18L82 4' stroke='#4b5a61' strokeWidth='3' strokeLinecap='round' />
         <path d='M76 0L88 8' stroke='#12393f' strokeWidth='5' strokeLinecap='round' />
@@ -121,7 +121,7 @@ const Gondola = () => (
 
 const DayRooftops = () => (
   <div className='roofs'>
-    <svg viewBox={`0 0 1600 ${HEIGHT}`} focusable='false'>
+    <svg data-art viewBox={`0 0 1600 ${HEIGHT}`} focusable='false'>
       {ROOFS.map(({ x, width, top, tone }) => (
         <path key={x} d={`M${x} ${top}h${width}V${HEIGHT}H${x}Z`} fill={TONES[tone]} />
       ))}

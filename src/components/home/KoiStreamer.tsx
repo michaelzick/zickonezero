@@ -6,8 +6,7 @@
  * art, drawn once as static SVG. The carp and the banner are each a chain of
  * links, each a window onto its drawing (src/lib/city/koi.ts), that bend at
  * their joints, so the fabric waves on the compositor and nothing is
- * repainted (styles/cityGap.ts). The rooftop's window lights switch off and
- * on at night (useWindowLights in CityGapScene).
+ * repainted (styles/cityGap.ts).
  */
 
 import type { CSSProperties } from 'react';
@@ -38,7 +37,6 @@ import {
   koiTailFin,
 } from '../../lib/city/koi';
 import type { ChainWindow } from '../../lib/city/koi';
-import { startsOff } from '../../lib/city/windowLights';
 
 const KOI_ART = 'gap-koi-art';
 const BANNER_ART = 'gap-koi-banner-art';
@@ -81,11 +79,8 @@ const ROOF_WINDOWS = Array.from({ length: 3 * 17 }, (_, index) => ({
   x: 14 + (index % 17) * 34,
   y: 96 + Math.floor(index / 17) * 32,
 }));
-// Lit windows; most can switch off and on (useWindowLights). Fixed, so the
-// static HTML and the hydrated page light the same ones.
-const STEADY_WINDOWS = new Set([5, 30, 41, 46]);
-const SWITCHING_WINDOWS = [1, 3, 8, 9, 12, 15, 18, 22, 24, 27, 33, 36, 38, 43, 48, 50];
-const LIT_WINDOWS = new Set([...STEADY_WINDOWS, ...SWITCHING_WINDOWS]);
+// Lit windows. Fixed, so the static HTML and the hydrated page light the same ones.
+const LIT_WINDOWS = new Set([1, 3, 5, 8, 9, 12, 15, 18, 22, 24, 27, 30, 33, 36, 38, 41, 43, 46, 48, 50]);
 const windowPath = (indexes: Iterable<number>) => [...indexes]
   .map((index) => `M${ROOF_WINDOWS[index].x} ${ROOF_WINDOWS[index].y}h14v18h-14z`)
   .join('');
@@ -249,17 +244,6 @@ const Rooftop = () => (
         d={windowPath(ROOF_WINDOWS.map((_, index) => index).filter((index) => !LIT_WINDOWS.has(index)))}
       />
       <path className='koi-roof-window is-lit' d={windowPath(LIT_WINDOWS)} />
-      {/* Covers that switch lights off: drawn, the window is dark. */}
-      {SWITCHING_WINDOWS.map((window, index) => (
-        <rect
-          key={window}
-          className={`koi-roof-window flicker-window${startsOff(index) ? ' is-off' : ''}`}
-          x={ROOF_WINDOWS[window].x}
-          y={ROOF_WINDOWS[window].y}
-          width='14'
-          height='18'
-        />
-      ))}
     </svg>
   </div>
 );

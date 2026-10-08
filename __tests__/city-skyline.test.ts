@@ -1,4 +1,3 @@
-import { FacadeOptions, generateFacade, MAX_FACADE_FLICKER } from '../src/lib/city/facade';
 import { createRandom, mulberry32 } from '../src/lib/city/prng';
 import { generateSkyline, MAX_FLICKER_WINDOWS, SkylineOptions } from '../src/lib/city/skyline';
 
@@ -18,7 +17,6 @@ const OPTIONS: SkylineOptions = {
   flickerCount: 14,
   windowWidth: 3,
   windowHeight: 4,
-  windowGap: 3,
   neonStrips: 7,
   billboards: 3,
   beacons: 2,
@@ -70,39 +68,16 @@ describe('generateSkyline', () => {
     });
   });
 
-  it('caps switching covers and keeps them inside the layer', () => {
+  it('caps flickering windows and keeps them inside the layer', () => {
     const layer = generateSkyline({ ...OPTIONS, flickerCount: 100 });
 
     expect(layer.flicker).toHaveLength(MAX_FLICKER_WINDOWS);
     layer.flicker.forEach((spot) => {
+      expect(spot.width).toBe(OPTIONS.windowWidth);
       expect(spot.height).toBe(OPTIONS.windowHeight);
       expect(spot.y).toBeGreaterThanOrEqual(0);
       expect(spot.y + spot.height).toBeLessThanOrEqual(OPTIONS.height);
     });
-  });
-
-  it('sizes each cover to a room of one to three whole windows', () => {
-    const pitch = OPTIONS.windowWidth + OPTIONS.windowGap;
-    const { flicker } = generateSkyline({ ...OPTIONS, extraFlicker: 14 });
-    const rooms = flicker.map(({ width }) => (width + OPTIONS.windowGap) / pitch);
-
-    rooms.forEach((windows) => {
-      expect(Number.isInteger(windows)).toBe(true);
-      expect(windows).toBeGreaterThanOrEqual(1);
-      expect(windows).toBeLessThanOrEqual(3);
-    });
-    expect(new Set(rooms).size).toBe(3);
-  });
-
-  it('adds extra covers without moving the city or the first covers', () => {
-    const { flicker, ...city } = generateSkyline(OPTIONS);
-    const { flicker: more, ...same } = generateSkyline({ ...OPTIONS, extraFlicker: 14 });
-
-    expect(same).toEqual(city);
-    expect(more).toHaveLength(OPTIONS.flickerCount + 14);
-    expect(more.slice(0, flicker.length)).toEqual(flicker);
-    expect(new Set(more.map(({ x, y }) => `${x},${y}`)).size).toBe(more.length);
-    expect(generateSkyline({ ...OPTIONS, extraFlicker: 14 }).flicker).toEqual(more);
   });
 
   it('places signs and beacons on visible buildings', () => {
@@ -124,16 +99,6 @@ describe('generateSkyline', () => {
     });
   });
 
-  it('keeps a sign-free layer the same however many windows can switch', () => {
-    const plain = { ...OPTIONS, neonStrips: 0, billboards: 0 };
-    const { flicker, ...steady } = generateSkyline({ ...plain, flickerCount: 0 });
-    const { flicker: switching, ...withSwitching } = generateSkyline({ ...plain, flickerCount: 10 });
-
-    expect(flicker).toEqual([]);
-    expect(switching).toHaveLength(10);
-    expect(withSwitching).toEqual(steady);
-  });
-
   it('can draw a plain layer with no signs or flicker', () => {
     const layer = generateSkyline({ ...OPTIONS, flickerCount: 0, neonStrips: 0, billboards: 0, beacons: 0 });
 
@@ -141,54 +106,5 @@ describe('generateSkyline', () => {
     expect(layer.strips).toEqual([]);
     expect(layer.billboards).toEqual([]);
     expect(layer.beacons).toEqual([]);
-  });
-});
-
-// The hero alley's wall (src/components/home/HeroScene.tsx).
-const FACADE: FacadeOptions = {
-  seed: 7,
-  length: 3200,
-  height: 1400,
-  groundHeight: 240,
-  floorHeight: 82,
-  windowWidth: 38,
-  windowHeight: 44,
-  windowGap: 26,
-  minSegment: 260,
-  maxSegment: 520,
-  minRoof: 0.92,
-  litChance: 0.1,
-  coolShare: 0.3,
-  unitChance: 0.18,
-  maxUnits: 30,
-  signs: 6,
-  detailLength: 1700,
-};
-
-describe('generateFacade window lights', () => {
-  it('picks switchable windows without changing the rest of the wall', () => {
-    const { flicker, ...steady } = generateFacade(FACADE);
-    const { flicker: switching, ...withSwitching } = generateFacade({ ...FACADE, flickerCount: 10 });
-
-    expect(flicker).toEqual([]);
-    expect(switching).toHaveLength(10);
-    expect(withSwitching).toEqual(steady);
-    expect(generateFacade({ ...FACADE, flickerCount: 10 }).flicker).toEqual(switching);
-  });
-
-  it('caps them and keeps each one a single window on the near end of a wall', () => {
-    const { flicker } = generateFacade({ ...FACADE, flickerCount: 100 });
-
-    expect(flicker).toHaveLength(MAX_FACADE_FLICKER);
-    expect(new Set(flicker.map(({ x, y }) => `${x},${y}`)).size).toBe(MAX_FACADE_FLICKER);
-    flicker.forEach((spot) => {
-      expect(spot.width).toBe(FACADE.windowWidth);
-      expect(spot.height).toBe(FACADE.windowHeight);
-      expect(spot.x).toBeGreaterThanOrEqual(0);
-      expect(spot.x + spot.width).toBeLessThanOrEqual(FACADE.detailLength);
-      expect(spot.y).toBeGreaterThanOrEqual(0);
-      expect(spot.y + spot.height).toBeLessThanOrEqual(FACADE.height - FACADE.groundHeight);
-      expect(['a', 'b']).toContain(spot.wall);
-    });
   });
 });

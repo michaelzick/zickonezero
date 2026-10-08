@@ -6,7 +6,6 @@ import { HudFrame } from '../../../styles/hud';
 import usePointerParallax from '../../hooks/usePointerParallax';
 import useSceneMotion from '../../hooks/useSceneMotion';
 import useScrollProgress from '../../hooks/useScrollProgress';
-import useWindowLights from '../../hooks/useWindowLights';
 import { generateFacade } from '../../lib/city/facade';
 import type { FacadeOptions } from '../../lib/city/facade';
 import BrandName from '../BrandName';
@@ -32,7 +31,6 @@ const WALL: Omit<FacadeOptions, 'seed'> = {
   maxUnits: 30,
   signs: 6,
   detailLength: 1700,
-  flickerCount: 24,
 };
 
 // Seeded, so the static HTML and the hydrated page draw the same alley.
@@ -93,7 +91,6 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
   useScrollProgress(heroRef, { pastAt: PANEL_FADED_AT });
   usePointerParallax(stageRef);
   useSceneMotion(heroRef);
-  useWindowLights(heroRef);
 
   return (
     <HeroRoot ref={heroRef} aria-labelledby='home-hero-title'>

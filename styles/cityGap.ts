@@ -6,8 +6,8 @@ import { THEME } from './theme';
  * The end of the homepage route (src/components/home/CityGapScene.tsx): open
  * air before the footer with one giant piece in the foreground, a carp
  * streamer and the brand banner at night (KoiStreamer) and a sightseeing
- * airship by day (Airship), among clouds and birds, over rooftops where a
- * window washer works (DayClouds, DayBirds, DayRooftops).
+ * airship by day (Airship), among clouds and delivery drones, over rooftops
+ * where a window washer works (DayClouds, DayDrones, DayRooftops).
  * Both are in the static HTML and the theme picks one, so the page never
  * flashes the wrong one.
  *
@@ -59,20 +59,23 @@ const cloudDrift = keyframes`
   to { transform: translate3d(110vw, 0, 0); }
 `;
 
-// Birds cross left to right at an even speed, rising a little and settling,
-// then wait off screen for the next pass.
-const BIRD_LOOP_SECONDS = 26;
-
-const fly = keyframes`
-  0% { transform: translate3d(-8vw, 0, 0); }
-  35% { transform: translate3d(51vw, -1.5vh, 0); }
-  70%, 100% { transform: translate3d(110vw, 0.5vh, 0); }
+// Delivery drones cross left to right at an even speed, climbing a little
+// on the way, then wait off screen for their next run.
+const deliver = keyframes`
+  0% { transform: translate3d(-12vw, 0, 0); }
+  35% { transform: translate3d(48vw, -1.5vh, 0); }
+  68%, 100% { transform: translate3d(112vw, -0.5vh, 0); }
 `;
 
-// A few wing beats, then a glide.
-const flap = keyframes`
-  0%, 20%, 40%, 100% { transform: scaleY(1); }
-  10%, 30% { transform: scaleY(-0.55); }
+// Each drone hovers up and down a little, and its parcel sways on its tether.
+const hover = keyframes`
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, -7%, 0); }
+`;
+
+const sway = keyframes`
+  from { transform: rotate(-4deg); }
+  to { transform: rotate(4deg); }
 `;
 
 // The window washer's gondola works down the building and back, its cables
@@ -182,21 +185,6 @@ export const CityGapRoot = styled.div`
   .koi-roof-rim { fill: none; stroke: rgba(47, 243, 255, 0.45); stroke-width: 1.5; }
   .koi-roof-window { fill: #0c1824; }
   .koi-roof-window.is-lit { fill: var(--window-lit); opacity: 0.85; }
-
-  /*
-   * A cover over one lit window (useWindowLights): drawn, the light is out.
-   * Lights go out quickly and come back with a short warm-up, as in
-   * styles/city.ts.
-   */
-  .flicker-window {
-    opacity: 0;
-    transition: opacity 0.45s ease-in;
-  }
-
-  .flicker-window.is-off {
-    opacity: 1;
-    transition-duration: 0.18s;
-  }
 
   .koi-defs {
     position: absolute;
@@ -383,7 +371,7 @@ export const CityGapRoot = styled.div`
 
   /* Flat clouds behind the airship, each at its own height and speed. */
   .clouds,
-  .birds {
+  .drones {
     position: absolute;
     inset: 0;
   }
@@ -405,20 +393,40 @@ export const CityGapRoot = styled.div`
     }
   }
 
-  /* Gulls between the airship and the roofs; --bird-size is their wingspan at 1440px wide. */
-  .bird {
+  /*
+   * Delivery drones between the airship and the roofs; --drone-size is their
+   * width at 1440px wide. The frame pitches forward into its flight, and the
+   * parcel hangs straight below it from the body's center.
+   */
+  .drone {
     position: absolute;
-    top: var(--bird-top);
+    top: var(--drone-top);
     left: 0;
-    width: calc(var(--bird-size) * (0.45px + 0.0382vw));
-    transform: translate3d(var(--bird-still), 0, 0);
-    animation: ${fly} ${BIRD_LOOP_SECONDS}s linear var(--bird-delay) infinite;
+    width: calc(var(--drone-size) * (0.45px + 0.0382vw));
+    transform: translate3d(var(--drone-still), 0, 0);
+    animation: ${deliver} var(--drone-duration) linear var(--drone-delay) infinite;
   }
 
-  .bird-flap {
+  .drone-hover {
     display: block;
-    transform-origin: 50% 55%;
-    animation: ${flap} var(--bird-beat) ease-in-out infinite;
+    position: relative;
+    animation: ${hover} var(--drone-bob) ease-in-out infinite alternate;
+  }
+
+  .drone-frame {
+    display: block;
+    width: 100%;
+    height: auto;
+    rotate: 5deg;
+  }
+
+  .drone-parcel {
+    position: absolute;
+    top: 64%;
+    left: 37%;
+    width: 26%;
+    transform-origin: 50% 0;
+    animation: ${sway} calc(var(--drone-bob) * 1.3) ease-in-out infinite alternate;
 
     svg {
       display: block;
@@ -556,8 +564,9 @@ export const CityGapRoot = styled.div`
   &:not([data-scene-motion='running']) .ship-ticker,
   &:not([data-scene-motion='running']) .ship-prop i,
   &:not([data-scene-motion='running']) .cloud,
-  &:not([data-scene-motion='running']) .bird,
-  &:not([data-scene-motion='running']) .bird-flap,
+  &:not([data-scene-motion='running']) .drone,
+  &:not([data-scene-motion='running']) .drone-hover,
+  &:not([data-scene-motion='running']) .drone-parcel,
   &:not([data-scene-motion='running']) .gondola,
   &:not([data-scene-motion='running']) .gondola-cable {
     animation-play-state: paused;
@@ -570,8 +579,9 @@ export const CityGapRoot = styled.div`
   &[data-scene-motion='still'] .ship-ticker,
   &[data-scene-motion='still'] .ship-prop i,
   &[data-scene-motion='still'] .cloud,
-  &[data-scene-motion='still'] .bird,
-  &[data-scene-motion='still'] .bird-flap,
+  &[data-scene-motion='still'] .drone,
+  &[data-scene-motion='still'] .drone-hover,
+  &[data-scene-motion='still'] .drone-parcel,
   &[data-scene-motion='still'] .gondola,
   &[data-scene-motion='still'] .gondola-cable {
     animation: none;

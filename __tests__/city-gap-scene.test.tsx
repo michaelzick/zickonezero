@@ -30,7 +30,7 @@ describe('end-of-route city scene', () => {
     expect(scene.querySelector('.gap-night .koi')).toBeInTheDocument();
     expect(scene.querySelector('.gap-day .ship')).toBeInTheDocument();
     expect(scene.querySelectorAll('.gap-day .cloud').length).toBeGreaterThanOrEqual(3);
-    expect(scene.querySelectorAll('.gap-day .bird').length).toBeGreaterThanOrEqual(5);
+    expect(scene.querySelectorAll('.gap-day .drone .drone-parcel').length).toBeGreaterThanOrEqual(3);
     expect(scene.querySelector('.gap-day .roofs svg')).toBeInTheDocument();
     expect(scene.querySelector('.gap-day .roofs .gondola')).toBeInTheDocument();
     expect(scene.querySelectorAll('.gap-day .roofs .gondola-cable')).toHaveLength(2);
@@ -104,16 +104,6 @@ describe('end-of-route city scene', () => {
     uses.forEach((use) => {
       const id = use.getAttribute('href')?.replace(/^#/, '') ?? '';
       expect(container.querySelector(`[id="${id}"]`)).not.toBeNull();
-    });
-  });
-
-  it("gives the carp's rooftop window lights that switch, every third starting dark", () => {
-    const { container } = render(<CityGapScene />);
-    const covers = [...container.querySelectorAll('.koi-roof .flicker-window')];
-
-    expect(covers.length).toBeGreaterThanOrEqual(12);
-    covers.forEach((cover, index) => {
-      expect(cover.classList.contains('is-off')).toBe(index % 3 === 0);
     });
   });
 

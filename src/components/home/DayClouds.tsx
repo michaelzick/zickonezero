@@ -43,7 +43,7 @@ const DayClouds = () => (
           '--cloud-still': `${still}vw`,
         } as CSSProperties}
       >
-        <svg viewBox='0 0 300 100' focusable='false'>
+        <svg data-art viewBox='0 0 300 100' focusable='false'>
           <path d={OUTLINE} fill='#fffaf0' opacity='0.85' />
           <path d={SHADE} fill='#e7d6bf' opacity='0.55' />
         </svg>

@@ -261,19 +261,6 @@ describe('Homepage city', () => {
     expect(scene?.querySelector('a, button, [tabindex]')).toBeNull();
   });
 
-  it('gives the alley walls single windows whose lights can switch', () => {
-    renderHome();
-    const hero = screen.getByRole('region', { name: 'Michael Zick is ZICKONEZERO Creative' });
-
-    const covers = hero.querySelectorAll('.flicker-window');
-    // 24 on each wall, every third starting dark.
-    expect(covers).toHaveLength(48);
-    expect(hero.querySelectorAll('.flicker-window.is-off')).toHaveLength(16);
-    covers.forEach((cover) => {
-      expect(cover.closest('[aria-hidden="true"]')).not.toBeNull();
-    });
-  });
-
   it('labels each district for the minimap and keeps its decorations out of the reading order', () => {
     const { container } = renderHome();
 

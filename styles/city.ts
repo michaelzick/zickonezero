@@ -175,27 +175,6 @@ export const SkylineDepth = styled.div`
     opacity: 0.5;
   }
 
-  /*
-   * A cover over one lit window (src/hooks/useWindowLights.ts), painted in
-   * the building's color: drawn, the light is out. Lights go out quickly and
-   * come back with a short warm-up. Day windows are reflections, so covers
-   * only show at night.
-   */
-  .flicker-window {
-    fill: var(--bldg-far);
-    opacity: 0;
-    transition: opacity 0.45s ease-in;
-  }
-
-  &[data-depth='mid'] .flicker-window {
-    fill: var(--bldg-mid);
-  }
-
-  .flicker-window.is-off {
-    opacity: var(--night-only, 1);
-    transition-duration: 0.18s;
-  }
-
   .beacon {
     fill: var(--neon-red);
   }

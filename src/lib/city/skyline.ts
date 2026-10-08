@@ -30,17 +30,11 @@ export type SkylineOptions = {
   litRowChance: number;
   /** Share of lit runs drawn in the cool (cyan) window color. */
   coolShare: number;
-  /** Upper bound for the covers whose lights switch, drawn from the main stream. */
+  /** Upper bound for individually flickering windows. */
   flickerCount: number;
-  /**
-   * More switching covers, picked from their own stream, so asking for them
-   * never moves anything else on the layer.
-   */
-  extraFlicker?: number;
-  /** Size of one window and the gap after it, so covers fit whole dashes. */
+  /** Size of one window, so flicker windows cover exactly one dash. */
   windowWidth: number;
   windowHeight: number;
-  windowGap: number;
   neonStrips: number;
   billboards: number;
   beacons: number;
@@ -68,19 +62,7 @@ type Building = { x: number; width: number; top: number; roof: number; antenna: 
 const NEON_TONES: readonly NeonTone[] = ['magenta', 'cyan', 'violet', 'amber', 'cyan', 'magenta', 'red'];
 
 /** Hard cap so a misconfigured layer can never flood the DOM. */
-export const MAX_FLICKER_WINDOWS = 32;
-
-// Extra covers are picked from their own stream (see SkylineOptions.extraFlicker).
-const FLICKER_SEED_OFFSET = 7919;
-
-/** A run of lit windows on one floor: where it starts and how many windows it holds. */
-type LitRun = { x: number; y: number; windows: number };
-
-/**
- * A cover's size cycles through a single window and rooms of two and three,
- * set by its index, so it costs no random draws.
- */
-const roomSize = (index: number, run: LitRun) => Math.min(1 + (index % 3), run.windows);
+export const MAX_FLICKER_WINDOWS = 16;
 
 /** The building outline and its highest point (where a beacon would sit). */
 const roofShape = (building: Building, baseline: number): { path: string; peak: Beacon } => {
@@ -143,8 +125,7 @@ export const generateSkyline = (options: SkylineOptions): SkylineLayer => {
 
   const lit: string[] = [];
   const cool: string[] = [];
-  const litRuns: LitRun[] = [];
-  const pitch = options.windowWidth + options.windowGap;
+  const litSpots: SkylineRect[] = [];
 
   buildings.forEach((building) => {
     const pad = Math.max(2, Math.round(building.width * 0.12));
@@ -172,50 +153,24 @@ export const generateSkyline = (options: SkylineOptions): SkylineLayer => {
         lit.push(segment);
       }
 
-      // Dashes start at the segment start, one window per pitch.
-      litRuns.push({
+      // The first window of the run; dashes start at the segment start.
+      litSpots.push({
         x: start,
         y: y - Math.round(options.windowHeight / 2),
-        windows: Math.floor((length + options.windowGap) / pitch),
+        width: options.windowWidth,
+        height: options.windowHeight,
       });
     }
   });
 
-  // A cover over `count` windows of a run, starting `offset` windows in.
-  const cover = (run: LitRun, offset: number, count: number): SkylineRect => ({
-    x: run.x + offset * pitch,
-    y: run.y,
-    width: count * pitch - options.windowGap,
-    height: options.windowHeight,
-  });
-
-  // The first covers start at their run's first window. These picks come from
-  // the main stream, so their count is fixed where later signs depend on it.
-  const flickerTarget = Math.min(options.flickerCount, MAX_FLICKER_WINDOWS, litRuns.length);
+  const flickerTarget = Math.min(options.flickerCount, MAX_FLICKER_WINDOWS, litSpots.length);
   const flicker: SkylineRect[] = [];
   const taken = new Set<number>();
   while (flicker.length < flickerTarget) {
-    const index = random.int(0, litRuns.length - 1);
+    const index = random.int(0, litSpots.length - 1);
     if (!taken.has(index)) {
       taken.add(index);
-      flicker.push(cover(litRuns[index], 0, roomSize(flicker.length, litRuns[index])));
-    }
-  }
-
-  // Extra covers anywhere along other runs, from their own stream.
-  const extraRandom = createRandom(options.seed + FLICKER_SEED_OFFSET);
-  const extraTarget = Math.min(
-    flicker.length + (options.extraFlicker ?? 0),
-    MAX_FLICKER_WINDOWS,
-    litRuns.length,
-  );
-  while (flicker.length < extraTarget) {
-    const index = extraRandom.int(0, litRuns.length - 1);
-    if (!taken.has(index)) {
-      taken.add(index);
-      const run = litRuns[index];
-      const count = roomSize(flicker.length, run);
-      flicker.push(cover(run, extraRandom.int(0, run.windows - count), count));
+      flicker.push(litSpots[index]);
     }
   }
 

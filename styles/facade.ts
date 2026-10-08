@@ -90,25 +90,6 @@ export const facadePalette = css`
     opacity: calc(0.55 * var(--night-only, 1));
   }
 
-  /*
-   * A cover over one lit window (src/hooks/useWindowLights.ts): drawn, the
-   * light is out. Lights go out quickly and come back with a short warm-up.
-   * Day windows are reflections, so covers only show at night.
-   */
-  .flicker-window {
-    opacity: 0;
-    transition: opacity 0.45s ease-in;
-  }
-
-  .flicker-window.is-off {
-    opacity: var(--night-only, 1);
-    transition-duration: 0.18s;
-  }
-
-  .flicker-pane {
-    fill: var(--facade-pane);
-  }
-
   .pipes {
     stroke: var(--facade-pipe);
     stroke-width: 7;
