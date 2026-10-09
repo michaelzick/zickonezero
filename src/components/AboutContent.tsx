@@ -2,6 +2,7 @@ import {
   useAppDispatch,
   useAppSelector
 } from '../hooks';
+import Head from 'next/head';
 import { useCallback, useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from 'react';
 import styled, { keyframes } from 'styled-components';
 import {
@@ -21,8 +22,10 @@ import {
 import { neonButton, notchPolygon, notchStrokes, scanlines } from '../../styles/hud';
 import { AnimatedSection } from '../../styles/projectShowcases';
 import { THEME } from '../../styles/theme';
-import { TopNavContent, FooterContent } from '../components';
+import useBodyScrollLock from '../hooks/useBodyScrollLock';
 import { trackEvent } from '../lib/analytics';
+import FooterContent from './FooterContent';
+import TopNavContent from './TopNavContent';
 import TrackedLink from './TrackedLink';
 
 /** Corner brackets on all four corners plus centre ticks: a camera viewfinder. */
@@ -73,6 +76,10 @@ const ctaGlint = keyframes`
   100% { background-position: -60% 0; }
 `;
 
+// The hero's photo is the page's largest paint; it is preloaded below because
+// a CSS background is otherwise found only after the styles apply.
+const ABOUT_HERO_IMAGE = '/img/illustrated-mt-hood-selfie.webp';
+
 const AboutHero = styled.section`
   position: relative;
   min-height: calc(100svh - 5em);
@@ -80,7 +87,7 @@ const AboutHero = styled.section`
   align-items: flex-end;
   overflow: hidden;
   isolation: isolate;
-  background: url('/img/illustrated-mt-hood-selfie.webp') center center / cover no-repeat;
+  background: url('${ABOUT_HERO_IMAGE}') center center / cover no-repeat;
   background-color: var(--color-darkest);
 
   /* Neon spill: magenta from the street below, cyan from the signs above. */
@@ -455,7 +462,6 @@ const AboutModalCopy = styled(DemoStokeMiniCardModalCopy)`
   text-align: left;
   font-size: 2em;
   line-height: 1.6;
-  max-height: calc(88vh - 5.5em);
   padding-left: 0.7em;
   border-left: 1px solid var(--hud-panel-border);
 
@@ -481,9 +487,11 @@ const AboutModalTitle = styled(DemoStokeMiniCardModalTitle)`
 const AboutContent = () => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
-  const aboutSectionRef = useRef<HTMLDivElement | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const openButtonRef = useRef<HTMLButtonElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
+
+  useBodyScrollLock(isAboutModalOpen);
 
   const openAboutModal = useCallback(() => {
     trackEvent('modal_open', {
@@ -503,28 +511,17 @@ const AboutContent = () => {
       page_path: window.location.pathname,
     });
     setIsAboutModalOpen(false);
+    openButtonRef.current?.focus();
   }, []);
 
   const handleAboutModalClick = useCallback((event: ReactMouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
   }, []);
 
+  // The bio stays in the page's HTML, so move focus into it when it opens.
   useEffect(() => {
-    const node = aboutSectionRef.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      });
-    }, { threshold: 0.2 });
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+    if (isAboutModalOpen) closeButtonRef.current?.focus();
+  }, [isAboutModalOpen]);
 
   useEffect(() => {
     if (!isAboutModalOpen) return undefined;
@@ -543,16 +540,17 @@ const AboutContent = () => {
 
   return (
     <>
+      <Head>
+        <link key='about-hero-image' rel='preload' as='image' href={ABOUT_HERO_IMAGE} fetchPriority='high' />
+      </Head>
       <TopNavContent />
       <Wrapper
         isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}
       >
-        <AnimatedSection
-          ref={aboutSectionRef}
-          data-animate-id='about-hero'
-          className={isVisible ? 'visible' : undefined}
-        >
+        {/* The hero opens the page, so it boots up from the first paint
+            rather than waiting for scripts to see it. */}
+        <AnimatedSection data-animate-id='about-hero' data-reveal='load' className='visible'>
           <AboutHero aria-label='About page hero'>
             <VisuallyHidden>About Michael Zick</VisuallyHidden>
             <AboutHeroHud aria-hidden='true'>
@@ -580,7 +578,7 @@ const AboutContent = () => {
               </div>
               <div className='feed'>Feed 04 // Live</div>
             </AboutHeroHud>
-            <AboutFixedCta type='button' onClick={openAboutModal} aria-controls='about-bio' aria-expanded={isAboutModalOpen} aria-haspopup='dialog'>
+            <AboutFixedCta ref={openButtonRef} type='button' onClick={openAboutModal} aria-controls='about-bio' aria-expanded={isAboutModalOpen} aria-haspopup='dialog'>
               About Michael
             </AboutFixedCta>
           </AboutHero>
@@ -594,7 +592,7 @@ const AboutContent = () => {
               aria-label='About Michael'
               onClick={handleAboutModalClick}
             >
-              <DemoStokeMiniCardModalClose type='button' onClick={closeAboutModal} aria-label='Close dialog'>
+              <DemoStokeMiniCardModalClose ref={closeButtonRef} type='button' onClick={closeAboutModal} aria-label='Close dialog'>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path d="m6 6 12 12M6 18 18 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -603,7 +601,7 @@ const AboutContent = () => {
                 <span className='shard'>Shard // bio.dat</span>
                 <span className='decrypted'>Decrypted</span>
               </AboutModalMeta>
-              <AboutModalTitle>About Michael</AboutModalTitle>
+              <AboutModalTitle as='h2'>About Michael</AboutModalTitle>
               <AboutModalCopy>
                 <p>
                   Michael is a results-oriented Product Leader with a background in product engineering, UX design,

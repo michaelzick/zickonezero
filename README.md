@@ -151,7 +151,8 @@ custom domains, trailing-slash handling, and real 404 responses. The zone's
 its descendants), sends the removed `/michael-zick-coaching` route to
 `https://www.niceguyuniversity.com/`, and `public/_headers` configures the
 security headers (see [Rackloose](#rackloose) for why `script-src` allows
-`blob:`).
+`blob:`) and a year-long `immutable` cache for the content-hashed
+`/_next/static/*` files.
 The contact form continues using the separate `zickonezero-contact` Worker.
 
 Workers Builds uses this GitHub repository's `main` branch with Node 24,
@@ -166,6 +167,10 @@ npx wrangler@4.133.0 deploy
 After deployment, verify real HTTP responses: existing routes return their own
 HTML and canonical, missing routes/assets return 404, legacy paths return 301,
 social assets have an image content type, and `sitemap.xml` includes new pages.
+
+Run Lighthouse's SEO audit against `https://www.zickonezero.com/`, not a branch
+preview: Cloudflare sends previews `x-robots-tag: noindex`, which fails the
+crawlability audit and caps the SEO score at 69.
 
 ### DigitalOcean rollback
 

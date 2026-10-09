@@ -38,7 +38,7 @@ const StoriesContent = ({
           >
             <section id='story-introduction'>
               <CompactIntroHeaderRow>
-                <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' />
+                <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' loading='lazy' />
                 <div>
                   <h2 className='tab-header page-header'>DemoStoke User Stories</h2>
                   <PitchDeckLink

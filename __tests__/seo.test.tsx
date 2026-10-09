@@ -10,7 +10,15 @@ jest.mock('next/head', () => ({
 }));
 
 import Seo from '../src/components/Seo';
-import { contactPageJsonLd, creativeWorkJsonLd, DEFAULT_OG_IMAGE } from '../src/lib/seo';
+import {
+  contactPageJsonLd,
+  creativeWorkJsonLd,
+  DEFAULT_OG_IMAGE,
+  PERSON_ID,
+  personJsonLd,
+  profilePageJsonLd,
+  webSiteJsonLd,
+} from '../src/lib/seo';
 
 const ORIGIN = 'https://www.zickonezero.com';
 
@@ -114,6 +122,33 @@ describe('Seo', () => {
     expect(
       document.querySelector('meta[name="robots"]')?.getAttribute('content')
     ).toContain('noindex');
+  });
+
+  it('omits the canonical from a page kept out of search', () => {
+    render(<Seo title='Page Not Found' path='/404/' noIndex />);
+    expect(document.querySelector('link[rel="canonical"]')).toBeNull();
+  });
+
+  it('escapes "<" in JSON-LD so the data cannot close its script tag', () => {
+    render(<Seo path='/' jsonLd={{ '@type': 'Thing', name: '</script><b>x</b>' }} />);
+
+    const script = document.querySelector('script[type="application/ld+json"]');
+    expect(script?.innerHTML).not.toContain('</script>');
+    expect(JSON.parse(script?.textContent ?? '{}').name).toBe('</script><b>x</b>');
+  });
+
+  it('names the same Person on every page', () => {
+    expect(PERSON_ID).toBe(`${ORIGIN}/#person`);
+    expect(personJsonLd()['@id']).toBe(PERSON_ID);
+    expect((profilePageJsonLd().mainEntity as Record<string, unknown>)['@id']).toBe(PERSON_ID);
+    expect((contactPageJsonLd().mainEntity as Record<string, unknown>)['@id']).toBe(PERSON_ID);
+    const work = creativeWorkJsonLd({ name: 'Riptyde', description: 'Surf forecasts.', path: '/riptyde/' });
+    expect((work.author as Record<string, unknown>)['@id']).toBe(PERSON_ID);
+  });
+
+  it('uses the trailing-slash home URL for the site and the person', () => {
+    expect(webSiteJsonLd().url).toBe(`${ORIGIN}/`);
+    expect(personJsonLd().url).toBe(`${ORIGIN}/`);
   });
 
   it('omits the robots meta by default', () => {

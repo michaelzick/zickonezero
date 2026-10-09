@@ -1,5 +1,6 @@
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { trackEvent, trackLinkClick } from '../../../lib/analytics';
+import { heroImageSources } from '../../../lib/responsiveImages';
 
 import {
   AnimatedSection,
@@ -16,6 +17,8 @@ import {
 } from '../../../../styles/projectShowcases';
 import { SetAnimatedSectionRef, VisibleSections } from '../../showcaseTypes';
 
+const HERO_IMAGE_SRC = '/img/demostoke/case-study/ds-hero-surf.webp';
+
 type IntroSectionProps = {
   setAnimatedSectionRef: SetAnimatedSectionRef;
   visibleSections: VisibleSections;
@@ -28,6 +31,7 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
   <AnimatedSection
     ref={setAnimatedSectionRef('section-intro')}
     data-animate-id='section-intro'
+    data-reveal='load'
     className={visibleSections['section-intro'] ? 'visible' : undefined}
   >
     <section id='introduction' className='story-section'>
@@ -35,9 +39,11 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
       <HeroGrid>
         <CaseStudyHeroMediaFrame className='image-animate'>
           <img
-            src='/img/demostoke/case-study/ds-hero-surf.webp'
+            src={HERO_IMAGE_SRC}
+            {...heroImageSources(HERO_IMAGE_SRC)}
             alt='DemoStoke homepage hero showing a surfer riding through the wave'
             loading='eager'
+            fetchPriority='high'
           />
         </CaseStudyHeroMediaFrame>
         <HeroContent className='text-animate'>

@@ -14,7 +14,8 @@ import {
   NavBrandGroup,
   NavControls
 } from '../../styles/nav';
-import { LinkBoxContent, AnimatedMobileMenu } from '.';
+import AnimatedMobileMenu from './AnimatedMobileMenu';
+import LinkBoxContent from './LinkBoxContent';
 import { MouseEvent, ReactElement, useEffect, useRef } from 'react';
 import useScrolledPast from '../hooks/useScrolledPast';
 import { trackEvent } from '../lib/analytics';

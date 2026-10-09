@@ -500,21 +500,56 @@ const bootUp = keyframes`
   }
 `;
 
+/*
+ * The scan line is a band painted on a still overlay (see AnimatedSection's
+ * ::after) and slid down by background-position. Moving the overlay itself
+ * with top made Chrome count every frame as a layout shift. The line (2px)
+ * and its glow (32px) are different heights, so each percentage position
+ * carries its own pixel offset; together they keep the two centered on each
+ * other the whole way down.
+ */
 const scanLine = keyframes`
   0% {
-    top: -2px;
+    background-position: 0 calc(0% + 16px), 0 calc(0% + 1px);
     opacity: 1;
   }
 
   58% {
-    top: calc(100% + 1em - 2px);
+    background-position: 0 calc(100% - 16px), 0 calc(100% - 1px);
     opacity: 1;
   }
 
   72%,
   100% {
-    top: calc(100% + 1em - 2px);
+    background-position: 0 calc(100% - 16px), 0 calc(100% - 1px);
     opacity: 0;
+  }
+`;
+
+/* A page's opening hero boots up with the same settle and scan line, but
+   no wipe and no fade: Chrome never credits Largest Contentful Paint to
+   content first painted clipped or transparent, and credits a rising image
+   only once it lands, which held these pages' LCP back by seconds. */
+const bootUpOpening = keyframes`
+  0% {
+    transform: translate3d(0, 14px, 0);
+  }
+
+  58% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  66% {
+    transform: translate3d(-3px, 0, 0);
+  }
+
+  74% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  82%,
+  100% {
+    transform: none;
   }
 `;
 
@@ -525,16 +560,23 @@ export const AnimatedSection = styled.div`
   opacity: 0;
   transform: translate3d(0, 14px, 0);
 
+  /* The scan line's overlay reaches 16px past where the line starts and
+     stops (just above the top, 1em below the bottom), so its glow is never
+     cut off. */
   &::after {
     content: '';
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
+    top: -18px;
+    bottom: calc(-1em - 16px);
     z-index: 2;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--city-accent) 18%, #fff 50%, var(--city-accent) 82%, transparent);
-    box-shadow: 0 0 12px 2px var(--city-glow);
+    background-image:
+      linear-gradient(90deg, transparent, var(--city-accent) 18%, #fff 50%, var(--city-accent) 82%, transparent),
+      linear-gradient(transparent, var(--city-glow) 50%, transparent);
+    background-repeat: no-repeat;
+    background-size: 100% 2px, 100% 32px;
+    background-position: 0 calc(0% + 16px), 0 calc(0% + 1px);
     opacity: 0;
     pointer-events: none;
   }
@@ -568,6 +610,24 @@ export const AnimatedSection = styled.div`
     transform: none;
   }
 
+  /* A page's opening hero (data-reveal='load') is rendered visible, so it
+     boots up from the first paint instead of waiting for scripts. Its content
+     is in place from that first frame while the panel settles and the scan
+     line sweeps over it (see bootUpOpening). */
+  &[data-reveal='load'] {
+    opacity: 1;
+  }
+
+  &[data-reveal='load'].visible {
+    animation-name: ${bootUpOpening};
+  }
+
+  &[data-reveal='load'] .image-animate,
+  &[data-reveal='load'] .text-animate {
+    opacity: 1;
+    transform: none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     opacity: 1;
     transform: none;
@@ -587,6 +647,10 @@ export const AnimatedSection = styled.div`
       opacity: 1;
       transform: none;
       transition: none;
+    }
+
+    &[data-reveal='load'].visible {
+      animation: none;
     }
   }
 `;

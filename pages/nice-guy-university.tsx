@@ -1,4 +1,4 @@
-import { NiceGuyUniversityContent } from '../src/components';
+import NiceGuyUniversityContent from '../src/components/NiceGuyUniversityContent';
 import Seo from '../src/components/Seo';
 import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
 

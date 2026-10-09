@@ -165,7 +165,18 @@ const LinkBoxContent = () => {
                       tabIndex={isOpen ? 0 : -1}
                       ariaCurrent={href === currentPath ? 'page' : undefined}
                     >
-                      {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
+                      {/* Lazy, so React doesn't preload every closed menu's icons with the page. */}
+                      {icon ? (
+                        <img
+                          className='case-logo'
+                          src={icon}
+                          alt={iconAlt || `${label} logo`}
+                          width='96'
+                          height='96'
+                          loading='lazy'
+                          decoding='async'
+                        />
+                      ) : null}
                       {label}
                     </TrackedLink>
                   )}

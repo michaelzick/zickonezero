@@ -24,7 +24,8 @@ import {
   ContactSuccess,
   ContactUplink,
 } from '../../styles/contact';
-import { TopNavContent, FooterContent } from '.';
+import FooterContent from './FooterContent';
+import TopNavContent from './TopNavContent';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { trackEvent } from '../lib/analytics';
 import {

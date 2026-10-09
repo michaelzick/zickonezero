@@ -11,9 +11,9 @@ import {
 } from '../showMobileMenuSlice';
 import { useState, useRef, useEffect, memo, useCallback, type MouseEvent } from 'react';
 
-import FsLightbox from 'fslightbox-react';
-
-import { TopNavContent, GridContent, FooterContent } from '.';
+import FooterContent from './FooterContent';
+import GridContent from './GridContent';
+import TopNavContent from './TopNavContent';
 import { Wrapper } from '../../styles';
 import useActiveSection from '../hooks/useActiveSection';
 import { trackEvent } from '../lib/analytics';
@@ -25,6 +25,7 @@ import District from './home/District';
 import HeroScene from './home/HeroScene';
 import HoloBillboard from './home/HoloBillboard';
 import HomeHud from './home/HomeHud';
+import LazyLightbox from './LazyLightbox';
 import type { DistrictTone, HomeSectionKey, WorksData } from '../types';
 
 type MainContentProps = {
@@ -120,10 +121,14 @@ const HUD_DISTRICTS = HOME_DISTRICTS.map(({ section, tabLabel, title, tone }) =>
 const HOME_ACCENT: CityAccent = 'cyan';
 
 const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentProps = {}) => {
-  const { worksDataReversed: worksDataReversedStore } = useAppSelector(selectData);
   // Prefer the prop (populated during static generation) and fall back to the
   // store so `<MainContent />` still renders when driven by a preloaded store.
-  const worksDataReversed = worksDataReversedProp ?? worksDataReversedStore;
+  // Only read the store without the prop: pages/index.tsx syncs the same data
+  // into it after hydration, which would otherwise re-render the whole city.
+  const worksDataReversedStore = useAppSelector(
+    (state) => (worksDataReversedProp ? undefined : selectData(state).worksDataReversed),
+  );
+  const worksDataReversed = worksDataReversedProp ?? worksDataReversedStore ?? [];
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
   const sectionRefs = useRef<Record<HomeSectionKey, HTMLElement | null>>({
@@ -284,7 +289,7 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
         {/* Open air at the end of the route, with a carp streamer by night and an airship by day. */}
         <CityGapScene />
 
-        {imgs && <FsLightbox
+        {imgs && <LazyLightbox
           toggler={lightboxController.toggler}
           sources={imgs}
           slide={1}

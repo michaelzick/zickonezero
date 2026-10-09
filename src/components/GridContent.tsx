@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
 import { GigCarouselControls, GigGrid } from '../../styles/district';
-import { Thumbnail } from '.';
+import Thumbnail from './Thumbnail';
 import useHorizontalGallery from '../hooks/useHorizontalGallery';
 import usePowerOn from '../hooks/usePowerOn';
 

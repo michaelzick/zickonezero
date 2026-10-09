@@ -1,6 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 
-import { FooterContent, TopNavContent } from '../src/components';
+import FooterContent from '../src/components/FooterContent';
+import TopNavContent from '../src/components/TopNavContent';
 import Seo from '../src/components/Seo';
 import TrackedLink from '../src/components/TrackedLink';
 import { Wrapper } from '../styles';

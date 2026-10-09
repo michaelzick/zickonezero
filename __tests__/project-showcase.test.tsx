@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import ProjectShowcase from '../src/components/ProjectShowcase';
@@ -8,6 +8,7 @@ jest.mock('fslightbox-react', () => function MockFsLightbox(props: {
   toggler: boolean;
   slide: number;
   sources: string[];
+  openOnMount?: boolean;
 }) {
   return (
     <div
@@ -15,6 +16,7 @@ jest.mock('fslightbox-react', () => function MockFsLightbox(props: {
       data-slide={String(props.slide)}
       data-source-count={String(props.sources.length)}
       data-toggler={String(props.toggler)}
+      data-open-on-mount={String(Boolean(props.openOnMount))}
     />
   );
 });
@@ -137,16 +139,23 @@ describe('ProjectShowcase', () => {
       />
     );
 
-    const lightbox = screen.getByTestId('project-showcase-lightbox');
-
-    expect(lightbox).toHaveAttribute('data-slide', '1');
-    expect(lightbox).toHaveAttribute('data-source-count', '2');
-    expect(lightbox).toHaveAttribute('data-toggler', 'false');
+    // The lightbox's script loads on the first open, not with the page.
+    expect(screen.queryByTestId('project-showcase-lightbox')).not.toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Open image: Second mock screenshot' }));
 
+    const lightbox = await screen.findByTestId('project-showcase-lightbox');
     expect(lightbox).toHaveAttribute('data-slide', '2');
+    expect(lightbox).toHaveAttribute('data-source-count', '2');
     expect(lightbox).toHaveAttribute('data-toggler', 'true');
+    expect(lightbox).toHaveAttribute('data-open-on-mount', 'true');
+
+    // Once mounted, later opens flip the same lightbox's toggler.
+    await user.click(screen.getByRole('button', { name: 'Open image: First mock screenshot' }));
+
+    await waitFor(() => expect(lightbox).toHaveAttribute('data-slide', '1'));
+    expect(lightbox).toHaveAttribute('data-toggler', 'false');
+    expect(screen.getAllByTestId('project-showcase-lightbox')).toHaveLength(1);
   });
 
   it('tracks showcase lightbox opens', async () => {

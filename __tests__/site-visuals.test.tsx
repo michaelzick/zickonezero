@@ -1,3 +1,6 @@
+import fs from 'fs';
+import path from 'path';
+
 import AboutContent from '../src/components/AboutContent';
 import MainContent from '../src/components/MainContent';
 import LinkBoxContent from '../src/components/LinkBoxContent';
@@ -41,7 +44,8 @@ describe('Home and About visuals', () => {
     expect(screen.queryByAltText('Illustrated self-portrait near Mt. Hood')).not.toBeInTheDocument();
     expect(screen.getAllByRole('heading', { name: 'Case Studies' }).length).toBeGreaterThan(0);
     expect(screen.getAllByRole('button', { name: 'Product Engineering' }).length).toBeGreaterThan(0);
-    expect(screen.getByRole('heading', { level: 2, name: 'Product Engineering' })).toBeInTheDocument();
+    // The footer has its own "Product Engineering" column title.
+    expect(within(screen.getByRole('main')).getByRole('heading', { level: 2, name: 'Product Engineering' })).toBeInTheDocument();
   });
 
   it('resets the homepage scroll position on mount', () => {
@@ -72,6 +76,35 @@ describe('Home and About visuals', () => {
     expect(getMatchingRuleValues(linkRow, 'flex-shrink')).toContain('0');
     expect(getMatchingRuleValues(aboutLink, 'min-height')).toContain('44px');
     expect(getMatchingRuleValues(projectMenu, 'min-height')).toContain('44px');
+  });
+
+  it('offers the billboard slides at sizes for each screen', () => {
+    renderWithProviders(<MainContent />, {
+      preloadedState: HOME_PRELOADED_STATE,
+    });
+
+    const slides = Array.from(screen.getByLabelText('Demostoke screenshot scroller').querySelectorAll('img'));
+    expect(slides.length).toBeGreaterThan(0);
+    slides.forEach((slide) => {
+      const candidates = (slide.getAttribute('srcset') ?? '').split(', ').map((candidate) => candidate.split(' '));
+      expect(candidates.map(([, width]) => width)).toEqual(['960w', '1440w', '1920w']);
+      expect(candidates[2][0]).toBe(slide.getAttribute('src'));
+      candidates.forEach(([url]) => {
+        expect(fs.existsSync(path.join(process.cwd(), 'public', url))).toBe(true);
+      });
+      expect(slide).toHaveAttribute('sizes');
+    });
+  });
+
+  it('loads the closed menus\' logos lazily from small copies', () => {
+    renderWithProviders(<LinkBoxContent />);
+
+    const logos = Array.from(document.querySelectorAll<HTMLImageElement>('img.case-logo'));
+    expect(logos.length).toBeGreaterThan(0);
+    logos.forEach((logo) => {
+      expect(logo).toHaveAttribute('loading', 'lazy');
+      expect(logo.getAttribute('src')).toMatch(/^\/img\/nav\/.+\.webp$/);
+    });
   });
 
   it('syncs the homepage carousel horizontally as vertical scroll progresses', async () => {
@@ -263,5 +296,34 @@ describe('Home and About visuals', () => {
     expect(screen.queryByRole('dialog', { name: 'About Michael' })).not.toBeInTheDocument();
     expect(biography).toBeInTheDocument();
     expect(biography).not.toBeVisible();
+  });
+
+  it('scrolls the About bio inside its dialog while the page behind holds still', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<AboutContent />);
+
+    const aboutCta = screen.getByRole('button', { name: 'About Michael' });
+    await user.click(aboutCta);
+
+    const aboutDialog = screen.getByRole('dialog', { name: 'About Michael' });
+    expect(within(aboutDialog).getByRole('heading', { level: 2, name: 'About Michael' })).toBeInTheDocument();
+    expect(within(aboutDialog).getByRole('button', { name: 'Close dialog' })).toHaveFocus();
+    expect(document.documentElement.style.overflow).toBe('hidden');
+
+    // The plate is a flex column capped to the visible height, and the copy
+    // takes what the header leaves, so it scrolls at any header height.
+    expect(getMatchingRuleValues(aboutDialog, 'max-height')).toContain('88dvh');
+    expect(getMatchingRuleValues(aboutDialog, 'flex-direction')).toContain('column');
+    const copy = within(aboutDialog).getByText(/results-oriented Product Leader/).parentElement as HTMLElement;
+    expect(getMatchingRuleValues(copy, 'overflow-y')).toContain('auto');
+    expect(getMatchingRuleValues(copy, 'min-height')).toContain('0');
+    expect(getMatchingRuleValues(copy, 'overscroll-behavior')).toContain('contain');
+    expect(getMatchingRuleValues(copy, 'max-height').some((value) => value.includes('88vh'))).toBe(false);
+
+    await user.keyboard('{Escape}');
+
+    expect(screen.queryByRole('dialog', { name: 'About Michael' })).not.toBeInTheDocument();
+    expect(aboutCta).toHaveFocus();
+    expect(document.documentElement.style.overflow).toBe('');
   });
 });
