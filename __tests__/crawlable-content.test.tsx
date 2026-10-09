@@ -5,6 +5,7 @@ import { renderToString } from 'react-dom/server.node';
 import { Provider } from 'react-redux';
 
 import AboutContent from '../src/components/AboutContent';
+import ContactContent from '../src/components/ContactContent';
 import DemoStokeContent from '../src/components/DemoStokeContent';
 import AntisyphonContent from '../src/components/AntisyphonContent';
 import NiceGuyUniversityContent from '../src/components/NiceGuyUniversityContent';
@@ -92,5 +93,41 @@ describe('Opening heroes in the static HTML', () => {
     const intro = html.querySelector('[data-animate-id="section-intro"]');
     expect(intro).toHaveClass('visible');
     expect(intro).toHaveAttribute('data-reveal', 'load');
+  });
+});
+
+describe('Main landmark in the static HTML', () => {
+  it.each([
+    ['About', () => <AboutContent />],
+    ['Contact', () => <ContactContent />],
+    ['DemoStoke', () => <DemoStokeContent />],
+    ['Antisyphon', () => <AntisyphonContent />],
+    ['Nice Guy University', () => <NiceGuyUniversityContent />],
+    ['a project showcase', () => (
+      <ProjectShowcase
+        title='Static showcase'
+        heroImage={{ src: '/hero.webp', alt: 'Static hero' }}
+        roleBullets={['product engineering']}
+        projectLink={{ href: 'https://example.com' }}
+        sections={[]}
+      />
+    )],
+  ] as const)('gives %s one main landmark holding the h1, with the footer outside it', (_name, renderPage) => {
+    const html = renderStaticHtml(renderPage());
+
+    const mains = html.querySelectorAll('main');
+    expect(mains).toHaveLength(1);
+    expect(mains[0].querySelector('h1')).not.toBeNull();
+    expect(html.querySelector('footer')).not.toBeNull();
+    expect(mains[0].querySelector('footer')).toBeNull();
+
+    // Visible headings never skip a level, footer included.
+    const levels = Array.from(html.querySelectorAll('h1, h2, h3, h4, h5, h6'))
+      .filter((heading) => !heading.closest('[hidden], [aria-hidden="true"]'))
+      .map((heading) => Number(heading.tagName[1]));
+    expect(levels[0]).toBe(1);
+    levels.forEach((level, index) => {
+      if (index > 0) expect(level).toBeLessThanOrEqual(levels[index - 1] + 1);
+    });
   });
 });

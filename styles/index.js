@@ -99,7 +99,9 @@ export const PitchDeckLink = styled(WhiteTransitionAnchor)`
   }
 `;
 
-export const Wrapper = styled.div`
+// Every page's content sits in this one wrapper, between the nav and the
+// footer, so it is the page's main landmark.
+export const Wrapper = styled.main`
   ${props => {
     if (props.isAtPage && props.$isProjectPage) return 'padding-top: 7em;';
     // The homepage hero runs full-bleed under the transparent nav.
@@ -399,7 +401,8 @@ export const FooterColumn = styled.div`
   }
 `;
 
-export const FooterColumnTitle = styled.h3`
+// h2, since the footer follows pages whose only visible heading is the h1.
+export const FooterColumnTitle = styled.h2`
   margin: 0;
   padding-left: 0.65em;
   border-left: 3px solid var(--footer-tone, var(--neon-cyan));
