@@ -33,9 +33,10 @@ const getPagePath = () => {
 /** Dispatched on window by the Amplitude init script (SiteAnalyticsScripts) once the SDK is ready. */
 export const AMPLITUDE_READY_EVENT = 'zickonezero:amplitude-ready';
 
-// Amplitude loads once the page is idle, so events tracked before then (the
-// first page view, an early click) wait here and go out in order when it
-// arrives. The cap keeps a blocked SDK from growing the queue without bound.
+// Amplitude loads a few seconds after the page does, so events tracked before
+// then (the first page view, an early click) wait here and go out in order
+// when it arrives. The cap keeps a blocked SDK from growing the queue without
+// bound.
 const MAX_PENDING_EVENTS = 50;
 
 type PendingEvent = { name: string; payload: AnalyticsEventPayload };
