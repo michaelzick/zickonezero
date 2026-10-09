@@ -35,6 +35,7 @@ import TopNavContent from './TopNavContent';
 import TrackedCtaLink from './TrackedCtaLink';
 import LazyLightbox from './LazyLightbox';
 import { trackEvent } from '../lib/analytics';
+import { heroImageSources } from '../lib/responsiveImages';
 import {
   useAppSelector,
   useAppDispatch
@@ -116,7 +117,7 @@ const ProjectShowcase = ({
             <AnimatedSection data-section-index={-1} data-reveal='load' className='visible'>
               <HeroGrid>
                 <HeroImageFrame>
-                  <img className="image-animate" src={heroImage.src} alt={heroImage.alt} />
+                  <img className="image-animate" src={heroImage.src} {...heroImageSources(heroImage.src)} alt={heroImage.alt} fetchPriority="high" />
                 </HeroImageFrame>
                 <HeroContent className="text-animate">
                   <Title>{title}</Title>

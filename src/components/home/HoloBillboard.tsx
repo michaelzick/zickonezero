@@ -6,6 +6,7 @@ import usePowerOn from '../../hooks/usePowerOn';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion';
 import { generateFacade } from '../../lib/city/facade';
 import { subscribeToScroll } from '../../lib/city/scrollSignal';
+import { widthSrcSet } from '../../lib/responsiveImages';
 import AlleyWall from '../city/AlleyWall';
 
 type Slide = {
@@ -45,10 +46,8 @@ const SLIDES: readonly Slide[] = [
   },
 ];
 
-const slideSrcSet = (src: string) => [960, 1440]
-  .map((width) => `${src.replace(/\.webp$/, `-${width}w.webp`)} ${width}w`)
-  .concat(`${src} 1920w`)
-  .join(', ');
+// Each slide is a 1920px copy with 960px and 1440px copies beside it.
+const slideSrcSet = (src: string) => widthSrcSet(src, [960, 1440], 1920);
 
 // How wide a slide's image renders (it covers the slide by height, see
 // styles/billboard.ts): about the screen's width on phones, at most 960px.

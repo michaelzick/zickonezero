@@ -73,6 +73,8 @@ describe('Opening heroes in the static HTML', () => {
     const hero = html.querySelector('[data-section-index="-1"]');
     expect(hero).toHaveClass('visible');
     expect(hero).toHaveAttribute('data-reveal', 'load');
+    // Its image is the page's largest paint, so it loads ahead of the rest.
+    expect(hero?.querySelector('img')).toHaveAttribute('fetchpriority', 'high');
     // Sections further down still boot up as they scroll in.
     expect(html.querySelector('[data-section-index="0"]')).not.toHaveClass('visible');
   });
@@ -93,6 +95,7 @@ describe('Opening heroes in the static HTML', () => {
     const intro = html.querySelector('[data-animate-id="section-intro"]');
     expect(intro).toHaveClass('visible');
     expect(intro).toHaveAttribute('data-reveal', 'load');
+    expect(intro?.querySelector('img')).toHaveAttribute('fetchpriority', 'high');
   });
 });
 

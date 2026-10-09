@@ -1,8 +1,11 @@
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { trackEvent, trackLinkClick } from '../../../lib/analytics';
+import { heroImageSources } from '../../../lib/responsiveImages';
 
 import { AnimatedSection, CaseStudyHeroLabel, CaseStudyHeroMediaFrame, HeroContent, HeroGrid, HiddenSectionAnchor, LinkRow, RoleList, SectionNavRevealAnchor, Summary, Title } from '../../../../styles/projectShowcases';
 import { SetAnimatedSectionRef, VisibleSections } from '../../showcaseTypes';
+
+const HERO_IMAGE_SRC = '/img/antisyphon/home.webp';
 
 type IntroSectionProps = {
   setAnimatedSectionRef: SetAnimatedSectionRef;
@@ -23,7 +26,7 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
       <HiddenSectionAnchor id='hero-spacer' aria-hidden='true' />
       <HeroGrid>
         <CaseStudyHeroMediaFrame className='image-animate' style={{ backgroundColor: '#151515' }}>
-          <img src='/img/antisyphon/home.webp' alt='Antisyphon Training homepage with course cards' loading='eager' />
+          <img src={HERO_IMAGE_SRC} {...heroImageSources(HERO_IMAGE_SRC)} alt='Antisyphon Training homepage with course cards' loading='eager' fetchPriority='high' />
         </CaseStudyHeroMediaFrame>
         <HeroContent className='text-animate'>
           <Title>Antisyphon<br />UX Case Study</Title>
