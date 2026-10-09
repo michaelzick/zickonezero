@@ -1,4 +1,4 @@
-import { DemoStokeContent } from '../src/components';
+import DemoStokeContent from '../src/components/DemoStokeContent';
 import Seo from '../src/components/Seo';
 import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
 

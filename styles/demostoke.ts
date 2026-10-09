@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {
   DemoStokeTldrImage
 } from './index';
+import { hudSubheading } from './hud';
 
 export const DemoStokeWhatImage = styled(DemoStokeTldrImage)`
 `;
@@ -12,6 +13,6 @@ export const DemoStokeGalleryBlock = styled.div`
 `;
 
 export const DemoStokeSectionSubheading = styled.h3`
+  ${hudSubheading}
   color: var(--color-orange);
-  margin: 0;
 `;

@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import FsLightbox from 'fslightbox-react';
 import {
   useAppDispatch,
   useAppSelector
@@ -11,12 +10,14 @@ import {
 import { scrollToTop } from '../helpers';
 
 import { Wrapper } from '../../styles';
-import { TopNavContent, FooterContent } from '.';
+import FooterContent from './FooterContent';
+import TopNavContent from './TopNavContent';
 import DemoStokeTabs from './DemoStokeTabs';
 import { SidebarSectionTabsMobile } from './SidebarSectionTabs';
 import { CASE_STUDY_BOTTOM_SECTION_ID, CASE_STUDY_SECTIONS, HOW_IMAGES, STORY_SECTIONS } from './demostoke/data';
 import CaseStudyContent from './demostoke/CaseStudyContent';
 import StoriesContent from './demostoke/StoriesContent';
+import LazyLightbox from './LazyLightbox';
 import useAnimatedSections from '../hooks/useAnimatedSections';
 import useHorizontalGallery from '../hooks/useHorizontalGallery';
 import useLightboxController from '../hooks/useLightboxController';
@@ -24,13 +25,16 @@ import { trackEvent } from '../lib/analytics';
 
 type SectionKey = 'case-study' | 'stories';
 
+// The intro opens the page, so it boots up from the first paint.
+const OPENING_SECTIONS = ['section-intro'];
+
 const DemoStokeContent = () => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState<SectionKey>('case-study');
   const [topTabsEl, setTopTabsEl] = useState<HTMLDivElement | null>(null);
   const [openPersonaId, setOpenPersonaId] = useState<string | null>(null);
-  const { visibleSections, setAnimatedSectionRef } = useAnimatedSections(activeTab);
+  const { visibleSections, setAnimatedSectionRef } = useAnimatedSections(activeTab, OPENING_SECTIONS);
   const { lightboxController, openLightbox } = useLightboxController();
   const { rowRef, canScrollLeft, canScrollRight, scrollGalleryBy } = useHorizontalGallery(activeTab);
   const caseStudyImages = HOW_IMAGES;
@@ -133,7 +137,7 @@ const DemoStokeContent = () => {
           isActive={activeTab === 'stories'}
         />
       </Wrapper>
-      <FsLightbox
+      <LazyLightbox
         toggler={lightboxController.toggler}
         sources={caseStudyImages.map(({ src }) => src)}
         slide={lightboxController.slide}

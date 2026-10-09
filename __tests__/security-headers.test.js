@@ -15,6 +15,26 @@ describe('framing', () => {
   });
 });
 
+describe('scripts', () => {
+  it("lets Bar Four's house rack register its audio worklets from blob: URLs", () => {
+    const sources = directive('script-src').split(/\s+/);
+    expect(sources).toContain('blob:');
+    expect(sources).not.toContain('data:');
+    expect(sources).not.toContain('*');
+  });
+});
+
+describe('analytics', () => {
+  it('lets Mixpanel load its SDK and recorder and send events and replays', () => {
+    expect(directive('script-src').split(/\s+/)).toContain('https://cdn.mxpnl.com');
+    expect(directive('connect-src').split(/\s+/)).toContain('https://*.mixpanel.com');
+  });
+
+  it('no longer allows Amplitude', () => {
+    expect(csp).not.toMatch(/amplitude/i);
+  });
+});
+
 describe('the rest of the security headers', () => {
   it('still denies plugins and restricts the base URI and form targets', () => {
     expect(directive('object-src')).toBe("object-src 'none'");

@@ -26,6 +26,10 @@ describe('generate-sitemap', () => {
     it('returns null for 500.tsx', () => {
       expect(routeFromPageFile(path.join(PAGES_DIR, '500.tsx'))).toBeNull();
     });
+
+    it('leaves the hidden Bar Four out', () => {
+      expect(routeFromPageFile(path.join(PAGES_DIR, 'bar-four.tsx'))).toBeNull();
+    });
   });
 
   describe('getPageFiles', () => {

@@ -12,6 +12,7 @@ import {
 } from '../../styles/projectShowcases';
 import {
   ContactActions,
+  ContactChannel,
   ContactField,
   ContactForm,
   ContactGrid,
@@ -21,8 +22,10 @@ import {
   ContactStatus,
   ContactSubmit,
   ContactSuccess,
+  ContactUplink,
 } from '../../styles/contact';
-import { TopNavContent, FooterContent } from '.';
+import FooterContent from './FooterContent';
+import TopNavContent from './TopNavContent';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { trackEvent } from '../lib/analytics';
 import {
@@ -147,6 +150,14 @@ const ContactContent = () => {
                   </ContactSuccess>
                 ) : (
                   <ContactForm className='image-animate' onSubmit={handleSubmit} noValidate aria-label='Contact form'>
+                    <ContactChannel aria-hidden='true'>
+                      <span className='channel'>Uplink // ch-01</span>
+                      <span className='signal'>
+                        <span className='bars'><span /><span /><span /><span /></span>
+                        Open
+                      </span>
+                    </ContactChannel>
+
                     <ContactField>
                       <label htmlFor='contact-name'>Name</label>
                       <input
@@ -214,6 +225,12 @@ const ContactContent = () => {
                       <ContactSubmit type='submit' disabled={isSubmitting}>
                         {isSubmitting ? 'Sending…' : 'Send message'}
                       </ContactSubmit>
+                      {isSubmitting ? (
+                        <ContactUplink aria-hidden='true'>
+                          <span className='track' />
+                          Transmitting
+                        </ContactUplink>
+                      ) : null}
                     </ContactActions>
                   </ContactForm>
                 )}

@@ -10,11 +10,13 @@ import {
 
 import getWorksData from '../src/lib/getWorksData';
 
-import { MainContent } from '../src/components';
+import MainContent from '../src/components/MainContent';
 import Seo from '../src/components/Seo';
 import { personJsonLd, webSiteJsonLd } from '../src/lib/seo';
 
 import type { WorksDataType } from '../src/types';
+
+const DESCRIPTION = 'Michael Zick is ZICKONEZERO Creative, a Product Engineer and UX designer. Explore case studies, product engineering, and web development work.';
 
 const Home: NextPage<WorksDataType> = (props) => {
   const { worksDataReversed } = props;
@@ -29,7 +31,7 @@ const Home: NextPage<WorksDataType> = (props) => {
 
   return (
     <>
-      <Seo path='/' jsonLd={[webSiteJsonLd(), personJsonLd()]} />
+      <Seo path='/' description={DESCRIPTION} jsonLd={[webSiteJsonLd(), personJsonLd()]} />
       <MainContent worksDataReversed={worksDataReversed} />
     </>
   );

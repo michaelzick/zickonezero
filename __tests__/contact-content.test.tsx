@@ -8,7 +8,7 @@ import LinkBoxMobileContent from '../src/components/LinkBoxMobileContent';
 import { DEFAULT_CONTACT_ENDPOINT } from '../src/lib/contactForm';
 import { renderWithProviders } from '../src/test/renderWithProviders';
 
-type TestWindow = Window & { amplitude?: { track: jest.Mock } };
+type TestWindow = Window & { mixpanel?: { track: jest.Mock } };
 
 // jsdom has no global Response, so mimic the subset of the fetch Response
 // contract that submitContactForm relies on.
@@ -31,7 +31,7 @@ describe('ContactContent', () => {
   beforeEach(() => {
     fetchMock.mockReset();
     global.fetch = fetchMock as unknown as typeof fetch;
-    delete (window as TestWindow).amplitude;
+    delete (window as TestWindow).mixpanel;
   });
 
   it('shows a validation error without calling the endpoint', async () => {
@@ -47,7 +47,7 @@ describe('ContactContent', () => {
   it('posts the submission and shows the success state', async () => {
     const user = userEvent.setup();
     const track = jest.fn();
-    (window as TestWindow).amplitude = { track };
+    (window as TestWindow).mixpanel = { track };
     fetchMock.mockImplementation(() => jsonResponse({ success: true }));
 
     renderWithProviders(<ContactContent />);
@@ -74,7 +74,7 @@ describe('ContactContent', () => {
   it('surfaces server errors and keeps the form editable', async () => {
     const user = userEvent.setup();
     const track = jest.fn();
-    (window as TestWindow).amplitude = { track };
+    (window as TestWindow).mixpanel = { track };
     fetchMock.mockImplementation(() => jsonResponse({ success: false, error: 'Failed to send message. Please try again later.' }, 502));
 
     renderWithProviders(<ContactContent />);

@@ -1,12 +1,14 @@
-import styled, { keyframes, css } from 'styled-components';
-import * as Select from '@radix-ui/react-select';
+import styled, { css } from 'styled-components';
 import { THEME } from './theme';
-
-const phraseCycle = keyframes`
-  0%, 25% { transform: translateY(0); opacity: 1; }
-  30% { transform: translateY(-100%); opacity: 0; }
-  31%, 100% { transform: translateY(100%); opacity: 0; }
-`;
+import {
+  hudFrame,
+  hudNotch,
+  hudScrollbar,
+  notchPolygon,
+  notchStrokes,
+  scanlines,
+  screenOverlay
+} from './hud';
 
 // Accessible heading that is hidden from sighted users but exposed to
 // assistive tech and search crawlers (used for image-only hero sections).
@@ -23,13 +25,13 @@ export const VisuallyHidden = styled.h1`
 `;
 
 export const Container = styled.div`
-  background-size: cover;
   text-align: center;
-  font-family: Roboto, sans-serif;
+  font-family: ${THEME.fonts.body};
   height: 100%;
   position: relative;
 
-  svg {
+  // Inline UI icons sit at text size; city art opts out with data-art.
+  svg:not([data-art]) {
     width: 1em;
     height: 1em;
     margin-left: 0.2em;
@@ -44,56 +46,16 @@ export const Container = styled.div`
   }
 `;
 
-export const FlexBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5em;
-
-  .page-header {
-    margin: 0;
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75em;
-
-    .ds-logo {
-      width: clamp(3.5rem, 28vw, 5.25rem);
-      height: auto;
-    }
-
-    .tab-header {
-      font-size: 1.05em;
-      text-align: left;
-      margin: 0;
-    }
-  }
-`;
-
 export const WhiteTransitionAnchor = styled.a`
-  transition: all 0.3s;
   color: ${THEME.colors.white};
+  text-decoration-color: var(--city-accent);
+  text-underline-offset: 0.18em;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
   ${props => props.large && 'font-size: 1.3em;'}
 
   &:hover {
-    color: ${THEME.colors.hotRed};
-  }
-`;
-
-export const DemoStokeExternalLink = styled(WhiteTransitionAnchor)`
-  display: inline-flex;
-  justify-self: start;
-  align-items: center;
-  gap: 0.35em;
-  line-height: 1.15;
-  width: max-content;
-
-  svg {
-    width: 1.05em;
-    height: 1.05em;
-    margin-left: 0;
+    color: var(--city-accent);
+    text-shadow: 0 0 calc(10px * var(--neon-glow-strength, 1)) var(--city-glow);
   }
 `;
 
@@ -102,8 +64,16 @@ export const PitchDeckLink = styled(WhiteTransitionAnchor)`
   align-items: center;
   gap: 0.2em;
   margin-top: 0.4em;
-  font-size: 0.95em;
   padding: 0.25em 0;
+  color: var(--city-accent);
+  font-family: ${THEME.fonts.mono};
+  font-size: 0.9em;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+
+  &:hover {
+    color: ${THEME.colors.white};
+  }
 
   &.pitch-link-mobile {
     display: none;
@@ -116,7 +86,7 @@ export const PitchDeckLink = styled(WhiteTransitionAnchor)`
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    font-size: 0.9em;
+    font-size: 0.85em;
     padding: 0.35em 0;
 
     &.pitch-link-desktop {
@@ -129,99 +99,13 @@ export const PitchDeckLink = styled(WhiteTransitionAnchor)`
   }
 `;
 
-export const WorkSectionHeader = styled.span`
-  display: inline-block;
-  font-family: monospace;
-  font-size: 2em;
-  padding: 0 0.5em;
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    font-size: 1.3em;
-  }
-`;
-
-export const AnimatedHeadlineWrapper = styled.h1`
-  display: flex;
-  align-items: baseline;
-  flex-wrap: nowrap;
-  gap: 0.35em;
-  max-width: 100em;
-  width: 100%;
-  margin: 0 auto 1em;
-  padding: 0 0.5em;
-  color: ${THEME.colors.white};
-  font-family: Roboto, sans-serif;
-  font-size: 1.8em;
-  font-weight: 500;
-  line-height: 1.1;
-  text-align: left;
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    font-size: 1.5em;
-    margin: 0 auto 0.9em;
-    padding: 0 0.5em;
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    font-size: 1.2em;
-    gap: 0.25em;
-    margin: 0 auto 0.8em;
-    padding: 0 0.5em;
-  }
-`;
-
-export const AnimatedHeadlineStatic = styled.span`
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: baseline;
-`;
-
-export const AnimatedHeadlineDynamic = styled.span`
-  position: relative;
-  display: inline-flex;
-  align-items: baseline;
-  overflow: hidden;
-  min-height: 1.25em;
-  line-height: 1.25;
-  min-width: 0;
-`;
-
-export const AnimatedHeadlineTrack = styled.span`
-  position: absolute;
-  inset: 0;
-  display: block;
-`;
-
-export const AnimatedHeadlinePhrase = styled.span`
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: inline-flex;
-  align-items: center;
-  width: 100%;
-  min-height: 1.25em;
-  line-height: 1.25;
-  color: ${THEME.colors.hotRed};
-  transform: translateY(100%);
-  opacity: 0;
-  animation: ${phraseCycle} 12s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
-  animation-fill-mode: forwards;
-  will-change: transform, opacity;
-`;
-
-export const AnimatedHeadlineSizer = styled.span`
-  visibility: hidden;
-  pointer-events: none;
-  display: block;
-  width: 100%;
-  min-height: 1.25em;
-  white-space: normal;
-`;
-
-export const Wrapper = styled.div`
+// Every page's content sits in this one wrapper, between the nav and the
+// footer, so it is the page's main landmark.
+export const Wrapper = styled.main`
   ${props => {
     if (props.isAtPage && props.$isProjectPage) return 'padding-top: 7em;';
-    if (props.isHomePage) return 'padding-top: 7.7em;';
+    // The homepage hero runs full-bleed under the transparent nav.
+    if (props.isHomePage) return 'padding-top: 0;';
     return 'padding-top: 5em;';
   }}
   min-height: 84%;
@@ -229,19 +113,18 @@ export const Wrapper = styled.div`
   ${props => props.isHomePage && `
     position: relative;
   `}
-  background-color: ${THEME.colors.dark};
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     ${props => {
       if (props.isAtPage && props.$isProjectPage) return 'padding-top: 6em;';
-      if (props.isHomePage) return 'padding-top: 6.9em;';
+      if (props.isHomePage) return 'padding-top: 0;';
       return 'padding-top: 5.2em;';
     }}
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     ${props => {
-      if (props.isHomePage) return 'padding-top: 9.6em;';
+      if (props.isHomePage) return 'padding-top: 0;';
       if (props.isAtPage && props.$isProjectPage) return 'padding-top: 7em;';
       if (props.isAtPage) return 'padding-top: 13.5em;';
       return 'padding-top: 8.7em;';
@@ -249,648 +132,13 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Nav = styled.div`
-  width: 100%;
-  padding: 1em clamp(1em, 2.5vw, 2.5em);
-  display: flex;
-  gap: 1.5em;
-  border-bottom: 2px dotted ${THEME.colors.grey};
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  z-index: 400;
-  background-color: ${THEME.colors.dark};
-  transition: filter 0.3s;
-
-  a {
-    transition: all 0.3s;
-    font-family: Roboto, sans-serif;
-    color: ${THEME.colors.white};
-    display: inline-flex;
-    align-items: center;
-    gap: 0.2em;
-    text-decoration: none;
-
-    &:hover {
-      color: ${THEME.colors.hotRed};
-    }
-  }
-
-  svg {
-    color: inherit;
-    fill: currentColor;
-    margin-left: 0;
-    transition: color 0.3s;
-  }
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    padding: 1em 1em;
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    align-items: flex-start;
-  }
-`;
-
-export const MenuIcon = styled.div`
-  display: none;
-  flex-shrink: 0;
-  cursor: pointer;
-
-  .bar1, .bar2, .bar3 {
-    width: 35px;
-    height: 5px;
-    background-color: ${THEME.colors.white};
-    margin: 6px 0;
-    transition: 0.4s;
-  }
-
-  &.change {
-    .bar1 {
-      transform: translate(0, 11px) rotate(-45deg);
-    }
-    .bar2 {opacity: 0;}
-    .bar3 {
-      transform: translate(0, -11px) rotate(45deg);
-    }
-  }
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    display: inline-block;
-  }
-`;
-
-export const Button = styled.a`
-  cursor: pointer;
-  position: relative;
-  display: flex;
-  overflow: hidden;
-  height: 44px;
-  padding: 0 3em;
-  justify-content: center;
-  align-items: center;
-  grid-auto-columns: 1fr;
-  grid-template-columns: auto;
-  grid-template-rows: auto;
-  border-radius: ${THEME.radii.md};
-  background-color: ${props => props.bgColor || THEME.colors.grey};
-  transition: transform 150ms,box-shadow 150ms,-webkit-transform 150ms;
-  color: #fff;
-  font-size: 16px;
-  line-height: 1.4em;
-  font-weight: 500;
-  text-align: center;
-  letter-spacing: .5px;
-  &:hover {
-    box-shadow: 0 10px 20px -8px rgb(0 0 0 / 53%);
-  }
-`;
-
-export const GridContainer = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 1em;
-  background-color: ${THEME.colors.dark};
-
-  .grid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    max-width: 100em;
-
-    @media (max-width: ${THEME.breakpoints.phone}) {
-      width: 100%;
-      flex-direction: column;
-    }
-  }
-
-  ${props => props.$carousel && css`
-    @media (max-width: ${THEME.breakpoints.phone}) {
-      .grid {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: flex-start;
-        justify-content: flex-start;
-        gap: 1em;
-        overflow-x: auto;
-        box-sizing: border-box;
-        padding: 0 1em 0.6em;
-        scroll-padding-inline: 1em;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-
-        &::-webkit-scrollbar {
-          height: 6px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          background: ${THEME.colors.grey};
-          border-radius: 999px;
-        }
-
-        &::-webkit-scrollbar-track {
-          background: transparent;
-        }
-
-        > * {
-          flex: 0 0 auto;
-          margin: 0.75em 0 0.5em;
-          scroll-snap-align: start;
-        }
-      }
-    }
-  `}
-`;
-
-export const GridCarouselControls = styled.div`
-  display: none;
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.65em;
-    align-self: stretch;
-    padding: 0 1em;
-  }
-`;
-
-export const HomeWorkSection = styled.section`
-  margin: 0 clamp(0.75em, 3vw, 2.5em) clamp(2.5em, 6vw, 4.5em);
-  padding: 0 clamp(0.5em, 2vw, 1.5em) clamp(0.75em, 2vw, 1.5em);
-  border: 1px solid ${props => `var(--home-section-${props.$tone}-border)`};
-  border-radius: 14px;
-  background: ${props => `var(--home-section-${props.$tone}-bg)`};
-
-  > h2,
-  > div {
-    background: transparent;
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    margin-inline: 0.75em;
-    padding-inline: 0;
-  }
-`;
-
-export const Image = styled.img`
-  width: 100%;
-  border-radius: ${THEME.radii.md};
-  border: none;
-`;
-
-export const FullBorderImage = styled(Image)`
-  border: 1px solid rgba(199, 197, 197, 0.2);
-  border-radius: ${THEME.radii.md};
+export const FullBorderImage = styled.img`
+  border: 1px solid var(--glass-border);
+  border-radius: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-`;
-
-export const Thumb = styled.div`
-  text-align: center;
-  font-family: Roboto, sans-serif;
-  margin: 3em 2em 1.5em;
-  color: ${THEME.colors.white};
-
-  img {
-    transition: all 0.3s;
-    border-radius: ${THEME.radii.md};
-    cursor: pointer;
-  }
-
-  h3 {
-    transition: all 0.3s;
-    margin: 0.6em 0 0;
-  }
-
-  p {
-    transition: all 0.3s;
-    width: 240px;
-    text-align: center;
-    margin: 0 auto;
-    line-height: 1.4;
-
-    .external-link-icon {
-      display: inline-flex;
-      align-items: center;
-      vertical-align: middle;
-      position: relative;
-      top: -0.05em;
-
-      svg {
-        width: 0.95em;
-        height: 0.95em;
-      }
-    }
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-    display: inline;
-
-    &:hover {
-      color: inherit;
-    }
-  }
-
-  &:hover {
-    h3, p {
-      color: ${THEME.colors.hotRed};
-      cursor: pointer;
-    }
-  }
-
-  .thumb-media {
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-    border-radius: ${THEME.radii.md};
-  }
-
-  .neon-trail-thumb {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    mix-blend-mode: screen;
-    opacity: 0.9;
-    transition: opacity 0.2s ease-out;
-    border-radius: ${THEME.radii.md};
-  }
-
-  .thumb-media .cursor-dot {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    mix-blend-mode: screen;
-    opacity: 0;
-    transform: translate3d(-9999px, -9999px, 0);
-    transition: opacity 0.2s ease-out;
-  }
-
-  .thumb-dot {
-    width: 12px;
-    height: 12px;
-    box-shadow: 0 0 14px hsla(170, 100%, 65%, 0.8);
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    margin: 2em 0 1em;
-  }
-`;
-
-// Site brand/logo in the top nav. Rendered as a <p> (not an <h1>) so each
-// page's own content heading is the single, page-descriptive <h1>.
-export const Title = styled.p`
-  margin: 0;
-  font-size: 2.1em;
-  font-family: system-ui;
-  line-height: 1.3;
-  white-space: nowrap;
-  transition: all 0.3s;
-  ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
-
-  a {
-    display: inline-flex;
-    align-items: baseline;
-    font-weight: 700;
-    text-decoration: none;
-    color: ${THEME.colors.white};
-    transition: color 0.3s;
-
-    .brand-one {
-      transition: color 0.3s;
-    }
-
-    // Swap the brand colors on hover so ONE stays distinct from the rest.
-    &:hover {
-      color: ${THEME.colors.hotRed};
-
-      .brand-one {
-        color: ${THEME.colors.white};
-      }
-    }
-
-    @media (max-width: ${THEME.breakpoints.largeTablet}) {
-      font-size: 0.8em;
-    }
-
-    @media (max-width: ${THEME.breakpoints.phone}) {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.05em;
-      white-space: normal;
-    }
-  }
-
-  .brand-line {
-    display: inline;
-    &.brand-first {
-      margin-right: 0.18em;
-    }
-
-    @media (max-width: ${THEME.breakpoints.phone}) {
-      display: block;
-      margin-right: 0;
-    }
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    font-size: 1.9em;
-    white-space: normal;
-    line-height: 1.1;
-  }
-`;
-
-export const LinkBox = styled.div`
-  display: flex;
-  align-items: center;
-  gap: clamp(1.5rem, 2vw, 2.5rem);
-  flex-shrink: 0;
-  white-space: nowrap;
-
-  > a {
-    min-height: 44px;
-  }
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    display: none;
-  }
-`;
-
-export const CaseStudiesChevron = styled.span`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.05em;
-  height: 1.05em;
-  flex-shrink: 0;
-  vertical-align: middle;
-
-  svg {
-    width: 1.05em;
-    height: 1.05em;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    transform: ${props => props.$isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
-    transform-origin: center;
-    transition: transform 0.2s ease;
-    color: inherit;
-  }
-`;
-
-export const CaseStudiesDesktopWrapper = styled.div`
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  color: ${THEME.colors.white};
-  font-family: Roboto, sans-serif;
-  cursor: pointer;
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    display: none;
-  }
-`;
-
-export const CaseStudiesTrigger = styled.button`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25em;
-  min-height: 44px;
-  padding: 0;
-  background: transparent;
-  border: none;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-  transition: color 0.2s ease;
-
-  &:hover,
-  &:focus-visible {
-    color: ${THEME.colors.hotRed};
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${THEME.colors.hotRed};
-    outline-offset: 4px;
-  }
-`;
-
-export const CaseStudiesDropdown = styled.ul`
-  position: absolute;
-  top: calc(100% + 0.65em);
-  right: 0;
-  list-style: none;
-  margin: 0;
-  padding: 0.75em 1em;
-  background: ${THEME.colors.darkest};
-  border-radius: ${THEME.radii.md};
-  border: 2px solid ${THEME.colors.white};
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  grid-auto-rows: auto;
-  gap: 0.9em 1.2em;
-  min-width: auto;
-  align-items: center;
-  opacity: ${props => props.$isOpen ? 1 : 0};
-  transform: ${props => props.$isOpen ? 'translateY(0)' : 'translateY(-10px)'};
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  pointer-events: ${props => props.$isOpen ? 'auto' : 'none'};
-  z-index: 500;
-
-  li {
-    margin: 0;
-    width: auto;
-    display: inline-flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  a {
-    color: ${THEME.colors.white};
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5em;
-    text-align: left;
-    white-space: nowrap;
-    width: auto;
-    align-self: center;
-    padding-bottom: 0;
-    text-decoration: none;
-    font-size: 1.3em;
-    margin: 0;
-
-    .case-logo {
-      width: 1.8em;
-      height: 1.8em;
-      border-radius: ${THEME.radii.md};
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-  }
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    display: none;
-  }
-`;
-
-export const LinkBoxMobile = styled.ul`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  list-style: none;
-  position: absolute;
-  top: 3.4em;
-  right: 1em;
-  padding: 1.2em 1.5em;
-  min-width: 15.5em;
-  width: 15.5em;
-  max-height: calc(100dvh - 5em);
-  overflow-y: auto;
-  background: ${THEME.colors.darkest};
-  z-index: 400;
-  border-radius: ${THEME.radii.md};
-  border: 2px solid ${THEME.colors.white};
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  animation: ${props => props.$isAnimating
-    ? 'slideInFromRight 0.3s ease-out forwards'
-    : 'slideOutToRight 0.3s ease-in forwards'};
-
-  @keyframes slideInFromRight {
-    from {
-      transform: translateX(calc(100% + 1em));
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes slideOutToRight {
-    from {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateX(calc(100% + 1em));
-      opacity: 0;
-    }
-  }
-
-  li {
-    &:not(:first-child) {
-      margin-top: 1.5em;
-    }
-
-    a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45em;
-      justify-content: flex-start;
-      color: ${THEME.colors.white};
-
-      &:hover {
-        color: ${THEME.colors.hotRed};
-      }
-
-      .case-logo {
-        width: 1.45em;
-        height: 1.45em;
-        border-radius: ${THEME.radii.md};
-        object-fit: cover;
-        flex-shrink: 0;
-      }
-    }
-  }
-
-  .contact-accordion {
-    button {
-      padding: 0;
-      border-bottom: none;
-      justify-content: space-between;
-      text-align: left;
-      color: ${THEME.colors.white};
-      margin: 0;
-
-      &:hover {
-        color: ${THEME.colors.hotRed};
-        border-color: ${THEME.colors.hotRed};
-      }
-    }
-  }
-`;
-
-export const CaseStudiesAccordionButton = styled.button`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: transparent;
-  border: none;
-  border-bottom: none;
-  color: ${THEME.colors.white};
-  font-family: Roboto, sans-serif;
-  font-size: 1em;
-  padding: 0 0 0.2em;
-  cursor: pointer;
-  gap: 0.25em;
-
-  &:hover {
-    color: ${THEME.colors.hotRed};
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${THEME.colors.hotRed};
-    outline-offset: 4px;
-  }
-`;
-
-export const CaseStudiesAccordionList = styled.ul`
-  list-style: none;
-  width: 100%;
-  margin: ${props => props.$isOpen ? '1em 0 0' : '0'};
-  padding: 0;
-  display: ${props => props.$isOpen ? 'flex' : 'none'};
-  flex-direction: column;
-  gap: 1.1em;
-  max-height: none;
-  overflow: visible;
-  opacity: 1;
-  transition: none;
-  pointer-events: ${props => props.$isOpen ? 'auto' : 'none'};
-
-  li {
-    margin: 0;
-  }
-
-  li:not(:first-child) {
-    margin-top: 0;
-  }
-
-  a {
-    border-bottom: none;
-    color: ${THEME.colors.white};
-    display: inline-flex;
-    align-items: center;
-    width: 100%;
-    align-self: flex-start;
-    padding-bottom: 0.1em;
-    justify-content: flex-start;
-    margin: 0;
-  }
 `;
 
 export const BioBox = styled.div`
@@ -1058,112 +306,67 @@ export const BioBox = styled.div`
   }
 `;
 
-export const DemoStokeContentGrid = styled.div`
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(4.8em, 5.5em);
-  gap: clamp(1.5em, 3vw, 2.8em);
-  align-items: flex-start;
-  width: 100%;
-  & > * {
-    min-width: 0;
-  }
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-`;
-
-export const AntisyphonColumnsWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 2.5em 4em;
-  width: 100%;
-  font-size: 25px;
-  text-align: left;
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    padding: 6em 1.5em;
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: 2em 1.5em;
-  }
-`;
-
-export const AntisyphonColumnsInner = styled.div`
-  width: 100%;
-  max-width: 62em;
-`;
-
-export const AntisyphonHeader = styled(FlexBox)`
-  .page-header {
-    color: ${THEME.colors.white};
-  }
-
-  .at-logo {
-    width: 6em;
-    height: auto;
-  }
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    margin-bottom: 1.5em;
-  }
-`;
-
-export const SectionTabsWrapper = styled.div`
-  position: fixed;
-  top: var(--sidebar-tabs-top, calc(5em + 4.4em));
-  left: 50%;
-  transform: translate(-50%, ${props => props.$isVisible ? '0' : '-10px'});
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45em;
-  width: min(calc(100% - 2.4em), 62em);
-  padding: 0.45em;
-  border-radius: ${THEME.radii.md};
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(var(--color-dark-rgb), 0.88);
-  box-shadow: 0 8px 22px -16px rgb(0 0 0 / 45%);
-  backdrop-filter: blur(10px);
-  opacity: ${props => props.$isVisible ? 1 : 0};
-  pointer-events: ${props => props.$isVisible ? 'auto' : 'none'};
-  transition: opacity 0.28s ease, transform 0.28s ease, border-color 0.25s ease;
-  z-index: 94;
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    display: none;
-    position: static;
-  }
-`;
-
-export const SectionHeader = styled.h2`
-  padding: 1.2em 0 0.6em;
-  margin: 0;
-  text-align: center;
-  font-family: Roboto, sans-serif;
-  font-size: 2em;
-  background: ${THEME.colors.dark};
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: 1.1em 0 0.8em;
-  }
-`;
-
+/*
+ * The footer is the city directory: a dark glass plate under a neon rule, a
+ * decorative directory heading, and one lit column per district (magenta
+ * case studies, cyan product engineering, amber links).
+ */
 export const Footer = styled.footer`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 2em;
-  padding: 2.5em 2em 2em;
   width: 100%;
-  border-top: 1px solid ${THEME.colors.white};
-  font-family: Roboto, sans-serif;
+  padding: 2.25em clamp(1.25em, 4vw, 3em) 2em;
+  border-top: 1px solid var(--glass-border);
+  background: linear-gradient(to bottom, rgba(var(--color-dark-rgb), 0.78), rgba(var(--color-dark-rgb), 0.95));
+  font-family: ${THEME.fonts.hud};
   text-align: left;
 
+  /* The neon rule along the top edge. */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-magenta), var(--neon-cyan) 50%, var(--neon-amber));
+    box-shadow: 0 0 calc(12px * var(--neon-glow-strength, 1)) rgba(47, 243, 255, 0.4);
+  }
+
+  .footer-directory {
+    display: flex;
+    align-items: center;
+    gap: 0.9em;
+    margin: 0;
+    color: var(--hud-ink-dim);
+    font-family: ${THEME.fonts.mono};
+    font-size: 0.78em;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+
+    span[lang] {
+      color: var(--neon-cyan);
+      font-family: ${THEME.fonts.cjk};
+      letter-spacing: 0.12em;
+    }
+
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--glass-border), transparent);
+    }
+  }
+
+  html[data-theme='light'] & .footer-directory {
+    color: var(--color-grey);
+  }
+
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    padding: 2em 1.5em;
     gap: 1.5em;
+    padding: 2em 1.5em;
   }
 `;
 
@@ -1180,20 +383,38 @@ export const FooterInner = styled.div`
 `;
 
 export const FooterColumn = styled.div`
+  --footer-tone: var(--neon-cyan);
+  --footer-glow: rgba(47, 243, 255, 0.45);
   display: flex;
   flex-direction: column;
-  gap: 0.6em;
+  gap: 0.75em;
   align-items: flex-start;
+
+  &:nth-child(1) {
+    --footer-tone: var(--neon-magenta);
+    --footer-glow: rgba(255, 43, 214, 0.45);
+  }
+
+  &:nth-child(3) {
+    --footer-tone: var(--neon-amber);
+    --footer-glow: rgba(255, 176, 59, 0.45);
+  }
 `;
 
-export const FooterColumnTitle = styled.h3`
+// h2, since the footer follows pages whose only visible heading is the h1.
+export const FooterColumnTitle = styled.h2`
   margin: 0;
-  font-size: 0.9em;
+  padding-left: 0.65em;
+  border-left: 3px solid var(--footer-tone, var(--neon-cyan));
+  color: var(--footer-tone, var(--neon-cyan));
+  font-family: ${THEME.fonts.hud};
+  font-size: 0.95em;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: ${THEME.colors.orange};
+  letter-spacing: 0.16em;
+  line-height: 1.2;
   text-align: left;
+  text-shadow: 0 0 calc(10px * var(--neon-glow-strength, 1)) var(--footer-glow, transparent);
+  text-transform: uppercase;
 `;
 
 export const FooterColumnLinks = styled.ul`
@@ -1212,14 +433,33 @@ export const FooterColumnLinks = styled.ul`
   a {
     display: inline-flex;
     align-items: center;
-    gap: 0.25em;
+    gap: 0.4em;
     color: ${THEME.colors.white};
+    font-size: 1.02em;
+    font-weight: 600;
+    letter-spacing: 0.03em;
     text-decoration: none;
-    font-size: 0.95em;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
 
-    &:hover {
-      color: ${THEME.colors.hotRed};
+    /* A route marker, left out of the link's name. */
+    &::before {
+      content: '▸';
+      content: '▸' / '';
+      color: var(--footer-tone, var(--neon-cyan));
+      opacity: 0.45;
+      transition: opacity 0.2s ease, transform 0.2s ${THEME.easing.out};
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: var(--footer-tone, var(--neon-cyan));
+      text-shadow: 0 0 calc(8px * var(--neon-glow-strength, 1)) var(--footer-glow, transparent);
+    }
+
+    &:hover::before,
+    &:focus-visible::before {
+      opacity: 1;
+      transform: translateX(2px);
     }
 
     svg {
@@ -1235,10 +475,14 @@ export const FooterBottom = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5em;
-  font-size: 0.85em;
-  color: ${THEME.colors.grey};
-  padding-top: 1em;
   width: 100%;
+  padding-top: 1.1em;
+  border-top: 1px dashed var(--glass-border);
+  color: ${THEME.colors.grey};
+  font-family: ${THEME.fonts.mono};
+  font-size: 0.8em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 
   @media (max-width: ${THEME.breakpoints.smallTablet}) {
     flex-direction: column;
@@ -1259,82 +503,19 @@ export const DemoStokeTitle = styled.h2`
   }
 `;
 
-export const DemoStokeList = styled.ul`
-  padding: ${props => props.$frameless ? '0' : '0.8em 1.8em'};
-  font-size: 0.9em;
-  font-weight: lighter;
-  list-style: none;
-  border: ${props => props.$frameless ? 'none' : `1px solid ${THEME.colors.grey}`};
-  border-radius: ${props => props.$frameless ? '0' : THEME.radii.md};
-  margin-bottom: 0;
-
-  li {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: flex-start;
-    column-gap: 0.55em;
-    ${props => props.spaced && 'padding: 0.7em 0;'}
-
-    p {
-      margin-bottom: 0;
-    }
-  }
-
-  li::before {
-    content: '⚡️';
-    display: inline-block;
-  }
-
-  li.monetization::before {
-    content: '💵';
-  }
-
-  li.complaint::before {
-    content: '⛔️';
-  }
-
-  li.next-step::before {
-    content: '👉🏻';
-  }
-
-  li.persona::before {
-    content: '👤';
-  }
-
-  li.learning::before {
-    content: '💡';
-  }
-
-  li.interview::before {
-    content: '📝';
-  }
-
-  li.prototype::before {
-    content: '🤙🏻';
-  }
-
-  li.crystal::before {
-    content: '🔮';
-  }
-
-  li.heart::before {
-    content: '💜';
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: ${props => props.$frameless ? '0' : '0.8em 1.8em'};
-  }
-`;
-
+/* Data readout tables: glass rows with an accent rail; the tinted variant
+   adds scanlines. */
 export const DemoStokeTwoColumnLayout = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.35em;
   padding: clamp(0.9em, 2vw, 1.45em) clamp(1.2em, 3vw, 2em);
-  border: ${props => props.$variant === 'tinted' ? 'none' : `1px solid ${THEME.colors.grey}`};
-  border-radius: ${THEME.radii.md};
-  background: ${props => props.$variant === 'tinted' ? 'rgba(37, 99, 235, 0.08)' : 'transparent'};
+  border: 1px solid var(--glass-border);
+  border-left: 2px solid var(--city-accent);
+  background: ${props => props.$variant === 'tinted'
+    ? `${scanlines}, rgba(var(--color-dark-rgb), 0.45)`
+    : 'rgba(var(--color-dark-rgb), 0.25)'};
 `;
 
 export const DemoStokeTwoColumnRow = styled.div`
@@ -1346,7 +527,7 @@ export const DemoStokeTwoColumnRow = styled.div`
   padding: 0.45em 0;
 
   &:not(:last-child) {
-    border-bottom: ${props => props.$isBorderless ? 'none' : `1px solid ${THEME.colors.grey}`};
+    border-bottom: ${props => props.$isBorderless ? 'none' : '1px dashed var(--glass-border)'};
     padding-bottom: clamp(0.75em, 1.8vw, 1.1em);
   }
 
@@ -1357,10 +538,12 @@ export const DemoStokeTwoColumnRow = styled.div`
 `;
 
 export const DemoStokeTwoColumnHeader = styled.div`
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: capitalize;
+  font-family: ${THEME.fonts.hud};
   font-size: clamp(1.05em, 2vw, 1.25em);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
 `;
 
 export const DemoStokeTwoColumnCopy = styled.div`
@@ -1433,10 +616,12 @@ export const DemoStokeTldrRow = styled.div`
 
 export const DemoStokeTldrTitle = styled.h3`
   margin: 0 0 0.35em;
+  font-family: ${THEME.fonts.hud};
   font-size: clamp(1.55em, 3.5vw, 2.15em);
-  line-height: 1.1;
+  font-weight: 700;
+  line-height: 1.05;
   color: ${THEME.colors.white};
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
 `;
 
 export const DemoStokeTldrCopy = styled.div`
@@ -1447,10 +632,12 @@ export const DemoStokeTldrCopy = styled.div`
   a {
     font-weight: 600;
     color: ${THEME.colors.white};
+    text-decoration-color: var(--city-accent);
+    text-underline-offset: 0.18em;
     transition: color 0.2s ease;
 
     &:hover {
-      color: ${THEME.colors.hotRed};
+      color: var(--city-accent);
     }
   }
 
@@ -1466,6 +653,10 @@ export const DemoStokeTldrCopy = styled.div`
       margin: 0 0 0.5em;
     }
 
+    li::marker {
+      color: var(--city-accent);
+    }
+
     li:last-child {
       margin-bottom: 0;
     }
@@ -1476,10 +667,10 @@ export const DemoStokeTldrImage = styled.img`
   width: 100%;
   height: auto;
   max-width: 100%;
-  border-radius: ${THEME.radii.md};
-  border: none;
+  border-radius: 2px;
+  border: 1px solid var(--glass-border);
   object-fit: contain;
-  box-shadow: 0 24px 38px -30px rgb(0 0 0 / 55%);
+  box-shadow: 0 24px 38px -30px var(--shadow-deep);
   display: block;
 `;
 
@@ -1528,15 +719,22 @@ export const DemoStokeAccordion = styled.div`
   gap: 0.55em;
 `;
 
+/* Accordion items are notched glass plates; the edge lights up in the
+   accent when open or hovered. */
 export const DemoStokeAccordionItem = styled.div`
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: ${THEME.radii.md};
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.005));
-  box-shadow: ${props => props.$isOpen ? '0 14px 28px -16px rgb(0 0 0 / 70%)' : 'none'};
+  --item-notch: 10px;
+  --item-edge: ${props => props.$isOpen ? 'var(--city-accent)' : 'var(--glass-border)'};
+  border: 1px solid var(--item-edge);
+  background-color: rgba(var(--color-dark-rgb), 0.4);
+  background-image: ${notchStrokes('var(--item-notch)', 'var(--item-edge)')};
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  ${hudNotch('var(--item-notch)')}
+  box-shadow: ${props => props.$isOpen ? 'inset 0 0 28px -14px var(--city-glow)' : 'none'};
   transition: border-color 0.2s ease, box-shadow 0.3s ease;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.5);
+    --item-edge: var(--city-accent);
   }
 `;
 
@@ -1551,12 +749,20 @@ export const DemoStokeAccordionHeader = styled.button`
   padding: 0.95em 1.05em;
   cursor: pointer;
   color: ${THEME.colors.white};
+
+  /* The item is clipped, so the ring sits inside it. */
+  &:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -5px;
+  }
 `;
 
 export const DemoStokeAccordionTitle = styled.span`
+  font-family: ${THEME.fonts.hud};
   font-size: clamp(1.1em, 2vw, 1.3em);
   font-weight: 700;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 `;
 
 export const DemoStokeAccordionChevron = styled.span`
@@ -1567,7 +773,7 @@ export const DemoStokeAccordionChevron = styled.span`
   height: 2.1em;
   padding: 0;
   flex-shrink: 0;
-  color: ${props => props.$isOpen ? THEME.colors.hotRed : 'inherit'};
+  color: ${props => props.$isOpen ? 'var(--city-accent)' : 'inherit'};
   background: transparent;
   border: none;
   box-shadow: none;
@@ -1654,69 +860,10 @@ export const DemoStokeTwoUp = styled.div`
   }
 `;
 
-export const DemoStokeStoryCardGrid = styled(DemoStokeTwoUp)`
-  gap: clamp(1.2em, 3vw, 2.6em);
-  align-items: stretch;
-`;
-
-export const DemoStokeStoryCard = styled.section`
-  position: relative;
-  isolation: isolate;
-  padding: clamp(1.15em, 2.4vw, 1.65em);
-  border-radius: ${THEME.radii.md};
-  background:
-    radial-gradient(120% 140% at 12% 12%, rgba(0, 215, 255, 0.22), rgba(2, 8, 23, 0)),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(0, 113, 227, 0.12));
-  box-shadow: 0 18px 36px -28px rgb(0 0 0 / 85%), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  border: none;
-  overflow: hidden;
-  color: ${THEME.colors.white};
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(90% 90% at 85% 10%, rgba(255, 0, 101, 0.12), rgba(255, 0, 101, 0));
-    opacity: 0.9;
-    pointer-events: none;
-  }
-
-  h3 {
-    margin: 0 0 0.5em;
-    color: ${THEME.colors.demostoke};
-    letter-spacing: 0.01em;
-    font-weight: 700;
-  }
-
-  p {
-    margin: 0;
-    line-height: 1.65;
-    color: ${THEME.colors.white};
-    opacity: 0.94;
-  }
-`;
-
-export const DemoStokeBorderBox = styled.div`
-  width: 100%;
-  background: transparent;
-  padding: ${props => props.$noPadding ? '0' : '1.05em 1.6em'};
-  font-size: 0.95em;
-  line-height: 1.6;
-  border: 1px solid ${THEME.colors.grey};
-  border-radius: ${THEME.radii.md};
-  color: ${THEME.colors.white};
-  overflow: hidden;
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: ${props => props.$noPadding ? '0' : '0.9em 1.1em'};
-  }
-`;
-
 export const DemoStokeWhyImageFrame = styled.div`
   margin-top: clamp(1em, 2vw, 1.5em);
-  border-radius: ${THEME.radii.md};
   overflow: hidden;
-  box-shadow: 0 16px 38px -24px rgb(0 0 0 / 75%);
+  box-shadow: 0 16px 38px -24px var(--shadow-deep);
 
   img {
     display: block;
@@ -1733,22 +880,10 @@ export const DemoStokeScrollRow = styled.div`
   display: flex;
   gap: clamp(0.9em, 2vw, 1.35em);
   overflow-x: auto;
-  padding: 0.4em 0.2em 0.2em;
+  padding: 0.4em 0.2em 0.5em;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-
-  &::-webkit-scrollbar {
-    height: 8px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: ${THEME.colors.grey};
-    border-radius: 999px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
+  ${hudScrollbar}
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     padding-right: 0.25em;
@@ -1756,19 +891,27 @@ export const DemoStokeScrollRow = styled.div`
 `;
 
 export const DemoStokeScrollItem = styled.div`
+  position: relative;
   min-width: clamp(12.8em, 45vw, 15em);
   max-width: 18em;
   flex: 0 0 auto;
-  border: 1px solid rgba(199, 197, 197, 0.2);
-  border-radius: ${THEME.radii.md};
+  border: 1px solid var(--glass-border);
   overflow: hidden;
-  background: transparent;
+  background: ${THEME.colors.darkest};
   cursor: pointer;
   scroll-snap-align: start;
-  transition: border-color 0.25s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  ${screenOverlay}
 
   &:hover {
-    border-color: ${THEME.colors.orange};
+    border-color: var(--city-accent);
+    box-shadow: 0 0 14px -4px var(--city-glow);
+  }
+
+  /* The row scrolls and clips, so the ring sits inside the item. */
+  &:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -4px;
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
@@ -1803,23 +946,34 @@ export const DemoStokeScrollControls = styled.div`
   gap: 0.65em;
 `;
 
+/* Notched square HUD buttons with a 44px minimum target. */
 export const DemoStokeScrollButton = styled.button`
   all: unset;
+  --btn-notch: 7px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.8em;
-  height: 1.8em;
-  border-radius: 50%;
-  border: 1px solid ${THEME.colors.grey};
+  width: max(44px, 1.8em);
+  height: max(44px, 1.8em);
+  border: 1px solid var(--glass-border);
+  background-color: rgba(var(--color-dark-rgb), 0.6);
+  background-image: ${notchStrokes('var(--btn-notch)', 'var(--city-accent)')};
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  ${hudNotch('var(--btn-notch)')}
   color: ${THEME.colors.white};
-  background: ${THEME.colors.darkest};
   cursor: pointer;
   transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 
   &:hover:enabled {
     transform: translateY(-1px);
-    border-color: ${THEME.colors.white};
+    border-color: var(--city-accent);
+    color: var(--city-accent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -5px;
   }
 
   &:disabled {
@@ -1839,54 +993,53 @@ export const DemoStokeMiniCardRow = styled.div`
   display: flex;
   gap: clamp(0.9em, 2vw, 1.35em);
   overflow-x: auto;
-  padding: 0.35em 0.2em 0.3em;
+  padding: 0.35em 0.2em 0.5em;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-
-  &::-webkit-scrollbar {
-    height: 8px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: ${THEME.colors.grey};
-    border-radius: 999px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
+  ${hudScrollbar}
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     padding-right: 0.25em;
   }
 `;
 
+/* Notched glass cards; the clip keeps focus rings inside the card. */
 export const DemoStokeMiniCard = styled.button`
   all: unset;
+  --card-notch: 12px;
+  --card-edge: var(--glass-border);
   cursor: pointer;
   display: flex;
   flex-direction: column;
   min-width: clamp(13em, 48vw, 15.5em);
   max-width: 18em;
   padding: clamp(1em, 2.3vw, 1.4em);
-  border-radius: ${THEME.radii.md};
-  background: transparent;
-  border: 1.5px solid ${THEME.colors.white};
-  box-shadow: none;
+  border: 1px solid var(--card-edge);
+  background-color: rgba(var(--color-dark-rgb), 0.55);
+  background-image:
+    ${notchStrokes('var(--card-notch)', 'var(--card-edge)')},
+    linear-gradient(160deg, var(--glass-highlight), transparent 45%);
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  ${hudNotch('var(--card-notch)')}
   color: ${THEME.colors.white};
   scroll-snap-align: start;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.2s ease, border-color 0.25s ease;
   text-align: left;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover,
+  &:focus-visible {
+    --card-edge: var(--city-accent);
+    box-shadow: inset 0 0 30px -14px var(--city-glow);
+  }
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: none;
-    border-color: ${THEME.colors.orange};
   }
 
   &:focus-visible {
-    outline: 2px solid ${THEME.colors.demostoke};
-    outline-offset: 3px;
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -5px;
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
@@ -1896,11 +1049,13 @@ export const DemoStokeMiniCard = styled.button`
 `;
 
 export const DemoStokeMiniCardTitle = styled.div`
-  font-weight: 700;
-  color: ${THEME.colors.white};
-  letter-spacing: 0.01em;
   margin: 0 0 0.5em;
-  font-size: clamp(1.02em, 2vw, 1.2em);
+  color: ${THEME.colors.white};
+  font-family: ${THEME.fonts.hud};
+  font-size: clamp(1.05em, 2vw, 1.25em);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
 `;
 
 export const DemoStokeMiniCardPreview = styled.div`
@@ -1922,29 +1077,31 @@ export const DemoStokeMiniCardPreview = styled.div`
 export const DemoStokeMiniCardHint = styled.span`
   display: inline-flex;
   align-items: center;
-  gap: 0.3em;
-  color: ${THEME.colors.demostoke};
-  opacity: 1;
-  font-size: 0.86em;
-  letter-spacing: 0.02em;
+  gap: 0.4em;
   margin-top: auto;
   padding-top: clamp(0.6em, 1vw, 0.85em);
+  color: var(--city-accent);
+  font-family: ${THEME.fonts.mono};
+  font-size: 0.78em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 
   &::after {
     content: '↗';
-    font-size: 0.95em;
+    content: '↗' / '';
+    font-size: 1.1em;
   }
 `;
 
 export const DemoStokeStoryHero = styled.img`
   width: 100%;
   display: block;
-  border-radius: ${THEME.radii.md};
-  border: 1.5px solid ${THEME.colors.grey};
+  border-radius: 0;
+  border: 1px solid var(--glass-border);
   object-fit: cover;
   object-position: top;
   margin: 0;
-  box-shadow: 0 12px 28px -20px rgb(0 0 0 / 60%);
+  box-shadow: 0 12px 28px -20px var(--shadow-deep);
 `;
 
 export const DemoStokeHeroAbstractLayout = styled.div`
@@ -1976,91 +1133,122 @@ export const DemoStokeHeroAbstractLayout = styled.div`
   }
 `;
 
+/*
+ * Dialogs: a "shard reader" with a dark glass plate and light ink in both
+ * themes. Portal it to the body when it opens inside a glass panel, since
+ * the panel's stacking context would hold it under the fixed nav. The plate
+ * is a flex column whose copy takes whatever height the header leaves, so
+ * the copy is always the part that scrolls; lock the page behind it with
+ * useBodyScrollLock.
+ */
 export const DemoStokeMiniCardModalOverlay = styled.div`
   position: fixed;
   inset: 0;
-  background: rgb(2 8 23 / 0.82);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(1em, 3vw, 2em);
   z-index: 999;
+  display: flex;
+  /* The plate centers with auto margins, which (unlike align-items: center)
+     let a plate taller than the screen scroll instead of losing both ends. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(1em, 3vw, 2em);
+  background: var(--modal-scrim);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 `;
 
 export const DemoStokeMiniCardModal = styled.div`
-  position: relative;
+  ${hudFrame({ blur: false })}
+  --hud-notch: 20px;
+  --hud-frame-bg: ${scanlines}, var(--modal-bg);
+  /* The plate stays dark by day, so keep the night sheen and teal, and a
+     yellow focus ring that reads on it in both themes. */
+  --glass-highlight: rgba(255, 255, 255, 0.06);
+  --hud-teal: #5ef6e6;
+  --focus-ring: var(--hud-yellow);
+  display: flex;
+  flex-direction: column;
   width: min(720px, 95vw);
+  /* dvh is the visible height, so the plate fits while Safari's toolbars show. */
   max-height: 88vh;
+  max-height: 88dvh;
+  margin: auto;
   overflow: hidden;
-  border-radius: ${THEME.radii.md};
-  background:
-    radial-gradient(140% 140% at 10% 0%, rgba(0, 215, 255, 0.16), rgba(2, 8, 23, 0)),
-    linear-gradient(150deg, rgba(3, 7, 18, 0.95), rgba(2, 132, 199, 0.14));
-  box-shadow: 0 18px 44px -26px rgb(0 0 0 / 80%), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(0, 215, 255, 0.2);
-  color: #f8fafc; /* lock light text regardless of theme */
   padding: clamp(1.2em, 2.5vw, 1.85em);
-
-  :root[data-theme='light'] & {
-    background:
-      radial-gradient(140% 140% at 10% 0%, rgba(0, 215, 255, 0.18), rgba(248, 250, 252, 0.02)),
-      linear-gradient(150deg, rgba(8, 47, 73, 0.9), rgba(12, 74, 110, 0.75));
-    color: #f8fafc; /* keep light text inside the modal in light theme */
-    border: 1px solid rgba(8, 47, 73, 0.5);
-    box-shadow: 0 18px 36px -24px rgb(15 23 42 / 45%);
-  }
+  color: var(--hud-ink);
+  filter: drop-shadow(0 24px 36px rgba(0, 0, 0, 0.5));
 `;
 
 export const DemoStokeMiniCardModalClose = styled.button`
   all: unset;
+  /* Its own scale, so every dialog's close matches whatever size the
+     dialog's text is set in (the How DemoStoke Helps overlay sets 25px). */
+  font-size: 1rem;
   position: absolute;
-  top: 0.3em;
-  right: 0.3em;
+  /* Clear the plate's notched corner with room to breathe. */
+  top: 1em;
+  right: calc(var(--hud-notch, 20px) + 0.6em);
+  z-index: 1;
   width: 2em;
   height: 2em;
-  border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #f8fafc; /* keep icon visible in light mode */
-  background: rgba(0, 215, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  color: var(--hud-ink);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--hud-panel-border);
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 
-  svg {
+  /* Same selector as Container's inline-icon rule, which overrides it: its
+     left margin would push the X off center in the About dialog, which sits
+     inside Container, while the How DemoStoke Helps dialog is portaled out. */
+  svg:not([data-art]) {
     width: 1em;
     height: 1em;
+    margin: 0;
     display: block;
-    transform: translateX(-0.09em);
   }
 
   &:hover {
-    transform: translateY(-1px);
-    opacity: 0.9;
+    color: var(--hud-yellow);
+    border-color: var(--hud-yellow);
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 
   &:focus-visible {
-    outline: 2px solid ${THEME.colors.demostoke};
+    outline: 2px solid var(--focus-ring);
     outline-offset: 3px;
   }
 `;
 
 export const DemoStokeMiniCardModalTitle = styled.h4`
   margin: 0 0 0.65em;
+  padding-right: 2em;
+  color: var(--hud-ink);
+  font-family: ${THEME.fonts.hud};
   font-size: clamp(1.25em, 2.3vw, 1.5em);
-  color: #f8fafc; /* lock light text regardless of theme */
-  letter-spacing: 0.01em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+  text-transform: uppercase;
+  text-shadow: 0 0 0.5em var(--city-glow);
 `;
 
 export const DemoStokeMiniCardModalCopy = styled.div`
-  color: #f8fafc; /* force light text so it reads on dark modal */
+  color: var(--hud-ink);
   line-height: 1.7;
   font-size: 1em;
-  max-height: calc(88vh - 4em);
+  /* Fill the plate below the header and scroll there; a drag that reaches
+     either end stops instead of moving the page. */
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding-right: 0.4em;
+  ${hudScrollbar}
 
   p {
     margin: 0 0 0.8em;
@@ -2071,321 +1259,82 @@ export const DemoStokeMiniCardModalCopy = styled.div`
   }
 
   a {
-    color: #f8fafc;
+    color: var(--hud-ink);
     font-weight: 600;
     text-decoration: underline;
+    text-decoration-color: var(--hud-yellow);
+    text-underline-offset: 0.18em;
 
     &:hover {
-      color: ${THEME.colors.hotRed};
+      color: var(--hud-yellow);
     }
   }
 `;
 
-export const DemoStokeWhyGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: clamp(0.85em, 2vw, 1.45em);
-  margin-top: 0.6em;
-`;
-
-export const DemoStokeWhyCard = styled.div`
-  position: relative;
-  padding: clamp(1em, 2.4vw, 1.4em);
-  border-radius: ${THEME.radii.md};
-  background: rgba(37, 99, 235, 0.08);
-  box-shadow: 0 12px 28px -22px rgb(0 0 0 / 70%);
-  color: ${THEME.colors.white};
-  border: none;
-  overflow: hidden;
-`;
-
-export const DemoStokeWhyBadge = styled.span`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 1.8em;
-  height: 1.8em;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(15, 23, 42, 0.55);
-  color: ${THEME.colors.white};
-  font-weight: 700;
-  font-size: 0.95em;
-  letter-spacing: 0.01em;
-  margin-bottom: 0.55em;
-`;
-
-export const DemoStokeWhyTitle = styled.h4`
-  margin: 0 0 0.4em;
-  color: ${THEME.colors.white};
-  font-size: clamp(1.05em, 2.2vw, 1.25em);
-  letter-spacing: 0.01em;
-`;
-
-export const DemoStokeWhyCopy = styled.div`
-  color: ${THEME.colors.white};
-  line-height: 1.65;
-  opacity: 0.96;
-
-  p {
-    margin: 0 0 0.7em;
-  }
-
-  p:last-child {
-    margin-bottom: 0;
-  }
-`;
-
-export const TableWrapper = styled.div`
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border-radius: ${THEME.radii.md};
-  border: 1px solid ${THEME.colors.grey};
-
-  table {
-    min-width: 600px; /* Adjust based on your content */
-    border-collapse: collapse;
-    width: 100%;
-  }
-
-  th,
-  td {
-    padding: 0.75rem;
-    text-align: left;
-    white-space: nowrap;
-  }
-`;
-
-export const DemoStokeTable = styled.table`
-  width: 100%;
-  padding: 0.8em 1.8em;
-  font-size: 0.9em;
-  font-weight: lighter;
-`;
-
-export const DemoStokeText = styled.div`
-  width: 100%;
-  background: transparent;
-  padding: 0.8em 1.8em;
-  font-size: 0.9em;
-  font-weight: lighter;
-  border: 1px solid ${THEME.colors.grey};
-  border-radius: ${THEME.radii.md};
-`;
-
-// Tabs
-export const TabWrapper = styled.div`
-  /* reset */
-  button,
-  fieldset,
-  input {
-    all: unset;
-  }
-
-  .TabsRoot {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .TabsList {
-    flex-shrink: 0;
-    display: flex;
-    position: fixed;
-    width: 100%;
-    top: 5em;
-
-    @media (max-width: ${THEME.breakpoints.largeTablet}) {
-      top: 4.9em;
-    }
-
-    @media (max-width: ${THEME.breakpoints.phone}) {
-      top: 8.48em;
-    }
-  }
-
-  .TabsTrigger {
-    font-family: inherit;
-    padding: 0 20px;
-    height: 45px;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2em;
-    user-select: none;
-    background-color: #0c4a6e;
-    color: #ffffff;
-    cursor: pointer;
-    display: block;
-
-    div {
-      line-height: 48px;
-    }
-
-    @media (max-width: ${THEME.breakpoints.phone}) {
-      font-size: 1em;
-    }
-  }
-
-  .TabsTrigger[data-state="active"] {
-    background-color: #d3ff00;
-    color: #020817;
-  }
-
-  .TabsContent {
-    flex-grow: 1;
-    outline: none;
-  }
-`;
-
-export const HotRedTitle = styled.h2`
-  color: ${THEME.colors.hotRed};
-`;
-
-// Theme Switcher styled components
-export const ThemeSwitcherWrapper = styled.div`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.9em;
-  transition: filter 0.3s;
-  pointer-events: ${props => props.isMobileMenuShown ? 'none' : 'auto'};
-  ${props => props.isMobileMenuShown && 'filter: blur(2px);'}
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.4em;
-  }
-`;
-
-export const ThemeSwitcherTrigger = styled(Select.Trigger)`
-  all: unset;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  min-width: 0;
-  padding: 0.25em 1em 0.22em;
-  border-radius: ${THEME.radii.md};
-  border: 1px solid ${THEME.colors.grey};
-  color: ${THEME.colors.white};
-  background-color: transparent;
-  cursor: pointer;
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.6rem;
-  line-height: 1;
-  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
-
-  &:hover,
-  &[data-state='open'] {
-    border-color: ${THEME.colors.hotRed};
-    color: ${THEME.colors.hotRed};
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${THEME.colors.hotRed};
-    outline-offset: 2px;
-  }
-`;
-
-export const ThemeSwitcherValue = styled(Select.Value)`
-  flex: 0 1 auto;
-  display: inline-flex;
-  align-items: center;
-  line-height: 1;
-`;
-
-export const ThemeSwitcherContent = styled(Select.Content)`
-  overflow: hidden;
-  background-color: ${THEME.colors.darkest};
-  color: ${THEME.colors.white};
-  border-radius: ${THEME.radii.md};
-  border: 1px solid ${THEME.colors.grey};
-  box-shadow: 0 18px 45px rgba(5, 5, 15, 0.35);
-  z-index: 400;
-`;
-
-export const ThemeSwitcherViewport = styled(Select.Viewport)`
-  padding: 0.25em 0;
-`;
-
-export const ThemeSwitcherItem = styled(Select.Item)`
-  display: flex;
-  align-items: center;
-  gap: 0.75em;
-  padding: 0.45em 1.1em;
-  font-size: 1em;
-  cursor: pointer;
-  user-select: none;
-  color: ${THEME.colors.white};
-  transition: background-color 0.2s ease, color 0.2s ease;
-
-  &[data-highlighted] {
-    outline: none;
-    background-color: ${THEME.colors.hotRed};
-    color: ${THEME.colors.contrast};
-  }
-`;
-
-export const ThemeSwitcherIndicator = styled(Select.ItemIndicator)`
-  margin-left: auto;
-  display: inline-flex;
-  color: inherit;
-`;
-
-export const HomeTabsBar = styled.div`
-  display: none;
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    position: fixed;
-    top: 4.9em;
-    left: 0;
-    right: 0;
-    display: flex;
-    gap: 0.6em;
-    padding: 0.4em 1em 0.45em;
-    z-index: 95;
-    background: transparent;
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    top: 8.48em;
-  }
-`;
-
-export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
+/*
+ * HUD tabs: notched plates with stroked notch diagonals. The plate itself is
+ * clipped, so focus rings sit inside it. Active tabs fill with the brand
+ * accent and white text; the case-study tab tests read those declarations
+ * from the [data-active='true'] rules, so keep them explicit.
+ */
+export const HudTabButton = styled.button.attrs(({ $isActive }) => ({
   'data-active': $isActive ? 'true' : 'false',
 }))`
   all: unset;
+  box-sizing: border-box;
+  --tab-notch: 9px;
+  --tab-edge: var(--glass-border);
+  position: relative;
   width: 100%;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.65em 1em;
-  border-radius: ${THEME.radii.md};
-  font-family: Roboto, sans-serif;
+  gap: 0.6em;
+  padding: 0.55em 1em;
+  border: 1px solid var(--tab-edge);
+  ${hudNotch('var(--tab-notch)')}
+  background-color: rgba(var(--color-dark-rgb), 0.55);
+  background-image: ${notchStrokes('var(--tab-notch)', 'var(--tab-edge)')};
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  color: ${THEME.colors.white};
+  font-family: ${THEME.fonts.hud};
   font-size: 1.05em;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.15;
   text-align: center;
+  text-transform: uppercase;
   white-space: normal;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-  background-color: ${props => props.$isActive ? THEME.colors.accent : THEME.colors.hotYellow};
-  color: ${props => props.$isActive ? '#fff' : THEME.colors.contrast};
-  box-shadow: ${props => props.$isActive ? 'none' : '0 8px 18px -10px rgb(0 0 0 / 50%)'};
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
 
-  &:hover {
+  &[data-active='true'] {
+    --tab-edge: ${THEME.colors.accent};
     background-color: ${THEME.colors.accent};
     border-color: ${THEME.colors.accent};
     color: #fff;
+    box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.16), inset 0 -2px 0 rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.45);
+  }
+
+  &:not([data-active='true']):hover {
+    --tab-edge: var(--city-accent);
+    background-color: rgba(var(--color-dark-rgb), 0.82);
+    color: var(--city-accent);
+    box-shadow: inset 0 0 18px -6px var(--city-glow);
   }
 
   &:focus-visible {
-    outline: 2px solid ${THEME.colors.hotYellow};
-    outline-offset: 3px;
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -5px;
+  }
+
+  &[data-active='true']:focus-visible {
+    outline-color: #fff;
   }
 
   &:active {
@@ -2394,79 +1343,150 @@ export const HomeTabButton = styled.button.attrs(({ $isActive }) => ({
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     font-size: 0.79em;
+    letter-spacing: 0.08em;
   }
 `;
 
-export const CaseStudyTopTabButton = styled(HomeTabButton)`
-  border: 1.5px solid var(--case-study-top-tab-border);
-  background: var(--case-study-top-tab-bg);
+export const CaseStudyTopTabButton = styled(HudTabButton)`
+  --tab-edge: var(--case-study-top-tab-border);
+  background-color: var(--case-study-top-tab-bg);
   color: var(--case-study-top-tab-color);
-  box-shadow: 0 10px 22px -14px rgb(0 0 0 / 55%);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+
+  /* A status diamond, lit on the active tab. */
+  &::before {
+    content: '';
+    flex-shrink: 0;
+    width: 0.5em;
+    height: 0.5em;
+    background: currentColor;
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+    opacity: 0.45;
+    transition: opacity 0.25s ease;
+  }
 
   &[data-active='true'] {
+    --tab-edge: ${THEME.colors.accent};
     background-color: ${THEME.colors.accent};
     border-color: ${THEME.colors.accent};
     color: #fff;
   }
 
-  &:hover {
-    background-color: ${THEME.colors.accent};
-    border-color: ${THEME.colors.accent};
-    color: #fff;
-  }
-
-  &[data-active='true']:hover {
-    background-color: ${THEME.colors.accent};
-    border-color: ${THEME.colors.accent};
-    color: #fff;
+  &[data-active='true']::before,
+  &:hover::before {
+    opacity: 1;
   }
 `;
 
 const sidebarTabButtonStyles = css`
+  --tab-notch: 7px;
+  --tab-edge: var(--section-tab-border);
   background-color: var(--section-tab-bg);
-  border: 1.5px solid var(--section-tab-border);
   color: var(--section-tab-color);
-  box-shadow: none;
-  transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 
   &[data-active='true'] {
-    background-color: ${THEME.colors.accent};
-    border-color: ${THEME.colors.accent};
-    color: #fff;
-  }
-
-  &:not([data-active='true']):hover {
-    background-color: ${THEME.colors.accent};
-    border-color: ${THEME.colors.accent};
-    color: #fff;
-  }
-
-  &[data-active='true']:hover {
+    --tab-edge: ${THEME.colors.accent};
     background-color: ${THEME.colors.accent};
     border-color: ${THEME.colors.accent};
     color: #fff;
   }
 `;
 
-export const SectionTabButton = styled(HomeTabButton)`
+/* The rails' glass plate and the reading-progress line along their foot. */
+const railPlate = (notch) => css`
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border: 1px solid var(--glass-border);
+    background:
+      ${notchStrokes(notch, 'var(--glass-border)')},
+      linear-gradient(180deg, var(--glass-highlight), transparent 65%),
+      rgba(var(--color-dark-rgb), 0.9);
+    clip-path: ${notchPolygon(notch)};
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 12px;
+    bottom: 3px;
+    left: 12px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--city-accent), var(--neon-cyan));
+    box-shadow: 0 0 8px var(--city-glow);
+    transform: scaleX(var(--page-progress, 0));
+    transform-origin: left center;
+    pointer-events: none;
+  }
+
+  @media (min-width: 601px) {
+    &::before {
+      background:
+        ${notchStrokes(notch, 'var(--glass-border)')},
+        linear-gradient(180deg, var(--glass-highlight), transparent 65%),
+        rgba(var(--color-dark-rgb), 0.8);
+      -webkit-backdrop-filter: blur(10px) saturate(130%);
+      backdrop-filter: blur(10px) saturate(130%);
+    }
+  }
+`;
+
+export const SectionTabsWrapper = styled.div`
+  position: fixed;
+  top: var(--sidebar-tabs-top, calc(5em + 4.4em));
+  left: 50%;
+  transform: translate(-50%, ${props => props.$isVisible ? '0' : '-10px'});
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.4em;
+  width: min(calc(100% - 2.4em), 62em);
+  padding: 0.4em 0.4em 0.6em;
+  counter-reset: rail;
+  opacity: ${props => props.$isVisible ? 1 : 0};
+  pointer-events: ${props => props.$isVisible ? 'auto' : 'none'};
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  z-index: 94;
+  ${railPlate('12px')}
+
+  @media (max-width: ${THEME.breakpoints.largeTablet}) {
+    display: none;
+    position: static;
+  }
+`;
+
+export const SectionTabButton = styled(HudTabButton)`
   ${sidebarTabButtonStyles}
   flex: 1 1 0;
   min-width: 0;
-  font-size: 0.72em;
-  padding: 0.7em 0.9em;
-  justify-content: center;
-  text-align: center;
   width: auto;
-  min-height: 2.2em;
-  letter-spacing: 0.011em;
-  line-height: 1.3;
-  border-radius: ${THEME.radii.md};
+  padding: 0.5em 0.8em;
+  font-size: 0.72em;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  counter-increment: rail;
+
+  /* Segment numbers come from a counter so the button text stays the label. */
+  &::before {
+    content: counter(rail, decimal-leading-zero);
+    content: counter(rail, decimal-leading-zero) / '';
+    flex-shrink: 0;
+    font-family: ${THEME.fonts.mono};
+    font-size: 0.8em;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    opacity: 0.6;
+  }
+
+  &[data-active='true']::before {
+    opacity: 1;
+  }
 
   @media (max-width: 1280px) {
     font-size: 0.65em;
-    padding: 0.65em 0.75em;
+    padding: 0.5em 0.65em;
   }
 `;
 
@@ -2485,100 +1505,39 @@ export const SectionTabsMobileWrapper = styled.div`
 `;
 
 export const SectionTabsMobileInner = styled.div`
+  position: relative;
+  isolation: isolate;
   display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap: 0.35em;
   width: 100%;
   max-width: 46em;
   margin: 0 auto;
-  gap: 0.45em;
-  padding: 0.4em;
-  border-radius: ${THEME.radii.md};
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(var(--color-dark-rgb), 0.88);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(6px);
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  overflow: hidden;
+  padding: 0.35em 0.35em 0.55em;
+  ${railPlate('10px')}
 `;
 
-export const SectionTabsMobileButton = styled(HomeTabButton)`
+export const SectionTabsMobileButton = styled(HudTabButton)`
   ${sidebarTabButtonStyles}
   flex: 1 1 0;
   min-width: 0;
-  font-size: 0.92em;
-  padding: 0.6em 1.1em;
-  white-space: normal;
-  padding: 0.75em 0.55em;
+  width: auto;
+  padding: 0.55em 0.45em;
+  font-size: 0.95em;
+  letter-spacing: 0.08em;
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    font-size: 0.75em;
+    font-size: 0.8em;
+    letter-spacing: 0.05em;
   }
 `;
 
-export const HomeTabsSpacer = styled.div`
-  display: none;
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    display: block;
-    height: 2.2em;
-  }
-`;
-
-export const FloatingCloudsViewport = styled.div`
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  pointer-events: none;
-  z-index: 0;
-`;
-
-const cloudDrift = keyframes`
-  0% { transform: translateX(60vw); }
-  100% { transform: translateX(-90vw); }
-`;
-
-const cloudDriftMobile = keyframes`
-  0% { transform: translateX(60vw); }
-  100% { transform: translateX(-140vw); }
-`;
-
-export const FloatingClouds = styled.div`
-  position: absolute;
-  top: clamp(2em, 9vw, 6.5em);
-  left: 50%;
-  width: clamp(12em, 45vw, 19em);
-  transform: translateX(60vw);
-  will-change: transform;
-  pointer-events: none;
-  z-index: 0;
-
-  ${props => props.$isActive && css`
-    animation: ${cloudDrift} 60s linear infinite;
-  `}
-
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-    box-shadow: none;
-  }
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    top: clamp(4.5em, 13vw, 7em);
-    width: clamp(12em, 55vw, 18em);
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    top: clamp(5.2em, 16vw, 7.5em);
-    width: clamp(12em, 70vw, 17em);
-    ${props => props.$isActive && css`
-      animation: ${cloudDriftMobile} 40s linear infinite;
-    `}
-  }
-`;
-
+/*
+ * The case-study tab bar docks under the nav as a glass HUD strip with an
+ * accent rule. Its top offsets match the nav heights, which the section
+ * rails and their scroll math read back.
+ */
 export const DemoStokeTabsBar = styled.div`
   position: fixed;
   top: 5em;
@@ -2588,7 +1547,40 @@ export const DemoStokeTabsBar = styled.div`
   gap: 0.6em;
   padding: 0.4em 1em 0.45em;
   z-index: 95;
-  background: transparent;
+  border-bottom: 1px solid var(--glass-border);
+  background: linear-gradient(180deg, rgba(var(--color-dark-rgb), 0.95), rgba(var(--color-dark-rgb), 0.86));
+  box-shadow: 0 14px 28px -24px var(--shadow-deep);
+
+  /* The nav ends a few pixels above this bar's offset; fill that seam so
+     scrolling copy never peeks through between the two glass layers. */
+  &::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    left: 0;
+    height: 3px;
+    background: rgba(var(--color-dark-rgb), 0.95);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--city-accent) 20%, var(--city-accent) 80%, transparent);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  @media (min-width: 601px) {
+    background: linear-gradient(180deg, rgba(var(--color-dark-rgb), 0.88), rgba(var(--color-dark-rgb), 0.74));
+    -webkit-backdrop-filter: blur(12px) saturate(130%);
+    backdrop-filter: blur(12px) saturate(130%);
+  }
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
     top: 4.9em;
@@ -2596,343 +1588,5 @@ export const DemoStokeTabsBar = styled.div`
 
   @media (max-width: ${THEME.breakpoints.phone}) {
     top: 8.48em;
-  }
-`;
-
-export const IntroSection = styled.div`
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: clamp(2.6em, 6vw, 4.6em) clamp(1.6em, 5vw, 3.4em);
-  max-width: 100em;
-  margin: 0 auto;
-  gap: clamp(2.5em, 6vw, 5.25em);
-  overflow: hidden; /* Prevent parallax elements from creating horizontal scroll */
-  min-height: clamp(64vh, 80vh, 88vh);
-
-  .intro-text {
-    flex: 1;
-    max-width: 34em;
-    text-align: left;
-    will-change: transform; /* Optimize for transforms */
-    transition: transform 0.1s ease-out; /* Smooth parallax movement */
-    order: 2;
-    align-self: stretch;
-    padding-bottom: clamp(1.25em, 3.3vw, 3em);
-    padding-top: clamp(0.1em, 1.5vw, 1.1em);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: clamp(0.7em, 2vw, 1.35em);
-
-    h1 {
-      color: ${THEME.colors.white};
-      font-family: Roboto, sans-serif;
-      font-size: clamp(3.4em, 6vw, 4.8em);
-      font-weight: 600;
-      margin: 0;
-      line-height: 1.08;
-      text-align: left;
-    }
-
-    p {
-      color: ${THEME.colors.white};
-      font-family: Roboto, sans-serif;
-      font-size: 1.6em;
-      line-height: 1.5;
-      margin: 0 0 1em 0;
-      text-align: left;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    .intro-rotator-headline {
-      border-top: 2px dotted ${THEME.colors.grey};
-      padding-top: clamp(0.4em, 1.4vw, 0.7em);
-      margin: clamp(0.1em, 0.6vw, 0.25em) 0 0;
-      max-width: none;
-      width: 100%;
-      padding-left: 0;
-      padding-right: 0;
-      color: ${THEME.colors.white};
-      gap: 0.3em;
-      font-size: 2.8em;
-    }
-
-    .case-studies-cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      align-self: flex-start;
-      margin-top: clamp(0.7em, 1.6vw, 1em);
-      padding: 0.65em 1.2em;
-      border-radius: ${THEME.radii.md};
-      border: 2px solid ${THEME.colors.hotYellow};
-      background-color: ${THEME.colors.hotYellow};
-      color: ${THEME.colors.contrast};
-      font-family: Roboto, sans-serif;
-      font-size: 1.1em;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      cursor: pointer;
-      box-shadow: 0 8px 18px -10px rgb(0 0 0 / 45%);
-      transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-
-      &:hover {
-        background-color: ${THEME.colors.accent};
-        border-color: ${THEME.colors.accent};
-        color: #fff;
-      }
-
-      &:active {
-        transform: translateY(1px);
-      }
-
-      &:focus-visible {
-        outline: 2px solid ${THEME.colors.hotRed};
-        outline-offset: 4px;
-      }
-    }
-  }
-
-  .intro-image {
-    flex: 1;
-    max-width: 38em;
-    will-change: transform; /* Optimize for transforms */
-    transition: transform 0.1s ease-out; /* Smooth parallax movement */
-    position: relative;
-    order: 1;
-    align-self: flex-end;
-
-    img {
-      width: 100%;
-      height: auto;
-      border-radius: ${THEME.radii.md};
-      display: block;
-    }
-
-    .neon-trail {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      mix-blend-mode: screen;
-      opacity: 0.9; /* Keep visible so the streak can finish fading after hover ends */
-      transition: opacity 0.2s ease-out;
-      border-radius: ${THEME.radii.md};
-    }
-  }
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 2.5em;
-    padding: 2em 1.5em;
-    min-height: auto;
-
-    .intro-text {
-      max-width: none;
-      text-align: left;
-      transform: none !important; /* Disable parallax on tablets and mobile */
-      order: 2;
-      padding-bottom: 0;
-      padding-top: 0;
-      gap: 0.8em;
-      justify-content: flex-start;
-      align-self: stretch;
-
-      h1 {
-        font-size: 3.1em;
-        text-align: left;
-      }
-
-      p {
-        font-size: 1.4em;
-        text-align: left;
-        margin: 0 0 1em 0;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-
-      .intro-rotator-headline {
-        border-top: 2px dotted ${THEME.colors.grey};
-        padding-top: 0.55em;
-        margin-top: 0.25em;
-        font-size: clamp(1.8rem, 4vw, 2.5rem);
-      }
-    }
-
-    .intro-image {
-      max-width: 34em;
-      transform: none !important; /* Disable parallax on tablets and mobile */
-      order: 1;
-      align-self: center;
-    }
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: 1.5em 1em;
-    gap: 2em;
-
-    .intro-text {
-      h1 {
-        font-size: 2.6em;
-      }
-
-      p {
-        font-size: 1.2em;
-        margin: 0 0 1em 0;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-
-      .intro-rotator-headline {
-        font-size: clamp(1.6rem, 5vw, 2.2rem);
-        padding-top: 0.5em;
-        margin-top: 0.22em;
-      }
-    }
-  }
-`;
-
-export const WorksParallaxStage = styled.section`
-  position: relative;
-  isolation: isolate;
-  margin: clamp(0.25em, 1vw, 0.75em) 0 0;
-  background: ${THEME.colors.dark};
-`;
-
-export const WorksRevealCurtain = styled.div`
-  position: relative;
-  z-index: 2;
-  height: clamp(116vh, 128vw, 146vh);
-  background: transparent;
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    height: clamp(148vh, 148vw, 170vh);
-  }
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    height: clamp(128vh, 148vw, 154vh);
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    height: clamp(276vh, 360vw, 336vh);
-  }
-`;
-
-export const WorksFixedIllustration = styled.div`
-  position: sticky;
-  top: 4.9em;
-  height: 100vh;
-  width: 100%;
-  z-index: 1;
-  pointer-events: auto;
-  overflow: hidden;
-  transform: translateZ(0);
-
-  img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transform: scale(1.02);
-    filter: saturate(1.05) contrast(1.03);
-  }
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    height: clamp(78vh, 120vw, 96vh);
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    top: 8.5em;
-    height: auto;
-    min-height: 72vh;
-  }
-`;
-
-export const WorksCarouselFrame = styled(WorksFixedIllustration)`
-  background: transparent;
-  pointer-events: none;
-`;
-
-export const WorksCarouselViewport = styled.div`
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  padding: clamp(0.375em, 1vw, 0.7em) clamp(1.25em, 3.8vw, 3em);
-  z-index: 0;
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    padding: clamp(0.325em, 1.2vw, 0.55em) clamp(1em, 3.8vw, 1.8em);
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    padding: clamp(0.25em, 1.4vw, 0.425em) clamp(0.75em, 3.6vw, 1.1em);
-  }
-`;
-
-export const WorksCarouselTrack = styled.div`
-  display: flex;
-  align-items: center;
-  gap: clamp(1.1em, 2.8vw, 2em);
-  width: max-content;
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-  padding-right: clamp(4em, 12vw, 10em);
-`;
-
-export const WorksCarouselItem = styled.div`
-  position: relative;
-  flex: 0 0 clamp(23rem, 58vw, 52rem);
-  aspect-ratio: 16 / 9;
-  border-radius: ${THEME.radii.md};
-  overflow: hidden;
-  border: 1.5px solid rgba(255, 255, 255, 0.82);
-  box-shadow: 0 34px 48px -30px rgb(0 0 0 / 82%);
-  background: ${THEME.colors.darkest};
-
-  @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    flex-basis: clamp(20rem, 78vw, 36rem);
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    flex-basis: 84vw;
-  }
-`;
-
-export const WorksCarouselImage = styled.img`
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: top;
-`;
-
-export const WorksSectionContent = styled.div`
-  position: relative;
-  z-index: 2;
-  background: ${THEME.colors.dark};
-  margin-top: -44vh;
-  padding-top: clamp(1em, 2.5vw, 1.75em);
-
-  @media (max-width: ${THEME.breakpoints.smallTablet}) {
-    margin-top: -24vh;
-  }
-
-  @media (max-width: ${THEME.breakpoints.phone}) {
-    margin-top: -12vh;
   }
 `;

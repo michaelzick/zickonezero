@@ -1,6 +1,9 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
+import { getRouteMeta } from '../src/lib/city/routes';
+import { THEME_BOOTSTRAP_SCRIPT } from '../src/theme/themeConfig';
+
 export default class MyDocument extends Document {
   static async getInitialProps(
     ctx: DocumentContext
@@ -31,8 +34,11 @@ export default class MyDocument extends Document {
   }
 
   render() {
+    // Each exported page starts glowing in its own route color.
+    const { accent } = getRouteMeta(this.props.__NEXT_DATA__.page);
+
     return (
-      <Html lang="en">
+      <Html lang="en" data-accent={accent}>
         <Head />
         <body>
           {/* Google Tag Manager (noscript) */}
@@ -44,23 +50,7 @@ export default class MyDocument extends Document {
               style={{ display: 'none', visibility: 'hidden' }}
             ></iframe>
           </noscript>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                (function() {
-                  try {
-                    var storageKey = 'zickonezero-theme';
-                    var preference = window.localStorage.getItem(storageKey) || 'system';
-                    var systemTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                    var resolved = preference === 'light' || preference === 'dark' ? preference : systemTheme;
-                    document.documentElement.setAttribute('data-theme', resolved);
-                  } catch (error) {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                  }
-                })();
-              `,
-            }}
-          />
+          <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP_SCRIPT }} />
           <Main />
           <NextScript />
         </body>

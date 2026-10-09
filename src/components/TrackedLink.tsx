@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import type { MouseEvent, ReactNode } from 'react';
+import type { AriaAttributes, MouseEvent, ReactNode } from 'react';
 
 import { trackLinkClick } from '../lib/analytics';
 
@@ -13,6 +13,8 @@ type TrackedLinkProps = {
   target?: string;
   rel?: string;
   tabIndex?: number;
+  /** Marks the link for the page being viewed. */
+  ariaCurrent?: AriaAttributes['aria-current'];
   children: ReactNode;
   onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
 };
@@ -27,6 +29,7 @@ const TrackedLink = ({
   target,
   rel,
   tabIndex,
+  ariaCurrent,
   children,
   onClick,
 }: TrackedLinkProps) => {
@@ -47,7 +50,13 @@ const TrackedLink = ({
 
   if (isInternal && (!target || target === '_self')) {
     return (
-      <Link href={href} className={className} tabIndex={tabIndex} onClick={handleClick}>
+      <Link
+        href={href}
+        className={className}
+        tabIndex={tabIndex}
+        aria-current={ariaCurrent}
+        onClick={handleClick}
+      >
         {children}
       </Link>
     );
@@ -60,6 +69,7 @@ const TrackedLink = ({
       rel={resolvedRel}
       className={className}
       tabIndex={tabIndex}
+      aria-current={ariaCurrent}
       onClick={handleClick}
     >
       {children}

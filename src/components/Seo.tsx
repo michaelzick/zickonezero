@@ -9,10 +9,13 @@ import {
 } from '../lib/seo';
 
 const SITE_TAGLINE = 'Product, UX & Development';
-// Intrinsic size and alt text of the default brand OG image, used when a page falls back to it.
-const DEFAULT_OG_IMAGE_WIDTH = 925;
-const DEFAULT_OG_IMAGE_HEIGHT = 1196;
-const DEFAULT_OG_IMAGE_ALT = 'ZICKONEZERO Creative lifeguard tower mark';
+// Intrinsic size and alt text of the default share image (the night hero), used when a page falls back to it.
+const DEFAULT_OG_IMAGE_WIDTH = 1200;
+const DEFAULT_OG_IMAGE_HEIGHT = 630;
+const DEFAULT_OG_IMAGE_ALT = 'ZICKONEZERO Creative wordmark beside the logo: a cyan Z and magenta 1 enclosed in a chamfered cyan zero';
+
+// Escape "<" so no string in the data can close the script tag early.
+const serializeJsonLd = (item: JsonLd) => JSON.stringify(item).replace(/</g, '\\u003c');
 
 export type SeoProps = {
   title?: string;
@@ -53,7 +56,8 @@ const Seo = ({
     <Head>
       <title key="title">{pageTitle}</title>
       <meta key="description" name="description" content={metaDescription} />
-      <link key="canonical" rel="canonical" href={canonical} />
+      {/* A page kept out of search has nothing to canonicalize. */}
+      {noIndex ? null : <link key="canonical" rel="canonical" href={canonical} />}
       {noIndex ? <meta key="robots" name="robots" content="noindex, nofollow" /> : null}
 
       <meta key="og:site_name" property="og:site_name" content={SITE_NAME} />
@@ -86,7 +90,7 @@ const Seo = ({
           // eslint-disable-next-line react/no-danger
           key={`jsonld-${index}`}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(item) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(item) }}
         />
       ))}
     </Head>

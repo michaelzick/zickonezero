@@ -4,14 +4,14 @@ import userEvent from '@testing-library/user-event';
 import TrackedLink from '../src/components/TrackedLink';
 
 type TestWindow = Window & {
-  amplitude?: {
+  mixpanel?: {
     track?: jest.Mock;
   };
 };
 
 describe('TrackedLink', () => {
   beforeEach(() => {
-    delete (window as TestWindow).amplitude;
+    delete (window as TestWindow).mixpanel;
   });
 
   it('renders internal links with Next link semantics', () => {
@@ -27,7 +27,7 @@ describe('TrackedLink', () => {
   it('preserves external target and rel while tracking clicks', async () => {
     const user = userEvent.setup();
     const track = jest.fn();
-    (window as TestWindow).amplitude = { track };
+    (window as TestWindow).mixpanel = { track };
 
     render(
       <TrackedLink

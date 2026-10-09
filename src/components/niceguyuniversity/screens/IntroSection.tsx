@@ -20,7 +20,7 @@ const PROJECT_URL = 'https://www.niceguyuniversity.com/';
 const IntroSection = ({ openScreenLightbox }: IntroSectionProps) => (
   <section id='screens-introduction'>
     <CompactIntroHeaderRow className='text-animate'>
-      <img className='ngu-logo' src='/img/squares/ngu-logo-square.webp' alt='Nice Guy University Logo' />
+      <img className='ngu-logo' src='/img/squares/ngu-logo-square.webp' alt='Nice Guy University Logo' loading='lazy' />
       <div>
         <h2 className='tab-header page-header'>Nice Guy University Product Screens</h2>
         <PitchDeckLink

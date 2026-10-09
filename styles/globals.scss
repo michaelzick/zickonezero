@@ -1,77 +1,314 @@
-:root {
-  color-scheme: dark;
-  --color-dark: #020817;
-  --color-dark-rgb: 2, 8, 23;
-  --color-darkest: #151515;
-  --color-surface: #1e293b;
-  --color-grey: #c7c5c5;
-  --color-blue: #0071e3;
-  --color-white: #ffffff;
-  --color-demostoke: #00dff7;
-  --color-hotYellow: #d3ff00;
-  --color-hotRed: #fe0065;
-  --color-accent: var(--color-hotRed);
-  --color-contrast: #020817;
-  --color-orange: #fb923c;
-  --color-mutedLabel: rgba(251, 146, 60, 0.72);
-  --case-study-top-tab-bg: rgba(2, 8, 23, 0.78);
-  --case-study-top-tab-border: rgba(255, 255, 255, 0.32);
-  --case-study-top-tab-color: #ffffff;
-  --section-tab-bg: transparent;
-  --section-tab-border: var(--color-white);
-  --section-tab-color: var(--color-white);
-  --home-section-case-bg: #17121f;
-  --home-section-case-border: rgba(167, 139, 190, 0.18);
-  --home-section-product-bg: #0c1a26;
-  --home-section-product-border: rgba(110, 165, 210, 0.2);
-  --home-section-web-bg: #17121f;
-  --home-section-web-border: rgba(167, 139, 190, 0.18);
+/*
+ * ZICKONEZERO "living city" tokens.
+ *
+ * Night is the default theme. The HUD time-of-day toggle switches the city to
+ * day (data-theme='light'). The semantic --color-* tokens predate the city
+ * redesign and are remapped onto its palette, so every page is reskinned at
+ * the token level first.
+ *
+ * Jest maps this file to identity-obj-proxy, so rules that jsdom's CSS parser
+ * cannot read (@property, global element selectors) belong here rather than in
+ * styled-components.
+ */
+
+/* Registered as typed colors, so a transition on any of them interpolates smoothly. */
+@property --sky-top {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #03050c;
 }
 
+@property --sky-mid {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #071827;
+}
+
+@property --sky-low {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #0c3540;
+}
+
+@property --haze {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #1c6f78;
+}
+
+@property --bldg-far {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #0a1926;
+}
+
+@property --bldg-mid {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #0a141f;
+}
+
+@property --bldg-near {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #050b13;
+}
+
+@property --window-lit {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ffcf7a;
+}
+
+@property --street {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #04080e;
+}
+
+@property --sun {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #2ff3ff;
+}
+
+@property --color-dark {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #050a14;
+}
+
+@property --color-white {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #e9f6ff;
+}
+
+@property --glass-bg {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(6, 14, 26, 0.72);
+}
+
+:root,
 :root[data-theme='dark'] {
   color-scheme: dark;
+
+  /* City: night alley */
+  --sky-top: #03050c;
+  --sky-mid: #071827;
+  --sky-low: #0c3540;
+  --haze: #1c6f78;
+  --bldg-far: #0a1926;
+  --bldg-mid: #0a141f;
+  --bldg-near: #050b13;
+  --window-lit: #ffcf7a;
+  --window-cool: #6ff4ff;
+  --street: #04080e;
+  --sun: #2ff3ff;
+  --world-dim: 0.18;
+  --night-only: 1;
+  --day-only: 0;
+  --accent-glow: 0.42;
+  --car-body: #0b1420;
+
+  /* Neon */
+  --neon-cyan: #2ff3ff;
+  --neon-magenta: #ff2bd6;
+  --neon-violet: #a35bff;
+  --neon-red: #ff3a5c;
+  --neon-amber: #ffb03b;
+  --neon-glow-strength: 1;
+  --hud-yellow: #f3e600;
+  --hud-red: #ff4f45;
+  --hud-teal: #5ef6e6;
+
+  /* HUD and glass surfaces */
+  --glass-bg: rgba(6, 14, 26, 0.72);
+  --glass-bg-strong: rgba(4, 10, 20, 0.9);
+  /* Open nav menus: opaque, so nothing animated reads through them. */
+  --menu-bg: #040a14;
+  --glass-border: rgba(47, 243, 255, 0.28);
+  --glass-highlight: rgba(255, 255, 255, 0.06);
+  --hud-panel-bg: rgba(4, 18, 26, 0.78);
+  --hud-panel-border: rgba(94, 246, 230, 0.45);
+  --hud-ink: #dffbff;
+  --hud-ink-dim: rgba(223, 251, 255, 0.62);
+  --scanline: rgba(47, 243, 255, 0.06);
+  --focus-ring: #2ff3ff;
+  --shadow-deep: rgba(0, 0, 0, 0.55);
+  /* Long-form inner-page panels and dialogs; dialogs keep light ink in both themes. */
+  --panel-bg: rgba(4, 10, 19, 0.82);
+  --modal-bg: rgba(3, 9, 18, 0.96);
+  --modal-scrim: rgba(1, 4, 10, 0.8);
+
+  /* Semantic tokens (pre-redesign names) */
+  --color-dark: #050a14;
+  --color-dark-rgb: 5, 10, 20;
+  --color-darkest: #03070e;
+  --color-surface: #0d1b2a;
+  --color-grey: #a3b9c8;
+  --color-blue: #3aa0ff;
+  --color-white: #e9f6ff;
+  --color-demostoke: #2ff3ff;
+  --color-hotYellow: #f3e600;
+  --color-hotRed: #ff4fd1;
+  --color-accent: #e81ea8;
+  --color-contrast: #050a14;
+  --color-orange: #ffb03b;
+  --color-mutedLabel: rgba(255, 176, 59, 0.78);
+  --case-study-top-tab-bg: rgba(5, 12, 22, 0.72);
+  --case-study-top-tab-border: rgba(47, 243, 255, 0.35);
+  --case-study-top-tab-color: #e9f6ff;
+  --section-tab-bg: rgba(5, 12, 22, 0.55);
+  --section-tab-border: rgba(47, 243, 255, 0.4);
+  --section-tab-color: var(--color-white);
+
+  /* District glass tints on the homepage */
+  --home-section-case-bg: rgba(38, 6, 34, 0.58);
+  --home-section-case-border: rgba(255, 43, 214, 0.36);
+  --home-section-product-bg: rgba(3, 28, 38, 0.58);
+  --home-section-product-border: rgba(47, 243, 255, 0.36);
+  --home-section-web-bg: rgba(36, 22, 4, 0.58);
+  --home-section-web-border: rgba(255, 176, 59, 0.36);
+
+  /* Dynamic accent; data-accent on <html> picks the color and its glow */
+  --city-accent: var(--neon-cyan);
+  --city-glow: rgba(47, 243, 255, 0.4);
 }
 
 :root[data-theme='light'] {
   color-scheme: light;
-  --color-dark: #f8fafc;
-  --color-dark-rgb: 248, 250, 252;
-  --color-darkest: #e2e8f0;
-  --color-surface: #e2e8f0;
-  --color-grey: #334155;
-  --color-blue: #2563eb;
-  --color-white: #0f172a;
-  --color-demostoke: #0284c7;
-  --color-hotYellow: #d3ff00;
-  --color-hotRed: #db2777;
-  --color-accent: var(--color-hotRed);
-  --color-contrast: #0f172a;
-  --color-orange: #fb923c;
-  --color-mutedLabel: rgba(251, 146, 60, 0.72);
-  --case-study-top-tab-bg: rgba(255, 255, 255, 0.72);
-  --case-study-top-tab-border: rgba(15, 23, 42, 0.55);
+
+  /* City: sunlit afternoon street */
+  --sky-top: #6fb9cc;
+  --sky-mid: #bfe0dc;
+  --sky-low: #f3e2c0;
+  --haze: #f6e6cc;
+  --bldg-far: #9db7b5;
+  --bldg-mid: #c06a4c;
+  --bldg-near: #1d5a63;
+  --window-lit: #eaf6f3;
+  --window-cool: #a5dde2;
+  --street: #77706a;
+  --sun: #ffd36b;
+  --world-dim: 0.1;
+  --night-only: 0;
+  --day-only: 1;
+  --accent-glow: 0.2;
+  --car-body: #22343a;
+
+  --neon-cyan: #0b8f9c;
+  --neon-magenta: #c8128a;
+  --neon-violet: #6b3fc4;
+  --neon-red: #d4263f;
+  --neon-amber: #c86a12;
+  --neon-glow-strength: 0.35;
+  --hud-yellow: #ffd21f;
+  --hud-red: #e2382f;
+  --hud-teal: #12a39a;
+
+  --glass-bg: rgba(255, 250, 241, 0.8);
+  --glass-bg-strong: rgba(255, 251, 244, 0.94);
+  --menu-bg: rgba(255, 251, 244, 0.94);
+  --glass-border: rgba(29, 90, 99, 0.3);
+  --glass-highlight: rgba(255, 255, 255, 0.5);
+  --hud-panel-bg: rgba(14, 72, 80, 0.86);
+  --hud-panel-border: rgba(140, 240, 230, 0.55);
+  --hud-ink: #effffd;
+  --hud-ink-dim: rgba(239, 255, 253, 0.7);
+  --scanline: rgba(29, 90, 99, 0.05);
+  --focus-ring: #c8128a;
+  --shadow-deep: rgba(60, 40, 20, 0.22);
+  --panel-bg: rgba(255, 251, 244, 0.88);
+  --modal-bg: rgba(10, 46, 52, 0.97);
+  --modal-scrim: rgba(24, 35, 41, 0.55);
+
+  --color-dark: #efe7da;
+  --color-dark-rgb: 239, 231, 218;
+  --color-darkest: #e4d9c7;
+  --color-surface: #e6dccb;
+  --color-grey: #4b5a61;
+  --color-blue: #1f6f78;
+  --color-white: #182329;
+  --color-demostoke: #0b7d8c;
+  --color-hotYellow: #ffd21f;
+  --color-hotRed: #c0127f;
+  --color-accent: #c0127f;
+  --color-contrast: #182329;
+  --color-orange: #b4513a;
+  --color-mutedLabel: rgba(180, 81, 58, 0.85);
+  --case-study-top-tab-bg: rgba(255, 251, 244, 0.82);
+  --case-study-top-tab-border: rgba(24, 35, 41, 0.4);
   --case-study-top-tab-color: var(--color-contrast);
-  --section-tab-bg: rgba(255, 255, 255, 0.72);
-  --section-tab-border: rgba(15, 23, 42, 0.55);
+  --section-tab-bg: rgba(255, 251, 244, 0.78);
+  --section-tab-border: rgba(24, 35, 41, 0.45);
   --section-tab-color: var(--color-contrast);
-  --home-section-case-bg: #f4f0f7;
-  --home-section-case-border: rgba(90, 60, 120, 0.12);
-  --home-section-product-bg: #e3eef6;
-  --home-section-product-border: rgba(20, 70, 110, 0.14);
-  --home-section-web-bg: #f4f0f7;
-  --home-section-web-border: rgba(90, 60, 120, 0.12);
+
+  --home-section-case-bg: rgba(255, 239, 247, 0.78);
+  --home-section-case-border: rgba(192, 18, 127, 0.3);
+  --home-section-product-bg: rgba(233, 248, 249, 0.8);
+  --home-section-product-border: rgba(11, 125, 140, 0.32);
+  --home-section-web-bg: rgba(255, 245, 228, 0.8);
+  --home-section-web-border: rgba(180, 81, 58, 0.32);
 }
 
-html,
+:root[data-accent='magenta'] {
+  --city-accent: var(--neon-magenta);
+  --city-glow: rgba(255, 43, 214, 0.4);
+}
+
+:root[data-accent='cyan'] {
+  --city-accent: var(--neon-cyan);
+  --city-glow: rgba(47, 243, 255, 0.4);
+}
+
+:root[data-accent='amber'] {
+  --city-accent: var(--neon-amber);
+  --city-glow: rgba(255, 176, 59, 0.4);
+}
+
+:root[data-accent='violet'] {
+  --city-accent: var(--neon-violet);
+  --city-glow: rgba(163, 91, 255, 0.4);
+}
+
+:root[data-accent='red'] {
+  --city-accent: var(--neon-red);
+  --city-glow: rgba(255, 58, 92, 0.4);
+}
+
+/*
+ * The time-of-day crossfade (src/theme/ThemeContext.tsx): one composited fade
+ * between snapshots of the old and new city.
+ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.9s;
+  animation-timing-function: ease;
+}
+
+html {
+  min-height: 100%;
+  height: 100%;
+  overflow-x: clip;
+  background: var(--color-dark);
+  color: var(--color-white);
+  scrollbar-color: rgba(47, 243, 255, 0.35) var(--color-dark);
+}
+
+/* Transparent so the fixed city layers (negative z-index) show through. */
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   min-height: 100%;
   height: 100%;
-  background: var(--color-dark);
+  background: transparent;
   color: var(--color-white);
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 #__next {
@@ -82,6 +319,16 @@ body {
   box-sizing: border-box;
 }
 
+::selection {
+  background: var(--neon-magenta);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
 /* hides the 0 in lightbox */
 .fslightbox-container {
   color: transparent;
@@ -90,4 +337,21 @@ body {
 
 .brand-name .brand-one {
   color: var(--color-accent);
+  text-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
 }

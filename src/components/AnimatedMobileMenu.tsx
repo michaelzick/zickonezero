@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { LinkBoxMobileContent } from '.';
+import LinkBoxMobileContent from './LinkBoxMobileContent';
 
 type AnimatedMobileMenuProps = {
   isVisible: boolean;

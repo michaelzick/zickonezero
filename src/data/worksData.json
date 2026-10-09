@@ -1,6 +1,6 @@
 [
   {
-    "thumb": "/img/squares/wb-large.webp",
+    "thumb": "/img/home/cards/wb-large.webp",
     "imgs": [
       "/img/gipsy_1.webp",
       "/img/gipsy_2.webp",
@@ -12,7 +12,7 @@
     "group": "wb"
   },
   {
-    "thumb": "/img/squares/paramount-large.webp",
+    "thumb": "/img/home/cards/paramount-large.webp",
     "imgs": [
       "/img/jeff_web.webp",
       "/img/kp_facebook_web.webp",
@@ -24,7 +24,7 @@
     "group": "paramount"
   },
   {
-    "thumb": "/img/squares/sony-large.webp",
+    "thumb": "/img/home/cards/sony-large.webp",
     "imgs": [
       "/img/tite_1.webp",
       "/img/tite_2.webp",
@@ -36,7 +36,7 @@
     "group": "sony"
   },
   {
-    "thumb": "/img/squares/dreamworks-large.webp",
+    "thumb": "/img/home/cards/dreamworks-large.webp",
     "imgs": [
       "/img/dragons_map.webp",
       "/img/dragons_forest.webp",
@@ -48,7 +48,7 @@
     "group": "dreamworks"
   },
   {
-    "thumb": "/img/squares/fox-large.webp",
+    "thumb": "/img/home/cards/fox-large.webp",
     "imgs": [
       "/img/vikings_1.webp",
       "/img/vikings_2.webp",
@@ -60,7 +60,7 @@
     "group": "fox"
   },
   {
-    "thumb": "/img/squares/riot-large.webp",
+    "thumb": "/img/home/cards/riot-large.webp",
     "imgs": [
       "/img/lol_home.webp",
       "/img/lol_user.webp",
@@ -72,7 +72,7 @@
     "group": "riot"
   },
   {
-    "thumb": "/img/squares/inrix-large.webp",
+    "thumb": "/img/home/cards/inrix-large.webp",
     "imgs": [
       "/img/parkme-home-2017.webp",
       "/img/parkme-city-2017.webp",
@@ -84,7 +84,7 @@
     "group": "parkme"
   },
   {
-    "thumb": "/img/squares/saatchi-large.webp",
+    "thumb": "/img/home/cards/saatchi-large.webp",
     "imgs": [
       "/img/citi.webp",
       "/img/etsy.webp",
@@ -96,7 +96,7 @@
     "group": "saatchi"
   },
   {
-    "thumb": "/img/squares/adam-chiappone-square.webp",
+    "thumb": "/img/home/cards/adam-chiappone-square.webp",
     "imgs": [],
     "desc": "General information site for family therapist Adam Chiappone",
     "header": "Adam Chiappone",
@@ -104,7 +104,7 @@
     "link": "/adam-chiappone"
   },
   {
-    "thumb": "/img/squares/king-512.webp",
+    "thumb": "/img/home/cards/king-512.webp",
     "imgs": [],
     "desc": "Internal Family Systems journaling app",
     "header": "Who’s In Charge?",
@@ -112,7 +112,7 @@
     "link": "/whos-in-charge"
   },
   {
-    "thumb": "/img/squares/fyfs-wave-square.webp",
+    "thumb": "/img/home/cards/fyfs-wave-square.webp",
     "imgs": [],
     "desc": "Free career quiz & personality assessment",
     "header": "Find Your Flow State",
@@ -120,7 +120,7 @@
     "link": "/find-your-flow-state"
   },
   {
-    "thumb": "/img/squares/at_logo_purple.webp",
+    "thumb": "/img/home/cards/at_logo_purple.webp",
     "imgs": [],
     "desc": "Cybersecurity training marketplace and CMS",
     "header": "CASE STUDY: Antisyphon Training",
@@ -128,7 +128,7 @@
     "link": "/antisyphon-training"
   },
   {
-    "thumb": "/img/squares/demostoke-logo-square.webp",
+    "thumb": "/img/home/cards/demostoke-logo-square.webp",
     "imgs": [],
     "desc": "Action sports gear rental system and lifestyle blog",
     "header": "CASE STUDY: DemoStoke",
@@ -136,7 +136,7 @@
     "link": "/demostoke"
   },
   {
-    "thumb": "/img/squares/ngu-logo-square.webp",
+    "thumb": "/img/home/cards/ngu-logo-square.webp",
     "imgs": [],
     "desc": "Recovery course and coaching platform for men",
     "header": "CASE STUDY: Nice Guy University",
@@ -144,7 +144,7 @@
     "link": "/nice-guy-university"
   },
   {
-    "thumb": "/img/squares/12-step-meetings-icon-square.webp",
+    "thumb": "/img/home/cards/12-step-meetings-icon-square.webp",
     "imgs": [],
     "desc": "Searchable recovery meeting directory with maps and filters",
     "header": "12 Step Meetings",
@@ -152,7 +152,7 @@
     "link": "/12-step-meetings"
   },
   {
-    "thumb": "/img/squares/timefraim-icon-square.webp",
+    "thumb": "/img/home/cards/timefraim-icon-square.webp",
     "imgs": [],
     "desc": "Daily planner with tasks, calendar blocks, and focus timers",
     "header": "TimeFraim",
@@ -160,7 +160,7 @@
     "link": "/timefraim"
   },
   {
-    "thumb": "/img/squares/ds-logo-stripes-fuchsia-square.webp",
+    "thumb": "/img/home/cards/ds-logo-stripes-fuchsia-square.webp",
     "imgs": [],
     "desc": "Gear shop dashboard and embeddable booking widget",
     "header": "DemoStoke Fleet Ops",
@@ -168,7 +168,7 @@
     "link": "/demostoke-fleet-ops"
   },
   {
-    "thumb": "/img/squares/riptyde-icon-square.webp",
+    "thumb": "/img/home/cards/riptyde-icon-square.webp",
     "imgs": [],
     "desc": "iOS surf forecast app with beach cams, session tracking, and AI",
     "header": "Riptyde",
@@ -176,7 +176,7 @@
     "link": "/riptyde"
   },
   {
-    "thumb": "/img/squares/bars-of-sand-icon-square.webp",
+    "thumb": "/img/home/cards/bars-of-sand-icon-square.webp",
     "imgs": [],
     "desc": "Interactive 3D surf lab for sandbars, waves, and sand movement",
     "header": "Bars of Sand",

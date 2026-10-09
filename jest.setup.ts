@@ -95,6 +95,13 @@ Object.defineProperty(window, 'cancelAnimationFrame', {
   value: (handle: number) => window.clearTimeout(handle),
 });
 
+// jsdom has no canvas; returning null (as browsers do for unsupported
+// contexts) keeps the city's weather layer inert without "Not implemented" noise.
+Object.defineProperty(window.HTMLCanvasElement.prototype, 'getContext', {
+  writable: true,
+  value: jest.fn(() => null),
+});
+
 Object.defineProperty(window.HTMLMediaElement.prototype, 'play', {
   writable: true,
   value: jest.fn(),

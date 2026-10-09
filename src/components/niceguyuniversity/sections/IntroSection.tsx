@@ -1,5 +1,6 @@
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { trackEvent, trackLinkClick } from '../../../lib/analytics';
+import { heroImageSources } from '../../../lib/responsiveImages';
 
 import {
   AnimatedSection,
@@ -15,6 +16,8 @@ import {
   Title
 } from '../../../../styles/projectShowcases';
 import { SetAnimatedSectionRef, VisibleSections } from '../../showcaseTypes';
+
+const HERO_IMAGE_SRC = '/img/nice-guy-university/ngu-home.webp';
 
 type IntroSectionProps = {
   setAnimatedSectionRef: SetAnimatedSectionRef;
@@ -34,13 +37,14 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
   <AnimatedSection
     ref={setAnimatedSectionRef('section-intro')}
     data-animate-id='section-intro'
+    data-reveal='load'
     className={visibleSections['section-intro'] ? 'visible' : undefined}
   >
     <section id='introduction' className='story-section'>
       <HiddenSectionAnchor id='hero-spacer' aria-hidden='true' />
       <HeroGrid>
         <CaseStudyHeroMediaFrame className='image-animate' style={{ backgroundColor: '#111111' }}>
-          <img src='/img/nice-guy-university/ngu-home.webp' alt='Nice Guy University homepage with hero and calls to action' loading='lazy' />
+          <img src={HERO_IMAGE_SRC} {...heroImageSources(HERO_IMAGE_SRC)} alt='Nice Guy University homepage with hero and calls to action' loading='eager' fetchPriority='high' />
         </CaseStudyHeroMediaFrame>
         <HeroContent className='text-animate'>
           <Title>Nice Guy University<br />UX Case Study</Title>

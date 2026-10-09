@@ -2,19 +2,19 @@ export const CASE_STUDIES_LINKS = [
   {
     href: '/nice-guy-university',
     label: 'Nice Guy University',
-    icon: '/img/squares/ngu-logo-square-sm.webp',
+    icon: '/img/nav/ngu-logo-square.webp',
     iconAlt: 'Nice Guy University logo'
   },
   {
     href: '/demostoke',
     label: 'DemoStoke',
-    icon: '/img/squares/demostoke-logo-square-sm.webp',
+    icon: '/img/nav/demostoke-logo-square.webp',
     iconAlt: 'DemoStoke logo'
   },
   {
     href: '/antisyphon-training',
     label: 'Antisyphon',
-    icon: '/img/squares/at_logo_purple-sm.webp',
+    icon: '/img/nav/at_logo_purple.webp',
     iconAlt: 'Antisyphon Training logo'
   },
 ] as const;

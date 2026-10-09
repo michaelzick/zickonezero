@@ -1,0 +1,10 @@
+{
+  "name": "rackloose",
+  "version": "1.10.0",
+  "tag": "v1.10.0",
+  "commit": "8d2426d9b680bdedb86f3ab63200ea341b0b2492",
+  "repository": "https://github.com/michaelzick/rackloose",
+  "archive": "rackloose-1.10.0.tgz",
+  "sha256": "fd86c5fd6f24bf0ee3b39aee068e3d2ddc3a49e65bb1b27e6a67dd8b97897f39",
+  "bytes": 135436
+}

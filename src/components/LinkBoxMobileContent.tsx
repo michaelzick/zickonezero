@@ -7,17 +7,20 @@ import {
 import {
   useAppDispatch,
 } from '../hooks';
-import { CASE_STUDIES_LINKS } from './caseStudiesLinks';
-import { EXTERNAL_LINKS } from './contactLinks';
-import { PROJECT_LINKS } from './projectLinks';
+import useCurrentPath from '../hooks/useCurrentPath';
 import { trackEvent } from '../lib/analytics';
+import { getRouteMeta } from '../lib/city/routes';
+import { NAV_MENUS, type NavMenuKey } from './navMenus';
 import TrackedLink from './TrackedLink';
 import {
-  LinkBoxMobile,
-  CaseStudiesAccordionButton,
-  CaseStudiesAccordionList,
-  CaseStudiesChevron
-} from '../../styles';
+  CityMapMenu,
+  NavAccordionButton,
+  NavAccordionList,
+  NavChevron
+} from '../../styles/nav';
+
+/** Referenced by the menu button's aria-controls. */
+export const MOBILE_MENU_ID = 'site-city-map';
 
 type LinkBoxMobileContentProps = {
   isAnimating?: boolean;
@@ -25,127 +28,114 @@ type LinkBoxMobileContentProps = {
 
 const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps) => {
   const dispatch = useAppDispatch();
-  const [isCaseStudiesOpen, setIsCaseStudiesOpen] = useState(false);
-  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
-  const [isContactOpen, setIsContactOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<NavMenuKey | null>(null);
+  const currentPath = useCurrentPath();
 
   const handleCloseMenu = () => dispatch(showMobileMenu(false));
-  const trackAccordionOpen = (label: string, expanded: boolean) => {
-    if (expanded) return;
-    trackEvent('nav_dropdown_open', {
-      location: 'mobile_nav',
-      label,
-      page_path: window.location.pathname,
-    });
+
+  const toggleMenu = (key: NavMenuKey, label: string) => {
+    const expanded = openMenu === key;
+    if (!expanded) {
+      trackEvent('nav_dropdown_open', {
+        location: 'mobile_nav',
+        label,
+        page_path: window.location.pathname,
+      });
+    }
+    setOpenMenu(expanded ? null : key);
   };
 
   return (
-    <LinkBoxMobile
+    <CityMapMenu
+      id={MOBILE_MENU_ID}
       $isAnimating={isAnimating}
+      data-location={getRouteMeta(currentPath ?? '/').label}
       onClick={(event: MouseEvent<HTMLUListElement>) => event.stopPropagation()}>
       <li onClick={handleCloseMenu}>
-        <TrackedLink href='/about' label='About' location='mobile_nav' section='primary' variant='mobile'>
+        <TrackedLink
+          href='/about'
+          label='About'
+          location='mobile_nav'
+          section='primary'
+          variant='mobile'
+          ariaCurrent={currentPath === '/about' ? 'page' : undefined}
+        >
           About
         </TrackedLink>
       </li>
       <li onClick={handleCloseMenu}>
-        <TrackedLink href='/contact' label='Contact' location='mobile_nav' section='primary' variant='mobile'>
+        <TrackedLink
+          href='/contact'
+          label='Contact'
+          location='mobile_nav'
+          section='primary'
+          variant='mobile'
+          ariaCurrent={currentPath === '/contact' ? 'page' : undefined}
+        >
           Contact
         </TrackedLink>
       </li>
-      <li className='case-studies-accordion'>
-        <CaseStudiesAccordionButton
-          type='button'
-          onClick={() => {
-            trackAccordionOpen('Case Studies', isCaseStudiesOpen);
-            setIsCaseStudiesOpen((prevState) => !prevState);
-            setIsProjectsOpen(false);
-            setIsContactOpen(false);
-          }}
-          aria-expanded={isCaseStudiesOpen}>
-          Case Studies
-          <CaseStudiesChevron $isOpen={isCaseStudiesOpen} aria-hidden='true'>
-            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-          </CaseStudiesChevron>
-        </CaseStudiesAccordionButton>
-        <CaseStudiesAccordionList $isOpen={isCaseStudiesOpen}>
-          {CASE_STUDIES_LINKS.map(({ href, label, icon, iconAlt }) => (
-            <li key={href} onClick={handleCloseMenu}>
-              <TrackedLink href={href} label={label} location='mobile_nav' section='case_studies_accordion' variant='mobile'>
-                {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
-                {label}
-              </TrackedLink>
-            </li>
-          ))}
-        </CaseStudiesAccordionList>
-      </li>
-      <li className='case-studies-accordion'>
-        <CaseStudiesAccordionButton
-          type='button'
-          onClick={() => {
-            trackAccordionOpen('Product Engineering', isProjectsOpen);
-            setIsProjectsOpen((prevState) => !prevState);
-            setIsCaseStudiesOpen(false);
-            setIsContactOpen(false);
-          }}
-          aria-expanded={isProjectsOpen}>
-          Product Engineering
-          <CaseStudiesChevron $isOpen={isProjectsOpen} aria-hidden='true'>
-            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-          </CaseStudiesChevron>
-        </CaseStudiesAccordionButton>
-        <CaseStudiesAccordionList $isOpen={isProjectsOpen}>
-          {PROJECT_LINKS.map(({ href, label, icon, iconAlt }) => (
-            <li key={href} onClick={handleCloseMenu}>
-              <TrackedLink href={href} label={label} location='mobile_nav' section='ux_design_accordion' variant='mobile'>
-                {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
-                {label}
-              </TrackedLink>
-            </li>
-          ))}
-        </CaseStudiesAccordionList>
-      </li>
-      <li className='contact-accordion'>
-        <CaseStudiesAccordionButton
-          type='button'
-          onClick={() => {
-            trackAccordionOpen('Links', isContactOpen);
-            setIsContactOpen((prevState) => !prevState);
-            setIsCaseStudiesOpen(false);
-            setIsProjectsOpen(false);
-          }}
-          aria-expanded={isContactOpen}>
-          Links
-          <CaseStudiesChevron $isOpen={isContactOpen} aria-hidden='true'>
-            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-          </CaseStudiesChevron>
-        </CaseStudiesAccordionButton>
-        <CaseStudiesAccordionList $isOpen={isContactOpen}>
-          {EXTERNAL_LINKS.map(({ href, label }) => (
-            <li key={href} onClick={handleCloseMenu}>
-              <TrackedLink
-                className='external-link'
-                href={href}
-                label={label}
-                location='mobile_nav'
-                section='links_accordion'
-                variant='mobile'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                {label} <OpenInNewWindowIcon aria-hidden='true' />
-              </TrackedLink>
-            </li>
-          ))}
-        </CaseStudiesAccordionList>
-      </li>
-    </LinkBoxMobile>
+      {NAV_MENUS.map((menu) => {
+        const isOpen = openMenu === menu.key;
+
+        return (
+          <li key={menu.key}>
+            <NavAccordionButton
+              type='button'
+              onClick={() => toggleMenu(menu.key, menu.label)}
+              aria-expanded={isOpen}>
+              {menu.label}
+              <NavChevron $isOpen={isOpen} aria-hidden='true'>
+                <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </NavChevron>
+            </NavAccordionButton>
+            <NavAccordionList $isOpen={isOpen}>
+              {menu.links.map(({ href, label, icon, iconAlt }) => (
+                <li key={href} onClick={handleCloseMenu}>
+                  {menu.external ? (
+                    <TrackedLink
+                      href={href}
+                      label={label}
+                      location='mobile_nav'
+                      section={menu.sections.mobile}
+                      variant='mobile'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      {label} <OpenInNewWindowIcon aria-hidden='true' />
+                    </TrackedLink>
+                  ) : (
+                    <TrackedLink
+                      href={href}
+                      label={label}
+                      location='mobile_nav'
+                      section={menu.sections.mobile}
+                      variant='mobile'
+                      ariaCurrent={href === currentPath ? 'page' : undefined}
+                    >
+                      {icon ? (
+                        <img
+                          className='case-logo'
+                          src={icon}
+                          alt={iconAlt || `${label} logo`}
+                          width='96'
+                          height='96'
+                          loading='lazy'
+                          decoding='async'
+                        />
+                      ) : null}
+                      {label}
+                    </TrackedLink>
+                  )}
+                </li>
+              ))}
+            </NavAccordionList>
+          </li>
+        );
+      })}
+    </CityMapMenu>
   );
 };
 

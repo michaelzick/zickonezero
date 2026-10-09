@@ -1,7 +1,16 @@
-import styled from 'styled-components';
-import { DemoStokeTldrTitle, DemoStokeTldrImage } from './index';
+import styled, { keyframes } from 'styled-components';
+import { DemoStokeMethodCard, DemoStokeTldrTitle, DemoStokeTldrImage } from './index';
+import {
+  hudButton,
+  hudFrame,
+  hudSlashes,
+  notchPolygon,
+  notchStrokes,
+  scanlines,
+  screenOverlay,
+  storyPanel
+} from './hud';
 import { THEME } from './theme';
-import { keyframes, css } from 'styled-components';
 
 export const PageShell = styled.div`
   display: flex;
@@ -43,6 +52,7 @@ export const CaseStudyPageInner = styled(PageInner)`
   .ngu-logo {
     width: 6em;
     height: auto;
+    filter: drop-shadow(0 0 calc(16px * var(--neon-glow-strength, 1)) var(--city-glow));
   }
 
   section {
@@ -59,6 +69,11 @@ export const CaseStudyPageInner = styled(PageInner)`
 
   section.story-section {
     margin-top: 2.5em;
+  }
+
+  /* Long-form sections sit on glass so body copy reads over the city. */
+  section.story-section:not(#introduction) {
+    ${storyPanel}
   }
 
   section#introduction.story-section,
@@ -93,13 +108,20 @@ export const HeroGrid = styled.div`
   }
 `;
 
+/*
+ * Hero media as a holo-billboard: a notched screen with accent strokes on
+ * the notches, faint scanlines, a sheen, and a rim light in the route's
+ * accent. Hover and focus styles brighten it through --frame-edge and
+ * --frame-glow, which the overlay reads.
+ */
 export const HeroImageFrame = styled.div`
+  --frame-notch: 18px;
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  border-radius: 0 ${THEME.radii.md} ${THEME.radii.md} 0;
   overflow: hidden;
-  box-shadow: 0 30px 38px -30px rgb(0 0 0 / 70%);
-  background: transparent;
+  clip-path: ${notchPolygon('var(--frame-notch)')};
+  background: ${THEME.colors.darkest};
 
   img {
     width: 100%;
@@ -107,12 +129,26 @@ export const HeroImageFrame = styled.div`
     object-fit: cover;
     display: block;
   }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--frame-edge, var(--glass-border));
+    background:
+      ${notchStrokes('var(--frame-notch)', 'var(--city-accent)')},
+      ${scanlines},
+      linear-gradient(115deg, transparent 36%, rgba(255, 255, 255, 0.07) 46%, transparent 56%);
+    background-origin: border-box;
+    background-repeat: no-repeat;
+    box-shadow: inset 0 0 2.6em -0.9em var(--frame-glow, var(--city-glow));
+    pointer-events: none;
+    transition: border-color 0.25s ease, box-shadow 0.3s ease;
+  }
 `;
 
 export const HeroMediaFrame = styled(HeroImageFrame)`
-  border: 1px solid rgba(199, 197, 197, 0.3);
   background: ${THEME.colors.darkest};
-  transition: border-color 0.2s ease;
 
   img,
   video {
@@ -124,8 +160,6 @@ export const HeroMediaFrame = styled(HeroImageFrame)`
 `;
 
 export const CaseStudyHeroMediaFrame = styled(HeroMediaFrame)`
-  border: none;
-  border-radius: 0 ${THEME.radii.md} ${THEME.radii.md} 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -139,12 +173,27 @@ export const CaseStudyHeroMediaFrame = styled(HeroMediaFrame)`
 `;
 
 export const HeroContent = styled.div`
+  ${hudFrame({ blur: false })}
+  --hud-frame-bg: var(--panel-bg);
   display: flex;
   flex-direction: column;
   gap: 0.9em;
+  padding: clamp(1em, 2.2vw, 1.5em);
   text-align: left;
   font-size: clamp(1em, 1.35vw, 1.05em);
   line-height: 1.7;
+`;
+
+/* Neon heading: light ink with a glow in the route's accent. */
+const neonHeading = `
+  font-family: ${THEME.fonts.display};
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  text-shadow:
+    0 0 0.04em var(--city-glow),
+    0 0 calc(0.4em * var(--neon-glow-strength, 1)) var(--city-glow);
 `;
 
 export const IntroHeaderRow = styled.div`
@@ -156,7 +205,10 @@ export const IntroHeaderRow = styled.div`
   margin-bottom: clamp(0.8em, 2vw, 1.35em);
 
   .page-header {
+    ${neonHeading}
     margin: 0;
+    font-size: clamp(1.15em, 2.4vw, 1.5em);
+    line-height: 1.15;
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
@@ -178,10 +230,10 @@ export const CompactIntroHeaderRow = styled(IntroHeaderRow)`
 `;
 
 export const Title = styled.h1`
+  ${neonHeading}
   margin: 0;
-  font-size: clamp(2rem, 4.6vw, 3.1rem);
-  letter-spacing: 0.01em;
-  line-height: 1.1;
+  font-size: clamp(1.6rem, 2.9vw, 2.35rem);
+  line-height: 1.12;
 `;
 
 export const Summary = styled.p`
@@ -191,40 +243,57 @@ export const Summary = styled.p`
   opacity: 0.9;
 `;
 
+/* A mono "// DESCRIPTION" readout. */
 export const HeroLabel = styled.div`
-  display: block;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6em;
+  margin-bottom: 0.3em;
+  font-family: ${THEME.fonts.mono};
+  font-size: 0.68em;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  line-height: 1.4;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 600;
-  font-size: 0.78em;
   color: ${THEME.colors.mutedLabel};
+
+  &::before {
+    ${hudSlashes}
+  }
 `;
 
 export const CaseStudyHeroLabel = styled(HeroLabel)`
   color: ${THEME.colors.mutedLabel};
 `;
 
+/* Roles as notched HUD chips. */
 export const RoleList = styled.ul`
   list-style: none;
   padding: 0;
-  margin: 0.2em 0 0;
+  margin: 0.35em 0 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.15em 0.1em;
+  gap: 0.45em;
 
   li {
-    display: inline;
-    line-height: 1.5;
+    --chip-notch: 7px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.9em;
+    padding: 0.2em 0.8em;
+    border: 1px solid var(--glass-border);
+    background-color: rgba(var(--color-dark-rgb), 0.5);
+    background-image: ${notchStrokes('var(--chip-notch)', 'var(--city-accent)')};
+    background-origin: border-box;
+    background-repeat: no-repeat;
+    clip-path: ${notchPolygon('var(--chip-notch)')};
     color: ${THEME.colors.white};
-
-    &::after {
-      content: ',';
-      margin-right: 0.2em;
-    }
-
-    &:last-child::after {
-      display: none;
-    }
+    font-family: ${THEME.fonts.hud};
+    font-size: 0.8em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+    text-transform: uppercase;
   }
 `;
 
@@ -234,25 +303,14 @@ export const LinkRow = styled.div`
   > div {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6em 1em;
+    gap: 0.6em 0.8em;
+    margin-top: 0.4em;
   }
 
   a {
-    color: ${THEME.colors.white};
-    text-decoration: none;
-    font-weight: 400;
-    line-height: 1;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.2em;
-    padding-bottom: 0.08em;
-    border-bottom: 2px solid ${THEME.colors.white};
-    transition: color 0.2s ease, border-color 0.2s ease;
-
-    &:hover {
-      color: ${THEME.colors.orange};
-      border-color: ${THEME.colors.orange};
-    }
+    ${hudButton}
+    min-height: 44px;
+    padding: 0 1.2em;
   }
 `;
 
@@ -285,16 +343,35 @@ export const HiddenSectionAnchor = styled.div`
   padding: 0;
 `;
 
+/* Section headings: amber HUD headings with a small accent "//" prefix. */
 export const SectionTitle = styled(DemoStokeTldrTitle)`
   color: ${THEME.colors.orange};
   margin-bottom: 0.35em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 calc(0.45em * var(--neon-glow-strength, 1)) rgba(255, 176, 59, 0.35);
+
+  &::before {
+    ${hudSlashes}
+    display: inline-block;
+    margin-right: 0.4em;
+    font-size: 0.55em;
+    vertical-align: 0.3em;
+    text-shadow: none;
+  }
 `;
 
 export const CaseStudySectionTitle = styled(SectionTitle)`
   color: ${THEME.colors.orange};
 `;
 
+/* The glass panel behind each ProjectShowcase section. */
+export const ShowcaseSectionCard = styled(DemoStokeMethodCard)`
+  ${storyPanel}
+`;
+
 export const ShowcaseImageButton = styled.button`
+  position: relative;
   display: block;
   width: 100%;
   padding: 0;
@@ -302,15 +379,18 @@ export const ShowcaseImageButton = styled.button`
   background: transparent;
   cursor: pointer;
   text-align: left;
-  border-radius: ${THEME.radii.md};
 
   ${(props) => props.$portrait && `
     display: flex;
     justify-content: center;
   `}
 
+  /* Landscape screenshots fill the button, so it can frame them as HUD
+     screens; portrait ones sit in a phone bezel instead. */
+  ${(props) => !props.$portrait && screenOverlay}
+
   &:focus-visible {
-    outline: 2px solid ${THEME.colors.hotYellow};
+    outline: 2px solid var(--focus-ring);
     outline-offset: 4px;
   }
 `;
@@ -320,25 +400,39 @@ export const ShowcaseImage = styled(DemoStokeTldrImage)`
   width: 100%;
   max-width: 100%;
   margin: 0;
-  border-radius: ${THEME.radii.md};
-  transition: box-shadow 0.18s ease;
+  transition: border-color 0.2s ease, box-shadow 0.25s ease;
 
-  /* Phone screenshots (≈9:19.5) keep their aspect ratio and are capped by
-     height so a single section never dwarfs its copy. */
+  /* Phone screenshots (≈9:19.5) sit in a phone bezel, keep their aspect
+     ratio, and are capped by height so a single section never dwarfs its
+     copy. The bezel is a content-box border, so the caps include it. */
   ${(props) => props.$portrait && `
+    box-sizing: content-box;
     width: auto;
-    max-width: min(100%, 22rem);
-    max-height: min(80vh, 44rem);
+    max-width: calc(min(100%, 22rem) - 0.9em);
+    max-height: calc(min(80vh, 44rem) - 0.9em);
     aspect-ratio: 1284 / 2778;
     object-fit: contain;
-    border-radius: 1.4em;
-    border: 1px solid rgba(199, 197, 197, 0.35);
+    border: 0.45em solid #06090f;
+    border-radius: 2.1em;
+    background: #06090f;
+    box-shadow: 0 0 0 1px var(--glass-border), 0 30px 48px -30px var(--shadow-deep);
   `}
 
   ${ShowcaseImageButton}:hover &,
   ${ShowcaseImageButton}:focus-visible & {
-    box-shadow: 0 24px 48px -32px rgb(0 0 0 / 70%), 0 0 0 1px ${THEME.colors.orange};
+    border-color: var(--city-accent);
+    box-shadow:
+      0 24px 48px -32px var(--shadow-deep),
+      0 0 0 1px var(--city-accent),
+      0 0 28px -6px var(--city-glow);
   }
+
+  ${(props) => props.$portrait && `
+    ${ShowcaseImageButton}:hover &,
+    ${ShowcaseImageButton}:focus-visible & {
+      border-color: #06090f;
+    }
+  `}
 `;
 
 export const ShowcaseMediaButton = styled.button`
@@ -346,61 +440,192 @@ export const ShowcaseMediaButton = styled.button`
   display: block;
   width: 100%;
   cursor: pointer;
-  border-radius: ${THEME.radii.md};
 
   &:hover ${HeroMediaFrame},
   &:hover ${CaseStudyHeroMediaFrame},
   &:focus-visible ${HeroMediaFrame},
   &:focus-visible ${CaseStudyHeroMediaFrame} {
-    border-color: ${THEME.colors.orange};
+    --frame-edge: var(--city-accent);
+    --frame-glow: var(--city-accent);
   }
 
   &:focus-visible {
-    outline: 2px solid ${THEME.colors.hotYellow};
+    outline: 2px solid var(--focus-ring);
     outline-offset: 4px;
   }
 `;
 
-const fadeUp = keyframes`
-  from {
+/*
+ * Sections "boot up" as they enter view: a scan line wipes them in from the
+ * top, then a short horizontal jitter settles. The clip reaches 1em past
+ * each edge so shadows survive the wipe, and the scan line rides the clip
+ * edge. Both end on none, so a revealed section creates no containing block
+ * or stacking context for the fixed overlays inside it.
+ */
+const bootUp = keyframes`
+  0% {
     opacity: 0;
-    transform: translateY(18px);
+    clip-path: inset(-1em -1em 100% -1em);
+    transform: translate3d(0, 14px, 0);
   }
-  to {
+
+  10% {
     opacity: 1;
-    transform: translateY(0);
+  }
+
+  58% {
+    clip-path: inset(-1em -1em -1em -1em);
+    transform: translate3d(0, 0, 0);
+  }
+
+  66% {
+    transform: translate3d(-3px, 0, 0);
+  }
+
+  74% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  82%,
+  99% {
+    opacity: 1;
+    clip-path: inset(-1em -1em -1em -1em);
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    clip-path: none;
+    transform: none;
   }
 `;
 
+/*
+ * The scan line is a band painted on a still overlay (see AnimatedSection's
+ * ::after) and slid down by background-position. Moving the overlay itself
+ * with top made Chrome count every frame as a layout shift. The line (2px)
+ * and its glow (32px) are different heights, so each percentage position
+ * carries its own pixel offset; together they keep the two centered on each
+ * other the whole way down.
+ */
+const scanLine = keyframes`
+  0% {
+    background-position: 0 calc(0% + 16px), 0 calc(0% + 1px);
+    opacity: 1;
+  }
+
+  58% {
+    background-position: 0 calc(100% - 16px), 0 calc(100% - 1px);
+    opacity: 1;
+  }
+
+  72%,
+  100% {
+    background-position: 0 calc(100% - 16px), 0 calc(100% - 1px);
+    opacity: 0;
+  }
+`;
+
+/* A page's opening hero boots up with the same settle and scan line, but
+   no wipe and no fade: Chrome never credits Largest Contentful Paint to
+   content first painted clipped or transparent, and credits a rising image
+   only once it lands, which held these pages' LCP back by seconds. */
+const bootUpOpening = keyframes`
+  0% {
+    transform: translate3d(0, 14px, 0);
+  }
+
+  58% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  66% {
+    transform: translate3d(-3px, 0, 0);
+  }
+
+  74% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  82%,
+  100% {
+    transform: none;
+  }
+`;
+
+const REVEAL_EASING = 'cubic-bezier(0.2, 0.7, 0.2, 1)';
+
 export const AnimatedSection = styled.div`
+  position: relative;
   opacity: 0;
-  transform: translateY(18px);
+  transform: translate3d(0, 14px, 0);
+
+  /* The scan line's overlay reaches 16px past where the line starts and
+     stops (just above the top, 1em below the bottom), so its glow is never
+     cut off. */
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -18px;
+    bottom: calc(-1em - 16px);
+    z-index: 2;
+    background-image:
+      linear-gradient(90deg, transparent, var(--city-accent) 18%, #fff 50%, var(--city-accent) 82%, transparent),
+      linear-gradient(transparent, var(--city-glow) 50%, transparent);
+    background-repeat: no-repeat;
+    background-size: 100% 2px, 100% 32px;
+    background-position: 0 calc(0% + 16px), 0 calc(0% + 1px);
+    opacity: 0;
+    pointer-events: none;
+  }
 
   &.visible {
-    animation: ${fadeUp} 0.7s ease forwards;
+    animation: ${bootUp} 0.95s ${REVEAL_EASING} forwards;
+  }
+
+  &.visible::after {
+    animation: ${scanLine} 0.95s ${REVEAL_EASING} forwards;
+  }
+
+  .image-animate,
+  .text-animate {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
   }
 
   .image-animate {
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.6s ease 0.18s, transform 0.6s ease 0.18s,
-      border 0.3s ease;
+    transition: opacity 0.6s ease 0.25s, transform 0.6s ${THEME.easing.out} 0.25s,
+      border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
   .text-animate {
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.6s ease 0.32s, transform 0.6s ease 0.32s;
+    transition: opacity 0.6s ease 0.38s, transform 0.6s ${THEME.easing.out} 0.38s;
   }
 
-  &.visible .image-animate {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
+  &.visible .image-animate,
   &.visible .text-animate {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
+  }
+
+  /* A page's opening hero (data-reveal='load') is rendered visible, so it
+     boots up from the first paint instead of waiting for scripts. Its content
+     is in place from that first frame while the panel settles and the scan
+     line sweeps over it (see bootUpOpening). */
+  &[data-reveal='load'] {
+    opacity: 1;
+  }
+
+  &[data-reveal='load'].visible {
+    animation-name: ${bootUpOpening};
+  }
+
+  &[data-reveal='load'] .image-animate,
+  &[data-reveal='load'] .text-animate {
+    opacity: 1;
+    transform: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -411,11 +636,21 @@ export const AnimatedSection = styled.div`
       animation: none;
     }
 
+    &::after,
+    &.visible::after {
+      display: none;
+      animation: none;
+    }
+
     .image-animate,
     .text-animate {
       opacity: 1;
       transform: none;
       transition: none;
+    }
+
+    &[data-reveal='load'].visible {
+      animation: none;
     }
   }
 `;

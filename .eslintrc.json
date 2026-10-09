@@ -2,7 +2,6 @@
   "extends": [
     "next/core-web-vitals"
   ],
-  "ignorePatterns": ["storybook-static/"],
   "rules": {
     "@next/next/no-img-element": "off"
   }

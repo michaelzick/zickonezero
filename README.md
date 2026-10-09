@@ -16,19 +16,128 @@ Run `npm run check` before shipping. It checks the agent briefs, lint, TypeScrip
 tests, and the production build. `npm run build` generates the sitemap and robots
 file, then exports the complete site into `out/`.
 
+## Tests
+
+`npm test` runs Jest in band and stops any run still going after 3 minutes, so a
+hung test fails fast instead of stalling; CI's test step has the same limit. Pass
+Jest arguments after `--`, for example `npm test -- __tests__/seo.test.tsx`.
+Watch mode (`npm test -- --watch`) has no limit.
+
+An optional browser smoke test loads the exported site in headless Chromium at
+desktop and phone sizes. It fails on page or console errors (including CSP
+violations), horizontal overflow, or a homepage scene that stops responding to
+scroll, theme, or reduced motion. It also follows the Bar Four sign and
+plays the rack, and checks that the club is shut by day. It is not part of
+`npm test`, `npm run check`,
+or CI, and it stops itself after 3 minutes. Playwright is not a project
+dependency, so install it once, globally or for this checkout only:
+
+```sh
+npm i -g playwright            # or: npm install --no-save playwright
+npx playwright install chromium
+npm run build
+npm run test:browser
+```
+
+Add `-- --screenshots <dir>` to save a PNG for each check; pick a folder outside
+the repository. On GitHub, start the **Browser tests** workflow from the Actions
+tab. It runs the same test and uploads its screenshots as the
+`browser-screenshots` artifact.
+
+## Living city
+
+The site is a neon city. One persistent backdrop (sky, skyline, flying traffic,
+fog, dust by day, and snow on About) mounts once in `pages/_app.tsx` and pans to each page's
+spot in the city as visitors navigate. The homepage walks from a weathered futuristic alley past a holo billboard
+and three work districts to open city
+above the footer, with a minimap HUD for fast travel.
+
+- The alley opens on "Michael Zick is ZICKONEZERO Creative" in a bottom-left introduction,
+  balanced by a top-right tube-neon BAR FOUR sign with a plain Russian
+  translation underneath. Two letters have brief, shallow flickers every few seconds; these
+  pause offscreen or in hidden tabs and stay lit under reduced motion or
+  Save-Data. Small paper scraps drift near the
+  worn street, pause offscreen or in hidden tabs, and stay still under reduced
+  motion or Save-Data. Five vertical towers emerge through fog as the camera
+  advances, reaching full contrast just before the hero leaves the viewport.
+  Their reveal reverses on the way back and stays visible under reduced motion.
+  The drone recedes down the alley toward the towers. Mouse movement changes
+  the camera parallax without a pointer glow, and ONE keeps its accent color
+  without glowing throughout the site.
+- The BAR FOUR sign is a link to `/bar-four/`, a hidden basement listening
+  bar, record exchange, and club. The name comes from music: in a four-bar
+  phrase, bar four is the turnaround, where the fill drops. Patch cables hang
+  from the ceiling, records line the walls, and the booth holds the house
+  rack, a playable [Rackloose](#rackloose) that opens on the Neon Skyline
+  preset. The club only opens after dark: by day the sign is unlit, a
+  flight-case lid covers the rack, and **Wait for dark** switches the city to
+  night. The page is left out of the sitemap and marked `noindex`.
+- The Next destination objective points to the next district in route order, then
+  offers "Return to surface" at Web Development to scroll back to the hero.
+- The open city at the end of the route has one giant piece in the
+  foreground: at night a carp streamer waves from the top of a rooftop mast,
+  with 夢 on its crest and "I dream of the feature" along its side, over a
+  string of paper lanterns slung to a tower across the street, while police
+  drones with flashing lights patrol behind it; by day a sightseeing airship
+  drifts across the sky with the same line on its LED band, among clouds and
+  delivery drones, over a row of rooftops where a window washer's gondola
+  works its way down a building.
+- Night is the default. The nav's time-of-day toggle switches to day, and the
+  choice is remembered.
+- Sound stays off until a visitor turns it on. It is synthesized in the browser
+  with Web Audio, so there are no audio files, and the choice is remembered.
+  Day brings passing traffic, the odd horn, and birdsong; night thins to a
+  couple of voices down the street, wind, crickets, and the occasional far-off
+  siren, helicopter, or train. Bar Four keeps the street outside, so none of it
+  plays in the club.
+- All art is original. The scenery is generated from seeded SVG, CSS, and canvas
+  code, and the fonts are self-hosted. Keep new signage and copy original too.
+- Everything that moves has a still state under reduced motion. To preview it,
+  turn on "Reduce motion" in your operating system's accessibility settings, or
+  open Chrome DevTools' **Rendering** panel and set **Emulate CSS media feature
+  prefers-reduced-motion** to `reduce`.
+
+See [AGENTS.md](AGENTS.md) for the module map and the CSS rules that keep the
+city testable in Jest.
+
 ## Search and sharing
 
 Every public page owns its title, description, canonical, social image metadata,
 and JSON-LD through `src/components/Seo.tsx`. Image dimensions must match the
 actual asset; provide descriptive alt text for custom social images.
 
+The default share card's "ZICKONEZERO / CREATIVE" matches the hero's heading.
+After changing the hero's type, regenerate it with
+`node scripts/render-share-card.js` (Playwright with Chromium must be
+resolvable, for example through `NODE_PATH`). It repaints only that text band
+and the cyan divider under it, so the logo and name lines stay as they are. Social networks cache the image,
+so re-scrape the page in their sharing debuggers after it changes.
+
 The About biography and secondary case-study panels are present in exported HTML.
 Native `hidden` containers preserve the modal/tab presentation. Keep the content
 rendered when changing those interactions, and maintain unique IDs and working
 tab-to-panel accessibility relationships.
 
-The generated sitemap includes all public routes and omits `lastmod` until a
-reliable per-page content-date source exists. A build date is not a content date.
+The generated sitemap includes all public routes except the hidden Bar Four,
+and omits `lastmod` until a reliable per-page content-date source
+exists. A build date is not a content date.
+
+## Rackloose
+
+Bar Four's house rack is [Rackloose](https://github.com/michaelzick/rackloose),
+installed from a pinned release archive committed in `vendor/rackloose/`, the
+same way Mike OS consumes it. There are no registry credentials or runtime
+downloads. To update it, copy `rackloose-<version>.tgz` and `release.json` from
+the GitHub release into `vendor/rackloose/`, check the archive's SHA-256 against
+the manifest, run `npm install ./vendor/rackloose/rackloose-<version>.tgz`, and
+commit the archive, manifest, `package.json`, and lockfile together. Remove the
+old archive in the same change.
+
+The rack loads only on `/bar-four/`, in the browser. It autosaves patches in
+this origin's `localStorage` under `zickonezero.rackloose.patch.v1`. Its audio
+worklets register from `blob:` URLs, so the Content-Security-Policy's
+`script-src` allows `blob:` site-wide: the sign navigates on the client, so
+the homepage's policy is the one in force when the rack starts.
 
 ## Cloudflare hosting
 
@@ -41,7 +150,9 @@ custom domains, trailing-slash handling, and real 404 responses. The zone's
 `public/_redirects` preserves the legacy `/case-studies` redirect (including
 its descendants), sends the removed `/michael-zick-coaching` route to
 `https://www.niceguyuniversity.com/`, and `public/_headers` configures the
-security headers.
+security headers (see [Rackloose](#rackloose) for why `script-src` allows
+`blob:`) and a year-long `immutable` cache for the content-hashed
+`/_next/static/*` files.
 The contact form continues using the separate `zickonezero-contact` Worker.
 
 Workers Builds uses this GitHub repository's `main` branch with Node 24,
@@ -56,6 +167,36 @@ npx wrangler@4.133.0 deploy
 After deployment, verify real HTTP responses: existing routes return their own
 HTML and canonical, missing routes/assets return 404, legacy paths return 301,
 social assets have an image content type, and `sitemap.xml` includes new pages.
+
+Run Lighthouse's SEO audit against `https://www.zickonezero.com/`, not a branch
+preview: Cloudflare sends previews `x-robots-tag: noindex`, which fails the
+crawlability audit and caps the SEO score at 69.
+
+### Releases
+
+Every merge to `main` is a production release, numbered with semver: major for
+a redesign or rebuild, minor for new pages or features, patch for fixes. The
+release PR into `main` bumps the version:
+
+```sh
+npm version 1.1.0 --no-git-tag-version
+```
+
+After it merges and Workers Builds deploys it, tag the merge commit and push the
+tag:
+
+```sh
+git fetch origin main
+git tag -a v1.1.0 <merge-sha> -m "Release title"
+git push origin v1.1.0
+```
+
+The Release workflow checks that the tag matches `package.json` and is on
+`main`, then publishes the GitHub release with the tag's title and the PRs
+merged since the previous tag. Pushed release tags can't be moved or deleted.
+Every Mixpanel event carries the version as its `release` property. To roll
+back, pick the deployment for an earlier tag's commit in the Cloudflare
+dashboard (Workers > zickonezero > Deployments) or run `npx wrangler rollback`.
 
 ### DigitalOcean rollback
 

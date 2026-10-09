@@ -1,4 +1,4 @@
-import { AntisyphonContent } from '../src/components';
+import AntisyphonContent from '../src/components/AntisyphonContent';
 import Seo from '../src/components/Seo';
 import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
 
