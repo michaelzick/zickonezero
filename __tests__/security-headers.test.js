@@ -24,6 +24,17 @@ describe('scripts', () => {
   });
 });
 
+describe('analytics', () => {
+  it('lets Mixpanel load its SDK and recorder and send events and replays', () => {
+    expect(directive('script-src').split(/\s+/)).toContain('https://cdn.mxpnl.com');
+    expect(directive('connect-src').split(/\s+/)).toContain('https://*.mixpanel.com');
+  });
+
+  it('no longer allows Amplitude', () => {
+    expect(csp).not.toMatch(/amplitude/i);
+  });
+});
+
 describe('the rest of the security headers', () => {
   it('still denies plugins and restricts the base URI and form targets', () => {
     expect(directive('object-src')).toBe("object-src 'none'");

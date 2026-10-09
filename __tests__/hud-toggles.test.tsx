@@ -14,7 +14,7 @@ import { THEME_STORAGE_KEY } from '../src/theme/themeConfig';
 jest.mock('../src/hooks/useAmbientSound');
 
 type TestWindow = Window & {
-  amplitude?: {
+  mixpanel?: {
     track?: jest.Mock;
   };
 };
@@ -34,11 +34,11 @@ describe('HUD toggles and readouts', () => {
     window.localStorage.clear();
     document.documentElement.removeAttribute('data-theme');
     track = jest.fn();
-    (window as TestWindow).amplitude = { track };
+    (window as TestWindow).mixpanel = { track };
   });
 
   afterEach(() => {
-    delete (window as TestWindow).amplitude;
+    delete (window as TestWindow).mixpanel;
     jest.useRealTimers();
   });
 

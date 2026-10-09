@@ -32,7 +32,7 @@ jest.mock('../src/lib/city/sound', () => ({
   releaseAmbience: jest.fn(),
 }));
 
-type TestWindow = Window & { amplitude?: { track: jest.Mock } };
+type TestWindow = Window & { mixpanel?: { track: jest.Mock } };
 
 const lastRackProps = (): RackProps => mockRack.mock.calls[mockRack.mock.calls.length - 1][0];
 
@@ -44,11 +44,11 @@ describe('Bar Four', () => {
     window.localStorage.clear();
     document.documentElement.removeAttribute('data-theme');
     track = jest.fn();
-    (window as TestWindow).amplitude = { track };
+    (window as TestWindow).mixpanel = { track };
   });
 
   afterEach(() => {
-    delete (window as TestWindow).amplitude;
+    delete (window as TestWindow).mixpanel;
   });
 
   describe('the room', () => {
