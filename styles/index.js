@@ -1199,11 +1199,14 @@ export const DemoStokeMiniCardModalClose = styled.button`
   border: 1px solid var(--hud-panel-border);
   transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 
-  svg {
+  /* Same selector as Container's inline-icon rule, which overrides it: its
+     left margin would push the X off center in the About dialog, which sits
+     inside Container, while the How DemoStoke Helps dialog is portaled out. */
+  svg:not([data-art]) {
     width: 1em;
     height: 1em;
+    margin: 0;
     display: block;
-    transform: translateX(-0.09em);
   }
 
   &:hover {
