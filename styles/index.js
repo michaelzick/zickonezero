@@ -1180,6 +1180,9 @@ export const DemoStokeMiniCardModal = styled.div`
 
 export const DemoStokeMiniCardModalClose = styled.button`
   all: unset;
+  /* Its own scale, so every dialog's close matches whatever size the
+     dialog's text is set in (the How DemoStoke Helps overlay sets 25px). */
+  font-size: 1rem;
   position: absolute;
   /* Clear the plate's notched corner with room to breathe. */
   top: 1em;
