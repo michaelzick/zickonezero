@@ -18,7 +18,7 @@ jest.mock('fslightbox-react', () => function MockFsLightbox(props: LightboxProps
 });
 
 type TestWindow = Window & {
-  amplitude?: {
+  mixpanel?: {
     track?: jest.Mock;
   };
 };
@@ -42,13 +42,13 @@ describe('Homepage city', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     track = jest.fn();
-    (window as TestWindow).amplitude = { track };
+    (window as TestWindow).mixpanel = { track };
     Object.defineProperty(window, 'scrollY', { configurable: true, writable: true, value: 0 });
     Object.defineProperty(window, 'innerHeight', { configurable: true, writable: true, value: 768 });
   });
 
   afterEach(() => {
-    delete (window as TestWindow).amplitude;
+    delete (window as TestWindow).mixpanel;
     jest.restoreAllMocks();
     restoreMatchMedia();
   });

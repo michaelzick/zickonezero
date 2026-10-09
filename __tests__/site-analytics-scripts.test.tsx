@@ -9,7 +9,12 @@ jest.mock('next/script', () => ({
   ),
 }));
 
+jest.mock('../src/lib/analytics', () => ({
+  loadMixpanel: jest.fn(),
+}));
+
 import SiteAnalyticsScripts, { ANALYTICS_DELAY_MS } from '../src/components/SiteAnalyticsScripts';
+import { loadMixpanel } from '../src/lib/analytics';
 
 const loadedScripts = () => Array.from(document.querySelectorAll('[data-testid="script"]'), (node) => node.getAttribute('data-id'));
 
@@ -20,6 +25,7 @@ const setReadyState = (state: DocumentReadyState) => {
 describe('SiteAnalyticsScripts', () => {
   beforeEach(() => {
     jest.useFakeTimers();
+    jest.mocked(loadMixpanel).mockClear();
   });
 
   afterEach(() => {
@@ -35,9 +41,11 @@ describe('SiteAnalyticsScripts', () => {
 
     act(() => { jest.advanceTimersByTime(ANALYTICS_DELAY_MS - 1); });
     expect(loadedScripts()).toEqual([]);
+    expect(loadMixpanel).not.toHaveBeenCalled();
 
     act(() => { jest.advanceTimersByTime(1); });
-    expect(loadedScripts()).toEqual(['gtm', 'amplitude-sdk', 'amplitude-init']);
+    expect(loadedScripts()).toEqual(['gtm']);
+    expect(loadMixpanel).toHaveBeenCalledTimes(1);
     document.querySelectorAll('[data-testid="script"]').forEach((node) => {
       expect(node).toHaveAttribute('data-strategy', 'lazyOnload');
     });
@@ -49,10 +57,12 @@ describe('SiteAnalyticsScripts', () => {
 
     act(() => { jest.advanceTimersByTime(ANALYTICS_DELAY_MS * 3); });
     expect(loadedScripts()).toEqual([]);
+    expect(loadMixpanel).not.toHaveBeenCalled();
 
     act(() => { window.dispatchEvent(new Event('load')); });
     act(() => { jest.advanceTimersByTime(ANALYTICS_DELAY_MS); });
-    expect(loadedScripts()).toEqual(['gtm', 'amplitude-sdk', 'amplitude-init']);
+    expect(loadedScripts()).toEqual(['gtm']);
+    expect(loadMixpanel).toHaveBeenCalledTimes(1);
   });
 
   it('cancels the pending delay when unmounted', () => {
@@ -61,5 +71,6 @@ describe('SiteAnalyticsScripts', () => {
     unmount();
 
     expect(jest.getTimerCount()).toBe(0);
+    expect(loadMixpanel).not.toHaveBeenCalled();
   });
 });

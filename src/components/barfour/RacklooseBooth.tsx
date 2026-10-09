@@ -31,8 +31,9 @@ const seedStarterPatch = () => {
  * Rackloose listens for note keys and Space on the whole window, so the
  * computer keyboard belongs to the rack only while focus, or the last press,
  * is inside it; the nav, toggles, and footer keep their keys. The first time
- * the visitor reaches for the rack is tracked. The city's ambient sound is
- * already quiet in here (see BarFourContent).
+ * the visitor reaches for the rack is tracked, and `data-rackloose` keeps
+ * patch and preset names out of session replays (see src/lib/analytics.ts).
+ * The city's ambient sound is already quiet in here (see BarFourContent).
  */
 const RacklooseBooth = () => {
   const rackRef = useRef<HTMLDivElement>(null);
@@ -68,7 +69,7 @@ const RacklooseBooth = () => {
   }, [active]);
 
   return (
-    <div ref={rackRef} className='booth-rack' data-keys={active ? 'rack' : 'page'}>
+    <div ref={rackRef} className='booth-rack' data-keys={active ? 'rack' : 'page'} data-rackloose=''>
       {seeded && <RacklooseApp storageKey={RACK_STORAGE_KEY} keysEnabled={active} linkBrand={false} />}
     </div>
   );

@@ -23,7 +23,7 @@ jest.mock('fslightbox-react', () => function MockFsLightbox(props: {
 
 describe('ProjectShowcase', () => {
   beforeEach(() => {
-    delete (window as Window & { amplitude?: unknown }).amplitude;
+    delete (window as Window & { mixpanel?: unknown }).mixpanel;
   });
 
   it('renders a single project link with the website default label', () => {
@@ -45,7 +45,7 @@ describe('ProjectShowcase', () => {
   it('renders additional project links in order and tracks each destination', async () => {
     const user = userEvent.setup();
     const track = jest.fn();
-    (window as Window & { amplitude?: { track: jest.Mock } }).amplitude = { track };
+    (window as Window & { mixpanel?: { track: jest.Mock } }).mixpanel = { track };
 
     renderWithProviders(
       <ProjectShowcase
@@ -161,7 +161,7 @@ describe('ProjectShowcase', () => {
   it('tracks showcase lightbox opens', async () => {
     const user = userEvent.setup();
     const track = jest.fn();
-    (window as Window & { amplitude?: { track: jest.Mock } }).amplitude = { track };
+    (window as Window & { mixpanel?: { track: jest.Mock } }).mixpanel = { track };
 
     renderWithProviders(
       <ProjectShowcase

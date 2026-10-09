@@ -1,10 +1,15 @@
-type AmplitudeClient = {
+import { SITE_URL } from './siteConfig';
+
+type MixpanelClient = {
+  // The official snippet's stub carries these until the bundle replaces it.
+  __SV?: number;
+  _i?: unknown[];
+  init?: (token: string, config: Record<string, unknown>) => void;
   track?: (name: string, props?: Record<string, unknown>) => void;
-  logEvent?: (name: string, props?: Record<string, unknown>) => void;
 };
 
 type AnalyticsWindow = Window & {
-  amplitude?: AmplitudeClient;
+  mixpanel?: MixpanelClient;
 };
 
 export type AnalyticsEventPayload = Record<string, unknown>;
@@ -18,11 +23,54 @@ export type LinkClickPayload = {
   pagePath?: string;
 };
 
+// Browser-side Mixpanel project token (public by design). Empty until the
+// project's token is filled in here or set through the env, which keeps
+// Mixpanel from loading at all.
+const MIXPANEL_TOKEN = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN || '';
+export const MIXPANEL_SCRIPT = 'https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js';
+const MIXPANEL_LOAD_TIMEOUT_MS = 30000;
+
+// Bar Four's rack shows patch and preset names the visitor typed or imported;
+// only its header is public, so replays and heatmap clicks skip the rest.
+const RACK_PRIVATE_SELECTOR = '[data-rackloose] section[aria-label="Rackloose modular synthesizer"] > :not(header)';
+
+const MIXPANEL_CONFIG = {
+  persistence: 'localStorage',
+  // PageAnalytics sends page_view on every route change.
+  track_pageview: false,
+  // The site tracks its own clicks; heatmaps still collect theirs through
+  // replay, and honor these block selectors.
+  autocapture: {
+    pageview: false,
+    click: false,
+    input: false,
+    scroll: false,
+    submit: false,
+    page_leave: false,
+    rage_click: false,
+    dead_click: false,
+    capture_text_content: false,
+    block_selectors: [RACK_PRIVATE_SELECTOR],
+  },
+  record_sessions_percent: 100,
+  record_heatmap_data: true,
+  // Form fields stay masked; the portfolio's public copy and screenshots stay
+  // readable (the default block selector would blank every image).
+  record_mask_all_inputs: true,
+  record_mask_all_text: false,
+  record_block_selector: RACK_PRIVATE_SELECTOR,
+  record_console: false,
+  record_network: false,
+};
+
 const isBrowser = () => typeof window !== 'undefined';
 
-const getAmplitude = (): AmplitudeClient | undefined => {
+// The stub, and the bundle before init, have no track; only an initialized
+// SDK can take events.
+const getMixpanel = (): MixpanelClient | undefined => {
   if (!isBrowser()) return undefined;
-  return (window as AnalyticsWindow).amplitude;
+  const mixpanel = (window as AnalyticsWindow).mixpanel;
+  return typeof mixpanel?.track === 'function' ? mixpanel : undefined;
 };
 
 const getPagePath = () => {
@@ -30,69 +78,122 @@ const getPagePath = () => {
   return window.location.pathname;
 };
 
-/** Dispatched on window by the Amplitude init script (SiteAnalyticsScripts) once the SDK is ready. */
-export const AMPLITUDE_READY_EVENT = 'zickonezero:amplitude-ready';
-
-// Amplitude loads a few seconds after the page does, so events tracked before
+// Mixpanel loads a few seconds after the page does, so events tracked before
 // then (the first page view, an early click) wait here and go out in order
-// when it arrives. The cap keeps a blocked SDK from growing the queue without
-// bound.
+// when it arrives. The cap keeps a slow SDK from growing the queue without
+// bound, and nothing waits once Mixpanel won't load.
 const MAX_PENDING_EVENTS = 50;
 
 type PendingEvent = { name: string; payload: AnalyticsEventPayload };
 
 let pendingEvents: PendingEvent[] = [];
-let isWaitingForAmplitude = false;
+let isMixpanelRequested = false;
+let isMixpanelUnavailable = false;
 
-const deliverEvent = (amplitude: AmplitudeClient, { name, payload }: PendingEvent) => {
-  if (amplitude.track) {
-    amplitude.track(name, payload);
-    return;
+const deliverEvent = (mixpanel: MixpanelClient, { name, payload }: PendingEvent) => {
+  try {
+    mixpanel.track?.(name, payload);
+  } catch {
+    // A vendor failure must never break the click or route change that tracked it.
   }
-
-  amplitude.logEvent?.(name, payload);
 };
 
-const flushPendingEvents = () => {
-  const amplitude = getAmplitude();
-  if (!amplitude) return;
-
-  window.removeEventListener(AMPLITUDE_READY_EVENT, flushPendingEvents);
-  isWaitingForAmplitude = false;
+const flushPendingEvents = (mixpanel: MixpanelClient) => {
   const events = pendingEvents;
   pendingEvents = [];
-  events.forEach((event) => deliverEvent(amplitude, event));
+  events.forEach((event) => deliverEvent(mixpanel, event));
 };
 
 const queueEvent = (event: PendingEvent) => {
-  if (pendingEvents.length >= MAX_PENDING_EVENTS) return;
+  if (isMixpanelUnavailable || pendingEvents.length >= MAX_PENDING_EVENTS) return;
 
   pendingEvents.push(event);
-  if (!isWaitingForAmplitude) {
-    isWaitingForAmplitude = true;
-    window.addEventListener(AMPLITUDE_READY_EVENT, flushPendingEvents);
-  }
 };
 
-const sendAmplitudeEvent = (name: string, payload: AnalyticsEventPayload) => {
-  const amplitude = getAmplitude();
+const stopQueueing = () => {
+  isMixpanelUnavailable = true;
+  pendingEvents = [];
+};
+
+const sendEvent = (name: string, payload: AnalyticsEventPayload) => {
+  const mixpanel = getMixpanel();
   const event = { name, payload };
 
-  if (!amplitude) {
+  if (!mixpanel) {
     queueEvent(event);
     return;
   }
 
-  // The SDK can appear before its ready event; send the backlog first so
-  // events still go out in the order they happened.
-  if (pendingEvents.length > 0) flushPendingEvents();
-  deliverEvent(amplitude, event);
+  // Send the backlog first so events still go out in the order they happened.
+  if (pendingEvents.length > 0) flushPendingEvents(mixpanel);
+  deliverEvent(mixpanel, event);
 };
+
+/** Initializes the downloaded Mixpanel bundle, then sends the events that waited for it. */
+export function startMixpanel() {
+  if (!isBrowser()) return;
+
+  try {
+    (window as AnalyticsWindow).mixpanel?.init?.(MIXPANEL_TOKEN, MIXPANEL_CONFIG);
+  } catch {
+    // Handled below: without a working SDK nothing waits for it.
+  }
+
+  const mixpanel = getMixpanel();
+  if (!mixpanel) {
+    stopQueueing();
+    return;
+  }
+
+  flushPendingEvents(mixpanel);
+}
+
+const isCanonicalHost = () => window.location.hostname === new URL(SITE_URL).hostname;
+
+/**
+ * Downloads Mixpanel once per document, only on the canonical host and only
+ * when a token is set, so local dev, workers.dev, and branch previews send
+ * nothing. Called by SiteAnalyticsScripts once the page has settled.
+ */
+export function loadMixpanel() {
+  if (!isBrowser() || isMixpanelRequested) return;
+  isMixpanelRequested = true;
+
+  if (!MIXPANEL_TOKEN || !isCanonicalHost()) {
+    stopQueueing();
+    return;
+  }
+
+  // The CDN bundle boots only from the official snippet's stub: a snippet
+  // version and a list of instances to create. Init waits for onload.
+  const analyticsWindow = window as AnalyticsWindow;
+  analyticsWindow.mixpanel ??= Object.assign([], { __SV: 1.2, _i: [] });
+
+  const script = document.createElement('script');
+  const finish = (loaded: boolean) => {
+    window.clearTimeout(timer);
+    script.onload = null;
+    script.onerror = null;
+    if (loaded) {
+      startMixpanel();
+      return;
+    }
+    script.remove();
+    stopQueueing();
+  };
+  const timer = window.setTimeout(() => finish(false), MIXPANEL_LOAD_TIMEOUT_MS);
+
+  script.src = MIXPANEL_SCRIPT;
+  script.async = true;
+  script.onload = () => finish(true);
+  script.onerror = () => finish(false);
+  document.head.appendChild(script);
+}
 
 export function trackEvent(name: string, payload: AnalyticsEventPayload = {}) {
   if (!isBrowser()) return;
 
-  sendAmplitudeEvent(name, payload);
+  sendEvent(name, payload);
 }
 
 export function trackLinkClick({
