@@ -6,6 +6,7 @@ type MixpanelClient = {
   _i?: unknown[];
   init?: (token: string, config: Record<string, unknown>) => void;
   track?: (name: string, props?: Record<string, unknown>) => void;
+  register?: (props: Record<string, unknown>) => void;
 };
 
 type AnalyticsWindow = Window & {
@@ -27,6 +28,9 @@ export type LinkClickPayload = {
 // the literal fallback keeps production builds sending without extra
 // configuration.
 const MIXPANEL_TOKEN = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN || 'fd2e07b182295dac64b9cb63934a268f';
+// The package.json version, set by next.config.js, so every event names the
+// production release it came from.
+const RELEASE_VERSION = process.env.NEXT_PUBLIC_RELEASE_VERSION;
 export const MIXPANEL_SCRIPT = 'https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js';
 const MIXPANEL_LOAD_TIMEOUT_MS = 30000;
 
@@ -143,6 +147,12 @@ export function startMixpanel() {
   if (!mixpanel) {
     stopQueueing();
     return;
+  }
+
+  try {
+    if (RELEASE_VERSION) mixpanel.register?.({ release: RELEASE_VERSION });
+  } catch {
+    // Events still go out, just without the release.
   }
 
   flushPendingEvents(mixpanel);

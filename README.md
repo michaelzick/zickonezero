@@ -172,6 +172,32 @@ Run Lighthouse's SEO audit against `https://www.zickonezero.com/`, not a branch
 preview: Cloudflare sends previews `x-robots-tag: noindex`, which fails the
 crawlability audit and caps the SEO score at 69.
 
+### Releases
+
+Every merge to `main` is a production release, numbered with semver: major for
+a redesign or rebuild, minor for new pages or features, patch for fixes. The
+release PR into `main` bumps the version:
+
+```sh
+npm version 1.1.0 --no-git-tag-version
+```
+
+After it merges and Workers Builds deploys it, tag the merge commit and push the
+tag:
+
+```sh
+git fetch origin main
+git tag -a v1.1.0 <merge-sha> -m "Release title"
+git push origin v1.1.0
+```
+
+The Release workflow checks that the tag matches `package.json` and is on
+`main`, then publishes the GitHub release with the tag's title and the PRs
+merged since the previous tag. Pushed release tags can't be moved or deleted.
+Every Mixpanel event carries the version as its `release` property. To roll
+back, pick the deployment for an earlier tag's commit in the Cloudflare
+dashboard (Workers > zickonezero > Deployments) or run `npx wrangler rollback`.
+
 ### DigitalOcean rollback
 
 The former static component remains inside the shared DigitalOcean `demostoke`

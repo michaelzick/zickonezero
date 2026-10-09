@@ -1,6 +1,6 @@
 {
   "name": "zickonezero",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "engines": {
     "node": "24.x"
   },
@@ -66,6 +66,5 @@
       "postcss": "8.5.28"
     }
   },
-  "readme": "ERROR: No README data found!",
-  "_id": "zickonezero@0.1.0"
+  "readme": "ERROR: No README data found!"
 }

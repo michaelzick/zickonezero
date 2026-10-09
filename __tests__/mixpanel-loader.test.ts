@@ -10,21 +10,30 @@ type TestWindow = Window & {
     _i?: unknown[];
     init?: jest.Mock;
     track?: jest.Mock;
+    register?: jest.Mock;
   };
 };
 
 const RACK_PRIVATE_SELECTOR = '[data-rackloose] section[aria-label="Rackloose modular synthesizer"] > :not(header)';
 
-// A fresh module per test, reading the token from the environment again.
-const loadAnalytics = (token = 'test-token') => {
-  const previous = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN;
-  process.env.NEXT_PUBLIC_MIXPANEL_TOKEN = token;
+const setEnv = (name: string, value: string | undefined) => {
+  if (value === undefined) delete process.env[name];
+  else process.env[name] = value;
+};
+
+// A fresh module per test, reading the token and release from the
+// environment again.
+const loadAnalytics = (token = 'test-token', release = '9.8.7') => {
+  const previousToken = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN;
+  const previousRelease = process.env.NEXT_PUBLIC_RELEASE_VERSION;
+  setEnv('NEXT_PUBLIC_MIXPANEL_TOKEN', token);
+  setEnv('NEXT_PUBLIC_RELEASE_VERSION', release);
   let analytics!: typeof import('../src/lib/analytics');
   jest.isolateModules(() => {
     analytics = require('../src/lib/analytics');
   });
-  if (previous === undefined) delete process.env.NEXT_PUBLIC_MIXPANEL_TOKEN;
-  else process.env.NEXT_PUBLIC_MIXPANEL_TOKEN = previous;
+  setEnv('NEXT_PUBLIC_MIXPANEL_TOKEN', previousToken);
+  setEnv('NEXT_PUBLIC_RELEASE_VERSION', previousRelease);
   return analytics;
 };
 
@@ -34,12 +43,13 @@ const sdkScripts = () => Array.from(document.head.querySelectorAll<HTMLScriptEle
 // real instance with track.
 const bootBundle = () => {
   const track = jest.fn();
+  const register = jest.fn();
   const init = jest.fn(() => {
-    (window as TestWindow).mixpanel = { track };
+    (window as TestWindow).mixpanel = { track, register };
   });
   (window as TestWindow).mixpanel!.init = init;
   sdkScripts()[0].dispatchEvent(new Event('load'));
-  return { init, track };
+  return { init, track, register };
 };
 
 describe('loadMixpanel on www.zickonezero.com', () => {
@@ -92,6 +102,26 @@ describe('loadMixpanel on www.zickonezero.com', () => {
     expect(track).toHaveBeenCalledWith('page_view', { page_path: '/' });
     // The download timeout is cleared once the SDK arrives.
     expect(jest.getTimerCount()).toBe(0);
+  });
+
+  it('tags every event with the release, including those that waited', () => {
+    const { loadMixpanel, trackEvent } = loadAnalytics();
+
+    trackEvent('page_view', { page_path: '/' });
+    loadMixpanel();
+    const { track, register } = bootBundle();
+
+    expect(register).toHaveBeenCalledWith({ release: '9.8.7' });
+    expect(register.mock.invocationCallOrder[0]).toBeLessThan(track.mock.invocationCallOrder[0]);
+  });
+
+  it('registers nothing when no release is set', () => {
+    const { loadMixpanel } = loadAnalytics('test-token', '');
+
+    loadMixpanel();
+    const { register } = bootBundle();
+
+    expect(register).not.toHaveBeenCalled();
   });
 
   it('drops waiting events and holds no more when the SDK fails to download', () => {
