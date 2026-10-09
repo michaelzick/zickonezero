@@ -23,10 +23,10 @@ export type LinkClickPayload = {
   pagePath?: string;
 };
 
-// Browser-side Mixpanel project token (public by design). Empty until the
-// project's token is filled in here or set through the env, which keeps
-// Mixpanel from loading at all.
-const MIXPANEL_TOKEN = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN || '';
+// Browser-side Mixpanel project token (public by design). Overridable via env;
+// the literal fallback keeps production builds sending without extra
+// configuration.
+const MIXPANEL_TOKEN = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN || 'fd2e07b182295dac64b9cb63934a268f';
 export const MIXPANEL_SCRIPT = 'https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js';
 const MIXPANEL_LOAD_TIMEOUT_MS = 30000;
 
