@@ -2,8 +2,15 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 type AnimatedSectionsState = Record<string, boolean>;
 
-const useAnimatedSections = (resetKey?: unknown) => {
-  const [visibleSections, setVisibleSections] = useState<AnimatedSectionsState>({});
+/**
+ * Reveals each animated section the first time it scrolls into view. Ids in
+ * initiallyVisible (a page's opening hero) render visible from the start, so
+ * they boot up from the first paint instead of waiting for scripts.
+ */
+const useAnimatedSections = (resetKey?: unknown, initiallyVisible: readonly string[] = []) => {
+  const [visibleSections, setVisibleSections] = useState<AnimatedSectionsState>(
+    () => Object.fromEntries(initiallyVisible.map((id) => [id, true])),
+  );
   const animatedSectionRefs = useRef<Map<string, HTMLDivElement | null>>(new Map());
 
   const setAnimatedSectionRef = useCallback((id: string) => (el: HTMLDivElement | null) => {

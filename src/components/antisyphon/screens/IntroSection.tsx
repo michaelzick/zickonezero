@@ -17,7 +17,7 @@ type IntroSectionProps = {
 const IntroSection = ({ openFlowLightbox }: IntroSectionProps) => (
   <section id='screens-introduction'>
     <CompactIntroHeaderRow className='text-animate'>
-      <img className='at-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' />
+      <img className='at-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' loading='lazy' />
       <div>
         <h2 className='tab-header page-header'>Antisyphon Product Screens</h2>
         <PitchDeckLink

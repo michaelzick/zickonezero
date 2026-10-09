@@ -16,7 +16,8 @@ type Slide = {
 // Homepage-sized copies (1920px wide, 2x the largest screen): the full-size
 // case-study captures decoded to 160 MB, enough for Chrome to evict them
 // (and the gig cards) while the visitor is at the bottom of the page, so they
-// flashed blank on the way back up.
+// flashed blank on the way back up. Each also has 960px and 1440px copies
+// (name-960w.webp, name-1440w.webp) for smaller screens.
 const SLIDES: readonly Slide[] = [
   {
     src: '/img/home/billboard/ds-explore-hybrid.webp',
@@ -43,6 +44,15 @@ const SLIDES: readonly Slide[] = [
     alt: 'DemoStoke gear quiz flow',
   },
 ];
+
+const slideSrcSet = (src: string) => [960, 1440]
+  .map((width) => `${src.replace(/\.webp$/, `-${width}w.webp`)} ${width}w`)
+  .concat(`${src} 1920w`)
+  .join(', ');
+
+// How wide a slide's image renders (it covers the slide by height, see
+// styles/billboard.ts): about the screen's width on phones, at most 960px.
+const SLIDE_SIZES = '(max-width: 600px) 105vw, (max-width: 1137px) 85vw, 960px';
 
 // Seeded, so the static HTML and the hydrated page draw the same tower.
 const TOWER = generateFacade({
@@ -148,7 +158,7 @@ const HoloBillboard = () => {
           <div className='bb-track' ref={trackRef}>
             {SLIDES.map(({ src, alt }) => (
               <div className='bb-slide' key={src}>
-                <img src={src} alt={alt} loading='lazy' decoding='sync' />
+                <img src={src} srcSet={slideSrcSet(src)} sizes={SLIDE_SIZES} alt={alt} loading='lazy' decoding='sync' />
               </div>
             ))}
           </div>

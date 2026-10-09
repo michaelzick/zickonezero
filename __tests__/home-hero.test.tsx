@@ -1,4 +1,4 @@
-import { act, createEvent, fireEvent, screen, within } from '@testing-library/react';
+import { act, createEvent, fireEvent, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import MainContent from '../src/components/MainContent';
@@ -6,7 +6,7 @@ import worksData from '../src/data/worksData.json';
 import { REDUCED_MOTION_QUERY, mockMatchMedia, restoreMatchMedia } from '../src/test/matchMedia';
 import { renderWithProviders } from '../src/test/renderWithProviders';
 
-type LightboxProps = { toggler: boolean; sources: string[]; slide: number };
+type LightboxProps = { toggler: boolean; sources: string[]; slide: number; openOnMount?: boolean };
 
 const mockLightbox = jest.fn((props: LightboxProps) => {
   void props;
@@ -238,11 +238,14 @@ describe('Homepage city', () => {
     const item = worksData.find(({ header }) => header === project);
     expect(item?.imgs?.length).toBeGreaterThan(0);
 
-    const lastToggler = mockLightbox.mock.calls[mockLightbox.mock.calls.length - 1][0].toggler;
+    // The lightbox's script loads on the first open, not with the page.
+    expect(mockLightbox).not.toHaveBeenCalled();
     await user.click(button);
 
+    await waitFor(() => expect(mockLightbox).toHaveBeenCalled());
     const props = mockLightbox.mock.calls[mockLightbox.mock.calls.length - 1][0];
-    expect(props.toggler).toBe(!lastToggler);
+    expect(props.toggler).toBe(true);
+    expect(props.openOnMount).toBe(true);
     expect(props.sources).toEqual(item?.imgs);
     expect(track).toHaveBeenCalledWith('project_card_click', expect.objectContaining({
       location: 'project_grid',

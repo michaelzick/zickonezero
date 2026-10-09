@@ -30,8 +30,10 @@ import {
   ShowcaseSectionCard,
   AnimatedSection
 } from '../../styles/projectShowcases';
-import { TopNavContent, FooterContent } from '.';
+import FooterContent from './FooterContent';
+import TopNavContent from './TopNavContent';
 import TrackedCtaLink from './TrackedCtaLink';
+import LazyLightbox from './LazyLightbox';
 import { trackEvent } from '../lib/analytics';
 import {
   useAppSelector,
@@ -41,7 +43,6 @@ import {
   showMobileMenu,
   getMobileMenuState
 } from '../showMobileMenuSlice';
-import FsLightbox from 'fslightbox-react';
 
 type ShowcaseSection = {
   title: string;
@@ -83,8 +84,6 @@ const ProjectShowcase = ({
   const [lightboxState, setLightboxState] = useState({ toggler: false, slide: 1 });
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [visibleSections, setVisibleSections] = useState<Record<number, boolean>>({});
-  const heroRef = useRef<HTMLDivElement | null>(null);
-  const [isHeroVisible, setIsHeroVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -102,23 +101,6 @@ const ProjectShowcase = ({
   }, []);
 
   useEffect(() => {
-    const node = heroRef.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setIsHeroVisible(true);
-          observer.disconnect();
-        }
-      });
-    }, { threshold: 0.25 });
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
     window.scrollTo({ top: 0 });
   }, []);
 
@@ -129,11 +111,9 @@ const ProjectShowcase = ({
         onClick={() => dispatch(showMobileMenu(false))}>
         <PageShell>
           <PageInner>
-            <AnimatedSection
-              ref={heroRef}
-              data-section-index={-1}
-              className={isHeroVisible ? 'visible' : undefined}
-            >
+            {/* The hero opens the page, so it boots up from the first paint
+                rather than waiting for scripts to see it. */}
+            <AnimatedSection data-section-index={-1} data-reveal='load' className='visible'>
               <HeroGrid>
                 <HeroImageFrame>
                   <img className="image-animate" src={heroImage.src} alt={heroImage.alt} />
@@ -226,7 +206,7 @@ const ProjectShowcase = ({
           </PageInner>
         </PageShell>
       </Wrapper>
-      <FsLightbox
+      <LazyLightbox
         toggler={lightboxState.toggler}
         slide={lightboxState.slide}
         sources={sections.map(({ image }) => image.src)}

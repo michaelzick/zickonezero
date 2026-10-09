@@ -9,7 +9,7 @@ export const DEFAULT_OG_IMAGE = '/img/og/zickonezero-card.png';
 
 const SAME_AS = [
   'https://github.com/michaelzick',
-  'https://linkedin.com/in/michaelzick',
+  'https://www.linkedin.com/in/michaelzick',
 ];
 
 /**
@@ -24,36 +24,42 @@ export const absoluteUrl = (path: string): string => {
   return `${SITE_URL}${normalized}`;
 };
 
+const HOME_URL = absoluteUrl('/');
+
+// Every page names the same Person by this id, so search engines treat the
+// mentions as one person rather than several.
+export const PERSON_ID = `${HOME_URL}#person`;
+
+const personNode = (): JsonLd => ({
+  '@type': 'Person',
+  '@id': PERSON_ID,
+  name: 'Michael Zick',
+  url: HOME_URL,
+  jobTitle: 'Product Leader',
+  sameAs: SAME_AS,
+});
+
 export const personJsonLd = (): JsonLd => ({
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Michael Zick',
-  url: SITE_URL,
-  jobTitle: 'Product Leader',
+  ...personNode(),
   worksFor: {
     '@type': 'Organization',
     name: SITE_NAME,
   },
-  sameAs: SAME_AS,
 });
 
 export const webSiteJsonLd = (): JsonLd => ({
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: SITE_NAME,
-  url: SITE_URL,
+  url: HOME_URL,
 });
 
 export const profilePageJsonLd = (): JsonLd => ({
   '@context': 'https://schema.org',
   '@type': 'ProfilePage',
-  mainEntity: {
-    '@type': 'Person',
-    name: 'Michael Zick',
-    url: absoluteUrl('/about/'),
-    jobTitle: 'Product Leader',
-    sameAs: SAME_AS,
-  },
+  url: absoluteUrl('/about/'),
+  mainEntity: personNode(),
 });
 
 export const contactPageJsonLd = (): JsonLd => ({
@@ -61,12 +67,7 @@ export const contactPageJsonLd = (): JsonLd => ({
   '@type': 'ContactPage',
   name: 'Contact',
   url: absoluteUrl('/contact/'),
-  mainEntity: {
-    '@type': 'Person',
-    name: 'Michael Zick',
-    url: SITE_URL,
-    sameAs: SAME_AS,
-  },
+  mainEntity: personNode(),
 });
 
 export type CreativeWorkInput = {
@@ -85,8 +86,9 @@ export const creativeWorkJsonLd = ({ name, description, path, image }: CreativeW
   image: absoluteUrl(image ?? DEFAULT_OG_IMAGE),
   author: {
     '@type': 'Person',
+    '@id': PERSON_ID,
     name: 'Michael Zick',
-    url: SITE_URL,
+    url: HOME_URL,
   },
 });
 

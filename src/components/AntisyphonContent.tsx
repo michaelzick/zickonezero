@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import FsLightbox from 'fslightbox-react';
 
 import {
   useAppDispatch,
@@ -12,11 +11,13 @@ import {
 import { scrollToTop } from '../helpers';
 
 import { Wrapper } from '../../styles';
-import { TopNavContent, FooterContent } from '.';
+import FooterContent from './FooterContent';
+import TopNavContent from './TopNavContent';
 import DemoStokeTabs from './DemoStokeTabs';
 import { SidebarSectionTabsMobile } from './SidebarSectionTabs';
 import CaseStudyContent from './antisyphon/CaseStudyContent';
 import ScreensContent from './antisyphon/ScreensContent';
+import LazyLightbox from './LazyLightbox';
 import {
   CASE_STUDY_BOTTOM_SECTION_ID,
   CASE_STUDY_SECTIONS,
@@ -36,13 +37,16 @@ import { trackEvent } from '../lib/analytics';
 
 type SectionKey = 'case-study' | 'flows';
 
+// The intro opens the page, so it boots up from the first paint.
+const OPENING_SECTIONS = ['section-intro'];
+
 const AntisyphonContent = () => {
   const { isMobileMenuShown } = useAppSelector(getMobileMenuState);
   const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState<SectionKey>('case-study');
   const [topTabsEl, setTopTabsEl] = useState<HTMLDivElement | null>(null);
   const [openPersonaId, setOpenPersonaId] = useState<string | null>(null);
-  const { visibleSections, setAnimatedSectionRef } = useAnimatedSections(activeTab);
+  const { visibleSections, setAnimatedSectionRef } = useAnimatedSections(activeTab, OPENING_SECTIONS);
   const { lightboxController, openLightbox } = useLightboxController();
   const { lightboxController: methodLightboxController, openLightbox: openMethodLightbox } = useLightboxController();
   const { lightboxController: flowLightboxController, openLightbox: openFlowLightbox } = useLightboxController();
@@ -177,17 +181,17 @@ const AntisyphonContent = () => {
           openFlowLightbox={handleOpenFlowLightbox}
         />
       </Wrapper>
-      <FsLightbox
+      <LazyLightbox
         toggler={lightboxController.toggler}
         sources={caseStudyImages.map(({ src }) => src)}
         slide={lightboxController.slide}
       />
-      <FsLightbox
+      <LazyLightbox
         toggler={methodLightboxController.toggler}
         sources={methodImages.map(({ src }) => src)}
         slide={methodLightboxController.slide}
       />
-      <FsLightbox
+      <LazyLightbox
         toggler={flowLightboxController.toggler}
         sources={flowImages.map(({ src }) => src)}
         slide={flowLightboxController.slide}

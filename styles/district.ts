@@ -398,14 +398,15 @@ export const GigCard = styled.div`
       object-fit: cover;
     }
 
-    /* Tinted copies of the thumbnail that split apart on hover. */
+    /* Tinted copies of the thumbnail that split apart on hover. They take
+       the image only on hover (below): a background image downloads even at
+       opacity 0, which would load every card up front despite the lazy img. */
     &::before,
     &::after {
       content: '';
       position: absolute;
       inset: 0;
       z-index: 1;
-      background-image: var(--thumb);
       background-position: center;
       background-size: cover;
       background-blend-mode: multiply;
@@ -533,6 +534,11 @@ export const GigCard = styled.div`
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       filter: drop-shadow(0 0 calc(14px * var(--neon-glow-strength, 1)) var(--gig-glow));
+    }
+
+    &:hover .gig-media::before,
+    &:hover .gig-media::after {
+      background-image: var(--thumb);
     }
 
     &:hover .gig-media::before {

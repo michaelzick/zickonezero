@@ -31,10 +31,10 @@ function MyApp({
         <FontVariables />
         <ThemeColorMeta />
         <Container>
-          {/* Google Tag Manager Script */}
+          {/* Google Tag Manager, loaded once the page is idle so it never competes with the first paint. */}
           <Script
             id="gtm"
-            strategy="afterInteractive"
+            strategy="lazyOnload"
             dangerouslySetInnerHTML={{
               __html: `
                 (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

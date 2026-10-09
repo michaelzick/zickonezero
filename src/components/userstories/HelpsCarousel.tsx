@@ -18,6 +18,7 @@ import {
 } from '../../../styles';
 import { DemoStokeSectionSubheading } from '../../../styles/demostoke';
 import { THEME } from '../../../styles/theme';
+import useBodyScrollLock from '../../hooks/useBodyScrollLock';
 import { trackEvent } from '../../lib/analytics';
 
 // The dialog is portaled out of the page's glass panels, whose stacking
@@ -47,6 +48,8 @@ const HelpsCarousel = ({ items, title = 'How DemoStoke Helps' }: HelpsCarouselPr
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const openerRef = useRef<HTMLElement | null>(null);
+
+  useBodyScrollLock(activeIndex !== null);
 
   const updateScrollButtons = useCallback(() => {
     const el = rowRef.current;

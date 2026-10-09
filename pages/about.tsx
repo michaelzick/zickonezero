@@ -1,4 +1,4 @@
-import { AboutContent } from '../src/components';
+import AboutContent from '../src/components/AboutContent';
 import Seo from '../src/components/Seo';
 import { profilePageJsonLd } from '../src/lib/seo';
 

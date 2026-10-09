@@ -16,13 +16,14 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
   <AnimatedSection
     ref={setAnimatedSectionRef('section-intro')}
     data-animate-id='section-intro'
+    data-reveal='load'
     className={visibleSections['section-intro'] ? 'visible' : undefined}
   >
     <section id='introduction' className='story-section'>
       <HiddenSectionAnchor id='hero-spacer' aria-hidden='true' />
       <HeroGrid>
         <CaseStudyHeroMediaFrame className='image-animate' style={{ backgroundColor: '#151515' }}>
-          <img src='/img/antisyphon/home.webp' alt='Antisyphon Training homepage with course cards' loading='lazy' />
+          <img src='/img/antisyphon/home.webp' alt='Antisyphon Training homepage with course cards' loading='eager' />
         </CaseStudyHeroMediaFrame>
         <HeroContent className='text-animate'>
           <Title>Antisyphon<br />UX Case Study</Title>

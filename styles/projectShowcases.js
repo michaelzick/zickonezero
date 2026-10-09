@@ -518,6 +518,33 @@ const scanLine = keyframes`
   }
 `;
 
+/* A page's opening hero boots up with the same settle and scan line, but
+   no wipe and no fade: Chrome never credits Largest Contentful Paint to
+   content first painted clipped or transparent, and credits a rising image
+   only once it lands, which held these pages' LCP back by seconds. */
+const bootUpOpening = keyframes`
+  0% {
+    transform: translate3d(0, 14px, 0);
+  }
+
+  58% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  66% {
+    transform: translate3d(-3px, 0, 0);
+  }
+
+  74% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  82%,
+  100% {
+    transform: none;
+  }
+`;
+
 const REVEAL_EASING = 'cubic-bezier(0.2, 0.7, 0.2, 1)';
 
 export const AnimatedSection = styled.div`
@@ -568,6 +595,24 @@ export const AnimatedSection = styled.div`
     transform: none;
   }
 
+  /* A page's opening hero (data-reveal='load') is rendered visible, so it
+     boots up from the first paint instead of waiting for scripts. Its content
+     is in place from that first frame while the panel settles and the scan
+     line sweeps over it (see bootUpOpening). */
+  &[data-reveal='load'] {
+    opacity: 1;
+  }
+
+  &[data-reveal='load'].visible {
+    animation-name: ${bootUpOpening};
+  }
+
+  &[data-reveal='load'] .image-animate,
+  &[data-reveal='load'] .text-animate {
+    opacity: 1;
+    transform: none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     opacity: 1;
     transform: none;
@@ -587,6 +632,10 @@ export const AnimatedSection = styled.div`
       opacity: 1;
       transform: none;
       transition: none;
+    }
+
+    &[data-reveal='load'].visible {
+      animation: none;
     }
   }
 `;

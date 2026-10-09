@@ -115,7 +115,17 @@ const LinkBoxMobileContent = ({ isAnimating = true }: LinkBoxMobileContentProps)
                       variant='mobile'
                       ariaCurrent={href === currentPath ? 'page' : undefined}
                     >
-                      {icon ? <img className='case-logo' src={icon} alt={iconAlt || `${label} logo`} /> : null}
+                      {icon ? (
+                        <img
+                          className='case-logo'
+                          src={icon}
+                          alt={iconAlt || `${label} logo`}
+                          width='96'
+                          height='96'
+                          loading='lazy'
+                          decoding='async'
+                        />
+                      ) : null}
                       {label}
                     </TrackedLink>
                   )}

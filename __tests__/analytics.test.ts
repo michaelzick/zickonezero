@@ -68,3 +68,69 @@ describe('analytics helpers', () => {
     });
   });
 });
+
+describe('events tracked before Amplitude loads', () => {
+  // A fresh module per test, so each starts with an empty queue.
+  const loadAnalytics = () => {
+    let analytics!: typeof import('../src/lib/analytics');
+    jest.isolateModules(() => {
+      analytics = require('../src/lib/analytics');
+    });
+    return analytics;
+  };
+
+  beforeEach(() => {
+    delete (window as TestWindow).amplitude;
+  });
+
+  afterEach(() => {
+    delete (window as TestWindow).amplitude;
+  });
+
+  it('holds them until the SDK announces itself, then sends them in order', () => {
+    const { AMPLITUDE_READY_EVENT, trackEvent: track } = loadAnalytics();
+
+    track('page_view', { page_path: '/' });
+    track('cta_click', { label: 'See Case Studies' });
+
+    const sdkTrack = jest.fn();
+    (window as TestWindow).amplitude = { track: sdkTrack };
+    window.dispatchEvent(new Event(AMPLITUDE_READY_EVENT));
+
+    expect(sdkTrack.mock.calls).toEqual([
+      ['page_view', { page_path: '/' }],
+      ['cta_click', { label: 'See Case Studies' }],
+    ]);
+
+    // The queue is empty afterwards, so another ready event sends nothing twice.
+    window.dispatchEvent(new Event(AMPLITUDE_READY_EVENT));
+    expect(sdkTrack).toHaveBeenCalledTimes(2);
+  });
+
+  it('sends the backlog first when the SDK appears before its ready event', () => {
+    const { trackEvent: track } = loadAnalytics();
+
+    track('page_view', { page_path: '/' });
+
+    const sdkTrack = jest.fn();
+    (window as TestWindow).amplitude = { track: sdkTrack };
+    track('cta_click', { label: 'Contact' });
+
+    expect(sdkTrack.mock.calls.map(([name]) => name)).toEqual(['page_view', 'cta_click']);
+  });
+
+  it('keeps at most 50 events while the SDK is missing', () => {
+    const { AMPLITUDE_READY_EVENT, trackEvent: track } = loadAnalytics();
+
+    for (let index = 0; index < 60; index += 1) {
+      track('scroll_depth', { index });
+    }
+
+    const sdkTrack = jest.fn();
+    (window as TestWindow).amplitude = { track: sdkTrack };
+    window.dispatchEvent(new Event(AMPLITUDE_READY_EVENT));
+
+    expect(sdkTrack).toHaveBeenCalledTimes(50);
+    expect(sdkTrack.mock.calls[49]).toEqual(['scroll_depth', { index: 49 }]);
+  });
+});

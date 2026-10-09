@@ -28,6 +28,7 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
   <AnimatedSection
     ref={setAnimatedSectionRef('section-intro')}
     data-animate-id='section-intro'
+    data-reveal='load'
     className={visibleSections['section-intro'] ? 'visible' : undefined}
   >
     <section id='introduction' className='story-section'>

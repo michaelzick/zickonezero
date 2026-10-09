@@ -1133,15 +1133,20 @@ export const DemoStokeHeroAbstractLayout = styled.div`
 /*
  * Dialogs: a "shard reader" with a dark glass plate and light ink in both
  * themes. Portal it to the body when it opens inside a glass panel, since
- * the panel's stacking context would hold it under the fixed nav.
+ * the panel's stacking context would hold it under the fixed nav. The plate
+ * is a flex column whose copy takes whatever height the header leaves, so
+ * the copy is always the part that scrolls; lock the page behind it with
+ * useBodyScrollLock.
  */
 export const DemoStokeMiniCardModalOverlay = styled.div`
   position: fixed;
   inset: 0;
   z-index: 999;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  /* The plate centers with auto margins, which (unlike align-items: center)
+     let a plate taller than the screen scroll instead of losing both ends. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: clamp(1em, 3vw, 2em);
   background: var(--modal-scrim);
   -webkit-backdrop-filter: blur(4px);
@@ -1157,8 +1162,13 @@ export const DemoStokeMiniCardModal = styled.div`
   --glass-highlight: rgba(255, 255, 255, 0.06);
   --hud-teal: #5ef6e6;
   --focus-ring: var(--hud-yellow);
+  display: flex;
+  flex-direction: column;
   width: min(720px, 95vw);
+  /* dvh is the visible height, so the plate fits while Safari's toolbars show. */
   max-height: 88vh;
+  max-height: 88dvh;
+  margin: auto;
   overflow: hidden;
   padding: clamp(1.2em, 2.5vw, 1.85em);
   color: var(--hud-ink);
@@ -1222,8 +1232,12 @@ export const DemoStokeMiniCardModalCopy = styled.div`
   color: var(--hud-ink);
   line-height: 1.7;
   font-size: 1em;
-  max-height: calc(88vh - 4em);
+  /* Fill the plate below the header and scroll there; a drag that reaches
+     either end stops instead of moving the page. */
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding-right: 0.4em;
   ${hudScrollbar}
 

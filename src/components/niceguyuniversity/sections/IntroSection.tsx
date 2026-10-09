@@ -34,13 +34,14 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
   <AnimatedSection
     ref={setAnimatedSectionRef('section-intro')}
     data-animate-id='section-intro'
+    data-reveal='load'
     className={visibleSections['section-intro'] ? 'visible' : undefined}
   >
     <section id='introduction' className='story-section'>
       <HiddenSectionAnchor id='hero-spacer' aria-hidden='true' />
       <HeroGrid>
         <CaseStudyHeroMediaFrame className='image-animate' style={{ backgroundColor: '#111111' }}>
-          <img src='/img/nice-guy-university/ngu-home.webp' alt='Nice Guy University homepage with hero and calls to action' loading='lazy' />
+          <img src='/img/nice-guy-university/ngu-home.webp' alt='Nice Guy University homepage with hero and calls to action' loading='eager' />
         </CaseStudyHeroMediaFrame>
         <HeroContent className='text-animate'>
           <Title>Nice Guy University<br />UX Case Study</Title>
