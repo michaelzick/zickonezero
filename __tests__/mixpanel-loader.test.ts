@@ -121,12 +121,14 @@ describe('loadMixpanel on www.zickonezero.com', () => {
     expect(jest.getTimerCount()).toBe(0);
   });
 
-  it('stays off until a token is set', () => {
+  it('falls back to the project token when the env sets none', () => {
     const { loadMixpanel } = loadAnalytics('');
 
     loadMixpanel();
+    const init = jest.fn();
+    (window as TestWindow).mixpanel = { init } as TestWindow['mixpanel'];
+    sdkScripts()[0].dispatchEvent(new Event('load'));
 
-    expect(sdkScripts()).toHaveLength(0);
-    expect((window as TestWindow).mixpanel).toBeUndefined();
+    expect(init).toHaveBeenCalledWith('fd2e07b182295dac64b9cb63934a268f', expect.any(Object));
   });
 });
