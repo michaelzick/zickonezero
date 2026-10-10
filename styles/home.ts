@@ -20,11 +20,12 @@ import { THEME } from './theme';
  * Memory: WebKit gives every leaf its own GPU backing at the screen's full
  * density and keeps all of it while the alley is in the page, even out of
  * view, so the walls and towers alone held over 800 MB on a 3x iPhone and
- * Safari's tab crashed. The walls are laid out at half size and the towers at
- * a quarter, then scaled back up in their transforms; WebKit draws them at
- * the smaller size, which perspective barely shows, since it shrinks most of
- * each leaf on screen. useReleaseOffscreen also takes the whole alley out of
- * the page while it is more than a screen away (data-offscreen).
+ * Safari's tab crashed. The towers are laid out at a quarter size and the
+ * walls, street, and cables smaller by --alley-*-scale (more so on
+ * phone-sized screens), then scaled back up in their transforms; WebKit draws
+ * them at the smaller size, which perspective barely shows, since it shrinks
+ * most of each leaf on screen. useReleaseOffscreen also takes the whole alley
+ * out of the page while it is more than a screen away (data-offscreen).
  */
 
 const paperGust = keyframes`
@@ -76,6 +77,11 @@ export const HeroRoot = styled.section`
   --alley-walk: 560px;
   --alley-street: 86%;
   --alley-top: -70%;
+  /* How many times smaller each kind of leaf is laid out than it is seen
+     (see the Memory note above). Phone-sized screens raise them. */
+  --alley-wall-scale: 2;
+  --alley-street-scale: 1;
+  --alley-cable-scale: 1;
   --alley-fog: rgba(25, 65, 70, 0.92);
   --alley-fog-mid: rgba(18, 46, 51, 0.45);
   --alley-ground: #090d10;
@@ -198,13 +204,13 @@ export const HeroRoot = styled.section`
 
   /*
    * Walls: face-on strips turned a quarter so they recede down the alley.
-   * Each is laid out at half size around the same center and scaled back up
-   * from its near edge.
+   * Each is laid out --alley-wall-scale times smaller around the same center
+   * and scaled back up from its near edge.
    */
   .wall {
-    top: calc(var(--alley-top) + (var(--alley-street) - var(--alley-top)) / 4);
-    width: calc(var(--alley-depth) / 2);
-    height: calc((var(--alley-street) - var(--alley-top)) / 2);
+    top: calc(var(--alley-top) + (var(--alley-street) - var(--alley-top)) * (1 - 1 / var(--alley-wall-scale)) / 2);
+    width: calc(var(--alley-depth) / var(--alley-wall-scale));
+    height: calc((var(--alley-street) - var(--alley-top)) / var(--alley-wall-scale));
 
     svg {
       display: block;
@@ -223,13 +229,13 @@ export const HeroRoot = styled.section`
   .wall-left {
     left: calc(50% - var(--alley-half));
     transform-origin: 0 50%;
-    transform: translateZ(var(--alley-near)) rotateY(90deg) scale(2);
+    transform: translateZ(var(--alley-near)) rotateY(90deg) scale(var(--alley-wall-scale));
   }
 
   .wall-right {
-    left: calc(50% + var(--alley-half) - var(--alley-depth) / 2);
+    left: calc(50% + var(--alley-half) - var(--alley-depth) / var(--alley-wall-scale));
     transform-origin: 100% 50%;
-    transform: translateZ(var(--alley-near)) rotateY(-90deg) scale(2);
+    transform: translateZ(var(--alley-near)) rotateY(-90deg) scale(var(--alley-wall-scale));
 
     svg {
       transform: scaleX(-1);
@@ -240,14 +246,16 @@ export const HeroRoot = styled.section`
     }
   }
 
-  /* Reflections and paving share the street leaf, so none of it z-fights. */
+  /* Reflections and paving share the street leaf, so none of it z-fights.
+     It is laid out --alley-street-scale times smaller and scaled back up
+     from its near edge. */
   .street {
-    left: calc(50% - var(--alley-half));
-    top: calc(var(--alley-street) - var(--alley-depth));
-    width: calc(var(--alley-half) * 2);
-    height: var(--alley-depth);
+    left: calc(50% - var(--alley-half) / var(--alley-street-scale));
+    top: calc(var(--alley-street) - var(--alley-depth) / var(--alley-street-scale));
+    width: calc(var(--alley-half) * 2 / var(--alley-street-scale));
+    height: calc(var(--alley-depth) / var(--alley-street-scale));
     transform-origin: 50% 100%;
-    transform: translateZ(var(--alley-near)) rotateX(90deg);
+    transform: translateZ(var(--alley-near)) rotateX(90deg) scale(var(--alley-street-scale));
     background:
       linear-gradient(to bottom, var(--alley-fog) 0%, var(--alley-fog-mid) 22%, transparent 55%),
       var(--alley-ground);
@@ -362,13 +370,15 @@ export const HeroRoot = styled.section`
     animation-play-state: paused;
   }
 
-  /* Cables sag across the alley at --z. */
+  /* Cables sag across the alley at --z, laid out --alley-cable-scale times
+     smaller and scaled back up from their top edge. */
   .cable {
     top: 0;
-    left: calc(50% - var(--alley-half));
-    width: calc(var(--alley-half) * 2);
-    height: 60%;
-    transform: translateZ(var(--z));
+    left: calc(50% - var(--alley-half) / var(--alley-cable-scale));
+    width: calc(var(--alley-half) * 2 / var(--alley-cable-scale));
+    height: calc(60% / var(--alley-cable-scale));
+    transform-origin: 50% 0;
+    transform: translateZ(var(--z)) scale(var(--alley-cable-scale));
 
     svg {
       width: 100%;
@@ -379,12 +389,12 @@ export const HeroRoot = styled.section`
     path {
       fill: none;
       stroke: var(--alley-cable);
-      stroke-width: 3px;
+      stroke-width: calc(3px / var(--alley-cable-scale));
       vector-effect: non-scaling-stroke;
     }
 
     .cable-thin {
-      stroke-width: 2px;
+      stroke-width: calc(2px / var(--alley-cable-scale));
     }
   }
 
@@ -756,6 +766,9 @@ export const HeroRoot = styled.section`
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
+    --alley-wall-scale: 4;
+    --alley-street-scale: 4;
+    --alley-cable-scale: 2;
     --alley-half: 38vw;
     --alley-persp: 760px;
     --alley-near: 220px;
@@ -841,6 +854,10 @@ export const HeroRoot = styled.section`
 
   /* Short landscape screens keep the two corner elements clear of the nav. */
   @media (max-height: 520px) and (min-aspect-ratio: 4/3) {
+    --alley-wall-scale: 4;
+    --alley-street-scale: 4;
+    --alley-cable-scale: 2;
+
     .distant-tower { height: calc(var(--tower-height) * 0.7 / 4); }
 
     .blade-dream {

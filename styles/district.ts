@@ -327,8 +327,6 @@ export const GigCard = styled.div`
   padding: 10px 10px 16px;
   color: var(--color-white);
   text-align: left;
-  /* The side under the pointer lifts toward it, so the card never slips out from under the pointer. */
-  transform: perspective(900px) rotateX(calc(var(--ty) * 7deg)) rotateY(calc(var(--tx) * -9deg));
   transition: transform 0.5s ${THEME.easing.out}, filter 0.3s ease;
 
   /* The glass plate, with the tone along its left edge and notches. */
@@ -532,6 +530,11 @@ export const GigCard = styled.div`
   }
 
   @media (hover: hover) and (pointer: fine) {
+    /* The side under the pointer lifts toward it, so the card never slips out
+       from under the pointer. Only here: a 3D transform keeps every card on a
+       GPU layer of its own, which touch screens, with no tilt, don't need. */
+    transform: perspective(900px) rotateX(calc(var(--ty) * 7deg)) rotateY(calc(var(--tx) * -9deg));
+
     &:hover {
       filter: drop-shadow(0 0 calc(14px * var(--neon-glow-strength, 1)) var(--gig-glow));
     }

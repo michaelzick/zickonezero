@@ -17,6 +17,7 @@ import { AppThemeProvider } from '../src/theme/ThemeContext';
 import FontVariables from '../src/theme/FontVariables';
 import ThemeColorMeta from '../src/theme/ThemeColorMeta';
 import { Container } from '../styles';
+import { PageLayer } from '../styles/city';
 
 function MyApp({
   Component, pageProps, router,
@@ -50,9 +51,11 @@ function MyApp({
             snow={normalizeRoutePath(router.pathname) === '/about'}
           />
 
-          <CurrentPathContext.Provider value={normalizeRoutePath(router.pathname)}>
-            <Component {...pageProps} />
-          </CurrentPathContext.Provider>
+          <PageLayer>
+            <CurrentPathContext.Provider value={normalizeRoutePath(router.pathname)}>
+              <Component {...pageProps} />
+            </CurrentPathContext.Provider>
+          </PageLayer>
 
           <FastTravelTransition />
         </Container>

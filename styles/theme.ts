@@ -51,11 +51,12 @@ export const THEME = {
     // System Japanese faces for the decorative signs; no CJK webfont download.
     cjk: "'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Noto Sans CJK JP', 'Noto Sans JP', sans-serif",
   },
-  // Stacking order, lowest first. The city layers sit below page content.
+  // Stacking order, lowest first. The city layers sit below page content,
+  // never at a negative z-index (see PageLayer in styles/city.ts).
   z: {
-    sky: -2,
-    weather: -1,
-    content: 1,
+    sky: 0,
+    weather: 1,
+    content: 2,
     hud: 90,
     sectionTabs: 95,
     nav: 400,
