@@ -4,23 +4,19 @@ import { facadePalette } from './facade';
 import { THEME } from './theme';
 
 /*
- * The homepage billboard (src/components/home/HoloBillboard.tsx): a giant
- * screen on a tower that pans through screenshots as the page scrolls. The
- * stage is tall and the frame inside it sticks for the length of the pan.
- * The component moves the track itself and writes --bp (0 to 1, how far
- * through the stage) and --slide (the slide nearest the middle, from 1) on
- * the stage. The screen stays flat: any 3D rotation resamples its layer and
- * blurs the screenshots on high-density screens, so depth comes from the
- * tower drifting behind it. Only @media and keyframes here; see
- * styles/city.ts.
+ * The homepage billboard (src/components/home/HoloBillboard.tsx): a
+ * full-width strip of screenshots that pans across a tower as the page
+ * scrolls. The stage is tall and the frame inside it sticks for the length
+ * of the pan. The component moves the track itself and writes --bp (0 to 1,
+ * how far through the stage) on the stage. Each panel keeps its image's own
+ * shape (--ar) at a shared height, so nothing is cropped, and the images
+ * carry no overlays or filters: they are the focal point. The panels stay
+ * flat: any 3D rotation resamples their layer and blurs the screenshots on
+ * high-density screens, so depth comes from the tower drifting behind them.
+ * Only @media and keyframes here; see styles/city.ts.
  */
 
-const refreshSweep = keyframes`
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(0, 760%, 0); }
-`;
-
-// The screen opens from a bright line, like an old tube warming up.
+// The strip opens from a bright line, like an old tube warming up.
 const powerOn = keyframes`
   0% { clip-path: inset(49.5% 0 49.5% 0); filter: brightness(2.6); }
   40% { clip-path: inset(49.5% 0 49.5% 0); filter: brightness(2.6); }
@@ -30,29 +26,30 @@ const powerOn = keyframes`
 
 export const BillboardStage = styled.section`
   --bp: 0;
-  --slide: 1;
-  --bb-w: min(1120px, 80vw, calc((100vh - 230px) * 2));
-  --bb-h: calc(var(--bb-w) / 2);
-  --bb-bezel: 10px;
+  /* Every panel's height; a 16:9 panel is 64vw (at most 1024px) wide. */
+  --bb-slide-h: min(36vw, 576px, calc(100vh - 280px));
+  /* Room above and below the panels for their shadows, inside the clip. */
+  --bb-pad: 48px;
+  --bb-gap: clamp(1.1rem, 2.8vw, 2rem);
+  --bb-inset: clamp(1.25rem, 3.8vw, 3rem);
+  /* Past the last panel: clear of the minimap HUD (216px, see styles/homeHud.ts). */
+  --bb-end: calc(216px + clamp(12px, 1.6vw, 24px) + var(--bb-inset));
   --bb-shift: 40px;
-  --bb-slide-w: calc((var(--bb-h) - var(--bb-bezel) * 2) * 1.6);
   /* How far the tower drifts across the pan. */
   --bb-drift: 8vw;
-  --bb-bezel-color: #05080d;
-  --bb-screen-bg: #02050a;
+  --bb-panel-bg: #02050a;
   /* A dark wash over the tower, so the screenshots stand out against it. */
   --bb-shade-rgb: 2, 4, 9;
-  --bb-shade: 0.62;
+  --bb-shade: 0.66;
   position: relative;
   height: 320vh;
   color: var(--color-white);
   ${facadePalette}
 
   html[data-theme='light'] & {
-    --bb-bezel-color: #263034;
-    --bb-screen-bg: #0b1418;
+    --bb-panel-bg: #0b1418;
     --bb-shade-rgb: 14, 18, 22;
-    --bb-shade: 0.5;
+    --bb-shade: 0.56;
   }
 
   .bb-frame {
@@ -77,18 +74,12 @@ export const BillboardStage = styled.section`
   .bb-screen {
     position: absolute;
     top: calc(50% + var(--bb-shift));
-    left: 50%;
+    left: 0;
+    right: 0;
     z-index: 2;
-    width: var(--bb-w);
-    height: var(--bb-h);
+    padding: var(--bb-pad) 0;
     overflow: hidden;
-    border: var(--bb-bezel) solid var(--bb-bezel-color);
-    background: var(--bb-screen-bg);
-    box-shadow:
-      0 0 0 1px rgba(47, 243, 255, 0.55),
-      0 0 calc(46px * var(--neon-glow-strength, 1)) rgba(47, 243, 255, 0.3),
-      0 40px 90px -30px rgba(0, 0, 0, 0.9);
-    transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(0, -50%, 0);
   }
 
   &[data-standby] .bb-screen > * {
@@ -101,117 +92,57 @@ export const BillboardStage = styled.section`
 
   .bb-track {
     display: flex;
+    align-items: center;
+    gap: var(--bb-gap);
     width: max-content;
-    height: 100%;
+    height: var(--bb-slide-h);
+    padding: 0 var(--bb-end) 0 var(--bb-inset);
     will-change: transform;
   }
 
   .bb-slide {
-    position: relative;
     flex: 0 0 auto;
-    width: var(--bb-slide-w);
     height: 100%;
+    aspect-ratio: var(--ar, 16 / 9);
     overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: ${THEME.radii.md};
+    background: var(--bb-panel-bg);
+    box-shadow:
+      0 0 calc(28px * var(--neon-glow-strength, 1)) rgba(47, 243, 255, 0.16),
+      0 34px 48px -30px rgba(0, 0, 0, 0.82);
 
     img {
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: top left;
-      filter: saturate(1.08) contrast(1.04);
+      object-position: top;
     }
+  }
 
-    /* Chromatic fringes along the panel edges. */
+  /* A thin rail under the strip, filling as the pan runs. */
+  .bb-progress {
+    position: absolute;
+    left: 50%;
+    bottom: calc(var(--bb-pad) / 2 - 1px);
+    width: clamp(120px, 22vw, 280px);
+    height: 2px;
+    background: rgba(255, 255, 255, 0.14);
+    transform: translate3d(-50%, 0, 0);
+    pointer-events: none;
+
     &::after {
       content: '';
       position: absolute;
       inset: 0;
-      box-shadow:
-        inset 3px 0 0 rgba(47, 243, 255, 0.45),
-        inset -3px 0 0 rgba(255, 43, 214, 0.45);
-      pointer-events: none;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+      transform: scaleX(var(--bp));
+      transform-origin: 0 50%;
     }
   }
 
-  .bb-slide + .bb-slide {
-    border-left: 3px solid #000;
-  }
-
-  .bb-scan,
-  .bb-bug,
-  .bb-channel,
-  .bb-progress {
-    position: absolute;
-    pointer-events: none;
-  }
-
-  .bb-scan {
-    inset: 0;
-    overflow: hidden;
-    background:
-      repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 3px),
-      linear-gradient(170deg, rgba(47, 243, 255, 0.12), transparent 38%, transparent 70%, rgba(255, 43, 214, 0.1));
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: -16%;
-      left: 0;
-      right: 0;
-      height: 16%;
-      background: linear-gradient(to bottom, transparent, rgba(160, 250, 255, 0.12), transparent);
-      animation: ${refreshSweep} 6s linear infinite;
-    }
-  }
-
-  .bb-bug,
-  .bb-channel {
-    top: 12px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 3px 8px;
-    background: rgba(2, 5, 10, 0.86);
-    color: #dffbff;
-    font-family: ${THEME.fonts.mono};
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-
-  .bb-bug {
-    left: 12px;
-
-    i {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #ff3a5c;
-      box-shadow: 0 0 8px #ff3a5c;
-    }
-  }
-
-  .bb-channel {
-    right: 12px;
-
-    &::after {
-      counter-reset: slide var(--slide) total var(--slide-count, 6);
-      content: 'CH ' counter(slide, decimal-leading-zero) ' / ' counter(total, decimal-leading-zero);
-    }
-  }
-
-  .bb-progress {
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
-    transform: scaleX(var(--bp));
-    transform-origin: 0 50%;
-  }
-
-  /* The tower behind the screen, drifting left as the pan runs. */
+  /* The tower behind the panels, drifting left as the pan runs. */
   .bb-rig {
     position: absolute;
     inset: -6vh calc(var(--bb-drift) / -2 - 2vw);
@@ -230,7 +161,7 @@ export const BillboardStage = styled.section`
       height: 100%;
     }
 
-    /* Shade over the facade, darkest at the edges, so the screen reads first. */
+    /* Shade over the facade, darkest at the edges, so the panels read first. */
     &::after {
       content: '';
       position: absolute;
@@ -242,19 +173,19 @@ export const BillboardStage = styled.section`
     }
   }
 
-  /* The light the screen throws on the tower. */
+  /* The light the strip throws on the tower. */
   .bb-spill {
     position: absolute;
     z-index: 0;
     left: 50%;
     top: calc(50% + var(--bb-shift));
-    width: calc(var(--bb-w) * 1.7);
-    height: calc(var(--bb-h) * 2.1);
+    width: 120vw;
+    height: calc(var(--bb-slide-h) * 2.2);
     transform: translate3d(-50%, -50%, 0);
     background: radial-gradient(
       closest-side,
-      rgba(47, 243, 255, calc(0.26 * var(--neon-glow-strength, 1))),
-      rgba(255, 43, 214, calc(0.12 * var(--neon-glow-strength, 1))) 55%,
+      rgba(47, 243, 255, calc(0.2 * var(--neon-glow-strength, 1))),
+      rgba(255, 43, 214, calc(0.08 * var(--neon-glow-strength, 1))) 55%,
       transparent
     );
     pointer-events: none;
@@ -264,7 +195,7 @@ export const BillboardStage = styled.section`
     position: absolute;
     z-index: 3;
     left: 50%;
-    top: calc(50% + var(--bb-shift) - var(--bb-h) / 2 - 18px);
+    top: calc(50% + var(--bb-shift) - var(--bb-slide-h) / 2 - 18px);
     display: flex;
     align-items: center;
     gap: 14px;
@@ -296,7 +227,7 @@ export const BillboardStage = styled.section`
     }
   }
 
-  /* Wet pavement under the tower, catching the screen's light. */
+  /* Wet pavement under the tower, catching the strip's light. */
   .bb-street {
     position: absolute;
     left: 0;
@@ -311,32 +242,21 @@ export const BillboardStage = styled.section`
   }
 
   @media (max-width: ${THEME.breakpoints.largeTablet}) {
-    --bb-w: min(900px, 90vw, calc((100vh - 230px) * 1.9));
-    --bb-h: calc(var(--bb-w) / 1.9);
+    /* A 16:9 panel is 78vw wide. */
+    --bb-slide-h: min(43.875vw, calc(100vh - 260px));
+  }
+
+  /* The HUD is a bottom bar here, below the strip. */
+  @media (max-width: ${THEME.breakpoints.smallTablet}), (max-height: 560px) {
+    --bb-end: calc(var(--bb-inset) * 2.5);
   }
 
   @media (max-width: ${THEME.breakpoints.phone}) {
-    --bb-w: 92vw;
-    --bb-h: calc(var(--bb-w) * 0.66);
-    --bb-bezel: 6px;
-    --bb-slide-w: calc((var(--bb-w) - var(--bb-bezel) * 2) * 0.86);
+    /* A 16:9 panel is 84vw wide. */
+    --bb-slide-h: min(47.25vw, calc(100vh - 240px));
+    --bb-pad: 32px;
     --bb-drift: 14vw;
     height: 240vh;
-
-    .bb-bug,
-    .bb-channel {
-      top: 8px;
-      padding: 2px 6px;
-      font-size: 9px;
-    }
-
-    .bb-bug {
-      left: 8px;
-    }
-
-    .bb-channel {
-      right: 8px;
-    }
 
     .bb-plate {
       gap: 10px;
@@ -346,8 +266,9 @@ export const BillboardStage = styled.section`
     }
   }
 
-  /* Reduced motion: no pan; the screen becomes a still wall of panels. */
+  /* Reduced motion: no pan; the strip becomes a still wall of panels. */
   @media (prefers-reduced-motion: reduce) {
+    --bb-slide-h: min(20vw, 288px);
     height: auto;
 
     .bb-frame {
@@ -359,25 +280,20 @@ export const BillboardStage = styled.section`
     .bb-screen {
       position: relative;
       top: auto;
-      left: auto;
-      width: var(--bb-w);
-      height: auto;
-      margin: 0 auto;
       transform: none;
     }
 
     .bb-track {
       flex-wrap: wrap;
+      justify-content: center;
       width: auto;
       height: auto;
+      padding: 0 var(--bb-inset);
       transform: none;
     }
 
     .bb-slide {
-      width: 50%;
-      height: auto;
-      aspect-ratio: 16 / 10;
-      border-left: 0;
+      height: var(--bb-slide-h);
     }
 
     .bb-rig {
@@ -388,9 +304,9 @@ export const BillboardStage = styled.section`
       top: 50%;
     }
 
-    /* Above the screen, which now starts at the frame's top padding. */
+    /* Above the panels, which now start below the frame's top padding. */
     .bb-plate {
-      top: calc(clamp(96px, 16vh, 150px) - 18px);
+      top: calc(clamp(96px, 16vh, 150px) + var(--bb-pad) - 18px);
     }
 
     .bb-progress {
@@ -399,8 +315,6 @@ export const BillboardStage = styled.section`
   }
 
   @media (prefers-reduced-motion: reduce) and (max-width: ${THEME.breakpoints.phone}) {
-    .bb-slide {
-      width: 100%;
-    }
+    --bb-slide-h: 47.25vw;
   }
 `;
