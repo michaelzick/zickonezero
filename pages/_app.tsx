@@ -31,7 +31,7 @@ function MyApp({
         <FontVariables />
         <ThemeColorMeta />
         <Container>
-          {/* Google Tag Manager and Mixpanel, a few seconds after the page loads. */}
+          {/* Google Analytics and Mixpanel, a few seconds after the page loads. */}
           <SiteAnalyticsScripts />
           <PageAnalytics />
 
