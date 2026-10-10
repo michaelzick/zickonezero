@@ -45,6 +45,7 @@ describe('Home and About visuals', () => {
     expect(screen.getByAltText(/^Bars of Sand 3D terrain model/)).toBeInTheDocument();
     expect(screen.queryByAltText('DemoStoke events calendar')).not.toBeInTheDocument();
     expect(screen.queryByAltText('DemoStoke gear quiz flow')).not.toBeInTheDocument();
+    expect(screen.queryByAltText('Antisyphon Training course catalog')).not.toBeInTheDocument();
     expect(screen.queryByAltText('Illustrated self-portrait near Mt. Hood')).not.toBeInTheDocument();
     expect(screen.getAllByRole('heading', { name: 'Case Studies' }).length).toBeGreaterThan(0);
     expect(screen.getAllByRole('button', { name: 'Product Engineering' }).length).toBeGreaterThan(0);
@@ -91,7 +92,7 @@ describe('Home and About visuals', () => {
     expect(slides.length).toBeGreaterThan(0);
     slides.forEach((slide) => {
       expect(fs.existsSync(path.join(process.cwd(), 'public', slide.getAttribute('src') ?? ''))).toBe(true);
-      // Images narrower than 1920px (the Riptyde phone screenshot) have no copies.
+      // Images narrower than 1920px (the Riptyde phone screenshots) have no copies.
       if (Number(slide.getAttribute('width')) < 1920) {
         expect(slide).not.toHaveAttribute('srcset');
         expect(slide).not.toHaveAttribute('sizes');

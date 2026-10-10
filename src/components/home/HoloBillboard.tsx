@@ -24,7 +24,8 @@ type Slide = {
 // (and the gig cards) while the visitor is at the bottom of the page, so they
 // flashed blank on the way back up. Each also has 960px and 1440px copies
 // (name-960w.webp, name-1440w.webp) for smaller screens. The Riptyde phone
-// screenshot is only 642px wide, already about 2x its panel, so it has none.
+// screenshots are only 642px wide, already about 2x their panels, so they
+// have none.
 const SLIDES: readonly Slide[] = [
   {
     src: '/img/home/billboard/ds-explore-hybrid.webp',
@@ -41,22 +42,22 @@ const SLIDES: readonly Slide[] = [
     copies: true,
   },
   {
-    src: '/img/home/billboard/course-catalog.webp',
-    alt: 'Antisyphon Training course catalog',
-    width: 1920,
-    height: 1063,
-    copies: true,
-  },
-  {
-    src: '/img/home/billboard/ngu-courses.webp',
-    alt: 'Nice Guy University course catalog',
-    width: 1920,
-    height: 1074,
-    copies: true,
-  },
-  {
     src: '/img/projects/riptyde/riptyde-home.webp',
     alt: 'Riptyde home screen with RAD-O-METER™ score and ten-day outlook',
+    width: 642,
+    height: 1389,
+    copies: false,
+  },
+  {
+    src: '/img/projects/riptyde/riptyde-rad-page.webp',
+    alt: 'RAD breakdown detail screen explaining each forecast factor',
+    width: 642,
+    height: 1389,
+    copies: false,
+  },
+  {
+    src: '/img/projects/riptyde/riptyde-spots.webp',
+    alt: 'The Lineup spot list sorted by RAD-O-METER™ score',
     width: 642,
     height: 1389,
     copies: false,
@@ -66,6 +67,13 @@ const SLIDES: readonly Slide[] = [
     alt: 'Bars of Sand 3D terrain model of El Porto beach with a crescent sandbar, labeled with the bar crest depth and the first break',
     width: 1920,
     height: 1204,
+    copies: true,
+  },
+  {
+    src: '/img/home/billboard/ngu-courses.webp',
+    alt: 'Nice Guy University course catalog',
+    width: 1920,
+    height: 1074,
     copies: true,
   },
 ];
