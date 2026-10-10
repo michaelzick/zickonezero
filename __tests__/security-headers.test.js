@@ -30,6 +30,18 @@ describe('analytics', () => {
     expect(directive('connect-src').split(/\s+/)).toContain('https://*.mixpanel.com');
   });
 
+  it('lets gtag.js load and send GA4 hits from any region', () => {
+    expect(directive('script-src').split(/\s+/)).toContain('https://www.googletagmanager.com');
+    expect(directive('connect-src').split(/\s+/)).toEqual(expect.arrayContaining([
+      'https://*.google-analytics.com',
+      'https://*.analytics.google.com',
+    ]));
+  });
+
+  it("no longer frames Tag Manager's noscript page", () => {
+    expect(directive('frame-src')).toBeUndefined();
+  });
+
   it('no longer allows Amplitude', () => {
     expect(csp).not.toMatch(/amplitude/i);
   });

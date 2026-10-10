@@ -11,6 +11,8 @@ type MixpanelClient = {
 
 type AnalyticsWindow = Window & {
   mixpanel?: MixpanelClient;
+  dataLayer?: unknown[];
+  gtag?: (...args: unknown[]) => void;
 };
 
 export type AnalyticsEventPayload = Record<string, unknown>;
@@ -33,6 +35,25 @@ const MIXPANEL_TOKEN = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN || 'fd2e07b182295d
 const RELEASE_VERSION = process.env.NEXT_PUBLIC_RELEASE_VERSION;
 export const MIXPANEL_SCRIPT = 'https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js';
 const MIXPANEL_LOAD_TIMEOUT_MS = 30000;
+
+// The GA4 web stream "ZICKONEZERO Engineering" (public by design), loaded as
+// gtag.js rather than through Tag Manager, so every event the site tracks
+// reaches it and its setup lives here.
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-DY992J2EV8';
+export const GA_SCRIPT = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+
+const GA_CONFIG = {
+  // PageAnalytics sends page_view on every route change. This doesn't stop
+  // gtag's history-based page views; the stream's enhanced measurement
+  // setting for those must stay off, or every client navigation counts twice.
+  send_page_view: false,
+  allow_google_signals: false,
+  allow_ad_personalization_signals: false,
+  ...(RELEASE_VERSION ? { release: RELEASE_VERSION } : {}),
+};
+
+// GA reads the page from page_location, so the path and URL copies stay in Mixpanel.
+const GA_OMITTED_PARAMS = new Set(['page_path', 'page_url']);
 
 // Bar Four's rack shows patch and preset names the visitor typed or imported;
 // only its header is public, so replays and heatmap clicks skip the rest.
@@ -119,7 +140,7 @@ const stopQueueing = () => {
   pendingEvents = [];
 };
 
-const sendEvent = (name: string, payload: AnalyticsEventPayload) => {
+const sendToMixpanel = (name: string, payload: AnalyticsEventPayload) => {
   const mixpanel = getMixpanel();
   const event = { name, payload };
 
@@ -159,6 +180,89 @@ export function startMixpanel() {
 }
 
 const isCanonicalHost = () => window.location.hostname === new URL(SITE_URL).hostname;
+
+type GoogleEvent = { name: string; params: AnalyticsEventPayload };
+
+// Events wait here until gtag.js is requested, like Mixpanel's queue, so the
+// landing page_view goes out first with the URL (and any utm_* tags) it had.
+let googleState: 'waiting' | 'on' | 'off' = 'waiting';
+let pendingGoogleEvents: GoogleEvent[] = [];
+let lastGooglePage: string | undefined;
+
+/**
+ * GA's parameters for an event: where it happened, captured now rather than
+ * when gtag.js arrives, and the payload without the page copies or empty
+ * values. A page view after a client navigation names the previous page as
+ * its referrer, as gtag's own history page views do.
+ */
+const toGoogleEvent = (name: string, payload: AnalyticsEventPayload): GoogleEvent => {
+  const params: AnalyticsEventPayload = { page_location: window.location.href };
+  Object.entries(payload).forEach(([key, value]) => {
+    if (value !== undefined && !GA_OMITTED_PARAMS.has(key)) params[key] = value;
+  });
+
+  if (name === 'page_view' && typeof payload.page_url === 'string') {
+    params.page_location = payload.page_url;
+    const referrer = lastGooglePage ?? payload.page_referrer;
+    if (referrer) params.page_referrer = referrer;
+    lastGooglePage = payload.page_url;
+  }
+
+  return { name, params };
+};
+
+const deliverGoogleEvent = ({ name, params }: GoogleEvent) => {
+  try {
+    (window as AnalyticsWindow).gtag?.('event', name, params);
+  } catch {
+    // A vendor failure must never break the click or route change that tracked it.
+  }
+};
+
+const sendToGoogle = (name: string, payload: AnalyticsEventPayload) => {
+  if (googleState === 'off') return;
+
+  const event = toGoogleEvent(name, payload);
+  if (googleState === 'on') deliverGoogleEvent(event);
+  else if (pendingGoogleEvents.length < MAX_PENDING_EVENTS) pendingGoogleEvents.push(event);
+};
+
+/**
+ * Starts GA4 once per document, only on the canonical host, so local dev,
+ * workers.dev, and branch previews send nothing. Commands go into the
+ * dataLayer at once, held events included, and gtag.js runs them in order
+ * when it arrives. Called by SiteAnalyticsScripts once the page has settled.
+ */
+export function loadGoogleAnalytics() {
+  if (!isBrowser() || googleState !== 'waiting') return;
+
+  if (!GA_MEASUREMENT_ID || !isCanonicalHost()) {
+    googleState = 'off';
+    pendingGoogleEvents = [];
+    return;
+  }
+
+  const analyticsWindow = window as AnalyticsWindow;
+  const dataLayer = (analyticsWindow.dataLayer ??= []);
+  // gtag.js runs only Arguments objects, as Google's snippet pushes them; it
+  // silently skips commands pushed as arrays.
+  analyticsWindow.gtag = function gtag() {
+    // eslint-disable-next-line prefer-rest-params
+    dataLayer.push(arguments);
+  };
+  analyticsWindow.gtag('js', new Date());
+  analyticsWindow.gtag('config', GA_MEASUREMENT_ID, GA_CONFIG);
+
+  googleState = 'on';
+  const events = pendingGoogleEvents;
+  pendingGoogleEvents = [];
+  events.forEach(deliverGoogleEvent);
+
+  const script = document.createElement('script');
+  script.src = GA_SCRIPT;
+  script.async = true;
+  document.head.appendChild(script);
+}
 
 /**
  * Downloads Mixpanel once per document, only on the canonical host and only
@@ -203,7 +307,8 @@ export function loadMixpanel() {
 export function trackEvent(name: string, payload: AnalyticsEventPayload = {}) {
   if (!isBrowser()) return;
 
-  sendEvent(name, payload);
+  sendToGoogle(name, payload);
+  sendToMixpanel(name, payload);
 }
 
 export function trackLinkClick({

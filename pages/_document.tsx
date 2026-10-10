@@ -41,15 +41,6 @@ export default class MyDocument extends Document {
       <Html lang="en" data-accent={accent}>
         <Head />
         <body>
-          {/* Google Tag Manager (noscript) */}
-          <noscript>
-            <iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-5JHBZZX"
-              height="0"
-              width="0"
-              style={{ display: 'none', visibility: 'hidden' }}
-            ></iframe>
-          </noscript>
           <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP_SCRIPT }} />
           <Main />
           <NextScript />
