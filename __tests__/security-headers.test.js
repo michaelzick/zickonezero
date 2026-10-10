@@ -38,6 +38,11 @@ describe('analytics', () => {
     ]));
   });
 
+  it("lets Cloudflare Web Analytics' injected beacon load and report", () => {
+    expect(directive('script-src').split(/\s+/)).toContain('https://static.cloudflareinsights.com');
+    expect(directive('connect-src').split(/\s+/)).toContain('https://cloudflareinsights.com');
+  });
+
   it("no longer frames Tag Manager's noscript page", () => {
     expect(directive('frame-src')).toBeUndefined();
   });
