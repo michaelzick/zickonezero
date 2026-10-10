@@ -195,7 +195,7 @@ git push origin v1.1.0
 The Release workflow checks that the tag matches `package.json` and is on
 `main`, then publishes the GitHub release with the tag's title and the PRs
 merged since the previous tag. Pushed release tags can't be moved or deleted.
-Every Mixpanel event carries the version as its `release` property. To roll
+Every Mixpanel and GA4 event carries the version as its `release` property. To roll
 back, pick the deployment for an earlier tag's commit in the Cloudflare
 dashboard (Workers > zickonezero > Deployments) or run `npx wrangler rollback`.
 

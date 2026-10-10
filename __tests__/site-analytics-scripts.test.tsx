@@ -1,22 +1,12 @@
 import { act, render } from '@testing-library/react';
-import type { ReactNode } from 'react';
-
-// Render each next/script as a marker, so the test sees what would load.
-jest.mock('next/script', () => ({
-  __esModule: true,
-  default: ({ id, src, strategy }: { id?: string; src?: string; strategy?: string; children?: ReactNode }) => (
-    <i data-testid='script' data-id={id} data-src={src} data-strategy={strategy} />
-  ),
-}));
 
 jest.mock('../src/lib/analytics', () => ({
+  loadGoogleAnalytics: jest.fn(),
   loadMixpanel: jest.fn(),
 }));
 
 import SiteAnalyticsScripts, { ANALYTICS_DELAY_MS } from '../src/components/SiteAnalyticsScripts';
-import { loadMixpanel } from '../src/lib/analytics';
-
-const loadedScripts = () => Array.from(document.querySelectorAll('[data-testid="script"]'), (node) => node.getAttribute('data-id'));
+import { loadGoogleAnalytics, loadMixpanel } from '../src/lib/analytics';
 
 const setReadyState = (state: DocumentReadyState) => {
   Object.defineProperty(document, 'readyState', { configurable: true, get: () => state });
@@ -25,6 +15,7 @@ const setReadyState = (state: DocumentReadyState) => {
 describe('SiteAnalyticsScripts', () => {
   beforeEach(() => {
     jest.useFakeTimers();
+    jest.mocked(loadGoogleAnalytics).mockClear();
     jest.mocked(loadMixpanel).mockClear();
   });
 
@@ -36,19 +27,17 @@ describe('SiteAnalyticsScripts', () => {
 
   it('loads nothing until the delay after an already-finished load has passed', () => {
     setReadyState('complete');
-    render(<SiteAnalyticsScripts />);
-    expect(loadedScripts()).toEqual([]);
+    const { container } = render(<SiteAnalyticsScripts />);
+    expect(container).toBeEmptyDOMElement();
 
     act(() => { jest.advanceTimersByTime(ANALYTICS_DELAY_MS - 1); });
-    expect(loadedScripts()).toEqual([]);
+    expect(loadGoogleAnalytics).not.toHaveBeenCalled();
     expect(loadMixpanel).not.toHaveBeenCalled();
 
     act(() => { jest.advanceTimersByTime(1); });
-    expect(loadedScripts()).toEqual(['gtm']);
+    expect(loadGoogleAnalytics).toHaveBeenCalledTimes(1);
     expect(loadMixpanel).toHaveBeenCalledTimes(1);
-    document.querySelectorAll('[data-testid="script"]').forEach((node) => {
-      expect(node).toHaveAttribute('data-strategy', 'lazyOnload');
-    });
+    expect(container).toBeEmptyDOMElement();
   });
 
   it('starts the delay at the load event when the page is still loading', () => {
@@ -56,12 +45,12 @@ describe('SiteAnalyticsScripts', () => {
     render(<SiteAnalyticsScripts />);
 
     act(() => { jest.advanceTimersByTime(ANALYTICS_DELAY_MS * 3); });
-    expect(loadedScripts()).toEqual([]);
+    expect(loadGoogleAnalytics).not.toHaveBeenCalled();
     expect(loadMixpanel).not.toHaveBeenCalled();
 
     act(() => { window.dispatchEvent(new Event('load')); });
     act(() => { jest.advanceTimersByTime(ANALYTICS_DELAY_MS); });
-    expect(loadedScripts()).toEqual(['gtm']);
+    expect(loadGoogleAnalytics).toHaveBeenCalledTimes(1);
     expect(loadMixpanel).toHaveBeenCalledTimes(1);
   });
 
@@ -71,6 +60,7 @@ describe('SiteAnalyticsScripts', () => {
     unmount();
 
     expect(jest.getTimerCount()).toBe(0);
+    expect(loadGoogleAnalytics).not.toHaveBeenCalled();
     expect(loadMixpanel).not.toHaveBeenCalled();
   });
 });
