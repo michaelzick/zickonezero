@@ -90,6 +90,7 @@ above the footer, with a minimap HUD for fast travel.
   couple of voices down the street, wind, crickets, and the occasional far-off
   siren, helicopter, or train. Bar Four keeps the street outside, so none of it
   plays in the club.
+  On an iPhone it plays even with the phone on silent, as a video would.
 - All art is original. The scenery is generated from seeded SVG, CSS, and canvas
   code, and the fonts are self-hosted. Keep new signage and copy original too.
 - Everything that moves has a still state under reduced motion. To preview it,

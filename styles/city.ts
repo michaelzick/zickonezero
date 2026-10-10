@@ -15,7 +15,21 @@ import { THEME } from './theme';
  *
  * Every layer is decorative, fixed, and pointer-transparent. Motion is limited
  * to transform and opacity so it stays on the compositor.
+ *
+ * GPU memory: on phones each composited layer costs its full area at 3x
+ * density, and WebKit kills a tab that holds too much ("A problem repeatedly
+ * occurred"). Two rules keep the city cheap:
+ * - The city sits at z-index 0 under PageLayer, never at a negative z-index.
+ *   A composited layer below the root's content made WebKit split every page
+ *   into three page-sized layers (about 70 MB on an iPhone).
+ * - Anything composited inside the backdrop forces every layer drawn over it
+ *   (the other skyline, the glows, the haze) onto a layer of its own. On touch
+ *   screens the backdrop therefore holds still: no scroll parallax, searchlight
+ *   sweep, fog drift, or traffic, so it paints into one layer.
  */
+
+/** Phones and tablets: no hover, a finger for a pointer. */
+const TOUCH = '(hover: none) and (pointer: coarse)';
 
 const beamSweep = keyframes`
   from { transform: rotate(-24deg); }
@@ -105,6 +119,23 @@ export const Searchlights = styled(Layer)`
   @media (max-width: ${THEME.breakpoints.phone}) {
     span:nth-child(3) {
       display: none;
+    }
+  }
+
+  /* Still beams, fanned out, for touch screens (see the header). */
+  @media ${TOUCH} {
+    span {
+      animation: none;
+      will-change: auto;
+      transform: rotate(-14deg);
+    }
+
+    span:nth-child(2) {
+      transform: rotate(10deg);
+    }
+
+    span:nth-child(3) {
+      transform: rotate(4deg);
     }
   }
 `;
@@ -235,6 +266,22 @@ export const SkylineDepth = styled.div`
       transform: none;
     }
   }
+
+  /* Touch screens skip the scroll parallax, and pan the camera with a flat
+     transform, which holds no layer once the pan ends (see the header). */
+  @media ${TOUCH} {
+    transform: translateX(calc(var(--camera, 0) * -9vw));
+
+    &[data-depth='mid'] {
+      transform: translateX(calc(var(--camera, 0) * -18vw));
+    }
+
+    .parallax,
+    &[data-depth='mid'] .parallax {
+      transform: none;
+      will-change: auto;
+    }
+  }
 `;
 
 export const FogBand = styled.div`
@@ -251,6 +298,11 @@ export const FogBand = styled.div`
   background-repeat: repeat-x;
   animation: ${fogDrift} 90s linear infinite;
   will-change: transform;
+
+  @media ${TOUCH} {
+    animation: none;
+    will-change: auto;
+  }
 `;
 
 export const TrafficLane = styled.div`
@@ -314,6 +366,11 @@ export const TrafficLane = styled.div`
       display: none;
     }
   }
+
+  /* A car is only a car while it moves; touch screens keep the sky clear. */
+  @media ${TOUCH} {
+    display: none;
+  }
 `;
 
 export const AccentGlow = styled(Layer)`
@@ -370,6 +427,15 @@ export const WorldDimmer = styled(Layer)`
   &[data-dimmed='true'] {
     opacity: calc(var(--world-dim, 0.18) * 2.2);
   }
+`;
+
+/**
+ * The page above the city: one positioned stacking context over the fixed
+ * layers, so WebKit composites the whole page as a single layer above them.
+ */
+export const PageLayer = styled.div`
+  position: relative;
+  z-index: ${THEME.z.content};
 `;
 
 export const WeatherCanvasElement = styled.canvas`

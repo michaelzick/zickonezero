@@ -23,6 +23,9 @@ export type SoundState = {
 
 type AudioContextClass = typeof AudioContext;
 
+// Safari 16.4+; TypeScript's DOM types don't include it yet.
+type AudioSessionNavigator = Navigator & { audioSession?: { type: string } };
+
 // The static HTML shows the toggle; browsers without Web Audio drop it after
 // hydration.
 const SERVER_STATE: SoundState = { supported: true, enabled: false, playing: false };
@@ -44,6 +47,20 @@ let held = false;
 const getAudioContextClass = (): AudioContextClass | undefined => (
   window.AudioContext ?? (window as Window & { webkitAudioContext?: AudioContextClass }).webkitAudioContext
 );
+
+/**
+ * iOS mutes web audio while the phone is on silent unless the page calls it
+ * media playback, as a video is. The visitor asked for the city, so claim
+ * playback, as Rackloose does for the rack; like a video, it pauses other
+ * apps' audio. The claim stays after muting, when nothing plays: giving it
+ * back could take it from the rack.
+ */
+const claimPlaybackSession = () => {
+  const session = (navigator as AudioSessionNavigator).audioSession;
+  if (session && session.type !== 'playback') {
+    session.type = 'playback';
+  }
+};
 
 const readStoredChoice = (): boolean => {
   try {
@@ -178,7 +195,12 @@ const loadAmbience = (audio: AudioContext): Promise<Ambience | null> => {
 };
 
 function play() {
-  const audio = held ? null : getContext();
+  if (held) {
+    return;
+  }
+
+  claimPlaybackSession();
+  const audio = getContext();
   if (!audio) {
     return;
   }
@@ -195,6 +217,9 @@ function play() {
     // The visitor may have muted again, or stepped into Bar Four, while the
     // graph loaded.
     if (loaded && readState().enabled && !held) {
+      // Again here: leaving Bar Four, the club lets the city go before the
+      // rack inside it hands the session back the way it found it.
+      claimPlaybackSession();
       loaded.start();
     }
     syncPlaying();

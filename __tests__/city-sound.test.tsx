@@ -49,6 +49,13 @@ type AudioWindow = Window & { AudioContext?: unknown; webkitAudioContext?: unkno
 
 const audioWindow = window as AudioWindow;
 
+/** Safari's navigator.audioSession, as iOS gives it to a page. */
+const stubAudioSession = (type = 'auto') => {
+  const session = { type };
+  Object.defineProperty(navigator, 'audioSession', { configurable: true, value: session });
+  return session;
+};
+
 /** A fresh copy of the store, as on a new page load. */
 const loadSound = (): SoundModule => {
   let sound: SoundModule | undefined;
@@ -88,6 +95,7 @@ describe('city sound store', () => {
     jest.restoreAllMocks();
     delete audioWindow.AudioContext;
     delete audioWindow.webkitAudioContext;
+    delete (navigator as Navigator & { audioSession?: unknown }).audioSession;
     Object.defineProperty(document, 'hidden', { configurable: true, get: () => false });
   });
 
@@ -257,6 +265,7 @@ describe('city sound store', () => {
   });
 
   it('leaves a muted city alone when held and released', () => {
+    const session = stubAudioSession();
     sound = loadSound();
 
     sound.holdAmbience();
@@ -264,6 +273,40 @@ describe('city sound store', () => {
 
     expect(contexts).toHaveLength(0);
     expect(sound.getSoundState()).toEqual({ supported: true, enabled: false, playing: false });
+    expect(session.type).toBe('auto');
+  });
+
+  it('claims playback so an iPhone on silent still plays the city', () => {
+    const session = stubAudioSession();
+    sound = loadSound();
+
+    sound.setSoundEnabled(true);
+
+    expect(session.type).toBe('playback');
+
+    // Muting keeps the claim, which the rack may share.
+    sound.setSoundEnabled(false);
+
+    expect(session.type).toBe('playback');
+  });
+
+  it('claims playback again after the rack hands the session back', async () => {
+    window.localStorage.setItem('zickonezero-sound', 'on');
+    const session = stubAudioSession();
+    sound = loadSound();
+
+    // A first visit straight to Bar Four: the club holds the city, and the
+    // rack claims playback, remembering 'auto'.
+    sound.holdAmbience();
+    session.type = 'playback';
+
+    // Leaving, the club lets the city go before the rack restores 'auto'.
+    sound.releaseAmbience();
+    session.type = 'auto';
+    await flushPromises();
+
+    expect(mockAmbience.start).toHaveBeenCalledTimes(1);
+    expect(session.type).toBe('playback');
   });
 
   it('keeps the choice for the visit when storage is blocked', () => {

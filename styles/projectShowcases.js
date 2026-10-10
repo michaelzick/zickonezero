@@ -461,6 +461,11 @@ export const ShowcaseMediaButton = styled.button`
  * each edge so shadows survive the wipe, and the scan line rides the clip
  * edge. Both end on none, so a revealed section creates no containing block
  * or stacking context for the fixed overlays inside it.
+ *
+ * Neither animation fills forwards: a revealed section's own styles match
+ * the last frame, so once it ends WebKit drops the GPU layers it ran on. A
+ * held animation kept every revealed section and its full-height scan-line
+ * overlay on layers, over 100 MB on a long case study on an iPhone.
  */
 const bootUp = keyframes`
   0% {
@@ -558,7 +563,7 @@ const REVEAL_EASING = 'cubic-bezier(0.2, 0.7, 0.2, 1)';
 export const AnimatedSection = styled.div`
   position: relative;
   opacity: 0;
-  transform: translate3d(0, 14px, 0);
+  transform: translateY(14px);
 
   /* The scan line's overlay reaches 16px past where the line starts and
      stops (just above the top, 1em below the bottom), so its glow is never
@@ -582,17 +587,19 @@ export const AnimatedSection = styled.div`
   }
 
   &.visible {
-    animation: ${bootUp} 0.95s ${REVEAL_EASING} forwards;
+    opacity: 1;
+    transform: none;
+    animation: ${bootUp} 0.95s ${REVEAL_EASING};
   }
 
   &.visible::after {
-    animation: ${scanLine} 0.95s ${REVEAL_EASING} forwards;
+    animation: ${scanLine} 0.95s ${REVEAL_EASING};
   }
 
   .image-animate,
   .text-animate {
     opacity: 0;
-    transform: translate3d(0, 12px, 0);
+    transform: translateY(12px);
   }
 
   .image-animate {

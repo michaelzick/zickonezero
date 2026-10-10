@@ -4,6 +4,7 @@ import type { CSSProperties } from 'react';
 import { HeroRoot } from '../../../styles/home';
 import { HudFrame } from '../../../styles/hud';
 import usePointerParallax from '../../hooks/usePointerParallax';
+import useReleaseOffscreen from '../../hooks/useReleaseOffscreen';
 import useSceneMotion from '../../hooks/useSceneMotion';
 import useScrollProgress from '../../hooks/useScrollProgress';
 import { generateFacade } from '../../lib/city/facade';
@@ -91,6 +92,7 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
   useScrollProgress(heroRef, { pastAt: PANEL_FADED_AT });
   usePointerParallax(stageRef);
   useSceneMotion(heroRef);
+  useReleaseOffscreen(heroRef);
 
   return (
     <HeroRoot ref={heroRef} aria-labelledby='home-hero-title'>
