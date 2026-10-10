@@ -34,13 +34,18 @@ describe('Home and About visuals', () => {
     });
   });
 
-  it('renders the homepage Demostoke scroller instead of the old Mt. Hood illustration', () => {
+  it('renders the homepage shipped work scroller instead of the old Mt. Hood illustration', () => {
     renderWithProviders(<MainContent />, {
       preloadedState: HOME_PRELOADED_STATE,
     });
 
-    expect(screen.getByLabelText('Demostoke screenshot scroller')).toBeInTheDocument();
+    expect(screen.getByLabelText('Shipped work screenshot scroller')).toBeInTheDocument();
     expect(screen.getByAltText('DemoStoke hybrid catalog and map view')).toBeInTheDocument();
+    expect(screen.getByAltText('Riptyde home screen with RAD-O-METER™ score and ten-day outlook')).toBeInTheDocument();
+    expect(screen.getByAltText(/^Bars of Sand 3D terrain model/)).toBeInTheDocument();
+    expect(screen.queryByAltText('DemoStoke events calendar')).not.toBeInTheDocument();
+    expect(screen.queryByAltText('DemoStoke gear quiz flow')).not.toBeInTheDocument();
+    expect(screen.queryByAltText('Antisyphon Training course catalog')).not.toBeInTheDocument();
     expect(screen.queryByAltText('Illustrated self-portrait near Mt. Hood')).not.toBeInTheDocument();
     expect(screen.getAllByRole('heading', { name: 'Case Studies' }).length).toBeGreaterThan(0);
     expect(screen.getAllByRole('button', { name: 'Product Engineering' }).length).toBeGreaterThan(0);
@@ -83,9 +88,16 @@ describe('Home and About visuals', () => {
       preloadedState: HOME_PRELOADED_STATE,
     });
 
-    const slides = Array.from(screen.getByLabelText('Demostoke screenshot scroller').querySelectorAll('img'));
+    const slides = Array.from(screen.getByLabelText('Shipped work screenshot scroller').querySelectorAll('img'));
     expect(slides.length).toBeGreaterThan(0);
     slides.forEach((slide) => {
+      expect(fs.existsSync(path.join(process.cwd(), 'public', slide.getAttribute('src') ?? ''))).toBe(true);
+      // Images narrower than 1920px (the Riptyde phone screenshots) have no copies.
+      if (Number(slide.getAttribute('width')) < 1920) {
+        expect(slide).not.toHaveAttribute('srcset');
+        expect(slide).not.toHaveAttribute('sizes');
+        return;
+      }
       const candidates = (slide.getAttribute('srcset') ?? '').split(', ').map((candidate) => candidate.split(' '));
       expect(candidates.map(([, width]) => width)).toEqual(['960w', '1440w', '1920w']);
       expect(candidates[2][0]).toBe(slide.getAttribute('src'));
@@ -112,7 +124,7 @@ describe('Home and About visuals', () => {
       preloadedState: HOME_PRELOADED_STATE,
     });
 
-    const frame = screen.getByLabelText('Demostoke screenshot scroller');
+    const frame = screen.getByLabelText('Shipped work screenshot scroller');
     const viewport = frame.firstElementChild as HTMLDivElement | null;
     const track = viewport?.firstElementChild as HTMLDivElement | null;
     const stage = frame.parentElement as HTMLElement | null;

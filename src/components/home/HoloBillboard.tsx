@@ -12,46 +12,77 @@ import AlleyWall from '../city/AlleyWall';
 type Slide = {
   src: string;
   alt: string;
+  // The image's own size: each panel keeps its shape, so nothing is cropped.
+  width: number;
+  height: number;
+  // Whether name-960w.webp and name-1440w.webp copies sit beside it.
+  copies: boolean;
 };
 
-// Homepage-sized copies (1920px wide, 2x the largest screen): the full-size
+// Homepage-sized copies (1920px wide, 2x the largest panel): the full-size
 // case-study captures decoded to 160 MB, enough for Chrome to evict them
 // (and the gig cards) while the visitor is at the bottom of the page, so they
 // flashed blank on the way back up. Each also has 960px and 1440px copies
-// (name-960w.webp, name-1440w.webp) for smaller screens.
+// (name-960w.webp, name-1440w.webp) for smaller screens. The Riptyde phone
+// screenshots are only 642px wide, already about 2x their panels, so they
+// have none.
 const SLIDES: readonly Slide[] = [
   {
     src: '/img/home/billboard/ds-explore-hybrid.webp',
     alt: 'DemoStoke hybrid catalog and map view',
+    width: 1920,
+    height: 1080,
+    copies: true,
   },
   {
     src: '/img/home/billboard/ds-fleet-ops-widget-low.webp',
     alt: 'DemoStoke Fleet Ops embeddable booking widget',
+    width: 1920,
+    height: 1080,
+    copies: true,
   },
   {
-    src: '/img/home/billboard/course-catalog.webp',
-    alt: 'Antisyphon Training course catalog',
+    src: '/img/projects/riptyde/riptyde-home.webp',
+    alt: 'Riptyde home screen with RAD-O-METER™ score and ten-day outlook',
+    width: 642,
+    height: 1389,
+    copies: false,
+  },
+  {
+    src: '/img/projects/riptyde/riptyde-rad-page.webp',
+    alt: 'RAD breakdown detail screen explaining each forecast factor',
+    width: 642,
+    height: 1389,
+    copies: false,
+  },
+  {
+    src: '/img/projects/riptyde/riptyde-spots.webp',
+    alt: 'The Lineup spot list sorted by RAD-O-METER™ score',
+    width: 642,
+    height: 1389,
+    copies: false,
+  },
+  {
+    src: '/img/home/billboard/bars-of-sand-hero.webp',
+    alt: 'Bars of Sand 3D terrain model of El Porto beach with a crescent sandbar, labeled with the bar crest depth and the first break',
+    width: 1920,
+    height: 1204,
+    copies: true,
   },
   {
     src: '/img/home/billboard/ngu-courses.webp',
     alt: 'Nice Guy University course catalog',
-  },
-  {
-    src: '/img/home/billboard/ds-calendar-cal.webp',
-    alt: 'DemoStoke events calendar',
-  },
-  {
-    src: '/img/home/billboard/ds-gear-quiz.webp',
-    alt: 'DemoStoke gear quiz flow',
+    width: 1920,
+    height: 1074,
+    copies: true,
   },
 ];
 
-// Each slide is a 1920px copy with 960px and 1440px copies beside it.
+// Each slide with copies is a 1920px file with 960px and 1440px copies beside it.
 const slideSrcSet = (src: string) => widthSrcSet(src, [960, 1440], 1920);
 
-// How wide a slide's image renders (it covers the slide by height, see
-// styles/billboard.ts): about the screen's width on phones, at most 960px.
-const SLIDE_SIZES = '(max-width: 600px) 105vw, (max-width: 1137px) 85vw, 960px';
+// How wide a landscape panel renders (see --bb-slide-h in styles/billboard.ts).
+const SLIDE_SIZES = '(max-width: 600px) 84vw, (max-width: 1137px) 78vw, min(64vw, 1024px)';
 
 // Seeded, so the static HTML and the hydrated page draw the same tower.
 const TOWER = generateFacade({
@@ -78,7 +109,7 @@ const TOWER = generateFacade({
 const POWER_ON_OBSERVER: IntersectionObserverInit = { threshold: 0.5 };
 
 /**
- * A giant screen on a tower that pans through product screenshots as the
+ * A full-width strip of product screenshots that pans across a tower as the
  * page scrolls. The stage is the scroll track; the sticky frame holds the
  * screen (the scroller's viewport, which clips the moving track) and the
  * decorative tower behind it. Reduced motion gets a still wall of panels.
@@ -101,7 +132,6 @@ const HoloBillboard = () => {
     }
 
     let isNear = true;
-    let slide = '';
 
     const sync = () => {
       if (!isNear) {
@@ -115,16 +145,6 @@ const HoloBillboard = () => {
       const translateX = maxTranslate * progress * -1;
       track.style.transform = `translate3d(${translateX}px, 0, 0)`;
       stage.style.setProperty('--bp', progress.toFixed(4));
-
-      const slideWidth = track.scrollWidth / SLIDES.length;
-      if (slideWidth > 0) {
-        const centered = Math.floor((viewport.clientWidth / 2 - translateX) / slideWidth) + 1;
-        const next = String(Math.min(Math.max(centered, 1), SLIDES.length));
-        if (next !== slide) {
-          slide = next;
-          stage.style.setProperty('--slide', next);
-        }
-      }
     };
 
     // Skip the per-frame measuring while the stage is well off-screen.
@@ -143,7 +163,6 @@ const HoloBillboard = () => {
       nearObserver?.disconnect();
       track.style.removeProperty('transform');
       stage.style.removeProperty('--bp');
-      stage.style.removeProperty('--slide');
     };
   }, [prefersReducedMotion]);
 
@@ -151,22 +170,25 @@ const HoloBillboard = () => {
   usePowerOn(stageRef, { watch: frameRef, poweredAttribute: 'data-powered', observerOptions: POWER_ON_OBSERVER });
 
   return (
-    <BillboardStage ref={stageRef} style={{ '--slide-count': SLIDES.length } as CSSProperties}>
-      <div className='bb-frame' ref={frameRef} role='group' aria-label='Demostoke screenshot scroller'>
+    <BillboardStage ref={stageRef}>
+      <div className='bb-frame' ref={frameRef} role='group' aria-label='Shipped work screenshot scroller'>
         <div className='bb-screen' ref={viewportRef}>
           <div className='bb-track' ref={trackRef}>
-            {SLIDES.map(({ src, alt }) => (
-              <div className='bb-slide' key={src}>
-                <img src={src} srcSet={slideSrcSet(src)} sizes={SLIDE_SIZES} alt={alt} loading='lazy' decoding='sync' />
+            {SLIDES.map(({ src, alt, width, height, copies }) => (
+              <div className='bb-slide' key={src} style={{ '--ar': `${width} / ${height}` } as CSSProperties}>
+                <img
+                  src={src}
+                  srcSet={copies ? slideSrcSet(src) : undefined}
+                  sizes={copies ? SLIDE_SIZES : undefined}
+                  width={width}
+                  height={height}
+                  alt={alt}
+                  loading='lazy'
+                  decoding='sync'
+                />
               </div>
             ))}
           </div>
-          <div className='bb-scan' aria-hidden='true' />
-          <div className='bb-bug' aria-hidden='true'>
-            <i />
-            Live
-          </div>
-          <div className='bb-channel' aria-hidden='true' />
           <div className='bb-progress' aria-hidden='true' />
         </div>
 
