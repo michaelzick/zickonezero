@@ -16,6 +16,15 @@ import { THEME } from './theme';
  * head-tracking. Custom properties here are prefixed --alley- because the
  * city's color tokens are registered as <color> in globals.scss, and reusing
  * one of those names for a length would invalidate it.
+ *
+ * Memory: WebKit gives every leaf its own GPU backing at the screen's full
+ * density and keeps all of it while the alley is in the page, even out of
+ * view, so the walls and towers alone held over 800 MB on a 3x iPhone and
+ * Safari's tab crashed. The walls are laid out at half size and the towers at
+ * a quarter, then scaled back up in their transforms; WebKit draws them at
+ * the smaller size, which perspective barely shows, since it shrinks most of
+ * each leaf on screen. useReleaseOffscreen also takes the whole alley out of
+ * the page while it is more than a screen away (data-offscreen).
  */
 
 const paperGust = keyframes`
@@ -147,6 +156,10 @@ export const HeroRoot = styled.section`
     will-change: transform;
   }
 
+  &[data-offscreen] .alley {
+    display: none;
+  }
+
   .plane {
     position: absolute;
     backface-visibility: hidden;
@@ -156,13 +169,16 @@ export const HeroRoot = styled.section`
      world. A wrapper with opacity would flatten and break wall occlusion. */
   .distant-towers { display: contents; }
 
+  /* Laid out at a quarter size and scaled up from its base: on screen a
+     tower never shows at much more than a quarter of its size. */
   .distant-tower {
     --tower-clarity: clamp(0, (var(--p) - var(--tower-reveal)) * var(--tower-gain), 1);
     bottom: calc(100% - var(--alley-street));
-    left: calc(50% + var(--tower-x) - var(--tower-width) * 0.5);
-    width: var(--tower-width);
-    height: var(--tower-height);
-    transform: translateZ(var(--tower-depth));
+    left: calc(50% + var(--tower-x) - var(--tower-width) / 8);
+    width: calc(var(--tower-width) / 4);
+    height: calc(var(--tower-height) / 4);
+    transform-origin: 50% 100%;
+    transform: translateZ(var(--tower-depth)) scale(4);
     opacity: calc(0.035 + var(--tower-clarity) * 0.965);
     /* The bases dissolve into ground fog without an animated blur layer. */
     -webkit-mask-image: linear-gradient(to bottom, #000 0% 64%, transparent 100%);
@@ -180,11 +196,15 @@ export const HeroRoot = styled.section`
   .tower-cool { stroke: var(--tower-cool); opacity: calc(0.15 + var(--tower-clarity) * 0.65); }
   .tower-light { fill: none; stroke: var(--tower-cool); stroke-width: 2; opacity: calc(0.12 + var(--tower-clarity) * 0.5); }
 
-  /* Walls: face-on strips turned a quarter so they recede down the alley. */
+  /*
+   * Walls: face-on strips turned a quarter so they recede down the alley.
+   * Each is laid out at half size around the same center and scaled back up
+   * from its near edge.
+   */
   .wall {
-    top: var(--alley-top);
-    width: var(--alley-depth);
-    height: calc(var(--alley-street) - var(--alley-top));
+    top: calc(var(--alley-top) + (var(--alley-street) - var(--alley-top)) / 4);
+    width: calc(var(--alley-depth) / 2);
+    height: calc((var(--alley-street) - var(--alley-top)) / 2);
 
     svg {
       display: block;
@@ -203,13 +223,13 @@ export const HeroRoot = styled.section`
   .wall-left {
     left: calc(50% - var(--alley-half));
     transform-origin: 0 50%;
-    transform: translateZ(var(--alley-near)) rotateY(90deg);
+    transform: translateZ(var(--alley-near)) rotateY(90deg) scale(2);
   }
 
   .wall-right {
-    left: calc(50% + var(--alley-half) - var(--alley-depth));
+    left: calc(50% + var(--alley-half) - var(--alley-depth) / 2);
     transform-origin: 100% 50%;
-    transform: translateZ(var(--alley-near)) rotateY(-90deg);
+    transform: translateZ(var(--alley-near)) rotateY(-90deg) scale(2);
 
     svg {
       transform: scaleX(-1);
@@ -821,7 +841,7 @@ export const HeroRoot = styled.section`
 
   /* Short landscape screens keep the two corner elements clear of the nav. */
   @media (max-height: 520px) and (min-aspect-ratio: 4/3) {
-    .distant-tower { height: calc(var(--tower-height) * 0.7); }
+    .distant-tower { height: calc(var(--tower-height) * 0.7 / 4); }
 
     .blade-dream {
       display: none;
