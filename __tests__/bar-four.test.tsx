@@ -56,8 +56,8 @@ describe('Bar Four', () => {
       const { container } = renderWithProviders(<BarFourContent />);
 
       const title = screen.getByRole('heading', { level: 1, name: 'Bar Four' });
-      const booth = screen.getByRole('region', { name: 'The House Music' });
-      expect(within(booth).getByText('Open rack tonight')).toBeInTheDocument();
+      const booth = screen.getByRole('region', { name: 'You’re the DJ' });
+      expect(within(booth).getByText('Tonight’s Performance')).toBeInTheDocument();
       expect(within(booth).getByText(/^Rackloose is a modular studio/)).toHaveTextContent(/and program its sequencers\.$/);
       expect(within(booth).getByText(/Open Presets to switch to another set/)).toBeInTheDocument();
 

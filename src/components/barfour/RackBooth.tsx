@@ -58,8 +58,8 @@ const RackBooth = () => {
   return (
     <BoothRoot aria-labelledby='house-music-title'>
       <div className='booth-copy'>
-        <p className='booth-tag'>Open rack tonight</p>
-        <h2 id='house-music-title'>The House Music</h2>
+        <p className='booth-tag'>Tonight&rsquo;s Performance</p>
+        <h2 id='house-music-title'>You&rsquo;re the DJ</h2>
         <p>
           Rackloose is a modular studio I built for the browser. Patch cables between synths, drum
           machines, and effects, and program its sequencers.
