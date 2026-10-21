@@ -22,6 +22,12 @@ describe('scripts', () => {
     expect(sources).not.toContain('data:');
     expect(sources).not.toContain('*');
   });
+
+  it("lets the rack compile its Analog engine's WebAssembly without allowing eval", () => {
+    const sources = directive('script-src').split(/\s+/);
+    expect(sources).toContain("'wasm-unsafe-eval'");
+    expect(sources).not.toContain("'unsafe-eval'");
+  });
 });
 
 describe('analytics', () => {
