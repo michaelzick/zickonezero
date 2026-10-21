@@ -136,9 +136,12 @@ old archive in the same change.
 
 The rack loads only on `/bar-four/`, in the browser. It autosaves patches in
 this origin's `localStorage` under `zickonezero.rackloose.patch.v1`. Its audio
-worklets register from `blob:` URLs, so the Content-Security-Policy's
-`script-src` allows `blob:` site-wide: the sign navigates on the client, so
-the homepage's policy is the one in force when the rack starts.
+worklets register from `blob:` URLs and, since 2.0.0, compile its Analog
+engine from WebAssembly, so the Content-Security-Policy's `script-src` allows
+`blob:` and `'wasm-unsafe-eval'` (WebAssembly only, not JavaScript `eval`)
+site-wide: the sign navigates on the client, so the homepage's policy is the
+one in force when the rack starts. Without `'wasm-unsafe-eval'` every device
+quietly falls back to Digital.
 
 ## Cloudflare hosting
 
@@ -152,7 +155,7 @@ custom domains, trailing-slash handling, and real 404 responses. The zone's
 its descendants), sends the removed `/michael-zick-coaching` route to
 `https://www.niceguyuniversity.com/`, and `public/_headers` configures the
 security headers (see [Rackloose](#rackloose) for why `script-src` allows
-`blob:`) and a year-long `immutable` cache for the content-hashed
+`blob:` and `'wasm-unsafe-eval'`) and a year-long `immutable` cache for the content-hashed
 `/_next/static/*` files.
 The contact form continues using the separate `zickonezero-contact` Worker.
 
