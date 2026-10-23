@@ -3,6 +3,7 @@ const path = require('path');
 
 const headers = fs.readFileSync(path.join(__dirname, '..', 'public', '_headers'), 'utf8');
 const csp = headers.match(/Content-Security-Policy:\s*(.+)/)[1];
+const permissions = headers.match(/Permissions-Policy:\s*(.+)/)[1];
 const directive = (name) => csp.split(';').map((part) => part.trim()).find((part) => part.startsWith(`${name} `));
 
 describe('framing', () => {
@@ -27,6 +28,18 @@ describe('scripts', () => {
     const sources = directive('script-src').split(/\s+/);
     expect(sources).toContain("'wasm-unsafe-eval'");
     expect(sources).not.toContain("'unsafe-eval'");
+  });
+});
+
+describe('permissions', () => {
+  it("lets Bar Four's house rack play from a MIDI keyboard on this site only", () => {
+    expect(permissions.split(',').map((part) => part.trim())).toContain('midi=(self)');
+  });
+
+  it('still denies the camera, microphone and location', () => {
+    expect(permissions).toMatch(/\bcamera=\(\)/);
+    expect(permissions).toMatch(/\bmicrophone=\(\)/);
+    expect(permissions).toMatch(/\bgeolocation=\(\)/);
   });
 });
 

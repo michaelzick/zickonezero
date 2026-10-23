@@ -361,6 +361,10 @@ async function runSmokeTest({ screenshotsDir }) {
     await tab.getByRole('link', { name: 'Bar Four' }).click();
     await tab.waitForURL('**/bar-four/', { timeout: 10000 });
     await clubChecks(tab, fail);
+    // Rackloose 2.2.0's MIDI button needs the Permissions-Policy to allow midi.
+    if (!(await tab.evaluate(() => document.featurePolicy?.allowsFeature('midi')))) {
+      fail('the Permissions-Policy blocks MIDI keyboards');
+    }
 
     await tab.getByRole('button', { name: 'Play all sequencers' }).click();
     await tab.getByRole('button', { name: 'Pause all sequencers' }).waitFor({ timeout: 10000 })
