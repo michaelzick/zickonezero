@@ -1,10 +1,10 @@
 {
   "name": "rackloose",
-  "version": "2.3.0",
-  "tag": "v2.3.0",
-  "commit": "005faff2c00a20123034bcce25a8327ee89e7751",
+  "version": "2.3.1",
+  "tag": "v2.3.1",
+  "commit": "b27c6f87b86203a6652f907e1ddfe55421411f7d",
   "repository": "https://github.com/michaelzick/rackloose",
-  "archive": "rackloose-2.3.0.tgz",
-  "sha256": "6777d4665bf40b8c2da00ad2cdbe478b97d770a3a0a5ec2df19d82c4644a50e8",
-  "bytes": 250581
+  "archive": "rackloose-2.3.1.tgz",
+  "sha256": "de09156c707ceb83869ab72f39bfdf6fd14272cb6adab7b44dfcfb0252e8335d",
+  "bytes": 250518
 }
