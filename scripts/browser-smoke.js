@@ -37,6 +37,7 @@ const PAGES = [
   { name: 'contact', path: '/contact/' },
   { name: 'demostoke', path: '/demostoke/' },
   { name: 'riptyde', path: '/riptyde/' },
+  { name: 'rackloose', path: '/rackloose/' },
   { name: 'bar-four', path: '/bar-four/' },
   { name: 'missing', path: '/no-such-page/', status: 404 },
 ];

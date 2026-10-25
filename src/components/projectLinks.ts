@@ -6,12 +6,6 @@ export const PROJECT_LINKS = [
     iconAlt: 'Bars of Sand logo'
   },
   {
-    href: '/riptyde',
-    label: 'Riptyde',
-    icon: '/img/nav/riptyde-icon-square.webp',
-    iconAlt: 'Riptyde app icon'
-  },
-  {
     href: '/demostoke-fleet-ops',
     label: 'DemoStoke Fleet Ops',
     icon: '/img/nav/ds-logo-stripes-fuchsia-square.webp',

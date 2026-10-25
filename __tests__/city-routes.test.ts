@@ -33,7 +33,9 @@ describe('city routes', () => {
 
   it('colors districts by kind of work', () => {
     expect(getRouteMeta('/demostoke').accent).toBe('magenta');
-    expect(getRouteMeta('/riptyde').accent).toBe('cyan');
+    expect(getRouteMeta('/riptyde').accent).toBe('magenta');
+    expect(getRouteMeta('/rackloose').accent).toBe('magenta');
+    expect(getRouteMeta('/bars-of-sand').accent).toBe('cyan');
     expect(getRouteMeta('/about').accent).toBe('violet');
     expect(getRouteMeta('/contact').accent).toBe('red');
     expect(getRouteMeta('/bar-four/')).toMatchObject({ label: 'Bar Four', accent: 'amber' });

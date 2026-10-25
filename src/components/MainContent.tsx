@@ -38,7 +38,7 @@ const DESKTOP_NAV_OFFSET = 92;
 const PHONE_NAV_OFFSET = 148;
 const PHONE_QUERY = '(max-width: 600px)';
 const DETECTION_BUFFER = 12;
-const CASE_STUDY_GROUPS = new Set(['demostoke', 'antisyphon-training', 'nice-guy-university']);
+const CASE_STUDY_GROUPS = new Set(['demostoke', 'antisyphon-training', 'nice-guy-university', 'riptyde', 'rackloose']);
 
 const getNavOffset = () => (window.matchMedia(PHONE_QUERY).matches ? PHONE_NAV_OFFSET : DESKTOP_NAV_OFFSET);
 const getDetectionOffset = () => getNavOffset() + DETECTION_BUFFER;

@@ -10,6 +10,9 @@ import DemoStokeContent from '../src/components/DemoStokeContent';
 import AntisyphonContent from '../src/components/AntisyphonContent';
 import NiceGuyUniversityContent from '../src/components/NiceGuyUniversityContent';
 import ProjectShowcase from '../src/components/ProjectShowcase';
+import CaseStudyPage from '../src/components/caseStudy/CaseStudyPage';
+import { RACKLOOSE_CASE_STUDY } from '../src/components/rackloose/caseStudyData';
+import { RIPTYDE_CASE_STUDY } from '../src/components/riptyde/caseStudyData';
 import { createTestStore, renderWithProviders } from '../src/test/renderWithProviders';
 import { AppThemeProvider } from '../src/theme/ThemeContext';
 
@@ -24,11 +27,16 @@ const renderStaticHtml = (ui: ReactElement) => {
   return host;
 };
 
+const RiptydeContent = () => <CaseStudyPage study={RIPTYDE_CASE_STUDY} />;
+const RacklooseContent = () => <CaseStudyPage study={RACKLOOSE_CASE_STUDY} />;
+
 describe('Crawlable case-study panels', () => {
   it.each([
     ['DemoStoke', DemoStokeContent, 'User Stories', 'The Independent Surfboard Shaper'],
     ['Antisyphon', AntisyphonContent, 'Product Screens', 'Antisyphon Product Screens'],
     ['Nice Guy University', NiceGuyUniversityContent, 'Product Screens', 'Support Ecosystem'],
+    ['Riptyde', RiptydeContent, 'Product Screens', 'Beach Cams'],
+    ['Rackloose', RacklooseContent, 'Product Screens', 'Out in the World'],
   ] as const)('includes %s secondary content before interaction and keeps tab visibility exclusive', async (_name, Content, tabName, text) => {
     const user = userEvent.setup();
     const { container } = renderWithProviders(<Content />);
@@ -89,6 +97,8 @@ describe('Opening heroes in the static HTML', () => {
     ['DemoStoke', DemoStokeContent],
     ['Antisyphon', AntisyphonContent],
     ['Nice Guy University', NiceGuyUniversityContent],
+    ['Riptyde', RiptydeContent],
+    ['Rackloose', RacklooseContent],
   ] as const)('renders the %s introduction already visible', (_name, Content) => {
     const html = renderStaticHtml(<Content />);
 
@@ -106,6 +116,8 @@ describe('Main landmark in the static HTML', () => {
     ['DemoStoke', () => <DemoStokeContent />],
     ['Antisyphon', () => <AntisyphonContent />],
     ['Nice Guy University', () => <NiceGuyUniversityContent />],
+    ['Riptyde', () => <RiptydeContent />],
+    ['Rackloose', () => <RacklooseContent />],
     ['a project showcase', () => (
       <ProjectShowcase
         title='Static showcase'
