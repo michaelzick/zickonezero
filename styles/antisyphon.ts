@@ -69,6 +69,11 @@ export const FlowImagesRow = styled.div<{ $topOffset?: boolean; }>`
   margin-top: ${({ $topOffset }: { $topOffset?: boolean; }) => ($topOffset ? '0.75em' : '0')};
 `;
 
+/* At most two shots a row, the most Nice Guy University's product screens show (the case-study kit's landscape blocks). */
+export const PairedFlowImagesRow = styled(FlowImagesRow)`
+  grid-template-columns: repeat(auto-fit, minmax(max(260px, calc(50% - 0.6em)), 1fr));
+`;
+
 /* Product-screen sections share the case-study glass panels. */
 export const FlowStorySection = styled.section`
   ${storyPanel}

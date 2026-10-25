@@ -6,6 +6,9 @@ import AntisyphonContent from '../src/components/AntisyphonContent';
 import DemoStokeContent from '../src/components/DemoStokeContent';
 import NiceGuyUniversityContent from '../src/components/NiceGuyUniversityContent';
 import ProjectShowcase from '../src/components/ProjectShowcase';
+import CaseStudyPage from '../src/components/caseStudy/CaseStudyPage';
+import { RACKLOOSE_CASE_STUDY } from '../src/components/rackloose/caseStudyData';
+import { RIPTYDE_CASE_STUDY } from '../src/components/riptyde/caseStudyData';
 import {
   HERO_COPY_WIDTHS,
   HERO_IMAGE_SIZES,
@@ -88,6 +91,8 @@ describe('Opening hero images', () => {
     ['DemoStoke', DemoStokeContent],
     ['Antisyphon', AntisyphonContent],
     ['Nice Guy University', NiceGuyUniversityContent],
+    ['Riptyde', () => <CaseStudyPage study={RIPTYDE_CASE_STUDY} />],
+    ['Rackloose', () => <CaseStudyPage study={RACKLOOSE_CASE_STUDY} />],
   ] as const)('serves the %s introduction image from its copies', (_name, Content) => {
     renderWithProviders(<Content />);
 

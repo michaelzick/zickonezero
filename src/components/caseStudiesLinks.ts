@@ -1,5 +1,17 @@
 export const CASE_STUDIES_LINKS = [
   {
+    href: '/riptyde',
+    label: 'Riptyde',
+    icon: '/img/nav/riptyde-icon-square.webp',
+    iconAlt: 'Riptyde app icon'
+  },
+  {
+    href: '/rackloose',
+    label: 'Rackloose',
+    icon: '/img/nav/rackloose-icon-square.webp',
+    iconAlt: 'Rackloose app icon'
+  },
+  {
     href: '/nice-guy-university',
     label: 'Nice Guy University',
     icon: '/img/nav/ngu-logo-square.webp',

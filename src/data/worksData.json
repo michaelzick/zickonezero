@@ -144,6 +144,22 @@
     "link": "/nice-guy-university"
   },
   {
+    "thumb": "/img/home/cards/rackloose-icon-square.webp",
+    "imgs": [],
+    "desc": "Playable modular synth for the browser with original devices",
+    "header": "CASE STUDY: Rackloose",
+    "group": "rackloose",
+    "link": "/rackloose"
+  },
+  {
+    "thumb": "/img/home/cards/riptyde-icon-square.webp",
+    "imgs": [],
+    "desc": "Surf forecast for iOS and the web with one score per break",
+    "header": "CASE STUDY: Riptyde",
+    "group": "riptyde",
+    "link": "/riptyde"
+  },
+  {
     "thumb": "/img/home/cards/12-step-meetings-icon-square.webp",
     "imgs": [],
     "desc": "Searchable recovery meeting directory with maps and filters",
@@ -166,14 +182,6 @@
     "header": "DemoStoke Fleet Ops",
     "group": "demostoke-fleet-ops",
     "link": "/demostoke-fleet-ops"
-  },
-  {
-    "thumb": "/img/home/cards/riptyde-icon-square.webp",
-    "imgs": [],
-    "desc": "iOS surf forecast app with beach cams, session tracking, and AI",
-    "header": "Riptyde",
-    "group": "riptyde",
-    "link": "/riptyde"
   },
   {
     "thumb": "/img/home/cards/bars-of-sand-icon-square.webp",

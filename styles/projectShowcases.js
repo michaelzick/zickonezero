@@ -10,6 +10,7 @@ import {
   screenOverlay,
   storyPanel
 } from './hud';
+import { phoneBezel } from './phoneScreens';
 import { THEME } from './theme';
 
 export const PageShell = styled.div`
@@ -49,10 +50,16 @@ export const PageInner = styled.div`
 export const CaseStudyPageInner = styled(PageInner)`
   .ds-logo,
   .at-logo,
-  .ngu-logo {
+  .ngu-logo,
+  .study-logo {
     width: 6em;
     height: auto;
     filter: drop-shadow(0 0 calc(16px * var(--neon-glow-strength, 1)) var(--city-glow));
+  }
+
+  /* App icons keep their rounded-square shape. */
+  .study-logo {
+    border-radius: 22%;
   }
 
   section {
@@ -406,16 +413,10 @@ export const ShowcaseImage = styled(DemoStokeTldrImage)`
      ratio, and are capped by height so a single section never dwarfs its
      copy. The bezel is a content-box border, so the caps include it. */
   ${(props) => props.$portrait && `
-    box-sizing: content-box;
+    ${phoneBezel}
     width: auto;
-    max-width: calc(min(100%, 22rem) - 0.9em);
-    max-height: calc(min(80vh, 44rem) - 0.9em);
-    aspect-ratio: 1284 / 2778;
-    object-fit: contain;
-    border: 0.45em solid #06090f;
-    border-radius: 2.1em;
-    background: #06090f;
-    box-shadow: 0 0 0 1px var(--glass-border), 0 30px 48px -30px var(--shadow-deep);
+    max-width: calc(min(100%, 22rem) - 2 * var(--phone-bezel));
+    max-height: calc(min(80vh, 44rem) - 2 * var(--phone-bezel));
   `}
 
   ${ShowcaseImageButton}:hover &,
