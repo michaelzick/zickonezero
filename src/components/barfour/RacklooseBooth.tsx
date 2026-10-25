@@ -8,7 +8,7 @@ import { trackEvent } from '../../lib/analytics';
 export const RACK_STORAGE_KEY = 'zickonezero.rackloose.patch.v1';
 
 /**
- * A first visit opens on Neon Skyline, the synthwave preset that sounds like
+ * A first visit opens on Neon Skyline, the Synthwave preset that sounds like
  * the city. The autosave is a plain serialized patch, so writing one before
  * the rack mounts is the same as having played it before. Returning visitors
  * keep their own patch.

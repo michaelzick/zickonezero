@@ -44,7 +44,7 @@ export const RIPTYDE_CASE_STUDY: CaseStudyData = {
     },
     {
       title: 'My Roles',
-      description: 'Everything from the first prototype to the App Store listing: product and visual design, the SwiftUI app, the scoring model and data pipeline, the Supabase backend, and riptyde.app, the web version I built in Next.js on the same backend.',
+      description: 'I built everything from the first prototype to the App Store listing: product and visual design, the SwiftUI app, the scoring model and data pipeline, the Supabase backend, and riptyde.app, the Next.js web version on the same backend.',
       image: screen('riptyde-web-rad.webp', 'riptyde.app on desktop showing the RAD-O-METER™ page for Malibu First Point with its breakdown, swell stack, and surf-quality chart')
     }
   ],
@@ -53,11 +53,11 @@ export const RIPTYDE_CASE_STUDY: CaseStudyData = {
     columns: [
       {
         title: 'Reading the Water',
-        copy: 'The screen reads in the order surfers decide: the score, the best window, then the conditions behind it. The RAD breakdown rates wave height, period, wind, and swell direction one at a time, so a 7.5 never feels like a black box. Throwback rewinds a break through the last ten days, so you can check the score against what you actually rode.'
+        copy: 'The screen reads in the order surfers decide: the score, the best window, then the conditions behind it. The RAD breakdown rates each factor on its own, from wave height and period to wind and tide, so a 7.5 never feels like a black box. Throwback rewinds a break through the last ten days, so you can check the score against what you actually rode.'
       },
       {
         title: 'Earning Trust',
-        copy: 'A score is only worth checking if it holds up. Until live data lands, Riptyde shows placeholders instead of sample numbers. A day’s score depends on that day’s forecast, not the time you open the app, so it doesn’t drift between dawn and lunch. Cams Riptyde has no permission to stream show a still that opens the provider’s page.'
+        copy: 'A score is only worth checking if it holds up. Until live data lands, Riptyde shows placeholders instead of sample numbers. A day’s score depends on that day’s forecast, not the time you open the app, so it doesn’t drift between dawn and lunch. A cam Riptyde isn’t licensed to stream shows a still that opens the provider’s page.'
       }
     ],
     image: screen('riptyde-web-home.webp', 'riptyde.app on desktop showing the Malibu First Point forecast with wind, tide, water temperature, and the RAD-O-METER™ score'),
@@ -82,7 +82,7 @@ export const RIPTYDE_CASE_STUDY: CaseStudyData = {
     {
       title: 'Road-Trippers and Travelers',
       bullets: [
-        'Surf breaks they don’t know yet and can’t read the local conditions.',
+        'Surf breaks they don’t know yet, where they can’t read the local conditions.',
         'Compare nearby spots by score and distance in the Lineup or on the map.',
         'Want a look at a beach cam before committing to the drive.'
       ]
@@ -186,7 +186,7 @@ export const RIPTYDE_CASE_STUDY: CaseStudyData = {
         id: 'screens-lineup',
         title: 'The Lineup',
         navLabel: 'Lineup',
-        copy: 'The Lineup ranks every spot by score, with filters for favorites, your own spots, and break type, and sorts by best rated, nearest, or biggest. Open the map and the list follows whatever stretch of coast you pan to.',
+        copy: 'The Lineup lists every spot with its score, filters by favorites, your own spots, or break type, and sorts by best rated, nearest, or biggest. Open the map and the list follows whatever stretch of coast you pan to.',
         images: [
           phone('riptyde-spots.webp', 'Riptyde Lineup of California spots ranked by RAD-O-METER™ score'),
           phone('riptyde-lineup-sort.webp', 'Riptyde Lineup of South Bay spots with the sort menu open to best rated, nearest, and biggest'),
