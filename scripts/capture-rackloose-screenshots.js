@@ -9,7 +9,9 @@
  * playing so steps, LEDs, and meters are lit. Close-ups lay the rack out
  * 1280px wide and crop a 16:9 frame around the named devices at 2.7x, so they
  * come out 3456px wide too. Phone shots are 393x852 at 3x, cropped to the
- * 1284:2778 shape the site's phone bezel holds and saved at 642x1389.
+ * 1284:2778 shape the site's phone bezel holds and saved at 642x1389. The
+ * opening hero also gets the 640, 960, 1440, and 1920px copies its srcset
+ * offers (see src/lib/responsiveImages.ts).
  *
  * Every shot gets a fresh browser context, so no patch, preset, or setting
  * carries over. Status toasts are hidden, focus is cleared, the pointer is
@@ -45,13 +47,17 @@ const DESKTOP = { viewport: { width: 1728, height: 967 }, deviceScaleFactor: 2 }
 const CLOSE_UP = { viewport: { width: 1280, height: 1700 }, deviceScaleFactor: 2.7 };
 const PHONE = { viewport: { width: 393, height: 852 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true };
 const PHONE_OUT = { width: 642, height: 1389 };
+// The widths HERO_COPY_WIDTHS in src/lib/responsiveImages.ts expects beside a hero.
+const HERO_COPY_WIDTHS = [640, 960, 1440, 1920];
 
 const SHOTS = [
-  // The opening view of the default preset, playing, with the keys showing.
+  // The opening hero: Bone Orchard playing, DICTATOR's clip across the top.
+  { name: 'rackloose-hero', preset: 'Bone Orchard', play: true, keys: true, heroCopies: true },
+  // High Dive's front panel, playing, with the keys showing.
   { name: 'rackloose-front', preset: 'High Dive', play: true, keys: true },
-  // The standalone page as it opens: the rack in its own window.
-  { name: 'rackloose-window', windowed: true, preset: 'Bone Orchard', play: true, keys: true },
-  { name: 'rackloose-rear', preset: 'High Dive', play: true, flip: true },
+  // The rack in its own window, as the standalone page opens it.
+  { name: 'rackloose-window', windowed: true, preset: 'Digital Boogie', play: true, keys: true },
+  { name: 'rackloose-rear', preset: 'Bone Orchard', play: true, flip: true },
   // A cable on its way from a spare jack, with the free jacks it fits lit.
   { name: 'rackloose-patching', preset: 'High Dive', flip: true, drag: { from: 'STEP–16 Pitch · 1V/oct output 2', to: 'SIEVE Cutoff CV input', reach: 0.72 } },
   { name: 'rackloose-presets', preset: 'Neon Skyline', play: true, open: 'Presets' },
@@ -69,9 +75,7 @@ const SHOTS = [
   { name: 'rackloose-boom', closeUp: ['BOOM'], preset: 'High Dive', play: true },
   { name: 'rackloose-strike', closeUp: ['STRIKE'], preset: 'Neon Skyline', play: true },
   { name: 'rackloose-forge', closeUp: ['FORGE'], preset: 'Bone Orchard', play: true },
-  { name: 'rackloose-dictator', closeUp: ['DICTATOR', 'MONARCH'], preset: 'Bone Orchard', play: true },
   { name: 'rackloose-piano-roll', closeUp: ['DICTATOR'], preset: 'Bone Orchard', play: true, edit: 'Edit DICTATOR #1 notes' },
-  { name: 'rackloose-sum', closeUp: ['SUM'], preset: 'Neon Skyline', play: true },
   { name: 'rackloose-talon', closeUp: ['TALON'], preset: 'Bone Orchard', play: true },
   { name: 'rackloose-brit', closeUp: ['BRIT'], preset: 'Neon Skyline', play: true },
   { name: 'rackloose-valve', closeUp: ['VALVE', 'MAIN'], preset: 'High Dive', play: true },
@@ -148,7 +152,7 @@ async function openMikeOs(page, shot) {
   await page.getByRole('button', { name: 'Decline', exact: true }).click();
   await page.getByRole('button', { name: 'Close', exact: true }).first().click();
   await page.getByRole('button', { name: 'Rackloose', exact: true }).dblclick();
-  await page.locator('article[aria-label^="STEP–16 "]').first().waitFor();
+  await page.locator('[class*=_rack_] article').first().waitFor();
   await prepareRack(page, page, { ...shot, keys: true });
 }
 
@@ -240,6 +244,12 @@ async function capture(browser, shot, tmpDir) {
         .toFile(out);
     } else {
       execFileSync('cwebp', ['-q', '85', png, '-o', out], { stdio: 'pipe' });
+    }
+    if (shot.heroCopies) {
+      const { width: naturalWidth } = await sharp(png).metadata();
+      for (const width of HERO_COPY_WIDTHS.filter((copyWidth) => copyWidth < naturalWidth)) {
+        await sharp(png).resize(width).webp({ quality: 80 }).toFile(path.join(OUT_DIR, `${shot.name}-${width}w.webp`));
+      }
     }
     console.log(`captured ${shot.name}.webp`);
   } finally {
