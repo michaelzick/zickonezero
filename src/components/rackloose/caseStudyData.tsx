@@ -9,8 +9,8 @@ const phone = (file: string, alt: string): CaseStudyImage => ({ src: `${DIR}/${f
 const screen = (file: string, alt: string): CaseStudyImage => ({ src: `${DIR}/${file}`, alt });
 
 const HERO = screen(
-  'rackloose-front.webp',
-  'Rackloose front panel playing the High Dive preset, with STEP–16, SOLID, SIEVE, and LEVEL above the transport and keyboard'
+  'rackloose-hero.webp',
+  'Rackloose front panel playing the Bone Orchard preset, with DICTATOR’s looping MIDI clip and MONARCH above the transport and keyboard'
 );
 
 const MIKE_OS = screen('rackloose-mike-os.webp', 'Rackloose open in a window on the Mike OS desktop, playing the Trap Soul preset');
@@ -38,7 +38,7 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
     {
       title: 'Product Summary',
       description: 'Rackloose is a studio rack in the browser. Synths, drum machines, sequencers, a mixer, and effects stack in one column, and every one of them is an original design. Press Play All and a preset is making music before you touch a cable. It runs as its own site and as a React component other sites can drop in.',
-      image: screen('rackloose-window.webp', 'Rackloose in windowed mode playing Bone Orchard, with DICTATOR and MONARCH above the transport and keyboard')
+      image: screen('rackloose-front.webp', 'Rackloose front panel playing the High Dive preset, with STEP–16, SOLID, SIEVE, and LEVEL above the transport and keyboard')
     },
     {
       title: 'The Challenge',
@@ -174,7 +174,7 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
         copy: 'The front panel is where the music happens: knobs, step buttons, and the transport and keyboard along the bottom. The studio fills the screen or shrinks into a window.',
         images: [
           screen('rackloose-voice.webp', 'SOLID oscillator, SIEVE filter, LEVEL amplifier, and CONTOUR envelope on the front panel'),
-          screen('rackloose-window.webp', 'Rackloose in windowed mode playing Bone Orchard')
+          screen('rackloose-window.webp', 'Rackloose in windowed mode playing Digital Boogie')
         ]
       },
       {
@@ -182,7 +182,7 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
         title: 'Patching',
         copy: 'Flip the rack to patch. Cables are colored by signal, each jack takes one cable, and a drag lights up only the jacks that fit.',
         images: [
-          screen('rackloose-rear.webp', 'Rackloose rear panel for the High Dive preset with STEP–16, SOLID, SIEVE, and LEVEL patched'),
+          screen('rackloose-rear.webp', 'Rackloose rear panel for the Bone Orchard preset, with DICTATOR’s pitch and gate cables running to MONARCH and MONARCH’s audio through RUST and CONSOLE'),
           screen('rackloose-patching.webp', 'A cable mid-drag on the rear panel with compatible jacks highlighted')
         ]
       },

@@ -25,7 +25,7 @@ export const HERO_IMAGE_WIDTHS: Readonly<Record<string, number>> = {
   '/img/projects/adam-chiappone/ac-home-cropped.webp': 3456,
   '/img/projects/bars-of-sand/bars-of-sand-hero.webp': 3456,
   '/img/projects/fyfs/fyfs-wave.webp': 1536,
-  '/img/projects/rackloose/rackloose-front.webp': 3456,
+  '/img/projects/rackloose/rackloose-hero.webp': 3456,
   '/img/projects/riptyde/riptyde-case-study-hero.webp': 3456,
   '/img/projects/timefraim/timefraim-planner.webp': 3456,
 };
