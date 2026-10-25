@@ -42,17 +42,17 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
     },
     {
       title: 'The Challenge',
-      description: 'Modular synths are famously hard to start. You get a blank rack, a pile of cables, and silence until you work out what goes where. The browser adds its own rules: audio can’t start until you click, screens get small, and the whole thing still has to work on a phone.',
+      description: 'Modular synths are famously hard to get into. You get a blank rack, a pile of cables, and silence until you work out what goes where. The browser adds its own rules: audio can’t start until you click, and the whole thing has to work on a phone screen too.',
       image: screen('rackloose-add-device.webp', 'Rackloose Add device catalog with sequencers, synths, drum machines, and effects above the rack')
     },
     {
       title: 'The Solution',
-      description: 'Start with sound. The rack opens on a full patch, and 27 factory presets in seven styles, from trap and funk to reggae, synthwave, and industrial, are one click away. Each one is a starting point you can pull apart. When you get curious, flip the rack and every cable is right there.',
+      description: 'Start with sound. The rack opens on a full patch, and 27 factory presets in seven styles, from Trap and Funk to Reggae, Synthwave, and Industrial, are one click away. Each one is a starting point you can pull apart. When you get curious, flip the rack and every cable is right there.',
       image: screen('rackloose-presets.webp', 'Rackloose Presets panel with factory presets grouped by style above the rack')
     },
     {
       title: 'My Roles',
-      description: 'I designed every device and the rack around them, wrote the sound engine and its DSP, built the factory presets, and wrote the user guide. Then I packaged it all as a component so it could live inside other sites.',
+      description: 'I designed every device and the rack that holds them, built the sound engine and its DSP, composed the factory presets, and wrote the user guide. Then I packaged it all as a component so it could live inside other sites.',
       image: screen('rackloose-guide.webp', 'Rackloose user guide open over the rack')
     }
   ],
@@ -73,7 +73,7 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
       screen('rackloose-monarch.webp', 'MONARCH vintage monosynth with three oscillators, a filter, and two envelopes'),
       screen('rackloose-aurora.webp', 'AURORA eight-voice polysynth with dual oscillators and a source mix'),
       screen('rackloose-prism.webp', 'PRISM six-operator FM synth with its algorithm and operator controls'),
-      screen('rackloose-skitter.webp', 'SKITTER trap step sequencer with kick, snare, clap, and hat lanes'),
+      screen('rackloose-skitter.webp', 'SKITTER Trap step sequencer with kick, snare, clap, and hat lanes'),
       screen('rackloose-strike.webp', 'STRIKE digital drum machine with sixteen lanes of steps'),
       screen('rackloose-boom.webp', 'BOOM analog-style drum machine with its step grid playing')
     ]
@@ -118,23 +118,23 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
       bullets: [
         'Modeled each device on a classic piece of studio gear, from console channel strips to vintage polysynths, then gave it an original name, panel, and sound.',
         'Kept the hardware habits that make racks fun: long-throw faders, LED meters, needles on the compressors, and a flip to the back for the cables.',
-        'Put mute, solo, clear, move, duplicate, and remove in the same spot on every device.'
+        'Put mute, solo, clear, swap, move, duplicate, and remove in the same spot on every device.'
       ],
       images: [screen('rackloose-cohere.webp', 'SUM eight-channel mixer with faders and LED meters above the COHERE bus compressor and the MAIN output')]
     },
     {
       title: 'Patching Without Fear',
       bullets: [
-        'One cable per jack, with numbered spares on every output, so one signal can feed several inputs without stacked plugs.',
-        'While you drag, only the free jacks that fit light up, and a line of text says what to do next. Escape cancels.',
-        'Undo goes back 50 steps and Revert restores the saved patch, so trying something never costs you the patch.'
+        'Allowed one cable per jack, with numbered spares on every output, so one signal can feed several inputs without stacked plugs.',
+        'Lit up only the free jacks that fit while you drag, with a line of text that says what to do next. Escape cancels.',
+        'Kept 50 steps of Undo and added Revert to the saved patch, so an experiment never costs you the patch.'
       ],
       images: [screen('rackloose-patching.webp', 'A cable mid-drag on the Rackloose rear panel, with only the free compatible jacks highlighted')]
     },
     {
       title: 'The Sound Engine',
       bullets: [
-        'Built the rack on Web Audio. Ten devices also have an Analog engine: ladder filters and modeled drums written in Rust, compiled to WebAssembly, and run in AudioWorklets at 2x oversampling.',
+        'Built the rack on Web Audio. Ten devices also have an Analog engine: ladder filters and modeled drums written in Rust, compiled to WebAssembly, and run in AudioWorklets at 2× oversampling.',
         'Level-matched every Analog engine to its Digital version, with Digital as the fallback wherever WebAssembly can’t run.',
         'Made Export WAV render the patch offline through the same graph, so the file sounds like what you heard. Browser audio tests and Rust DSP tests keep it that way.'
       ],
@@ -143,7 +143,7 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
     {
       title: 'Shipping It as a Component',
       bullets: [
-        'Packaged the rack as a React component with props for keyboard focus, pausing audio, and its own save slot. It disposes every audio node when it unmounts.',
+        'Packaged the rack as a React component with props for keyboard focus, pausing audio, and its own save slot, and made it dispose of every audio node when it unmounts.',
         'Shipped each version as an immutable release archive with a checksum, so host sites install exactly the build they tested.',
         'Left out the backend, accounts, API keys, and analytics. Patches autosave in the browser and export as files.'
       ],
@@ -160,7 +160,7 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
     </>,
     <>Running inside {mikeOsLink('rackloose_case_study_outcome', 'Rackloose UX Case Study')}, where it opens like any other desktop app.</>,
     'Booked for a regular gig in a basement bar somewhere on this site. You’ll have to find it.',
-    '23 releases and 133 commits in about three weeks.'
+    '25 releases and 137 commits in about three weeks.'
   ],
   screens: {
     logo: { src: '/img/squares/rackloose-icon-square.webp', alt: 'Rackloose app icon' },
@@ -189,7 +189,7 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
       {
         id: 'screens-instruments',
         title: 'Instruments',
-        copy: 'MONARCH is a three-oscillator mono synth, AURORA an eight-voice poly, ORACLE a five-voice poly, and PRISM a six-operator FM synth. The three polys can turn one key into a whole chord, and every one of the four switches between a Digital engine and an Analog one.',
+        copy: 'MONARCH is a three-oscillator mono synth, AURORA an eight-voice poly, ORACLE a five-voice poly, and PRISM a six-operator FM synth. The three polys can turn one key into a whole chord, and all four switch between a Digital engine and an Analog one.',
         images: [
           screen('rackloose-monarch.webp', 'MONARCH vintage monosynth'),
           screen('rackloose-aurora.webp', 'AURORA eight-voice polysynth'),
@@ -201,12 +201,12 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
         id: 'screens-drums',
         title: 'Drums and Grooves',
         navLabel: 'Drums',
-        copy: 'BOOM, STRIKE, and FORGE are three of the five drum machines, from an analog-style kit to an industrial one. SKITTER makes no sound on its own. It plays steps and rolls on any drum machine it’s patched to.',
+        copy: 'BOOM, STRIKE, and FORGE are three of the five drum machines, from an analog-style kit to an Industrial one. SKITTER makes no sound on its own. It plays steps and rolls on any drum machine it’s patched to.',
         images: [
-          screen('rackloose-skitter.webp', 'SKITTER trap step sequencer'),
+          screen('rackloose-skitter.webp', 'SKITTER Trap step sequencer'),
           screen('rackloose-boom.webp', 'BOOM analog-style drum machine'),
           screen('rackloose-strike.webp', 'STRIKE digital drum machine'),
-          screen('rackloose-forge.webp', 'FORGE industrial drum kit')
+          screen('rackloose-forge.webp', 'FORGE Industrial drum kit')
         ]
       },
       {

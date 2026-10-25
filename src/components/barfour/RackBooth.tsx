@@ -65,8 +65,8 @@ const RackBooth = () => {
           machines, and effects, and program its sequencers.
         </p>
         <p className='booth-open-note'>
-          It&apos;s warmed up on Neon Skyline. Open Presets to switch to another set, from G-funk
-          and dub to Italo disco, or save your own. Press Play All, or click into the rack to play
+          It&apos;s warmed up on Neon Skyline. Open Presets to switch to another set, from G-Funk
+          and Dub to Italo Disco, or save your own. Press Play All, or click into the rack to play
           it from your keyboard. Click anywhere else to give the keys back.
         </p>
         <TrackedLink
