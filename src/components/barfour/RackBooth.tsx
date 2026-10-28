@@ -70,7 +70,7 @@ const RackBooth = () => {
           it from your keyboard. Click anywhere else to give the keys back.
         </p>
         <TrackedLink
-          href='https://rackloose.michaelzick.com/'
+          href='https://www.rackloose.com/'
           label='Open the full studio'
           location='bar_four'
           section='house_music'
