@@ -62,7 +62,7 @@ describe('Bar Four', () => {
       expect(within(booth).getByText(/Open Presets to switch to another set/)).toBeInTheDocument();
 
       const studio = within(booth).getByRole('link', { name: 'Open the full studio' });
-      expect(studio).toHaveAttribute('href', 'https://rackloose.michaelzick.com/');
+      expect(studio).toHaveAttribute('href', 'https://www.rackloose.com/');
       expect(studio).toHaveAttribute('target', '_blank');
       expect(studio).toHaveAttribute('rel', 'noopener noreferrer');
       expect(screen.getByRole('link', { name: 'Back up to the alley' })).toHaveAttribute('href', '/');

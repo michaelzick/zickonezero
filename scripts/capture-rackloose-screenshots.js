@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Capture the Rackloose case study's screenshots from the live studio at
- * rackloose.michaelzick.com, from Mike OS on michaelzick.com, and from Bar
+ * www.rackloose.com, from Mike OS on michaelzick.com, and from Bar
  * Four's booth on www.zickonezero.com, into public/img/projects/rackloose/.
  *
  * Studio shots fill a 1728x967 window at 2x, the size of the other case
@@ -37,7 +37,7 @@ const path = require('path');
 const sharp = require('sharp');
 
 const OUT_DIR = path.join(__dirname, '..', 'public', 'img', 'projects', 'rackloose');
-const STUDIO_URL = 'https://rackloose.michaelzick.com/';
+const STUDIO_URL = 'https://www.rackloose.com/';
 const MIKE_OS_URL = 'https://www.michaelzick.com/';
 const BAR_FOUR_URL = 'https://www.zickonezero.com/bar-four/';
 const BLOCKED_HOSTS = /googletagmanager|google-analytics|analytics\.google|mixpanel|mxpnl|cloudflareinsights/;

@@ -23,7 +23,7 @@ const STUDIES = [
     study: RACKLOOSE_CASE_STUDY,
     dataFile: 'src/components/rackloose/caseStudyData.tsx',
     heroLinks: ['Web App'],
-    screensLink: 'rackloose.michaelzick.com',
+    screensLink: 'www.rackloose.com',
     screensNav: ['Front', 'Patching', 'Instruments', 'Drums', 'Recording', 'Effects', 'Presets', 'Phone', 'Out There'],
   },
 ] as const;

@@ -2,7 +2,7 @@ import TrackedLink from '../TrackedLink';
 import { type CaseStudyData, type CaseStudyImage } from '../caseStudy/types';
 
 const DIR = '/img/projects/rackloose';
-const STUDIO_URL = 'https://rackloose.michaelzick.com/';
+const STUDIO_URL = 'https://www.rackloose.com/';
 const MIKE_OS_URL = 'https://www.michaelzick.com/';
 
 const phone = (file: string, alt: string): CaseStudyImage => ({ src: `${DIR}/${file}`, alt, portrait: true });
@@ -153,8 +153,8 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
   outcome: [
     <>
       Live at{' '}
-      <TrackedLink href={STUDIO_URL} label='rackloose.michaelzick.com' location='rackloose_case_study_outcome' section='Rackloose UX Case Study' target='_blank'>
-        rackloose.michaelzick.com
+      <TrackedLink href={STUDIO_URL} label='www.rackloose.com' location='rackloose_case_study_outcome' section='Rackloose UX Case Study' target='_blank'>
+        www.rackloose.com
       </TrackedLink>
       {' '}as a standalone studio.
     </>,
@@ -164,7 +164,7 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
   ],
   screens: {
     logo: { src: '/img/squares/rackloose-icon-square.webp', alt: 'Rackloose app icon' },
-    link: { label: 'rackloose.michaelzick.com', href: STUDIO_URL },
+    link: { label: 'www.rackloose.com', href: STUDIO_URL },
     hero: HERO,
     blocks: [
       {
