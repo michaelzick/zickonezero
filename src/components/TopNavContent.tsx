@@ -73,7 +73,7 @@ const NavContent = ({ onBrandClick }: NavContentProps = {}): ReactElement => {
           <span className='signal' aria-hidden='true' />
           <TrackedLink
             href='/'
-            label='ZICKONEZERO Creative'
+            label='ZICK ONE ZERO Creative'
             location='top_nav'
             section='brand'
             onClick={onBrandClick}

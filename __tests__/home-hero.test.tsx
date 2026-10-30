@@ -57,7 +57,7 @@ describe('Homepage city', () => {
     renderHome();
 
     const headline = screen.getByRole('heading', { level: 1 });
-    expect(headline).toHaveAccessibleName('Michael Zick is ZICKONEZERO Creative');
+    expect(headline).toHaveAccessibleName('Michael Zick is ZICK ONE ZERO Creative');
     expect(headline).toHaveAttribute('id', 'home-hero-title');
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
     expect(headline.closest('section')).toHaveAttribute('aria-labelledby', 'home-hero-title');
@@ -71,7 +71,7 @@ describe('Homepage city', () => {
     renderHome();
 
     expect(screen.getByText(/Michael Zick is/)).toHaveTextContent(
-      'Michael Zick is ZICKONEZERO Creative',
+      'Michael Zick is ZICK ONE ZERO Creative',
     );
     expect(screen.getByText('I dream of the feature.')).toBeInTheDocument();
 
@@ -84,7 +84,7 @@ describe('Homepage city', () => {
       page_path: '/',
     });
 
-    const hero = screen.getByRole('region', { name: 'Michael Zick is ZICKONEZERO Creative' });
+    const hero = screen.getByRole('region', { name: 'Michael Zick is ZICK ONE ZERO Creative' });
     expect(within(hero).getByRole('link', { name: 'Contact' })).toHaveAttribute('href', '/contact');
     expect(screen.queryByRole('link', { name: 'Jack In' })).not.toBeInTheDocument();
   });
@@ -166,7 +166,7 @@ describe('Homepage city', () => {
     expect(scroll).toHaveBeenLastCalledWith({ top: 0, behavior: 'auto' });
     expect(window.scrollY).toBe(0);
     expect(track).toHaveBeenLastCalledWith('link_click', expect.objectContaining({
-      link_location: 'top_nav', link_text: 'ZICKONEZERO Creative',
+      link_location: 'top_nav', link_text: 'ZICK ONE ZERO Creative',
     }));
 
     // The jump that was under way is over and cannot pull the page back down.
@@ -179,7 +179,7 @@ describe('Homepage city', () => {
     const club = screen.getByRole('link', { name: 'Bar Four' });
     expect(club).toHaveAttribute('href', '/bar-four');
     // The link follows the introduction's CTAs in tab order.
-    const hero = screen.getByRole('region', { name: 'Michael Zick is ZICKONEZERO Creative' });
+    const hero = screen.getByRole('region', { name: 'Michael Zick is ZICK ONE ZERO Creative' });
     const contact = within(hero).getByRole('link', { name: 'Contact' });
     expect(contact.compareDocumentPosition(club) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
 
@@ -215,7 +215,7 @@ describe('Homepage city', () => {
 
   it('replaces the overhead marquee with decorative distant towers', () => {
     const { container } = renderHome();
-    const hero = screen.getByRole('region', { name: 'Michael Zick is ZICKONEZERO Creative' });
+    const hero = screen.getByRole('region', { name: 'Michael Zick is ZICK ONE ZERO Creative' });
 
     expect(hero.querySelector('.banner, .ticker-track')).toBeNull();
     const towers = container.querySelectorAll('.distant-tower');

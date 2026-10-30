@@ -9,5 +9,8 @@ const SITE_URL = (
 
 module.exports = {
   SITE_URL,
-  SITE_NAME: 'ZICKONEZERO Creative',
+  SITE_NAME: 'ZICK ONE ZERO Creative',
+  // Earlier spellings of the brand, kept in structured data so search and AI
+  // engines tie them to the same site.
+  SITE_ALTERNATE_NAMES: ['ZICKONEZERO Creative', 'ZICKONEZERO'],
 };

@@ -40,12 +40,12 @@ describe('Seo', () => {
 
   it('applies the title template for interior pages', () => {
     render(<Seo title='About Michael Zick' path='/about/' />);
-    expect(document.title).toBe('About Michael Zick | ZICKONEZERO Creative');
+    expect(document.title).toBe('About Michael Zick | ZICK ONE ZERO Creative');
   });
 
   it('uses the brand and tagline as the home page title when no title is provided', () => {
     render(<Seo path='/' />);
-    expect(document.title).toBe('ZICKONEZERO Creative | Product, UX & Development');
+    expect(document.title).toBe('ZICK ONE ZERO Creative | Product, UX & Development');
   });
 
   it('exposes an absolute og:image URL by default', () => {
@@ -69,7 +69,7 @@ describe('Seo', () => {
 
   it('falls back to a brand alt for the default og:image', () => {
     render(<Seo path='/' />);
-    expect(document.querySelector('meta[property="og:image:alt"]')?.getAttribute('content')).toMatch(/ZICKONEZERO/);
+    expect(document.querySelector('meta[property="og:image:alt"]')?.getAttribute('content')).toMatch(/ZICK ONE ZERO/);
   });
 
   it('omits image alt tags when a custom image has no alt', () => {
@@ -149,6 +149,14 @@ describe('Seo', () => {
   it('uses the trailing-slash home URL for the site and the person', () => {
     expect(webSiteJsonLd().url).toBe(`${ORIGIN}/`);
     expect(personJsonLd().url).toBe(`${ORIGIN}/`);
+  });
+
+  it('names the brand ZICK ONE ZERO and keeps the one-word spelling as an alternate', () => {
+    const organization = personJsonLd().worksFor as Record<string, unknown>;
+    for (const node of [webSiteJsonLd(), organization]) {
+      expect(node.name).toBe('ZICK ONE ZERO Creative');
+      expect(node.alternateName).toEqual(['ZICKONEZERO Creative', 'ZICKONEZERO']);
+    }
   });
 
   it('omits the robots meta by default', () => {

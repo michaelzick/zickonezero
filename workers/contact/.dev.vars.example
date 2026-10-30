@@ -1,5 +1,5 @@
 # Copy to .dev.vars for `npm run dev`. BREVO_USER / BREVO_SMTP_PASSWORD are the
-# ZICKONEZERO Brevo SMTP login and SMTP key.
+# ZICK ONE ZERO Brevo SMTP login and SMTP key.
 BREVO_USER=
 BREVO_SMTP_PASSWORD=
 BREVO_FROM=mzick@zickonezero.com

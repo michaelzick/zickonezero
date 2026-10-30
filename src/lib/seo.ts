@@ -1,4 +1,4 @@
-import { SITE_NAME, SITE_URL } from './siteConfig';
+import { SITE_ALTERNATE_NAMES, SITE_NAME, SITE_URL } from './siteConfig';
 
 export type JsonLd = Record<string, unknown>;
 
@@ -45,6 +45,7 @@ export const personJsonLd = (): JsonLd => ({
   worksFor: {
     '@type': 'Organization',
     name: SITE_NAME,
+    alternateName: SITE_ALTERNATE_NAMES,
   },
 });
 
@@ -52,6 +53,7 @@ export const webSiteJsonLd = (): JsonLd => ({
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: SITE_NAME,
+  alternateName: SITE_ALTERNATE_NAMES,
   url: HOME_URL,
 });
 

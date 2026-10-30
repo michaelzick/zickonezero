@@ -56,7 +56,7 @@ describe('buildContactEmail', () => {
       new Date('2026-09-03T12:00:00.000Z'),
     );
 
-    expect(email.subject).toBe('ZICKONEZERO contact: Jane Bcc: evil@example.com');
+    expect(email.subject).toBe('ZICK ONE ZERO contact: Jane Bcc: evil@example.com');
     expect(email.subject).not.toMatch(/[\r\n]/);
     expect(email.text).toContain('Email: jane@example.com');
     expect(email.text).toContain('Sent: 2026-09-03T12:00:00.000Z');

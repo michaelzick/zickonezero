@@ -3,9 +3,9 @@ import { render } from '@testing-library/react';
 import BrandName from '../src/components/BrandName';
 
 describe('BrandName', () => {
-  it('keeps the brand spelled as one word', () => {
+  it('spells the brand as three words', () => {
     const { container } = render(<BrandName />);
-    expect(container).toHaveTextContent(/^ZICKONEZERO$/);
+    expect(container.textContent).toBe('ZICK ONE ZERO');
   });
 
   it('marks only ONE for accent styling', () => {
