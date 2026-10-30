@@ -19,7 +19,7 @@ function configureStaticHosting(spec) {
         host === HOSTS[0] && rule.redirect?.authority === HOSTS[1]
       ))
   )))) {
-    throw new Error('Expected explicit ZICKONEZERO host routes; refusing to change shared ingress.');
+    throw new Error('Expected explicit ZICK ONE ZERO host routes; refusing to change shared ingress.');
   }
 
   delete site.catchall_document;

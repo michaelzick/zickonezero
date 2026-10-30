@@ -705,7 +705,7 @@ export const HeroRoot = styled.section`
       letter-spacing: -0.025em;
     }
 
-    /* Keep ONE inline so the accessible brand name remains one word in jsdom. */
+    /* Keep ONE inline so the accessible name reads ZICK ONE ZERO in jsdom. */
     .brand-one { display: inline; }
   }
 

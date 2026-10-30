@@ -1,4 +1,4 @@
-# ZICKONEZERO Creative
+# ZICK ONE ZERO Creative
 
 Michael Zick’s portfolio and case-study site, built with Next.js Pages Router,
 React, TypeScript, and styled-components. Production is a static export.
@@ -52,7 +52,7 @@ spot in the city as visitors navigate. The homepage walks from a weathered futur
 and three work districts to open city
 above the footer, with a minimap HUD for fast travel.
 
-- The alley opens on "Michael Zick is ZICKONEZERO Creative" in a bottom-left introduction,
+- The alley opens on "Michael Zick is ZICK ONE ZERO Creative" in a bottom-left introduction,
   balanced by a top-right tube-neon BAR FOUR sign with a plain Russian
   translation underneath. Two letters have brief, shallow flickers every few seconds; these
   pause offscreen or in hidden tabs and stay lit under reduced motion or
@@ -107,7 +107,7 @@ Every public page owns its title, description, canonical, social image metadata,
 and JSON-LD through `src/components/Seo.tsx`. Image dimensions must match the
 actual asset; provide descriptive alt text for custom social images.
 
-The default share card's "ZICKONEZERO / CREATIVE" matches the hero's heading.
+The default share card's "ZICK ONE ZERO / CREATIVE" matches the hero's heading.
 After changing the hero's type, regenerate it with
 `node scripts/render-share-card.js` (Playwright with Chromium must be
 resolvable, for example through `NODE_PATH`). It repaints only that text band

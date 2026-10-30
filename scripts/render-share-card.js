@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Redraw the wordmark on the default share card, public/img/og/zickonezero-card.png,
- * in the homepage hero card's type: "ZICKONEZERO" over "CREATIVE", with the
+ * in the homepage hero card's type: "ZICK ONE ZERO" over "CREATIVE", with the
  * short divider under it in the logo's cyan.
  *
  * Only the wordmark band to the right of the logo and the divider change. The
@@ -45,8 +45,8 @@ const BAND = { left: 530, top: 180, width: WIDTH - 530, height: 170 };
 const DIVIDER = { left: 557, top: 355, width: 120, height: 3 };
 const LOGO_CYAN = '#15fcfd';
 
-// The hero title is 46.08px at 1440px wide. Scaled so the wordmark spans the
-// card's existing 560-1083px, it keeps the layout's balance.
+// The hero title is 46.08px at 1440px wide. Scaled so the old one-word wordmark
+// spanned 560-1083px; ZICK ONE ZERO now runs to about 1122px.
 const HERO_TITLE_PX = 46.08;
 const SCALE = 57 / HERO_TITLE_PX;
 const px = (value) => `${(value * SCALE).toFixed(2)}px`;
@@ -131,7 +131,7 @@ const html = () => `<!doctype html>
 <body>
   <div class="band"></div>
   <div class="divider"></div>
-  <h1 class="title"><span class="brand-name">ZICK<span class="brand-one">ONE</span>ZERO</span><span class="creative">Creative</span></h1>
+  <h1 class="title"><span class="brand-name">ZICK <span class="brand-one">ONE</span> ZERO</span><span class="creative">Creative</span></h1>
 </body>
 </html>`;
 

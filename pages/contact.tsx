@@ -4,7 +4,7 @@ import { breadcrumbJsonLd, contactPageJsonLd } from '../src/lib/seo';
 
 const PATH = '/contact/';
 const TITLE = 'Contact';
-const DESCRIPTION = 'Get in touch with Michael Zick / ZICKONEZERO Creative about product, UX, and engineering work.';
+const DESCRIPTION = 'Get in touch with Michael Zick / ZICK ONE ZERO Creative about product, UX, and engineering work.';
 
 const ContactPage = () => (
   <>

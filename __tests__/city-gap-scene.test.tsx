@@ -91,10 +91,10 @@ describe('end-of-route city scene', () => {
     expect(crest).toHaveAttribute('lang', 'ja');
     expect(koi).toHaveTextContent('I dream of the feature');
 
-    // The carp carries the only lettering at night; nothing says ZICKONEZERO CREATIVE.
+    // The carp carries the only lettering at night; nothing says ZICK ONE ZERO CREATIVE.
     const lettering = [...koi.querySelectorAll('text')].map((text) => text.textContent);
     expect(lettering).toEqual(['I dream of the feature', '夢']);
-    expect(container.querySelector('.gap-night')).not.toHaveTextContent(/ZICKONEZERO|CREATIVE/i);
+    expect(container.querySelector('.gap-night')).not.toHaveTextContent(/ZICK ONE ZERO|CREATIVE/i);
 
     // The airship keeps its emblem and marquee.
     expect(container.querySelector('.ship-emblem-glyph')).toHaveAttribute('lang', 'ja');

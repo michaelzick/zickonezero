@@ -10,7 +10,7 @@ const BarFourPage = () => (
   <>
     <Seo
       title='Bar Four'
-      description='A basement club under the ZICKONEZERO alley, with a playable Rackloose modular synth open in the booth.'
+      description='A basement club under the ZICK ONE ZERO alley, with a playable Rackloose modular synth open in the booth.'
       path='/bar-four/'
       noIndex
     />

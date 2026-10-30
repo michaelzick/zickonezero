@@ -124,7 +124,7 @@ export default {
       });
 
       await mailer.send({
-        from: { name: 'ZICKONEZERO Contact Form', email: env.BREVO_FROM },
+        from: { name: 'ZICK ONE ZERO Contact Form', email: env.BREVO_FROM },
         to: env.BREVO_TO,
         reply: { name: submission.name, email: submission.email },
         subject: email.subject,

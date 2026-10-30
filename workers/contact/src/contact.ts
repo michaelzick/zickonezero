@@ -81,7 +81,7 @@ export type ContactEmail = {
 const singleLine = (value: string) => value.replace(/[\r\n]+/g, ' ').trim();
 
 export function buildContactEmail(submission: ContactSubmission, submittedAt: Date = new Date()): ContactEmail {
-  const subject = `ZICKONEZERO contact: ${singleLine(submission.name)}`;
+  const subject = `ZICK ONE ZERO contact: ${singleLine(submission.name)}`;
   const text = [
     'New message from the zickonezero.com contact form.',
     '',

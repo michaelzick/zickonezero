@@ -6,20 +6,20 @@ const repoRoot = resolve(fileURLToPath(new URL("../../..", import.meta.url)));
 const sourcePath = resolve(repoRoot, "AGENTS.md");
 const checkMode = process.argv.includes("--check");
 
-const sourceTitle = "# ZICKONEZERO - Agent Orientation (Codex / AGENTS.md)";
+const sourceTitle = "# ZICK ONE ZERO - Agent Orientation (Codex / AGENTS.md)";
 const sourceSiblingLine =
   "Sibling files [CLAUDE.md](CLAUDE.md) (Claude Code) and [GEMINI.md](GEMINI.md) (Gemini CLI) mirror this content for other harnesses. Update all three together when code structure changes.";
 
 const targets = [
   {
     path: resolve(repoRoot, "CLAUDE.md"),
-    title: "# ZICKONEZERO - Agent Orientation (Claude Code)",
+    title: "# ZICK ONE ZERO - Agent Orientation (Claude Code)",
     siblingLine:
       "Sibling files [AGENTS.md](AGENTS.md) (Codex) and [GEMINI.md](GEMINI.md) (Gemini CLI) mirror this content for other harnesses. Update all three together when code structure changes.",
   },
   {
     path: resolve(repoRoot, "GEMINI.md"),
-    title: "# ZICKONEZERO - Agent Orientation (Gemini CLI)",
+    title: "# ZICK ONE ZERO - Agent Orientation (Gemini CLI)",
     siblingLine:
       "Sibling files [CLAUDE.md](CLAUDE.md) (Claude Code) and [AGENTS.md](AGENTS.md) (Codex) mirror this content for other harnesses. Update all three together when code structure changes.",
   },
