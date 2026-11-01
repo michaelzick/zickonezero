@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
  * Capture the Rackloose case study's screenshots from the live studio at
- * www.rackloose.com, from Mike OS on michaelzick.com, and from Bar
- * Four's booth on www.zickonezero.com, into public/img/projects/rackloose/.
+ * www.rackloose.com and from Mike OS on michaelzick.com, into
+ * public/img/projects/rackloose/. The club booth shot
+ * (rackloose-club-booth.webp) is a supplied screenshot, not captured here.
  *
  * Studio shots fill a 1728x967 window at 2x, the size of the other case
  * studies' captures, with the Rackloose window expanded and a factory preset
@@ -39,7 +40,6 @@ const sharp = require('sharp');
 const OUT_DIR = path.join(__dirname, '..', 'public', 'img', 'projects', 'rackloose');
 const STUDIO_URL = 'https://www.rackloose.com/';
 const MIKE_OS_URL = 'https://www.michaelzick.com/';
-const BAR_FOUR_URL = 'https://www.zickonezero.com/bar-four/';
 const BLOCKED_HOSTS = /googletagmanager|google-analytics|analytics\.google|mixpanel|mxpnl|cloudflareinsights/;
 const HIDE_TOASTS = '[class*=_toast_] { display: none !important; }';
 
@@ -90,7 +90,6 @@ const SHOTS = [
 
   // Hosts.
   { name: 'rackloose-mike-os', host: 'mike-os', preset: 'Trap Soul', play: true },
-  { name: 'rackloose-club-booth', host: 'bar-four', play: true },
 ];
 
 const wait = (page, ms) => page.waitForTimeout(ms);
@@ -156,18 +155,6 @@ async function openMikeOs(page, shot) {
   await prepareRack(page, page, { ...shot, keys: true });
 }
 
-async function openBarFour(page, shot) {
-  await page.goto(BAR_FOUR_URL, { waitUntil: 'networkidle' });
-  const booth = page.locator('.booth-rack');
-  await booth.locator('article').first().waitFor({ timeout: 30000 });
-  await page.addStyleTag({ content: HIDE_TOASTS });
-  await page.locator('#house-music-title').evaluate((title) => {
-    window.scrollTo({ top: title.getBoundingClientRect().top + window.scrollY - 150 });
-  });
-  await wait(page, 800);
-  await prepareRack(page, booth, { ...shot, keys: true });
-}
-
 // Drags a cable most of the way from one jack to another and holds it there.
 async function holdCable(page, { from, to, reach }) {
   const start = await page.getByRole('button', { name: from }).first().boundingBox();
@@ -216,7 +203,6 @@ async function capture(browser, shot, tmpDir) {
 
   try {
     if (shot.host === 'mike-os') await openMikeOs(page, shot);
-    else if (shot.host === 'bar-four') await openBarFour(page, shot);
     else await openStudio(page, shot);
 
     const png = path.join(tmpDir, `${shot.name}.png`);
