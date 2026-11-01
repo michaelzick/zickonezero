@@ -10,6 +10,9 @@
  * 1280px wide and crop a 16:9 frame around the named devices at 2.7x, so they
  * come out 3456px wide too. Phone shots are 393x852 at 3x, cropped to the
  * 1284:2778 shape the site's phone bezel holds and saved at 642x1389. The
+ * club booth shot lays Bar Four out in a 2560x1433 window at 1.35x, so the
+ * sign and the whole booth fit above the fixed-height deck, and saves the same
+ * 3456x1934 as the studio shots. The
  * opening hero also gets the 640, 960, 1440, and 1920px copies its srcset
  * offers (see src/lib/responsiveImages.ts).
  *
@@ -45,6 +48,9 @@ const HIDE_TOASTS = '[class*=_toast_] { display: none !important; }';
 
 const DESKTOP = { viewport: { width: 1728, height: 967 }, deviceScaleFactor: 2 };
 const CLOSE_UP = { viewport: { width: 1280, height: 1700 }, deviceScaleFactor: 2.7 };
+// Bar Four's deck is a fixed height, so a 1728px window can't show the sign and the whole booth at once.
+const CLUB = { viewport: { width: 2560, height: 1433 }, deviceScaleFactor: 1.35 };
+const CLUB_OUT = { width: 3456, height: 1934 };
 const PHONE = { viewport: { width: 393, height: 852 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true };
 const PHONE_OUT = { width: 642, height: 1389 };
 // The widths HERO_COPY_WIDTHS in src/lib/responsiveImages.ts expects beside a hero.
@@ -90,7 +96,8 @@ const SHOTS = [
 
   // Hosts.
   { name: 'rackloose-mike-os', host: 'mike-os', preset: 'Trap Soul', play: true },
-  { name: 'rackloose-club-booth', host: 'bar-four', play: true },
+  // Like a visitor who just walked in: the rack on Neon Skyline, audio off.
+  { name: 'rackloose-club-booth', host: 'bar-four', club: true },
 ];
 
 const wait = (page, ms) => page.waitForTimeout(ms);
@@ -161,8 +168,11 @@ async function openBarFour(page, shot) {
   const booth = page.locator('.booth-rack');
   await booth.locator('article').first().waitFor({ timeout: 30000 });
   await page.addStyleTag({ content: HIDE_TOASTS });
-  await page.locator('#house-music-title').evaluate((title) => {
-    window.scrollTo({ top: title.getBoundingClientRect().top + window.scrollY - 150 });
+  // Scroll just far enough that the whole booth is in view, 8px above the bottom edge: the sign stays in
+  // frame and only the ceiling's patch cables go off the top.
+  await booth.evaluate((rack) => {
+    const frame = rack.closest('section').getBoundingClientRect();
+    window.scrollTo({ top: frame.bottom + window.scrollY + 8 - window.innerHeight });
   });
   await wait(page, 800);
   await prepareRack(page, booth, { ...shot, keys: true });
@@ -205,7 +215,7 @@ async function closeUpClip(page, names) {
 }
 
 async function capture(browser, shot, tmpDir) {
-  const device = shot.phone ? PHONE : shot.closeUp ? CLOSE_UP : DESKTOP;
+  const device = shot.phone ? PHONE : shot.closeUp ? CLOSE_UP : shot.club ? CLUB : DESKTOP;
   const context = await browser.newContext({
     ...device,
     timezoneId: 'America/Los_Angeles',
@@ -242,6 +252,9 @@ async function capture(browser, shot, tmpDir) {
         .resize(PHONE_OUT.width, PHONE_OUT.height)
         .webp({ quality: 85 })
         .toFile(out);
+    } else if (shot.club) {
+      // 1433px at 1.35x renders a row past 1934.
+      await sharp(png).extract({ left: 0, top: 0, ...CLUB_OUT }).webp({ quality: 85 }).toFile(out);
     } else {
       execFileSync('cwebp', ['-q', '85', png, '-o', out], { stdio: 'pipe' });
     }

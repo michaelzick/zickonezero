@@ -15,7 +15,7 @@ const HERO = screen(
 
 const MIKE_OS = screen('rackloose-mike-os.webp', 'Rackloose open in a window on the Mike OS desktop, playing the Trap Soul preset');
 // The club stays a hint: no link to it and no URL in the copy or the alt text.
-const CLUB = screen('rackloose-club-booth.webp', 'Rackloose in the booth of a basement club, beside a ticket stub that reads You’re the DJ');
+const CLUB = screen('rackloose-club-booth.webp', 'Rackloose in the booth of a basement club under its neon sign, beside a ticket stub that reads You’re the DJ');
 
 const mikeOsLink = (location: string, section: string) => (
   <TrackedLink href={MIKE_OS_URL} label='Mike OS' location={location} section={section} target='_blank'>
