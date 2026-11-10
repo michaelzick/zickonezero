@@ -8,7 +8,7 @@ Sibling files [CLAUDE.md](CLAUDE.md) (Claude Code) and [GEMINI.md](GEMINI.md) (G
 
 ## 1. Project overview
 
-**ZICK ONE ZERO** is a statically exported portfolio and case-study site for Michael Zick / ZICK ONE ZERO Creative. It presents flagship products, smaller design and build work, older web development, and analytics-instrumented navigation/CTA flows.
+**ZICK ONE ZERO** is a statically exported portfolio site for Michael Zick / ZICK ONE ZERO Creative. It presents flagship products, smaller design and build work, older web development, and analytics-instrumented navigation/CTA flows.
 
 Primary flows:
 - Home portfolio: a living neon city the visitor walks through on scroll, from a weathered futuristic alley past a holo billboard and three work districts to an open stretch of city above the footer (a giant carp streamer flies from the top of a rooftop mast there at night over a string of paper lanterns, with police drones patrolling behind it, and by day a sightseeing airship drifts across among clouds and delivery drones over rooftops where a window washer works), with a minimap HUD for fast travel and a lightbox gallery.

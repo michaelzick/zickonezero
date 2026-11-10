@@ -71,7 +71,7 @@ const IndieShaper = ({
   const painPoints = [
     {
       title: 'High-effort demo days',
-      description: 'Curtis manually hauled a van of boards to the beach, set up, and hoped the right audience showed up—labor-intensive and hit-or-miss.'
+      description: 'Curtis manually hauled a van of boards to the beach, set up, and hoped the right audience showed up. It was labor-intensive and hit-or-miss.'
     },
     {
       title: 'Limited reach',
@@ -108,7 +108,7 @@ const IndieShaper = ({
       title: 'Converts demos into deposits',
       description: (
         <>
-          “Try Before You Buy” built trust so surfers could demo, love a board, and place deposits through the app—without awkward sales pushes.
+          “Try Before You Buy” built trust so surfers could demo, love a board, and place deposits through the app, without awkward sales pushes.
         </>
       )
     },
@@ -134,7 +134,7 @@ const IndieShaper = ({
             <DemoStokeTldrSection className='text-animate' $borderless>
               <DemoStokeTldrTitle>Abstract</DemoStokeTldrTitle>
               <DemoStokeTldrCopy>
-                From the lens of Curtis, an independent Southern California surfboard shaper, {DSLink} had the potential to radically simplify and expand his business by addressing key pain points around demo logistics, discovery, trust, and conversion.
+                Through the eyes of Curtis, an independent Southern California surfboard shaper, {DSLink} had the potential to radically simplify and expand his business by addressing key pain points around demo logistics, discovery, trust, and conversion.
               </DemoStokeTldrCopy>
             </DemoStokeTldrSection>
           </DemoStokeHeroAbstractLayout>

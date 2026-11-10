@@ -19,12 +19,12 @@ export const TLDR_ITEMS: {
 }[] = [
   {
     title: 'Product Summary',
-    description: 'I helped reimagine Antisyphon Training from a static marketing site and fragmented LMS touchpoints into a cohesive marketplace for live, on-demand, and pay-what-you-can security education. The redesign improved enrollment, reduced support load, and gave learners, instructors, and operations teams a more coherent end-to-end experience.',
+    description: 'I designed Antisyphon Training’s move from a static marketing site and scattered LMS touchpoints to one marketplace for live, on-demand, and pay-what-you-can security courses. The new store raised enrollments, cut support tickets, and gave learners, instructors, and the operations team one place to work.',
     image: { src: '/img/antisyphon/home.webp', alt: 'Antisyphon Training homepage hero' }
   },
   {
     title: 'The Challenge',
-    description: 'Replace a static marketing site and scattered LMS touchpoints with a cohesive shopping and learning experience.',
+    description: 'Courses were sold through a static marketing site and third-party tools, while enrollment, progress, and course communications lived in separate systems.',
     image: { src: '/img/antisyphon/course-catalog.webp', alt: 'Course catalog cards showing filtering and categories' }
   },
   {

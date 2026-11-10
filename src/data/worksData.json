@@ -122,7 +122,7 @@
   {
     "thumb": "/img/home/cards/at_logo_purple.webp",
     "imgs": [],
-    "desc": "Live cybersecurity training marketplace and course CMS",
+    "desc": "Cybersecurity training marketplace and course CMS for a client",
     "header": "Antisyphon Training",
     "group": "antisyphon-training",
     "link": "/antisyphon-training"
@@ -130,7 +130,7 @@
   {
     "thumb": "/img/home/cards/demostoke-logo-square.webp",
     "imgs": [],
-    "desc": "Live action sports gear rental platform and lifestyle blog",
+    "desc": "Gear rental marketplace and blog for action sports riders and shops",
     "header": "DemoStoke",
     "group": "demostoke",
     "link": "/demostoke"
@@ -138,7 +138,7 @@
   {
     "thumb": "/img/home/cards/ngu-logo-square.webp",
     "imgs": [],
-    "desc": "Live recovery course and coaching platform for men",
+    "desc": "Self-paced recovery courses and coaching for men",
     "header": "Nice Guy University",
     "group": "nice-guy-university",
     "link": "/nice-guy-university"
@@ -146,7 +146,7 @@
   {
     "thumb": "/img/home/cards/rackloose-icon-square.webp",
     "imgs": [],
-    "desc": "Live modular synth for the browser with original devices",
+    "desc": "Browser modular synth with original devices and Rust/WASM DSP",
     "header": "Rackloose",
     "group": "rackloose",
     "link": "/rackloose"
@@ -154,7 +154,7 @@
   {
     "thumb": "/img/home/cards/riptyde-icon-square.webp",
     "imgs": [],
-    "desc": "Live surf forecast on iOS and the web, one score per break",
+    "desc": "Surf forecast app for iPhone and the web, one score per break",
     "header": "Riptyde",
     "group": "riptyde",
     "link": "/riptyde"

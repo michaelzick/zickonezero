@@ -109,7 +109,7 @@ const HOME_DISTRICTS: readonly HomeDistrict[] = [
     japanese: 'ウェブ開発',
     unit: 'Archive gigs',
     status: 'Archive',
-    tagline: 'Hand-coded for film studios and brands, from their designs.',
+    tagline: 'Hand-coded for film and game studios, brands, and startups, from their designs.',
     carouselLabel: 'Web Development projects',
     includeItem: (item) => !item.link,
   },

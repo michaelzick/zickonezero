@@ -40,7 +40,7 @@ export const TLDR_ITEMS: {
 }[] = [
   {
     title: 'Product Summary',
-    description: 'Riders and shops struggle with fragmented, offline demo and rental flows. I designed and built DemoStoke, now live at demostoke.com, as a unified marketplace to solve those issues. In validation sessions, 90% of shop owners said it would bring them more customers, and 100% of riders described it as "the thing that should already exist."',
+    description: 'Riders and shops struggle with fragmented, offline demo and rental flows. I designed and built DemoStoke, now live at demostoke.com, to bring all of it into one marketplace. In validation sessions, 90% of shop owners said it would bring them more customers, and 100% of riders described it as "the thing that should already exist."',
     image: {
       src: '/img/demostoke/case-study/ds-explore-hybrid.webp',
       alt: 'DemoStoke global gear discovery collage'
@@ -94,10 +94,10 @@ export const METHOD_SECTIONS = [
   {
     title: 'Prototype, Ship, and Measure',
     bullets: [
-      'Used Lovable AI to generate hi-fi pages quickly, then refined with prompt engineering.',
-      'Layered custom frontend polish and Supabase to demo discovery, admin, and AI integrations.',
+      'Used Lovable to generate hi-fi pages quickly, then refined them with prompt engineering.',
+      'Added custom front-end work and a Supabase backend for discovery, admin, and the AI features.',
       'Ran moderated and unmoderated walkthroughs to validate discovery, booking, and trust cues.',
-      'Shipped it with GTM, GA4, and Mixpanel behind a regional consent check, tracking over 60 events across search, filters, reservations, AI tools, and shop listings.'
+      'Shipped with GTM, GA4, and Mixpanel behind a regional consent check, tracking over 60 events across search, filters, reservations, AI tools, and shop listings.'
     ],
     image: { src: '/img/demostoke/surfer-and-guy-with-phone.webp', alt: 'Surfer carrying a board while walking beside a man on his phone' }
   }

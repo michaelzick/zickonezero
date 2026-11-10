@@ -61,7 +61,7 @@ describe('Home and About visuals', () => {
     const taglines = [
       ['case-studies', 'Live products I designed, shipped, and measured end to end.'],
       ['ux-design', 'Smaller sites and tools I designed and built.'],
-      ['web-development', 'Hand-coded for film studios and brands, from their designs.'],
+      ['web-development', 'Hand-coded for film and game studios, brands, and startups, from their designs.'],
     ];
 
     for (const [headingId, tagline] of taglines) {

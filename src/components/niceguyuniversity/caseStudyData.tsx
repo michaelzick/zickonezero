@@ -88,9 +88,9 @@ export const PERSONA_ITEMS = [
   {
     title: 'Students Starting Recovery',
     bullets: [
-      'Usually lands here after a breaking point, like a relationship ending or one resentment too many, not from casual browsing.',
+      'Usually land here after a breaking point, like a relationship ending or one resentment too many, not from casual browsing.',
       'Skeptical of self-help and allergic to anything that sounds like a pep talk.',
-      'Needs to know which course matches the pattern that is actually costing him, and what it will ask of him.'
+      'Need to know which course matches the pattern that is actually costing them, and what it will ask of them.'
     ]
   },
   {
@@ -114,7 +114,7 @@ export const PERSONA_ITEMS = [
     bullets: [
       'Manages courses, reviews, enrollments, and purchases from a single admin dashboard.',
       'Views analytics in the same place: completion rates, chapter progress, engagement, and enrollment trends.',
-      'Builds and manages comprehensive email campaigns through the dashboard, keeping marketing next to the student data it runs on.'
+      'Builds and sends email campaigns from the dashboard, keeping marketing next to the student data it runs on.'
     ]
   }
 ] as const;

@@ -49,15 +49,15 @@ const HowSection = ({
           <section>
             <h3>Location-Based Discovery</h3>
             <p>
-              With DemoStoke, I created a comprehensive gear discovery and rental platform that connects riders with
-              demo opportunities in their area.
+              DemoStoke shows riders the demo and rental gear near them on a map, in a list, or both side by side, so
+              they can find something to try without calling around.
             </p>
           </section>
           <section>
             <h3>Rapid Prototyping with AI</h3>
             <p>
-              Using Lovable.dev, I was able to spin up the app’s foundation with a well-written prompt, then iterated
-              rapidly to refine features and user experience.
+              I built the app’s foundation in Lovable.dev from one well-written prompt, then iterated quickly on its
+              features and user experience.
             </p>
           </section>
         </DemoStokeTwoUp>

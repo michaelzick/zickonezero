@@ -4,7 +4,7 @@ import { breadcrumbJsonLd, softwareApplicationJsonLd } from '../src/lib/seo';
 
 const TITLE = 'Nice Guy University: Recovery Courses and Coaching for Men';
 const DESCRIPTION =
-  'Nice Guy University is a platform that turns the Nice Guy recovery coaching I do one-on-one into self-paced courses men can start tonight.';
+  'Nice Guy University is a live course platform that turns Michael Zick’s one-on-one Nice Guy recovery coaching into self-paced courses men can start tonight.';
 const PATH = '/nice-guy-university/';
 const OG_IMAGE = '/img/nice-guy-university/ngu-home.webp';
 
