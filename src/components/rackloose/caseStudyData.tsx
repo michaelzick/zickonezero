@@ -30,7 +30,7 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
   intro: {
     status: 'Live at rackloose.com and inside Mike OS',
     summary: 'Rackloose is a live modular synth that runs in a browser tab: a rack of original instruments, drum machines, and effects you wire together with virtual cables.',
-    roles: ['Product strategy', 'UX design', 'product engineering', 'sound design', 'product analytics'],
+    roles: ['Product strategy', 'UX design', 'product engineering', 'sound design', 'analytics'],
     image: HERO,
     imageBackground: '#111214',
     links: [{ label: 'Web App', href: STUDIO_URL }]

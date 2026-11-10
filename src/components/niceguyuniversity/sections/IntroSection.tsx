@@ -30,7 +30,7 @@ const ROLE_BULLETS = [
   'UX/UI design',
   'product engineering',
   'content architecture',
-  'product analytics'
+  'analytics'
 ] as const;
 const INTRO_SUMMARY = 'Nice Guy University is a live course and coaching platform that turns the Nice Guy recovery coaching I do one-on-one into self-paced courses men can start tonight.';
 const PROJECT_URL = 'https://www.niceguyuniversity.com/';

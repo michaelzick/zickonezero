@@ -25,7 +25,7 @@ type IntroSectionProps = {
   visibleSections: VisibleSections;
 };
 
-const ROLE_BULLETS = ['Founder', 'product engineering', 'UX design', 'product analytics'] as const;
+const ROLE_BULLETS = ['Founder', 'product engineering', 'UX design', 'analytics'] as const;
 const INTRO_SUMMARY = 'DemoStoke is a live marketplace that helps riders and shops discover, book, and manage demo and rental gear in one place.';
 
 const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionProps) => (
