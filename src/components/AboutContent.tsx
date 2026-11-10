@@ -604,8 +604,8 @@ const AboutContent = () => {
               <AboutModalTitle as='h2'>About Michael</AboutModalTitle>
               <AboutModalCopy>
                 <p>
-                  Michael is a results-oriented Product Leader with a background in product engineering, UX design,
-                  DevOps, SEO, and e-commerce platforms.
+                  Michael is a results-oriented Product Engineer and UX designer with a background in DevOps, SEO, and
+                  e-commerce platforms.
                 </p>
                 <p>
                   He has hired and led engineering teams to build high-engagement products from 0 to 1 under tight

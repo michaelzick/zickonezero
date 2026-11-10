@@ -34,7 +34,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'My Roles',
-    description: 'All of the UX design, from discovery and wireframes through validated flows, plus front-end development. I also led the team of senior WordPress and WooCommerce developers who built the store, its LMS integrations, and the admin tools, and measured the live store with WooCommerce Analytics and GA4.',
+    description: 'I was the Product Lead: I set the product direction and did all of the UX design, from discovery and wireframes through validated flows, plus front-end development. I also led the team of senior WordPress and WooCommerce developers who built the store, its LMS integrations, and the admin tools, and measured the live store with WooCommerce Analytics and GA4.',
     image: { src: '/img/antisyphon/admin-course-edit.webp', alt: 'Admin course creation form inside WordPress' }
   }
 ] as const;

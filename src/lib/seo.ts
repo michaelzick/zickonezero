@@ -35,7 +35,7 @@ const personNode = (): JsonLd => ({
   '@id': PERSON_ID,
   name: 'Michael Zick',
   url: HOME_URL,
-  jobTitle: 'Product Leader',
+  jobTitle: ['Product Engineer', 'UX designer'],
   sameAs: SAME_AS,
 });
 

@@ -305,7 +305,7 @@ describe('Home and About visuals', () => {
 
     expect(aboutHero).toBeInTheDocument();
     expect(aboutHero).toContainElement(aboutCta);
-    const biography = screen.getByText(/Michael is a results-oriented Product Leader/i);
+    const biography = screen.getByText(/Michael is a results-oriented Product Engineer and UX designer/i);
     expect(biography).toBeInTheDocument();
     expect(biography).not.toBeVisible();
     expect(aboutCta).toHaveAttribute('aria-expanded', 'false');
@@ -318,7 +318,7 @@ describe('Home and About visuals', () => {
 
     const aboutDialog = screen.getByRole('dialog', { name: 'About Michael' });
     expect(aboutDialog).toBeInTheDocument();
-    expect(screen.getByText(/Michael is a results-oriented Product Leader/i)).toBeInTheDocument();
+    expect(screen.getByText(/Michael is a results-oriented Product Engineer and UX designer/i)).toBeInTheDocument();
     expect(within(aboutDialog).getByRole('link', { name: 'main gallery' })).toBeInTheDocument();
     expect(within(aboutDialog).getByRole('link', { name: 'GitHub' })).toBeInTheDocument();
     expect(within(aboutDialog).getByRole('link', { name: 'LinkedIn' })).toBeInTheDocument();
@@ -346,7 +346,7 @@ describe('Home and About visuals', () => {
     // takes what the header leaves, so it scrolls at any header height.
     expect(getMatchingRuleValues(aboutDialog, 'max-height')).toContain('88dvh');
     expect(getMatchingRuleValues(aboutDialog, 'flex-direction')).toContain('column');
-    const copy = within(aboutDialog).getByText(/results-oriented Product Leader/).parentElement as HTMLElement;
+    const copy = within(aboutDialog).getByText(/results-oriented Product Engineer and UX designer/).parentElement as HTMLElement;
     expect(getMatchingRuleValues(copy, 'overflow-y')).toContain('auto');
     expect(getMatchingRuleValues(copy, 'min-height')).toContain('0');
     expect(getMatchingRuleValues(copy, 'overscroll-behavior')).toContain('contain');

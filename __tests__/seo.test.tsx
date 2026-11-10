@@ -181,6 +181,10 @@ describe('Seo', () => {
     expect((work.author as Record<string, unknown>)['@id']).toBe(PERSON_ID);
   });
 
+  it('gives the person the same titles the site shows', () => {
+    expect(personJsonLd().jobTitle).toEqual(['Product Engineer', 'UX designer']);
+  });
+
   it('uses the trailing-slash home URL for the site and the person', () => {
     expect(webSiteJsonLd().url).toBe(`${ORIGIN}/`);
     expect(personJsonLd().url).toBe(`${ORIGIN}/`);

@@ -40,7 +40,7 @@ export const TLDR_ITEMS: {
 }[] = [
   {
     title: 'Product Summary',
-    description: 'Riders and shops struggle with fragmented, offline demo and rental flows. I designed and built DemoStoke, now live at demostoke.com, to bring all of it into one marketplace. In validation sessions, 90% of shop owners said it would bring them more customers, and 100% of riders described it as "the thing that should already exist."',
+    description: 'Riders and shops struggle with fragmented, offline demo and rental flows. I designed and built DemoStoke, now live at demostoke.com, to bring all of it into one marketplace. In validation sessions, 90% of shop owners said it would bring them more customers, and 95% of riders described it as "the thing that should already exist."',
     image: {
       src: '/img/demostoke/case-study/ds-explore-hybrid.webp',
       alt: 'DemoStoke global gear discovery collage'
