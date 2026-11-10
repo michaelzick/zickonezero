@@ -34,7 +34,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'My Roles',
-    description: 'Product strategy, product engineering, and WordPress/WooCommerce engineering plus LMS/admin integrations, then measuring the live store with WooCommerce Analytics and GA4.',
+    description: 'All of the UX design, from discovery and wireframes through validated flows, plus the front-end development. I also led the team of senior WordPress and WooCommerce developers who built the store, its LMS integrations, and the admin tools, and measured the live store with WooCommerce Analytics and GA4.',
     image: { src: '/img/antisyphon/admin-course-edit.webp', alt: 'Admin course creation form inside WordPress' }
   }
 ] as const;
@@ -74,11 +74,11 @@ export const METHOD_SECTIONS: MethodSection[] = [
     images: [{ src: '/img/antisyphon/wireframe-corporate-dashboard.webp', alt: 'Corporate dashboard with course progress' }]
   },
   {
-    title: 'Build the Customer and Admin Interfaces',
+    title: 'Lead the Build',
     bullets: [
-      'Customized WooCommerce and WordPress templates for live/on-demand courses and subscriptions.',
-      'Integrated with the LMS plus PHP/MySQL services for progress tracking, certificates, and reporting.',
-      'Streamlined admin forms and ACF-driven inputs, cutting course setup time by roughly 85%.',
+      'Developed the front end of the catalog, course pages, cart, and checkout for live and on-demand courses and subscriptions.',
+      'Led a team of senior WordPress and WooCommerce developers through the LMS integration and the PHP/MySQL services behind progress tracking, certificates, and reporting.',
+      'Designed the streamlined admin forms and ACF-driven inputs the team built, cutting course setup time by roughly 85%.',
       'Tracked the live store with WooCommerce Analytics and GA4, so enrollment and checkout changes showed up as numbers, not anecdotes.'
     ],
     images: [{ src: '/img/antisyphon/admin-event-tickets.webp', alt: 'Admin order edit view with custom fields' }]

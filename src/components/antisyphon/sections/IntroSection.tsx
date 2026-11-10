@@ -12,7 +12,7 @@ type IntroSectionProps = {
   visibleSections: VisibleSections;
 };
 
-const ROLE_BULLETS = ['Product strategy', 'product engineering', 'UX design', 'analytics'] as const;
+const ROLE_BULLETS = ['UX design', 'front-end development', 'development team lead', 'product strategy', 'analytics'] as const;
 const INTRO_SUMMARY = 'Antisyphon Training is a cybersecurity training marketplace in production, selling live, on-demand, and pay-what-you-can security courses.';
 
 const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionProps) => (

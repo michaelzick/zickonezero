@@ -79,7 +79,7 @@ const HOME_DISTRICTS: readonly HomeDistrict[] = [
     japanese: '主力製品',
     unit: 'Live products',
     status: 'Live',
-    tagline: 'Designed, engineered, shipped, and measured end to end.',
+    tagline: 'Live products I designed, shipped, and measured end to end.',
     carouselLabel: 'Flagship products',
     includeItem: ({ group }) => CASE_STUDY_GROUPS.has(group),
     disableThumbClick: true,
