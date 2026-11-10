@@ -1,8 +1,8 @@
 import DemoStokeContent from '../src/components/DemoStokeContent';
 import Seo from '../src/components/Seo';
-import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
+import { breadcrumbJsonLd, softwareApplicationJsonLd } from '../src/lib/seo';
 
-const TITLE = 'DemoStoke UX Case Study';
+const TITLE = 'DemoStoke: Gear Rental Marketplace for Riders and Shops';
 const DESCRIPTION =
   'DemoStoke is a unified marketplace that helps riders and shops discover, book, and manage demo and rental gear in one place.';
 const PATH = '/demostoke/';
@@ -20,7 +20,15 @@ const DemoStoke = () => (
       ogImageWidth={3456}
       ogImageHeight={1944}
       jsonLd={[
-        creativeWorkJsonLd({ name: TITLE, description: DESCRIPTION, path: PATH, image: OG_IMAGE }),
+        softwareApplicationJsonLd({
+          name: 'DemoStoke',
+          description: DESCRIPTION,
+          path: PATH,
+          appUrl: 'https://www.demostoke.com/',
+          applicationCategory: 'SportsApplication',
+          operatingSystem: 'Web',
+          image: OG_IMAGE,
+        }),
         breadcrumbJsonLd([
           { name: 'Home', path: '/' },
           { name: TITLE, path: PATH },

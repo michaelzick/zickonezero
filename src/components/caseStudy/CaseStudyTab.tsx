@@ -62,7 +62,8 @@ import {
   SectionNavRevealAnchor,
   SectionsBlock,
   Summary,
-  Title
+  Title,
+  TitleStatus
 } from '../../../styles/projectShowcases';
 import { trackEvent, trackLinkClick } from '../../lib/analytics';
 import { heroImageSources } from '../../lib/responsiveImages';
@@ -94,9 +95,12 @@ const IntroSection = ({ study, setAnimatedSectionRef, visibleSections }: Section
             <img src={intro.image.src} {...heroImageSources(intro.image.src)} alt={intro.image.alt} loading='eager' fetchPriority='high' />
           </CaseStudyHeroMediaFrame>
           <HeroContent className='text-animate'>
-            <Title>{name}<br />UX Case Study</Title>
+            <hgroup>
+              <Title>{name}</Title>
+              <TitleStatus>{intro.status}</TitleStatus>
+            </hgroup>
             <div>
-              <CaseStudyHeroLabel>Description</CaseStudyHeroLabel>
+              <CaseStudyHeroLabel>The Product</CaseStudyHeroLabel>
               <Summary>{intro.summary}</Summary>
             </div>
             <div>
@@ -108,7 +112,7 @@ const IntroSection = ({ study, setAnimatedSectionRef, visibleSections }: Section
               </RoleList>
             </div>
             <LinkRow>
-              <CaseStudyHeroLabel>{intro.links.length > 1 ? 'Project Links' : 'Project Link'}</CaseStudyHeroLabel>
+              <CaseStudyHeroLabel>Use It Live</CaseStudyHeroLabel>
               <div>
                 {intro.links.map(({ label, href }) => (
                   <a
@@ -121,7 +125,7 @@ const IntroSection = ({ study, setAnimatedSectionRef, visibleSections }: Section
                         location: 'case_study_hero',
                         label,
                         href,
-                        section: `${name} UX Case Study`,
+                        section: `${name} Product Story`,
                       });
                       trackEvent('external_project_click', {
                         location: `${analyticsId}_case_study`,
@@ -293,7 +297,7 @@ const WhoSection = ({
     className={visibleSections['section-the-who'] ? 'visible' : undefined}
   >
     <section id='section-the-who' className='story-section'>
-      <CaseStudySectionTitle as='h2'>The Who / Audiences and Stakeholders</CaseStudySectionTitle>
+      <CaseStudySectionTitle as='h2'>The Who / Who Uses It</CaseStudySectionTitle>
       <DemoStokeAccordion className='text-animate'>
         {study.personas.map(({ title, bullets }) => {
           const personaId = `persona-${title.toLowerCase().replace(/\s+/g, '-')}`;
@@ -338,7 +342,7 @@ const MethodsSection = ({ study, setAnimatedSectionRef, visibleSections, openMet
   let imageOffset = 0;
   return (
     <section id='section-methodology' className='story-section'>
-      <CaseStudySectionTitle as='h2'>Methods / The UX Process</CaseStudySectionTitle>
+      <CaseStudySectionTitle as='h2'>Methods / Design, Build, Measure</CaseStudySectionTitle>
       <DemoStokeMethodList>
         {study.methods.map(({ title, bullets, images }, index) => {
           const offset = imageOffset;

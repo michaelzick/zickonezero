@@ -42,9 +42,9 @@ describe('AntisyphonContent', () => {
   it('renders the showcase-style case study shell with desktop and mobile section navs', () => {
     renderWithProviders(<AntisyphonContent />);
 
-    const heroHeading = screen.getByRole('heading', { name: 'Antisyphon UX Case Study' });
+    const heroHeading = screen.getByRole('heading', { name: 'Antisyphon Training' });
     const whatHeading = screen.getByRole('heading', { name: 'The What' });
-    const methodsHeading = screen.getByRole('heading', { name: 'Methods / The UX Process' });
+    const methodsHeading = screen.getByRole('heading', { name: 'Methods / Design, Build, Measure' });
     const outcomeHeading = screen.getByRole('heading', { name: 'The Outcome' });
     const desktopTabs = screen.getByLabelText('Desktop page sections');
     const mobileTabs = screen.getByLabelText('Mobile page sections');
@@ -55,7 +55,7 @@ describe('AntisyphonContent', () => {
     const methodsSectionEl = methodsSection as HTMLElement;
     const outcomeSectionEl = outcomeSection as HTMLElement;
 
-    expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'UX Case Study' }));
+    expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'Product Story' }));
     expect(screen.getByRole('tablist', { name: 'Page sections' })).toBeInTheDocument();
     expect(desktopTabs).toBeInTheDocument();
     expect(mobileTabs).toBeInTheDocument();
@@ -65,7 +65,9 @@ describe('AntisyphonContent', () => {
     expect(document.getElementById('section-links')).toBeNull();
     expect(heroHeading).toBeInTheDocument();
     expect(whatHeading).toBeInTheDocument();
-    expect(heroHeading.querySelector('br')).toBeInTheDocument();
+    // The live-status line follows the product's name in its hgroup.
+    expect(heroHeading.parentElement?.tagName).toBe('HGROUP');
+    expect(heroHeading.nextElementSibling).toHaveTextContent(/live/i);
     expect(screen.getByAltText('Antisyphon Training homepage with course cards')).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Open image: Antisyphon Training homepage with course cards' })).not.toBeInTheDocument();
     expect(whatSection).not.toBeNull();

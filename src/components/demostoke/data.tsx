@@ -40,7 +40,7 @@ export const TLDR_ITEMS: {
 }[] = [
   {
     title: 'Product Summary',
-    description: 'Riders and shops struggle with fragmented, offline demo and rental flows. I designed DemoStoke to be a unified marketplace to solve those issues. In validation sessions, 90% of shop owners said it would bring them more customers, and 100% of riders described it as "the thing that should already exist."',
+    description: 'Riders and shops struggle with fragmented, offline demo and rental flows. I designed and built DemoStoke, now live at demostoke.com, as a unified marketplace to solve those issues. In validation sessions, 90% of shop owners said it would bring them more customers, and 100% of riders described it as "the thing that should already exist."',
     image: {
       src: '/img/demostoke/case-study/ds-explore-hybrid.webp',
       alt: 'DemoStoke global gear discovery collage'
@@ -64,7 +64,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'My Roles',
-    description: 'I led DemoStoke end to end as founder, Product Engineer, and UX designer, shaping the product strategy, research, information architecture, user flows, and visual system. I also built the front end, auth and dashboard flows, database-backed features, and AI-assisted discovery tooling needed to turn the concept into a working web application.',
+    description: 'I led DemoStoke end to end as founder, Product Engineer, and UX designer, shaping the product strategy, research, information architecture, user flows, and visual system. I also built the front end, auth and dashboard flows, database-backed features, and AI-assisted discovery tooling behind the live web app, plus the analytics that measure how riders and shops use it.',
     image: {
       src: '/img/demostoke/ds-design-system.webp',
       alt: 'DemoStoke design system components'
@@ -92,11 +92,12 @@ export const METHOD_SECTIONS = [
     image: { src: '/img/demostoke/skiiers-on-lift.webp', alt: 'Skiers riding a chairlift together' }
   },
   {
-    title: 'Prototype, Test, and Refine the Product',
+    title: 'Prototype, Ship, and Measure',
     bullets: [
       'Used Lovable AI to generate hi-fi pages quickly, then refined with prompt engineering.',
       'Layered custom frontend polish and Supabase to demo discovery, admin, and AI integrations.',
-      'Ran moderated and unmoderated walkthroughs to validate discovery, booking, and trust cues.'
+      'Ran moderated and unmoderated walkthroughs to validate discovery, booking, and trust cues.',
+      'Shipped it with GTM, GA4, and Mixpanel behind a regional consent check, tracking over 60 events across search, filters, reservations, AI tools, and shop listings.'
     ],
     image: { src: '/img/demostoke/surfer-and-guy-with-phone.webp', alt: 'Surfer carrying a board while walking beside a man on his phone' }
   }

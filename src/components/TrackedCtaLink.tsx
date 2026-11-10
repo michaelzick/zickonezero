@@ -18,7 +18,7 @@ type TrackedCtaLinkProps = {
 
 const resolveEventName = (href: string, label: string, eventName?: string) => {
   if (eventName) return eventName;
-  if (/project|portfolio|case study/i.test(label)) return 'project_click';
+  if (/project|portfolio|case study|flagship/i.test(label)) return 'project_click';
   if (/contact|book|schedule|request|demo/i.test(label)) return 'cta_click';
   if (/^https?:\/\//i.test(href)) return 'external_project_click';
   return 'cta_click';

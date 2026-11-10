@@ -41,20 +41,22 @@ describe('DemoStokeContent', () => {
   it('renders the refactored case-study view and removes the old why section', () => {
     renderWithProviders(<DemoStokeContent />);
 
-    const heroHeading = screen.getByRole('heading', { name: 'DemoStoke UX Case Study' });
+    const heroHeading = screen.getByRole('heading', { name: 'DemoStoke' });
     const whatHeading = screen.getByRole('heading', { name: 'The What' });
-    const methodsHeading = screen.getByRole('heading', { name: 'Methods / The UX Process' });
-    const whoHeading = screen.getByRole('heading', { name: 'The Who / User Personas' });
+    const methodsHeading = screen.getByRole('heading', { name: 'Methods / Design, Build, Measure' });
+    const whoHeading = screen.getByRole('heading', { name: 'The Who / Who Uses It' });
     const theWhatImage = screen.getByAltText('DemoStoke global gear discovery collage');
     const whatSection = document.getElementById('section-the-what');
 
-    expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'UX Case Study' }));
+    expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'Product Story' }));
     expect(screen.getByRole('tablist', { name: 'Page sections' })).toBeInTheDocument();
     expect(screen.getByLabelText('Desktop page sections')).toBeInTheDocument();
     expect(screen.getByLabelText('Mobile page sections')).toBeInTheDocument();
     expect(heroHeading).toBeInTheDocument();
     expect(whatHeading).toBeInTheDocument();
-    expect(heroHeading.querySelector('br')).toBeInTheDocument();
+    // The live-status line follows the product's name in its hgroup.
+    expect(heroHeading.parentElement?.tagName).toBe('HGROUP');
+    expect(heroHeading.nextElementSibling).toHaveTextContent(/live/i);
     expect(screen.getByAltText('DemoStoke homepage hero showing a surfer riding through the wave')).toBeInTheDocument();
     expect(screen.queryByLabelText('DemoStoke hero video')).not.toBeInTheDocument();
     expect(whoHeading).toBeInTheDocument();

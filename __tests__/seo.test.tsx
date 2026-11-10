@@ -13,6 +13,7 @@ import Seo from '../src/components/Seo';
 import {
   contactPageJsonLd,
   creativeWorkJsonLd,
+  softwareApplicationJsonLd,
   DEFAULT_OG_IMAGE,
   PERSON_ID,
   personJsonLd,
@@ -89,19 +90,53 @@ describe('Seo', () => {
 
   it('emits parseable JSON-LD with absolute URLs', () => {
     const jsonLd = creativeWorkJsonLd({
-      name: 'DemoStoke UX Case Study',
-      description: 'A unified gear marketplace.',
-      path: '/demostoke/',
-      image: '/img/demostoke/case-study/ds-hero-surf.webp',
+      name: 'Bars of Sand',
+      description: 'A browser surf lab.',
+      path: '/bars-of-sand/',
+      image: '/img/projects/bars-of-sand/hero.webp',
     });
-    render(<Seo path='/demostoke/' jsonLd={jsonLd} />);
+    render(<Seo path='/bars-of-sand/' jsonLd={jsonLd} />);
 
     const script = document.querySelector('script[type="application/ld+json"]');
     expect(script).not.toBeNull();
     const parsed = JSON.parse(script?.textContent ?? '{}');
     expect(parsed['@type']).toBe('CreativeWork');
-    expect(parsed.url).toBe(`${ORIGIN}/demostoke/`);
-    expect(parsed.image).toBe(`${ORIGIN}/img/demostoke/case-study/ds-hero-surf.webp`);
+    expect(parsed.url).toBe(`${ORIGIN}/bars-of-sand/`);
+    expect(parsed.image).toBe(`${ORIGIN}/img/projects/bars-of-sand/hero.webp`);
+  });
+
+  it('describes a flagship as the live app, with this site’s page as its subject', () => {
+    const app = softwareApplicationJsonLd({
+      name: 'Riptyde',
+      description: 'Surf forecasts.',
+      path: '/riptyde/',
+      appUrl: 'https://riptyde.app/',
+      downloadUrl: 'https://apps.apple.com/us/app/riptyde/id6793336480',
+      applicationCategory: 'SportsApplication',
+      operatingSystem: 'iOS, Web',
+    });
+
+    expect(app['@type']).toBe('SoftwareApplication');
+    expect(app.url).toBe('https://riptyde.app/');
+    expect(app.downloadUrl).toBe('https://apps.apple.com/us/app/riptyde/id6793336480');
+    expect((app.author as Record<string, unknown>)['@id']).toBe(PERSON_ID);
+    expect(app.subjectOf).toEqual({ '@type': 'WebPage', url: `${ORIGIN}/riptyde/` });
+  });
+
+  it('credits Michael as a contributor on a client product', () => {
+    const app = softwareApplicationJsonLd({
+      name: 'Antisyphon Training',
+      description: 'Security training.',
+      path: '/antisyphon-training/',
+      appUrl: 'https://www.antisyphontraining.com/',
+      applicationCategory: 'EducationalApplication',
+      operatingSystem: 'Web',
+      clientProduct: true,
+    });
+
+    expect(app.author).toBeUndefined();
+    expect(app.downloadUrl).toBeUndefined();
+    expect((app.contributor as Record<string, unknown>)['@id']).toBe(PERSON_ID);
   });
 
   it('renders each entry when jsonLd is an array', () => {

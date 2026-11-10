@@ -25,14 +25,14 @@ export type NavMenuConfig = {
 export const NAV_MENUS: readonly NavMenuConfig[] = [
   {
     key: 'case-studies',
-    label: 'Case Studies',
+    label: 'Flagship Products',
     sections: { desktop: 'case_studies_dropdown', mobile: 'case_studies_accordion' },
     links: CASE_STUDIES_LINKS,
     external: false,
   },
   {
     key: 'projects',
-    label: 'Product Engineering',
+    label: 'Design & Build',
     sections: { desktop: 'ux_design_dropdown', mobile: 'ux_design_accordion' },
     links: PROJECT_LINKS,
     external: false,

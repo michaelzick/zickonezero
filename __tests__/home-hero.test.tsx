@@ -75,11 +75,11 @@ describe('Homepage city', () => {
     );
     expect(screen.getByText('I dream of the feature.')).toBeInTheDocument();
 
-    await user.click(screen.getByRole('button', { name: 'See Case Studies' }));
+    await user.click(screen.getByRole('button', { name: 'See Flagship Products' }));
 
     expect(track).toHaveBeenCalledWith('cta_click', {
       location: 'home_intro',
-      label: 'See Case Studies',
+      label: 'See Flagship Products',
       section: 'case-studies',
       page_path: '/',
     });
@@ -109,8 +109,8 @@ describe('Homepage city', () => {
     });
 
     const hud = screen.getByRole('navigation', { name: 'Homepage sections' });
-    await user.click(within(hud).getByRole('button', { name: 'Head to Case Studies' }));
-    await user.click(within(hud).getByRole('button', { name: 'Head to Product Engineering' }));
+    await user.click(within(hud).getByRole('button', { name: 'Head to Flagship Products' }));
+    await user.click(within(hud).getByRole('button', { name: 'Head to Design & Build' }));
     await user.click(within(hud).getByRole('button', { name: 'Head to Web Development' }));
     expect(window.scrollY).toBeGreaterThan(2000);
 
@@ -121,7 +121,7 @@ describe('Homepage city', () => {
     expect(track).toHaveBeenLastCalledWith('section_tab_click', expect.objectContaining({
       location: 'home_tabs', label: 'Return to surface', section: 'hero',
     }));
-    expect(within(hud).getByRole('button', { name: 'Head to Case Studies' })).toBeInTheDocument();
+    expect(within(hud).getByRole('button', { name: 'Head to Flagship Products' })).toBeInTheDocument();
   });
 
   it('takes the brand link back to the top of the homepage, even mid-jump', async () => {
@@ -269,7 +269,7 @@ describe('Homepage city', () => {
 
     const hud = screen.getByRole('navigation', { name: 'Homepage sections' });
     expect(within(within(hud).getByRole('list')).getAllByRole('button').map((pin) => pin.textContent))
-      .toEqual(['Case Studies', 'Product Engineering', 'Web Dev']);
+      .toEqual(['Flagship Products', 'Design & Build', 'Web Dev']);
 
     ['case-studies', 'ux-design', 'web-development'].forEach((id) => {
       expect(container.querySelector(`#${id}`)).not.toBeNull();

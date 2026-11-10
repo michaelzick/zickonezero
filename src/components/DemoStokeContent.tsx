@@ -101,7 +101,7 @@ const DemoStokeContent = () => {
         <DemoStokeTabs
           ref={handleTopTabsRef}
           tabs={[
-            { key: 'case-study', label: 'UX Case Study' },
+            { key: 'case-study', label: 'Product Story' },
             { key: 'stories', label: 'User Stories' }
           ]}
           activeTab={activeTab}

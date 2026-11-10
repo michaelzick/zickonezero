@@ -78,7 +78,7 @@ export const METHOD_SECTIONS: MethodSection[] = [
     bullets: [
       'Built an admin dashboard with real reporting: course completion, chapter progress, video and audio engagement, and enrollment trends.',
       'Run the whole business from the same place, from orders and coupons to reviews and email marketing, without touching code.',
-      'Instrumented the funnel from first visit through enrollment so I can see where men hesitate and fix it.'
+      'Instrumented the funnel with Mixpanel and GA4, from first visit through the catalog, checkout, and course completion, with consent-gated session replay, so I can see where men hesitate and fix it.'
     ],
     images: [{ src: '/img/nice-guy-university/ngu-admin-analytics.webp', alt: 'Nice Guy University admin analytics dashboard showing course completion by status' }]
   }

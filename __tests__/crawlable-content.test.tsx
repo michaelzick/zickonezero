@@ -9,10 +9,12 @@ import ContactContent from '../src/components/ContactContent';
 import DemoStokeContent from '../src/components/DemoStokeContent';
 import AntisyphonContent from '../src/components/AntisyphonContent';
 import NiceGuyUniversityContent from '../src/components/NiceGuyUniversityContent';
+import MainContent from '../src/components/MainContent';
 import ProjectShowcase from '../src/components/ProjectShowcase';
 import CaseStudyPage from '../src/components/caseStudy/CaseStudyPage';
 import { RACKLOOSE_CASE_STUDY } from '../src/components/rackloose/caseStudyData';
 import { RIPTYDE_CASE_STUDY } from '../src/components/riptyde/caseStudyData';
+import worksData from '../src/data/worksData.json';
 import { createTestStore, renderWithProviders } from '../src/test/renderWithProviders';
 import { AppThemeProvider } from '../src/theme/ThemeContext';
 
@@ -40,7 +42,7 @@ describe('Crawlable case-study panels', () => {
   ] as const)('includes %s secondary content before interaction and keeps tab visibility exclusive', async (_name, Content, tabName, text) => {
     const user = userEvent.setup();
     const { container } = renderWithProviders(<Content />);
-    const initialTab = screen.getByRole('tab', { name: 'UX Case Study' });
+    const initialTab = screen.getByRole('tab', { name: 'Product Story' });
     const secondaryTab = screen.getByRole('tab', { name: tabName });
     const initialPanel = document.getElementById(initialTab.getAttribute('aria-controls') ?? '');
     const secondaryPanel = document.getElementById(secondaryTab.getAttribute('aria-controls') ?? '');
@@ -144,5 +146,22 @@ describe('Main landmark in the static HTML', () => {
     levels.forEach((level, index) => {
       if (index > 0) expect(level).toBeLessThanOrEqual(levels[index - 1] + 1);
     });
+  });
+});
+
+// The flagships are live products, not case studies: neither the homepage nor
+// any flagship page (both tabs, nav, and footer) calls them that.
+describe('Flagship framing in the static HTML', () => {
+  it.each([
+    ['the homepage', () => <MainContent worksDataReversed={worksData} />],
+    ['DemoStoke', () => <DemoStokeContent />],
+    ['Antisyphon', () => <AntisyphonContent />],
+    ['Nice Guy University', () => <NiceGuyUniversityContent />],
+    ['Riptyde', () => <RiptydeContent />],
+    ['Rackloose', () => <RacklooseContent />],
+  ] as const)('never calls %s a case study', (_name, renderPage) => {
+    const html = renderStaticHtml(renderPage());
+
+    expect(html.textContent).not.toMatch(/case stud/i);
   });
 });

@@ -25,7 +25,7 @@ const methodImageOffsets = METHOD_SECTIONS.reduce<number[]>((offsets, _section, 
 
 const MethodsSection = ({ setAnimatedSectionRef, visibleSections, openMethodLightbox }: MethodsSectionProps) => (
   <section id='section-methodology' className='story-section'>
-    <CaseStudySectionTitle as='h2'>Methods / The UX Process</CaseStudySectionTitle>
+    <CaseStudySectionTitle as='h2'>Methods / Design, Build, Measure</CaseStudySectionTitle>
     <DemoStokeMethodList>
       {METHOD_SECTIONS.map(({ title, bullets, images }, index) => (
         <AnimatedSection

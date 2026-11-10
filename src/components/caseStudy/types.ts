@@ -22,9 +22,9 @@ export type CaseStudyScreenBlock = {
 };
 
 /**
- * Everything a two-tab case study (UX Case Study and Product Screens) shows.
- * CaseStudyPage renders it with the same markup and styles as Nice Guy
- * University's case study.
+ * Everything a flagship product's two-tab page (Product Story and Product
+ * Screens) shows. CaseStudyPage renders it with the same markup and styles as
+ * Nice Guy University's page.
  */
 export type CaseStudyData = {
   /** Kebab-case id for DOM ids, e.g. 'riptyde'. */
@@ -33,6 +33,8 @@ export type CaseStudyData = {
   analyticsId: string;
   name: string;
   intro: {
+    /** The live-status line under the product's name, e.g. "Live on the App Store and the web". */
+    status: string;
     summary: string;
     roles: readonly string[];
     /** The opening hero; needs an entry in HERO_IMAGE_WIDTHS when wider than 640px. */

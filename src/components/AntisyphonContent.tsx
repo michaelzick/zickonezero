@@ -143,7 +143,7 @@ const AntisyphonContent = () => {
         <DemoStokeTabs
           ref={handleTopTabsRef}
           tabs={[
-            { key: 'case-study', label: 'UX Case Study' },
+            { key: 'case-study', label: 'Product Story' },
             { key: 'flows', label: 'Product Screens' }
           ]}
           activeTab={activeTab}

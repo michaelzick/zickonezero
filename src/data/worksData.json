@@ -122,40 +122,40 @@
   {
     "thumb": "/img/home/cards/at_logo_purple.webp",
     "imgs": [],
-    "desc": "Cybersecurity training marketplace and CMS",
-    "header": "CASE STUDY: Antisyphon Training",
+    "desc": "Live cybersecurity training marketplace and course CMS",
+    "header": "Antisyphon Training",
     "group": "antisyphon-training",
     "link": "/antisyphon-training"
   },
   {
     "thumb": "/img/home/cards/demostoke-logo-square.webp",
     "imgs": [],
-    "desc": "Action sports gear rental system and lifestyle blog",
-    "header": "CASE STUDY: DemoStoke",
+    "desc": "Live action sports gear rental platform and lifestyle blog",
+    "header": "DemoStoke",
     "group": "demostoke",
     "link": "/demostoke"
   },
   {
     "thumb": "/img/home/cards/ngu-logo-square.webp",
     "imgs": [],
-    "desc": "Recovery course and coaching platform for men",
-    "header": "CASE STUDY: Nice Guy University",
+    "desc": "Live recovery course and coaching platform for men",
+    "header": "Nice Guy University",
     "group": "nice-guy-university",
     "link": "/nice-guy-university"
   },
   {
     "thumb": "/img/home/cards/rackloose-icon-square.webp",
     "imgs": [],
-    "desc": "Playable modular synth for the browser with original devices",
-    "header": "CASE STUDY: Rackloose",
+    "desc": "Live modular synth for the browser with original devices",
+    "header": "Rackloose",
     "group": "rackloose",
     "link": "/rackloose"
   },
   {
     "thumb": "/img/home/cards/riptyde-icon-square.webp",
     "imgs": [],
-    "desc": "Surf forecast for iOS and the web with one score per break",
-    "header": "CASE STUDY: Riptyde",
+    "desc": "Live surf forecast on iOS and the web, one score per break",
+    "header": "Riptyde",
     "group": "riptyde",
     "link": "/riptyde"
   },

@@ -30,7 +30,7 @@ const WhoSection = ({
     className={visibleSections['section-the-who'] ? 'visible' : undefined}
   >
     <section id='section-the-who' className='story-section'>
-      <CaseStudySectionTitle as='h2'>The Who / Audiences and Stakeholders</CaseStudySectionTitle>
+      <CaseStudySectionTitle as='h2'>The Who / Who Uses It</CaseStudySectionTitle>
       <DemoStokeAccordion className='text-animate'>
         {PERSONA_ITEMS.map(({ title, bullets }) => {
           const personaId = `persona-${title.toLowerCase().replace(/\s+/g, '-')}`;

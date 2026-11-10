@@ -71,7 +71,7 @@ export const DistrictSection = styled.section`
   }
 `;
 
-/** The district's street sign: number, kicker, the h2, and a readout. */
+/** The district's street sign: number, kicker, the h2, its tagline, and a readout. */
 export const DistrictSign = styled.header`
   position: relative;
   display: grid;
@@ -140,9 +140,20 @@ export const DistrictSign = styled.header`
     overflow-wrap: anywhere;
   }
 
+  .district-tagline {
+    grid-column: 2;
+    margin: 0.35em 0 0;
+    color: var(--color-grey);
+    font-family: ${THEME.fonts.hud};
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: 0.04em;
+  }
+
   .district-readout {
     grid-column: 3;
-    grid-row: 1 / span 2;
+    grid-row: 1 / span 3;
     align-self: end;
     margin: 0;
     color: var(--color-grey);
@@ -169,6 +180,10 @@ export const DistrictSign = styled.header`
     .district-kicker {
       font-size: 0.68rem;
       letter-spacing: 0.24em;
+    }
+
+    .district-tagline {
+      grid-column: 1 / -1;
     }
 
     .district-readout {

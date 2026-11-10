@@ -136,7 +136,7 @@ describe('HUD toggles and readouts', () => {
       const onObjectiveClick = jest.fn();
       const { container } = render(
         <QuestTracker
-          objective='Explore Product Engineering'
+          objective='Explore Design & Build'
           onObjectiveClick={onObjectiveClick}
           distanceRef={distanceRef}
         />,
@@ -147,7 +147,7 @@ describe('HUD toggles and readouts', () => {
       expect(container.querySelector('.quest-distance')).toHaveAttribute('aria-hidden', 'true');
       expect(distanceRef.current).toHaveTextContent('-.- km');
 
-      await user.click(screen.getByRole('button', { name: 'Explore Product Engineering' }));
+      await user.click(screen.getByRole('button', { name: 'Explore Design & Build' }));
       expect(onObjectiveClick).toHaveBeenCalledTimes(1);
     });
   });

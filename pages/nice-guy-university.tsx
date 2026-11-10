@@ -1,8 +1,8 @@
 import NiceGuyUniversityContent from '../src/components/NiceGuyUniversityContent';
 import Seo from '../src/components/Seo';
-import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
+import { breadcrumbJsonLd, softwareApplicationJsonLd } from '../src/lib/seo';
 
-const TITLE = 'Nice Guy University UX Case Study';
+const TITLE = 'Nice Guy University: Recovery Courses and Coaching for Men';
 const DESCRIPTION =
   'Nice Guy University is a platform that turns the Nice Guy recovery coaching I do one-on-one into self-paced courses men can start tonight.';
 const PATH = '/nice-guy-university/';
@@ -20,7 +20,15 @@ const NiceGuyUniversity = () => (
       ogImageWidth={3456}
       ogImageHeight={1934}
       jsonLd={[
-        creativeWorkJsonLd({ name: TITLE, description: DESCRIPTION, path: PATH, image: OG_IMAGE }),
+        softwareApplicationJsonLd({
+          name: 'Nice Guy University',
+          description: DESCRIPTION,
+          path: PATH,
+          appUrl: 'https://www.niceguyuniversity.com/',
+          applicationCategory: 'EducationalApplication',
+          operatingSystem: 'Web',
+          image: OG_IMAGE,
+        }),
         breadcrumbJsonLd([
           { name: 'Home', path: '/' },
           { name: TITLE, path: PATH },

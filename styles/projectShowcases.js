@@ -243,6 +243,31 @@ export const Title = styled.h1`
   line-height: 1.12;
 `;
 
+/* The live-status line under a flagship product's name, led by an accent dot. */
+export const TitleStatus = styled.p`
+  display: flex;
+  align-items: baseline;
+  gap: 0.55em;
+  margin: 0.4em 0 0;
+  color: ${THEME.colors.white};
+  font-family: ${THEME.fonts.hud};
+  font-size: clamp(1.05rem, 1.7vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  text-transform: uppercase;
+
+  &::before {
+    content: '';
+    flex: none;
+    width: 0.55em;
+    height: 0.55em;
+    border-radius: 50%;
+    background: var(--city-accent);
+    box-shadow: 0 0 calc(8px * var(--neon-glow-strength, 1)) var(--city-accent);
+  }
+`;
+
 export const Summary = styled.p`
   margin: 0;
   font-size: clamp(1em, 1.35vw, 1.05em);

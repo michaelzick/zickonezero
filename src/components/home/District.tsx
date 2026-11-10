@@ -11,7 +11,9 @@ type Props = {
   headingId: string;
   /** The decorative Japanese street name. */
   japanese: string;
-  /** The tally on the sign, such as 3 "Case files". */
+  /** What Michael did on the district's work, shown under the heading. */
+  tagline: string;
+  /** The tally on the sign, such as 5 "Live products". */
   readout: { count: number; unit: string };
   sectionRef?: Ref<HTMLElement>;
   children: ReactNode;
@@ -20,11 +22,11 @@ type Props = {
 const pad = (value: number) => String(value).padStart(2, '0');
 
 /**
- * A homepage district: a neon street sign over its grid of gigs. The h2 is the
- * real heading; the number, the kicker with its Japanese street name, and the
- * readout are decoration that assistive tech skips.
+ * A homepage district: a neon street sign over its grid of gigs. The h2 and
+ * the tagline under it are real content; the number, the kicker with its
+ * Japanese street name, and the readout are decoration that assistive tech skips.
  */
-const District = ({ tone, number, title, headingId, japanese, readout, sectionRef, children }: Props) => (
+const District = ({ tone, number, title, headingId, japanese, tagline, readout, sectionRef, children }: Props) => (
   <DistrictSection ref={sectionRef} $tone={tone} data-district={tone}>
     <DistrictSign>
       <p className='district-no' aria-hidden='true'>{pad(number)}</p>
@@ -33,6 +35,7 @@ const District = ({ tone, number, title, headingId, japanese, readout, sectionRe
         <span lang='ja'>{japanese}</span>
       </p>
       <h2 id={headingId}>{title}</h2>
+      <p className='district-tagline'>{tagline}</p>
       <p className='district-readout' aria-hidden='true'>
         <b>{pad(readout.count)}</b>
         {readout.unit}

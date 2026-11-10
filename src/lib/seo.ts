@@ -94,6 +94,56 @@ export const creativeWorkJsonLd = ({ name, description, path, image }: CreativeW
   },
 });
 
+export type SoftwareApplicationInput = {
+  /** The product's name, e.g. 'Riptyde'. */
+  name: string;
+  description: string;
+  /** This site's page about the product. */
+  path: string;
+  /** Where the live product runs. */
+  appUrl: string;
+  /** An app store listing, when there is one. */
+  downloadUrl?: string;
+  applicationCategory: string;
+  operatingSystem: string;
+  image?: string;
+  /** A product Michael built for a client: he is a contributor, not its author. */
+  clientProduct?: boolean;
+};
+
+/** A live product Michael shipped, described by this site's page about it. */
+export const softwareApplicationJsonLd = ({
+  name,
+  description,
+  path,
+  appUrl,
+  downloadUrl,
+  applicationCategory,
+  operatingSystem,
+  image,
+  clientProduct = false,
+}: SoftwareApplicationInput): JsonLd => ({
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name,
+  description,
+  url: appUrl,
+  ...(downloadUrl ? { downloadUrl } : {}),
+  applicationCategory,
+  operatingSystem,
+  image: absoluteUrl(image ?? DEFAULT_OG_IMAGE),
+  [clientProduct ? 'contributor' : 'author']: {
+    '@type': 'Person',
+    '@id': PERSON_ID,
+    name: 'Michael Zick',
+    url: HOME_URL,
+  },
+  subjectOf: {
+    '@type': 'WebPage',
+    url: absoluteUrl(path),
+  },
+});
+
 export type BreadcrumbItem = {
   name: string;
   path: string;

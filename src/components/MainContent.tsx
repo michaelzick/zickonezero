@@ -38,6 +38,8 @@ const DESKTOP_NAV_OFFSET = 92;
 const PHONE_NAV_OFFSET = 148;
 const PHONE_QUERY = '(max-width: 600px)';
 const DETECTION_BUFFER = 12;
+// The hero's CTA, which is also its analytics label.
+const SEE_FLAGSHIP_PRODUCTS = 'See Flagship Products';
 const CASE_STUDY_GROUPS = new Set(['demostoke', 'antisyphon-training', 'nice-guy-university', 'riptyde', 'rackloose']);
 
 const getNavOffset = () => (window.matchMedia(PHONE_QUERY).matches ? PHONE_NAV_OFFSET : DESKTOP_NAV_OFFSET);
@@ -58,6 +60,8 @@ type HomeDistrict = {
   unit: string;
   /** The status chip on each of the district's cards. */
   status: string;
+  /** The sign's visible line saying what Michael did on the district's work. */
+  tagline: string;
   carouselLabel: string;
   includeItem: (item: WorksData) => boolean;
   /** Linked cards navigate; only gallery cards open the lightbox. */
@@ -67,29 +71,31 @@ type HomeDistrict = {
 const HOME_DISTRICTS: readonly HomeDistrict[] = [
   {
     section: 'case-studies',
-    tabLabel: 'Case Studies',
+    tabLabel: 'Flagship Products',
     accent: 'magenta',
     tone: 'case',
-    title: 'Case Studies',
+    title: 'Flagship Products',
     headingId: 'case-studies',
-    japanese: '事例研究',
-    unit: 'Case files',
-    status: 'Case file',
-    carouselLabel: 'Case Studies projects',
+    japanese: '主力製品',
+    unit: 'Live products',
+    status: 'Live',
+    tagline: 'Designed, engineered, shipped, and measured end to end.',
+    carouselLabel: 'Flagship products',
     includeItem: ({ group }) => CASE_STUDY_GROUPS.has(group),
     disableThumbClick: true,
   },
   {
     section: 'ux',
-    tabLabel: 'Product Engineering',
+    tabLabel: 'Design & Build',
     accent: 'cyan',
     tone: 'product',
-    title: 'Product Engineering',
+    title: 'Design & Build',
     headingId: 'ux-design',
-    japanese: '製品開発',
-    unit: 'Live products',
+    japanese: '設計と開発',
+    unit: 'Live builds',
     status: 'Live',
-    carouselLabel: 'Product Engineering projects',
+    tagline: 'Smaller sites and tools I designed and built.',
+    carouselLabel: 'Design & Build projects',
     includeItem: (item) => Boolean(item.link) && !CASE_STUDY_GROUPS.has(item.group),
     disableThumbClick: true,
   },
@@ -103,6 +109,7 @@ const HOME_DISTRICTS: readonly HomeDistrict[] = [
     japanese: 'ウェブ開発',
     unit: 'Archive gigs',
     status: 'Archive',
+    tagline: 'Hand-coded for film studios and brands, from their designs.',
     carouselLabel: 'Web Development projects',
     includeItem: (item) => !item.link,
   },
@@ -171,7 +178,7 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
   }, [jumper, setActiveSection]);
 
   const handleHomeSectionClick = useCallback((section: HomeSectionKey, label: string, location: string) => {
-    trackEvent(label === 'See Case Studies' ? 'cta_click' : 'section_tab_click', {
+    trackEvent(label === SEE_FLAGSHIP_PRODUCTS ? 'cta_click' : 'section_tab_click', {
       location,
       label,
       section,
@@ -180,8 +187,8 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
     scrollToHomeSection(section);
   }, [scrollToHomeSection]);
 
-  const handleSeeCaseStudies = useCallback(() => {
-    handleHomeSectionClick('case-studies', 'See Case Studies', 'home_intro');
+  const handleSeeFlagshipProducts = useCallback(() => {
+    handleHomeSectionClick('case-studies', SEE_FLAGSHIP_PRODUCTS, 'home_intro');
   }, [handleHomeSectionClick]);
 
   const handleTravel = useCallback((section: HomeSectionKey, label: string) => {
@@ -257,7 +264,7 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
 
       <Wrapper isHomePage isMobileMenuShown={isMobileMenuShown}
         onClick={() => dispatch(showMobileMenu(false))}>
-        <HeroScene onSeeCaseStudies={handleSeeCaseStudies} />
+        <HeroScene onSeeFlagshipProducts={handleSeeFlagshipProducts} />
 
         <HoloBillboard />
 
@@ -272,6 +279,7 @@ const MainContent = ({ worksDataReversed: worksDataReversedProp }: MainContentPr
             title={district.title}
             headingId={district.headingId}
             japanese={district.japanese}
+            tagline={district.tagline}
             readout={{ count: worksDataReversed.filter(district.includeItem).length, unit: district.unit }}
           >
             <GridContent

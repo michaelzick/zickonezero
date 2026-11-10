@@ -1,8 +1,8 @@
 import AntisyphonContent from '../src/components/AntisyphonContent';
 import Seo from '../src/components/Seo';
-import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
+import { breadcrumbJsonLd, softwareApplicationJsonLd } from '../src/lib/seo';
 
-const TITLE = 'Antisyphon Training UX Case Study';
+const TITLE = 'Antisyphon Training: Cybersecurity Training Marketplace';
 const DESCRIPTION =
   'Antisyphon Training is a cohesive marketplace experience for live, on-demand, and pay-what-you-can security education.';
 const PATH = '/antisyphon-training/';
@@ -20,7 +20,16 @@ const Antisyphon = () => (
       ogImageWidth={3411}
       ogImageHeight={1789}
       jsonLd={[
-        creativeWorkJsonLd({ name: TITLE, description: DESCRIPTION, path: PATH, image: OG_IMAGE }),
+        softwareApplicationJsonLd({
+          name: 'Antisyphon Training',
+          description: DESCRIPTION,
+          path: PATH,
+          appUrl: 'https://www.antisyphontraining.com/',
+          applicationCategory: 'EducationalApplication',
+          operatingSystem: 'Web',
+          image: OG_IMAGE,
+          clientProduct: true,
+        }),
         breadcrumbJsonLd([
           { name: 'Home', path: '/' },
           { name: TITLE, path: PATH },

@@ -47,10 +47,30 @@ describe('Home and About visuals', () => {
     expect(screen.queryByAltText('DemoStoke gear quiz flow')).not.toBeInTheDocument();
     expect(screen.queryByAltText('Antisyphon Training course catalog')).not.toBeInTheDocument();
     expect(screen.queryByAltText('Illustrated self-portrait near Mt. Hood')).not.toBeInTheDocument();
-    expect(screen.getAllByRole('heading', { name: 'Case Studies' }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole('button', { name: 'Product Engineering' }).length).toBeGreaterThan(0);
-    // The footer has its own "Product Engineering" column title.
-    expect(within(screen.getByRole('main')).getByRole('heading', { level: 2, name: 'Product Engineering' })).toBeInTheDocument();
+    expect(screen.getAllByRole('heading', { name: 'Flagship Products' }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole('button', { name: 'Design & Build' }).length).toBeGreaterThan(0);
+    // The footer has its own "Design & Build" column title.
+    expect(within(screen.getByRole('main')).getByRole('heading', { level: 2, name: 'Design & Build' })).toBeInTheDocument();
+  });
+
+  it('says on each district sign what Michael did on its work', () => {
+    renderWithProviders(<MainContent />, {
+      preloadedState: HOME_PRELOADED_STATE,
+    });
+
+    const taglines = [
+      ['case-studies', 'Designed, engineered, shipped, and measured end to end.'],
+      ['ux-design', 'Smaller sites and tools I designed and built.'],
+      ['web-development', 'Hand-coded for film studios and brands, from their designs.'],
+    ];
+
+    for (const [headingId, tagline] of taglines) {
+      const heading = document.getElementById(headingId)!;
+      const line = heading.nextElementSibling;
+      expect(line).toHaveTextContent(tagline);
+      expect(line).toBeVisible();
+      expect(line?.closest('[aria-hidden="true"]')).toBeNull();
+    }
   });
 
   it('resets the homepage scroll position on mount', () => {
@@ -72,7 +92,7 @@ describe('Home and About visuals', () => {
 
     const aboutLink = screen.getByRole('link', { name: 'About' });
     const linkRow = aboutLink.parentElement!;
-    const projectMenu = screen.getByRole('button', { name: 'Product Engineering' });
+    const projectMenu = screen.getByRole('button', { name: 'Design & Build' });
 
     expect(getMatchingRuleValues(linkRow, 'gap').map(value => value.replace(/\s/g, '')))
       .toContain('clamp(1.5rem,2vw,2.5rem)');
@@ -181,8 +201,8 @@ describe('Home and About visuals', () => {
     });
 
     const sections = [
-      { name: 'Case Studies projects', tone: 'case', headingId: 'case-studies' },
-      { name: 'Product Engineering projects', tone: 'product', headingId: 'ux-design' },
+      { name: 'Flagship products', tone: 'case', headingId: 'case-studies' },
+      { name: 'Design & Build projects', tone: 'product', headingId: 'ux-design' },
       { name: 'Web Development projects', tone: 'web', headingId: 'web-development' },
     ];
 

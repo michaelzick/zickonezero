@@ -34,7 +34,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'My Roles',
-    description: 'Product strategy, product engineering, and WordPress/WooCommerce engineering plus LMS/admin integrations.',
+    description: 'Product strategy, product engineering, and WordPress/WooCommerce engineering plus LMS/admin integrations, then measuring the live store with WooCommerce Analytics and GA4.',
     image: { src: '/img/antisyphon/admin-course-edit.webp', alt: 'Admin course creation form inside WordPress' }
   }
 ] as const;
@@ -78,7 +78,8 @@ export const METHOD_SECTIONS: MethodSection[] = [
     bullets: [
       'Customized WooCommerce and WordPress templates for live/on-demand courses and subscriptions.',
       'Integrated with the LMS plus PHP/MySQL services for progress tracking, certificates, and reporting.',
-      'Streamlined admin forms and ACF-driven inputs, cutting course setup time by roughly 85%.'
+      'Streamlined admin forms and ACF-driven inputs, cutting course setup time by roughly 85%.',
+      'Tracked the live store with WooCommerce Analytics and GA4, so enrollment and checkout changes showed up as numbers, not anecdotes.'
     ],
     images: [{ src: '/img/antisyphon/admin-event-tickets.webp', alt: 'Admin order edit view with custom fields' }]
   }

@@ -103,7 +103,7 @@ describe('events tracked before Mixpanel starts', () => {
     const { startMixpanel, trackEvent: track } = loadAnalytics();
 
     track('page_view', { page_path: '/' });
-    track('cta_click', { label: 'See Case Studies' });
+    track('cta_click', { label: 'See Flagship Products' });
 
     const { sdk, track: sdkTrack } = downloadedSdk();
     startMixpanel();
@@ -111,7 +111,7 @@ describe('events tracked before Mixpanel starts', () => {
     expect(sdk.init).toHaveBeenCalledWith('test-token', expect.any(Object));
     expect(sdkTrack.mock.calls).toEqual([
       ['page_view', { page_path: '/' }],
-      ['cta_click', { label: 'See Case Studies' }],
+      ['cta_click', { label: 'See Flagship Products' }],
     ]);
 
     // Later events go straight out, and nothing is sent twice.
@@ -243,7 +243,7 @@ describe('Google Analytics', () => {
 
     window.history.replaceState(null, '', '/?utm_source=linkedin');
     trackPage(undefined, 'Home');
-    track('cta_click', { label: 'See Case Studies', page_path: '/', missing: undefined });
+    track('cta_click', { label: 'See Flagship Products', page_path: '/', missing: undefined });
     window.history.replaceState(null, '', '/contact/');
 
     loadGoogleAnalytics();
@@ -254,7 +254,7 @@ describe('Google Analytics', () => {
         page_location: 'http://localhost/?utm_source=linkedin',
         page_title: 'Home',
       }],
-      ['event', 'cta_click', { page_location: 'http://localhost/?utm_source=linkedin', label: 'See Case Studies' }],
+      ['event', 'cta_click', { page_location: 'http://localhost/?utm_source=linkedin', label: 'See Flagship Products' }],
       ['event', 'contact_form_submit_succeeded', { page_location: 'http://localhost/contact/' }],
     ]);
   });
