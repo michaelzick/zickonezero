@@ -47,7 +47,7 @@ export const TLDR_ITEMS: {
     }
   },
   {
-    title: 'The Problem',
+    title: 'The Challenge',
     description: 'Riders want to try gear before committing, but most demos still depend on scattered shop events, word of mouth, or expensive short-term rentals. Shops and independent makers also lack a shared digital system for surfacing availability, building trust, and converting a successful demo into a sale.',
     image: {
       src: '/img/demostoke/demo-van.webp',
@@ -64,7 +64,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'My Roles',
-    description: 'I led DemoStoke end to end as founder, Product Engineer, and UX designer, shaping the product strategy, research, information architecture, user flows, and visual system. I also built the front end, auth and dashboard flows, database-backed features, and AI-assisted discovery tooling behind the live web app, plus the analytics that measure how riders and shops use it.',
+    description: 'I led DemoStoke end to end as founder, Product Engineer, and UX Designer, shaping the product strategy, research, information architecture, user flows, and visual system. I also built the front end, auth and dashboard flows, database-backed features, and AI-assisted discovery tooling behind the live web app, plus the analytics that measure how riders and shops use it.',
     image: {
       src: '/img/demostoke/ds-design-system.webp',
       alt: 'DemoStoke design system components'
@@ -124,7 +124,7 @@ export const PERSONA_ITEMS = [
   {
     title: 'Nomadic Renter',
     bullets: [
-      'Maya (31, Santa Cruz) is a van-lifer and remote Product Engineer who rides 1-3x/week.',
+      'Maya (31, Santa Cruz) is a van-lifer and remote product engineer who rides 1-3x/week.',
       'She doesn’t want to own a ton of gear and struggles to find quality rentals in new locations.',
       'She wants DemoStoke to offer verified local lenders, easy-to-find gear specs, and fair prices.'
     ]

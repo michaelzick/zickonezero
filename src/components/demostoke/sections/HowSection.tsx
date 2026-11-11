@@ -43,7 +43,7 @@ const HowSection = ({
     className={visibleSections['section-the-how'] ? 'visible' : undefined}
   >
     <section id='section-the-how' className='story-section'>
-      <CaseStudySectionTitle as='h2'>The How / AI-Driven Development</CaseStudySectionTitle>
+      <CaseStudySectionTitle as='h2'>The How / Marketplace Experience</CaseStudySectionTitle>
       <DemoStokeTldrSection>
         <DemoStokeTwoUp className='text-animate'>
           <section>
@@ -54,10 +54,11 @@ const HowSection = ({
             </p>
           </section>
           <section>
-            <h3>Rapid Prototyping with AI</h3>
+            <h3>From Prototype to Production</h3>
             <p>
-              I built the app’s foundation in Lovable.dev from one well-written prompt, then iterated quickly on its
-              features and user experience.
+              I started the prototype in Lovable, then built the production app on top of it: Supabase auth and data,
+              gear management for owners, a gear quiz, plain-language AI search, and a demo-event calendar that finds
+              new events across the web every week.
             </p>
           </section>
         </DemoStokeTwoUp>

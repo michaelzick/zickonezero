@@ -32,8 +32,9 @@ const WhosInChargePage = () => (
       heroImage={HERO_IMAGE}
       roleBullets={[
       'UX architecture',
-      'visual design',
-      'images and text',
+      'Visual design',
+      'Images and text',
+      'Analytics',
     ]}
     projectLink={{ href: 'https://whosincharge.michaelzick.com/' }}
     sections={[

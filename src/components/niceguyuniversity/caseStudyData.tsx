@@ -34,7 +34,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'My Roles',
-    description: 'All of it. Positioning and copy, UX/UI design, the React front end, the Supabase backend, checkout and coupons, and the admin dashboard I use to run the business every day.',
+    description: 'All of it. Positioning and copy, UX design, the React front end, the Supabase backend, checkout and coupons, and the admin dashboard I use to run the business every day.',
     image: { src: '/img/nice-guy-university/ngu-how-it-works.webp', alt: 'Nice Guy University how it works page' }
   }
 ] as const;

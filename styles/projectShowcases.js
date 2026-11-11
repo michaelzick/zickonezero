@@ -268,6 +268,14 @@ export const TitleStatus = styled.p`
   }
 `;
 
+/* A plain line under a secondary tab's heading that says what the tab holds. */
+export const TabNote = styled.p`
+  margin: 0.4em 0 0;
+  font-size: clamp(1em, 1.35vw, 1.05em);
+  line-height: 1.4;
+  opacity: 0.85;
+`;
+
 export const Summary = styled.p`
   margin: 0;
   font-size: clamp(1em, 1.35vw, 1.05em);

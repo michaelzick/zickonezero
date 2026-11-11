@@ -569,7 +569,7 @@ const AboutContent = () => {
                   <dt>Subject</dt>
                   <dd>M. Zick</dd>
                   <dt>Class</dt>
-                  <dd>Product Engineer + UX designer</dd>
+                  <dd>Product Engineer + UX Designer</dd>
                   <dt>Status</dt>
                   <dd><span className='status'>Open to connect</span></dd>
                   <dt className='dossier-row-optional'>Last seen</dt>
@@ -604,15 +604,16 @@ const AboutContent = () => {
               <AboutModalTitle as='h2'>About Michael</AboutModalTitle>
               <AboutModalCopy>
                 <p>
-                  Michael is a results-oriented Product Engineer and UX designer with a background in DevOps, SEO, and
-                  e-commerce platforms.
+                  Michael is a Product Engineer and UX Designer with a background in DevOps, SEO, and e-commerce
+                  platforms.
                 </p>
                 <p>
                   He has hired and led engineering teams to build high-engagement products from 0 to 1 under tight
                   deadlines, while aligning cross-functional stakeholders in highly ambiguous environments.
                 </p>
                 <p>
-                  From concept to launch, Michael thrives on solving complex problems with elegant, user-centered solutions.
+                  He designs, builds, and runs four live products of his own: Riptyde, Rackloose, Nice Guy University, and
+                  DemoStoke. Each one is measured in production with Mixpanel and GA4.
                 </p>
                 <p>
                   Samples of his work can be found in the <TrackedLink href='/' label='main gallery' location='about_modal' section='body'>main gallery</TrackedLink>, with code examples on{' '}

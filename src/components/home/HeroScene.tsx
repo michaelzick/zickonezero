@@ -164,7 +164,7 @@ const HeroScene = ({ onSeeFlagshipProducts }: HeroSceneProps) => {
 
         <HudFrame className='hero-panel'>
           <p className='hero-eyebrow'>
-            Product Engineer <span aria-hidden='true'>{'//'}</span> UX designer
+            Product Engineer <span aria-hidden='true'>{'//'}</span> UX Designer
           </p>
           <h1 id='home-hero-title' className='hero-title'>
             Michael Zick is{' '}<BrandName />{' '}

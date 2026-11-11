@@ -16,6 +16,7 @@ import {
   HowSection,
   IntroSection,
   MethodsSection,
+  OutcomeSection,
   PersonasSection,
   WhatSection
 } from './sections';
@@ -79,6 +80,7 @@ const CaseStudyContent = ({
             togglePersona={togglePersona}
           />
           <MethodsSection setAnimatedSectionRef={setAnimatedSectionRef} visibleSections={visibleSections} />
+          <OutcomeSection setAnimatedSectionRef={setAnimatedSectionRef} visibleSections={visibleSections} />
         </SectionsBlock>
       </CaseStudyPageInner>
     </PageShell>

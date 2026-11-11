@@ -51,7 +51,7 @@ describe('NiceGuyUniversityContent', () => {
     expect(heroHeading.parentElement?.tagName).toBe('HGROUP');
     expect(heroHeading.nextElementSibling).toHaveTextContent(/live/i);
     expect(screen.getAllByText(/turns the Nice Guy recovery coaching I do one-on-one into self-paced courses/i).length).toBeGreaterThan(0);
-    expect(screen.getByRole('link', { name: 'Website' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Web App' })).toBeInTheDocument();
     expect(screen.getByAltText('Nice Guy University homepage with hero and calls to action')).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Open image: Nice Guy University homepage with hero and calls to action' })).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The What' })).toBeInTheDocument();

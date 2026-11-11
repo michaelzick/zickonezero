@@ -32,8 +32,9 @@ const FindYourFlowStatePage = () => (
       heroImage={HERO_IMAGE}
       roleBullets={[
       'Product strategy',
-      'quiz questions',
-      'product engineering'
+      'Product engineering',
+      'Quiz writing',
+      'Analytics'
     ]}
     projectLink={{ href: 'https://findyourflowstate.michaelzick.com/' }}
     sections={[

@@ -27,10 +27,10 @@ type IntroSectionProps = {
 
 const ROLE_BULLETS = [
   'Product strategy',
-  'UX/UI design',
-  'product engineering',
-  'content architecture',
-  'analytics'
+  'Product engineering',
+  'UX design',
+  'Content architecture',
+  'Analytics'
 ] as const;
 const INTRO_SUMMARY = 'Nice Guy University is a live course and coaching platform that turns the Nice Guy recovery coaching I do one-on-one into self-paced courses men can start tonight.';
 const PROJECT_URL = 'https://www.niceguyuniversity.com/';
@@ -75,19 +75,19 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
                 onClick={() => {
                   trackLinkClick({
                     location: 'case_study_hero',
-                    label: 'Website',
+                    label: 'Web App',
                     href: PROJECT_URL,
                     section: 'Nice Guy University Product Story',
                   });
                   trackEvent('external_project_click', {
                     location: 'nice_guy_university_case_study',
-                    label: 'Website',
+                    label: 'Web App',
                     href: PROJECT_URL,
                     page_path: window.location.pathname,
                   });
                 }}
               >
-                Website <OpenInNewWindowIcon aria-hidden='true' />
+                Web App <OpenInNewWindowIcon aria-hidden='true' />
               </a>
             </div>
           </LinkRow>

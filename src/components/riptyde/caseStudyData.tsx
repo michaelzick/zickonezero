@@ -19,7 +19,7 @@ export const RIPTYDE_CASE_STUDY: CaseStudyData = {
   intro: {
     status: 'Live on the App Store and the web',
     summary: 'Riptyde is a West Coast surf forecast, live on iPhone and at riptyde.app, that gives every break one score out of 10, then shows you exactly how it got there.',
-    roles: ['Product strategy', 'product engineering', 'UX design', 'iOS development', 'analytics'],
+    roles: ['Product strategy', 'Product engineering', 'UX design', 'iOS development', 'Analytics'],
     image: HERO,
     imageBackground: '#0B2A4A',
     links: [

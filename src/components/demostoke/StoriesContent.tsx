@@ -9,7 +9,8 @@ import {
   CompactIntroHeaderRow,
   CompactSectionNavRevealAnchor,
   PageShell,
-  SectionsBlock
+  SectionsBlock,
+  TabNote
 } from '../../../styles/projectShowcases';
 
 type StoriesContentProps = {
@@ -41,6 +42,7 @@ const StoriesContent = ({
                 <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' loading='lazy' />
                 <div>
                   <h2 className='tab-header page-header'>DemoStoke User Stories</h2>
+                  <TabNote>Stories from the pre-launch research that shaped what DemoStoke built first.</TabNote>
                   <PitchDeckLink
                     href="https://www.demostoke.com/"
                     target='_blank'

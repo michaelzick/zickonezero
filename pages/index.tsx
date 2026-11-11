@@ -16,7 +16,7 @@ import { personJsonLd, webSiteJsonLd } from '../src/lib/seo';
 
 import type { WorksDataType } from '../src/types';
 
-const DESCRIPTION = 'Michael Zick is ZICK ONE ZERO Creative, a Product Engineer and UX designer. Explore live flagship products, smaller design and build work, and web development.';
+const DESCRIPTION = 'Michael Zick is ZICK ONE ZERO Creative, a Product Engineer and UX Designer. Explore live flagship products, smaller design and build work, and web development.';
 
 const Home: NextPage<WorksDataType> = (props) => {
   const { worksDataReversed } = props;

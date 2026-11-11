@@ -30,7 +30,7 @@ const BarsOfSandPage = () => (
       title={TITLE}
       summary={SUMMARY}
       heroImage={HERO_IMAGE}
-      roleBullets={['Product strategy', 'product engineering', 'UX design']}
+      roleBullets={['Product strategy', 'Product engineering', 'UX design']}
       projectLink={{ href: 'https://bars-of-sand.zickonezero.workers.dev/' }}
       sections={[
         {

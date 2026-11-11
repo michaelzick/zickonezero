@@ -25,7 +25,7 @@ type IntroSectionProps = {
   visibleSections: VisibleSections;
 };
 
-const ROLE_BULLETS = ['Founder', 'product engineering', 'UX design', 'analytics'] as const;
+const ROLE_BULLETS = ['Founder', 'Product strategy', 'Product engineering', 'UX design', 'Analytics'] as const;
 const INTRO_SUMMARY = 'DemoStoke is a live marketplace that helps riders and shops discover, book, and manage demo and rental gear in one place.';
 
 const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionProps) => (
@@ -74,19 +74,19 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
                 onClick={() => {
                   trackLinkClick({
                     location: 'case_study_hero',
-                    label: 'Website',
+                    label: 'Web App',
                     href: 'https://www.demostoke.com/',
                     section: 'DemoStoke Product Story',
                   });
                   trackEvent('external_project_click', {
                     location: 'case_study_hero',
-                    label: 'Website',
+                    label: 'Web App',
                     href: 'https://www.demostoke.com/',
                     page_path: window.location.pathname,
                   });
                 }}
               >
-                Website <OpenInNewWindowIcon aria-hidden='true' />
+                Web App <OpenInNewWindowIcon aria-hidden='true' />
               </a>
             </div>
           </LinkRow>

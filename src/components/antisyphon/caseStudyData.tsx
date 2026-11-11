@@ -49,7 +49,7 @@ export const METHOD_SECTIONS: MethodSection[] = [
   {
     title: 'Discovery and Alignment',
     bullets: [
-      'Partnered with BHIS creative directors, instructors, and ops leaders to define goals for the new marketplace.',
+      'Partnered with Black Hills Information Security creative directors, instructors, and ops leaders to define goals for the new marketplace.',
       'Mapped pain points across third-party sales, LMS enrollment, and communications.',
       'Captured requirements for live events, on-demand courses, coupons, and corporate purchasing.'
     ],
