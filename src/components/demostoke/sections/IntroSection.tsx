@@ -26,7 +26,7 @@ type IntroSectionProps = {
 };
 
 const ROLE_BULLETS = ['Founder', 'Product strategy', 'Product engineering', 'UX design', 'Analytics'] as const;
-const INTRO_SUMMARY = 'DemoStoke is a live marketplace that helps riders and shops discover, book, and manage demo and rental gear in one place.';
+const INTRO_SUMMARY = 'DemoStoke is a live marketplace that helps riders find demo and rental gear from nearby shops and owners, then contact them to rent it.';
 
 const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionProps) => (
   <AnimatedSection

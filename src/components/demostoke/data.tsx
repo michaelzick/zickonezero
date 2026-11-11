@@ -56,7 +56,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'The Solution',
-    description: 'DemoStoke turns those fragmented offline workflows into a location-aware marketplace where riders can discover gear nearby, compare listings, and book demos or rentals with more confidence. The platform also gives shops, shapers, and individual lenders tools to showcase inventory, manage availability, and turn trial experiences into repeat business.',
+    description: 'DemoStoke turns those fragmented offline workflows into a location-aware marketplace where riders can discover gear nearby, compare listings, and contact the shop or owner to set up a demo or rental. The platform also gives shops, shapers, and individual lenders tools to list and manage their gear and turn trial experiences into repeat business.',
     image: {
       src: '/img/demostoke/surf-shop.webp',
       alt: 'Surf shop displaying boards available for demo'
@@ -97,7 +97,7 @@ export const METHOD_SECTIONS = [
       'Used Lovable to generate hi-fi pages quickly, then refined them with prompt engineering.',
       'Added custom front-end work and a Supabase backend for discovery, admin, and the AI features.',
       'Ran moderated and unmoderated walkthroughs to validate discovery, booking, and trust cues.',
-      'Shipped with GTM, GA4, and Mixpanel behind a regional consent check, tracking over 60 events across search, filters, reservations, AI tools, and shop listings.'
+      'Shipped with GTM, GA4, and Mixpanel behind a regional consent check, tracking over 60 events across search, filters, rental requests, AI tools, and shop listings.'
     ],
     image: { src: '/img/demostoke/surfer-and-guy-with-phone.webp', alt: 'Surfer carrying a board while walking beside a man on his phone' }
   }

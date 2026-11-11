@@ -4,7 +4,7 @@ import { breadcrumbJsonLd, softwareApplicationJsonLd } from '../src/lib/seo';
 
 const TITLE = 'DemoStoke: Gear Rental Marketplace for Riders and Shops';
 const DESCRIPTION =
-  'DemoStoke is a live marketplace that helps riders and shops discover, book, and manage demo and rental gear in one place.';
+  'DemoStoke is a live marketplace that helps riders find demo and rental gear from nearby shops and owners, then contact them to rent it.';
 const PATH = '/demostoke/';
 const OG_IMAGE = '/img/demostoke/case-study/ds-hero-surf.webp';
 
