@@ -176,14 +176,6 @@
     "link": "/timefraim"
   },
   {
-    "thumb": "/img/home/cards/ds-logo-stripes-fuchsia-square.webp",
-    "imgs": [],
-    "desc": "Gear shop dashboard and embeddable booking widget",
-    "header": "DemoStoke Fleet Ops",
-    "group": "demostoke-fleet-ops",
-    "link": "/demostoke-fleet-ops"
-  },
-  {
     "thumb": "/img/home/cards/bars-of-sand-icon-square.webp",
     "imgs": [],
     "desc": "Interactive 3D surf lab for sandbars, waves, and sand movement",

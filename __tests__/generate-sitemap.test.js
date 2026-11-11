@@ -12,7 +12,7 @@ describe('generate-sitemap', () => {
     });
 
     it('converts hyphenated page names', () => {
-      expect(routeFromPageFile(path.join(PAGES_DIR, 'demostoke-fleet-ops.tsx'))).toBe('/demostoke-fleet-ops/');
+      expect(routeFromPageFile(path.join(PAGES_DIR, 'nice-guy-university.tsx'))).toBe('/nice-guy-university/');
     });
 
     it('returns null for _app.tsx', () => {

@@ -4,11 +4,12 @@ import { SidebarSectionConfig } from '../SidebarSectionTabs';
 
 export const SCREEN_SECTIONS: SidebarSectionConfig[] = [
   { id: 'screens-introduction', label: 'Intro', hidden: true },
-  { id: 'screens-explore', label: 'Explore' },
-  { id: 'screens-gear-and-shops', label: 'Gear and Shops' },
-  { id: 'screens-gear-quiz', label: 'Gear Quiz' },
-  { id: 'screens-demo-calendar', label: 'Demo Calendar' },
-  { id: 'screens-list-your-gear', label: 'List Your Gear' }
+  { id: 'screens-explore', label: 'Find Gear' },
+  { id: 'screens-gear-and-shops', label: 'Listings' },
+  { id: 'screens-demo-calendar', label: 'Events' },
+  { id: 'screens-fleet-ops', label: 'Fleet Ops' },
+  { id: 'screens-inventory', label: 'Gear Admin' },
+  { id: 'screens-booking-widget', label: 'Widget' }
 ] as const;
 
 export const SCREEN_BOTTOM_SECTION_ID = SCREEN_SECTIONS[SCREEN_SECTIONS.length - 1]?.id;
@@ -27,48 +28,41 @@ export type ScreenBlock = {
   images: { src: string; alt: string; }[];
 };
 
-// Captured from the live site at demostoke.com.
+// Rider screens come from the live site at demostoke.com. Fleet Ops screens come from
+// fleet.demostoke.com, signed in to MZ Rentals, Michael's test shop, and its widget
+// embedded on the demoshop.demostoke.com sample site.
 export const SCREEN_BLOCKS: ScreenBlock[] = [
   {
     id: 'screens-explore',
-    title: 'Explore and Search',
+    title: 'Find Gear',
     copy: (
       <>
         Explore shows gear on a map, in a list, or both side by side, and the list keeps to whatever stretch of coast or
         mountain is on the map. Search takes plain language, like &quot;beginner surfboard for small waves,&quot; and turns
-        it into filtered results.
+        it into filtered results. Riders who don&apos;t know what to look for take the gear quiz: six short steps that end in
+        AI recommendations matched to how they ride.
       </>
     ),
     images: [
       { src: '/img/demostoke/screens/ds-screen-explore.webp', alt: 'DemoStoke explore page with gear cards beside a map of Los Angeles' },
-      { src: '/img/demostoke/screens/ds-screen-search.webp', alt: 'DemoStoke search results for a plain-language surfboard query' }
+      { src: '/img/demostoke/screens/ds-screen-search.webp', alt: 'DemoStoke search results for a plain-language surfboard query' },
+      { src: '/img/demostoke/screens/ds-screen-quiz.webp', alt: 'DemoStoke gear quiz first step with surfboard, snowboard, ski, and mountain bike choices' }
     ]
   },
   {
     id: 'screens-gear-and-shops',
-    title: 'Gear and Shops',
+    title: 'Gear, Shops, and Lenders',
     copy: (
       <>
         Every listing has its own page with the daily price, specs, the shop or owner behind it, and similar gear nearby.
         Book Now puts the rider in touch with the shop to arrange the rental. Shop pages carry the shop&apos;s story,
-        contact details, and full inventory.
+        contact details, and full inventory, and owners list their own boards and bikes through a short form.
       </>
     ),
     images: [
       { src: '/img/demostoke/screens/ds-screen-gear.webp', alt: 'DemoStoke gear page for a longboard with its daily price and a Book Now button' },
-      { src: '/img/demostoke/screens/ds-screen-shop.webp', alt: 'DemoStoke shop page for Pacific Beach Surf Shop with its available equipment' }
-    ]
-  },
-  {
-    id: 'screens-gear-quiz',
-    title: 'Gear Quiz',
-    copy: (
-      <>
-        Six short steps, starting with the sport, end in AI recommendations matched to how the rider actually rides.
-      </>
-    ),
-    images: [
-      { src: '/img/demostoke/screens/ds-screen-quiz.webp', alt: 'DemoStoke gear quiz first step with surfboard, snowboard, ski, and mountain bike choices' }
+      { src: '/img/demostoke/screens/ds-screen-shop.webp', alt: 'DemoStoke shop page for Pacific Beach Surf Shop with its available equipment' },
+      { src: '/img/demostoke/screens/ds-screen-list.webp', alt: 'DemoStoke List Your Gear page with manual entry and point-of-sale options' }
     ]
   },
   {
@@ -87,16 +81,51 @@ export const SCREEN_BLOCKS: ScreenBlock[] = [
     ]
   },
   {
-    id: 'screens-list-your-gear',
-    title: 'List Your Gear',
+    id: 'screens-fleet-ops',
+    title: 'Fleet Ops Dashboard',
     copy: (
       <>
-        The way in for lenders. Owners add boards and bikes through a short form, and shops get a path to bring in
-        inventory from their point-of-sale system.
+        Fleet Ops is the shop side of DemoStoke. Its dashboard opens on equipment, bookings, revenue, and anything waiting
+        on the shop. The bookings list follows each reservation from pending to completed, with Stripe refunds a click
+        away, and analytics chart revenue, bookings, and utilization for any date range, with an AI panel that suggests
+        what to change. These screens come from MZ Rentals, my test shop, since no shop runs on Fleet Ops yet.
       </>
     ),
     images: [
-      { src: '/img/demostoke/screens/ds-screen-list.webp', alt: 'DemoStoke List Your Gear page with manual entry and point-of-sale options' }
+      { src: '/img/demostoke/screens/ds-fleet-dashboard.webp', alt: 'DemoStoke Fleet Ops dashboard with equipment, booking, and revenue totals beside recent bookings and popular gear' },
+      { src: '/img/demostoke/screens/ds-fleet-bookings.webp', alt: 'DemoStoke Fleet Ops bookings list with rental dates, totals, statuses, and refund actions' },
+      { src: '/img/demostoke/screens/ds-fleet-analytics.webp', alt: 'DemoStoke Fleet Ops analytics with revenue and bookings charts for a 90-day range' }
+    ]
+  },
+  {
+    id: 'screens-inventory',
+    title: 'Inventory',
+    copy: (
+      <>
+        Shops manage the whole fleet from one list, with search, category and brand filters, and a switch that hides an
+        item from riders. The gear editor previews the rider-facing card as the shop types, in any of five storefront
+        themes.
+      </>
+    ),
+    images: [
+      { src: '/img/demostoke/screens/ds-fleet-inventory.webp', alt: 'DemoStoke Fleet Ops equipment list with category, status, widget visibility, and daily price' },
+      { src: '/img/demostoke/screens/ds-fleet-gear-editor.webp', alt: 'DemoStoke Fleet Ops gear editor with card themes and a live preview of the gear card' }
+    ]
+  },
+  {
+    id: 'screens-booking-widget',
+    title: 'Booking Widget',
+    copy: (
+      <>
+        One script tag puts a shop&apos;s inventory on its own website. The shop picks a theme in Fleet Ops, and the widget
+        carries it from browsing to dates, pricing, and checkout. Here it is embedded on a sample shop site. Checkout opens
+        to riders when the first shop goes live.
+      </>
+    ),
+    images: [
+      { src: '/img/demostoke/screens/ds-fleet-widget-themes.webp', alt: 'DemoStoke Fleet Ops widget settings with the embed code and the storefront theme menu open' },
+      { src: '/img/demostoke/screens/ds-fleet-widget-embed.webp', alt: 'DemoStoke booking widget embedded on a sample ski shop rentals page' },
+      { src: '/img/demostoke/screens/ds-fleet-widget-dates.webp', alt: 'DemoStoke booking widget with rental dates picked and a price summary' }
     ]
   }
 ] as const;

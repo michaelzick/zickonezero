@@ -26,7 +26,7 @@ type IntroSectionProps = {
 };
 
 const ROLE_BULLETS = ['Founder', 'Product strategy', 'Product engineering', 'UX design', 'Analytics'] as const;
-const INTRO_SUMMARY = 'DemoStoke is a live marketplace that helps riders find demo and rental gear from nearby shops and owners, then contact them to rent it.';
+const INTRO_SUMMARY = 'DemoStoke is a gear rental marketplace with two sides: a live site where riders find demo and rental gear from nearby shops and owners, and Fleet Ops, where shops manage that gear and take bookings through a widget on their own sites.';
 const TIMELINE = 'April 2025 to now, solo';
 
 const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionProps) => (

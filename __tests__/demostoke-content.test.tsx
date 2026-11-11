@@ -95,7 +95,7 @@ describe('DemoStokeContent', () => {
 
     const introHeading = screen.getByRole('heading', { name: 'DemoStoke Product Screens' });
     const introRow = introHeading.closest('div')?.parentElement as HTMLElement | null;
-    const labels = ['Explore', 'Gear and Shops', 'Gear Quiz', 'Demo Calendar', 'List Your Gear'];
+    const labels = ['Find Gear', 'Listings', 'Events', 'Fleet Ops', 'Gear Admin', 'Widget'];
 
     expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'Product Screens' }));
     expect(getTabLabels(screen.getByLabelText('Desktop page sections'))).toEqual(labels);
@@ -108,7 +108,7 @@ describe('DemoStokeContent', () => {
     expect(
       screen.getAllByRole('button', { name: 'Open image: DemoStoke homepage with a gear search box and category shortcuts' }).length
     ).toBeGreaterThan(0);
-    ['Explore and Search', 'Gear and Shops', 'Gear Quiz', 'Demo Calendar', 'List Your Gear'].forEach((name) => {
+    ['Find Gear', 'Gear, Shops, and Lenders', 'Demo Calendar', 'Fleet Ops Dashboard', 'Inventory', 'Booking Widget'].forEach((name) => {
       expect(screen.getByRole('heading', { name })).toBeInTheDocument();
     });
     // The pre-launch user stories are gone, so a live product never reads as a concept.

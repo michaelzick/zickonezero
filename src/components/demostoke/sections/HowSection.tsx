@@ -43,22 +43,23 @@ const HowSection = ({
     className={visibleSections['section-the-how'] ? 'visible' : undefined}
   >
     <section id='section-the-how' className='story-section'>
-      <CaseStudySectionTitle as='h2'>The How / Marketplace Experience</CaseStudySectionTitle>
+      <CaseStudySectionTitle as='h2'>The How / Two Sides of the Marketplace</CaseStudySectionTitle>
       <DemoStokeTldrSection>
         <DemoStokeTwoUp className='text-animate'>
           <section>
-            <h3>Location-Based Discovery</h3>
+            <h3>For Riders</h3>
             <p>
-              DemoStoke shows riders the demo and rental gear near them on a map, in a list, or both side by side, so
-              they can find something to try without calling around.
+              DemoStoke shows riders the demo and rental gear near them on a map, in a list, or both side by side, with
+              plain-language AI search, a gear quiz, and a demo-event calendar that finds new events across the web every
+              week.
             </p>
           </section>
           <section>
-            <h3>From Prototype to Production</h3>
+            <h3>For Shops</h3>
             <p>
-              I started the prototype in Lovable, then built the production app on top of it: Supabase auth and data,
-              gear management for owners, a gear quiz, plain-language AI search, and a demo-event calendar that finds
-              new events across the web every week.
+              Fleet Ops is where shops run their rentals: inventory, pricing, add-ons, bookings, and analytics, with
+              Stripe payments and SendGrid booking emails. One script tag puts a booking widget, in the shop&apos;s
+              chosen theme, on its own website.
             </p>
           </section>
         </DemoStokeTwoUp>

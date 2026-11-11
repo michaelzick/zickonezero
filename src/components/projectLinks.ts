@@ -6,12 +6,6 @@ export const PROJECT_LINKS = [
     iconAlt: 'Bars of Sand logo'
   },
   {
-    href: '/demostoke-fleet-ops',
-    label: 'DemoStoke Fleet Ops',
-    icon: '/img/nav/ds-logo-stripes-fuchsia-square.webp',
-    iconAlt: 'DemoStoke Fleet Ops logo'
-  },
-  {
     href: '/timefraim',
     label: 'TimeFraim',
     icon: '/img/nav/timefraim-icon-square.webp',

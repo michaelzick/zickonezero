@@ -19,7 +19,6 @@ export const HERO_COPY_WIDTHS: readonly number[] = [640, 960, 1440, 1920];
 export const HERO_IMAGE_WIDTHS: Readonly<Record<string, number>> = {
   '/img/antisyphon/home.webp': 3411,
   '/img/demostoke/case-study/ds-hero-surf.webp': 3456,
-  '/img/fleet-ops/ds-fleet-ops-gear-edit.webp': 3456,
   '/img/nice-guy-university/ngu-home.webp': 3456,
   '/img/projects/12-step-meetings/12-step-meetings-hybrid.webp': 3456,
   '/img/projects/adam-chiappone/ac-home-cropped.webp': 3456,

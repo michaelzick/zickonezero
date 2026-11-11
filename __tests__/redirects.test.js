@@ -19,3 +19,13 @@ describe('removed Michael Zick Coaching route', () => {
     expect(rules).toContainEqual({ from, to: 'https://www.niceguyuniversity.com/', status: '301' });
   });
 });
+
+describe('removed DemoStoke Fleet Ops route', () => {
+  it.each([
+    '/demostoke-fleet-ops',
+    '/demostoke-fleet-ops/',
+    '/demostoke-fleet-ops/*',
+  ])('permanently redirects %s to DemoStoke, which now covers Fleet Ops', (from) => {
+    expect(rules).toContainEqual({ from, to: 'https://www.zickonezero.com/demostoke/', status: '301' });
+  });
+});

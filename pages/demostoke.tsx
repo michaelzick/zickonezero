@@ -4,7 +4,7 @@ import { breadcrumbJsonLd, softwareApplicationJsonLd } from '../src/lib/seo';
 
 const TITLE = 'DemoStoke: Gear Rental Marketplace for Riders and Shops';
 const DESCRIPTION =
-  'DemoStoke is a live marketplace that helps riders find demo and rental gear from nearby shops and owners, then contact them to rent it.';
+  'DemoStoke is a gear rental marketplace with two sides: a live site where riders find demo and rental gear from nearby shops and owners, and Fleet Ops, where shops manage that gear and take bookings through a widget on their own sites.';
 const PATH = '/demostoke/';
 const OG_IMAGE = '/img/demostoke/case-study/ds-hero-surf.webp';
 

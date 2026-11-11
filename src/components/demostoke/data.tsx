@@ -18,7 +18,7 @@ export const TLDR_ITEMS: {
 }[] = [
   {
     title: 'Product Summary',
-    description: 'Riders and shops struggle with fragmented, offline demo and rental flows. I designed and built DemoStoke, now live at demostoke.com, to bring all of it into one marketplace. In validation sessions, 90% of shop owners said it would bring them more customers, and 95% of riders described it as "the thing that should already exist."',
+    description: 'Riders and shops struggle with fragmented, offline demo and rental flows. I designed and built DemoStoke to bring all of it into one marketplace: demostoke.com for riders, live now, and Fleet Ops for the shops that rent to them. In validation sessions, 90% of shop owners said it would bring them more customers, and 95% of riders described it as "the thing that should already exist."',
     image: {
       src: '/img/demostoke/case-study/ds-explore-hybrid.webp',
       alt: 'DemoStoke global gear discovery collage'
@@ -34,7 +34,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'The Solution',
-    description: 'DemoStoke turns those fragmented offline workflows into a location-aware marketplace where riders can discover gear nearby, compare listings, and contact the shop or owner to set up a demo or rental. The platform also gives shops, shapers, and individual lenders tools to list and manage their gear and turn trial experiences into repeat business.',
+    description: 'DemoStoke turns those fragmented offline workflows into a location-aware marketplace where riders can discover gear nearby, compare listings, and contact the shop or owner to set up a demo or rental. Owners and shapers list their gear on the site. Shops get Fleet Ops, a dashboard for inventory, pricing, add-ons, and bookings, with a booking widget that takes reservations on their own websites and turns trial experiences into repeat business.',
     image: {
       src: '/img/demostoke/surf-shop.webp',
       alt: 'Surf shop displaying boards available for demo'
@@ -42,7 +42,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'My Roles',
-    description: 'I led DemoStoke end to end as founder, Product Engineer, and UX Designer, shaping the product strategy, research, information architecture, user flows, and visual system. I also built the front end, auth and dashboard flows, database-backed features, and AI-assisted discovery tooling behind the live web app, plus the analytics that measure how riders and shops use it.',
+    description: 'I led DemoStoke end to end as founder, Product Engineer, and UX Designer, shaping the product strategy, research, information architecture, user flows, and visual system. I also built the front end, auth and dashboard flows, database-backed features, and AI-assisted discovery tooling behind the live web app, plus the analytics that measure how riders and shops use it. On the shop side I built Fleet Ops, with Stripe payments and refunds, SendGrid booking emails, and the embeddable widget.',
     image: {
       src: '/img/demostoke/ds-design-system.webp',
       alt: 'DemoStoke design system components'
@@ -75,6 +75,7 @@ export const METHOD_SECTIONS = [
       'Used Lovable to generate hi-fi pages quickly, then refined them with prompt engineering.',
       'Added custom front-end work and a Supabase backend for discovery, admin, and the AI features.',
       'Ran moderated and unmoderated walkthroughs to validate discovery, booking, and trust cues.',
+      'Built Fleet Ops on the same Supabase project, with Edge Functions for Stripe payments, refunds, and webhooks, SendGrid booking emails, and OpenAI booking insights.',
       'Shipped with GTM, GA4, and Mixpanel behind a regional consent check, tracking over 60 events across search, filters, rental requests, AI tools, and shop listings.'
     ],
     image: { src: '/img/demostoke/surfer-and-guy-with-phone.webp', alt: 'Surfer carrying a board while walking beside a man on his phone' }
