@@ -65,8 +65,8 @@ describe('DemoStokeContent', () => {
     expect(whatSection).not.toBeNull();
     expect(whatSection).toContainElement(whatHeading);
     expect(whoHeading.compareDocumentPosition(methodsHeading) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(getTabLabels(screen.getByLabelText('Desktop page sections'))).toEqual(['The What', 'The How', 'The Who', 'Methods']);
-    expect(getTabLabels(screen.getByLabelText('Mobile page sections'))).toEqual(['The What', 'The How', 'The Who', 'Methods']);
+    expect(getTabLabels(screen.getByLabelText('Desktop page sections'))).toEqual(['The What', 'The How', 'The Who', 'Methods', 'Outcomes']);
+    expect(getTabLabels(screen.getByLabelText('Mobile page sections'))).toEqual(['The What', 'The How', 'The Who', 'Methods', 'Outcomes']);
     expect(theWhatImage).not.toHaveAttribute('role', 'button');
     expect(theWhatImage).not.toHaveAttribute('tabindex');
     expect(screen.queryByText(/The Why \/ How It Started/i)).not.toBeInTheDocument();
@@ -95,7 +95,7 @@ describe('DemoStokeContent', () => {
 
     const introHeading = screen.getByRole('heading', { name: 'DemoStoke Product Screens' });
     const introRow = introHeading.closest('div')?.parentElement as HTMLElement | null;
-    const labels = ['Find Gear', 'Listings', 'Events', 'Fleet Ops', 'Gear Admin', 'Widget'];
+    const labels = ['Find Gear', 'Events', 'Fleet Ops', 'Gear Admin', 'Widget'];
 
     expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'Product Screens' }));
     expect(getTabLabels(screen.getByLabelText('Desktop page sections'))).toEqual(labels);
@@ -108,7 +108,7 @@ describe('DemoStokeContent', () => {
     expect(
       screen.getAllByRole('button', { name: 'Open image: DemoStoke homepage with a gear search box and category shortcuts' }).length
     ).toBeGreaterThan(0);
-    ['Find Gear', 'Gear, Shops, and Lenders', 'Demo Calendar', 'Fleet Ops Dashboard', 'Inventory', 'Booking Widget'].forEach((name) => {
+    ['Find Gear and Listings', 'Demo Calendar', 'Fleet Ops Dashboard', 'Inventory', 'Booking Widget'].forEach((name) => {
       expect(screen.getByRole('heading', { name })).toBeInTheDocument();
     });
     // The pre-launch user stories are gone, so a live product never reads as a concept.

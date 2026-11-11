@@ -1139,6 +1139,19 @@ export const SectionTabsMobileButton = styled(HudTabButton)`
     font-size: 0.8em;
     letter-spacing: 0.05em;
   }
+
+  /* A short rail whose one-word labels ("Methods", "Outcomes") must never clip: each tab
+     grows to its longest word, the rest share what's left, and phones tighten the type. */
+  ${({ $fitLabels }) => $fitLabels && css`
+    min-width: min-content;
+
+    @media (max-width: ${THEME.breakpoints.phone}) {
+      padding-left: 0.25em;
+      padding-right: 0.25em;
+      font-size: 0.75em;
+      letter-spacing: 0.02em;
+    }
+  `}
 `;
 
 /*

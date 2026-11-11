@@ -29,6 +29,8 @@ type SidebarSectionTabsProps = {
   isFixed?: boolean;
   mobileTopAdjustment?: number;
   desktopRevealAnchorId?: string;
+  /** Size phone tabs to their longest word instead of equal widths; for short rails with one-word labels. */
+  fitMobileLabels?: boolean;
 };
 
 type SectionTabsHookParams = SidebarSectionTabsProps & {
@@ -327,7 +329,7 @@ const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
 };
 
 export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
-  const { sections, isFixed, mobileTopAdjustment = 0 } = props;
+  const { sections, isFixed, mobileTopAdjustment = 0, fitMobileLabels = false } = props;
   const visibleSections = sections.filter(({ hidden }) => !hidden);
   const [wrapperEl, setWrapperEl] = useState<HTMLDivElement | null>(null);
   const wrapperSize = useSize(wrapperEl);
@@ -359,6 +361,7 @@ export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
             key={id}
             type='button'
             $isActive={activeSection === id}
+            $fitLabels={fitMobileLabels}
             aria-current={activeSection === id ? 'true' : undefined}
             onClick={() => {
               trackEvent('section_tab_click', {

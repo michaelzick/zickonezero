@@ -6,7 +6,8 @@ export const CASE_STUDY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'section-the-what', label: 'The What' },
   { id: 'section-the-how', label: 'The How' },
   { id: 'section-the-who', label: 'The Who' },
-  { id: 'section-methodology', label: 'Methods' }
+  { id: 'section-methodology', label: 'Methods' },
+  { id: 'section-outcome', label: 'Outcomes' }
 ] as const;
 
 export const CASE_STUDY_BOTTOM_SECTION_ID = CASE_STUDY_SECTIONS[CASE_STUDY_SECTIONS.length - 1]?.id;

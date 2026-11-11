@@ -5,7 +5,6 @@ import { SidebarSectionConfig } from '../SidebarSectionTabs';
 export const SCREEN_SECTIONS: SidebarSectionConfig[] = [
   { id: 'screens-introduction', label: 'Intro', hidden: true },
   { id: 'screens-explore', label: 'Find Gear' },
-  { id: 'screens-gear-and-shops', label: 'Listings' },
   { id: 'screens-demo-calendar', label: 'Events' },
   { id: 'screens-fleet-ops', label: 'Fleet Ops' },
   { id: 'screens-inventory', label: 'Gear Admin' },
@@ -34,32 +33,22 @@ export type ScreenBlock = {
 export const SCREEN_BLOCKS: ScreenBlock[] = [
   {
     id: 'screens-explore',
-    title: 'Find Gear',
+    title: 'Find Gear and Listings',
     copy: (
       <>
         Explore shows gear on a map, in a list, or both side by side, and the list keeps to whatever stretch of coast or
         mountain is on the map. Search takes plain language, like &quot;beginner surfboard for small waves,&quot; and turns
-        it into filtered results. Riders who don&apos;t know what to look for take the gear quiz: six short steps that end in
-        AI recommendations matched to how they ride.
+        it into filtered results, and the gear quiz matches riders who don&apos;t know what to look for with AI
+        recommendations in six short steps. Every listing has its own page with the daily price, specs, the shop or owner
+        behind it, and similar gear nearby, and Book Now puts the rider in touch with the shop to arrange the rental. Shop
+        pages carry the shop&apos;s story, contact details, and full inventory, and owners list their own boards and bikes
+        through a short form.
       </>
     ),
     images: [
       { src: '/img/demostoke/screens/ds-screen-explore.webp', alt: 'DemoStoke explore page with gear cards beside a map of Los Angeles' },
       { src: '/img/demostoke/screens/ds-screen-search.webp', alt: 'DemoStoke search results for a plain-language surfboard query' },
-      { src: '/img/demostoke/screens/ds-screen-quiz.webp', alt: 'DemoStoke gear quiz first step with surfboard, snowboard, ski, and mountain bike choices' }
-    ]
-  },
-  {
-    id: 'screens-gear-and-shops',
-    title: 'Gear, Shops, and Lenders',
-    copy: (
-      <>
-        Every listing has its own page with the daily price, specs, the shop or owner behind it, and similar gear nearby.
-        Book Now puts the rider in touch with the shop to arrange the rental. Shop pages carry the shop&apos;s story,
-        contact details, and full inventory, and owners list their own boards and bikes through a short form.
-      </>
-    ),
-    images: [
+      { src: '/img/demostoke/screens/ds-screen-quiz.webp', alt: 'DemoStoke gear quiz first step with surfboard, snowboard, ski, and mountain bike choices' },
       { src: '/img/demostoke/screens/ds-screen-gear.webp', alt: 'DemoStoke gear page for a longboard with its daily price and a Book Now button' },
       { src: '/img/demostoke/screens/ds-screen-shop.webp', alt: 'DemoStoke shop page for Pacific Beach Surf Shop with its available equipment' },
       { src: '/img/demostoke/screens/ds-screen-list.webp', alt: 'DemoStoke List Your Gear page with manual entry and point-of-sale options' }

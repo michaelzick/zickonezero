@@ -2,10 +2,10 @@ import { DemoStokeTldrCopy } from '../../../../styles';
 import {
   FlowImage,
   FlowImageButton,
-  FlowImagesRow,
   FlowSection,
   FlowStorySection,
-  FlowText
+  FlowText,
+  TripleFlowImagesRow
 } from '../../../../styles/antisyphon';
 import { AnimatedSection, CaseStudySectionTitle } from '../../../../styles/projectShowcases';
 import { type ScreenBlock } from '../screenData';
@@ -37,7 +37,7 @@ const ScreenBlockSection = ({
           <CaseStudySectionTitle as='h2'>{block.title}</CaseStudySectionTitle>
           <DemoStokeTldrCopy>{block.copy}</DemoStokeTldrCopy>
         </FlowText>
-        <FlowImagesRow className='image-animate'>
+        <TripleFlowImagesRow className='image-animate'>
           {block.images.map((image, imageIndex) => (
             <FlowImageButton
               key={image.src}
@@ -48,7 +48,7 @@ const ScreenBlockSection = ({
               <FlowImage src={image.src} alt={image.alt} loading='lazy' />
             </FlowImageButton>
           ))}
-        </FlowImagesRow>
+        </TripleFlowImagesRow>
       </FlowSection>
     </FlowStorySection>
   </AnimatedSection>

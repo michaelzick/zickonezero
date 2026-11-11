@@ -74,6 +74,11 @@ export const PairedFlowImagesRow = styled(FlowImagesRow)`
   grid-template-columns: repeat(auto-fit, minmax(max(260px, calc(50% - 0.6em)), 1fr));
 `;
 
+/* At most three shots a row, so DemoStoke's six-shot Find Gear block reads as two even rows of three on wide screens. */
+export const TripleFlowImagesRow = styled(FlowImagesRow)`
+  grid-template-columns: repeat(auto-fit, minmax(max(260px, calc((100% - 2.4em) / 3)), 1fr));
+`;
+
 /* Product-screen sections share the case-study glass panels. */
 export const FlowStorySection = styled.section`
   ${storyPanel}
