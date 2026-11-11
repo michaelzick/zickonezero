@@ -53,6 +53,7 @@ const ScreensContent = ({
           sections={sections}
           topTabsEl={topTabsEl}
           isActive={isActive}
+          lockToBottomSectionId={sections[sections.length - 1]?.id}
           scrollOffsetAdjustment={8}
           desktopRevealAnchorId='antisyphon-screens-nav-anchor'
         />

@@ -161,6 +161,7 @@ const ScreensTab = ({
             sections={sections}
             topTabsEl={topTabsEl}
             isActive={isActive}
+            lockToBottomSectionId={sections[sections.length - 1]?.id}
             scrollOffsetAdjustment={8}
             desktopRevealAnchorId={`${study.id}-screens-nav-anchor`}
           />
