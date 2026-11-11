@@ -26,6 +26,7 @@ type IntroSectionProps = {
 };
 
 const ROLE_BULLETS = [
+  'Founder',
   'Product strategy',
   'Product engineering',
   'UX design',
