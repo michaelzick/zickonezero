@@ -1041,6 +1041,52 @@ const railPlate = (notch) => css`
   }
 `;
 
+/*
+ * The row of tabs inside a rail's plate. Tabs share the width evenly but never
+ * shrink below their longest word, so a rail with too many or too long labels
+ * scrolls sideways instead of clipping them. Edge fades show there is more.
+ */
+export const SectionTabsTrack = styled.div`
+  --track-fade: 1.6em;
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: inherit;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-padding-inline: var(--track-fade);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  & > button {
+    flex: 1 0 0;
+    min-width: min-content;
+  }
+
+  &[data-overflow-start='true'][data-overflow-end='false'] {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--track-fade));
+    mask-image: linear-gradient(90deg, transparent, #000 var(--track-fade));
+  }
+
+  &[data-overflow-start='false'][data-overflow-end='true'] {
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - var(--track-fade)), transparent);
+    mask-image: linear-gradient(90deg, #000 calc(100% - var(--track-fade)), transparent);
+  }
+
+  &[data-overflow-start='true'][data-overflow-end='true'] {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--track-fade), #000 calc(100% - var(--track-fade)), transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 var(--track-fade), #000 calc(100% - var(--track-fade)), transparent);
+  }
+`;
+
 export const SectionTabsWrapper = styled.div`
   position: fixed;
   top: var(--sidebar-tabs-top, calc(5em + 4.4em));
@@ -1065,10 +1111,9 @@ export const SectionTabsWrapper = styled.div`
   }
 `;
 
+/* Width comes from SectionTabsTrack: an even share, never narrower than the longest word. */
 export const SectionTabButton = styled(HudTabButton)`
   ${sidebarTabButtonStyles}
-  flex: 1 1 0;
-  min-width: 0;
   width: auto;
   padding: 0.5em 0.8em;
   font-size: 0.72em;
@@ -1116,8 +1161,6 @@ export const SectionTabsMobileInner = styled.div`
   position: relative;
   isolation: isolate;
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
   gap: 0.35em;
   width: 100%;
   max-width: 46em;
@@ -1128,8 +1171,6 @@ export const SectionTabsMobileInner = styled.div`
 
 export const SectionTabsMobileButton = styled(HudTabButton)`
   ${sidebarTabButtonStyles}
-  flex: 1 1 0;
-  min-width: 0;
   width: auto;
   padding: 0.55em 0.45em;
   font-size: 0.95em;
@@ -1140,11 +1181,8 @@ export const SectionTabsMobileButton = styled(HudTabButton)`
     letter-spacing: 0.05em;
   }
 
-  /* A short rail whose one-word labels ("Methods", "Outcomes") must never clip: each tab
-     grows to its longest word, the rest share what's left, and phones tighten the type. */
+  /* Tighter phone type, so a short rail of one-word labels ("Methods", "Outcomes") fits without scrolling. */
   ${({ $fitLabels }) => $fitLabels && css`
-    min-width: min-content;
-
     @media (max-width: ${THEME.breakpoints.phone}) {
       padding-left: 0.25em;
       padding-right: 0.25em;

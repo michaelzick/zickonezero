@@ -7,11 +7,80 @@ import {
   SectionTabButton,
   SectionTabsMobileWrapper,
   SectionTabsMobileInner,
-  SectionTabsMobileButton
+  SectionTabsMobileButton,
+  SectionTabsTrack
 } from '../../styles';
 
 const DETECTION_BUFFER = 20;
 const DEFAULT_STICKY_TOP = 160;
+
+type TrackOverflow = { start: boolean; end: boolean; };
+
+/**
+ * A rail whose tabs don't fit scrolls sideways. This keeps the active tab in view,
+ * reports which edges hide more tabs (for the fades), and lets a mouse wheel move
+ * the rail sideways until it reaches an end, after which the page scrolls as usual.
+ */
+const useScrollingTrack = (activeSection: string) => {
+  const [trackEl, setTrackEl] = useState<HTMLDivElement | null>(null);
+  const [overflow, setOverflow] = useState<TrackOverflow>({ start: false, end: false });
+
+  const updateOverflow = useCallback(() => {
+    if (!trackEl) return;
+    const maxScroll = trackEl.scrollWidth - trackEl.clientWidth;
+    const next = { start: trackEl.scrollLeft > 1, end: trackEl.scrollLeft < maxScroll - 1 };
+    setOverflow((prev) => (prev.start === next.start && prev.end === next.end ? prev : next));
+  }, [trackEl]);
+
+  useEffect(() => {
+    if (!trackEl) return undefined;
+
+    updateOverflow();
+    trackEl.addEventListener('scroll', updateOverflow, { passive: true });
+    window.addEventListener('resize', updateOverflow);
+    const resizeObserver = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(updateOverflow);
+    resizeObserver?.observe(trackEl);
+
+    const handleWheel = (event: WheelEvent) => {
+      if (Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
+      const maxScroll = trackEl.scrollWidth - trackEl.clientWidth;
+      if (maxScroll <= 0) return;
+      const canMove = event.deltaY > 0 ? trackEl.scrollLeft < maxScroll - 1 : trackEl.scrollLeft > 1;
+      if (!canMove) return;
+      event.preventDefault();
+      trackEl.scrollLeft += event.deltaY;
+    };
+    trackEl.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      trackEl.removeEventListener('scroll', updateOverflow);
+      window.removeEventListener('resize', updateOverflow);
+      resizeObserver?.disconnect();
+      trackEl.removeEventListener('wheel', handleWheel);
+    };
+  }, [trackEl, updateOverflow]);
+
+  // Center the active tab inside the track, without moving the page.
+  useEffect(() => {
+    if (!trackEl || trackEl.scrollWidth <= trackEl.clientWidth) return;
+    const activeButton = trackEl.querySelector<HTMLElement>('[aria-current="true"]');
+    if (!activeButton) return;
+    const left = activeButton.offsetLeft - (trackEl.clientWidth - activeButton.offsetWidth) / 2;
+    if (typeof trackEl.scrollTo === 'function') {
+      trackEl.scrollTo({ left, behavior: 'smooth' });
+    } else {
+      trackEl.scrollLeft = left;
+    }
+  }, [trackEl, activeSection]);
+
+  return {
+    trackRef: setTrackEl,
+    trackProps: {
+      'data-overflow-start': overflow.start ? 'true' : 'false',
+      'data-overflow-end': overflow.end ? 'true' : 'false',
+    },
+  };
+};
 
 export type SidebarSectionConfig = {
   id: string;
@@ -229,6 +298,7 @@ const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
     extraOffset: desktopExtraOffset
   });
   const [isVisible, setIsVisible] = useState(!desktopRevealAnchorId);
+  const { trackRef, trackProps } = useScrollingTrack(activeSection);
   const firstVisibleSectionId = visibleSections[0]?.id;
   const hasLeadingHiddenSections = sections.findIndex(({ hidden }) => !hidden) > 0;
 
@@ -304,26 +374,28 @@ const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
       $isVisible={isVisible}
       style={{ '--sidebar-tabs-top': `${stickyTop}px` } as CSSProperties}
     >
-      {visibleSections.map(({ id, label }) => (
-        <SectionTabButton
-          key={id}
-          type='button'
-          $isActive={resolvedActiveSection === id}
-          aria-current={resolvedActiveSection === id ? 'true' : undefined}
-          onClick={() => {
-            trackEvent('section_tab_click', {
-              location: 'sidebar_section_tabs',
-              variant: 'desktop',
-              section: id,
-              label,
-              page_path: window.location.pathname,
-            });
-            handleTabClick(id);
-          }}
-        >
-          {label}
-        </SectionTabButton>
-      ))}
+      <SectionTabsTrack ref={trackRef} {...trackProps}>
+        {visibleSections.map(({ id, label }) => (
+          <SectionTabButton
+            key={id}
+            type='button'
+            $isActive={resolvedActiveSection === id}
+            aria-current={resolvedActiveSection === id ? 'true' : undefined}
+            onClick={() => {
+              trackEvent('section_tab_click', {
+                location: 'sidebar_section_tabs',
+                variant: 'desktop',
+                section: id,
+                label,
+                page_path: window.location.pathname,
+              });
+              handleTabClick(id);
+            }}
+          >
+            {label}
+          </SectionTabButton>
+        ))}
+      </SectionTabsTrack>
     </SectionTabsWrapper>
   );
 };
@@ -341,6 +413,7 @@ export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
     ...props,
     extraOffset: mobileExtraOffset
   });
+  const { trackRef, trackProps } = useScrollingTrack(activeSection);
 
   if (!visibleSections.length) {
     return null;
@@ -356,27 +429,29 @@ export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
       style={{ '--mobile-tabs-top': `${stickyTop + mobileTopAdjustment}px` } as CSSProperties}
     >
       <SectionTabsMobileInner>
-        {visibleSections.map(({ id, label }) => (
-          <SectionTabsMobileButton
-            key={id}
-            type='button'
-            $isActive={activeSection === id}
-            $fitLabels={fitMobileLabels}
-            aria-current={activeSection === id ? 'true' : undefined}
-            onClick={() => {
-              trackEvent('section_tab_click', {
-                location: 'sidebar_section_tabs',
-                variant: 'mobile',
-                section: id,
-                label,
-                page_path: window.location.pathname,
-              });
-              handleTabClick(id);
-            }}
-          >
-            {label}
-          </SectionTabsMobileButton>
-        ))}
+        <SectionTabsTrack ref={trackRef} {...trackProps}>
+          {visibleSections.map(({ id, label }) => (
+            <SectionTabsMobileButton
+              key={id}
+              type='button'
+              $isActive={activeSection === id}
+              $fitLabels={fitMobileLabels}
+              aria-current={activeSection === id ? 'true' : undefined}
+              onClick={() => {
+                trackEvent('section_tab_click', {
+                  location: 'sidebar_section_tabs',
+                  variant: 'mobile',
+                  section: id,
+                  label,
+                  page_path: window.location.pathname,
+                });
+                handleTabClick(id);
+              }}
+            >
+              {label}
+            </SectionTabsMobileButton>
+          ))}
+        </SectionTabsTrack>
       </SectionTabsMobileInner>
     </SectionTabsMobileWrapper>
   );

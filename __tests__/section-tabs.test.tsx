@@ -362,6 +362,42 @@ describe('SidebarSectionTabs', () => {
     expectDarkGreenActiveTab(screen.getByRole('button', { name: 'Intro', hidden: true }));
   });
 
+  it('scrolls an overflowing rail sideways, with a fade on the hidden side, then hands the wheel back to the page', () => {
+    const isTrack = (el: Element) => el.hasAttribute('data-overflow-start');
+    const scrollWidth = jest.spyOn(HTMLElement.prototype, 'scrollWidth', 'get').mockImplementation(function (this: HTMLElement) {
+      return isTrack(this) ? 500 : 0;
+    });
+    const clientWidth = jest.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(function (this: HTMLElement) {
+      return isTrack(this) ? 300 : 0;
+    });
+
+    try {
+      render(<MobileVisibleHarness />);
+      const track = screen.getByRole('button', { name: 'Intro', hidden: true }).parentElement as HTMLElement;
+      fireEvent.scroll(track);
+
+      expect(track).toHaveAttribute('data-overflow-start', 'false');
+      expect(track).toHaveAttribute('data-overflow-end', 'true');
+
+      // A vertical wheel over the rail moves it sideways while it can still move.
+      const wheel = new WheelEvent('wheel', { deltaY: 120, bubbles: true, cancelable: true });
+      track.dispatchEvent(wheel);
+      expect(wheel.defaultPrevented).toBe(true);
+      expect(track.scrollLeft).toBe(120);
+      fireEvent.scroll(track);
+      expect(track).toHaveAttribute('data-overflow-start', 'true');
+
+      // At the far end, the wheel scrolls the page instead.
+      track.scrollLeft = 200;
+      const atEnd = new WheelEvent('wheel', { deltaY: 120, bubbles: true, cancelable: true });
+      track.dispatchEvent(atEnd);
+      expect(atEnd.defaultPrevented).toBe(false);
+    } finally {
+      scrollWidth.mockRestore();
+      clientWidth.mockRestore();
+    }
+  });
+
   it('scrolls the desktop DemoStoke tabs to the matching section anchors', async () => {
     render(<DesktopDemoStokeClickHarness />);
 
