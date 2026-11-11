@@ -14,6 +14,26 @@ import {
 const DETECTION_BUFFER = 20;
 const DEFAULT_STICKY_TOP = 160;
 
+/**
+ * A section's page top once its reveal animation has finished. Sections not yet
+ * revealed sit a few pixels low (AnimatedSection's translateY), so measuring them
+ * as-is would land the heading that much tighter under the rail once they rise.
+ */
+const getSettledTop = (sectionEl: HTMLElement) => {
+  let top = sectionEl.getBoundingClientRect().top + window.scrollY;
+  if (typeof DOMMatrixReadOnly === 'undefined') return top;
+
+  for (let node: HTMLElement | null = sectionEl; node; node = node.parentElement) {
+    if (!node.hasAttribute('data-animate-id')) continue;
+    const { transform } = window.getComputedStyle(node);
+    if (transform && transform !== 'none') {
+      top -= new DOMMatrixReadOnly(transform).m42;
+    }
+  }
+
+  return top;
+};
+
 type TrackOverflow = { start: boolean; end: boolean; };
 
 /**
@@ -98,8 +118,6 @@ type SidebarSectionTabsProps = {
   isFixed?: boolean;
   mobileTopAdjustment?: number;
   desktopRevealAnchorId?: string;
-  /** Size phone tabs to their longest word instead of equal widths; for short rails with one-word labels. */
-  fitMobileLabels?: boolean;
 };
 
 type SectionTabsHookParams = SidebarSectionTabsProps & {
@@ -190,8 +208,7 @@ const useSectionTabs = ({
     }
 
     const totalOffset = getTotalOffset();
-    const liveTop = sectionEl.getBoundingClientRect().top + window.scrollY;
-    const targetPosition = liveTop - totalOffset;
+    const targetPosition = getSettledTop(sectionEl) - totalOffset;
 
     window.scrollTo({
       top: targetPosition,
@@ -401,7 +418,7 @@ const SidebarSectionTabs = (props: SidebarSectionTabsProps) => {
 };
 
 export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
-  const { sections, isFixed, mobileTopAdjustment = 0, fitMobileLabels = false } = props;
+  const { sections, isFixed, mobileTopAdjustment = 0 } = props;
   const visibleSections = sections.filter(({ hidden }) => !hidden);
   const [wrapperEl, setWrapperEl] = useState<HTMLDivElement | null>(null);
   const wrapperSize = useSize(wrapperEl);
@@ -435,7 +452,6 @@ export const SidebarSectionTabsMobile = (props: SidebarSectionTabsProps) => {
               key={id}
               type='button'
               $isActive={activeSection === id}
-              $fitLabels={fitMobileLabels}
               aria-current={activeSection === id ? 'true' : undefined}
               onClick={() => {
                 trackEvent('section_tab_click', {

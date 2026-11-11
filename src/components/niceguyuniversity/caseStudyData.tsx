@@ -7,7 +7,8 @@ export const CASE_STUDY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'section-the-what', label: 'The What' },
   { id: 'section-the-how', label: 'The How' },
   { id: 'section-the-who', label: 'The Who' },
-  { id: 'section-methodology', label: 'Methods' }
+  { id: 'section-methodology', label: 'Methods' },
+  { id: 'section-outcome', label: 'Outcomes' }
 ] as const;
 
 export const CASE_STUDY_BOTTOM_SECTION_ID = CASE_STUDY_SECTIONS[CASE_STUDY_SECTIONS.length - 1]?.id;
@@ -49,7 +50,7 @@ export const METHOD_SECTIONS: MethodSection[] = [
   {
     title: 'Discovery and Positioning',
     bullets: [
-      'Wrote the positioning from years of coaching calls, in the words men actually use, like shame, resentment, and "why do I keep doing this," rather than therapy-speak.',
+      'Wrote the positioning from years of coaching calls, in the words men actually use, like shame, resentment, and “why do I keep doing this,” rather than therapy-speak.',
       'Boiled the curriculum down to a three-step framework every course teaches toward: confront shame, drop the victim story, build boundaries.',
       'Set a voice that could be blunt on the homepage and careful inside the lessons, because the work needs both.'
     ],
@@ -69,7 +70,7 @@ export const METHOD_SECTIONS: MethodSection[] = [
     bullets: [
       'Built a high-contrast interface with oversized type and direct calls to action. It is the visual version of the coaching voice.',
       'Shipped the catalog, course detail, curriculum, cart, checkout, and auth flows in React on Supabase.',
-      'Kept the honest details in: every course page carries a plain-language "not a substitute for therapy" disclosure.'
+      'Kept the honest details in: every course page carries a plain-language “not a substitute for therapy” disclosure.'
     ],
     images: [{ src: '/img/nice-guy-university/ngu-course-overview.webp', alt: 'Nice Guy University course overview with learning outcomes and therapy disclaimer' }]
   },

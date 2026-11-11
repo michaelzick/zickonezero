@@ -39,8 +39,8 @@ describe.each(STUDIES)('$study.name case study', ({ study, dataFile, heroLinks, 
     expect(heroHeading.parentElement?.tagName).toBe('HGROUP');
     expect(heroHeading.nextElementSibling).toHaveTextContent(/live/i);
     expect(screen.getByRole('tab', { name: 'Product Story' })).toHaveAttribute('aria-selected', 'true');
-    expect(getTabLabels(screen.getByLabelText('Desktop page sections'))).toEqual(['The What', 'The How', 'The Who', 'Methods']);
-    expect(getTabLabels(screen.getByLabelText('Mobile page sections'))).toEqual(['The What', 'The How', 'The Who', 'Methods']);
+    expect(getTabLabels(screen.getByLabelText('Desktop page sections'))).toEqual(['The What', 'The How', 'The Who', 'Methods', 'Outcomes']);
+    expect(getTabLabels(screen.getByLabelText('Mobile page sections'))).toEqual(['The What', 'The How', 'The Who', 'Methods', 'Outcomes']);
     expect(screen.getByRole('heading', { name: 'The What' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: `The How / ${study.how.heading}` })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The Who / Who Uses It' })).toBeInTheDocument();

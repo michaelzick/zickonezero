@@ -25,7 +25,7 @@ export const CASE_STUDIES_LINKS = [
   },
   {
     href: '/antisyphon-training',
-    label: 'Antisyphon',
+    label: 'Antisyphon Training',
     icon: '/img/nav/at_logo_purple.webp',
     iconAlt: 'Antisyphon Training logo'
   },

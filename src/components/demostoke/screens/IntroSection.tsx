@@ -20,7 +20,7 @@ const PROJECT_URL = 'https://www.demostoke.com/';
 const IntroSection = ({ openScreenLightbox }: IntroSectionProps) => (
   <section id='screens-introduction'>
     <CompactIntroHeaderRow className='text-animate'>
-      <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke Logo' loading='lazy' />
+      <img className='ds-logo' src='/img/squares/demostoke-logo-square.webp' alt='DemoStoke logo' loading='lazy' />
       <div>
         <h2 className='tab-header page-header'>DemoStoke Product Screens</h2>
         <PitchDeckLink

@@ -58,13 +58,13 @@ const HowSection = ({
             <h3>For Shops</h3>
             <p>
               Fleet Ops is where shops run their rentals: inventory, pricing, add-ons, bookings, and analytics, with
-              Stripe payments and SendGrid booking emails. One script tag puts a booking widget, in the shop&apos;s
+              Stripe payments and SendGrid booking emails. One script tag puts a booking widget, in the shop’s
               chosen theme, on its own website.
             </p>
           </section>
         </DemoStokeTwoUp>
         <DemoStokeWhyImageFrame className='image-animate'>
-          <FullBorderImage src='/img/demostoke/case-study/ds-explore-map.webp' alt='DemoStoke Hybrid View' loading='lazy' />
+          <FullBorderImage src='/img/demostoke/case-study/ds-explore-map.webp' alt='DemoStoke map view with shop pins across North America' loading='lazy' />
         </DemoStokeWhyImageFrame>
       </DemoStokeTldrSection>
       <DemoStokeGalleryBlock>

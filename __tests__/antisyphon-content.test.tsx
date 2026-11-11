@@ -59,8 +59,8 @@ describe('AntisyphonContent', () => {
     expect(screen.getByRole('tablist', { name: 'Page sections' })).toBeInTheDocument();
     expect(desktopTabs).toBeInTheDocument();
     expect(mobileTabs).toBeInTheDocument();
-    expect(getTabLabels(desktopTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods']);
-    expect(getTabLabels(mobileTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods']);
+    expect(getTabLabels(desktopTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods', 'Outcomes']);
+    expect(getTabLabels(mobileTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods', 'Outcomes']);
     expect(screen.queryByRole('button', { name: 'Outcome' })).not.toBeInTheDocument();
     expect(document.getElementById('section-links')).toBeNull();
     expect(heroHeading).toBeInTheDocument();
@@ -87,7 +87,7 @@ describe('AntisyphonContent', () => {
 
     await user.click(screen.getByRole('tab', { name: 'Product Screens' }));
 
-    const introHeading = screen.getByRole('heading', { name: 'Antisyphon Product Screens' });
+    const introHeading = screen.getByRole('heading', { name: 'Antisyphon Training Product Screens' });
     const introRow = introHeading.closest('div')?.parentElement as HTMLElement | null;
     const introSection = document.getElementById('screens-introduction');
     const introImageWrap = within(introSection as HTMLElement).getByRole('button', {

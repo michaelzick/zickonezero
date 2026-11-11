@@ -10,7 +10,7 @@ import TrackedLink from '../TrackedLink';
 const RackStandby = ({ error, retry }: DynamicOptionsLoadingProps) => (
   error ? (
     <div className='rack-standby' role='alert'>
-      <p>The rack wouldn&apos;t power up. Check your connection and try again.</p>
+      <p>The rack wouldn’t power up. Check your connection and try again.</p>
       {retry && <button type='button' className='booth-button' onClick={retry}>Try again</button>}
     </div>
   ) : (
@@ -65,7 +65,7 @@ const RackBooth = () => {
           machines, and effects, and program its sequencers.
         </p>
         <p className='booth-open-note'>
-          It&apos;s warmed up on Neon Skyline. Open Presets to switch to another set, from G-Funk
+          It’s warmed up on Neon Skyline. Open Presets to switch to another set, from G-Funk
           and Dub to Italo Disco, or save your own. Press Play All, or click into the rack to play
           it from your keyboard. Click anywhere else to give the keys back.
         </p>

@@ -319,7 +319,7 @@ describe('Home and About visuals', () => {
     const aboutDialog = screen.getByRole('dialog', { name: 'About Michael' });
     expect(aboutDialog).toBeInTheDocument();
     expect(screen.getByText(/Michael is a Product Engineer and UX Designer/i)).toBeInTheDocument();
-    expect(within(aboutDialog).getByRole('link', { name: 'main gallery' })).toBeInTheDocument();
+    expect(within(aboutDialog).getByRole('link', { name: 'homepage' })).toBeInTheDocument();
     expect(within(aboutDialog).getByRole('link', { name: 'GitHub' })).toBeInTheDocument();
     expect(within(aboutDialog).getByRole('link', { name: 'LinkedIn' })).toBeInTheDocument();
 

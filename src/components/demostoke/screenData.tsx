@@ -36,13 +36,11 @@ export const SCREEN_BLOCKS: ScreenBlock[] = [
     title: 'Find Gear and Listings',
     copy: (
       <>
-        Explore shows gear on a map, in a list, or both side by side, and the list keeps to whatever stretch of coast or
-        mountain is on the map. Search takes plain language, like &quot;beginner surfboard for small waves,&quot; and turns
-        it into filtered results, and the gear quiz matches riders who don&apos;t know what to look for with AI
-        recommendations in six short steps. Every listing has its own page with the daily price, specs, the shop or owner
-        behind it, and similar gear nearby, and Book Now puts the rider in touch with the shop to arrange the rental. Shop
-        pages carry the shop&apos;s story, contact details, and full inventory, and owners list their own boards and bikes
-        through a short form.
+        Explore shows gear on a map, in a list, or both, and the list follows the map. Search takes plain language, like
+        “beginner surfboard for small waves,” and the gear quiz gives riders who don’t know what they want AI
+        recommendations in six short steps. Every listing has a page with the daily price, specs, the shop or owner, and
+        similar gear nearby, and Book Now puts the rider in touch with the shop. Shop pages carry the shop’s story, contact
+        details, and full inventory, and owners list their own boards and bikes through a short form.
       </>
     ),
     images: [
@@ -61,7 +59,7 @@ export const SCREEN_BLOCKS: ScreenBlock[] = [
       <>
         Demo days from shops and brands, filtered by distance and sport. A weekly job searches the web for new events,
         pulls out the details, and publishes them, so the calendar stays current without anyone typing it in. Each event
-        gets a page with the host, time, location, and a link to the event&apos;s own site.
+        gets a page with the host, time, location, and a link to the event’s own site.
       </>
     ),
     images: [
@@ -106,7 +104,7 @@ export const SCREEN_BLOCKS: ScreenBlock[] = [
     title: 'Booking Widget',
     copy: (
       <>
-        One script tag puts a shop&apos;s inventory on its own website. The shop picks a theme in Fleet Ops, and the widget
+        One script tag puts a shop’s inventory on its own website. The shop picks a theme in Fleet Ops, and the widget
         carries it from browsing to dates, pricing, and checkout. Here it is embedded on a sample shop site. Checkout opens
         to riders when the first shop goes live.
       </>

@@ -44,8 +44,8 @@ describe('NiceGuyUniversityContent', () => {
 
     expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'Product Story' }));
     expect(screen.getByRole('tablist', { name: 'Page sections' })).toBeInTheDocument();
-    expect(getTabLabels(desktopTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods']);
-    expect(getTabLabels(mobileTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods']);
+    expect(getTabLabels(desktopTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods', 'Outcomes']);
+    expect(getTabLabels(mobileTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods', 'Outcomes']);
     expect(heroHeading).toBeInTheDocument();
     // The live-status line follows the product's name in its hgroup.
     expect(heroHeading.parentElement?.tagName).toBe('HGROUP');

@@ -133,7 +133,6 @@ const DemoStokeContent = () => {
           isActive={true}
           lockToBottomSectionId={lockToBottomSectionId}
           scrollOffsetAdjustment={8}
-          fitMobileLabels
         />
 
         <CaseStudyContent

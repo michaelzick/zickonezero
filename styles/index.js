@@ -1043,8 +1043,9 @@ const railPlate = (notch) => css`
 
 /*
  * The row of tabs inside a rail's plate. Tabs share the width evenly but never
- * shrink below their longest word, so a rail with too many or too long labels
- * scrolls sideways instead of clipping them. Edge fades show there is more.
+ * shrink below their label on one line, so a rail with too many or too long
+ * labels scrolls sideways instead of wrapping or clipping them. Edge fades show
+ * there is more.
  */
 export const SectionTabsTrack = styled.div`
   --track-fade: 1.6em;
@@ -1068,7 +1069,8 @@ export const SectionTabsTrack = styled.div`
 
   & > button {
     flex: 1 0 0;
-    min-width: min-content;
+    min-width: max-content;
+    white-space: nowrap;
   }
 
   &[data-overflow-start='true'][data-overflow-end='false'] {
@@ -1176,20 +1178,13 @@ export const SectionTabsMobileButton = styled(HudTabButton)`
   font-size: 0.95em;
   letter-spacing: 0.08em;
 
+  /* Tight phone type, so a five-tab story rail ("The What" through "Outcomes") fits from 360px up. */
   @media (max-width: ${THEME.breakpoints.phone}) {
-    font-size: 0.8em;
-    letter-spacing: 0.05em;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    font-size: 0.75em;
+    letter-spacing: 0.02em;
   }
-
-  /* Tighter phone type, so a short rail of one-word labels ("Methods", "Outcomes") fits without scrolling. */
-  ${({ $fitLabels }) => $fitLabels && css`
-    @media (max-width: ${THEME.breakpoints.phone}) {
-      padding-left: 0.25em;
-      padding-right: 0.25em;
-      font-size: 0.75em;
-      letter-spacing: 0.02em;
-    }
-  `}
 `;
 
 /*

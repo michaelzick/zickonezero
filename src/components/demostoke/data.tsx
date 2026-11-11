@@ -19,7 +19,7 @@ export const TLDR_ITEMS: {
 }[] = [
   {
     title: 'Product Summary',
-    description: 'Riders and shops struggle with fragmented, offline demo and rental flows. I designed and built DemoStoke to bring all of it into one marketplace: demostoke.com for riders, live now, and Fleet Ops for the shops that rent to them. In validation sessions, 90% of shop owners said it would bring them more customers, and 95% of riders described it as "the thing that should already exist."',
+    description: 'Riders and shops struggle with fragmented, offline demo and rental flows. I designed and built DemoStoke to bring all of it into one marketplace: demostoke.com for riders, live now, and Fleet Ops for the shops that rent to them. In validation sessions, 90% of shop owners said it would bring them more customers, and 95% of riders described it as “the thing that should already exist.”',
     image: {
       src: '/img/demostoke/case-study/ds-explore-hybrid.webp',
       alt: 'DemoStoke global gear discovery collage'
@@ -87,7 +87,7 @@ export const PERSONA_ITEMS = [
   {
     title: 'Weekend Warrior',
     bullets: [
-      'Rachel (34, San Diego) is a marketing manager who rides 1-2x/month.',
+      'Rachel (34, San Diego) is a marketing manager who rides once or twice a month.',
       'She wants to try before buying expensive gear but is frustrated by limited demo options.',
       'She looks to Instagram and friends for recs, and wants DemoStoke to offer trusted peer reviews, easy filters, and clear pickup info.'
     ]
@@ -95,7 +95,7 @@ export const PERSONA_ITEMS = [
   {
     title: 'Die-Hard',
     bullets: [
-      'Chris (29, Truckee) is a remote project manager who snowboards 3-4x/week.',
+      'Chris (29, Truckee) is a remote project manager who snowboards three or four days a week.',
       'He seeks variety in gear but shops don’t offer enough options.',
       'He’s active in forums and trades gear with friends.',
       'He wants DemoStoke to offer high-quality listings, flexible pickup, and rider reviews.'
@@ -104,7 +104,7 @@ export const PERSONA_ITEMS = [
   {
     title: 'Nomadic Renter',
     bullets: [
-      'Maya (31, Santa Cruz) is a van-lifer and remote product engineer who rides 1-3x/week.',
+      'Maya (31, Santa Cruz) is a van-lifer and remote product engineer who rides one to three days a week.',
       'She doesn’t want to own a ton of gear and struggles to find quality rentals in new locations.',
       'She wants DemoStoke to offer verified local lenders, easy-to-find gear specs, and fair prices.'
     ]

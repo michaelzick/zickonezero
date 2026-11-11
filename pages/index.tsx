@@ -20,7 +20,7 @@ import type { WorksDataType } from '../src/types';
 const FLAGSHIP_PRODUCTS = itemListJsonLd(
   'Flagship Products',
   CASE_STUDIES_LINKS.map(({ href, label }) => ({
-    name: label === 'Antisyphon' ? 'Antisyphon Training' : label,
+    name: label,
     path: `${href}/`,
   }))
 );

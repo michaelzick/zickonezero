@@ -616,10 +616,10 @@ const AboutContent = () => {
                   DemoStoke. Each one is measured in production with Mixpanel and GA4.
                 </p>
                 <p>
-                  Samples of his work can be found in the <TrackedLink href='/' label='main gallery' location='about_modal' section='body'>main gallery</TrackedLink>, with code examples on{' '}
+                  His work is on the <TrackedLink href='/' label='homepage' location='about_modal' section='body'>homepage</TrackedLink>, his code is on{' '}
                   <TrackedLink href='https://github.com/michaelzick' label='GitHub' location='about_modal' section='body'
-                    target='_blank' rel='noopener noreferrer'>GitHub</TrackedLink>, and a
-                  full list of qualifications on <TrackedLink href='https://linkedin.com/in/michaelzick'
+                    target='_blank' rel='noopener noreferrer'>GitHub</TrackedLink>, and his full
+                  qualifications are on <TrackedLink href='https://linkedin.com/in/michaelzick'
                     label='LinkedIn' location='about_modal' section='body'
                     target='_blank' rel='noopener noreferrer'>LinkedIn</TrackedLink>.
                 </p>
