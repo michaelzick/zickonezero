@@ -1,6 +1,6 @@
 # ZICK ONE ZERO Creative
 
-Michael Zick’s portfolio and case-study site, built with Next.js Pages Router,
+Michael Zick’s portfolio of live products and earlier work, built with Next.js Pages Router,
 React, TypeScript, and styled-components. Production is a static export.
 
 ## Local development
@@ -114,7 +114,7 @@ resolvable, for example through `NODE_PATH`). It repaints only that text band
 and the cyan divider under it, so the logo and name lines stay as they are. Social networks cache the image,
 so re-scrape the page in their sharing debuggers after it changes.
 
-The About biography and secondary case-study panels are present in exported HTML.
+The About biography and flagship product pages' secondary tab panels are present in exported HTML.
 Native `hidden` containers preserve the modal/tab presentation. Keep the content
 rendered when changing those interactions, and maintain unique IDs and working
 tab-to-panel accessibility relationships.

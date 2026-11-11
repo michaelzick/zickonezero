@@ -19,9 +19,10 @@ const OutcomeSection = ({ setAnimatedSectionRef, visibleSections }: OutcomeSecti
       <DemoStokeTldrSection className='text-animate'>
         <OutcomeCopy>
           <ul className='plain-lines'>
-            <li>A live product at niceguyuniversity.com selling real courses, not a concept deck.</li>
+            <li>Live at niceguyuniversity.com, selling self-paced courses.</li>
             <li>A coaching practice that scales past my calendar; men can start the work without booking a session.</li>
             <li>A back office that lets one person run the entire business, from analytics to email.</li>
+            <li>Measured in production with Mixpanel and GA4, from first visit to finished course.</li>
           </ul>
         </OutcomeCopy>
       </DemoStokeTldrSection>

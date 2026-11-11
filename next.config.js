@@ -1,5 +1,10 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
+
+/** @type {(phase: string) => import('next').NextConfig} */
+const nextConfig = (phase) => ({
+  // `next dev` compiles into its own folder, so a `next build` (or `npm run check`)
+  // run alongside it can't delete or replace the modules the dev server is serving.
+  distDir: phase === PHASE_DEVELOPMENT_SERVER ? '.next-dev' : '.next',
   reactStrictMode: true,
   // Only the version string is inlined, so every analytics event names its release.
   env: {
@@ -13,6 +18,6 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-};
+});
 
 module.exports = nextConfig;

@@ -14,6 +14,7 @@ import {
   SectionNavRevealAnchor,
   Summary,
   Title,
+  TitleStatus,
 } from '../../../../styles/projectShowcases';
 import { SetAnimatedSectionRef, VisibleSections } from '../../showcaseTypes';
 
@@ -24,8 +25,9 @@ type IntroSectionProps = {
   visibleSections: VisibleSections;
 };
 
-const ROLE_BULLETS = ['Founder', 'Product Engineer', 'UX designer'] as const;
-const INTRO_SUMMARY = 'DemoStoke is a unified marketplace that helps riders and shops discover, book, and manage demo and rental gear in one place.';
+const ROLE_BULLETS = ['Founder', 'Product strategy', 'Product engineering', 'UX design', 'Analytics'] as const;
+const INTRO_SUMMARY = 'DemoStoke is a two-sided gear rental marketplace: riders find demo and rental gear nearby, and shops run their rentals in Fleet Ops.';
+const TIMELINE = 'April 2025 to now, solo';
 
 const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionProps) => (
   <AnimatedSection
@@ -47,9 +49,12 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
           />
         </CaseStudyHeroMediaFrame>
         <HeroContent className='text-animate'>
-          <Title>DemoStoke<br />UX Case Study</Title>
+          <hgroup>
+            <Title>DemoStoke</Title>
+            <TitleStatus>Live at demostoke.com</TitleStatus>
+          </hgroup>
           <div>
-            <CaseStudyHeroLabel>Description</CaseStudyHeroLabel>
+            <CaseStudyHeroLabel>The Product</CaseStudyHeroLabel>
             <Summary>{INTRO_SUMMARY}</Summary>
           </div>
           <div>
@@ -60,8 +65,12 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
               ))}
             </RoleList>
           </div>
+          <div>
+            <CaseStudyHeroLabel>Timeline and Team</CaseStudyHeroLabel>
+            <Summary>{TIMELINE}</Summary>
+          </div>
           <LinkRow>
-            <CaseStudyHeroLabel>Project Link</CaseStudyHeroLabel>
+            <CaseStudyHeroLabel>Use It Live</CaseStudyHeroLabel>
             <div>
               <a
                 href='https://www.demostoke.com/'
@@ -70,19 +79,19 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
                 onClick={() => {
                   trackLinkClick({
                     location: 'case_study_hero',
-                    label: 'Website',
+                    label: 'Web App',
                     href: 'https://www.demostoke.com/',
-                    section: 'DemoStoke UX Case Study',
+                    section: 'DemoStoke Product Story',
                   });
                   trackEvent('external_project_click', {
                     location: 'case_study_hero',
-                    label: 'Website',
+                    label: 'Web App',
                     href: 'https://www.demostoke.com/',
                     page_path: window.location.pathname,
                   });
                 }}
               >
-                Website <OpenInNewWindowIcon aria-hidden='true' />
+                Web App <OpenInNewWindowIcon aria-hidden='true' />
               </a>
             </div>
           </LinkRow>

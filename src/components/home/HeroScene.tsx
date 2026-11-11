@@ -76,7 +76,7 @@ const SCRAPS = [
 const PANEL_FADED_AT = 0.34;
 
 type HeroSceneProps = {
-  onSeeCaseStudies: () => void;
+  onSeeFlagshipProducts: () => void;
 };
 
 /**
@@ -85,7 +85,7 @@ type HeroSceneProps = {
  * is a link to the hidden club, and the worn utilities and windblown scraps
  * are decorative city scenery.
  */
-const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
+const HeroScene = ({ onSeeFlagshipProducts }: HeroSceneProps) => {
   const heroRef = useRef<HTMLElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
 
@@ -164,7 +164,7 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
 
         <HudFrame className='hero-panel'>
           <p className='hero-eyebrow'>
-            Product Engineer <span aria-hidden='true'>{'//'}</span> UX designer
+            Product Engineer <span aria-hidden='true'>{'//'}</span> UX Designer
           </p>
           <h1 id='home-hero-title' className='hero-title'>
             Michael Zick is{' '}<BrandName />{' '}
@@ -172,8 +172,8 @@ const HeroScene = ({ onSeeCaseStudies }: HeroSceneProps) => {
           </h1>
           <p className='hero-pitch'>I dream of the feature.</p>
           <div className='hero-ctas'>
-            <button type='button' className='hero-cta' onClick={onSeeCaseStudies}>
-              See Case Studies
+            <button type='button' className='hero-cta' onClick={onSeeFlagshipProducts}>
+              See Flagship Products
             </button>
             <TrackedLink
               href='/contact'

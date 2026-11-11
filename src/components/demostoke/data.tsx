@@ -6,32 +6,11 @@ export const CASE_STUDY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'section-the-what', label: 'The What' },
   { id: 'section-the-how', label: 'The How' },
   { id: 'section-the-who', label: 'The Who' },
-  { id: 'section-methodology', label: 'Methods' }
+  { id: 'section-methodology', label: 'Methods' },
+  { id: 'section-outcome', label: 'Outcomes' }
 ] as const;
 
 export const CASE_STUDY_BOTTOM_SECTION_ID = CASE_STUDY_SECTIONS[CASE_STUDY_SECTIONS.length - 1]?.id;
-
-export const STORY_SECTIONS: SidebarSectionConfig[] = [
-  { id: 'story-introduction', label: 'Intro', hidden: true },
-  { id: 'story-independent-surfboard-shaper-title', label: 'Independent Shaper' },
-  { id: 'story-weekend-warrior', label: 'Weekend Warrior' },
-  { id: 'story-small-ski-shop', label: 'Small Ski/Bike Shop' }
-] as const;
-
-export const STORY_HERO_IMAGES = [
-  {
-    src: '/img/demostoke/pop-art-shaper.webp',
-    alt: 'Independent surfboard shaper with demo boards'
-  },
-  {
-    src: '/img/demostoke/pop-art-snowboarder.webp',
-    alt: 'Snowboarder carrying her board'
-  },
-  {
-    src: '/img/demostoke/pop-art-mtb-man-woman.webp',
-    alt: 'Mountain bike rental counter'
-  }
-] as const;
 
 export const TLDR_ITEMS: {
   title: string;
@@ -40,14 +19,14 @@ export const TLDR_ITEMS: {
 }[] = [
   {
     title: 'Product Summary',
-    description: 'Riders and shops struggle with fragmented, offline demo and rental flows. I designed DemoStoke to be a unified marketplace to solve those issues. In validation sessions, 90% of shop owners said it would bring them more customers, and 100% of riders described it as "the thing that should already exist."',
+    description: 'Riders and shops struggle with fragmented, offline demo and rental flows. I designed and built DemoStoke to bring all of it into one marketplace: demostoke.com for riders, live now, and Fleet Ops for the shops that rent to them. In validation sessions, 90% of shop owners said it would bring them more customers, and 95% of riders described it as “the thing that should already exist.”',
     image: {
       src: '/img/demostoke/case-study/ds-explore-hybrid.webp',
       alt: 'DemoStoke global gear discovery collage'
     }
   },
   {
-    title: 'The Problem',
+    title: 'The Challenge',
     description: 'Riders want to try gear before committing, but most demos still depend on scattered shop events, word of mouth, or expensive short-term rentals. Shops and independent makers also lack a shared digital system for surfacing availability, building trust, and converting a successful demo into a sale.',
     image: {
       src: '/img/demostoke/demo-van.webp',
@@ -56,7 +35,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'The Solution',
-    description: 'DemoStoke turns those fragmented offline workflows into a location-aware marketplace where riders can discover gear nearby, compare listings, and book demos or rentals with more confidence. The platform also gives shops, shapers, and individual lenders tools to showcase inventory, manage availability, and turn trial experiences into repeat business.',
+    description: 'DemoStoke turns those fragmented offline workflows into a location-aware marketplace where riders can discover gear nearby, compare listings, and contact the shop or owner to set up a demo or rental. Owners and shapers list their gear on the site. Shops get Fleet Ops, a dashboard for inventory, pricing, add-ons, and bookings, with a booking widget that takes reservations on their own websites and turns trial experiences into repeat business.',
     image: {
       src: '/img/demostoke/surf-shop.webp',
       alt: 'Surf shop displaying boards available for demo'
@@ -64,7 +43,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'My Roles',
-    description: 'I led DemoStoke end to end as founder, Product Engineer, and UX designer, shaping the product strategy, research, information architecture, user flows, and visual system. I also built the front end, auth and dashboard flows, database-backed features, and AI-assisted discovery tooling needed to turn the concept into a working web application.',
+    description: 'I led DemoStoke end to end as founder, Product Engineer, and UX Designer, shaping the product strategy, research, information architecture, user flows, and visual system. I also built the front end, auth and dashboard flows, database-backed features, and AI-assisted discovery tooling behind the live web app, plus the analytics that measure how riders and shops use it. On the shop side I built Fleet Ops, with Stripe payments and refunds, SendGrid booking emails, and the embeddable widget.',
     image: {
       src: '/img/demostoke/ds-design-system.webp',
       alt: 'DemoStoke design system components'
@@ -92,11 +71,13 @@ export const METHOD_SECTIONS = [
     image: { src: '/img/demostoke/skiiers-on-lift.webp', alt: 'Skiers riding a chairlift together' }
   },
   {
-    title: 'Prototype, Test, and Refine the Product',
+    title: 'Prototype, Ship, and Measure',
     bullets: [
-      'Used Lovable AI to generate hi-fi pages quickly, then refined with prompt engineering.',
-      'Layered custom frontend polish and Supabase to demo discovery, admin, and AI integrations.',
-      'Ran moderated and unmoderated walkthroughs to validate discovery, booking, and trust cues.'
+      'Used Lovable to generate hi-fi pages quickly, then refined them with prompt engineering.',
+      'Added custom front-end work and a Supabase backend for discovery, admin, and the AI features.',
+      'Ran moderated and unmoderated walkthroughs to validate discovery, booking, and trust cues.',
+      'Built Fleet Ops on the same Supabase project, with Edge Functions for Stripe payments, refunds, and webhooks, SendGrid booking emails, and OpenAI booking insights.',
+      'Shipped with GTM, GA4, and Mixpanel behind a regional consent check, tracking over 60 events across search, filters, rental requests, AI tools, and shop listings.'
     ],
     image: { src: '/img/demostoke/surfer-and-guy-with-phone.webp', alt: 'Surfer carrying a board while walking beside a man on his phone' }
   }
@@ -106,7 +87,7 @@ export const PERSONA_ITEMS = [
   {
     title: 'Weekend Warrior',
     bullets: [
-      'Rachel (34, San Diego) is a marketing manager who rides 1-2x/month.',
+      'Rachel (34, San Diego) is a marketing manager who rides once or twice a month.',
       'She wants to try before buying expensive gear but is frustrated by limited demo options.',
       'She looks to Instagram and friends for recs, and wants DemoStoke to offer trusted peer reviews, easy filters, and clear pickup info.'
     ]
@@ -114,7 +95,7 @@ export const PERSONA_ITEMS = [
   {
     title: 'Die-Hard',
     bullets: [
-      'Chris (29, Truckee) is a remote project manager who snowboards 3-4x/week.',
+      'Chris (29, Truckee) is a remote project manager who snowboards three or four days a week.',
       'He seeks variety in gear but shops don’t offer enough options.',
       'He’s active in forums and trades gear with friends.',
       'He wants DemoStoke to offer high-quality listings, flexible pickup, and rider reviews.'
@@ -123,7 +104,7 @@ export const PERSONA_ITEMS = [
   {
     title: 'Nomadic Renter',
     bullets: [
-      'Maya (31, Santa Cruz) is a van-lifer and remote Product Engineer who rides 1-3x/week.',
+      'Maya (31, Santa Cruz) is a van-lifer and remote product engineer who rides one to three days a week.',
       'She doesn’t want to own a ton of gear and struggles to find quality rentals in new locations.',
       'She wants DemoStoke to offer verified local lenders, easy-to-find gear specs, and fair prices.'
     ]

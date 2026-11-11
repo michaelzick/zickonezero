@@ -1,9 +1,9 @@
 import CaseStudyPage from '../src/components/caseStudy/CaseStudyPage';
 import { RIPTYDE_CASE_STUDY } from '../src/components/riptyde/caseStudyData';
 import Seo from '../src/components/Seo';
-import { breadcrumbJsonLd, creativeWorkJsonLd } from '../src/lib/seo';
+import { breadcrumbJsonLd, softwareApplicationJsonLd } from '../src/lib/seo';
 
-const TITLE = 'Riptyde UX Case Study';
+const TITLE = 'Riptyde: Surf Forecast App for iOS and the Web';
 const DESCRIPTION = RIPTYDE_CASE_STUDY.intro.summary;
 const PATH = '/riptyde/';
 const OG_IMAGE = RIPTYDE_CASE_STUDY.intro.image;
@@ -20,10 +20,19 @@ const RiptydePage = () => (
       ogImageWidth={3456}
       ogImageHeight={1944}
       jsonLd={[
-        creativeWorkJsonLd({ name: TITLE, description: DESCRIPTION, path: PATH, image: OG_IMAGE.src }),
+        softwareApplicationJsonLd({
+          name: 'Riptyde',
+          description: DESCRIPTION,
+          path: PATH,
+          appUrl: 'https://riptyde.app/',
+          downloadUrl: 'https://apps.apple.com/us/app/riptyde/id6793336480',
+          applicationCategory: 'SportsApplication',
+          operatingSystem: 'iOS, Web',
+          image: OG_IMAGE.src,
+        }),
         breadcrumbJsonLd([
           { name: 'Home', path: '/' },
-          { name: TITLE, path: PATH },
+          { name: 'Riptyde', path: PATH },
         ]),
       ]}
     />

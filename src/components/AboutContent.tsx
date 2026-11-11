@@ -569,7 +569,7 @@ const AboutContent = () => {
                   <dt>Subject</dt>
                   <dd>M. Zick</dd>
                   <dt>Class</dt>
-                  <dd>Product Engineer + UX designer</dd>
+                  <dd>Product Engineer + UX Designer</dd>
                   <dt>Status</dt>
                   <dd><span className='status'>Open to connect</span></dd>
                   <dt className='dossier-row-optional'>Last seen</dt>
@@ -604,21 +604,22 @@ const AboutContent = () => {
               <AboutModalTitle as='h2'>About Michael</AboutModalTitle>
               <AboutModalCopy>
                 <p>
-                  Michael is a results-oriented Product Leader with a background in product engineering, UX design,
-                  DevOps, SEO, and e-commerce platforms.
+                  Michael is a Product Engineer and UX Designer with a background in DevOps, SEO, and e-commerce
+                  platforms.
                 </p>
                 <p>
                   He has hired and led engineering teams to build high-engagement products from 0 to 1 under tight
                   deadlines, while aligning cross-functional stakeholders in highly ambiguous environments.
                 </p>
                 <p>
-                  From concept to launch, Michael thrives on solving complex problems with elegant, user-centered solutions.
+                  He designs, builds, and runs four live products of his own: Riptyde, Rackloose, Nice Guy University, and
+                  DemoStoke. Each one is measured in production with Mixpanel and GA4.
                 </p>
                 <p>
-                  Samples of his work can be found in the <TrackedLink href='/' label='main gallery' location='about_modal' section='body'>main gallery</TrackedLink>, with code examples on{' '}
+                  His work is on the <TrackedLink href='/' label='homepage' location='about_modal' section='body'>homepage</TrackedLink>, his code is on{' '}
                   <TrackedLink href='https://github.com/michaelzick' label='GitHub' location='about_modal' section='body'
-                    target='_blank' rel='noopener noreferrer'>GitHub</TrackedLink>, and a
-                  full list of qualifications on <TrackedLink href='https://linkedin.com/in/michaelzick'
+                    target='_blank' rel='noopener noreferrer'>GitHub</TrackedLink>, and his full
+                  qualifications are on <TrackedLink href='https://linkedin.com/in/michaelzick'
                     label='LinkedIn' location='about_modal' section='body'
                     target='_blank' rel='noopener noreferrer'>LinkedIn</TrackedLink>.
                 </p>

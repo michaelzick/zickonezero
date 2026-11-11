@@ -23,7 +23,7 @@ const FooterContent = (): ReactElement => (
 
     <FooterInner>
       <FooterColumn>
-        <FooterColumnTitle>Case Studies</FooterColumnTitle>
+        <FooterColumnTitle>Flagship Products</FooterColumnTitle>
         <FooterColumnLinks>
           {CASE_STUDIES_LINKS.map(({ href, label }) => (
             <li key={href}>
@@ -36,7 +36,7 @@ const FooterContent = (): ReactElement => (
       </FooterColumn>
 
       <FooterColumn>
-        <FooterColumnTitle>Product Engineering</FooterColumnTitle>
+        <FooterColumnTitle>Design &amp; Build</FooterColumnTitle>
         <FooterColumnLinks>
           {PROJECT_LINKS.map(({ href, label }) => (
             <li key={href}>

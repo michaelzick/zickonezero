@@ -144,7 +144,7 @@ const NiceGuyUniversityContent = () => {
         <DemoStokeTabs
           ref={handleTopTabsRef}
           tabs={[
-            { key: 'case-study', label: 'UX Case Study' },
+            { key: 'case-study', label: 'Product Story' },
             { key: 'screens', label: 'Product Screens' }
           ]}
           activeTab={activeTab}

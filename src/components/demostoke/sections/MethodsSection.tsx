@@ -17,7 +17,7 @@ type MethodsSectionProps = {
 
 const MethodsSection = ({ setAnimatedSectionRef, visibleSections }: MethodsSectionProps) => (
   <section id='section-methodology' className='story-section'>
-    <CaseStudySectionTitle as='h2'>Methods / The UX Process</CaseStudySectionTitle>
+    <CaseStudySectionTitle as='h2'>Methods / Design, Build, Measure</CaseStudySectionTitle>
     <DemoStokeMethodList>
       {METHOD_SECTIONS.map(({ title, bullets, image }, index) => (
         <AnimatedSection

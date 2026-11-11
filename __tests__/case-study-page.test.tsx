@@ -31,18 +31,20 @@ const STUDIES = [
 const renderStudy = (study: CaseStudyData) => renderWithProviders(<CaseStudyPage study={study} />);
 
 describe.each(STUDIES)('$study.name case study', ({ study, dataFile, heroLinks, screensLink, screensNav }) => {
-  it('renders the UX Case Study tab with the shared section navigation', () => {
+  it('renders the Product Story tab with the shared section navigation', () => {
     renderStudy(study);
 
-    const heroHeading = screen.getByRole('heading', { level: 1, name: `${study.name} UX Case Study` });
-    expect(heroHeading.querySelector('br')).toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: 'UX Case Study' })).toHaveAttribute('aria-selected', 'true');
-    expect(getTabLabels(screen.getByLabelText('Desktop page sections'))).toEqual(['The What', 'The How', 'The Who', 'Methods']);
-    expect(getTabLabels(screen.getByLabelText('Mobile page sections'))).toEqual(['The What', 'The How', 'The Who', 'Methods']);
+    const heroHeading = screen.getByRole('heading', { level: 1, name: study.name });
+    // The live-status line follows the product's name in its hgroup.
+    expect(heroHeading.parentElement?.tagName).toBe('HGROUP');
+    expect(heroHeading.nextElementSibling).toHaveTextContent(/live/i);
+    expect(screen.getByRole('tab', { name: 'Product Story' })).toHaveAttribute('aria-selected', 'true');
+    expect(getTabLabels(screen.getByLabelText('Desktop page sections'))).toEqual(['The What', 'The How', 'The Who', 'Methods', 'Outcomes']);
+    expect(getTabLabels(screen.getByLabelText('Mobile page sections'))).toEqual(['The What', 'The How', 'The Who', 'Methods', 'Outcomes']);
     expect(screen.getByRole('heading', { name: 'The What' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: `The How / ${study.how.heading}` })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'The Who / Audiences and Stakeholders' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Methods / The UX Process' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'The Who / Who Uses It' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Methods / Design, Build, Measure' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The Outcome' })).toBeInTheDocument();
     expect(screen.getByLabelText(`${study.name} screenshot carousel`)).toBeInTheDocument();
 
@@ -52,8 +54,8 @@ describe.each(STUDIES)('$study.name case study', ({ study, dataFile, heroLinks, 
     });
   });
 
-  // Each screenshot shows once on the UX Case Study tab, the hero included.
-  it('never repeats an image on the UX Case Study tab', () => {
+  // Each screenshot shows once on the Product Story tab, the hero included.
+  it('never repeats an image on the Product Story tab', () => {
     renderStudy(study);
 
     const sources = Array.from(document.querySelectorAll('#case-study-content img'), (image) => image.getAttribute('src'));

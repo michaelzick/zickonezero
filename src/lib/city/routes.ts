@@ -19,7 +19,7 @@ const NOT_FOUND: RouteMeta = { path: '/404', label: 'Signal lost', accent: 'red'
 
 const roundCamera = (value: number) => Math.round(value * 1000) / 1000;
 
-// The city map: case studies in the magenta west, product engineering in the
+// The city map: flagship products in the magenta west, design and build in the
 // cyan east, home in the middle.
 const CASE_STUDY_ROUTES = CASE_STUDIES_LINKS.map((link, index): RouteMeta => ({
   path: link.href,

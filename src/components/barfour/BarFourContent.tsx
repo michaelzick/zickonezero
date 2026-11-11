@@ -149,7 +149,7 @@ const BarFourContent = () => {
             <h1 className='club-title'>Bar Four</h1>
             <p className='club-caption' lang='ru' aria-hidden='true'>БАР ЧЕТЫРЕ</p>
             <p className='club-intro'>
-              Every phrase has a bar four, the turnaround where the fill drops. Down here it&apos;s a
+              Every phrase has a bar four, the turnaround where the fill drops. Down here it’s a
               listening bar, a record exchange, and an open booth till dawn. Everything on the racks is
               something I build after hours, just to see if it can be done.
             </p>

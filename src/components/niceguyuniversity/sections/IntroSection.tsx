@@ -13,7 +13,8 @@ import {
   RoleList,
   SectionNavRevealAnchor,
   Summary,
-  Title
+  Title,
+  TitleStatus
 } from '../../../../styles/projectShowcases';
 import { SetAnimatedSectionRef, VisibleSections } from '../../showcaseTypes';
 
@@ -25,12 +26,15 @@ type IntroSectionProps = {
 };
 
 const ROLE_BULLETS = [
+  'Founder',
   'Product strategy',
-  'UX/UI design',
-  'content architecture',
-  'analytics planning'
+  'Product engineering',
+  'UX design',
+  'Content architecture',
+  'Analytics'
 ] as const;
-const INTRO_SUMMARY = 'Nice Guy University is a platform that turns the Nice Guy recovery coaching I do one-on-one into self-paced courses men can start tonight.';
+const INTRO_SUMMARY = 'Nice Guy University is a live course and coaching platform that turns the Nice Guy recovery coaching I do one-on-one into self-paced courses men can start tonight.';
+const TIMELINE = 'March 2026 to now, solo';
 const PROJECT_URL = 'https://www.niceguyuniversity.com/';
 
 const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionProps) => (
@@ -47,9 +51,12 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
           <img src={HERO_IMAGE_SRC} {...heroImageSources(HERO_IMAGE_SRC)} alt='Nice Guy University homepage with hero and calls to action' loading='eager' fetchPriority='high' />
         </CaseStudyHeroMediaFrame>
         <HeroContent className='text-animate'>
-          <Title>Nice Guy University<br />UX Case Study</Title>
+          <hgroup>
+            <Title>Nice Guy University</Title>
+            <TitleStatus>Live at niceguyuniversity.com</TitleStatus>
+          </hgroup>
           <div>
-            <CaseStudyHeroLabel>Description</CaseStudyHeroLabel>
+            <CaseStudyHeroLabel>The Product</CaseStudyHeroLabel>
             <Summary>{INTRO_SUMMARY}</Summary>
           </div>
           <div>
@@ -60,8 +67,12 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
               ))}
             </RoleList>
           </div>
+          <div>
+            <CaseStudyHeroLabel>Timeline and Team</CaseStudyHeroLabel>
+            <Summary>{TIMELINE}</Summary>
+          </div>
           <LinkRow>
-            <CaseStudyHeroLabel>Project Link</CaseStudyHeroLabel>
+            <CaseStudyHeroLabel>Use It Live</CaseStudyHeroLabel>
             <div>
               <a
                 href={PROJECT_URL}
@@ -70,19 +81,19 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
                 onClick={() => {
                   trackLinkClick({
                     location: 'case_study_hero',
-                    label: 'Website',
+                    label: 'Web App',
                     href: PROJECT_URL,
-                    section: 'Nice Guy University UX Case Study',
+                    section: 'Nice Guy University Product Story',
                   });
                   trackEvent('external_project_click', {
                     location: 'nice_guy_university_case_study',
-                    label: 'Website',
+                    label: 'Web App',
                     href: PROJECT_URL,
                     page_path: window.location.pathname,
                   });
                 }}
               >
-                Website <OpenInNewWindowIcon aria-hidden='true' />
+                Web App <OpenInNewWindowIcon aria-hidden='true' />
               </a>
             </div>
           </LinkRow>

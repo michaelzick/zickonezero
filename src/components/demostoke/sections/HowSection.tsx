@@ -43,26 +43,28 @@ const HowSection = ({
     className={visibleSections['section-the-how'] ? 'visible' : undefined}
   >
     <section id='section-the-how' className='story-section'>
-      <CaseStudySectionTitle as='h2'>The How / AI-Driven Development</CaseStudySectionTitle>
+      <CaseStudySectionTitle as='h2'>The How / Two Sides of the Marketplace</CaseStudySectionTitle>
       <DemoStokeTldrSection>
         <DemoStokeTwoUp className='text-animate'>
           <section>
-            <h3>Location-Based Discovery</h3>
+            <h3>For Riders</h3>
             <p>
-              With DemoStoke, I created a comprehensive gear discovery and rental platform that connects riders with
-              demo opportunities in their area.
+              DemoStoke shows riders the demo and rental gear near them on a map, in a list, or both side by side, with
+              plain-language AI search, a gear quiz, and a demo-event calendar that finds new events across the web every
+              week.
             </p>
           </section>
           <section>
-            <h3>Rapid Prototyping with AI</h3>
+            <h3>For Shops</h3>
             <p>
-              Using Lovable.dev, I was able to spin up the app’s foundation with a well-written prompt, then iterated
-              rapidly to refine features and user experience.
+              Fleet Ops is where shops run their rentals: inventory, pricing, add-ons, bookings, and analytics, with
+              Stripe payments and SendGrid booking emails. One script tag puts a booking widget, in the shop’s
+              chosen theme, on its own website.
             </p>
           </section>
         </DemoStokeTwoUp>
         <DemoStokeWhyImageFrame className='image-animate'>
-          <FullBorderImage src='/img/demostoke/case-study/ds-explore-map.webp' alt='DemoStoke Hybrid View' loading='lazy' />
+          <FullBorderImage src='/img/demostoke/case-study/ds-explore-map.webp' alt='DemoStoke map view with shop pins across North America' loading='lazy' />
         </DemoStokeWhyImageFrame>
       </DemoStokeTldrSection>
       <DemoStokeGalleryBlock>

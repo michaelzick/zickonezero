@@ -7,7 +7,8 @@ export const CASE_STUDY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'section-the-what', label: 'The What' },
   { id: 'section-the-how', label: 'The How' },
   { id: 'section-the-who', label: 'The Who' },
-  { id: 'section-methodology', label: 'Methods' }
+  { id: 'section-methodology', label: 'Methods' },
+  { id: 'section-outcome', label: 'Outcomes' }
 ] as const;
 
 export const CASE_STUDY_BOTTOM_SECTION_ID = CASE_STUDY_SECTIONS[CASE_STUDY_SECTIONS.length - 1]?.id;
@@ -19,12 +20,12 @@ export const TLDR_ITEMS: {
 }[] = [
   {
     title: 'Product Summary',
-    description: 'I helped reimagine Antisyphon Training from a static marketing site and fragmented LMS touchpoints into a cohesive marketplace for live, on-demand, and pay-what-you-can security education. The redesign improved enrollment, reduced support load, and gave learners, instructors, and operations teams a more coherent end-to-end experience.',
+    description: 'I led Antisyphon Training’s move from a static marketing site and scattered LMS touchpoints to one marketplace for live, on-demand, and pay-what-you-can security courses. The new store raised enrollments, cut support tickets, and gave learners, instructors, and the operations team one place to work.',
     image: { src: '/img/antisyphon/home.webp', alt: 'Antisyphon Training homepage hero' }
   },
   {
     title: 'The Challenge',
-    description: 'Replace a static marketing site and scattered LMS touchpoints with a cohesive shopping and learning experience.',
+    description: 'Courses were sold through a static marketing site and third-party tools, while enrollment, progress, and course communications lived in separate systems.',
     image: { src: '/img/antisyphon/course-catalog.webp', alt: 'Course catalog cards showing filtering and categories' }
   },
   {
@@ -34,7 +35,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'My Roles',
-    description: 'Product strategy, product engineering, and WordPress/WooCommerce engineering plus LMS/admin integrations.',
+    description: 'I was the Product Lead from December 2022 to April 2025, leading a team of six, not all of them direct reports. I managed the team, the timeline, the tasks, and the stakeholders, ran the user research, did all of the UX design, and built the front end. The senior WordPress and WooCommerce developers on the team built the store, its LMS integrations, and the admin tools, and I measured the live store with WooCommerce Analytics and GA4.',
     image: { src: '/img/antisyphon/admin-course-edit.webp', alt: 'Admin course creation form inside WordPress' }
   }
 ] as const;
@@ -49,7 +50,7 @@ export const METHOD_SECTIONS: MethodSection[] = [
   {
     title: 'Discovery and Alignment',
     bullets: [
-      'Partnered with BHIS creative directors, instructors, and ops leaders to define goals for the new marketplace.',
+      'Partnered with Black Hills Information Security creative directors, instructors, and ops leaders to define goals for the new marketplace.',
       'Mapped pain points across third-party sales, LMS enrollment, and communications.',
       'Captured requirements for live events, on-demand courses, coupons, and corporate purchasing.'
     ],
@@ -74,11 +75,12 @@ export const METHOD_SECTIONS: MethodSection[] = [
     images: [{ src: '/img/antisyphon/wireframe-corporate-dashboard.webp', alt: 'Corporate dashboard with course progress' }]
   },
   {
-    title: 'Build the Customer and Admin Interfaces',
+    title: 'Lead the Build',
     bullets: [
-      'Customized WooCommerce and WordPress templates for live/on-demand courses and subscriptions.',
-      'Integrated with the LMS plus PHP/MySQL services for progress tracking, certificates, and reporting.',
-      'Streamlined admin forms and ACF-driven inputs, cutting course setup time by roughly 85%.'
+      'Developed the front end of the catalog, course pages, cart, and checkout for live and on-demand courses and subscriptions.',
+      'Managed a team of six, the timeline, and the task plan while the senior WordPress and WooCommerce developers built the LMS integration and the PHP/MySQL services behind progress tracking, certificates, and reporting.',
+      'Designed the streamlined admin forms and ACF-driven inputs the team built, cutting course setup time by roughly 85%.',
+      'Tracked the live store with WooCommerce Analytics and GA4, so enrollment and checkout changes showed up as numbers, not anecdotes.'
     ],
     images: [{ src: '/img/antisyphon/admin-event-tickets.webp', alt: 'Admin order edit view with custom fields' }]
   }

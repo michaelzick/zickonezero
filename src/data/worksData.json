@@ -114,7 +114,7 @@
   {
     "thumb": "/img/home/cards/fyfs-wave-square.webp",
     "imgs": [],
-    "desc": "Free career quiz & personality assessment",
+    "desc": "Free career quiz and personality assessment",
     "header": "Find Your Flow State",
     "group": "fyfs",
     "link": "/find-your-flow-state"
@@ -122,40 +122,40 @@
   {
     "thumb": "/img/home/cards/at_logo_purple.webp",
     "imgs": [],
-    "desc": "Cybersecurity training marketplace and CMS",
-    "header": "CASE STUDY: Antisyphon Training",
+    "desc": "Cybersecurity training marketplace and course CMS for a client",
+    "header": "Antisyphon Training",
     "group": "antisyphon-training",
     "link": "/antisyphon-training"
   },
   {
     "thumb": "/img/home/cards/demostoke-logo-square.webp",
     "imgs": [],
-    "desc": "Action sports gear rental system and lifestyle blog",
-    "header": "CASE STUDY: DemoStoke",
+    "desc": "Gear rental marketplace and blog for action sports riders and shops",
+    "header": "DemoStoke",
     "group": "demostoke",
     "link": "/demostoke"
   },
   {
     "thumb": "/img/home/cards/ngu-logo-square.webp",
     "imgs": [],
-    "desc": "Recovery course and coaching platform for men",
-    "header": "CASE STUDY: Nice Guy University",
+    "desc": "Self-paced recovery courses and coaching for men",
+    "header": "Nice Guy University",
     "group": "nice-guy-university",
     "link": "/nice-guy-university"
   },
   {
     "thumb": "/img/home/cards/rackloose-icon-square.webp",
     "imgs": [],
-    "desc": "Playable modular synth for the browser with original devices",
-    "header": "CASE STUDY: Rackloose",
+    "desc": "Browser modular synth with original devices and Rust/WASM DSP",
+    "header": "Rackloose",
     "group": "rackloose",
     "link": "/rackloose"
   },
   {
     "thumb": "/img/home/cards/riptyde-icon-square.webp",
     "imgs": [],
-    "desc": "Surf forecast for iOS and the web with one score per break",
-    "header": "CASE STUDY: Riptyde",
+    "desc": "Surf forecast app for iPhone and the web, one score per break",
+    "header": "Riptyde",
     "group": "riptyde",
     "link": "/riptyde"
   },
@@ -174,14 +174,6 @@
     "header": "TimeFraim",
     "group": "timefraim",
     "link": "/timefraim"
-  },
-  {
-    "thumb": "/img/home/cards/ds-logo-stripes-fuchsia-square.webp",
-    "imgs": [],
-    "desc": "Gear shop dashboard and embeddable booking widget",
-    "header": "DemoStoke Fleet Ops",
-    "group": "demostoke-fleet-ops",
-    "link": "/demostoke-fleet-ops"
   },
   {
     "thumb": "/img/home/cards/bars-of-sand-icon-square.webp",

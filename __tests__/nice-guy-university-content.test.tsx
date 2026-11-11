@@ -38,24 +38,26 @@ describe('NiceGuyUniversityContent', () => {
   it('renders the Nice Guy University case-study tab with section navigation', () => {
     renderWithProviders(<NiceGuyUniversityContent />);
 
-    const heroHeading = screen.getByRole('heading', { name: 'Nice Guy University UX Case Study' });
+    const heroHeading = screen.getByRole('heading', { name: 'Nice Guy University' });
     const desktopTabs = screen.getByLabelText('Desktop page sections');
     const mobileTabs = screen.getByLabelText('Mobile page sections');
 
-    expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'UX Case Study' }));
+    expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'Product Story' }));
     expect(screen.getByRole('tablist', { name: 'Page sections' })).toBeInTheDocument();
-    expect(getTabLabels(desktopTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods']);
-    expect(getTabLabels(mobileTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods']);
+    expect(getTabLabels(desktopTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods', 'Outcomes']);
+    expect(getTabLabels(mobileTabs)).toEqual(['The What', 'The How', 'The Who', 'Methods', 'Outcomes']);
     expect(heroHeading).toBeInTheDocument();
-    expect(heroHeading.querySelector('br')).toBeInTheDocument();
+    // The live-status line follows the product's name in its hgroup.
+    expect(heroHeading.parentElement?.tagName).toBe('HGROUP');
+    expect(heroHeading.nextElementSibling).toHaveTextContent(/live/i);
     expect(screen.getAllByText(/turns the Nice Guy recovery coaching I do one-on-one into self-paced courses/i).length).toBeGreaterThan(0);
-    expect(screen.getByRole('link', { name: 'Website' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Web App' })).toBeInTheDocument();
     expect(screen.getByAltText('Nice Guy University homepage with hero and calls to action')).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Open image: Nice Guy University homepage with hero and calls to action' })).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The What' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The How / Course Platform Experience' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'The Who / Audiences and Stakeholders' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Methods / The UX Process' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'The Who / Who Uses It' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Methods / Design, Build, Measure' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The Outcome' })).toBeInTheDocument();
     expect(screen.getByLabelText('Nice Guy University screenshot carousel')).toBeInTheDocument();
     expect(screen.getByAltText('Nice Guy University course catalog with search and filters')).toBeInTheDocument();

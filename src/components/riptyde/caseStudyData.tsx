@@ -6,7 +6,7 @@ const phone = (file: string, alt: string): CaseStudyImage => ({ src: `${DIR}/${f
 const screen = (file: string, alt: string): CaseStudyImage => ({ src: `${DIR}/${file}`, alt });
 
 // The hero's three screens (The Lineup, Malibu First, and its score) appear
-// nowhere else on the UX Case Study tab; see scripts/render-riptyde-hero.js.
+// nowhere else on the Product Story tab; see scripts/render-riptyde-hero.js.
 const HERO = screen(
   'riptyde-case-study-hero.webp',
   'Three Riptyde iPhone screens: The Lineup ranked by score, the Malibu First Point forecast, and its RAD-O-METER™ score of 7.5'
@@ -17,8 +17,10 @@ export const RIPTYDE_CASE_STUDY: CaseStudyData = {
   analyticsId: 'riptyde',
   name: 'Riptyde',
   intro: {
-    summary: 'Riptyde is a West Coast surf forecast that gives every break one score out of 10, then shows you exactly how it got there.',
-    roles: ['Product strategy', 'product engineering', 'UX design', 'iOS development'],
+    status: 'Live on the App Store and the web',
+    summary: 'Riptyde is a West Coast surf forecast, live on iPhone and at riptyde.app, that gives every break one score out of 10, then shows you exactly how it got there.',
+    roles: ['Founder', 'Product strategy', 'Product engineering', 'UX design', 'iOS development', 'Analytics'],
+    timeline: 'May 2026 to now, solo',
     image: HERO,
     imageBackground: '#0B2A4A',
     links: [
@@ -44,7 +46,7 @@ export const RIPTYDE_CASE_STUDY: CaseStudyData = {
     },
     {
       title: 'My Roles',
-      description: 'I built everything from the first prototype to the App Store listing: product and visual design, the SwiftUI app, the scoring model and data pipeline, the Supabase backend, and riptyde.app, the Next.js web version on the same backend.',
+      description: 'I built and run all of it, from the first prototype to the App Store listing: product and visual design, the SwiftUI app, the scoring model and data pipeline, the Supabase backend, riptyde.app, the Next.js web version on the same backend, and the analytics on both that show how surfers actually use it.',
       image: screen('riptyde-web-rad.webp', 'riptyde.app on desktop showing the RAD-O-METER™ page for Malibu First Point with its breakdown, swell stack, and surf-quality chart')
     }
   ],
@@ -128,7 +130,8 @@ export const RIPTYDE_CASE_STUDY: CaseStudyData = {
       bullets: [
         'Used MapKit for the spot map. The list follows whatever stretch of coast you’re looking at and loads forecasts only for the spots in view.',
         'Used EventKit to put swell alerts on your calendar and StoreKit 2 for Riptyde Pro.',
-        'Kept accounts, favorites, sessions, and crew in Supabase, with row-level security so private spots and sessions stay private. AI summaries run on your own OpenAI or Anthropic key, stored in the iOS Keychain.'
+        'Kept accounts, favorites, sessions, and crew in Supabase, with row-level security so private spots and sessions stay private. AI summaries run on your own OpenAI or Anthropic key, stored in the iOS Keychain.',
+        'Instrumented every flow, from app opens and spot views to check-ins, the paywall, and purchases. Events go to anonymous Mixpanel and a private first-party table in Supabase, with no cross-app tracking, alongside App Store Connect retention and Xcode Organizer crash and hang reports.'
       ],
       images: [
         phone('riptyde-spot-map.webp', 'Riptyde spot map of the San Francisco Bay Area coast with a button to drop a secret spot'),
@@ -140,7 +143,8 @@ export const RIPTYDE_CASE_STUDY: CaseStudyData = {
       bullets: [
         'Rebuilt the app as riptyde.app with Next.js on Cloudflare Workers, sharing the iOS app’s Supabase backend and AI proxy.',
         'Treated the iOS app as the source of truth. A test harness replays recorded forecast data through the Swift code, and the web version has to match its scores exactly.',
-        'Rendered every public spot page with real forecast HTML, so search engines and link previews see the actual conditions.'
+        'Rendered every public spot page with real forecast HTML, so search engines and link previews see the actual conditions.',
+        'Gave the web its own GA4 and Mixpanel behind a consent choice: typed events, masked session replay, and Core Web Vitals, with a Pro purchase counted only once checkout is verified.'
       ],
       images: [
         screen('riptyde-web-spots.webp', 'riptyde.app on desktop with The Lineup beside a full-height map of the South Bay'),
@@ -150,9 +154,10 @@ export const RIPTYDE_CASE_STUDY: CaseStudyData = {
   ],
   outcome: [
     'Live on the App Store, with Pro open to every signed-in surfer for now.',
-    'riptyde.app on the web, with spot pages built to be found in search.',
+    'Live on the web at riptyde.app, with spot pages built to be found in search.',
     'One scoring model on iOS and the web, checked against the same recorded data.',
-    'Close to 400 commits across the two apps since May 2026.'
+    'Measured on both platforms, from first open to purchase, without tracking anyone across apps.',
+    'Over 430 commits across the two apps since May 2026.'
   ],
   screens: {
     logo: { src: '/img/squares/riptyde-icon-square.webp', alt: 'Riptyde app icon' },

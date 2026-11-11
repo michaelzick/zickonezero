@@ -2,7 +2,7 @@ import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { trackEvent, trackLinkClick } from '../../../lib/analytics';
 import { heroImageSources } from '../../../lib/responsiveImages';
 
-import { AnimatedSection, CaseStudyHeroLabel, CaseStudyHeroMediaFrame, HeroContent, HeroGrid, HiddenSectionAnchor, LinkRow, RoleList, SectionNavRevealAnchor, Summary, Title } from '../../../../styles/projectShowcases';
+import { AnimatedSection, CaseStudyHeroLabel, CaseStudyHeroMediaFrame, HeroContent, HeroGrid, HiddenSectionAnchor, LinkRow, RoleList, SectionNavRevealAnchor, Summary, Title, TitleStatus } from '../../../../styles/projectShowcases';
 import { SetAnimatedSectionRef, VisibleSections } from '../../showcaseTypes';
 
 const HERO_IMAGE_SRC = '/img/antisyphon/home.webp';
@@ -12,8 +12,9 @@ type IntroSectionProps = {
   visibleSections: VisibleSections;
 };
 
-const ROLE_BULLETS = ['Product strategy', 'product engineering', 'UX design'] as const;
-const INTRO_SUMMARY = 'Antisyphon Training is a cohesive marketplace experience for live, on-demand, and pay-what-you-can security education.';
+const ROLE_BULLETS = ['Product Lead', 'User research', 'UX design', 'Front-end development', 'Analytics'] as const;
+const INTRO_SUMMARY = 'Antisyphon Training is a cybersecurity training marketplace that sells live, on-demand, and pay-what-you-can security courses.';
+const TIMELINE = 'December 2022 to April 2025, leading a team of six';
 
 const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionProps) => (
   <AnimatedSection
@@ -29,9 +30,12 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
           <img src={HERO_IMAGE_SRC} {...heroImageSources(HERO_IMAGE_SRC)} alt='Antisyphon Training homepage with course cards' loading='eager' fetchPriority='high' />
         </CaseStudyHeroMediaFrame>
         <HeroContent className='text-animate'>
-          <Title>Antisyphon<br />UX Case Study</Title>
+          <hgroup>
+            <Title>Antisyphon Training</Title>
+            <TitleStatus>Client product, live at antisyphontraining.com</TitleStatus>
+          </hgroup>
           <div>
-            <CaseStudyHeroLabel>Description</CaseStudyHeroLabel>
+            <CaseStudyHeroLabel>The Product</CaseStudyHeroLabel>
             <Summary>{INTRO_SUMMARY}</Summary>
           </div>
           <div>
@@ -42,8 +46,12 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
               ))}
             </RoleList>
           </div>
+          <div>
+            <CaseStudyHeroLabel>Timeline and Team</CaseStudyHeroLabel>
+            <Summary>{TIMELINE}</Summary>
+          </div>
           <LinkRow>
-            <CaseStudyHeroLabel>Project Link</CaseStudyHeroLabel>
+            <CaseStudyHeroLabel>Use It Live</CaseStudyHeroLabel>
             <div>
               <a
                 href='https://www.antisyphontraining.com/'
@@ -52,19 +60,19 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
                 onClick={() => {
                   trackLinkClick({
                     location: 'case_study_hero',
-                    label: 'Website',
+                    label: 'Web App',
                     href: 'https://www.antisyphontraining.com/',
-                    section: 'Antisyphon UX Case Study',
+                    section: 'Antisyphon Product Story',
                   });
                   trackEvent('external_project_click', {
                     location: 'case_study_hero',
-                    label: 'Website',
+                    label: 'Web App',
                     href: 'https://www.antisyphontraining.com/',
                     page_path: window.location.pathname,
                   });
                 }}
               >
-                Website <OpenInNewWindowIcon aria-hidden='true' />
+                Web App <OpenInNewWindowIcon aria-hidden='true' />
               </a>
             </div>
           </LinkRow>

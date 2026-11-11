@@ -17,9 +17,9 @@ type IntroSectionProps = {
 const IntroSection = ({ openFlowLightbox }: IntroSectionProps) => (
   <section id='screens-introduction'>
     <CompactIntroHeaderRow className='text-animate'>
-      <img className='at-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training Logo' loading='lazy' />
+      <img className='at-logo' src='/img/squares/at_logo_purple.webp' alt='Antisyphon Training logo' loading='lazy' />
       <div>
-        <h2 className='tab-header page-header'>Antisyphon Product Screens</h2>
+        <h2 className='tab-header page-header'>Antisyphon Training Product Screens</h2>
         <PitchDeckLink
           href='https://www.antisyphontraining.com/'
           target='_blank'
@@ -29,7 +29,7 @@ const IntroSection = ({ openFlowLightbox }: IntroSectionProps) => (
               location: 'product_screens_intro',
               label: 'www.antisyphontraining.com',
               href: 'https://www.antisyphontraining.com/',
-              section: 'Antisyphon Product Screens',
+              section: 'Antisyphon Training Product Screens',
             });
             trackEvent('external_project_click', {
               location: 'product_screens_intro',

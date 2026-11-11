@@ -33,7 +33,7 @@ export const SCREEN_BLOCKS: ScreenBlock[] = [
     title: 'Platform Overview',
     copy: (
       <>
-        The homepage makes the promise in five words, &quot;stop being nice, start being you,&quot; and backs it with the
+        The homepage makes the promise in five words, “stop being nice, start being you,” and backs it with the
         framework every course teaches toward. The how-it-works page lays out the actual process: browse coaches, pick a
         course, do the work.
       </>

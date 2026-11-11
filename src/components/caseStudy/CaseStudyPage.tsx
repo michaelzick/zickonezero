@@ -35,7 +35,7 @@ type CaseStudyPageProps = {
 };
 
 /**
- * A two-tab case study, UX Case Study and Product Screens, built from data
+ * A flagship product's two tabs, Product Story and Product Screens, built from data
  * with the same layout, section nav, and tracking as Nice Guy University's.
  */
 const CaseStudyPage = ({ study }: CaseStudyPageProps) => {
@@ -135,7 +135,7 @@ const CaseStudyPage = ({ study }: CaseStudyPageProps) => {
         <DemoStokeTabs
           ref={handleTopTabsRef}
           tabs={[
-            { key: 'case-study', label: 'UX Case Study' },
+            { key: 'case-study', label: 'Product Story' },
             { key: 'screens', label: 'Product Screens' }
           ]}
           activeTab={activeTab}

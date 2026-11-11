@@ -12,11 +12,20 @@ import getWorksData from '../src/lib/getWorksData';
 
 import MainContent from '../src/components/MainContent';
 import Seo from '../src/components/Seo';
-import { personJsonLd, webSiteJsonLd } from '../src/lib/seo';
+import { CASE_STUDIES_LINKS } from '../src/components/caseStudiesLinks';
+import { itemListJsonLd, personJsonLd, webSiteJsonLd } from '../src/lib/seo';
 
 import type { WorksDataType } from '../src/types';
 
-const DESCRIPTION = 'Michael Zick is ZICK ONE ZERO Creative, a Product Engineer and UX designer. Explore case studies, product engineering, and web development work.';
+const FLAGSHIP_PRODUCTS = itemListJsonLd(
+  'Flagship Products',
+  CASE_STUDIES_LINKS.map(({ href, label }) => ({
+    name: label,
+    path: `${href}/`,
+  }))
+);
+
+const DESCRIPTION = 'Michael Zick is ZICK ONE ZERO Creative, a Product Engineer and UX Designer. Explore live flagship products, smaller design and build work, and web development.';
 
 const Home: NextPage<WorksDataType> = (props) => {
   const { worksDataReversed } = props;
@@ -31,7 +40,7 @@ const Home: NextPage<WorksDataType> = (props) => {
 
   return (
     <>
-      <Seo path='/' description={DESCRIPTION} jsonLd={[webSiteJsonLd(), personJsonLd()]} />
+      <Seo path='/' description={DESCRIPTION} jsonLd={[webSiteJsonLd(), personJsonLd(), FLAGSHIP_PRODUCTS]} />
       <MainContent worksDataReversed={worksDataReversed} />
     </>
   );

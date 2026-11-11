@@ -1,0 +1,42 @@
+# ZICK ONE ZERO Creative
+
+> Portfolio of Michael Zick, a Product Engineer and UX Designer who designs, builds, and runs live products, with a background in DevOps, SEO, and e-commerce platforms. ZICK ONE ZERO Creative is his studio name.
+
+The site sorts his work into three groups: Flagship Products he designed, engineered, shipped, and measured end to end; smaller Design & Build sites and tools; and Web Development he hand-coded for film studios and brands from their designs.
+
+## Flagship Products
+
+- [Riptyde](https://www.zickonezero.com/riptyde/): West Coast surf forecast, live on iPhone and at riptyde.app, that gives every break one score out of 10 and shows how it got there. Founder, Product Engineer, and UX Designer.
+- [Rackloose](https://www.zickonezero.com/rackloose/): Modular synth that runs in a browser tab, with original instruments, drum machines, and effects wired together with virtual cables. Founder, Product Engineer, and UX Designer.
+- [Nice Guy University](https://www.zickonezero.com/nice-guy-university/): Live course platform that turns Nice Guy recovery coaching for men into self-paced courses. Founder, Product Engineer, and UX Designer.
+- [DemoStoke](https://www.zickonezero.com/demostoke/): Two-sided gear rental marketplace. Riders find demo and rental gear nearby, and shops run their rentals in Fleet Ops, a dashboard with an embeddable booking widget. Founder, Product Engineer, and UX Designer.
+- [Antisyphon Training](https://www.zickonezero.com/antisyphon-training/): Client product, a marketplace for live, on-demand, and pay-what-you-can cybersecurity courses. Product Lead from December 2022 to April 2025, leading a team of six, with user research, UX design, and front-end development.
+
+## Design & Build
+
+- [Bars of Sand](https://www.zickonezero.com/bars-of-sand/): Interactive browser surf lab that shows how sandbars shape breaking waves, and how waves reshape the sand.
+- [TimeFraim](https://www.zickonezero.com/timefraim/): Daily planner that brings tasks, calendar blocks, and timers into one view.
+- [12 Step Meetings](https://www.zickonezero.com/12-step-meetings/): Searchable directory of in-person recovery meetings across Los Angeles and Ventura counties.
+- [Who's In Charge?](https://www.zickonezero.com/whos-in-charge/): Internal Family Systems journaling app with tarot-style imagery.
+- [Find Your Flow State](https://www.zickonezero.com/find-your-flow-state/): Free AI-powered career personality assessment quiz.
+- [Adam Chiappone](https://www.zickonezero.com/adam-chiappone/): Therapy practice website.
+
+## Web Development
+
+Hand-coded from client designs, listed on the homepage:
+
+- Warner Bros. Pictures: Pacific Rim landing pages
+- Paramount Pictures: interactive emails and Facebook pages
+- Sony Pictures: sites, landing pages, and games
+- DreamWorks Animation: How to Train Your Dragon sites
+- Fox Television: Vikings video voting bracket
+- Riot Games: League of Legends tournament creation app
+- ParkMe (INRIX): parking locator and reservation dashboard
+- Saatchi Art: fine art marketplace
+
+## About and Contact
+
+- [About](https://www.zickonezero.com/about/): Background, skills, and experience.
+- [Contact](https://www.zickonezero.com/contact/): Get in touch about product, UX, and engineering work.
+- [GitHub](https://github.com/michaelzick)
+- [LinkedIn](https://www.linkedin.com/in/michaelzick)

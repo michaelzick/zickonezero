@@ -28,8 +28,10 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
   analyticsId: 'rackloose',
   name: 'Rackloose',
   intro: {
-    summary: 'Rackloose is a modular synth that runs in a browser tab: a rack of original instruments, drum machines, and effects you wire together with virtual cables.',
-    roles: ['Product strategy', 'UX design', 'product engineering', 'sound design'],
+    status: 'Live at rackloose.com and inside Mike OS',
+    summary: 'Rackloose is a live modular synth that runs in a browser tab: a rack of original instruments, drum machines, and effects you wire together with virtual cables.',
+    roles: ['Founder', 'Product strategy', 'Product engineering', 'UX design', 'Sound design', 'Analytics'],
+    timeline: 'October 2026 to now, solo',
     image: HERO,
     imageBackground: '#111214',
     links: [{ label: 'Web App', href: STUDIO_URL }]
@@ -52,7 +54,7 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
     },
     {
       title: 'My Roles',
-      description: 'I designed every device and the rack that holds them, built the sound engine and its DSP, composed the factory presets, and wrote the user guide. Then I packaged it all as a component so it could live inside other sites.',
+      description: 'I designed every device and the rack that holds them, built the sound engine and its Rust DSP, composed the factory presets, and wrote the user guide. Then I shipped it three ways: as its own site with analytics, inside Mike OS, and as a versioned component other sites install.',
       image: screen('rackloose-guide.webp', 'Rackloose user guide open over the rack')
     }
   ],
@@ -145,7 +147,8 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
       bullets: [
         'Packaged the rack as a React component with props for keyboard focus, pausing audio, and its own save slot, and made it dispose of every audio node when it unmounts.',
         'Shipped each version as an immutable release archive with a checksum, so host sites install exactly the build they tested.',
-        'Left out the backend, accounts, API keys, and analytics. Patches autosave in the browser and export as files.'
+        'Kept the backend, accounts, API keys, and analytics out of the component. Patches autosave in the browser and export as files.',
+        'Measured the standalone site with GA4 and Mixpanel, each rack event sent to both, with session replay that hides patch and preset names, and nothing loaded on the sites that embed the rack.'
       ],
       images: [MIKE_OS, CLUB]
     }
@@ -153,14 +156,15 @@ export const RACKLOOSE_CASE_STUDY: CaseStudyData = {
   outcome: [
     <>
       Live at{' '}
-      <TrackedLink href={STUDIO_URL} label='www.rackloose.com' location='rackloose_case_study_outcome' section='Rackloose UX Case Study' target='_blank'>
+      <TrackedLink href={STUDIO_URL} label='www.rackloose.com' location='rackloose_case_study_outcome' section='Rackloose Product Story' target='_blank'>
         www.rackloose.com
       </TrackedLink>
       {' '}as a standalone studio.
     </>,
-    <>Running inside {mikeOsLink('rackloose_case_study_outcome', 'Rackloose UX Case Study')}, where it opens like any other desktop app.</>,
+    <>Running inside {mikeOsLink('rackloose_case_study_outcome', 'Rackloose Product Story')}, where it opens like any other desktop app.</>,
     'Booked for a regular gig in a basement bar somewhere on this site. You’ll have to find it.',
-    '25 releases and 137 commits in about three weeks.'
+    'Measured on rackloose.com, from first preset to exported WAV.',
+    '36 releases and over 190 commits since October 2026.'
   ],
   screens: {
     logo: { src: '/img/squares/rackloose-icon-square.webp', alt: 'Rackloose app icon' },

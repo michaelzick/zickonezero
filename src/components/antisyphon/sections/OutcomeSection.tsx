@@ -21,9 +21,11 @@ const OutcomeSection = ({ setAnimatedSectionRef, visibleSections }: OutcomeSecti
       <DemoStokeTldrSection className='text-animate'>
         <OutcomeCopy>
           <ul className='plain-lines'>
-            <li>Increased enrollments by 49%</li>
-            <li>Reduced customer support tickets by 67%</li>
-            <li>Cut course setup time by 85%</li>
+            <li>Live at antisyphontraining.com.</li>
+            <li>Increased enrollments by 49%.</li>
+            <li>Reduced customer support tickets by 67%.</li>
+            <li>Cut course setup time by roughly 85%.</li>
+            <li>Measured with WooCommerce Analytics and GA4.</li>
           </ul>
         </OutcomeCopy>
       </DemoStokeTldrSection>

@@ -7,7 +7,8 @@ export const CASE_STUDY_SECTIONS: SidebarSectionConfig[] = [
   { id: 'section-the-what', label: 'The What' },
   { id: 'section-the-how', label: 'The How' },
   { id: 'section-the-who', label: 'The Who' },
-  { id: 'section-methodology', label: 'Methods' }
+  { id: 'section-methodology', label: 'Methods' },
+  { id: 'section-outcome', label: 'Outcomes' }
 ] as const;
 
 export const CASE_STUDY_BOTTOM_SECTION_ID = CASE_STUDY_SECTIONS[CASE_STUDY_SECTIONS.length - 1]?.id;
@@ -34,7 +35,7 @@ export const TLDR_ITEMS: {
   },
   {
     title: 'My Roles',
-    description: 'All of it. Positioning and copy, UX/UI design, the React front end, the Supabase backend, checkout and coupons, and the admin dashboard I use to run the business every day.',
+    description: 'All of it. Positioning and copy, UX design, the React front end, the Supabase backend, checkout and coupons, and the admin dashboard I use to run the business every day.',
     image: { src: '/img/nice-guy-university/ngu-how-it-works.webp', alt: 'Nice Guy University how it works page' }
   }
 ] as const;
@@ -49,7 +50,7 @@ export const METHOD_SECTIONS: MethodSection[] = [
   {
     title: 'Discovery and Positioning',
     bullets: [
-      'Wrote the positioning from years of coaching calls, in the words men actually use, like shame, resentment, and "why do I keep doing this," rather than therapy-speak.',
+      'Wrote the positioning from years of coaching calls, in the words men actually use, like shame, resentment, and “why do I keep doing this,” rather than therapy-speak.',
       'Boiled the curriculum down to a three-step framework every course teaches toward: confront shame, drop the victim story, build boundaries.',
       'Set a voice that could be blunt on the homepage and careful inside the lessons, because the work needs both.'
     ],
@@ -69,7 +70,7 @@ export const METHOD_SECTIONS: MethodSection[] = [
     bullets: [
       'Built a high-contrast interface with oversized type and direct calls to action. It is the visual version of the coaching voice.',
       'Shipped the catalog, course detail, curriculum, cart, checkout, and auth flows in React on Supabase.',
-      'Kept the honest details in: every course page carries a plain-language "not a substitute for therapy" disclosure.'
+      'Kept the honest details in: every course page carries a plain-language “not a substitute for therapy” disclosure.'
     ],
     images: [{ src: '/img/nice-guy-university/ngu-course-overview.webp', alt: 'Nice Guy University course overview with learning outcomes and therapy disclaimer' }]
   },
@@ -78,7 +79,7 @@ export const METHOD_SECTIONS: MethodSection[] = [
     bullets: [
       'Built an admin dashboard with real reporting: course completion, chapter progress, video and audio engagement, and enrollment trends.',
       'Run the whole business from the same place, from orders and coupons to reviews and email marketing, without touching code.',
-      'Instrumented the funnel from first visit through enrollment so I can see where men hesitate and fix it.'
+      'Instrumented the funnel with Mixpanel and GA4, from first visit through the catalog, checkout, and course completion, with consent-gated session replay, so I can see where men hesitate and fix it.'
     ],
     images: [{ src: '/img/nice-guy-university/ngu-admin-analytics.webp', alt: 'Nice Guy University admin analytics dashboard showing course completion by status' }]
   }
@@ -88,9 +89,9 @@ export const PERSONA_ITEMS = [
   {
     title: 'Students Starting Recovery',
     bullets: [
-      'Usually lands here after a breaking point, like a relationship ending or one resentment too many, not from casual browsing.',
+      'Usually land here after a breaking point, like a relationship ending or one resentment too many, not from casual browsing.',
       'Skeptical of self-help and allergic to anything that sounds like a pep talk.',
-      'Needs to know which course matches the pattern that is actually costing him, and what it will ask of him.'
+      'Need to know which course matches the pattern that is actually costing them, and what it will ask of them.'
     ]
   },
   {
@@ -114,7 +115,7 @@ export const PERSONA_ITEMS = [
     bullets: [
       'Manages courses, reviews, enrollments, and purchases from a single admin dashboard.',
       'Views analytics in the same place: completion rates, chapter progress, engagement, and enrollment trends.',
-      'Builds and manages comprehensive email campaigns through the dashboard, keeping marketing next to the student data it runs on.'
+      'Builds and sends email campaigns from the dashboard, keeping marketing next to the student data it runs on.'
     ]
   }
 ] as const;
