@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   useAppDispatch,
   useAppSelector
@@ -14,16 +14,22 @@ import FooterContent from './FooterContent';
 import TopNavContent from './TopNavContent';
 import DemoStokeTabs from './DemoStokeTabs';
 import { SidebarSectionTabsMobile } from './SidebarSectionTabs';
-import { CASE_STUDY_BOTTOM_SECTION_ID, CASE_STUDY_SECTIONS, HOW_IMAGES, STORY_SECTIONS } from './demostoke/data';
+import { CASE_STUDY_BOTTOM_SECTION_ID, CASE_STUDY_SECTIONS, HOW_IMAGES } from './demostoke/data';
+import {
+  SCREEN_BLOCKS,
+  SCREEN_BOTTOM_SECTION_ID,
+  SCREEN_HERO_IMAGE,
+  SCREEN_SECTIONS
+} from './demostoke/screenData';
 import CaseStudyContent from './demostoke/CaseStudyContent';
-import StoriesContent from './demostoke/StoriesContent';
+import ScreensContent from './demostoke/ScreensContent';
 import LazyLightbox from './LazyLightbox';
 import useAnimatedSections from '../hooks/useAnimatedSections';
 import useHorizontalGallery from '../hooks/useHorizontalGallery';
 import useLightboxController from '../hooks/useLightboxController';
 import { trackEvent } from '../lib/analytics';
 
-type SectionKey = 'case-study' | 'stories';
+type SectionKey = 'case-study' | 'screens';
 
 // The intro opens the page, so it boots up from the first paint.
 const OPENING_SECTIONS = ['section-intro'];
@@ -36,8 +42,10 @@ const DemoStokeContent = () => {
   const [openPersonaId, setOpenPersonaId] = useState<string | null>(null);
   const { visibleSections, setAnimatedSectionRef } = useAnimatedSections(activeTab, OPENING_SECTIONS);
   const { lightboxController, openLightbox } = useLightboxController();
+  const { lightboxController: screenLightboxController, openLightbox: openScreenLightbox } = useLightboxController();
   const { rowRef, canScrollLeft, canScrollRight, scrollGalleryBy } = useHorizontalGallery(activeTab);
   const caseStudyImages = HOW_IMAGES;
+  const screenImages = useMemo(() => [SCREEN_HERO_IMAGE, ...SCREEN_BLOCKS.flatMap(({ images }) => images)], []);
   const handleTopTabsRef = useCallback((node: HTMLDivElement | null) => {
     setTopTabsEl(node);
   }, []);
@@ -46,8 +54,8 @@ const DemoStokeContent = () => {
     setActiveTab(tabKey as SectionKey);
   };
   const isCaseStudyView = activeTab === 'case-study';
-  const currentSections = isCaseStudyView ? CASE_STUDY_SECTIONS : STORY_SECTIONS;
-  const lockToBottomSectionId = isCaseStudyView ? CASE_STUDY_BOTTOM_SECTION_ID : undefined;
+  const currentSections = isCaseStudyView ? CASE_STUDY_SECTIONS : SCREEN_SECTIONS;
+  const lockToBottomSectionId = isCaseStudyView ? CASE_STUDY_BOTTOM_SECTION_ID : SCREEN_BOTTOM_SECTION_ID;
 
   // Scroll to top after tab content changes
   useEffect(() => {
@@ -93,6 +101,18 @@ const DemoStokeContent = () => {
     openLightbox(index);
   }, [caseStudyImages, openLightbox]);
 
+  const handleOpenScreenLightbox = useCallback((index: number) => {
+    const image = screenImages[index];
+    trackEvent('lightbox_open', {
+      location: 'demostoke_product_screens',
+      image_index: index,
+      image_alt: image?.alt,
+      image_url: image?.src,
+      page_path: window.location.pathname,
+    });
+    openScreenLightbox(index);
+  }, [screenImages, openScreenLightbox]);
+
   return (
     <>
       <TopNavContent />
@@ -102,7 +122,7 @@ const DemoStokeContent = () => {
           ref={handleTopTabsRef}
           tabs={[
             { key: 'case-study', label: 'Product Story' },
-            { key: 'stories', label: 'User Stories' }
+            { key: 'screens', label: 'Product Screens' }
           ]}
           activeTab={activeTab}
           onTabClick={handleTabClick}
@@ -129,18 +149,24 @@ const DemoStokeContent = () => {
           isActive={activeTab === 'case-study'}
         />
 
-        <StoriesContent
+        <ScreensContent
           setAnimatedSectionRef={setAnimatedSectionRef}
           visibleSections={visibleSections}
           topTabsEl={topTabsEl}
-          sections={STORY_SECTIONS}
-          isActive={activeTab === 'stories'}
+          sections={SCREEN_SECTIONS}
+          isActive={!isCaseStudyView}
+          openScreenLightbox={handleOpenScreenLightbox}
         />
       </Wrapper>
       <LazyLightbox
         toggler={lightboxController.toggler}
         sources={caseStudyImages.map(({ src }) => src)}
         slide={lightboxController.slide}
+      />
+      <LazyLightbox
+        toggler={screenLightboxController.toggler}
+        sources={screenImages.map(({ src }) => src)}
+        slide={screenLightboxController.slide}
       />
       <FooterContent />
     </>

@@ -87,28 +87,31 @@ describe('DemoStokeContent', () => {
     expect(screen.getByText(/Rachel \(34, San Diego\)/i)).toBeInTheDocument();
   });
 
-  it('switches to the user stories tab and preserves story content', async () => {
+  it('switches to the product screens tab', async () => {
     const user = userEvent.setup();
     renderWithProviders(<DemoStokeContent />);
 
-    await user.click(screen.getByRole('tab', { name: 'User Stories' }));
+    await user.click(screen.getByRole('tab', { name: 'Product Screens' }));
 
-    const introHeading = screen.getByRole('heading', { name: 'DemoStoke User Stories' });
+    const introHeading = screen.getByRole('heading', { name: 'DemoStoke Product Screens' });
     const introRow = introHeading.closest('div')?.parentElement as HTMLElement | null;
+    const labels = ['Explore', 'Gear and Shops', 'Gear Quiz', 'Demo Calendar', 'List Your Gear'];
 
-    expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'User Stories' }));
-    expect(screen.getByLabelText('Desktop page sections')).toBeInTheDocument();
-    expect(introHeading).toBeInTheDocument();
+    expectDarkGreenActiveTab(screen.getByRole('tab', { name: 'Product Screens' }));
+    expect(getTabLabels(screen.getByLabelText('Desktop page sections'))).toEqual(labels);
+    expect(getTabLabels(screen.getByLabelText('Mobile page sections'))).toEqual(labels);
     expect(introRow).not.toBeNull();
     expect(getMatchingRuleValues(introRow as HTMLElement, 'margin-top').map(normalizeDeclaration)).toContain(
       normalizeDeclaration(INTRO_ROW_TOP_MARGIN_DECLARATION)
     );
     expect(screen.getByRole('link', { name: 'www.demostoke.com' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'The Independent Surfboard Shaper' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'The Weekend Warrior' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'The Small Ski & Bike Shop' })).toBeInTheDocument();
-    expect(screen.getByAltText('Independent surfboard shaper with demo boards')).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: 'Open image: Independent surfboard shaper with demo boards' })).not.toBeInTheDocument();
-    expect(screen.getAllByText('How DemoStoke Helps').length).toBeGreaterThan(0);
+    expect(
+      screen.getAllByRole('button', { name: 'Open image: DemoStoke homepage with a gear search box and category shortcuts' }).length
+    ).toBeGreaterThan(0);
+    ['Explore and Search', 'Gear and Shops', 'Gear Quiz', 'Demo Calendar', 'List Your Gear'].forEach((name) => {
+      expect(screen.getByRole('heading', { name })).toBeInTheDocument();
+    });
+    // The pre-launch user stories are gone, so a live product never reads as a concept.
+    expect(screen.queryByRole('tab', { name: 'User Stories' })).not.toBeInTheDocument();
   });
 });

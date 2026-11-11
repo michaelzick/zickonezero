@@ -27,6 +27,7 @@ type IntroSectionProps = {
 
 const ROLE_BULLETS = ['Founder', 'Product strategy', 'Product engineering', 'UX design', 'Analytics'] as const;
 const INTRO_SUMMARY = 'DemoStoke is a live marketplace that helps riders find demo and rental gear from nearby shops and owners, then contact them to rent it.';
+const TIMELINE = 'April 2025 to now, solo';
 
 const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionProps) => (
   <AnimatedSection
@@ -63,6 +64,10 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
                 <li key={bullet}>{bullet}</li>
               ))}
             </RoleList>
+          </div>
+          <div>
+            <CaseStudyHeroLabel>Timeline and Team</CaseStudyHeroLabel>
+            <Summary>{TIMELINE}</Summary>
           </div>
           <LinkRow>
             <CaseStudyHeroLabel>Use It Live</CaseStudyHeroLabel>

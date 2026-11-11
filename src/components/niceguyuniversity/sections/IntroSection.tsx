@@ -33,6 +33,7 @@ const ROLE_BULLETS = [
   'Analytics'
 ] as const;
 const INTRO_SUMMARY = 'Nice Guy University is a live course and coaching platform that turns the Nice Guy recovery coaching I do one-on-one into self-paced courses men can start tonight.';
+const TIMELINE = 'March 2026 to now, solo';
 const PROJECT_URL = 'https://www.niceguyuniversity.com/';
 
 const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionProps) => (
@@ -64,6 +65,10 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
                 <li key={bullet}>{bullet}</li>
               ))}
             </RoleList>
+          </div>
+          <div>
+            <CaseStudyHeroLabel>Timeline and Team</CaseStudyHeroLabel>
+            <Summary>{TIMELINE}</Summary>
           </div>
           <LinkRow>
             <CaseStudyHeroLabel>Use It Live</CaseStudyHeroLabel>

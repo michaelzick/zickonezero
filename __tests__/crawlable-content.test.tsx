@@ -34,7 +34,7 @@ const RacklooseContent = () => <CaseStudyPage study={RACKLOOSE_CASE_STUDY} />;
 
 describe('Crawlable case-study panels', () => {
   it.each([
-    ['DemoStoke', DemoStokeContent, 'User Stories', 'The Independent Surfboard Shaper'],
+    ['DemoStoke', DemoStokeContent, 'Product Screens', 'Demo Calendar'],
     ['Antisyphon', AntisyphonContent, 'Product Screens', 'Antisyphon Product Screens'],
     ['Nice Guy University', NiceGuyUniversityContent, 'Product Screens', 'Support Ecosystem'],
     ['Riptyde', RiptydeContent, 'Product Screens', 'Beach Cams'],

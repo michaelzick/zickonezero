@@ -37,6 +37,8 @@ export type CaseStudyData = {
     status: string;
     summary: string;
     roles: readonly string[];
+    /** When it was built and by whom, e.g. "May 2026 to now, solo". */
+    timeline: string;
     /** The opening hero; needs an entry in HERO_IMAGE_WIDTHS when wider than 640px. */
     image: CaseStudyImage;
     imageBackground: string;

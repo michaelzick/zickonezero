@@ -12,8 +12,9 @@ type IntroSectionProps = {
   visibleSections: VisibleSections;
 };
 
-const ROLE_BULLETS = ['Product Lead', 'UX design', 'Front-end development', 'Analytics'] as const;
+const ROLE_BULLETS = ['Product Lead', 'User research', 'UX design', 'Front-end development', 'Analytics'] as const;
 const INTRO_SUMMARY = 'Antisyphon Training is a cybersecurity training marketplace in production, selling live, on-demand, and pay-what-you-can security courses.';
+const TIMELINE = 'December 2022 to April 2025, leading a team of six';
 
 const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionProps) => (
   <AnimatedSection
@@ -44,6 +45,10 @@ const IntroSection = ({ setAnimatedSectionRef, visibleSections }: IntroSectionPr
                 <li key={bullet}>{bullet}</li>
               ))}
             </RoleList>
+          </div>
+          <div>
+            <CaseStudyHeroLabel>Timeline and Team</CaseStudyHeroLabel>
+            <Summary>{TIMELINE}</Summary>
           </div>
           <LinkRow>
             <CaseStudyHeroLabel>Use It Live</CaseStudyHeroLabel>

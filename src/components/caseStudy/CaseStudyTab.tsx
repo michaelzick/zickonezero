@@ -111,6 +111,10 @@ const IntroSection = ({ study, setAnimatedSectionRef, visibleSections }: Section
                 ))}
               </RoleList>
             </div>
+            <div>
+              <CaseStudyHeroLabel>Timeline and Team</CaseStudyHeroLabel>
+              <Summary>{intro.timeline}</Summary>
+            </div>
             <LinkRow>
               <CaseStudyHeroLabel>Use It Live</CaseStudyHeroLabel>
               <div>

@@ -4,7 +4,7 @@ import { breadcrumbJsonLd, softwareApplicationJsonLd } from '../src/lib/seo';
 
 const TITLE = 'Antisyphon Training: Cybersecurity Training Marketplace';
 const DESCRIPTION =
-  'Antisyphon Training sells live, on-demand, and pay-what-you-can cybersecurity courses. Michael Zick was its Product Lead, UX Designer, and front-end developer.';
+  'Antisyphon Training sells live, on-demand, and pay-what-you-can cybersecurity courses. As Product Lead, Michael Zick led its team of six and did its user research, UX design, and front-end development.';
 const PATH = '/antisyphon-training/';
 const OG_IMAGE = '/img/antisyphon/home.webp';
 
