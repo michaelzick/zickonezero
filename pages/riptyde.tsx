@@ -32,7 +32,7 @@ const RiptydePage = () => (
         }),
         breadcrumbJsonLd([
           { name: 'Home', path: '/' },
-          { name: TITLE, path: PATH },
+          { name: 'Riptyde', path: PATH },
         ]),
       ]}
     />

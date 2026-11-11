@@ -8,7 +8,7 @@ import {
   type JsonLd,
 } from '../lib/seo';
 
-const SITE_TAGLINE = 'Product, UX & Development';
+const SITE_TAGLINE = 'Michael Zick, Product Engineer & UX Designer';
 // Intrinsic size and alt text of the default share image (the night hero), used when a page falls back to it.
 const DEFAULT_OG_IMAGE_WIDTH = 1200;
 const DEFAULT_OG_IMAGE_HEIGHT = 630;

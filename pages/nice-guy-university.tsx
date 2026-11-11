@@ -31,7 +31,7 @@ const NiceGuyUniversity = () => (
         }),
         breadcrumbJsonLd([
           { name: 'Home', path: '/' },
-          { name: TITLE, path: PATH },
+          { name: 'Nice Guy University', path: PATH },
         ]),
       ]}
     />

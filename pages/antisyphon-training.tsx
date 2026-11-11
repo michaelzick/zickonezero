@@ -2,9 +2,9 @@ import AntisyphonContent from '../src/components/AntisyphonContent';
 import Seo from '../src/components/Seo';
 import { breadcrumbJsonLd, softwareApplicationJsonLd } from '../src/lib/seo';
 
-const TITLE = 'Antisyphon Training: Cybersecurity Training Marketplace';
+const TITLE = 'Antisyphon Training: Cybersecurity Course Marketplace';
 const DESCRIPTION =
-  'Antisyphon Training sells live, on-demand, and pay-what-you-can cybersecurity courses. As Product Lead, Michael Zick led its team of six and did its user research, UX design, and front-end development.';
+  'Antisyphon Training sells live, on-demand, and pay-what-you-can cybersecurity courses. Michael Zick led its team of six as Product Lead and designed its UX.';
 const PATH = '/antisyphon-training/';
 const OG_IMAGE = '/img/antisyphon/home.webp';
 
@@ -32,7 +32,7 @@ const Antisyphon = () => (
         }),
         breadcrumbJsonLd([
           { name: 'Home', path: '/' },
-          { name: TITLE, path: PATH },
+          { name: 'Antisyphon Training', path: PATH },
         ]),
       ]}
     />

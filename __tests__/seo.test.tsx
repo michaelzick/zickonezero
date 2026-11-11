@@ -14,7 +14,9 @@ import {
   contactPageJsonLd,
   creativeWorkJsonLd,
   softwareApplicationJsonLd,
+  DEFAULT_DESCRIPTION,
   DEFAULT_OG_IMAGE,
+  itemListJsonLd,
   PERSON_ID,
   personJsonLd,
   profilePageJsonLd,
@@ -46,7 +48,7 @@ describe('Seo', () => {
 
   it('uses the brand and tagline as the home page title when no title is provided', () => {
     render(<Seo path='/' />);
-    expect(document.title).toBe('ZICK ONE ZERO Creative | Product, UX & Development');
+    expect(document.title).toBe('ZICK ONE ZERO Creative | Michael Zick, Product Engineer & UX Designer');
   });
 
   it('exposes an absolute og:image URL by default', () => {
@@ -183,6 +185,24 @@ describe('Seo', () => {
 
   it('gives the person the same titles the site shows', () => {
     expect(personJsonLd().jobTitle).toEqual(['Product Engineer', 'UX Designer']);
+  });
+
+  it('describes the person in the same words as the default description', () => {
+    expect(personJsonLd().description).toBe(DEFAULT_DESCRIPTION);
+    expect(DEFAULT_DESCRIPTION).toMatch(/Product Engineer and UX Designer/);
+    expect(personJsonLd().knowsAbout).toEqual(expect.arrayContaining(['Product engineering', 'UX design']));
+  });
+
+  it('lists pages in order with absolute URLs', () => {
+    const list = itemListJsonLd('Flagship Products', [
+      { name: 'Riptyde', path: '/riptyde/' },
+      { name: 'Rackloose', path: '/rackloose/' },
+    ]);
+    expect(list['@type']).toBe('ItemList');
+    expect(list.itemListElement).toEqual([
+      { '@type': 'ListItem', position: 1, name: 'Riptyde', url: `${ORIGIN}/riptyde/` },
+      { '@type': 'ListItem', position: 2, name: 'Rackloose', url: `${ORIGIN}/rackloose/` },
+    ]);
   });
 
   it('uses the trailing-slash home URL for the site and the person', () => {

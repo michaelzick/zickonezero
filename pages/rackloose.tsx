@@ -31,7 +31,7 @@ const RackloosePage = () => (
         }),
         breadcrumbJsonLd([
           { name: 'Home', path: '/' },
-          { name: TITLE, path: PATH },
+          { name: 'Rackloose', path: PATH },
         ]),
       ]}
     />

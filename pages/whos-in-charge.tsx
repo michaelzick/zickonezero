@@ -6,6 +6,8 @@ const PATH = '/whos-in-charge/';
 const TITLE = 'Who’s In Charge?';
 const SUMMARY = 'An Internal Family Systems journaling app with tarot-style imagery.';
 const HERO_IMAGE = { src: '/img/squares/king-512.webp', alt: 'Who’s In Charge? crown logo' };
+// The large share card is landscape, so it uses the homepage screenshot rather than the square logo.
+const SHARE_IMAGE = { src: '/img/projects/wic/wic-home.webp', alt: 'Who’s In Charge? homepage with a call to start journaling' };
 
 const WhosInChargePage = () => (
   <>
@@ -14,12 +16,12 @@ const WhosInChargePage = () => (
       description={SUMMARY}
       path={PATH}
       type='article'
-      ogImage={HERO_IMAGE.src}
-      ogImageAlt={HERO_IMAGE.alt}
-      ogImageWidth={512}
-      ogImageHeight={512}
+      ogImage={SHARE_IMAGE.src}
+      ogImageAlt={SHARE_IMAGE.alt}
+      ogImageWidth={3456}
+      ogImageHeight={1924}
       jsonLd={[
-        creativeWorkJsonLd({ name: TITLE, description: SUMMARY, path: PATH, image: HERO_IMAGE.src }),
+        creativeWorkJsonLd({ name: TITLE, description: SUMMARY, path: PATH, image: SHARE_IMAGE.src }),
         breadcrumbJsonLd([
           { name: 'Home', path: '/' },
           { name: TITLE, path: PATH },

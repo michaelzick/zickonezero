@@ -31,7 +31,7 @@ const DemoStoke = () => (
         }),
         breadcrumbJsonLd([
           { name: 'Home', path: '/' },
-          { name: TITLE, path: PATH },
+          { name: 'DemoStoke', path: PATH },
         ]),
       ]}
     />

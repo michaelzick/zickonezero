@@ -3,9 +3,24 @@ import { SITE_ALTERNATE_NAMES, SITE_NAME, SITE_URL } from './siteConfig';
 export type JsonLd = Record<string, unknown>;
 
 export const DEFAULT_DESCRIPTION =
-  'Product Management, Engineering Management, product engineering, UX design, Git/DevOps, and Creative Direction.';
+  'Michael Zick is a Product Engineer and UX Designer who designs, builds, and runs live products, with a background in DevOps, SEO, and e-commerce platforms.';
 
 export const DEFAULT_OG_IMAGE = '/img/og/zickonezero-card.png';
+
+// What the live products on this site show he does, for answer engines.
+const KNOWS_ABOUT = [
+  'Product engineering',
+  'UX design',
+  'Product strategy',
+  'User research',
+  'Product analytics',
+  'React',
+  'TypeScript',
+  'Next.js',
+  'Supabase',
+  'iOS development',
+  'SEO',
+];
 
 const SAME_AS = [
   'https://github.com/michaelzick',
@@ -36,6 +51,8 @@ const personNode = (): JsonLd => ({
   name: 'Michael Zick',
   url: HOME_URL,
   jobTitle: ['Product Engineer', 'UX Designer'],
+  description: DEFAULT_DESCRIPTION,
+  knowsAbout: KNOWS_ABOUT,
   sameAs: SAME_AS,
 });
 
@@ -55,6 +72,24 @@ export const webSiteJsonLd = (): JsonLd => ({
   name: SITE_NAME,
   alternateName: SITE_ALTERNATE_NAMES,
   url: HOME_URL,
+});
+
+export type ItemListEntry = {
+  name: string;
+  path: string;
+};
+
+/** An ordered list of pages on this site, such as the homepage's flagship products. */
+export const itemListJsonLd = (name: string, items: ItemListEntry[]): JsonLd => ({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name,
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    url: absoluteUrl(item.path),
+  })),
 });
 
 export const profilePageJsonLd = (): JsonLd => ({
