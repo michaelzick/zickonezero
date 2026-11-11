@@ -23,12 +23,14 @@
     "next-env.d.ts",
     "additional.d.ts",
     ".next/types/**/*.ts",
+    ".next-dev/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
     "pages/_document.js"
   ],
   "exclude": [
     "node_modules",
+    ".next-dev",
     "workers/contact/node_modules",
     "workers/contact/src/index.ts"
   ]

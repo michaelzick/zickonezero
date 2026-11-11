@@ -15,7 +15,7 @@
     "test": "node scripts/run-tests.js",
     "test:browser": "node scripts/browser-smoke.js",
     "start": "next start",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-pattern .next/ --ignore-pattern out/ --ignore-pattern public/",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-pattern .next/ --ignore-pattern .next-dev/ --ignore-pattern out/ --ignore-pattern public/",
     "typecheck": "tsc --noEmit",
     "check": "npm run agent-briefs:check && npm run lint && npm run typecheck && npm test && npm run build",
     "sitemap": "node scripts/generate-sitemap.js"

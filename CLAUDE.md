@@ -128,7 +128,7 @@ Root scripts:
 ```bash
 npm run agent-briefs:sync   # regenerate CLAUDE.md and GEMINI.md from AGENTS.md
 npm run agent-briefs:check  # fail if CLAUDE.md or GEMINI.md drift from AGENTS.md
-npm run dev                 # Next dev server
+npm run dev                 # Next dev server, compiled into .next-dev/ so builds and checks never break it
 npm run lint                # ESLint CLI across JS/TS source
 npm run typecheck           # TypeScript no-emit check
 npm test                    # Jest test suite, run in band and stopped after 3 minutes
