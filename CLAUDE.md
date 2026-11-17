@@ -20,7 +20,7 @@ Primary flows:
 
 ## 2. Tech stack
 
-- **Framework:** Next.js 15 Pages Router with React 19 and TypeScript.
+- **Framework:** Next.js 16 Pages Router with React 19 and TypeScript. The npm scripts use Webpack.
 - **Rendering:** Static export via `next.config.js` (`output: 'export'`, `trailingSlash: true`, unoptimized images).
 - **State:** Redux Toolkit with typed hooks in `src/hooks.ts`.
 - **Styling:** styled-components 5, SCSS globals, and shared theme constants in `styles/theme.ts`. Fonts (Orbitron, Rajdhani, Share Tech Mono) are self-hosted from `@fontsource` packages through `next/font/local`.
@@ -141,7 +141,7 @@ npm run test:browser        # optional headless Chromium smoke test of out/ (aft
 
 CI runs `npm ci`, `agent-briefs:check`, lint, typecheck, a `workers/contact` install + typecheck, tests (a step capped at 3 minutes), and production build on Node 24.x. CI never runs a browser. The **Browser tests** workflow (`.github/workflows/browser-tests.yml`) runs only when started by hand from the Actions tab: it builds the site, installs Playwright for that run, runs `npm run test:browser` (capped at 3 minutes), and uploads the screenshots as the `browser-screenshots` artifact.
 
-Security automation runs Gitleaks, dependency review, CodeQL, and a production dependency audit at high severity (`npm audit --omit=dev --audit-level=high`). Next.js stays on the patched 15.5 release line with matching `eslint-config-next`; Sharp uses 0.35.5 or later. The root `package.json` overrides Next's pinned PostCSS with 8.5.28 for security fixes; retain that override until Next's own dependency is patched. The full audit's remaining findings are development-only (`braces` and `sprintf-js`, which have no patched releases, through Jest 29, Sass's file watcher, and `eslint-config-next`); clear them by upgrading those tools, not by forcing overrides.
+Security automation runs Gitleaks, dependency review, CodeQL, and a production dependency audit at high severity (`npm audit --omit=dev --audit-level=high`). Keep Next.js and `eslint-config-next` on matching releases. Sharp uses 0.35.5 or later. The root `package.json` pins Next's PostCSS to 8.5.28 through an override.
 
 **Releases:** every merge to `main` is a production release, versioned with semver read for a website: major for a redesign or rebuild, minor for new pages, case studies, or features, patch for fixes and copy. v1.0.0 is the living-city rebuild. The release PR (from the integration branch into `main`) bumps the version with `npm version X.Y.Z --no-git-tag-version`; once it merges and Workers Builds deploys it, tag the merge commit with `git tag -a vX.Y.Z <merge-sha> -m "<release title>"` (an optional message body becomes the release notes' opening) and `git push origin vX.Y.Z`. `.github/workflows/release.yml` then checks the tag with `scripts/check-release-tag.js`, checks it is on `main`, and publishes the GitHub release with the tag's title and the PRs merged since the previous tag. Production still deploys from `main`, not from tags; the tag records which commit went live, which is also how to pick a Cloudflare deployment to roll back to (the dashboard's Deployments or `npx wrangler rollback`). Repository rulesets protect both: **Main Branch Protection** requires a PR merged with a merge commit, blocks force-pushes and deletion, and requires CI's `checks` job to pass (the Security Checks workflow is disabled, so its jobs are not required; add them to the ruleset if it is turned back on); **Release tags** stops a `v*` tag from being moved or deleted once pushed.
 
